@@ -52,46 +52,48 @@ export default function Home() {
     <div className="min-h-screen">
       {/* HERO */}
       <section className="flex flex-col items-center justify-center min-h-[90vh] px-6 text-center">
-        <div className="inline-block px-5 py-2 mb-8 text-xs font-bold tracking-[0.25em] text-gold-bright uppercase border border-gold/30 rounded-full bg-gold/5">
+        <div className="inline-block px-6 py-2.5 mb-8 text-xs font-bold tracking-[0.2em] text-spotify-black uppercase bg-spotify-green rounded-full">
           Temporada 2026-27
         </div>
 
         <h1 className="text-6xl sm:text-8xl lg:text-9xl font-black tracking-tight leading-none mb-6">
-          <span className="text-gold-bright">4º INTERLIGA</span>
+          <span className="text-spotify-white">4º INTER</span>
+          <span className="text-spotify-green">LIGA</span>
         </h1>
 
-        <p className="text-lg sm:text-xl font-semibold tracking-wide text-foreground/70">
+        <p className="text-base sm:text-lg font-semibold tracking-wide text-spotify-silver uppercase">
           FÚTBOL{" "}
-          <span className="text-gold/60 mx-1">•</span>{" "}
+          <span className="text-spotify-green mx-1">•</span>{" "}
           CAMISETA{" "}
-          <span className="text-gold/60 mx-1">•</span>{" "}
-          <span className="text-emerald">PASIÓN</span>
+          <span className="text-spotify-green mx-1">•</span>{" "}
+          <span className="text-spotify-green">PASIÓN</span>
         </p>
       </section>
 
       {/* REGLAS */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 bg-spotify-dark">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">
-            Reglas de la <span className="text-gold">Competición</span>
+            Reglas de la{" "}
+            <span className="text-spotify-green">Competición</span>
           </h2>
-          <p className="text-foreground/50 text-center mb-12 max-w-md mx-auto">
+          <p className="text-spotify-silver text-center mb-12 max-w-md mx-auto text-sm">
             Tres pasos para participar y competir por los premios.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {rules.map((rule) => (
               <div
                 key={rule.number}
-                className="relative p-8 rounded-2xl bg-card border border-border"
+                className="relative p-7 rounded-lg bg-spotify-mid transition-colors hover:bg-spotify-card"
               >
-                <span className="block text-5xl font-black text-gold/20 mb-4 leading-none">
+                <span className="block text-5xl font-black text-spotify-green/15 mb-3 leading-none">
                   {rule.number}
                 </span>
-                <h3 className="text-lg font-bold mb-3 text-foreground">
+                <h3 className="text-base font-bold mb-2 text-spotify-white">
                   {rule.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-foreground/60">
+                <p className="text-sm leading-relaxed text-spotify-silver">
                   {rule.text}
                 </p>
               </div>
@@ -101,25 +103,26 @@ export default function Home() {
       </section>
 
       {/* SISTEMA DE PUNTUACIÓN */}
-      <section className="py-20 px-6 bg-card/40">
+      <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">
-            Sistema de <span className="text-gold">Puntuación</span>
+            Sistema de{" "}
+            <span className="text-spotify-green">Puntuación</span>
           </h2>
-          <p className="text-foreground/50 text-center mb-12 max-w-md mx-auto">
+          <p className="text-spotify-silver text-center mb-12 max-w-md mx-auto text-sm">
             Cada acierto suma puntos. ¡Máximo 3 goleadores por partido!
           </p>
 
-          <div className="space-y-3">
+          <div className="space-y-2">
             {scoring.map((item, i) => (
               <div
                 key={i}
-                className="flex items-center justify-between p-5 rounded-xl bg-card border border-border hover:border-gold/20 transition-colors"
+                className="flex items-center justify-between px-6 py-4 rounded-lg bg-spotify-dark hover:bg-spotify-mid transition-colors"
               >
-                <span className="text-sm font-medium text-foreground/80">
+                <span className="text-sm text-spotify-silver">
                   {item.label}
                 </span>
-                <span className="text-lg font-black text-gold-bright min-w-[4rem] text-right">
+                <span className="text-base font-bold text-spotify-white min-w-[4rem] text-right">
                   {item.points}
                 </span>
               </div>
@@ -127,60 +130,62 @@ export default function Home() {
           </div>
 
           {/* Nota */}
-          <div className="mt-6 p-4 rounded-xl bg-gold/5 border border-gold/15">
-            <p className="text-sm text-foreground/60 text-center leading-relaxed">
-              <span className="text-gold font-semibold">Nota:</span> si pronosticas varios goleadores, los puntos se multiplican a tu favor — máximo 3 jugadores por partido.
+          <div className="mt-5 px-6 py-4 rounded-lg bg-spotify-mid">
+            <p className="text-xs text-spotify-silver leading-relaxed">
+              <span className="text-spotify-green font-bold">Nota:</span>{" "}
+              si pronosticas varios goleadores, los puntos se multiplican a tu
+              favor — máximo 3 jugadores por partido.
             </p>
           </div>
         </div>
       </section>
 
       {/* PREMIOS */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 bg-spotify-dark">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">
-            <span className="text-gold">Premios</span>
+            <span className="text-spotify-green">Premios</span>
           </h2>
-          <p className="text-foreground/50 text-center mb-12 max-w-md mx-auto">
+          <p className="text-spotify-silver text-center mb-12 max-w-md mx-auto text-sm">
             Los mejores pronosticadores se llevan premios increíbles.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
             {prizes.map((prize) => (
               <div
                 key={prize.place}
-                className={`relative p-8 rounded-2xl ${
+                className={`relative p-7 rounded-lg ${
                   prize.highlight
-                    ? "bg-card border-2 border-gold/40 md:-mt-4"
-                    : "bg-card border border-border"
+                    ? "bg-spotify-mid shadow-[rgba(30,215,96,0.15)] shadow-lg md:-mt-4"
+                    : "bg-spotify-mid"
                 }`}
               >
                 {prize.highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-xs font-bold tracking-wider uppercase bg-gold text-background rounded-full">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-[10px] font-bold tracking-[0.15em] uppercase bg-spotify-green text-spotify-black rounded-full">
                     Destacado
                   </div>
                 )}
 
-                <div className="text-center mb-6">
+                <div className="text-center mb-5">
                   <span className="text-3xl mb-2 block">{prize.medal}</span>
                   <h3
-                    className={`text-lg font-bold ${
-                      prize.highlight ? "text-gold-bright" : "text-foreground"
+                    className={`text-sm font-bold tracking-wider uppercase ${
+                      prize.highlight ? "text-spotify-green" : "text-spotify-white"
                     }`}
                   >
                     {prize.place}
                   </h3>
                 </div>
 
-                <ul className="space-y-2.5">
+                <ul className="space-y-2">
                   {prize.items.map((item) => (
                     <li
                       key={item}
-                      className="flex items-center gap-3 text-sm text-foreground/70"
+                      className="flex items-center gap-3 text-sm text-spotify-silver"
                     >
                       <span
                         className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                          prize.highlight ? "bg-gold" : "bg-foreground/30"
+                          prize.highlight ? "bg-spotify-green" : "bg-spotify-border"
                         }`}
                       />
                       {item}
@@ -194,12 +199,12 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-16 px-6 border-t border-border">
+      <footer className="py-16 px-6 border-t border-spotify-border/30">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-lg sm:text-xl font-bold tracking-widest text-gold/80 mb-3">
+          <p className="text-base sm:text-lg font-bold tracking-[0.15em] uppercase text-spotify-white mb-3">
             ELIGE TU EQUIPO • PRONOSTICA • GANA
           </p>
-          <p className="text-sm text-foreground/40 tracking-wide">
+          <p className="text-xs text-spotify-silver tracking-wider uppercase">
             4º CONCURSO INTERLIGA • TEMPORADA 2026-27
           </p>
         </div>
