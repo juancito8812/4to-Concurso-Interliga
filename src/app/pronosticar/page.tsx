@@ -12,10 +12,18 @@ interface Match {
   match_date: string;
 }
 
+interface Scorer {
+  player_name: string;
+  goals: number;
+  team: "home" | "away";
+}
+
 interface Prediction {
   match_id: string;
   home_score: number;
   away_score: number;
+  scorers: Scorer[];
+  prediction_id?: string;
 }
 
 export default function PronosticarPage() {
@@ -23,6 +31,7 @@ export default function PronosticarPage() {
   const router = useRouter();
   const [matches, setMatches] = useState<Match[]>([]);
   const [predictions, setPredictions] = useState<Record<string, Prediction>>({});
+  const [expandedMatch, setExpandedMatch] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -46,21 +55,35 @@ export default function PronosticarPage() {
       .select("*")
       .gte("match_date", new Date().toISOString().split("T")[0])
       .order("match_date", { ascending: true })
-      .limit(20);
+      .limit(30);
 
     if (matchesData) {
       setMatches(matchesData);
 
+      // Fetch existing predictions with scorers
       const { data: predsData } = await supabase
         .from("predictions")
-        .select("match_id, home_score, away_score")
+        .select("id, match_id, home_score, away_score")
         .eq("user_id", user?.id);
 
       if (predsData) {
         const predsMap: Record<string, Prediction> = {};
-        predsData.forEach((p) => {
-          predsMap[p.match_id] = { match_id: p.match_id, home_score: p.home_score, away_score: p.away_score };
-        });
+        
+        for (const pred of predsData) {
+          const { data: scorersData } = await supabase
+            .from("prediction_scorers")
+            .select("player_name, goals, team")
+            .eq("prediction_id", pred.id);
+
+          predsMap[pred.match_id] = {
+            match_id: pred.match_id,
+            home_score: pred.home_score,
+            away_score: pred.away_score,
+            scorers: scorersData || [],
+            prediction_id: pred.id,
+          };
+        }
+        
         setPredictions(predsMap);
       }
     }
@@ -74,9 +97,66 @@ export default function PronosticarPage() {
         match_id: matchId,
         home_score: prev[matchId]?.home_score ?? 0,
         away_score: prev[matchId]?.away_score ?? 0,
+        scorers: prev[matchId]?.scorers ?? [],
+        prediction_id: prev[matchId]?.prediction_id,
         [field]: value,
       },
     }));
+  };
+
+  const addScorer = (matchId: string, team: "home" | "away") => {
+    const current = predictions[matchId];
+    const teamScorers = (current?.scorers ?? []).filter(s => s.team === team);
+    
+    if (teamScorers.length >= 3) return; // Max 3 scorers per team
+
+    setPredictions((prev) => ({
+      ...prev,
+      [matchId]: {
+        match_id: matchId,
+        home_score: prev[matchId]?.home_score ?? 0,
+        away_score: prev[matchId]?.away_score ?? 0,
+        scorers: [
+          ...(prev[matchId]?.scorers ?? []),
+          { player_name: "", goals: 1, team },
+        ],
+        prediction_id: prev[matchId]?.prediction_id,
+      },
+    }));
+  };
+
+  const updateScorer = (matchId: string, index: number, field: keyof Scorer, value: string | number) => {
+    setPredictions((prev) => {
+      const scorers = [...(prev[matchId]?.scorers ?? [])];
+      scorers[index] = { ...scorers[index], [field]: value };
+      return {
+        ...prev,
+        [matchId]: {
+          match_id: matchId,
+          home_score: prev[matchId]?.home_score ?? 0,
+          away_score: prev[matchId]?.away_score ?? 0,
+          scorers,
+          prediction_id: prev[matchId]?.prediction_id,
+        },
+      };
+    });
+  };
+
+  const removeScorer = (matchId: string, index: number) => {
+    setPredictions((prev) => {
+      const scorers = [...(prev[matchId]?.scorers ?? [])];
+      scorers.splice(index, 1);
+      return {
+        ...prev,
+        [matchId]: {
+          match_id: matchId,
+          home_score: prev[matchId]?.home_score ?? 0,
+          away_score: prev[matchId]?.away_score ?? 0,
+          scorers,
+          prediction_id: prev[matchId]?.prediction_id,
+        },
+      };
+    });
   };
 
   const handleSave = async () => {
@@ -85,24 +165,59 @@ export default function PronosticarPage() {
     setError("");
     setSuccess(false);
 
-    const predictionsArray = Object.values(predictions).map((p) => ({
-      user_id: user.id,
-      match_id: p.match_id,
-      home_score: p.home_score,
-      away_score: p.away_score,
-    }));
+    try {
+      for (const matchId of Object.keys(predictions)) {
+        const pred = predictions[matchId];
+        
+        // Upsert prediction
+        const { data: predData, error: predError } = await supabase
+          .from("predictions")
+          .upsert({
+            user_id: user.id,
+            match_id: matchId,
+            home_score: pred.home_score,
+            away_score: pred.away_score,
+          }, { onConflict: "user_id,match_id" })
+          .select("id")
+          .single();
 
-    const { error } = await supabase
-      .from("predictions")
-      .upsert(predictionsArray, { onConflict: "user_id,match_id" });
+        if (predError) throw predError;
 
-    setSaving(false);
+        if (predData) {
+          // Delete existing scorers
+          await supabase
+            .from("prediction_scorers")
+            .delete()
+            .eq("prediction_id", predData.id);
 
-    if (error) {
-      setError("Error al guardar: " + error.message);
-    } else {
+          // Insert new scorers
+          if (pred.scorers.length > 0) {
+            const scorersToInsert = pred.scorers
+              .filter(s => s.player_name.trim() !== "")
+              .map(s => ({
+                prediction_id: predData.id,
+                player_name: s.player_name,
+                goals: s.goals,
+                team: s.team,
+              }));
+
+            if (scorersToInsert.length > 0) {
+              const { error: scorersError } = await supabase
+                .from("prediction_scorers")
+                .insert(scorersToInsert);
+
+              if (scorersError) throw scorersError;
+            }
+          }
+        }
+      }
+
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
+    } catch (err: any) {
+      setError("Error al guardar: " + err.message);
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -114,11 +229,28 @@ export default function PronosticarPage() {
     );
   }
 
+  const getMatchDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("es-AR", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+    });
+  };
+
+  const getMatchTime = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return date.toLocaleTimeString("es-AR", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
     <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Hacer Pronósticos</h1>
-        <p className="text-silver text-sm mb-8">Elegí los resultados de los próximos partidos</p>
+        <p className="text-silver text-sm mb-6">Elegí el resultado y los goleadores de cada partido</p>
 
         {matches.length === 0 ? (
           <div className="bg-navy-mid border border-border rounded-2xl p-8 text-center">
@@ -126,40 +258,193 @@ export default function PronosticarPage() {
             <p className="text-silver text-sm">No hay partidos programados por el momento</p>
           </div>
         ) : (
-          <div className="space-y-3">
-            {matches.map((match) => (
-              <div key={match.id} className="bg-navy-mid border border-border rounded-xl p-4">
-                <div className="text-silver text-xs mb-3">
-                  {new Date(match.match_date).toLocaleDateString("es-AR", {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                  })}
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-white text-sm font-medium flex-1 text-right">{match.home_team}</span>
-                  <input
-                    type="number"
-                    min={0}
-                    max={20}
-                    value={predictions[match.id]?.home_score ?? ""}
-                    onChange={(e) => handleScoreChange(match.id, "home_score", parseInt(e.target.value) || 0)}
-                    className="w-14 bg-navy-card border border-border rounded-lg px-2 py-2 text-center text-white text-sm focus:outline-none focus:border-gold"
-                  />
-                  <span className="text-silver text-xs">vs</span>
-                  <input
-                    type="number"
-                    min={0}
-                    max={20}
-                    value={predictions[match.id]?.away_score ?? ""}
-                    onChange={(e) => handleScoreChange(match.id, "away_score", parseInt(e.target.value) || 0)}
-                    className="w-14 bg-navy-card border border-border rounded-lg px-2 py-2 text-center text-white text-sm focus:outline-none focus:border-gold"
-                  />
-                  <span className="text-white text-sm font-medium flex-1">{match.away_team}</span>
-                </div>
-              </div>
-            ))}
+          <div className="space-y-4">
+            {matches.map((match) => {
+              const pred = predictions[match.id];
+              const isExpanded = expandedMatch === match.id;
+              const homeScorers = (pred?.scorers ?? []).filter(s => s.team === "home");
+              const awayScorers = (pred?.scorers ?? []).filter(s => s.team === "away");
 
+              return (
+                <div key={match.id} className="bg-navy-mid border border-border rounded-xl overflow-hidden">
+                  {/* Match Header */}
+                  <div className="p-4">
+                    <div className="flex items-center justify-between text-silver text-xs mb-3">
+                      <span>{getMatchDate(match.match_date)}</span>
+                      <span className="bg-navy-card px-2 py-0.5 rounded">{getMatchTime(match.match_date)}</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-3">
+                      <span className="text-white text-sm font-medium flex-1 text-right">{match.home_team}</span>
+                      <input
+                        type="number"
+                        min={0}
+                        max={20}
+                        value={pred?.home_score ?? ""}
+                        onChange={(e) => handleScoreChange(match.id, "home_score", parseInt(e.target.value) || 0)}
+                        className="w-14 bg-navy-card border border-border rounded-lg px-2 py-2 text-center text-white text-sm font-bold focus:outline-none focus:border-gold"
+                      />
+                      <span className="text-gold text-xs font-bold px-2">VS</span>
+                      <input
+                        type="number"
+                        min={0}
+                        max={20}
+                        value={pred?.away_score ?? ""}
+                        onChange={(e) => handleScoreChange(match.id, "away_score", parseInt(e.target.value) || 0)}
+                        className="w-14 bg-navy-card border border-border rounded-lg px-2 py-2 text-center text-white text-sm font-bold focus:outline-none focus:border-gold"
+                      />
+                      <span className="text-white text-sm font-medium flex-1">{match.away_team}</span>
+                    </div>
+
+                    {/* Scorer count badges */}
+                    {(homeScorers.length > 0 || awayScorers.length > 0) && (
+                      <div className="flex justify-center gap-4 mt-3">
+                        {homeScorers.length > 0 && (
+                          <span className="text-[10px] text-gold">⚽ {homeScorers.length} goleador{homeScorers.length > 1 ? "es" : ""}</span>
+                        )}
+                        {awayScorers.length > 0 && (
+                          <span className="text-[10px] text-gold">⚽ {awayScorers.length} goleador{awayScorers.length > 1 ? "es" : ""}</span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Expand/Collapse Button */}
+                  <button
+                    onClick={() => setExpandedMatch(isExpanded ? null : match.id)}
+                    className="w-full bg-navy-card border-t border-border px-4 py-2 text-xs text-silver hover:text-white transition-colors flex items-center justify-center gap-2"
+                  >
+                    <span>{isExpanded ? "Ocultar goleadores" : "Agregar goleadores"}</span>
+                    <span className={`transform transition-transform ${isExpanded ? "rotate-180" : ""}`}>▼</span>
+                  </button>
+
+                  {/* Expanded Scorer Section */}
+                  {isExpanded && (
+                    <div className="p-4 border-t border-border bg-navy-black/30">
+                      {/* Home Team Scorers */}
+                      <div className="mb-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-white text-xs font-medium">{match.home_team}</span>
+                          {homeScorers.length < 3 && (
+                            <button
+                              onClick={() => addScorer(match.id, "home")}
+                              className="text-gold text-[10px] hover:text-gold-light flex items-center gap-1"
+                            >
+                              <span>+</span> Agregar goleador
+                            </button>
+                          )}
+                        </div>
+                        {homeScorers.length === 0 ? (
+                          <p className="text-silver text-[10px] italic">Sin goleadores seleccionados</p>
+                        ) : (
+                          <div className="space-y-2">
+                            {(pred?.scorers ?? []).map((scorer, idx) => {
+                              if (scorer.team !== "home") return null;
+                              const globalIdx = pred?.scorers?.indexOf(scorer) ?? idx;
+                              return (
+                                <div key={idx} className="flex items-center gap-2">
+                                  <input
+                                    type="text"
+                                    value={scorer.player_name}
+                                    onChange={(e) => updateScorer(match.id, globalIdx, "player_name", e.target.value)}
+                                    placeholder="Nombre del jugador"
+                                    className="flex-1 bg-navy-card border border-border rounded-lg px-3 py-1.5 text-white text-xs focus:outline-none focus:border-gold"
+                                  />
+                                  <div className="flex items-center gap-1">
+                                    <button
+                                      onClick={() => updateScorer(match.id, globalIdx, "goals", Math.max(1, scorer.goals - 1))}
+                                      className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white"
+                                    >
+                                      -
+                                    </button>
+                                    <span className="text-gold text-xs font-bold w-6 text-center">{scorer.goals}</span>
+                                    <button
+                                      onClick={() => updateScorer(match.id, globalIdx, "goals", Math.min(10, scorer.goals + 1))}
+                                      className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white"
+                                    >
+                                      +
+                                    </button>
+                                  </div>
+                                  <button
+                                    onClick={() => removeScorer(match.id, globalIdx)}
+                                    className="text-red-400 text-xs hover:text-red-300"
+                                  >
+                                    ✕
+                                  </button>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Away Team Scorers */}
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-white text-xs font-medium">{match.away_team}</span>
+                          {awayScorers.length < 3 && (
+                            <button
+                              onClick={() => addScorer(match.id, "away")}
+                              className="text-gold text-[10px] hover:text-gold-light flex items-center gap-1"
+                            >
+                              <span>+</span> Agregar goleador
+                            </button>
+                          )}
+                        </div>
+                        {awayScorers.length === 0 ? (
+                          <p className="text-silver text-[10px] italic">Sin goleadores seleccionados</p>
+                        ) : (
+                          <div className="space-y-2">
+                            {(pred?.scorers ?? []).map((scorer, idx) => {
+                              if (scorer.team !== "away") return null;
+                              const globalIdx = pred?.scorers?.indexOf(scorer) ?? idx;
+                              return (
+                                <div key={idx} className="flex items-center gap-2">
+                                  <input
+                                    type="text"
+                                    value={scorer.player_name}
+                                    onChange={(e) => updateScorer(match.id, globalIdx, "player_name", e.target.value)}
+                                    placeholder="Nombre del jugador"
+                                    className="flex-1 bg-navy-card border border-border rounded-lg px-3 py-1.5 text-white text-xs focus:outline-none focus:border-gold"
+                                  />
+                                  <div className="flex items-center gap-1">
+                                    <button
+                                      onClick={() => updateScorer(match.id, globalIdx, "goals", Math.max(1, scorer.goals - 1))}
+                                      className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white"
+                                    >
+                                      -
+                                    </button>
+                                    <span className="text-gold text-xs font-bold w-6 text-center">{scorer.goals}</span>
+                                    <button
+                                      onClick={() => updateScorer(match.id, globalIdx, "goals", Math.min(10, scorer.goals + 1))}
+                                      className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white"
+                                    >
+                                      +
+                                    </button>
+                                  </div>
+                                  <button
+                                    onClick={() => removeScorer(match.id, globalIdx)}
+                                    className="text-red-400 text-xs hover:text-red-300"
+                                  >
+                                    ✕
+                                  </button>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+
+                      <p className="text-silver text-[10px] mt-3 text-center">
+                        Máximo 3 goleadores por equipo · Los goles se suman al marcador
+                      </p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+
+            {/* Save Button */}
             <div className="pt-4">
               {error && (
                 <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3 mb-4">
