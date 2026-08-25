@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
-  <rect width="80" height="80" rx="16" fill="#fff"/>
-  <path d="M28 20 L40 12 L52 20 L52 50 L40 58 L28 50 Z" fill="none" stroke="#1a1a2e" stroke-width="2"/>
-  <path d="M32 24 L40 18 L48 24 L48 46 L40 52 L32 46 Z" fill="#008c45"/>
-  <path d="M36 24 L40 18 L44 24 L44 46 L40 52 L36 46 Z" fill="#cd212a"/>
-  <text x="40" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" font-weight="700" fill="#1a1a2e">COPPA ITALIA</text>
-</svg>

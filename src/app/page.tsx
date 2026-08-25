@@ -3,12 +3,12 @@
 const basePath = "/4to-Concurso-Interliga";
 
 const leagues = [
-  { name: "LaLiga", logo: `${basePath}/logos/laliga.svg` },
-  { name: "Serie A", logo: `${basePath}/logos/seriea.svg` },
-  { name: "Champions League", logo: `${basePath}/logos/champions.svg` },
-  { name: "Europa League", logo: `${basePath}/logos/europa.svg` },
-  { name: "Conference League", logo: `${basePath}/logos/conference.svg` },
-  { name: "Copa Italia", logo: `${basePath}/logos/coppaitalia.svg` },
+  { name: "LaLiga", logo: `${basePath}/logos/laliga.png` },
+  { name: "Serie A", logo: `${basePath}/logos/seriea.png` },
+  { name: "Champions League", logo: `${basePath}/logos/champions.png` },
+  { name: "Europa League", logo: `${basePath}/logos/europa.png` },
+  { name: "Conference League", logo: `${basePath}/logos/conference.png` },
+  { name: "Copa Italia", logo: `${basePath}/logos/coppaitalia.png` },
 ];
 
 const rules = [
