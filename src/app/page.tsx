@@ -6,6 +6,7 @@ const leagues = [
   { name: "LaLiga", logo: `${basePath}/logos/laliga.png` },
   { name: "Premier League", logo: `${basePath}/logos/premier.png` },
   { name: "Serie A", logo: `${basePath}/logos/seriea.png` },
+  { name: "Bundesliga", logo: `${basePath}/logos/bundesliga.png` },
   { name: "Champions League", logo: `${basePath}/logos/champions.png` },
   { name: "Europa League", logo: `${basePath}/logos/europa.png` },
   { name: "Conference League", logo: `${basePath}/logos/conference.png` },
