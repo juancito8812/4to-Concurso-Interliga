@@ -4,16 +4,175 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const leagueData: Record<string, { name: string; espnCode: string }> = {
-  laliga: { name: "LaLiga", espnCode: "esp.1" },
-  premier: { name: "Premier League", espnCode: "eng.1" },
-  seriea: { name: "Serie A", espnCode: "ita.1" },
-  bundesliga: { name: "Bundesliga", espnCode: "ger.1" },
-  champions: { name: "Champions League", espnCode: "uefa.champions" },
-  europa: { name: "Europa League", espnCode: "uefa.europa" },
-  conference: { name: "Conference League", espnCode: "uefa.europa.conf" },
-  coppaitalia: { name: "Copa Italia", espnCode: "ita.coppa" },
+const leagueData: Record<string, { name: string; espnCode: string; country: string }> = {
+  laliga: { name: "LaLiga", espnCode: "esp.1", country: "ESP" },
+  premier: { name: "Premier League", espnCode: "eng.1", country: "GBR" },
+  seriea: { name: "Serie A", espnCode: "ita.1", country: "ITA" },
+  bundesliga: { name: "Bundesliga", espnCode: "ger.1", country: "GER" },
+  champions: { name: "Champions League", espnCode: "uefa.champions", country: "EUR" },
+  europa: { name: "Europa League", espnCode: "uefa.europa", country: "EUR" },
+  conference: { name: "Conference League", espnCode: "uefa.europa.conf", country: "EUR" },
+  coppaitalia: { name: "Copa Italia", espnCode: "ita.coppa", country: "ITA" },
 };
+
+// Sample data for each league
+const sampleData: Record<string, { scorers: any[]; assists: any[]; cards: any[] }> = {
+  premier: {
+    scorers: [
+      { rank: 1, name: "Erling Haaland", team: "Manchester City", value: 28 },
+      { rank: 2, name: "Mohamed Salah", team: "Liverpool", value: 22 },
+      { rank: 3, name: "Alexander Isak", team: "Newcastle", value: 20 },
+      { rank: 4, name: "Jhon Durán", team: "Aston Villa", value: 18 },
+      { rank: 5, name: "Chris Wood", team: "Nott. Forest", value: 17 },
+      { rank: 6, name: "Bukayo Saka", team: "Arsenal", value: 16 },
+      { rank: 7, name: "Son Heung-min", team: "Tottenham", value: 15 },
+      { rank: 8, name: "Nicolas Jackson", team: "Chelsea", value: 14 },
+      { rank: 9, name: "Ollie Watkins", team: "Aston Villa", value: 13 },
+      { rank: 10, name: "Dominic Solanke", team: "Tottenham", value: 12 },
+    ],
+    assists: [
+      { rank: 1, name: "Mohamed Salah", team: "Liverpool", value: 16 },
+      { rank: 2, name: "Kevin De Bruyne", team: "Manchester City", value: 14 },
+      { rank: 3, name: "Bukayo Saka", team: "Arsenal", value: 13 },
+      { rank: 4, name: "Anthony Gordon", team: "Newcastle", value: 11 },
+      { rank: 5, name: "Jack Grealish", team: "Manchester City", value: 10 },
+      { rank: 6, name: "Bernardo Silva", team: "Manchester City", value: 9 },
+      { rank: 7, name: "Martin Ødegaard", team: "Arsenal", value: 9 },
+      { rank: 8, name: "James Maddison", team: "Tottenham", value: 8 },
+      { rank: 9, name: "Cole Palmer", team: "Chelsea", value: 8 },
+      { rank: 10, name: "Bruno Fernandes", team: "Man United", value: 7 },
+    ],
+    cards: [
+      { rank: 1, name: "Marcos Senesi", team: "Bournemouth", value: 14 },
+      { rank: 2, name: "João Palhinha", team: "Tottenham", value: 12 },
+      { rank: 3, name: "Cristian Romero", team: "Tottenham", value: 11 },
+      { rank: 4, name: "William Saliba", team: "Arsenal", value: 10 },
+      { rank: 5, name: "Virgil van Dijk", team: "Liverpool", value: 9 },
+      { rank: 6, name: "Lewis Dunk", team: "Brighton", value: 9 },
+      { rank: 7, name: "James Tarkowski", team: "Everton", value: 8 },
+      { rank: 8, name: "Issa Diop", team: "Fulham", value: 8 },
+      { rank: 9, name: "Conor Gallagher", team: "Chelsea", value: 7 },
+      { rank: 10, name: "Rob Holding", team: "Crystal Palace", value: 7 },
+    ],
+  },
+  esp: {
+    scorers: [
+      { rank: 1, name: "Robert Lewandowski", team: "Barcelona", value: 24 },
+      { rank: 2, name: "Jude Bellingham", team: "Real Madrid", value: 19 },
+      { rank: 3, name: "Artem Dovbyk", team: "Girona", value: 18 },
+      { rank: 4, name: "Vinícius Jr.", team: "Real Madrid", value: 16 },
+      { rank: 5, name: "Ayoze Pérez", team: "Villarreal", value: 15 },
+      { rank: 6, name: "Alexander Sørloth", team: "Atlético Madrid", value: 14 },
+      { rank: 7, name: "Antoine Griezmann", team: "Atlético Madrid", value: 13 },
+      { rank: 8, name: "Wissam Ben Yedder", team: "Sevilla", value: 12 },
+      { rank: 9, name: "Mikel Oyarzabal", team: "Real Sociedad", value: 11 },
+      { rank: 10, name: "Joselu", team: "Real Madrid", value: 10 },
+    ],
+    assists: [
+      { rank: 1, name: "Lamine Yamal", team: "Barcelona", value: 13 },
+      { rank: 2, name: "Vinícius Jr.", team: "Real Madrid", value: 11 },
+      { rank: 3, name: "Jude Bellingham", team: "Real Madrid", value: 10 },
+      { rank: 4, name: "Dani Olmo", team: "Barcelona", value: 9 },
+      { rank: 5, name: "Antoine Griezmann", team: "Atlético Madrid", value: 8 },
+      { rank: 6, name: "Pedri", team: "Barcelona", value: 8 },
+      { rank: 7, name: "Federico Valverde", team: "Real Madrid", value: 7 },
+      { rank: 8, name: "Isco", team: "Real Betis", value: 7 },
+      { rank: 9, name: "Rodrigo Hernández", team: "Barcelona", value: 6 },
+      { rank: 10, name: "Takefusa Kubo", team: "Real Sociedad", value: 6 },
+    ],
+    cards: [
+      { rank: 1, name: "Nacho Fernández", team: "Real Madrid", value: 13 },
+      { rank: 2, name: "Stefan Savić", team: "Atlético Madrid", value: 12 },
+      { rank: 3, name: "Éder Militão", team: "Real Madrid", value: 11 },
+      { rank: 4, name: "Ronald Araújo", team: "Barcelona", value: 10 },
+      { rank: 5, name: "Jules Koundé", team: "Barcelona", value: 9 },
+      { rank: 6, name: "José Giménez", team: "Atlético Madrid", value: 9 },
+      { rank: 7, name: "Dani Carvajal", team: "Real Madrid", value: 8 },
+      { rank: 8, name: "Alejandro Grimaldo", team: "Atlético Madrid", value: 8 },
+      { rank: 9, name: "Marcos Llorente", team: "Atlético Madrid", value: 7 },
+      { rank: 10, name: "Frenkie de Jong", team: "Barcelona", value: 7 },
+    ],
+  },
+  ita: {
+    scorers: [
+      { rank: 1, name: "Lautaro Martínez", team: "Inter Milan", value: 22 },
+      { rank: 2, name: "Marcus Thuram", team: "Inter Milan", value: 18 },
+      { rank: 3, name: "Dušan Vlahović", team: "Juventus", value: 16 },
+      { rank: 4, name: "Rafael Leão", team: "AC Milan", value: 15 },
+      { rank: 5, name: "Romelu Lukaku", team: "Napoli", value: 14 },
+      { rank: 6, name: "Mattia Retegui", team: "Atalanta", value: 13 },
+      { rank: 7, name: "Patrick Schick", team: "Bayer Leverkusen", value: 12 },
+      { rank: 8, name: "Khvicha Kvaratskhelia", team: "Napoli", value: 11 },
+      { rank: 9, name: "Federico Chiesa", team: "Juventus", value: 10 },
+      { rank: 10, name: "Lorenzo Insigne", team: "Toronto FC", value: 9 },
+    ],
+    assists: [
+      { rank: 1, name: "Nicolò Barella", team: "Inter Milan", value: 11 },
+      { rank: 2, name: "Hakan Çalhanoğlu", team: "Inter Milan", value: 10 },
+      { rank: 3, name: "Khvicha Kvaratskhelia", team: "Napoli", value: 9 },
+      { rank: 4, name: "Rafael Leão", team: "AC Milan", value: 8 },
+      { rank: 5, name: "Paulo Dybala", team: "Roma", value: 8 },
+      { rank: 6, name: "Lucas Paquetá", team: "West Ham", value: 7 },
+      { rank: 7, name: "Piotr Zieliński", team: "Inter Milan", value: 7 },
+      { rank: 8, name: "Andrea Belotti", team: "Fiorentina", value: 6 },
+      { rank: 9, name: "Domenico Berardi", team: "Sassuolo", value: 6 },
+      { rank: 10, name: "Federico Bernardeschi", team: "Toronto FC", value: 5 },
+    ],
+    cards: [
+      { rank: 1, name: "Gleison Bremer", team: "Juventus", value: 12 },
+      { rank: 2, name: "Francesco Acerbi", team: "Inter Milan", value: 11 },
+      { rank: 3, name: "Kim Min-jae", team: "Bayern Munich", value: 10 },
+      { rank: 4, name: "Alessio Romagnoli", team: "Lazio", value: 9 },
+      { rank: 5, name: "Rrahmani", team: "Napoli", value: 9 },
+      { rank: 6, name: "Theo Hernández", team: "AC Milan", value: 8 },
+      { rank: 7, name: "Giacomo Raspadori", team: "Napoli", value: 8 },
+      { rank: 8, name: "Sergej Milinković-Savić", team: "Al-Hilal", value: 7 },
+      { rank: 9, name: "Sandro Tonali", team: "Newcastle", value: 7 },
+      { rank: 10, name: "Nicolò Zaniolo", team: "Galatasaray", value: 6 },
+    ],
+  },
+  ger: {
+    scorers: [
+      { rank: 1, name: "Harry Kane", team: "Bayern Munich", value: 30 },
+      { rank: 2, name: "Omar Marmoush", team: "Eintracht Frankfurt", value: 20 },
+      { rank: 3, name: "Serhou Guirassy", team: "Borussia Dortmund", value: 18 },
+      { rank: 4, name: "Loïs Openda", team: "RB Leipzig", value: 16 },
+      { rank: 5, name: "Victor Boniface", team: "Bayer Leverkusen", value: 14 },
+      { rank: 6, name: "Jonathan Burkardt", team: "Mainz", value: 13 },
+      { rank: 7, name: "Deniz Undav", team: "Stuttgart", value: 12 },
+      { rank: 8, name: "Alexandre Lacazette", team: "Lyon", value: 11 },
+      { rank: 9, name: "Patrick Schick", team: "Bayer Leverkusen", value: 10 },
+      { rank: 10, name: "Waldemar Anton", team: "Borussia Dortmund", value: 9 },
+    ],
+    assists: [
+      { rank: 1, name: "Florian Wirtz", team: "Bayer Leverkusen", value: 14 },
+      { rank: 2, name: "Omar Marmoush", team: "Eintracht Frankfurt", value: 12 },
+      { rank: 3, name: "Jamal Musiala", team: "Bayern Munich", value: 10 },
+      { rank: 4, name: "Xavi Simons", team: "RB Leipzig", value: 9 },
+      { rank: 5, name: "Julian Brandt", team: "Borussia Dortmund", value: 8 },
+      { rank: 6, name: "Martin Terrier", team: "Bayer Leverkusen", value: 8 },
+      { rank: 7, name: "Chris Führich", team: "Stuttgart", value: 7 },
+      { rank: 8, name: "Raphaël Guerreiro", team: "Bayern Munich", value: 7 },
+      { rank: 9, name: "Kevin Schade", team: "Brentford", value: 6 },
+      { rank: 10, name: "Joshua Kimmich", team: "Bayern Munich", value: 6 },
+    ],
+    cards: [
+      { rank: 1, name: "Jonathan Tah", team: "Bayer Leverkusen", value: 11 },
+      { rank: 2, name: "Waldemar Anton", team: "Borussia Dortmund", value: 10 },
+      { rank: 3, name: "Edmond Tapsoba", team: "Bayer Leverkusen", value: 9 },
+      { rank: 4, name: "Nico Schlotterbeck", team: "Borussia Dortmund", value: 9 },
+      { rank: 5, name: "David Raum", team: "RB Leipzig", value: 8 },
+      { rank: 6, name: "Minjae Kim", team: "Bayern Munich", value: 8 },
+      { rank: 7, name: "Mats Hummels", team: "Roma", value: 7 },
+      { rank: 8, name: "Niklas Süle", team: "Borussia Dortmund", value: 7 },
+      { rank: 9, name: "Łukasz Piszczek", team: "Gornik Zabrze", value: 6 },
+      { rank: 10, name: "Jeremie Frimpong", team: "Bayer Leverkusen", value: 6 },
+    ],
+  },
+};
+
+// Generate empty data for leagues without sample data
+const emptyData = { scorers: [], assists: [], cards: [] };
 
 interface Standing {
   rank: number;
@@ -26,6 +185,13 @@ interface Standing {
   lose: number;
   goalsFor: number;
   goalsAgainst: number;
+}
+
+interface PlayerStat {
+  rank: number;
+  name: string;
+  team: string;
+  value: number;
 }
 
 type Tab = "standings" | "scorers" | "assists" | "cards";
@@ -41,6 +207,7 @@ export default function TablaLigaClient() {
   const params = useParams();
   const league = params.league as string;
   const data = leagueData[league];
+  const leagueSample = sampleData[league] || emptyData;
   const [standings, setStandings] = useState<Standing[]>([]);
   const [activeTab, setActiveTab] = useState<Tab>("standings");
   const [loading, setLoading] = useState(true);
@@ -103,6 +270,33 @@ export default function TablaLigaClient() {
     );
   }
 
+  const renderPlayerTable = (players: PlayerStat[], valueLabel: string) => (
+    <div className="overflow-x-auto">
+      <table className="w-full min-w-[280px]">
+        <thead>
+          <tr className="border-b border-border text-[10px] sm:text-xs text-silver uppercase">
+            <th className="px-2 sm:px-4 py-2 sm:py-3 text-left w-8 sm:w-12">#</th>
+            <th className="px-2 sm:px-4 py-2 sm:py-3 text-left">Jugador</th>
+            <th className="hidden sm:table-cell px-4 py-3 text-left">Equipo</th>
+            <th className="px-2 sm:px-4 py-2 sm:py-3 text-center w-16 font-bold text-gold">{valueLabel}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {players.map((p) => (
+            <tr key={p.rank} className="border-b border-border/50 hover:bg-navy-card transition-colors">
+              <td className="px-2 sm:px-4 py-2.5 sm:py-3 text-silver text-xs sm:text-sm">{p.rank}</td>
+              <td className="px-2 sm:px-4 py-2.5 sm:py-3">
+                <span className="text-white text-xs sm:text-sm font-medium">{p.name}</span>
+              </td>
+              <td className="hidden sm:table-cell px-4 py-3 text-silver text-xs sm:text-sm">{p.team}</td>
+              <td className="px-2 sm:px-4 py-2.5 sm:py-3 text-center text-gold font-bold text-xs sm:text-sm">{p.value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+
   return (
     <div className="min-h-screen pt-16 sm:pt-20 pb-8 sm:pb-12 px-3 sm:px-4">
       <div className="max-w-4xl mx-auto">
@@ -146,7 +340,6 @@ export default function TablaLigaClient() {
             </div>
           ) : (
             <>
-              {/* Standings Tab */}
               {activeTab === "standings" && (
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[320px]">
@@ -189,40 +382,37 @@ export default function TablaLigaClient() {
                 </div>
               )}
 
-              {/* Scorers Tab */}
               {activeTab === "scorers" && (
-                <div className="p-8 sm:p-12 text-center">
-                  <span className="text-4xl mb-4 block">⚽</span>
-                  <h3 className="text-white font-bold text-lg mb-2">Goleadores</h3>
-                  <p className="text-silver text-sm mb-4">Estadísticas de goleadores de la {data.name}</p>
-                  <div className="inline-block px-4 py-2 bg-gold/10 border border-gold/20 rounded-full">
-                    <span className="text-gold text-xs font-medium">Próximamente disponible</span>
-                  </div>
-                </div>
+                leagueSample.scorers.length > 0
+                  ? renderPlayerTable(leagueSample.scorers, "Goles")
+                  : (
+                    <div className="p-8 sm:p-12 text-center">
+                      <span className="text-4xl mb-3 block">⚽</span>
+                      <p className="text-silver text-sm">Goleadores no disponibles para esta liga</p>
+                    </div>
+                  )
               )}
 
-              {/* Assists Tab */}
               {activeTab === "assists" && (
-                <div className="p-8 sm:p-12 text-center">
-                  <span className="text-4xl mb-4 block">🅰️</span>
-                  <h3 className="text-white font-bold text-lg mb-2">Asistencias</h3>
-                  <p className="text-silver text-sm mb-4">Top asistidores de la {data.name}</p>
-                  <div className="inline-block px-4 py-2 bg-gold/10 border border-gold/20 rounded-full">
-                    <span className="text-gold text-xs font-medium">Próximamente disponible</span>
-                  </div>
-                </div>
+                leagueSample.assists.length > 0
+                  ? renderPlayerTable(leagueSample.assists, "Asist.")
+                  : (
+                    <div className="p-8 sm:p-12 text-center">
+                      <span className="text-4xl mb-3 block">🅰️</span>
+                      <p className="text-silver text-sm">Asistencias no disponibles para esta liga</p>
+                    </div>
+                  )
               )}
 
-              {/* Cards Tab */}
               {activeTab === "cards" && (
-                <div className="p-8 sm:p-12 text-center">
-                  <span className="text-4xl mb-4 block">🟨</span>
-                  <h3 className="text-white font-bold text-lg mb-2">Tarjetas</h3>
-                  <p className="text-silver text-sm mb-4">Jugadores con más tarjetas de la {data.name}</p>
-                  <div className="inline-block px-4 py-2 bg-gold/10 border border-gold/20 rounded-full">
-                    <span className="text-gold text-xs font-medium">Próximamente disponible</span>
-                  </div>
-                </div>
+                leagueSample.cards.length > 0
+                  ? renderPlayerTable(leagueSample.cards, "Tarjetas")
+                  : (
+                    <div className="p-8 sm:p-12 text-center">
+                      <span className="text-4xl mb-3 block">🟨</span>
+                      <p className="text-silver text-sm">Tarjetas no disponibles para esta liga</p>
+                    </div>
+                  )
               )}
             </>
           )}
