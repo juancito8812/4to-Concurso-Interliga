@@ -1,36 +1,21 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --spotify-black: #121212;
-    --spotify-dark: #181818;
-    --spotify-mid: #1f1f1f;
-    --spotify-card: #252525;
-    --spotify-green: #1ed760;
-    --spotify-green-dark: #1db954;
-    --spotify-white: #ffffff;
-    --spotify-silver: #b3b3b3;
-    --spotify-border: #4d4d4d;
-    --spotify-red: #f3727f;
-  }
+@theme {
+  --color-spotify-black: #121212;
+  --color-spotify-dark: #181818;
+  --color-spotify-mid: #1f1f1f;
+  --color-spotify-card: #252525;
+  --color-spotify-green: #1ed760;
+  --color-spotify-green-dark: #1db954;
+  --color-spotify-white: #ffffff;
+  --color-spotify-silver: #b3b3b3;
+  --color-spotify-border: #4d4d4d;
+  --color-spotify-red: #f3727f;
+  --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
 
-  @theme inline {
-    --color-spotify-black: var(--spotify-black);
-    --color-spotify-dark: var(--spotify-dark);
-    --color-spotify-mid: var(--spotify-mid);
-    --color-spotify-card: var(--spotify-card);
-    --color-spotify-green: var(--spotify-green);
-    --color-spotify-green-dark: var(--spotify-green-dark);
-    --color-spotify-white: var(--spotify-white);
-    --color-spotify-silver: var(--spotify-silver);
-    --color-spotify-border: var(--spotify-border);
-    --color-spotify-red: var(--spotify-red);
-    --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  }
-
-  body {
-    background: var(--spotify-black);
-    color: var(--spotify-white);
-    font-family: var(--font-sans);
-  }
+body {
+  background: #121212;
+  color: #ffffff;
+  font-family: var(--font-sans);
 }
