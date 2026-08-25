@@ -150,11 +150,11 @@ export default function Home() {
             Los mejores pronosticadores se llevan premios increíbles.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {prizes.map((prize) => (
               <div
                 key={prize.place}
-                className={`relative p-7 rounded-lg ${
+                className={`relative p-7 rounded-lg flex flex-col ${
                   prize.highlight
                     ? "bg-spotify-mid shadow-[rgba(30,215,96,0.15)] shadow-lg md:-mt-4"
                     : "bg-spotify-mid"
@@ -177,7 +177,7 @@ export default function Home() {
                   </h3>
                 </div>
 
-                <ul className="space-y-2">
+                <ul className="space-y-2 flex-1">
                   {prize.items.map((item) => (
                     <li
                       key={item}
