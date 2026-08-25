@@ -1,277 +1,207 @@
 "use client";
 
-import { useState } from "react";
-
-const competitions = [
-  { name: "Serie A", emoji: "🇮🇹" },
-  { name: "Champions League", emoji: "🏆" },
-  { name: "Europa League", emoji: "⚽" },
+const rules = [
+  {
+    number: "01",
+    title: "Elige tu Equipo",
+    text: "Escoge tu club favorito para representarlo durante toda la temporada.",
+  },
+  {
+    number: "02",
+    title: "Pronostica",
+    text: "Envía tu pronóstico de resultado y marcador antes de cada partido de Liga, Copa Nacional y Copas Europeas.",
+  },
+  {
+    number: "03",
+    title: "Eliminación Directa",
+    text: "Las copas nacionales son de eliminación directa: si fallas tu pronóstico en fase de Knock-out, quedas fuera de esa ronda.",
+  },
 ];
 
-const scoringRules = [
-  { action: "Resultado correcto el marcador", points: 10 },
-  { action: "Marcador exacto", points: 15 },
-  { action: "Diferencia de 1 gol en el goleador", points: 5 },
-  { action: "Goleador acertado", points: 10 },
-  { action: "Cantidad de goles del goleador", points: 5 },
+const scoring = [
+  { points: "3 pts", label: "Resultado correcto" },
+  { points: "2 pts", label: "Marcador exacto" },
+  { points: "1 pt", label: "Diferencia de 1 gol en el marcador" },
+  { points: "1 pt", label: "Goleador acertado (nombre)" },
+  { points: "2 pts", label: "Cantidad de goles del goleador" },
 ];
 
-const prizes = {
-  first: [
-    "Camiseta",
-    "Gorra",
-    "Jarra",
-    "Gafas",
-    "Bandera",
-    "Póster",
-    "Revista de tu equipo",
-  ],
-  second: ["Balón", "Jarra", "Gafas", "Bandera"],
-  third: ["Camiseta", "Short", "Gorra", "Bandera", "Jarra", "Gafas", "Póster"],
-};
+const prizes = [
+  {
+    place: "2DO LUGAR",
+    medal: "🥈",
+    items: ["Camiseta", "Short", "Gorra", "Bandera", "Jarra", "Gafas", "Póster"],
+    highlight: false,
+  },
+  {
+    place: "1ER LUGAR",
+    medal: "🥇",
+    items: ["Camiseta", "Short", "Balón", "Jarra", "Gafas", "Bandera", "Revista de tu equipo"],
+    highlight: true,
+  },
+  {
+    place: "3ER LUGAR",
+    medal: "🥉",
+    items: ["Camiseta", "Short", "Gorra", "Bandera", "Jarra"],
+    highlight: false,
+  },
+];
 
 export default function Home() {
-  const [selectedCompetition, setSelectedCompetition] = useState<string | null>(null);
-
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative flex flex-col items-center justify-center min-h-screen px-6 text-center overflow-hidden">
-        {/* Background gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-tertiary/10 via-transparent to-transparent pointer-events-none" />
-
-        <div className="relative z-10 max-w-4xl mx-auto">
-          <div className="inline-block px-4 py-2 mb-6 text-sm font-semibold tracking-widest text-accent uppercase bg-accent/10 rounded-full border border-accent/20">
-            4° Edición — Temporada 2026-27
-          </div>
-
-          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tighter leading-none mb-6">
-            <span className="block text-foreground">INTER</span>
-            <span className="block text-tertiary">LIGA</span>
-          </h1>
-
-          <p className="text-xl sm:text-2xl font-medium text-foreground/80 mb-4">
-            FÚTBOL + CAMISETA + PASIÓN
-          </p>
-
-          <p className="text-lg text-foreground/60 max-w-2xl mx-auto mb-10">
-            Elige tu club favorito, pronostica los resultados y compite por increíbles premios
-            durante toda la temporada 2026-27.
-          </p>
-
-          <a
-            href="#como-funciona"
-            className="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-white bg-tertiary rounded-full hover:bg-tertiary/80 transition-all duration-200 hover:scale-105"
-          >
-            Empezar Ahora
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </a>
+      {/* HERO */}
+      <section className="flex flex-col items-center justify-center min-h-[90vh] px-6 text-center">
+        <div className="inline-block px-5 py-2 mb-8 text-xs font-bold tracking-[0.25em] text-gold-bright uppercase border border-gold/30 rounded-full bg-gold/5">
+          Temporada 2026-27
         </div>
 
-        {/* Decorative elements */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg className="w-6 h-6 text-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </div>
+        <h1 className="text-6xl sm:text-8xl lg:text-9xl font-black tracking-tight leading-none mb-6">
+          <span className="text-gold-bright">4º INTERLIGA</span>
+        </h1>
+
+        <p className="text-lg sm:text-xl font-semibold tracking-wide text-foreground/70">
+          FÚTBOL{" "}
+          <span className="text-gold/60 mx-1">•</span>{" "}
+          CAMISETA{" "}
+          <span className="text-gold/60 mx-1">•</span>{" "}
+          <span className="text-emerald">PASIÓN</span>
+        </p>
       </section>
 
-      {/* Competitions Section */}
-      <section className="py-20 px-6 bg-secondary/50">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Elige tu <span className="text-accent">Competición</span>
+      {/* REGLAS */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">
+            Reglas de la <span className="text-gold">Competición</span>
           </h2>
-          <p className="text-foreground/60 mb-10 max-w-xl mx-auto">
-            Representa a tu club en cualquiera de estas competiciones europeas.
+          <p className="text-foreground/50 text-center mb-12 max-w-md mx-auto">
+            Tres pasos para participar y competir por los premios.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {competitions.map((comp) => (
-              <button
-                key={comp.name}
-                onClick={() => setSelectedCompetition(comp.name)}
-                className={`p-8 rounded-2xl border-2 transition-all duration-200 hover:scale-105 ${
-                  selectedCompetition === comp.name
-                    ? "border-tertiary bg-tertiary/10"
-                    : "border-foreground/10 bg-secondary hover:border-foreground/20"
-                }`}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {rules.map((rule) => (
+              <div
+                key={rule.number}
+                className="relative p-8 rounded-2xl bg-card border border-border"
               >
-                <span className="text-4xl block mb-4">{comp.emoji}</span>
-                <span className="text-xl font-bold">{comp.name}</span>
-              </button>
+                <span className="block text-5xl font-black text-gold/20 mb-4 leading-none">
+                  {rule.number}
+                </span>
+                <h3 className="text-lg font-bold mb-3 text-foreground">
+                  {rule.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-foreground/60">
+                  {rule.text}
+                </p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section id="como-funciona" className="py-20 px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            ¿Cómo <span className="text-tertiary">Funciona</span>?
+      {/* SISTEMA DE PUNTUACIÓN */}
+      <section className="py-20 px-6 bg-card/40">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">
+            Sistema de <span className="text-gold">Puntuación</span>
           </h2>
-          <p className="text-foreground/60 mb-12 max-w-xl mx-auto">
-            Tres pasos sencillos para participar y ganar.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-8 rounded-2xl bg-secondary border border-foreground/10">
-              <div className="w-14 h-14 rounded-full bg-tertiary/20 flex items-center justify-center mx-auto mb-5">
-                <span className="text-2xl">🏟️</span>
-              </div>
-              <h3 className="text-xl font-bold mb-3">1. Elige tu Equipo</h3>
-              <p className="text-foreground/60">
-                Escoge tu club favorito para representarlo durante toda la temporada.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-2xl bg-secondary border border-foreground/10">
-              <div className="w-14 h-14 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-5">
-                <span className="text-2xl">🎯</span>
-              </div>
-              <h3 className="text-xl font-bold mb-3">2. Pronostica</h3>
-              <p className="text-foreground/60">
-                Envía tu pronóstico de resultado y marcador antes de cada partido.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-2xl bg-secondary border border-foreground/10">
-              <div className="w-14 h-14 rounded-full bg-success/20 flex items-center justify-center mx-auto mb-5">
-                <span className="text-2xl">🏆</span>
-              </div>
-              <h3 className="text-xl font-bold mb-3">3. Gana</h3>
-              <p className="text-foreground/60">
-                Acumula puntos y gana increíbles premios. Las copas son de eliminación directa.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Scoring System Section */}
-      <section className="py-20 px-6 bg-secondary/50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Sistema de <span className="text-accent">Puntuación</span>
-          </h2>
-          <p className="text-foreground/60 mb-10 max-w-xl mx-auto">
+          <p className="text-foreground/50 text-center mb-12 max-w-md mx-auto">
             Cada acierto suma puntos. ¡Máximo 3 goleadores por partido!
           </p>
 
-          <div className="bg-secondary rounded-2xl border border-foreground/10 overflow-hidden">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="border-b border-foreground/10">
-                  <th className="p-5 text-sm font-semibold text-foreground/60 uppercase tracking-wider">
-                    Acción
-                  </th>
-                  <th className="p-5 text-sm font-semibold text-foreground/60 uppercase tracking-wider text-right">
-                    Puntos
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {scoringRules.map((rule, i) => (
-                  <tr key={i} className="border-b border-foreground/5 last:border-0">
-                    <td className="p-5 font-medium">{rule.action}</td>
-                    <td className="p-5 text-right">
-                      <span className="inline-flex items-center justify-center min-w-[3rem] px-3 py-1 text-sm font-bold text-accent bg-accent/10 rounded-full">
-                        {rule.points} pts
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="space-y-3">
+            {scoring.map((item, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-between p-5 rounded-xl bg-card border border-border hover:border-gold/20 transition-colors"
+              >
+                <span className="text-sm font-medium text-foreground/80">
+                  {item.label}
+                </span>
+                <span className="text-lg font-black text-gold-bright min-w-[4rem] text-right">
+                  {item.points}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Nota */}
+          <div className="mt-6 p-4 rounded-xl bg-gold/5 border border-gold/15">
+            <p className="text-sm text-foreground/60 text-center leading-relaxed">
+              <span className="text-gold font-semibold">Nota:</span> si pronosticas varios goleadores, los puntos se multiplican a tu favor — máximo 3 jugadores por partido.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Prizes Section */}
+      {/* PREMIOS */}
       <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            <span className="text-accent">Premios</span>
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">
+            <span className="text-gold">Premios</span>
           </h2>
-          <p className="text-foreground/60 mb-12 max-w-xl mx-auto">
+          <p className="text-foreground/50 text-center mb-12 max-w-md mx-auto">
             Los mejores pronosticadores se llevan premios increíbles.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* 1st Place */}
-            <div className="relative p-8 rounded-2xl bg-gradient-to-b from-accent/10 to-secondary border-2 border-accent/30">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 text-sm font-bold text-primary bg-accent rounded-full">
-                🥇 1er LUGAR
-              </div>
-              <ul className="mt-4 space-y-3 text-left">
-                {prizes.first.map((prize) => (
-                  <li key={prize} className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-accent shrink-0" />
-                    <span className="font-medium">{prize}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
+            {prizes.map((prize) => (
+              <div
+                key={prize.place}
+                className={`relative p-8 rounded-2xl ${
+                  prize.highlight
+                    ? "bg-card border-2 border-gold/40 md:-mt-4"
+                    : "bg-card border border-border"
+                }`}
+              >
+                {prize.highlight && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-xs font-bold tracking-wider uppercase bg-gold text-background rounded-full">
+                    Destacado
+                  </div>
+                )}
 
-            {/* 2nd Place */}
-            <div className="relative p-8 rounded-2xl bg-secondary border border-foreground/10">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 text-sm font-bold text-primary bg-foreground/60 rounded-full">
-                🥈 2DO LUGAR
-              </div>
-              <ul className="mt-4 space-y-3 text-left">
-                {prizes.second.map((prize) => (
-                  <li key={prize} className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-foreground/40 shrink-0" />
-                    <span className="font-medium">{prize}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                <div className="text-center mb-6">
+                  <span className="text-3xl mb-2 block">{prize.medal}</span>
+                  <h3
+                    className={`text-lg font-bold ${
+                      prize.highlight ? "text-gold-bright" : "text-foreground"
+                    }`}
+                  >
+                    {prize.place}
+                  </h3>
+                </div>
 
-            {/* 3rd Place */}
-            <div className="relative p-8 rounded-2xl bg-secondary border border-foreground/10">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 text-sm font-bold text-primary bg-tertiary/60 rounded-full">
-                🥉 3ER LUGAR
+                <ul className="space-y-2.5">
+                  {prize.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-center gap-3 text-sm text-foreground/70"
+                    >
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+                          prize.highlight ? "bg-gold" : "bg-foreground/30"
+                        }`}
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="mt-4 space-y-3 text-left">
-                {prizes.third.map((prize) => (
-                  <li key={prize} className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-tertiary/60 shrink-0" />
-                    <span className="font-medium">{prize}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-6 bg-tertiary">
+      {/* FOOTER */}
+      <footer className="py-16 px-6 border-t border-border">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            ELIGE TU EQUIPO — PRONOSTICA — GANA
-          </h2>
-          <p className="text-white/80 text-lg mb-8">
-            4° Concurso Interliga + Temporada 2026-27
+          <p className="text-lg sm:text-xl font-bold tracking-widest text-gold/80 mb-3">
+            ELIGE TU EQUIPO • PRONOSTICA • GANA
           </p>
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 px-8 py-4 text-lg font-bold text-tertiary bg-white rounded-full hover:bg-white/90 transition-all duration-200 hover:scale-105"
-          >
-            Participar Ahora
-          </a>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-10 px-6 border-t border-foreground/10">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-foreground/40">
-          <span className="font-bold text-foreground/60">INTERLIGA</span>
-          <span>© 2026 Interliga. Todos los derechos reservados.</span>
+          <p className="text-sm text-foreground/40 tracking-wide">
+            4º CONCURSO INTERLIGA • TEMPORADA 2026-27
+          </p>
         </div>
       </footer>
     </div>
