@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <rect width="80" height="80" rx="16" fill="#fff"/>
+  <circle cx="40" cy="30" r="12" fill="none" stroke="#f36f21" stroke-width="2.5"/>
+  <circle cx="40" cy="30" r="6" fill="#f36f21"/>
+  <text x="40" y="54" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#1a1a2e">EUROPA</text>
+  <text x="40" y="63" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#1a1a2e">LEAGUE</text>
+</svg>

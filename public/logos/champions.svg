@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <rect width="80" height="80" rx="16" fill="#fff"/>
+  <circle cx="40" cy="32" r="14" fill="none" stroke="#1a1a2e" stroke-width="2"/>
+  <polygon points="40,20 43,28 52,28 45,33 48,41 40,36 32,41 35,33 28,28 37,28" fill="#1a1a2e"/>
+  <text x="40" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#1a1a2e">CHAMPIONS</text>
+  <text x="40" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#1a1a2e">LEAGUE</text>
+</svg>
