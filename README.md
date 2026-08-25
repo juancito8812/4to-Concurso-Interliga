@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 4° Concurso Interliga
 
-## Getting Started
+Concurso de pronósticos de fútbol para la temporada 2026-27. Los participantes eligen un equipo y compiten pronosticando resultados, marcadores y goleadores de las principales ligas y copas europeas.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework:** Next.js 16 (App Router, static export)
+- **React:** 19
+- **Estilos:** Tailwind CSS v4
+- **TypeScript:** 5
+- **Deploy:** GitHub Pages (`output: "export"`)
+- **API:** api-sports.io (tablas de posiciones)
+
+## Estructura
+
+```
+src/app/
+├── page.tsx                    # Página principal (landing)
+├── layout.tsx                  # Layout con fuente DM Sans
+├── globals.css                 # Paleta de colores navy + gold
+├── tabla/
+│   └── [league]/
+│       ├── page.tsx            # Genera rutas estáticas
+│       └── TablaLigaClient.tsx # Tabla de posiciones (client)
+public/
+├── logos/                      # Logos de ligas (PNG)
+└── ...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Rutas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Ruta | Descripción |
+|------|-------------|
+| `/` | Landing principal |
+| `/tabla/laliga` | Clasificación LaLiga |
+| `/tabla/premier` | Clasificación Premier League |
+| `/tabla/seriea` | Clasificación Serie A |
+| `/tabla/bundesliga` | Clasificación Bundesliga |
+| `/tabla/champions` | Clasificación Champions League |
+| `/tabla/europa` | Clasificación Europa League |
+| `/tabla/conference` | Clasificación Conference League |
+| `/tabla/coppaitalia` | Clasificación Copa Italia |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Comandos
 
-## Learn More
+```bash
+npm run dev      # Desarrollo local
+npm run build    # Build estático (genera ./out)
+npm run lint     # ESLint
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Configuración importante
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `next.config.ts`: `basePath: "/4to-Concurso-Interliga"` (obligatorio para GitHub Pages)
+- `next.config.ts`: `trailingSlash: true` (necesario para rutas estáticas)
+- Las imágenes usan `unoptimized: true` (requisito para export estático)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
+Automático vía GitHub Actions al hacer push a `main`. Ver `.github/workflows/deploy.yml`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**URL:** https://juancito8812.github.io/4to-Concurso-Interliga/
