@@ -4,15 +4,15 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const leagueData: Record<string, { name: string; apiId: number }> = {
-  laliga: { name: "LaLiga", apiId: 140 },
-  premier: { name: "Premier League", apiId: 39 },
-  seriea: { name: "Serie A", apiId: 135 },
-  bundesliga: { name: "Bundesliga", apiId: 78 },
-  champions: { name: "Champions League", apiId: 2 },
-  europa: { name: "Europa League", apiId: 3 },
-  conference: { name: "Conference League", apiId: 848 },
-  coppaitalia: { name: "Copa Italia", apiId: 137 },
+const leagueData: Record<string, { name: string; code: string }> = {
+  laliga: { name: "LaLiga", code: "PD" },
+  premier: { name: "Premier League", code: "PL" },
+  seriea: { name: "Serie A", code: "SA" },
+  bundesliga: { name: "Bundesliga", code: "BL1" },
+  champions: { name: "Champions League", code: "CL" },
+  europa: { name: "Europa League", code: "EL" },
+  conference: { name: "Conference League", code: "ECL" },
+  coppaitalia: { name: "Copa Italia", code: "CI" },
 };
 
 interface Standing {
@@ -37,17 +37,27 @@ export default function TablaLigaClient() {
     const fetchStandings = async () => {
       try {
         const res = await fetch(
-          `https://v3.football.api-sports.io/standings?league=${data.apiId}&season=2025`,
-          {
-            headers: {
-              "x-rapidapi-host": "v3.football.api-sports.io",
-              "x-rapidapi-key": "demo",
-            },
-          }
+          `https://site.api.espn.com/apis/site/v2/sports/soccer/${data.code === "PD" ? "esp.1" : data.code === "PL" ? "eng.1" : data.code === "SA" ? "ita.1" : data.code === "BL1" ? "ger.1" : data.code === "CL" ? "uefa.champions" : data.code === "EL" ? "uefa.europa" : data.code === "ECL" ? "uefa.europa.conf" : "ita.coppa"}/standings`
         );
         const json = await res.json();
-        if (json.response && json.response[0]) {
-          setStandings(json.response[0].league.standings[0]);
+        if (json.children && json.children[0] && json.children[0].standings) {
+          const mapped = json.children[0].standings.entries.map((entry: any, i: number) => ({
+            rank: entry.stats.find((s: any) => s.name === "rank")?.value || i + 1,
+            team: {
+              name: entry.team.displayName || entry.team.shortDisplayName,
+              logo: entry.team.logos?.[0]?.href || "",
+            },
+            points: entry.stats.find((s: any) => s.name === "points")?.value || 0,
+            goalsDiff: entry.stats.find((s: any) => s.name === "pointDifferential")?.value || 0,
+            all: {
+              played: entry.stats.find((s: any) => s.name === "gamesPlayed")?.value || 0,
+              win: entry.stats.find((s: any) => s.name === "wins")?.value || 0,
+              draw: entry.stats.find((s: any) => s.name === "ties")?.value || 0,
+              lose: entry.stats.find((s: any) => s.name === "losses")?.value || 0,
+              goals: { for: 0, against: 0 },
+            },
+          }));
+          setStandings(mapped);
         } else {
           setError("No se pudo cargar la clasificación");
         }

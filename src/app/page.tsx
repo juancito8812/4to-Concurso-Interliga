@@ -2,17 +2,17 @@
 
 import Link from "next/link";
 
-const basePath = "";
+const basePath = "/4to-Concurso-Interliga";
 
 const leagues = [
-  { name: "LaLiga", logo: "/logos/laliga.png", slug: "laliga" },
-  { name: "Premier League", logo: "/logos/premier.png", slug: "premier" },
-  { name: "Serie A", logo: "/logos/seriea.png", slug: "seriea" },
-  { name: "Bundesliga", logo: "/logos/bundesliga.png", slug: "bundesliga" },
-  { name: "Champions League", logo: "/logos/champions.png", slug: "champions" },
-  { name: "Europa League", logo: "/logos/europa.png", slug: "europa" },
-  { name: "Conference League", logo: "/logos/conference.png", slug: "conference" },
-  { name: "Copa Italia", logo: "/logos/coppaitalia.png", slug: "coppaitalia" },
+  { name: "LaLiga", logo: `${basePath}/logos/laliga.png`, slug: "laliga" },
+  { name: "Premier League", logo: `${basePath}/logos/premier.png`, slug: "premier" },
+  { name: "Serie A", logo: `${basePath}/logos/seriea.png`, slug: "seriea" },
+  { name: "Bundesliga", logo: `${basePath}/logos/bundesliga.png`, slug: "bundesliga" },
+  { name: "Champions League", logo: `${basePath}/logos/champions.png`, slug: "champions" },
+  { name: "Europa League", logo: `${basePath}/logos/europa.png`, slug: "europa" },
+  { name: "Conference League", logo: `${basePath}/logos/conference.png`, slug: "conference" },
+  { name: "Copa Italia", logo: `${basePath}/logos/coppaitalia.png`, slug: "coppaitalia" },
 ];
 
 const rules = [
