@@ -1,16 +1,18 @@
 "use client";
 
+import Link from "next/link";
+
 const basePath = "/4to-Concurso-Interliga";
 
 const leagues = [
-  { name: "LaLiga", logo: `${basePath}/logos/laliga.png` },
-  { name: "Premier League", logo: `${basePath}/logos/premier.png` },
-  { name: "Serie A", logo: `${basePath}/logos/seriea.png` },
-  { name: "Bundesliga", logo: `${basePath}/logos/bundesliga.png` },
-  { name: "Champions League", logo: `${basePath}/logos/champions.png` },
-  { name: "Europa League", logo: `${basePath}/logos/europa.png` },
-  { name: "Conference League", logo: `${basePath}/logos/conference.png` },
-  { name: "Copa Italia", logo: `${basePath}/logos/coppaitalia.png` },
+  { name: "LaLiga", logo: `${basePath}/logos/laliga.png`, slug: "laliga" },
+  { name: "Premier League", logo: `${basePath}/logos/premier.png`, slug: "premier" },
+  { name: "Serie A", logo: `${basePath}/logos/seriea.png`, slug: "seriea" },
+  { name: "Bundesliga", logo: `${basePath}/logos/bundesliga.png`, slug: "bundesliga" },
+  { name: "Champions League", logo: `${basePath}/logos/champions.png`, slug: "champions" },
+  { name: "Europa League", logo: `${basePath}/logos/europa.png`, slug: "europa" },
+  { name: "Conference League", logo: `${basePath}/logos/conference.png`, slug: "conference" },
+  { name: "Copa Italia", logo: `${basePath}/logos/coppaitalia.png`, slug: "coppaitalia" },
 ];
 
 const rules = [
@@ -83,8 +85,9 @@ export default function Home() {
         {/* League Logos */}
         <div className="flex flex-wrap justify-center gap-4 max-w-2xl">
           {leagues.map((league) => (
-            <div
+            <Link
               key={league.name}
+              href={`${basePath}/tabla/${league.slug}`}
               className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white flex items-center justify-center p-2 hover:scale-105 transition-transform"
             >
               <img
@@ -92,7 +95,7 @@ export default function Home() {
                 alt={league.name}
                 className="w-full h-full object-contain"
               />
-            </div>
+            </Link>
           ))}
         </div>
       </section>
