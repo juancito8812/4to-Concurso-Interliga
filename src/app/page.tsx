@@ -4,6 +4,7 @@ const basePath = "/4to-Concurso-Interliga";
 
 const leagues = [
   { name: "LaLiga", logo: `${basePath}/logos/laliga.png` },
+  { name: "Premier League", logo: `${basePath}/logos/premier.png` },
   { name: "Serie A", logo: `${basePath}/logos/seriea.png` },
   { name: "Champions League", logo: `${basePath}/logos/champions.png` },
   { name: "Europa League", logo: `${basePath}/logos/europa.png` },
