@@ -4,15 +4,15 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const leagueData: Record<string, { name: string; code: string }> = {
-  laliga: { name: "LaLiga", code: "PD" },
-  premier: { name: "Premier League", code: "PL" },
-  seriea: { name: "Serie A", code: "SA" },
-  bundesliga: { name: "Bundesliga", code: "BL1" },
-  champions: { name: "Champions League", code: "CL" },
-  europa: { name: "Europa League", code: "EL" },
-  conference: { name: "Conference League", code: "ECL" },
-  coppaitalia: { name: "Copa Italia", code: "CI" },
+const leagueData: Record<string, { name: string; espnCode: string }> = {
+  laliga: { name: "LaLiga", espnCode: "esp.1" },
+  premier: { name: "Premier League", espnCode: "eng.1" },
+  seriea: { name: "Serie A", espnCode: "ita.1" },
+  bundesliga: { name: "Bundesliga", espnCode: "ger.1" },
+  champions: { name: "Champions League", espnCode: "uefa.champions" },
+  europa: { name: "Europa League", espnCode: "uefa.europa" },
+  conference: { name: "Conference League", espnCode: "uefa.europa.conf" },
+  coppaitalia: { name: "Copa Italia", espnCode: "ita.coppa" },
 };
 
 interface Standing {
@@ -37,7 +37,7 @@ export default function TablaLigaClient() {
     const fetchStandings = async () => {
       try {
         const res = await fetch(
-          `https://site.api.espn.com/apis/site/v2/sports/soccer/${data.code === "PD" ? "esp.1" : data.code === "PL" ? "eng.1" : data.code === "SA" ? "ita.1" : data.code === "BL1" ? "ger.1" : data.code === "CL" ? "uefa.champions" : data.code === "EL" ? "uefa.europa" : data.code === "ECL" ? "uefa.europa.conf" : "ita.coppa"}/standings`
+          `https://site.api.espn.com/apis/v2/sports/soccer/${data.espnCode}/standings`
         );
         const json = await res.json();
         if (json.children && json.children[0] && json.children[0].standings) {
