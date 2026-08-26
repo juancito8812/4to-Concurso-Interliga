@@ -38,13 +38,13 @@ const leagueColors: Record<string, string> = {
   "Europa League": "#f37920",
 };
 
-const leagueBadge: Record<string, string> = {
-  "Premier League": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-  "LaLiga": "🇪🇸",
-  "Serie A": "🇮🇹",
-  "Bundesliga": "🇩🇪",
-  "Champions League": "⭐",
-  "Europa League": "🏆",
+const leagueLogos: Record<string, string> = {
+  "Premier League": "/4to-Concurso-Interliga/logos/premier.png",
+  "LaLiga": "/4to-Concurso-Interliga/logos/laliga.png",
+  "Serie A": "/4to-Concurso-Interliga/logos/seriea.png",
+  "Bundesliga": "/4to-Concurso-Interliga/logos/bundesliga.png",
+  "Champions League": "/4to-Concurso-Interliga/logos/champions.png",
+  "Europa League": "/4to-Concurso-Interliga/logos/europa.png",
 };
 
 export default function MisPronosticosPage() {
@@ -183,9 +183,11 @@ export default function MisPronosticosPage() {
                   <div className="h-1" style={{ backgroundColor: borderColor }}></div>
                   <div className="p-4">
                     {p.league && (
-                      <div className="flex items-center gap-1 mb-2">
-                        <span className="text-[10px]">{leagueBadge[p.league]}</span>
-                        <span className="text-[10px] font-medium" style={{ color: borderColor }}>{p.league}</span>
+                      <div className="flex items-center gap-1.5 mb-2">
+                        {leagueLogos[p.league] && (
+                          <img src={leagueLogos[p.league]} alt={p.league} className="w-4 h-4 object-contain" />
+                        )}
+                        <span className="text-[10px] font-medium" style={{ color: leagueColors[p.league] }}>{p.league}</span>
                       </div>
                     )}
                     <div className="text-silver text-xs mb-2">

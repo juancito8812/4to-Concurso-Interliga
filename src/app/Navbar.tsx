@@ -38,8 +38,7 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-navy-black/90 backdrop-blur-sm border-b border-border">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <span className="text-silver text-xs group-hover:text-white transition-colors">←</span>
+        <Link href="/" className="flex items-center gap-2">
           <span className="text-gold font-black text-lg tracking-tight">INTERLIGA</span>
         </Link>
 

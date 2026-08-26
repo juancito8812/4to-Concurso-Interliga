@@ -66,13 +66,13 @@ export default function PronosticarPage() {
     "Europa League": "#f37920",
   };
 
-  const leagueBadge: Record<string, string> = {
-    "Premier League": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-    "LaLiga": "🇪🇸",
-    "Serie A": "🇮🇹",
-    "Bundesliga": "🇩🇪",
-    "Champions League": "⭐",
-    "Europa League": "🏆",
+  const leagueLogos: Record<string, string> = {
+    "Premier League": "/4to-Concurso-Interliga/logos/premier.png",
+    "LaLiga": "/4to-Concurso-Interliga/logos/laliga.png",
+    "Serie A": "/4to-Concurso-Interliga/logos/seriea.png",
+    "Bundesliga": "/4to-Concurso-Interliga/logos/bundesliga.png",
+    "Champions League": "/4to-Concurso-Interliga/logos/champions.png",
+    "Europa League": "/4to-Concurso-Interliga/logos/europa.png",
   };
 
   useEffect(() => {
@@ -405,8 +405,10 @@ export default function PronosticarPage() {
                   <div className="h-1" style={{ backgroundColor: leagueColors[match.league] || "#334155" }}></div>
                   <div className="p-4 sm:p-5">
                     {match.league && (
-                      <div className="flex items-center gap-1 mb-2">
-                        <span className="text-[10px]">{leagueBadge[match.league]}</span>
+                      <div className="flex items-center gap-1.5 mb-2">
+                        {leagueLogos[match.league] && (
+                          <img src={leagueLogos[match.league]} alt={match.league} className="w-4 h-4 object-contain" />
+                        )}
                         <span className="text-[10px] font-medium" style={{ color: leagueColors[match.league] }}>{match.league}</span>
                       </div>
                     )}
