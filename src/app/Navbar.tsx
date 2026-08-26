@@ -14,16 +14,22 @@ export default function Navbar() {
     if (user) {
       supabase
         .from("profiles")
-        .select("teams(name, logo_url)")
+        .select("team_id")
         .eq("user_id", user.id)
         .single()
         .then(({ data }) => {
-          if (data?.teams) {
-            const teams = data.teams as { name: string; logo_url: string }[];
-            if (teams.length > 0) {
-              setTeamName(teams[0].name);
-              setTeamLogo(teams[0].logo_url || "");
-            }
+          if (data?.team_id) {
+            supabase
+              .from("teams")
+              .select("name, logo_url")
+              .eq("id", data.team_id)
+              .single()
+              .then(({ data: team }) => {
+                if (team) {
+                  setTeamName(team.name);
+                  setTeamLogo(team.logo_url || "");
+                }
+              });
           }
         });
     }

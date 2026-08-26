@@ -71,23 +71,33 @@ export default function PronosticarPage() {
     // First fetch user's team
     const { data: profileData } = await supabase
       .from("profiles")
-      .select("team_id, teams(id, name, league, logo_url)")
+      .select("team_id")
       .eq("user_id", user?.id)
       .single();
 
-    if (!profileData?.teams) {
+    if (!profileData?.team_id) {
       setLoading(false);
       return;
     }
 
-    const team = Array.isArray(profileData.teams) ? profileData.teams[0] : profileData.teams;
-    setUserTeam(team);
+    const { data: teamData } = await supabase
+      .from("teams")
+      .select("id, name, league, logo_url")
+      .eq("id", profileData.team_id)
+      .single();
+
+    if (!teamData) {
+      setLoading(false);
+      return;
+    }
+
+    setUserTeam(teamData);
 
     // Fetch matches where user's team is playing (home or away)
     const { data: matchesData } = await supabase
       .from("matches")
       .select("*")
-      .or(`home_team.eq.${team.name},away_team.eq.${team.name}`)
+      .or(`home_team.eq.${teamData.name},away_team.eq.${teamData.name}`)
       .gte("match_date", new Date().toISOString().split("T")[0])
       .order("match_date", { ascending: true })
       .limit(10);

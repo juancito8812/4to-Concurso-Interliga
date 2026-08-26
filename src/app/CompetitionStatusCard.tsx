@@ -19,13 +19,18 @@ export default function CompetitionStatusCard() {
     const checkStatus = async () => {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("team_id, teams(name)")
+        .select("team_id")
         .eq("user_id", user.id)
         .single();
 
-      if (profile?.teams) {
-        const teams = profile.teams as { name: string }[];
-        if (teams.length > 0) setTeamName(teams[0].name);
+      if (profile?.team_id) {
+        const { data: team } = await supabase
+          .from("teams")
+          .select("name")
+          .eq("id", profile.team_id)
+          .single();
+
+        if (team) setTeamName(team.name);
       }
 
       const { data: predictions } = await supabase

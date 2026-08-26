@@ -36,18 +36,22 @@ export default function TeamSelectorCard() {
     if (user) {
       supabase
         .from("profiles")
-        .select("team_id, teams(id, name, league, logo_url)")
+        .select("team_id")
         .eq("user_id", user.id)
         .single()
         .then(({ data }) => {
-          if (data?.teams) {
-            const t = data.teams as unknown as Team;
-            if (Array.isArray(data.teams)) {
-              setSelectedTeam(data.teams[0] || null);
-            } else {
-              setSelectedTeam(t);
-            }
-            setTeamLocked(true);
+          if (data?.team_id) {
+            supabase
+              .from("teams")
+              .select("id, name, league, logo_url")
+              .eq("id", data.team_id)
+              .single()
+              .then(({ data: team }) => {
+                if (team) {
+                  setSelectedTeam(team);
+                  setTeamLocked(true);
+                }
+              });
           }
         });
     }
