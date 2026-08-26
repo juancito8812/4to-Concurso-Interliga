@@ -8,18 +8,22 @@ import { supabase } from "@/lib/supabase";
 export default function Navbar() {
   const { user, signOut } = useAuth();
   const [teamName, setTeamName] = useState("");
+  const [teamLogo, setTeamLogo] = useState("");
 
   useEffect(() => {
     if (user) {
       supabase
         .from("profiles")
-        .select("teams(name)")
+        .select("teams(name, logo_url)")
         .eq("user_id", user.id)
         .single()
         .then(({ data }) => {
           if (data?.teams) {
-            const teams = data.teams as { name: string }[];
-            if (teams.length > 0) setTeamName(teams[0].name);
+            const teams = data.teams as { name: string; logo_url: string }[];
+            if (teams.length > 0) {
+              setTeamName(teams[0].name);
+              setTeamLogo(teams[0].logo_url || "");
+            }
           }
         });
     }
@@ -55,10 +59,12 @@ export default function Navbar() {
               </Link>
               <div className="relative group">
                 <button className="bg-gold text-navy-black font-bold px-4 py-1.5 rounded-full text-xs hover:bg-gold-light transition-colors flex items-center gap-2">
-                  {teamName && (
-                    <span className="text-[10px] text-navy-black/70">⚽</span>
+                  {teamLogo ? (
+                    <img src={teamLogo} alt={teamName} className="w-5 h-5 rounded-full object-contain" />
+                  ) : (
+                    <span className="text-[10px]">⚽</span>
                   )}
-                  <span>{teamName || user.email?.split("@")[0]}</span>
+                  <span>{user.email?.split("@")[0]}</span>
                 </button>
                 <div className="absolute right-0 top-full mt-2 w-48 bg-navy-mid border border-border rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
                   <Link href="/perfil/" className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card rounded-t-xl">
