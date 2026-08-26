@@ -18,19 +18,6 @@ const leagues = [
   { name: "Copa Italia", logo: `${basePath}/logos/coppaitalia.png`, slug: "coppaitalia" },
 ];
 
-const rules = [
-  {
-    number: "2",
-    text: "Elegí 10 partidos por jornada y pronosticá el resultado exacto",
-    highlight: "10 partidos",
-  },
-  {
-    number: "3",
-    text: "Sumá puntos con cada acierto — resultado, goleador y goles",
-    highlight: "puntos",
-  },
-];
-
 const scoring = [
   { points: "3pts", label: "Resultado correcto" },
   { points: "2pts", label: "Marcador exacto" },
@@ -113,24 +100,37 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-10">
             <TeamSelectorCard />
-            {rules.map((rule) => {
-              const parts = rule.text.split(rule.highlight);
-              return (
-                <div
-                  key={rule.number}
-                  className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border"
-                >
-                  <span className="block text-4xl sm:text-5xl font-black text-gold/20 mb-2 sm:mb-3 leading-none">
-                    {rule.number}
-                  </span>
-                  <p className="text-sm leading-relaxed text-silver">
-                    {parts[0]}
-                    <span className="text-gold font-semibold">{rule.highlight}</span>
-                    {parts[1]}
-                  </p>
-                </div>
-              );
-            })}
+
+            {/* Tarjeta 2: Cómo pronosticar */}
+            <div className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border flex flex-col">
+              <span className="block text-4xl sm:text-5xl font-black text-gold/20 mb-2 sm:mb-3 leading-none">
+                2
+              </span>
+              <p className="text-sm leading-relaxed text-silver mb-3">
+                Elegí <span className="text-gold font-semibold">10 partidos</span> por jornada y pronosticá el resultado exacto de cada uno.
+              </p>
+              <ul className="text-[11px] text-silver/80 space-y-1 mb-4 flex-1">
+                <li>• Seleccioná el marcador de cada partido</li>
+                <li>• Elegí hasta <span className="text-gold">3 goleadores</span> por partido</li>
+                <li>• Sumá puntos con cada acierto</li>
+              </ul>
+              <Link
+                href="/pronosticar/"
+                className="block text-center bg-gold/10 border border-gold/30 text-gold font-bold py-2.5 rounded-full text-xs hover:bg-gold/20 transition-colors"
+              >
+                Ir a Pronosticar →
+              </Link>
+            </div>
+
+            {/* Tarjeta 3 */}
+            <div className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border">
+              <span className="block text-4xl sm:text-5xl font-black text-gold/20 mb-2 sm:mb-3 leading-none">
+                3
+              </span>
+              <p className="text-sm leading-relaxed text-silver">
+                Sumá <span className="text-gold font-semibold">puntos</span> con cada acierto — resultado, goleador y goles.
+              </p>
+            </div>
           </div>
         </div>
       </section>
