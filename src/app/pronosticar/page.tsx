@@ -339,7 +339,7 @@ export default function PronosticarPage() {
   return (
     <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4">
       <div className="max-w-2xl mx-auto">
-        <Link href="/" className="text-silver text-xs hover:text-white transition-colors inline-flex items-center gap-1 mb-4">← Inicio</Link>
+        <Link href="/" className="inline-flex items-center gap-2 text-silver hover:text-white mb-4 transition-colors text-sm"><span className="text-gold">←</span> Volver al inicio</Link>
         <div className="flex items-center gap-3 mb-6">
           <img src={userTeam.logo_url} alt={userTeam.name} className="w-12 h-12 rounded-full object-contain bg-white p-0.5" />
           <div>
