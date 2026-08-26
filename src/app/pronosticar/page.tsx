@@ -629,8 +629,8 @@ export default function PronosticarPage() {
                 </div>
               )}
               {success && (
-                <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 mb-4">
-                  <p className="text-green-400 text-xs">¡Pronósticos guardados!</p>
+                <div className="bg-green/10 border border-green/20 rounded-lg p-3 mb-4">
+                  <p className="text-green text-xs">¡Pronósticos guardados!</p>
                 </div>
               )}
               <button

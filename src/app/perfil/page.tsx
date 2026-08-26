@@ -99,8 +99,8 @@ export default function PerfilPage() {
           )}
 
           {success && (
-            <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
-              <p className="text-green-400 text-xs">¡Perfil actualizado!</p>
+            <div className="bg-green/10 border border-green/20 rounded-lg p-3">
+              <p className="text-green text-xs">¡Perfil actualizado!</p>
             </div>
           )}
 
