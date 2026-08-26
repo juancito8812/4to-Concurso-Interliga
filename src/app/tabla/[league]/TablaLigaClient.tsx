@@ -55,7 +55,7 @@ const sampleData: Record<string, { scorers: any[]; assists: any[]; cards: any[] 
       { rank: 10, name: "Ezri Konsa", team: "Aston Villa", value: 7 },
     ],
   },
-  esp: {
+  laliga: {
     scorers: [
       { rank: 1, name: "Robert Lewandowski", team: "Barcelona", value: 27 },
       { rank: 2, name: "Lamine Yamal", team: "Barcelona", value: 22 },
@@ -93,7 +93,7 @@ const sampleData: Record<string, { scorers: any[]; assists: any[]; cards: any[] 
       { rank: 10, name: "Frenkie de Jong", team: "Barcelona", value: 7 },
     ],
   },
-  ita: {
+  seriea: {
     scorers: [
       { rank: 1, name: "Lautaro Martínez", team: "Inter Milan", value: 25 },
       { rank: 2, name: "Marcus Thuram", team: "Inter Milan", value: 20 },
@@ -131,7 +131,7 @@ const sampleData: Record<string, { scorers: any[]; assists: any[]; cards: any[] 
       { rank: 10, name: "Davide Calabria", team: "AC Milan", value: 7 },
     ],
   },
-  ger: {
+  bundesliga: {
     scorers: [
       { rank: 1, name: "Harry Kane", team: "Bayern Munich", value: 35 },
       { rank: 2, name: "Omar Marmoush", team: "Eintracht Frankfurt", value: 23 },

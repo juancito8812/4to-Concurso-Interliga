@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
+import { leagueColors, leagueLogos } from "@/lib/leagueConfig";
 
 interface Match {
   id: string;
@@ -56,24 +57,6 @@ export default function PronosticarPage() {
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
-
-  const leagueColors: Record<string, string> = {
-    "Premier League": "#3d195b",
-    "LaLiga": "#ee8707",
-    "Serie A": "#024494",
-    "Bundesliga": "#d20515",
-    "Champions League": "#1a4b8e",
-    "Europa League": "#f37920",
-  };
-
-  const leagueLogos: Record<string, string> = {
-    "Premier League": "/4to-Concurso-Interliga/logos/premier.png",
-    "LaLiga": "/4to-Concurso-Interliga/logos/laliga.png",
-    "Serie A": "/4to-Concurso-Interliga/logos/seriea.png",
-    "Bundesliga": "/4to-Concurso-Interliga/logos/bundesliga.png",
-    "Champions League": "/4to-Concurso-Interliga/logos/champions.png",
-    "Europa League": "/4to-Concurso-Interliga/logos/europa.png",
-  };
 
   useEffect(() => {
     if (!authLoading && !user) {

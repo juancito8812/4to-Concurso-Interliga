@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 
-const basePath = "/4to-Concurso-Interliga";
-
 const ligas = [
   { name: "LaLiga", slug: "laliga" },
   { name: "Premier League", slug: "premier" },

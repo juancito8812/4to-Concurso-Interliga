@@ -17,16 +17,18 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ### Estructura
 
 - **Landing principal:** `src/app/page.tsx` — Componente `"use client"` con datos hardcodeados (reglas, puntuación, premios, logos de ligas)
-- **Tablas de posiciones:** `src/app/tabla/[league]/TablaLigaClient.tsx` — Fetch client-side a ESPN API + datos de ejemplo para goleadores/asistencias/tarjetas
+- **Tablas de posiciones:** `src/app/tabla/[league]/TablaLigaClient.tsx` — Fetch client-side a ESPN API + datos de ejemplo
 - **Autenticación:** Supabase Auth — registro, login, recuperación de contraseña
-- **Base de datos:** Supabase PostgreSQL — tablas profiles, matches, predictions
-- **Colores:** Definidos en `src/app/globals.css` con `@theme` de Tailwind v4. Paleta: navy-dark (#080e1c), gold (#c9a84c), green (#1ed760)
-- **Configuración:** `next.config.ts` — `basePath: "/4to-Concurso-Interliga"` es OBLIGATORIO para que funcione en GitHub Pages
+- **Base de datos:** Supabase PostgreSQL — tablas profiles, matches, predictions, prediction_scorers, teams, players
+- **Colores:** Definidos en `src/app/globals.css` con `@theme` de Tailwind v4
+- **Config de ligas:** `src/lib/leagueConfig.ts` — Colores y logos de ligas (fuente única)
+- **Configuración:** `next.config.ts` — `basePath: "/4to-Concurso-Interliga"` es OBLIGATORIO para GitHub Pages
 
-### Páginas de auth
+### Páginas
 
 | Ruta | Archivo | Descripción |
 |------|---------|-------------|
+| `/` | `src/app/page.tsx` | Landing principal |
 | `/registro` | `src/app/registro/page.tsx` | Crear cuenta |
 | `/login` | `src/app/login/page.tsx` | Iniciar sesión |
 | `/olvide-contrasena` | `src/app/olvide-contrasena/page.tsx` | Recuperar contraseña |
@@ -34,70 +36,68 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `/pronosticar` | `src/app/pronosticar/page.tsx` | Hacer pronósticos (requiere auth) |
 | `/mis-pronosticos` | `src/app/mis-pronosticos/page.tsx` | Historial (requiere auth) |
 | `/ranking` | `src/app/ranking/page.tsx` | Tabla de posiciones |
+| `/tabla/[league]` | `src/app/tabla/[league]/TablaLigaClient.tsx` | Tabla de posiciones por liga |
 
-### Base de datos (SQL para Supabase)
+### Componentes
 
-```sql
--- Tabla de perfiles
-CREATE TABLE profiles (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID REFERENCES auth.users(id) UNIQUE NOT NULL,
-  display_name TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
+| Archivo | Descripción |
+|---------|-------------|
+| `src/app/Navbar.tsx` | Navbar con estado de auth y equipo del usuario |
+| `src/app/Footer.tsx` | Footer con ligas, navegación, reglas, créditos |
+| `src/app/TeamSelectorCard.tsx` | Selección de equipo en landing (bloqueada una vez elegida) |
+| `src/app/CompetitionStatusCard.tsx` | Estado de competición (VIVO/KO) |
+| `src/lib/leagueConfig.ts` | Colores y logos de ligas (compartido) |
 
--- Tabla de partidos
-CREATE TABLE matches (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  home_team TEXT NOT NULL,
-  away_team TEXT NOT NULL,
-  match_date TIMESTAMPTZ NOT NULL,
-  result_home INTEGER,
-  result_away INTEGER,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
+### Base de datos (tablas Supabase)
 
--- Tabla de pronósticos
-CREATE TABLE predictions (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID REFERENCES auth.users(id) NOT NULL,
-  match_id UUID REFERENCES matches(id) NOT NULL,
-  home_score INTEGER NOT NULL DEFAULT 0,
-  away_score INTEGER NOT NULL DEFAULT 0,
-  points INTEGER,
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  UNIQUE(user_id, match_id)
-);
+- **profiles** — user_id, display_name, team_id (FK → teams)
+- **teams** — name, league, logo_url (86+ equipos con logos de TheSportsDB)
+- **players** — name, team, league, position (500+ jugadores)
+- **matches** — home_team, away_team, match_date, league, result_home, result_away
+- **predictions** — user_id, match_id, home_score, away_score, points (UNIQUE user_id+match_id)
+- **prediction_scorers** — prediction_id, player_name, goals, team
 
--- Habilitar RLS
-ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
-ALTER TABLE matches ENABLE ROW LEVEL SECURITY;
-ALTER TABLE predictions ENABLE ROW LEVEL SECURITY;
+### Paleta de colores (globals.css)
 
--- Políticas de seguridad
-CREATE POLICY "Users can view own profile" ON profiles FOR SELECT USING (auth.uid() = user_id);
-CREATE POLICY "Users can update own profile" ON profiles FOR UPDATE USING (auth.uid() = user_id);
-CREATE POLICY "Users can insert own profile" ON profiles FOR INSERT WITH CHECK (auth.uid() = user_id);
+```
+navy-black: #080e1c    (fondo principal)
+navy-mid: #131d35      (fondo de cards)
+navy-card: #1a2540     (fondo de inputs)
+gold: #c9a84c          (acento principal)
+gold-light: #d4b45e    (hover de gold)
+gold-dark: #b8943f     (gold oscuro)
+green: #1ed760         (éxito)
+silver: #8a9bb5        (texto secundario)
+border: #1e2d4a        (bordes)
+```
 
-CREATE POLICY "Anyone can view matches" ON matches FOR SELECT USING (true);
+### Liga colors (src/lib/leagueConfig.ts)
 
-CREATE POLICY "Users can view own predictions" ON predictions FOR SELECT USING (auth.uid() = user_id);
-CREATE POLICY "Users can insert own predictions" ON predictions FOR INSERT WITH CHECK (auth.uid() = user_id);
-CREATE POLICY "Users can update own predictions" ON predictions FOR UPDATE USING (auth.uid() = user_id);
+```
+Premier League: #3d195b (violeta)
+LaLiga: #ee8707 (naranja)
+Serie A: #024494 (azul)
+Bundesliga: #d20515 (rojo)
+Champions League: #1a4b8e (azul oscuro)
+Europa League: #f37920 (naranja)
+Conference League: #00843d (verde)
+Copa Italia: #024494 (azul)
 ```
 
 ### Convenciones
 
-- Usar clases de Tailwind, no CSS inline (excepto para sombras complejas)
+- Usar clases de Tailwind, no CSS inline (excepto colores de liga que vienen de leagueConfig.ts)
 - Los componentes de página usan `"use client"` porque necesitan hooks o datos dinámicos
 - Las rutas dinámicas (`[league]`) requieren `generateStaticParams()` en un Server Component wrapper
 - No hay backend propio — todo es estático con fetch client-side
 - Supabase se usa directamente desde el browser via JS client
+- **Supabase foreign key relations return arrays, not objects** — hacer queries separadas
+- `<Link>` auto-adds basePath; `<img>` NO — manual prefix requerido para img src
 
 ### Variables de entorno
 
 ```bash
-NEXT_PUBLIC_SUPABASE_URL=https://tu-proyecto.supabase.co
+NEXT_PUBLIC_SUPABASE_URL=https://ilkndkqcmxvlufxaugog.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu-anon-key
 ```
 
@@ -117,3 +117,4 @@ Copiar `.env.example` a `.env.local` y completar.
 - Si las tablas no cargan: la API de ESPN funciona sin key, verificar CORS en browser
 - Si auth no funciona: verificar que `.env.local` tenga las credenciales correctas de Supabase
 - Si el build falla: verificar que no haya errores de TypeScript con `npm run build`
+- Si los logos de equipo no se ven: TheSportsDB es rate-limited, usar delays de 3s entre requests
