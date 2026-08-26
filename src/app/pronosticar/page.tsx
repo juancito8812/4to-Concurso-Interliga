@@ -417,7 +417,7 @@ export default function PronosticarPage() {
                     onClick={() => handleExpand(match.id)}
                     className="w-full bg-navy-card border-t border-border px-4 py-2 text-xs text-silver hover:text-white transition-colors flex items-center justify-center gap-2"
                   >
-                    <span>{isExpanded ? "Ocultar goleadores" : "Agregar goleadores"}</span>
+                    <span>{isExpanded ? "Ocultar goleadores" : (homeScorers.some(s => s.player_name) || awayScorers.some(s => s.player_name)) ? "Editar goleadores" : "Agregar goleadores"}</span>
                     <span className={`transform transition-transform ${isExpanded ? "rotate-180" : ""}`}>▼</span>
                   </button>
 
