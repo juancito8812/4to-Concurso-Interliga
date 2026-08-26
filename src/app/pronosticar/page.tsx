@@ -13,6 +13,14 @@ interface Match {
   matchweek: number;
 }
 
+interface Player {
+  id: string;
+  name: string;
+  team: string;
+  league: string;
+  position: string;
+}
+
 interface Scorer {
   player_name: string;
   goals: number;
@@ -39,6 +47,7 @@ export default function PronosticarPage() {
   const router = useRouter();
   const [userTeam, setUserTeam] = useState<TeamInfo | null>(null);
   const [matches, setMatches] = useState<Match[]>([]);
+  const [players, setPlayers] = useState<Player[]>([]);
   const [predictions, setPredictions] = useState<Record<string, Prediction>>({});
   const [expandedMatch, setExpandedMatch] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -114,6 +123,31 @@ export default function PronosticarPage() {
       }
     }
     setLoading(false);
+  };
+
+  // Fetch players for the user's team and opponent
+  useEffect(() => {
+    if (userTeam && matches.length > 0) {
+      const teamNames = new Set<string>();
+      teamNames.add(userTeam.name);
+      matches.forEach(m => {
+        teamNames.add(m.home_team);
+        teamNames.add(m.away_team);
+      });
+
+      supabase
+        .from("players")
+        .select("*")
+        .in("team", Array.from(teamNames))
+        .order("name")
+        .then(({ data }) => {
+          if (data) setPlayers(data);
+        });
+    }
+  }, [userTeam, matches]);
+
+  const getPlayersForTeam = (teamName: string) => {
+    return players.filter(p => p.team === teamName);
   };
 
   const handleScoreChange = (matchId: string, field: "home_score" | "away_score", value: number) => {
@@ -293,14 +327,14 @@ export default function PronosticarPage() {
           />
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold text-white">Pronosticar</h1>
-            <p className="text-silver text-sm">{userTeam.name} — Semana actual</p>
+            <p className="text-silver text-sm">{userTeam.name} — Próximos 3 partidos</p>
           </div>
         </div>
 
         {matches.length === 0 ? (
           <div className="bg-navy-mid border border-border rounded-2xl p-8 text-center">
             <span className="text-4xl mb-3 block">📅</span>
-            <p className="text-silver text-sm">No hay partidos programados para {userTeam.name} esta semana</p>
+            <p className="text-silver text-sm">No hay partidos programados para {userTeam.name}</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -309,6 +343,8 @@ export default function PronosticarPage() {
               const isExpanded = expandedMatch === match.id;
               const homeScorers = (pred?.scorers ?? []).filter(s => s.team === "home");
               const awayScorers = (pred?.scorers ?? []).filter(s => s.team === "away");
+              const homePlayers = getPlayersForTeam(match.home_team);
+              const awayPlayers = getPlayersForTeam(match.away_team);
 
               return (
                 <div key={match.id} className="bg-navy-mid border border-border rounded-xl overflow-hidden">
@@ -387,13 +423,18 @@ export default function PronosticarPage() {
                               const globalIdx = pred?.scorers?.indexOf(scorer) ?? idx;
                               return (
                                 <div key={idx} className="flex items-center gap-2">
-                                  <input
-                                    type="text"
+                                  <select
                                     value={scorer.player_name}
                                     onChange={(e) => updateScorer(match.id, globalIdx, "player_name", e.target.value)}
-                                    placeholder="Nombre del jugador"
                                     className="flex-1 bg-navy-card border border-border rounded-lg px-3 py-1.5 text-white text-xs focus:outline-none focus:border-gold"
-                                  />
+                                  >
+                                    <option value="">Seleccionar jugador</option>
+                                    {homePlayers.map((player) => (
+                                      <option key={player.id} value={player.name}>
+                                        {player.name}
+                                      </option>
+                                    ))}
+                                  </select>
                                   <div className="flex items-center gap-1">
                                     <button
                                       onClick={() => updateScorer(match.id, globalIdx, "goals", Math.max(1, scorer.goals - 1))}
@@ -444,13 +485,18 @@ export default function PronosticarPage() {
                               const globalIdx = pred?.scorers?.indexOf(scorer) ?? idx;
                               return (
                                 <div key={idx} className="flex items-center gap-2">
-                                  <input
-                                    type="text"
+                                  <select
                                     value={scorer.player_name}
                                     onChange={(e) => updateScorer(match.id, globalIdx, "player_name", e.target.value)}
-                                    placeholder="Nombre del jugador"
                                     className="flex-1 bg-navy-card border border-border rounded-lg px-3 py-1.5 text-white text-xs focus:outline-none focus:border-gold"
-                                  />
+                                  >
+                                    <option value="">Seleccionar jugador</option>
+                                    {awayPlayers.map((player) => (
+                                      <option key={player.id} value={player.name}>
+                                        {player.name}
+                                      </option>
+                                    ))}
+                                  </select>
                                   <div className="flex items-center gap-1">
                                     <button
                                       onClick={() => updateScorer(match.id, globalIdx, "goals", Math.max(1, scorer.goals - 1))}
