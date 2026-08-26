@@ -268,7 +268,7 @@ export default function PronosticarPage() {
 
   const handleExpand = (matchId: string) => {
     const match = matches.find(m => m.id === matchId);
-    if (match && isMatchLocked(match.match_date)) return;
+    if (match && isMatchLocked(matchId, match.match_date)) return;
 
     if (expandedMatch === matchId) {
       setExpandedMatch(null);
@@ -285,12 +285,15 @@ export default function PronosticarPage() {
     if (awayScorers.length < 3) ensureThreeScorers(matchId, "away");
   };
 
-  const isMatchLocked = (matchDate: string) => {
+  const isMatchLocked = (matchId: string, matchDate: string) => {
+    const pred = predictions[matchId];
+    const hasBeenSaved = !!pred?.prediction_id;
     const now = new Date();
     const matchTime = new Date(matchDate);
     const diffMs = matchTime.getTime() - now.getTime();
     const diffMin = diffMs / (1000 * 60);
-    return diffMin <= 30;
+    const within30Min = diffMin <= 30;
+    return hasBeenSaved || within30Min;
   };
 
   const handleSave = async () => {
@@ -302,7 +305,7 @@ export default function PronosticarPage() {
     try {
       const unlockedMatches = Object.keys(predictions).filter(matchId => {
         const match = matches.find(m => m.id === matchId);
-        return match && !isMatchLocked(match.match_date);
+        return match && !isMatchLocked(matchId, match.match_date);
       });
 
       for (const matchId of unlockedMatches) {
@@ -411,7 +414,7 @@ export default function PronosticarPage() {
             {matches.map((match) => {
               const pred = predictions[match.id];
               const isExpanded = expandedMatch === match.id;
-              const locked = isMatchLocked(match.match_date);
+              const locked = isMatchLocked(match.id, match.match_date);
               const homeScorers = (pred?.scorers ?? []).filter(s => s.team === "home");
               const awayScorers = (pred?.scorers ?? []).filter(s => s.team === "away");
               const homePlayers = getPlayersForTeam(match.home_team);
@@ -423,8 +426,12 @@ export default function PronosticarPage() {
                     <div className="absolute inset-0 z-10 flex items-center justify-center bg-navy-black/50 rounded-2xl">
                       <div className="text-center">
                         <span className="text-3xl block mb-2">🔒</span>
-                        <p className="text-white text-sm font-bold">Cerrado</p>
-                        <p className="text-silver text-[10px]">Ya comenzó el partido</p>
+                        <p className="text-white text-sm font-bold">
+                          {pred?.prediction_id ? "Guardado" : "Cerrado"}
+                        </p>
+                        <p className="text-silver text-[10px]">
+                          {pred?.prediction_id ? "Pronóstico ya enviado" : "Ya comenzó el partido"}
+                        </p>
                       </div>
                     </div>
                   )}
