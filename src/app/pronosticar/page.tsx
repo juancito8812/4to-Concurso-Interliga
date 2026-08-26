@@ -421,9 +421,9 @@ export default function PronosticarPage() {
               const awayPlayers = getPlayersForTeam(match.away_team);
 
               return (
-                <div key={match.id} className={`bg-navy-mid border border-border rounded-2xl overflow-hidden relative ${locked ? "opacity-60" : ""}`}>
+                <div key={match.id} className={`relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border ${locked ? "opacity-60" : ""}`}>
                   {locked && (
-                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-navy-black/50 rounded-2xl">
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-navy-black/50 rounded-xl sm:rounded-2xl">
                       <div className="text-center">
                         <span className="text-3xl block mb-2">🔒</span>
                         <p className="text-white text-sm font-bold">
@@ -435,8 +435,6 @@ export default function PronosticarPage() {
                       </div>
                     </div>
                   )}
-                  <div className="h-1" style={{ backgroundColor: leagueColors[match.league] || "#334155" }}></div>
-                  <div className="p-4 sm:p-5">
                     {match.league && (
                       <div className="flex items-center gap-1.5 mb-2">
                         {leagueLogos[match.league] && (
@@ -500,18 +498,17 @@ export default function PronosticarPage() {
                         )}
                       </div>
                     )}
-                  </div>
 
                   <button
                     onClick={() => handleExpand(match.id)}
-                    className="w-full bg-navy-card border-t border-border px-4 py-2 text-xs text-silver hover:text-white transition-colors flex items-center justify-center gap-2"
+                    className="block w-full text-center bg-gold/10 border border-gold/30 text-gold font-bold py-2.5 rounded-full text-xs hover:bg-gold/20 transition-colors mt-3"
                   >
                     <span>{isExpanded ? "Ocultar goleadores" : (homeScorers.some(s => s.player_name) || awayScorers.some(s => s.player_name)) ? "Editar goleadores" : "Agregar goleadores"}</span>
-                    <span className={`transform transition-transform ${isExpanded ? "rotate-180" : ""}`}>▼</span>
+                    <span className={`inline-block ml-1 transform transition-transform ${isExpanded ? "rotate-180" : ""}`}>▼</span>
                   </button>
 
                   {isExpanded && (
-                    <div className="p-4 border-t border-border bg-navy-black/30">
+                    <div className="mt-4 pt-4 border-t border-border">
                       {/* Home Team Scorers - 3 slots */}
                       <div className="mb-4">
                         <div className="flex items-center gap-2 mb-2">

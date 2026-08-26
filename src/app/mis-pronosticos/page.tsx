@@ -177,11 +177,8 @@ export default function MisPronosticosPage() {
         ) : (
           <div className="space-y-3">
             {predictions.map((p) => {
-              const borderColor = leagueColors[p.league] || "#334155";
               return (
-                <div key={p.id} className="bg-navy-mid border border-border rounded-xl overflow-hidden">
-                  <div className="h-1" style={{ backgroundColor: borderColor }}></div>
-                  <div className="p-4">
+                <div key={p.id} className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border">
                     {p.league && (
                       <div className="flex items-center gap-1.5 mb-2">
                         {leagueLogos[p.league] && (
@@ -233,7 +230,6 @@ export default function MisPronosticosPage() {
                         )}
                       </div>
                     )}
-                  </div>
                 </div>
               );
             })}
