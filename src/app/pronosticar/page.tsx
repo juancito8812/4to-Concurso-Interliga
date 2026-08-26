@@ -267,6 +267,9 @@ export default function PronosticarPage() {
   };
 
   const handleExpand = (matchId: string) => {
+    const match = matches.find(m => m.id === matchId);
+    if (match && isMatchLocked(match.match_date)) return;
+
     if (expandedMatch === matchId) {
       setExpandedMatch(null);
       return;
@@ -282,6 +285,14 @@ export default function PronosticarPage() {
     if (awayScorers.length < 3) ensureThreeScorers(matchId, "away");
   };
 
+  const isMatchLocked = (matchDate: string) => {
+    const now = new Date();
+    const matchTime = new Date(matchDate);
+    const diffMs = matchTime.getTime() - now.getTime();
+    const diffMin = diffMs / (1000 * 60);
+    return diffMin <= 30;
+  };
+
   const handleSave = async () => {
     if (!user) return;
     setSaving(true);
@@ -289,7 +300,12 @@ export default function PronosticarPage() {
     setSuccess(false);
 
     try {
-      for (const matchId of Object.keys(predictions)) {
+      const unlockedMatches = Object.keys(predictions).filter(matchId => {
+        const match = matches.find(m => m.id === matchId);
+        return match && !isMatchLocked(match.match_date);
+      });
+
+      for (const matchId of unlockedMatches) {
         const pred = predictions[matchId];
         const homeScore = pred.home_score === "" ? 0 : parseInt(pred.home_score);
         const awayScore = pred.away_score === "" ? 0 : parseInt(pred.away_score);
@@ -395,13 +411,23 @@ export default function PronosticarPage() {
             {matches.map((match) => {
               const pred = predictions[match.id];
               const isExpanded = expandedMatch === match.id;
+              const locked = isMatchLocked(match.match_date);
               const homeScorers = (pred?.scorers ?? []).filter(s => s.team === "home");
               const awayScorers = (pred?.scorers ?? []).filter(s => s.team === "away");
               const homePlayers = getPlayersForTeam(match.home_team);
               const awayPlayers = getPlayersForTeam(match.away_team);
 
               return (
-                <div key={match.id} className="bg-navy-mid border border-border rounded-2xl overflow-hidden">
+                <div key={match.id} className={`bg-navy-mid border border-border rounded-2xl overflow-hidden relative ${locked ? "opacity-60" : ""}`}>
+                  {locked && (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-navy-black/50 rounded-2xl">
+                      <div className="text-center">
+                        <span className="text-3xl block mb-2">🔒</span>
+                        <p className="text-white text-sm font-bold">Cerrado</p>
+                        <p className="text-silver text-[10px]">Ya comenzó el partido</p>
+                      </div>
+                    </div>
+                  )}
                   <div className="h-1" style={{ backgroundColor: leagueColors[match.league] || "#334155" }}></div>
                   <div className="p-4 sm:p-5">
                     {match.league && (
