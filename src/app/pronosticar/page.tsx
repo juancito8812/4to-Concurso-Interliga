@@ -10,6 +10,7 @@ interface Match {
   home_team: string;
   away_team: string;
   match_date: string;
+  matchweek: number;
 }
 
 interface Scorer {
@@ -26,9 +27,17 @@ interface Prediction {
   prediction_id?: string;
 }
 
+interface TeamInfo {
+  id: string;
+  name: string;
+  league: string;
+  logo_url: string;
+}
+
 export default function PronosticarPage() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
+  const [userTeam, setUserTeam] = useState<TeamInfo | null>(null);
   const [matches, setMatches] = useState<Match[]>([]);
   const [predictions, setPredictions] = useState<Record<string, Prediction>>({});
   const [expandedMatch, setExpandedMatch] = useState<string | null>(null);
@@ -45,20 +54,38 @@ export default function PronosticarPage() {
 
   useEffect(() => {
     if (user) {
-      fetchMatches();
+      fetchUserData();
     }
   }, [user]);
 
-  const fetchMatches = async () => {
+  const fetchUserData = async () => {
+    // First fetch user's team
+    const { data: profileData } = await supabase
+      .from("profiles")
+      .select("team_id, teams(id, name, league, logo_url)")
+      .eq("user_id", user?.id)
+      .single();
+
+    if (!profileData?.teams) {
+      setLoading(false);
+      return;
+    }
+
+    const team = Array.isArray(profileData.teams) ? profileData.teams[0] : profileData.teams;
+    setUserTeam(team);
+
+    // Fetch matches where user's team is playing (home or away)
     const { data: matchesData } = await supabase
       .from("matches")
       .select("*")
+      .or(`home_team.eq.${team.name},away_team.eq.${team.name}`)
       .gte("match_date", new Date().toISOString().split("T")[0])
       .order("match_date", { ascending: true })
-      .limit(30);
+      .limit(10);
 
     if (matchesData) {
-      setMatches(matchesData);
+      // Limit to max 2 matches (current week)
+      setMatches(matchesData.slice(0, 2));
 
       // Fetch existing predictions with scorers
       const { data: predsData } = await supabase
@@ -108,7 +135,7 @@ export default function PronosticarPage() {
     const current = predictions[matchId];
     const teamScorers = (current?.scorers ?? []).filter(s => s.team === team);
     
-    if (teamScorers.length >= 3) return; // Max 3 scorers per team
+    if (teamScorers.length >= 3) return;
 
     setPredictions((prev) => ({
       ...prev,
@@ -169,7 +196,6 @@ export default function PronosticarPage() {
       for (const matchId of Object.keys(predictions)) {
         const pred = predictions[matchId];
         
-        // Upsert prediction
         const { data: predData, error: predError } = await supabase
           .from("predictions")
           .upsert({
@@ -184,13 +210,11 @@ export default function PronosticarPage() {
         if (predError) throw predError;
 
         if (predData) {
-          // Delete existing scorers
           await supabase
             .from("prediction_scorers")
             .delete()
             .eq("prediction_id", predData.id);
 
-          // Insert new scorers
           if (pred.scorers.length > 0) {
             const scorersToInsert = pred.scorers
               .filter(s => s.player_name.trim() !== "")
@@ -229,6 +253,18 @@ export default function PronosticarPage() {
     );
   }
 
+  if (!userTeam) {
+    return (
+      <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4 flex items-center justify-center">
+        <div className="bg-navy-mid border border-border rounded-2xl p-8 text-center max-w-md">
+          <span className="text-4xl mb-3 block">⚽</span>
+          <p className="text-white text-sm font-bold mb-2">Elegí tu equipo primero</p>
+          <p className="text-silver text-xs">Para pronosticar, primero seleccioná tu equipo en la página principal</p>
+        </div>
+      </div>
+    );
+  }
+
   const getMatchDate = (dateStr: string) => {
     const date = new Date(dateStr);
     return date.toLocaleDateString("es-AR", {
@@ -249,13 +285,23 @@ export default function PronosticarPage() {
   return (
     <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Hacer Pronósticos</h1>
-        <p className="text-silver text-sm mb-6">Elegí el resultado y los goleadores de cada partido</p>
+        {/* Header con equipo */}
+        <div className="flex items-center gap-3 mb-6">
+          <img
+            src={userTeam.logo_url}
+            alt={userTeam.name}
+            className="w-12 h-12 rounded-full object-contain bg-white p-0.5"
+          />
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-white">Pronosticar</h1>
+            <p className="text-silver text-sm">{userTeam.name} — Semana actual</p>
+          </div>
+        </div>
 
         {matches.length === 0 ? (
           <div className="bg-navy-mid border border-border rounded-2xl p-8 text-center">
             <span className="text-4xl mb-3 block">📅</span>
-            <p className="text-silver text-sm">No hay partidos programados por el momento</p>
+            <p className="text-silver text-sm">No hay partidos programados para {userTeam.name} esta semana</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -296,7 +342,6 @@ export default function PronosticarPage() {
                       <span className="text-white text-sm font-medium flex-1">{match.away_team}</span>
                     </div>
 
-                    {/* Scorer count badges */}
                     {(homeScorers.length > 0 || awayScorers.length > 0) && (
                       <div className="flex justify-center gap-4 mt-3">
                         {homeScorers.length > 0 && (

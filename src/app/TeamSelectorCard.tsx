@@ -19,6 +19,7 @@ export default function TeamSelectorCard() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [teamLocked, setTeamLocked] = useState(false);
 
   useEffect(() => {
     supabase
@@ -46,13 +47,14 @@ export default function TeamSelectorCard() {
             } else {
               setSelectedTeam(t);
             }
+            setTeamLocked(true);
           }
         });
     }
   }, [user]);
 
   const handleSelect = async (teamId: string) => {
-    if (!user || !teamId) return;
+    if (!user || !teamId || teamLocked) return;
 
     setLoading(true);
     setError("");
@@ -70,6 +72,7 @@ export default function TeamSelectorCard() {
 
     const team = teams.find((t) => t.id === teamId);
     if (team) setSelectedTeam(team);
+    setTeamLocked(true);
     setSuccess(true);
     setLoading(false);
     setTimeout(() => setSuccess(false), 3000);
@@ -107,25 +110,30 @@ export default function TeamSelectorCard() {
             </p>
           )}
 
-          <select
-            value={selectedTeam?.id || ""}
-            onChange={(e) => handleSelect(e.target.value)}
-            disabled={loading}
-            className="w-full bg-navy-card border border-border rounded-lg px-3 py-2.5 text-white text-xs focus:outline-none focus:border-gold transition-colors mb-2"
-          >
-            <option value="">
-              {selectedTeam ? "Cambiar equipo" : "Elegí tu equipo"}
-            </option>
-            {Object.entries(teamsByLeague).map(([league, leagueTeams]) => (
-              <optgroup key={league} label={league}>
-                {leagueTeams.map((team) => (
-                  <option key={team.id} value={team.id}>
-                    {team.name}
-                  </option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
+          {teamLocked ? (
+            <div className="w-full bg-navy-card border border-border rounded-lg px-3 py-2.5 text-silver text-xs flex items-center gap-2">
+              <span className="text-gold">🔒</span>
+              <span>Equipo confirmado — no se puede cambiar</span>
+            </div>
+          ) : (
+            <select
+              value={selectedTeam?.id || ""}
+              onChange={(e) => handleSelect(e.target.value)}
+              disabled={loading}
+              className="w-full bg-navy-card border border-border rounded-lg px-3 py-2.5 text-white text-xs focus:outline-none focus:border-gold transition-colors mb-2"
+            >
+              <option value="">Elegí tu equipo</option>
+              {Object.entries(teamsByLeague).map(([league, leagueTeams]) => (
+                <optgroup key={league} label={league}>
+                  {leagueTeams.map((team) => (
+                    <option key={team.id} value={team.id}>
+                      {team.name}
+                    </option>
+                  ))}
+                </optgroup>
+              ))}
+            </select>
+          )}
 
           <p className="text-[10px] text-gold/70 mb-2">
             ⚠ No podés cambiar de equipo hasta la temporada entrante
@@ -135,7 +143,7 @@ export default function TeamSelectorCard() {
             <p className="text-[10px] text-red-400">{error}</p>
           )}
           {success && (
-            <p className="text-[10px] text-green-400">¡Equipo guardado!</p>
+            <p className="text-[10px] text-green-400">¡Equipo confirmado!</p>
           )}
         </>
       ) : (
