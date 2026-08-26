@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 
-const basePath = "/4to-Concurso-Interliga";
-
 export default function Navbar() {
   const { user, signOut } = useAuth();
 
@@ -19,19 +17,19 @@ export default function Navbar() {
           {user ? (
             <>
               <Link
-                href={`${basePath}/pronosticar/`}
+                href="/pronosticar/"
                 className="text-silver text-xs hover:text-white transition-colors hidden sm:block"
               >
                 Pronosticar
               </Link>
               <Link
-                href={`${basePath}/mis-pronosticos/`}
+                href="/mis-pronosticos/"
                 className="text-silver text-xs hover:text-white transition-colors hidden sm:block"
               >
                 Mis Pronósticos
               </Link>
               <Link
-                href={`${basePath}/ranking/`}
+                href="/ranking/"
                 className="text-silver text-xs hover:text-white transition-colors hidden sm:block"
               >
                 Ranking
@@ -41,16 +39,16 @@ export default function Navbar() {
                   {user.email?.split("@")[0]}
                 </button>
                 <div className="absolute right-0 top-full mt-2 w-48 bg-navy-mid border border-border rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                  <Link href={`${basePath}/perfil/`} className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card rounded-t-xl">
+                  <Link href="/perfil/" className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card rounded-t-xl">
                     Mi Perfil
                   </Link>
-                  <Link href={`${basePath}/pronosticar/`} className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card sm:hidden">
+                  <Link href="/pronosticar/" className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card sm:hidden">
                     Pronosticar
                   </Link>
-                  <Link href={`${basePath}/mis-pronosticos/`} className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card sm:hidden">
+                  <Link href="/mis-pronosticos/" className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card sm:hidden">
                     Mis Pronósticos
                   </Link>
-                  <Link href={`${basePath}/ranking/`} className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card sm:hidden">
+                  <Link href="/ranking/" className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card sm:hidden">
                     Ranking
                   </Link>
                   <button
@@ -65,13 +63,13 @@ export default function Navbar() {
           ) : (
             <>
               <Link
-                href={`${basePath}/login/`}
+                href="/login/"
                 className="text-silver text-xs hover:text-white transition-colors"
               >
                 Iniciar Sesión
               </Link>
               <Link
-                href={`${basePath}/registro/`}
+                href="/registro/"
                 className="bg-gold text-navy-black font-bold px-4 py-1.5 rounded-full text-xs hover:bg-gold-light transition-colors"
               >
                 Registrarse
