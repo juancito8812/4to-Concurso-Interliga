@@ -448,56 +448,57 @@ export default function PronosticarPage() {
                       <span className="bg-navy-card px-2 py-0.5 rounded">{getMatchTime(match.match_date)}</span>
                     </div>
                     
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-2 flex-1 justify-end">
-                        <span className="text-white text-sm font-medium">{match.home_team}</span>
-                        {teamLogos[match.home_team] && (
-                          <img src={teamLogos[match.home_team]} alt={match.home_team} className="w-8 h-8 rounded-full object-contain bg-white p-0.5" />
+                    <div className="flex items-start gap-3">
+                      <div className="flex-1 text-right">
+                        <div className="flex items-center gap-2 justify-end">
+                          <span className="text-white text-sm font-medium">{match.home_team}</span>
+                          {teamLogos[match.home_team] && (
+                            <img src={teamLogos[match.home_team]} alt={match.home_team} className="w-8 h-8 rounded-full object-contain bg-white p-0.5" />
+                          )}
+                        </div>
+                        {homeScorers.some(s => s.player_name) && (
+                          <div className="mt-1.5 flex flex-wrap justify-end gap-1">
+                            {homeScorers.filter(s => s.player_name).map((s, i) => (
+                              <span key={i} className="text-[10px] text-gold">⚽ {s.player_name}{s.goals > 1 ? ` (${s.goals})` : ""}</span>
+                            ))}
+                          </div>
                         )}
                       </div>
-                      <input
-                        type="number"
-                        min={0}
-                        max={20}
-                        value={pred?.home_score ?? ""}
-                        onChange={(e) => handleScoreChange(match.id, "home_score", e.target.value)}
-                        className="w-14 bg-navy-card border border-border rounded-lg px-2 py-2 text-center text-white text-sm font-bold focus:outline-none focus:border-gold"
-                      />
-                      <span className="text-gold text-xs font-bold px-2">VS</span>
-                      <input
-                        type="number"
-                        min={0}
-                        max={20}
-                        value={pred?.away_score ?? ""}
-                        onChange={(e) => handleScoreChange(match.id, "away_score", e.target.value)}
-                        className="w-14 bg-navy-card border border-border rounded-lg px-2 py-2 text-center text-white text-sm font-bold focus:outline-none focus:border-gold"
-                      />
-                      <div className="flex items-center gap-2 flex-1">
-                        {teamLogos[match.away_team] && (
-                          <img src={teamLogos[match.away_team]} alt={match.away_team} className="w-8 h-8 rounded-full object-contain bg-white p-0.5" />
+                      <div className="flex flex-col items-center gap-1 pt-1">
+                        <input
+                          type="number"
+                          min={0}
+                          max={20}
+                          value={pred?.home_score ?? ""}
+                          onChange={(e) => handleScoreChange(match.id, "home_score", e.target.value)}
+                          className="w-14 bg-navy-card border border-border rounded-lg px-2 py-2 text-center text-white text-sm font-bold focus:outline-none focus:border-gold"
+                        />
+                        <span className="text-gold text-xs font-bold">VS</span>
+                        <input
+                          type="number"
+                          min={0}
+                          max={20}
+                          value={pred?.away_score ?? ""}
+                          onChange={(e) => handleScoreChange(match.id, "away_score", e.target.value)}
+                          className="w-14 bg-navy-card border border-border rounded-lg px-2 py-2 text-center text-white text-sm font-bold focus:outline-none focus:border-gold"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          {teamLogos[match.away_team] && (
+                            <img src={teamLogos[match.away_team]} alt={match.away_team} className="w-8 h-8 rounded-full object-contain bg-white p-0.5" />
+                          )}
+                          <span className="text-white text-sm font-medium">{match.away_team}</span>
+                        </div>
+                        {awayScorers.some(s => s.player_name) && (
+                          <div className="mt-1.5 flex flex-wrap gap-1">
+                            {awayScorers.filter(s => s.player_name).map((s, i) => (
+                              <span key={i} className="text-[10px] text-gold">⚽ {s.player_name}{s.goals > 1 ? ` (${s.goals})` : ""}</span>
+                            ))}
+                          </div>
                         )}
-                        <span className="text-white text-sm font-medium">{match.away_team}</span>
                       </div>
                     </div>
-
-                    {(homeScorers.some(s => s.player_name) || awayScorers.some(s => s.player_name)) && (
-                      <div className="flex flex-col gap-1 mt-3">
-                        {homeScorers.some(s => s.player_name) && (
-                          <div className="flex flex-wrap items-center justify-center gap-1">
-                            {homeScorers.filter(s => s.player_name).map((s, i) => (
-                              <span key={i} className="text-[10px] text-gold">⚽ {s.player_name}{s.goals > 1 ? ` (${s.goals})` : ""}{i < homeScorers.filter(s => s.player_name).length - 1 ? " · " : ""}</span>
-                            ))}
-                          </div>
-                        )}
-                        {awayScorers.some(s => s.player_name) && (
-                          <div className="flex flex-wrap items-center justify-center gap-1">
-                            {awayScorers.filter(s => s.player_name).map((s, i) => (
-                              <span key={i} className="text-[10px] text-gold">⚽ {s.player_name}{s.goals > 1 ? ` (${s.goals})` : ""}{i < awayScorers.filter(s => s.player_name).length - 1 ? " · " : ""}</span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )}
 
                   <button
                     onClick={() => handleExpand(match.id)}
