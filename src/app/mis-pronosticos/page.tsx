@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -58,6 +59,7 @@ export default function MisPronosticosPage() {
   return (
     <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4">
       <div className="max-w-2xl mx-auto">
+        <Link href="/" className="text-silver text-xs hover:text-white transition-colors inline-flex items-center gap-1 mb-4">← Inicio</Link>
         <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Mis Pronósticos</h1>
         <p className="text-silver text-sm mb-4">Historial de tus predicciones</p>
 

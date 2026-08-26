@@ -31,6 +31,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4 flex items-center justify-center">
       <div className="max-w-md w-full">
+        <Link href="/" className="text-silver text-xs hover:text-white transition-colors inline-flex items-center gap-1 mb-4">← Inicio</Link>
         <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2 text-center">Iniciar Sesión</h1>
         <p className="text-silver text-sm text-center mb-8">Entrá a tu cuenta para pronosticar</p>
 
