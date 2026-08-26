@@ -4,6 +4,7 @@ import Link from "next/link";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import TeamSelectorCard from "./TeamSelectorCard";
+import CompetitionStatusCard from "./CompetitionStatusCard";
 
 const basePath = "/4to-Concurso-Interliga";
 
@@ -123,14 +124,7 @@ export default function Home() {
             </div>
 
             {/* Tarjeta 3 */}
-            <div className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border">
-              <span className="block text-4xl sm:text-5xl font-black text-gold/20 mb-2 sm:mb-3 leading-none">
-                3
-              </span>
-              <p className="text-sm leading-relaxed text-silver">
-                Sumá <span className="text-gold font-semibold">puntos</span> con cada acierto — resultado, goleador y goles.
-              </p>
-            </div>
+            <CompetitionStatusCard />
           </div>
         </div>
       </section>
