@@ -11,6 +11,7 @@ interface Match {
   home_team: string;
   away_team: string;
   match_date: string;
+  league: string;
 }
 
 interface Player {
@@ -48,12 +49,31 @@ export default function PronosticarPage() {
   const [userTeam, setUserTeam] = useState<TeamInfo | null>(null);
   const [matches, setMatches] = useState<Match[]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
+  const [teamLogos, setTeamLogos] = useState<Record<string, string>>({});
   const [predictions, setPredictions] = useState<Record<string, Prediction>>({});
   const [expandedMatch, setExpandedMatch] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+
+  const leagueColors: Record<string, string> = {
+    "Premier League": "#3d195b",
+    "LaLiga": "#ee8707",
+    "Serie A": "#024494",
+    "Bundesliga": "#d20515",
+    "Champions League": "#1a4b8e",
+    "Europa League": "#f37920",
+  };
+
+  const leagueBadge: Record<string, string> = {
+    "Premier League": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    "LaLiga": "🇪🇸",
+    "Serie A": "🇮🇹",
+    "Bundesliga": "🇩🇪",
+    "Champions League": "⭐",
+    "Europa League": "🏆",
+  };
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -102,6 +122,23 @@ export default function PronosticarPage() {
 
     if (matchesData) {
       setMatches(matchesData.slice(0, 3));
+
+      const teamNames = new Set<string>();
+      matchesData.slice(0, 3).forEach(m => {
+        teamNames.add(m.home_team);
+        teamNames.add(m.away_team);
+      });
+
+      const { data: teamsData } = await supabase
+        .from("teams")
+        .select("name, logo_url")
+        .in("name", Array.from(teamNames));
+
+      if (teamsData) {
+        const logosMap: Record<string, string> = {};
+        teamsData.forEach(t => { logosMap[t.name] = t.logo_url || ""; });
+        setTeamLogos(logosMap);
+      }
 
       const { data: predsData } = await supabase
         .from("predictions")
@@ -364,15 +401,27 @@ export default function PronosticarPage() {
               const awayPlayers = getPlayersForTeam(match.away_team);
 
               return (
-                <div key={match.id} className="bg-navy-mid border border-border rounded-xl overflow-hidden">
-                  <div className="p-4">
+                <div key={match.id} className="bg-navy-mid border border-border rounded-2xl overflow-hidden">
+                  <div className="h-1" style={{ backgroundColor: leagueColors[match.league] || "#334155" }}></div>
+                  <div className="p-4 sm:p-5">
+                    {match.league && (
+                      <div className="flex items-center gap-1 mb-2">
+                        <span className="text-[10px]">{leagueBadge[match.league]}</span>
+                        <span className="text-[10px] font-medium" style={{ color: leagueColors[match.league] }}>{match.league}</span>
+                      </div>
+                    )}
                     <div className="flex items-center justify-between text-silver text-xs mb-3">
                       <span>{getMatchDate(match.match_date)}</span>
                       <span className="bg-navy-card px-2 py-0.5 rounded">{getMatchTime(match.match_date)}</span>
                     </div>
                     
                     <div className="flex items-center gap-3">
-                      <span className="text-white text-sm font-medium flex-1 text-right">{match.home_team}</span>
+                      <div className="flex items-center gap-2 flex-1 justify-end">
+                        <span className="text-white text-sm font-medium">{match.home_team}</span>
+                        {teamLogos[match.home_team] && (
+                          <img src={teamLogos[match.home_team]} alt={match.home_team} className="w-8 h-8 rounded-full object-contain bg-white p-0.5" />
+                        )}
+                      </div>
                       <input
                         type="number"
                         min={0}
@@ -390,7 +439,12 @@ export default function PronosticarPage() {
                         onChange={(e) => handleScoreChange(match.id, "away_score", e.target.value)}
                         className="w-14 bg-navy-card border border-border rounded-lg px-2 py-2 text-center text-white text-sm font-bold focus:outline-none focus:border-gold"
                       />
-                      <span className="text-white text-sm font-medium flex-1">{match.away_team}</span>
+                      <div className="flex items-center gap-2 flex-1">
+                        {teamLogos[match.away_team] && (
+                          <img src={teamLogos[match.away_team]} alt={match.away_team} className="w-8 h-8 rounded-full object-contain bg-white p-0.5" />
+                        )}
+                        <span className="text-white text-sm font-medium">{match.away_team}</span>
+                      </div>
                     </div>
 
                     {(homeScorers.some(s => s.player_name) || awayScorers.some(s => s.player_name)) && (
@@ -425,7 +479,10 @@ export default function PronosticarPage() {
                     <div className="p-4 border-t border-border bg-navy-black/30">
                       {/* Home Team Scorers - 3 slots */}
                       <div className="mb-4">
-                        <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2 mb-2">
+                          {teamLogos[match.home_team] && (
+                            <img src={teamLogos[match.home_team]} alt={match.home_team} className="w-5 h-5 rounded-full object-contain bg-white p-0.5" />
+                          )}
                           <span className="text-white text-xs font-medium">{match.home_team}</span>
                         </div>
                         {[0, 1, 2].map((slotIdx) => {
@@ -482,7 +539,10 @@ export default function PronosticarPage() {
 
                       {/* Away Team Scorers - 3 slots */}
                       <div>
-                        <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2 mb-2">
+                          {teamLogos[match.away_team] && (
+                            <img src={teamLogos[match.away_team]} alt={match.away_team} className="w-5 h-5 rounded-full object-contain bg-white p-0.5" />
+                          )}
                           <span className="text-white text-xs font-medium">{match.away_team}</span>
                         </div>
                         {[0, 1, 2].map((slotIdx) => {
