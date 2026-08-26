@@ -394,12 +394,20 @@ export default function PronosticarPage() {
                     </div>
 
                     {(homeScorers.some(s => s.player_name) || awayScorers.some(s => s.player_name)) && (
-                      <div className="flex justify-center gap-4 mt-3">
+                      <div className="flex flex-col gap-1 mt-3">
                         {homeScorers.some(s => s.player_name) && (
-                          <span className="text-[10px] text-gold">⚽ {homeScorers.filter(s => s.player_name).length} goleador{homeScorers.filter(s => s.player_name).length > 1 ? "es" : ""}</span>
+                          <div className="flex flex-wrap items-center justify-center gap-1">
+                            {homeScorers.filter(s => s.player_name).map((s, i) => (
+                              <span key={i} className="text-[10px] text-gold">⚽ {s.player_name}{s.goals > 1 ? ` (${s.goals})` : ""}{i < homeScorers.filter(s => s.player_name).length - 1 ? " · " : ""}</span>
+                            ))}
+                          </div>
                         )}
                         {awayScorers.some(s => s.player_name) && (
-                          <span className="text-[10px] text-gold">⚽ {awayScorers.filter(s => s.player_name).length} goleador{awayScorers.filter(s => s.player_name).length > 1 ? "es" : ""}</span>
+                          <div className="flex flex-wrap items-center justify-center gap-1">
+                            {awayScorers.filter(s => s.player_name).map((s, i) => (
+                              <span key={i} className="text-[10px] text-gold">⚽ {s.player_name}{s.goals > 1 ? ` (${s.goals})` : ""}{i < awayScorers.filter(s => s.player_name).length - 1 ? " · " : ""}</span>
+                            ))}
+                          </div>
                         )}
                       </div>
                     )}
