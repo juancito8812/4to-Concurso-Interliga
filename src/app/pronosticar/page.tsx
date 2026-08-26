@@ -84,8 +84,7 @@ export default function PronosticarPage() {
       .limit(10);
 
     if (matchesData) {
-      // Limit to max 2 matches (current week)
-      setMatches(matchesData.slice(0, 2));
+      setMatches(matchesData.slice(0, 3));
 
       // Fetch existing predictions with scorers
       const { data: predsData } = await supabase
