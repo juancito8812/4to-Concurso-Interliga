@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import TeamSelectorCard from "./TeamSelectorCard";
 
 const basePath = "/4to-Concurso-Interliga";
 
@@ -19,19 +20,14 @@ const leagues = [
 
 const rules = [
   {
-    number: "01",
-    text: 'Escoge tu club favorito para representarlo durante toda la temporada.',
-    highlight: "club favorito",
+    number: "2",
+    text: "Elegí 10 partidos por jornada y pronosticá el resultado exacto",
+    highlight: "10 partidos",
   },
   {
-    number: "02",
-    text: 'Envía tu pronóstico de resultado y marcador antes de cada partido de Liga, Copa Nacional y Copas Europeas.',
-    highlight: "resultado y marcador",
-  },
-  {
-    number: "03",
-    text: 'Las copas nacionales son de eliminación directa: si fallas tu pronóstico en fase de Knock-out, quedas fuera de esa ronda.',
-    highlight: "eliminación directa",
+    number: "3",
+    text: "Sumá puntos con cada acierto — resultado, goleador y goles",
+    highlight: "puntos",
   },
 ];
 
@@ -116,6 +112,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-10">
+            <TeamSelectorCard />
             {rules.map((rule) => {
               const parts = rule.text.split(rule.highlight);
               return (
