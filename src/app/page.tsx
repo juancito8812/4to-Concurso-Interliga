@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const basePath = "/4to-Concurso-Interliga";
 
@@ -220,16 +221,7 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-10 sm:py-16 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-sm sm:text-lg font-bold tracking-[0.15em] uppercase text-white mb-2 sm:mb-3">
-            ELIGE TU EQUIPO • PRONOSTICA • GANA
-          </p>
-          <p className="text-[10px] sm:text-xs text-silver tracking-wider uppercase">
-            4° CONCURSO INTERLIGA • TEMPORADA 2026-27
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

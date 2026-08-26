@@ -5,10 +5,18 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 
+interface Team {
+  id: string;
+  name: string;
+  league: string;
+}
+
 export default function PerfilPage() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const [displayName, setDisplayName] = useState("");
+  const [selectedTeamId, setSelectedTeamId] = useState("");
+  const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -23,14 +31,28 @@ export default function PerfilPage() {
     if (user) {
       supabase
         .from("profiles")
-        .select("display_name")
+        .select("display_name, team_id")
         .eq("user_id", user.id)
         .single()
         .then(({ data }) => {
-          if (data) setDisplayName(data.display_name || "");
+          if (data) {
+            setDisplayName(data.display_name || "");
+            setSelectedTeamId(data.team_id || "");
+          }
         });
     }
   }, [user]);
+
+  useEffect(() => {
+    supabase
+      .from("teams")
+      .select("id, name, league")
+      .order("league")
+      .order("name")
+      .then(({ data }) => {
+        if (data) setTeams(data);
+      });
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,7 +64,10 @@ export default function PerfilPage() {
 
     const { error } = await supabase
       .from("profiles")
-      .upsert({ user_id: user.id, display_name: displayName }, { onConflict: "user_id" });
+      .upsert(
+        { user_id: user.id, display_name: displayName, team_id: selectedTeamId || null },
+        { onConflict: "user_id" }
+      );
 
     setLoading(false);
 
@@ -62,11 +87,17 @@ export default function PerfilPage() {
     );
   }
 
+  const teamsByLeague = teams.reduce<Record<string, Team[]>>((acc, team) => {
+    if (!acc[team.league]) acc[team.league] = [];
+    acc[team.league].push(team);
+    return acc;
+  }, {});
+
   return (
     <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4">
       <div className="max-w-md mx-auto">
         <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Mi Perfil</h1>
-        <p className="text-silver text-sm mb-8">Editá tu información personal</p>
+        <p className="text-silver text-sm mb-8">Editá tu información y elegí tu equipo</p>
 
         <form onSubmit={handleSubmit} className="bg-navy-mid border border-border rounded-2xl p-6 sm:p-8 space-y-4">
           <div>
@@ -88,6 +119,26 @@ export default function PerfilPage() {
               className="w-full bg-navy-card border border-border rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-gold transition-colors"
               placeholder="Tu nombre en el concurso"
             />
+          </div>
+
+          <div>
+            <label className="block text-silver text-xs mb-1.5">Tu equipo</label>
+            <select
+              value={selectedTeamId}
+              onChange={(e) => setSelectedTeamId(e.target.value)}
+              className="w-full bg-navy-card border border-border rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-gold transition-colors"
+            >
+              <option value="">Elegí tu equipo</option>
+              {Object.entries(teamsByLeague).map(([league, leagueTeams]) => (
+                <optgroup key={league} label={league}>
+                  {leagueTeams.map((team) => (
+                    <option key={team.id} value={team.id}>
+                      {team.name}
+                    </option>
+                  ))}
+                </optgroup>
+              ))}
+            </select>
           </div>
 
           {error && (
