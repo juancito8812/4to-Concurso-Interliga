@@ -1,10 +1,29 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/lib/supabase";
 
 export default function Navbar() {
   const { user, signOut } = useAuth();
+  const [teamName, setTeamName] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      supabase
+        .from("profiles")
+        .select("teams(name)")
+        .eq("user_id", user.id)
+        .single()
+        .then(({ data }) => {
+          if (data?.teams) {
+            const teams = data.teams as { name: string }[];
+            if (teams.length > 0) setTeamName(teams[0].name);
+          }
+        });
+    }
+  }, [user]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-navy-black/90 backdrop-blur-sm border-b border-border">
@@ -35,8 +54,11 @@ export default function Navbar() {
                 Ranking
               </Link>
               <div className="relative group">
-                <button className="bg-gold text-navy-black font-bold px-4 py-1.5 rounded-full text-xs hover:bg-gold-light transition-colors">
-                  {user.email?.split("@")[0]}
+                <button className="bg-gold text-navy-black font-bold px-4 py-1.5 rounded-full text-xs hover:bg-gold-light transition-colors flex items-center gap-2">
+                  {teamName && (
+                    <span className="text-[10px] text-navy-black/70">⚽</span>
+                  )}
+                  <span>{teamName || user.email?.split("@")[0]}</span>
                 </button>
                 <div className="absolute right-0 top-full mt-2 w-48 bg-navy-mid border border-border rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
                   <Link href="/perfil/" className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card rounded-t-xl">
