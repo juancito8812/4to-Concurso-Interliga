@@ -44,10 +44,11 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 
 - Selección de equipo bloqueada una vez elegida
 - Pronósticos filtrados por equipo del usuario (próximos 3 partidos)
-- Goleadores: 3 barras por equipo, dropdown con jugadores predefinidos + posición
-- Lock 30 min antes del partido
-- Lock después de guardar (no se puede re-editar)
-- Logos de equipos desde TheSportsDB
+- Diseño estilo transmisión oficial de TV: cabecera con logo y color de competencia + cuenta regresiva dinámica
+- Goleadores en 2 columnas simétricas directamente debajo de cada equipo (dropdown + stepper de goles + eliminar, hasta 3 por equipo)
+- Lock 10 min antes del partido
+- Re-edición habilitada libremente antes del cierre (diffMin > 10)
+- Logos de equipos desde TheSportsDB / football-data
 - Badges de competencia con color y logo
 - Rankings con puntos
 
