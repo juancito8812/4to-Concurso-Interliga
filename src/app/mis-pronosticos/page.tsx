@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { leagueColors, leagueLogos } from "@/lib/leagueConfig";
+import { calculateScore } from "@/lib/scoring";
 
 interface ScorerInfo {
   player_name: string;
@@ -18,6 +19,7 @@ interface PredictionWithMatch {
   home_score: number;
   away_score: number;
   points: number | null;
+  pointsDetails?: string[];
   match_id: string;
   home_team: string;
   away_team: string;
@@ -117,12 +119,36 @@ export default function MisPronosticosPage() {
 
       const result: PredictionWithMatch[] = predsData.map((pred) => {
         const match = matchesMap[pred.match_id];
+        const matchScorers = scorersMap[pred.id] || [];
+
+        let earnedPoints = pred.points;
+        let details: string[] = [];
+
+        if (match && match.result_home !== null && match.result_away !== null) {
+          const breakdown = calculateScore(
+            {
+              home_score: pred.home_score,
+              away_score: pred.away_score,
+              scorers: matchScorers,
+            },
+            {
+              result_home: match.result_home,
+              result_away: match.result_away,
+            }
+          );
+          if (earnedPoints === null) {
+            earnedPoints = breakdown.totalPoints;
+          }
+          details = breakdown.details;
+        }
+
         return {
           id: pred.id,
           match_id: pred.match_id,
           home_score: pred.home_score,
           away_score: pred.away_score,
-          points: pred.points,
+          points: earnedPoints,
+          pointsDetails: details,
           home_team: match?.home_team || "",
           away_team: match?.away_team || "",
           match_date: match?.match_date || "",
@@ -131,7 +157,7 @@ export default function MisPronosticosPage() {
           league: match?.league || "",
           home_logo: teamsMap[match?.home_team] || "",
           away_logo: teamsMap[match?.away_team] || "",
-          scorers: scorersMap[pred.id] || [],
+          scorers: matchScorers,
         };
       });
 
@@ -228,10 +254,28 @@ export default function MisPronosticosPage() {
                       </div>
                     )}
                     {p.result_home !== null && (
-                      <div className="mt-2 text-center">
-                        <span className="text-silver text-xs">Resultado: {p.result_home} - {p.result_away}</span>
-                        {p.points !== null && (
-                          <span className="ml-2 text-gold text-xs font-bold">+{p.points} pts</span>
+                      <div className="mt-3 pt-3 border-t border-border/40 text-center">
+                        <div className="flex items-center justify-center gap-2 mb-1.5">
+                          <span className="text-silver text-xs">
+                            Resultado final: <strong className="text-white">{p.result_home} - {p.result_away}</strong>
+                          </span>
+                          {p.points !== null && (
+                            <span className="bg-gold/15 border border-gold/30 text-gold text-xs font-bold px-2 py-0.5 rounded-full">
+                              +{p.points} pts
+                            </span>
+                          )}
+                        </div>
+                        {p.pointsDetails && p.pointsDetails.length > 0 && (
+                          <div className="flex flex-wrap justify-center gap-1.5 mt-1.5">
+                            {p.pointsDetails.map((detail, idx) => (
+                              <span
+                                key={idx}
+                                className="text-[10px] bg-navy-dark/90 text-silver border border-border/60 px-2 py-0.5 rounded-md"
+                              >
+                                ✓ {detail}
+                              </span>
+                            ))}
+                          </div>
                         )}
                       </div>
                     )}
