@@ -43,89 +43,111 @@ export default function MisPronosticosPage() {
   }, [user, authLoading, router]);
 
   useEffect(() => {
-    if (user) {
-      fetchPredictions();
-    }
+    if (!user) return;
+
+    let isMounted = true;
+
+    const fetchPredictions = async () => {
+      const { data: predsData } = await supabase
+        .from("predictions")
+        .select("id, match_id, home_score, away_score, points")
+        .eq("user_id", user.id);
+
+      if (!predsData || predsData.length === 0) {
+        if (isMounted) setLoading(false);
+        return;
+      }
+
+      const matchIds = predsData.map((p) => p.match_id);
+      const { data: matchesData } = await supabase
+        .from("matches")
+        .select("id, home_team, away_team, match_date, result_home, result_away, league")
+        .in("id", matchIds);
+
+      interface MatchData {
+        id: string;
+        home_team: string;
+        away_team: string;
+        match_date: string;
+        result_home: number | null;
+        result_away: number | null;
+        league: string;
+      }
+
+      const matchesMap: Record<string, MatchData> = {};
+      if (matchesData) {
+        (matchesData as MatchData[]).forEach((m) => {
+          matchesMap[m.id] = m;
+        });
+      }
+
+      const allTeamNames = new Set<string>();
+      if (matchesData) {
+        matchesData.forEach((m) => {
+          allTeamNames.add(m.home_team);
+          allTeamNames.add(m.away_team);
+        });
+      }
+
+      const { data: teamsData } = await supabase
+        .from("teams")
+        .select("name, logo_url")
+        .in("name", Array.from(allTeamNames));
+
+      const teamsMap: Record<string, string> = {};
+      if (teamsData) {
+        teamsData.forEach((t) => {
+          teamsMap[t.name] = t.logo_url || "";
+        });
+      }
+
+      const predIds = predsData.map((p) => p.id);
+      const { data: scorersData } = await supabase
+        .from("prediction_scorers")
+        .select("prediction_id, player_name, goals, team")
+        .in("prediction_id", predIds);
+
+      const scorersMap: Record<string, ScorerInfo[]> = {};
+      if (scorersData) {
+        scorersData.forEach((s) => {
+          if (!scorersMap[s.prediction_id]) scorersMap[s.prediction_id] = [];
+          scorersMap[s.prediction_id].push(s);
+        });
+      }
+
+      const result: PredictionWithMatch[] = predsData.map((pred) => {
+        const match = matchesMap[pred.match_id];
+        return {
+          id: pred.id,
+          match_id: pred.match_id,
+          home_score: pred.home_score,
+          away_score: pred.away_score,
+          points: pred.points,
+          home_team: match?.home_team || "",
+          away_team: match?.away_team || "",
+          match_date: match?.match_date || "",
+          result_home: match?.result_home,
+          result_away: match?.result_away,
+          league: match?.league || "",
+          home_logo: teamsMap[match?.home_team] || "",
+          away_logo: teamsMap[match?.away_team] || "",
+          scorers: scorersMap[pred.id] || [],
+        };
+      });
+
+      if (isMounted) {
+        result.sort((a, b) => new Date(b.match_date).getTime() - new Date(a.match_date).getTime());
+        setPredictions(result);
+        setLoading(false);
+      }
+    };
+
+    fetchPredictions();
+
+    return () => {
+      isMounted = false;
+    };
   }, [user]);
-
-  const fetchPredictions = async () => {
-    const { data: predsData } = await supabase
-      .from("predictions")
-      .select("id, match_id, home_score, away_score, points")
-      .eq("user_id", user?.id);
-
-    if (!predsData || predsData.length === 0) {
-      setLoading(false);
-      return;
-    }
-
-    const matchIds = predsData.map(p => p.match_id);
-    const { data: matchesData } = await supabase
-      .from("matches")
-      .select("id, home_team, away_team, match_date, result_home, result_away, league")
-      .in("id", matchIds);
-
-    const matchesMap: Record<string, any> = {};
-    if (matchesData) {
-      matchesData.forEach(m => { matchesMap[m.id] = m; });
-    }
-
-    const allTeamNames = new Set<string>();
-    if (matchesData) {
-      matchesData.forEach(m => {
-        allTeamNames.add(m.home_team);
-        allTeamNames.add(m.away_team);
-      });
-    }
-
-    const { data: teamsData } = await supabase
-      .from("teams")
-      .select("name, logo_url")
-      .in("name", Array.from(allTeamNames));
-
-    const teamsMap: Record<string, string> = {};
-    if (teamsData) {
-      teamsData.forEach(t => { teamsMap[t.name] = t.logo_url || ""; });
-    }
-
-    const predIds = predsData.map(p => p.id);
-    const { data: scorersData } = await supabase
-      .from("prediction_scorers")
-      .select("prediction_id, player_name, goals, team")
-      .in("prediction_id", predIds);
-
-    const scorersMap: Record<string, ScorerInfo[]> = {};
-    if (scorersData) {
-      scorersData.forEach(s => {
-        if (!scorersMap[s.prediction_id]) scorersMap[s.prediction_id] = [];
-        scorersMap[s.prediction_id].push(s);
-      });
-    }
-
-    const result: PredictionWithMatch[] = predsData.map(pred => {
-      const match = matchesMap[pred.match_id];
-      return {
-        id: pred.id,
-        match_id: pred.match_id,
-        home_score: pred.home_score,
-        away_score: pred.away_score,
-        points: pred.points,
-        home_team: match?.home_team || "",
-        away_team: match?.away_team || "",
-        match_date: match?.match_date || "",
-        result_home: match?.result_home,
-        result_away: match?.result_away,
-        league: match?.league || "",
-        home_logo: teamsMap[match?.home_team] || "",
-        away_logo: teamsMap[match?.away_team] || "",
-        scorers: scorersMap[pred.id] || [],
-      };
-    });
-
-    result.sort((a, b) => new Date(b.match_date).getTime() - new Date(a.match_date).getTime());
-    setPredictions(result);
-    setLoading(false);
-  };
 
   if (authLoading || loading) {
     return (

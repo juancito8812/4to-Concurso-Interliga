@@ -9,6 +9,7 @@ export default function Navbar() {
   const { user, signOut } = useAuth();
   const [teamName, setTeamName] = useState("");
   const [teamLogo, setTeamLogo] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -35,59 +36,107 @@ export default function Navbar() {
     }
   }, [user]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest("#user-menu-container")) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-navy-black/90 backdrop-blur-sm border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-navy-black/95 backdrop-blur-md border-b border-border shadow-lg shadow-navy-black/40">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-gold font-black text-lg tracking-tight">INTERLIGA</span>
+        <Link href="/" className="flex items-center gap-2 group">
+          <span className="text-gold font-black text-xl tracking-tight group-hover:text-gold-light transition-colors">
+            INTERLIGA
+          </span>
         </Link>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 sm:gap-4">
           {user ? (
             <>
               <Link
                 href="/pronosticar/"
-                className="text-silver text-xs hover:text-white transition-colors hidden sm:block"
+                className="text-silver text-xs font-semibold hover:text-white transition-colors hidden sm:block"
               >
                 Pronosticar
               </Link>
               <Link
                 href="/mis-pronosticos/"
-                className="text-silver text-xs hover:text-white transition-colors hidden sm:block"
+                className="text-silver text-xs font-semibold hover:text-white transition-colors hidden sm:block"
               >
                 Mis Pronósticos
               </Link>
               <Link
                 href="/ranking/"
-                className="text-silver text-xs hover:text-white transition-colors hidden sm:block"
+                className="text-silver text-xs font-semibold hover:text-white transition-colors hidden sm:block"
               >
                 Ranking
               </Link>
-              <div className="relative group">
-                <button className="bg-gold text-navy-black font-bold px-4 py-1.5 rounded-full text-xs hover:bg-gold-light transition-colors flex items-center gap-2">
+              <div id="user-menu-container" className="relative">
+                <button
+                  onClick={() => setMenuOpen((prev) => !prev)}
+                  aria-expanded={menuOpen}
+                  aria-haspopup="true"
+                  className="bg-gold text-navy-black font-bold px-3.5 py-1.5 rounded-full text-xs hover:bg-gold-light transition-all flex items-center gap-2 shadow-sm cursor-pointer"
+                >
                   {teamLogo ? (
-                    <img src={teamLogo} alt={teamName} className="w-5 h-5 rounded-full object-contain" />
+                    <img src={teamLogo} alt={teamName} className="w-5 h-5 rounded-full object-contain bg-white p-0.5" />
                   ) : (
-                    <span className="text-[10px]">⚽</span>
+                    <span className="text-xs">⚽</span>
                   )}
-                  <span>{user.email?.split("@")[0]}</span>
+                  <span className="max-w-[100px] truncate">{user.email?.split("@")[0]}</span>
+                  <span className={`text-[9px] transition-transform duration-200 ${menuOpen ? "rotate-180" : ""}`}>▼</span>
                 </button>
-                <div className="absolute right-0 top-full mt-2 w-48 bg-navy-mid border border-border rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                  <Link href="/perfil/" className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card rounded-t-xl">
+                <div
+                  className={`absolute right-0 top-full mt-2 w-52 bg-navy-mid border border-border rounded-xl shadow-xl transition-all duration-150 z-50 ${
+                    menuOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"
+                  }`}
+                >
+                  {teamName && (
+                    <div className="px-4 py-2.5 border-b border-border/70 flex items-center gap-2">
+                      {teamLogo && <img src={teamLogo} alt="" className="w-4 h-4 rounded-full object-contain bg-white p-0.5" />}
+                      <span className="text-xs text-silver font-medium truncate">{teamName}</span>
+                    </div>
+                  )}
+                  <Link
+                    href="/perfil/"
+                    onClick={() => setMenuOpen(false)}
+                    className="block px-4 py-2.5 text-xs text-silver hover:text-white hover:bg-navy-card transition-colors"
+                  >
                     Mi Perfil
                   </Link>
-                  <Link href="/pronosticar/" className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card sm:hidden">
+                  <Link
+                    href="/pronosticar/"
+                    onClick={() => setMenuOpen(false)}
+                    className="block px-4 py-2.5 text-xs text-silver hover:text-white hover:bg-navy-card sm:hidden transition-colors"
+                  >
                     Pronosticar
                   </Link>
-                  <Link href="/mis-pronosticos/" className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card sm:hidden">
+                  <Link
+                    href="/mis-pronosticos/"
+                    onClick={() => setMenuOpen(false)}
+                    className="block px-4 py-2.5 text-xs text-silver hover:text-white hover:bg-navy-card sm:hidden transition-colors"
+                  >
                     Mis Pronósticos
                   </Link>
-                  <Link href="/ranking/" className="block px-4 py-2 text-sm text-silver hover:text-white hover:bg-navy-card sm:hidden">
+                  <Link
+                    href="/ranking/"
+                    onClick={() => setMenuOpen(false)}
+                    className="block px-4 py-2.5 text-xs text-silver hover:text-white hover:bg-navy-card sm:hidden transition-colors"
+                  >
                     Ranking
                   </Link>
                   <button
-                    onClick={() => signOut()}
-                    className="w-full text-left px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-navy-card rounded-b-xl"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      signOut();
+                    }}
+                    className="w-full text-left px-4 py-2.5 text-xs text-red-400 hover:text-red-300 hover:bg-navy-card rounded-b-xl border-t border-border/70 transition-colors cursor-pointer"
                   >
                     Cerrar Sesión
                   </button>
@@ -98,13 +147,13 @@ export default function Navbar() {
             <>
               <Link
                 href="/login/"
-                className="text-silver text-xs hover:text-white transition-colors"
+                className="text-silver text-xs font-semibold hover:text-white transition-colors"
               >
                 Iniciar Sesión
               </Link>
               <Link
                 href="/registro/"
-                className="bg-gold text-navy-black font-bold px-4 py-1.5 rounded-full text-xs hover:bg-gold-light transition-colors"
+                className="bg-gold text-navy-black font-bold px-4 py-1.5 rounded-full text-xs hover:bg-gold-light transition-all shadow-sm"
               >
                 Registrarse
               </Link>

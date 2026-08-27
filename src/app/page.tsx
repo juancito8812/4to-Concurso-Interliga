@@ -70,18 +70,21 @@ export default function Home() {
         </p>
 
         {/* League Logos */}
-        <div className="grid grid-cols-4 gap-3 sm:gap-4 max-w-md sm:max-w-2xl">
+        <div className="grid grid-cols-4 gap-2.5 sm:gap-4 max-w-md sm:max-w-2xl">
           {leagues.map((league) => (
             <Link
               key={league.name}
               href={`/tabla/${league.slug}`}
-              className="aspect-square rounded-xl sm:rounded-2xl bg-white flex items-center justify-center p-2 sm:p-3 hover:scale-105 transition-transform"
+              title={league.name}
+              className="group aspect-square rounded-xl sm:rounded-2xl bg-navy-mid/90 border border-border/80 hover:border-gold/70 p-2 sm:p-2.5 flex items-center justify-center hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-all"
             >
-              <img
-                src={league.logo}
-                alt={league.name}
-                className="w-full h-full object-contain"
-              />
+              <div className="w-full h-full bg-white rounded-lg sm:rounded-xl p-1.5 sm:p-2 flex items-center justify-center shadow-inner">
+                <img
+                  src={league.logo}
+                  alt={league.name}
+                  className="w-full h-full object-contain transition-transform group-hover:scale-105"
+                />
+              </div>
             </Link>
           ))}
         </div>

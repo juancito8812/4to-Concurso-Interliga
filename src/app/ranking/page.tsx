@@ -10,6 +10,12 @@ interface RankingEntry {
   rank: number;
 }
 
+interface PredictionRow {
+  user_id: string;
+  points: number | null;
+  profiles: { display_name: string | null } | null;
+}
+
 export default function RankingPage() {
   const [rankings, setRankings] = useState<RankingEntry[]>([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +29,7 @@ export default function RankingPage() {
       if (data) {
         const userPoints: Record<string, { name: string; total: number }> = {};
 
-        data.forEach((p: any) => {
+        (data as unknown as PredictionRow[]).forEach((p) => {
           if (!userPoints[p.user_id]) {
             userPoints[p.user_id] = {
               name: p.profiles?.display_name || "Anónimo",

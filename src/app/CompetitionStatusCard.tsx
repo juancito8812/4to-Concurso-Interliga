@@ -11,26 +11,28 @@ export default function CompetitionStatusCard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) {
-      setLoading(false);
-      return;
-    }
+    let isMounted = true;
 
     const checkStatus = async () => {
+      if (!user) {
+        if (isMounted) setLoading(false);
+        return;
+      }
+
       const { data: profile } = await supabase
         .from("profiles")
         .select("team_id")
         .eq("user_id", user.id)
         .single();
 
-      if (profile?.team_id) {
+      if (profile?.team_id && isMounted) {
         const { data: team } = await supabase
           .from("teams")
           .select("name")
           .eq("id", profile.team_id)
           .single();
 
-        if (team) setTeamName(team.name);
+        if (team && isMounted) setTeamName(team.name);
       }
 
       const { data: predictions } = await supabase
@@ -39,14 +41,18 @@ export default function CompetitionStatusCard() {
         .eq("user_id", user.id)
         .limit(1);
 
-      setHasPredictions(!!predictions && predictions.length > 0);
-      setLoading(false);
+      if (isMounted) {
+        setHasPredictions(!!predictions && predictions.length > 0);
+        setLoading(false);
+      }
     };
 
     checkStatus();
-  }, [user]);
 
-  const isAlive = user && teamName && hasPredictions;
+    return () => {
+      isMounted = false;
+    };
+  }, [user]);
 
   return (
     <div className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border">
@@ -60,17 +66,31 @@ export default function CompetitionStatusCard() {
         si fallás tu pronóstico en fase de Knock-out, quedás fuera de esa ronda.
       </p>
 
-      {!loading && user && (
-        isAlive ? (
-          <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3 mt-4">
-            <p className="text-green-400 text-xs font-bold text-center">
-              🟢 VIVO — {teamName}
-            </p>
-          </div>
+      {!loading && (
+        user ? (
+          teamName ? (
+            <div className="bg-green/10 border border-green/30 rounded-xl p-3.5 mt-4">
+              <div className="flex items-center justify-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-green animate-pulse" />
+                <p className="text-green text-xs font-bold uppercase tracking-wider">
+                  VIVO — {teamName}
+                </p>
+              </div>
+              <p className="text-silver/80 text-[11px] text-center mt-1">
+                {hasPredictions ? "Pronósticos cargados para la ronda actual" : "Hacé tus pronósticos para mantener tu lugar"}
+              </p>
+            </div>
+          ) : (
+            <div className="bg-gold/10 border border-gold/30 rounded-xl p-3.5 mt-4 text-center">
+              <p className="text-gold text-xs font-semibold">
+                ⚽ Elegí tu equipo en el Paso 1 para activar tu estado
+              </p>
+            </div>
+          )
         ) : (
-          <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 mt-4">
-            <p className="text-red-400 text-xs font-bold text-center">
-              🔴 KO — Fuera de competición
+          <div className="bg-navy-card/80 border border-border/80 rounded-xl p-3 mt-4 text-center">
+            <p className="text-silver text-xs">
+              Registrate para seguir tu estado en Knock-out
             </p>
           </div>
         )

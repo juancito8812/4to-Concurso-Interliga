@@ -165,9 +165,17 @@ export async function getScorers(
   return data?.scorers || [];
 }
 
+export interface FDTeam {
+  id: number;
+  name: string;
+  shortName: string;
+  tla: string;
+  crest: string;
+}
+
 // Get competition teams
-export async function getTeams(competitionCode: string) {
-  const data = await fdFetch<{ teams: any[] }>(
+export async function getTeams(competitionCode: string): Promise<FDTeam[]> {
+  const data = await fdFetch<{ teams: FDTeam[] }>(
     `/competitions/${competitionCode}/teams`
   );
   return data?.teams || [];

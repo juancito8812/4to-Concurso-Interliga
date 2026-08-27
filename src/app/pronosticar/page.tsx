@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { leagueColors, leagueLogos } from "@/lib/leagueConfig";
-import { getTeamMatches, getScorers, FDMatch, FDScorer } from "@/lib/footballData";
-import { findTeamId } from "@/lib/footballData";
+import { getTeamMatches, FDMatch, findTeamId } from "@/lib/footballData";
 
 interface Match {
   id: string;
@@ -63,100 +62,7 @@ export default function PronosticarPage() {
   const [error, setError] = useState("");
   const [dataSource, setDataSource] = useState<"api" | "supabase">("api");
 
-  useEffect(() => {
-    if (!authLoading && !user) {
-      router.push("/login");
-    }
-  }, [user, authLoading, router]);
-
-  useEffect(() => {
-    if (user) {
-      fetchUserData();
-    }
-  }, [user]);
-
-  const fetchUserData = async () => {
-    const { data: profileData } = await supabase
-      .from("profiles")
-      .select("team_id")
-      .eq("user_id", user?.id)
-      .single();
-
-    if (!profileData?.team_id) {
-      setLoading(false);
-      return;
-    }
-
-    const { data: teamData } = await supabase
-      .from("teams")
-      .select("id, name, league, logo_url")
-      .eq("id", profileData.team_id)
-      .single();
-
-    if (!teamData) {
-      setLoading(false);
-      return;
-    }
-
-    setUserTeam(teamData);
-
-    // Try football-data.org first
-    const apiTeamId = findTeamId(teamData.name);
-    
-    if (apiTeamId && process.env.NEXT_PUBLIC_FOOTBALL_DATA_KEY && process.env.NEXT_PUBLIC_FOOTBALL_DATA_KEY !== "TU_API_KEY_AQUI") {
-      try {
-        const apiMatches = await getTeamMatches(apiTeamId, "SCHEDULED");
-        
-        if (apiMatches.length > 0) {
-          setDataSource("api");
-          const mappedMatches: Match[] = apiMatches.slice(0, 3).map((f: FDMatch) => ({
-            id: String(f.id),
-            home_team: f.homeTeam.name,
-            away_team: f.awayTeam.name,
-            match_date: f.utcDate,
-            league: getLeagueName(f.id),
-            home_logo: f.homeTeam.crest,
-            away_logo: f.awayTeam.crest,
-          }));
-          setMatches(mappedMatches);
-
-          // Set team logos from API
-          const logos: Record<string, string> = {};
-          apiMatches.forEach((f: FDMatch) => {
-            logos[f.homeTeam.name] = f.homeTeam.crest;
-            logos[f.awayTeam.name] = f.awayTeam.crest;
-          });
-          setTeamLogos(logos);
-
-          // Fetch scorers from API for player names
-          const allPlayers: Player[] = [];
-          const teamNames = new Set<string>();
-          teamNames.add(teamData.name);
-          apiMatches.forEach((f: FDMatch) => {
-            teamNames.add(f.homeTeam.name);
-            teamNames.add(f.awayTeam.name);
-          });
-
-          // We'll use scorers data to get player names
-          // For now, use Supabase players as fallback
-          await fetchPlayersFromSupabase(Array.from(teamNames), allPlayers);
-        } else {
-          await fetchFromSupabase(teamData);
-        }
-      } catch (err) {
-        console.error("football-data.org error, falling back to Supabase:", err);
-        await fetchFromSupabase(teamData);
-      }
-    } else {
-      await fetchFromSupabase(teamData);
-    }
-
-    await fetchPredictions();
-    setLoading(false);
-  };
-
   const getLeagueName = (matchId: number): string => {
-    // Simple heuristic based on match ID ranges
     if (matchId < 500000) return "Premier League";
     if (matchId < 600000) return "LaLiga";
     if (matchId < 700000) return "Serie A";
@@ -164,7 +70,7 @@ export default function PronosticarPage() {
     return "Champions League";
   };
 
-  const fetchPlayersFromSupabase = async (teamNames: string[], allPlayers: Player[]) => {
+  const fetchPlayersFromSupabase = async (teamNames: string[]) => {
     const { data: playersData } = await supabase
       .from("players")
       .select("*")
@@ -217,34 +123,122 @@ export default function PronosticarPage() {
     }
   };
 
-  const fetchPredictions = async () => {
-    if (!user) return;
-
-    const { data: predsData } = await supabase
-      .from("predictions")
-      .select("id, match_id, home_score, away_score")
-      .eq("user_id", user?.id);
-
-    if (predsData) {
-      const predsMap: Record<string, Prediction> = {};
-      for (const pred of predsData) {
-        const { data: scorersData } = await supabase
-          .from("prediction_scorers")
-          .select("player_name, goals, team")
-          .eq("prediction_id", pred.id);
-
-        predsMap[pred.match_id] = {
-          match_id: pred.match_id,
-          home_score: pred.home_score === 0 ? "" : String(pred.home_score),
-          away_score: pred.away_score === 0 ? "" : String(pred.away_score),
-          scorers: scorersData || [],
-          prediction_id: pred.id,
-        };
-      }
-      setPredictions(predsMap);
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.push("/login");
     }
-  };
+  }, [user, authLoading, router]);
 
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadUserData = async () => {
+      if (!user) {
+        if (isMounted) setLoading(false);
+        return;
+      }
+      const { data: profileData } = await supabase
+        .from("profiles")
+        .select("team_id")
+        .eq("user_id", user.id)
+        .single();
+
+      if (!profileData?.team_id) {
+        if (isMounted) setLoading(false);
+        return;
+      }
+
+      const { data: teamData } = await supabase
+        .from("teams")
+        .select("id, name, league, logo_url")
+        .eq("id", profileData.team_id)
+        .single();
+
+      if (!teamData) {
+        if (isMounted) setLoading(false);
+        return;
+      }
+
+      if (isMounted) setUserTeam(teamData);
+
+      const apiTeamId = findTeamId(teamData.name);
+
+      if (apiTeamId && process.env.NEXT_PUBLIC_FOOTBALL_DATA_KEY && process.env.NEXT_PUBLIC_FOOTBALL_DATA_KEY !== "TU_API_KEY_AQUI") {
+        try {
+          const apiMatches = await getTeamMatches(apiTeamId, "SCHEDULED");
+
+          if (apiMatches.length > 0 && isMounted) {
+            setDataSource("api");
+            const mappedMatches: Match[] = apiMatches.slice(0, 3).map((f: FDMatch) => ({
+              id: String(f.id),
+              home_team: f.homeTeam.name,
+              away_team: f.awayTeam.name,
+              match_date: f.utcDate,
+              league: getLeagueName(f.id),
+              home_logo: f.homeTeam.crest,
+              away_logo: f.awayTeam.crest,
+            }));
+            setMatches(mappedMatches);
+
+            const logos: Record<string, string> = {};
+            apiMatches.forEach((f: FDMatch) => {
+              logos[f.homeTeam.name] = f.homeTeam.crest;
+              logos[f.awayTeam.name] = f.awayTeam.crest;
+            });
+            setTeamLogos(logos);
+
+            const teamNames = new Set<string>();
+            teamNames.add(teamData.name);
+            apiMatches.forEach((f: FDMatch) => {
+              teamNames.add(f.homeTeam.name);
+              teamNames.add(f.awayTeam.name);
+            });
+
+            await fetchPlayersFromSupabase(Array.from(teamNames));
+          } else {
+            await fetchFromSupabase(teamData);
+          }
+        } catch (err) {
+          console.error("football-data.org error, falling back to Supabase:", err);
+          await fetchFromSupabase(teamData);
+        }
+      } else {
+        await fetchFromSupabase(teamData);
+      }
+
+      const { data: predsData } = await supabase
+        .from("predictions")
+        .select("id, match_id, home_score, away_score")
+        .eq("user_id", user.id);
+
+      if (predsData && isMounted) {
+        const predsMap: Record<string, Prediction> = {};
+        for (const pred of predsData) {
+          const { data: scorersData } = await supabase
+            .from("prediction_scorers")
+            .select("player_name, goals, team")
+            .eq("prediction_id", pred.id);
+
+          predsMap[pred.match_id] = {
+            match_id: pred.match_id,
+            home_score: pred.home_score === 0 ? "" : String(pred.home_score),
+            away_score: pred.away_score === 0 ? "" : String(pred.away_score),
+            scorers: scorersData || [],
+            prediction_id: pred.id,
+          };
+        }
+        setPredictions(predsMap);
+      }
+
+      if (isMounted) setLoading(false);
+    };
+
+    loadUserData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [user, authLoading]);
   const getPlayersForTeam = (teamName: string) => {
     return players.filter(p => p.team === teamName);
   };
@@ -413,8 +407,9 @@ export default function PronosticarPage() {
 
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
-    } catch (err: any) {
-      setError("Error al guardar: " + err.message);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Error desconocido";
+      setError("Error al guardar: " + msg);
     } finally {
       setSaving(false);
     }

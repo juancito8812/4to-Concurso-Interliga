@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getStandings, getScorers, FDStanding, FDScorer } from "@/lib/footballData";
+import { getStandings, getScorers, FDScorer } from "@/lib/footballData";
 import { leagueColors, leagueLogos } from "@/lib/leagueConfig";
 
 const leagueData: Record<string, { name: string; fdCode: string; country: string; hasApi: boolean }> = {
@@ -28,6 +28,23 @@ interface Standing {
   lose: number;
   goalsFor: number;
   goalsAgainst: number;
+}
+
+interface FDTableEntry {
+  position: number;
+  team: {
+    name: string;
+    shortName?: string;
+    crest?: string;
+  };
+  playedGames: number;
+  won: number;
+  draw: number;
+  lost: number;
+  points: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDifference: number;
 }
 
 interface PlayerStat {
@@ -67,7 +84,7 @@ export default function TablaLigaClient() {
           const standingsData = await getStandings(data.fdCode);
           if (standingsData.length > 0) {
             const table = standingsData[0]?.table || [];
-            const mapped: Standing[] = table.map((entry: any) => ({
+            const mapped: Standing[] = (table as FDTableEntry[]).map((entry) => ({
               rank: entry.position,
               team: {
                 name: entry.team.shortName || entry.team.name,
