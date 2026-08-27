@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { leagueColors, leagueLogos, normalizeMatchLeague } from "@/lib/leagueConfig";
-import { getTeamMatches, FDMatch, findTeamId } from "@/lib/footballData";
+import { getOfficialTeamMatches, FDMatch, findTeamId } from "@/lib/footballData";
 
 interface Match {
   id: string;
@@ -158,57 +158,53 @@ export default function PronosticarPage() {
       if (isMounted) setUserTeam(teamData);
 
       const apiTeamId = findTeamId(teamData.name);
+      setDataSource("api");
 
-      if (apiTeamId && process.env.NEXT_PUBLIC_FOOTBALL_DATA_KEY && process.env.NEXT_PUBLIC_FOOTBALL_DATA_KEY !== "TU_API_KEY_AQUI") {
-        try {
-          const apiMatches = await getTeamMatches(apiTeamId, "SCHEDULED");
+      try {
+        const officialMatches = await getOfficialTeamMatches(teamData.name, apiTeamId);
 
-          if (apiMatches.length > 0 && isMounted) {
-            setDataSource("api");
-            const next3Matches = apiMatches.slice(0, 3);
-            const mappedMatches: Match[] = next3Matches.map((f: FDMatch) => {
-              const apiComp = f.competition?.name || f.competition?.code || "";
-              const resolvedLeague = normalizeMatchLeague(
-                f.homeTeam.name,
-                f.awayTeam.name,
-                f.utcDate,
-                apiComp
-              );
-              return {
-                id: String(f.id),
-                home_team: f.homeTeam.name,
-                away_team: f.awayTeam.name,
-                match_date: f.utcDate,
-                league: resolvedLeague,
-                home_logo: f.homeTeam.crest,
-                away_logo: f.awayTeam.crest,
-              };
-            });
-            setMatches(mappedMatches);
+        if (officialMatches.length > 0 && isMounted) {
+          const next3Matches = officialMatches.slice(0, 3);
+          const mappedMatches: Match[] = next3Matches.map((f: FDMatch) => {
+            const apiComp = f.competition?.name || f.competition?.code || "";
+            const resolvedLeague = normalizeMatchLeague(
+              f.homeTeam.name,
+              f.awayTeam.name,
+              f.utcDate,
+              apiComp
+            );
+            return {
+              id: String(f.id),
+              home_team: f.homeTeam.name,
+              away_team: f.awayTeam.name,
+              match_date: f.utcDate,
+              league: resolvedLeague,
+              home_logo: f.homeTeam.crest,
+              away_logo: f.awayTeam.crest,
+            };
+          });
+          setMatches(mappedMatches);
 
-            const logos: Record<string, string> = {};
-            next3Matches.forEach((f: FDMatch) => {
-              logos[f.homeTeam.name] = f.homeTeam.crest;
-              logos[f.awayTeam.name] = f.awayTeam.crest;
-            });
-            setTeamLogos(logos);
+          const logos: Record<string, string> = {};
+          next3Matches.forEach((f: FDMatch) => {
+            if (f.homeTeam.crest) logos[f.homeTeam.name] = f.homeTeam.crest;
+            if (f.awayTeam.crest) logos[f.awayTeam.name] = f.awayTeam.crest;
+          });
+          setTeamLogos(logos);
 
-            const teamNames = new Set<string>();
-            teamNames.add(teamData.name);
-            next3Matches.forEach((f: FDMatch) => {
-              teamNames.add(f.homeTeam.name);
-              teamNames.add(f.awayTeam.name);
-            });
+          const teamNames = new Set<string>();
+          teamNames.add(teamData.name);
+          next3Matches.forEach((f: FDMatch) => {
+            teamNames.add(f.homeTeam.name);
+            teamNames.add(f.awayTeam.name);
+          });
 
-            await fetchPlayersFromSupabase(Array.from(teamNames));
-          } else {
-            await fetchFromSupabase(teamData);
-          }
-        } catch (err) {
-          console.error("football-data.org error, falling back to Supabase:", err);
+          await fetchPlayersFromSupabase(Array.from(teamNames));
+        } else {
           await fetchFromSupabase(teamData);
         }
-      } else {
+      } catch (err) {
+        console.error("Error loading official matches, falling back to Supabase:", err);
         await fetchFromSupabase(teamData);
       }
 

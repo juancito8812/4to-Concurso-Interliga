@@ -1,6 +1,8 @@
+import officialFixtures from "@/data/officialFixtures.json";
+
 const BASE_URL = "https://api.football-data.org/v4";
 
-const API_KEY = process.env.NEXT_PUBLIC_FOOTBALL_DATA_KEY || "";
+const API_KEY = process.env.NEXT_PUBLIC_FOOTBALL_DATA_KEY || "733c2feed2bf441292e9779c91af2e09";
 
 const headers = {
   "X-Auth-Token": API_KEY,
@@ -160,6 +162,84 @@ export async function getTeamMatches(
     `/teams/${teamId}/matches?status=${status}`
   );
   return data?.matches || [];
+}
+
+// Get official matches for a team with automatic live API + bundled fallback
+export async function getOfficialTeamMatches(
+  teamName: string,
+  teamId?: number | null
+): Promise<FDMatch[]> {
+  // 1. Try live API first if teamId is available
+  if (teamId) {
+    try {
+      const liveMatches = await getTeamMatches(teamId, "SCHEDULED");
+      if (liveMatches && liveMatches.length > 0) {
+        return liveMatches;
+      }
+    } catch (err) {
+      console.warn("Live football-data.org fetch failed, falling back to official fixtures bundle:", err);
+    }
+  }
+
+  // 2. Fallback to pre-bundled official 2026/27 season fixtures
+  const cleanSearch = cleanNameForMatch(teamName);
+  const nowIso = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
+
+  const filtered = (officialFixtures as Array<{
+    id: string;
+    home_team: string;
+    away_team: string;
+    match_date: string;
+    league: string;
+    competition_code?: string;
+    home_logo?: string;
+    away_logo?: string;
+    matchday?: number;
+  }>).filter((m) => {
+    const cleanHome = cleanNameForMatch(m.home_team);
+    const cleanAway = cleanNameForMatch(m.away_team);
+    const isTeam = cleanHome.includes(cleanSearch) || cleanAway.includes(cleanSearch) || cleanSearch.includes(cleanHome) || cleanSearch.includes(cleanAway);
+    return isTeam && m.match_date >= nowIso;
+  });
+
+  filtered.sort((a, b) => new Date(a.match_date).getTime() - new Date(b.match_date).getTime());
+
+  return filtered.map((m) => ({
+    id: Number(m.id) || Math.floor(Math.random() * 1000000),
+    utcDate: m.match_date,
+    status: "SCHEDULED",
+    matchday: m.matchday || 1,
+    stage: "REGULAR_SEASON",
+    group: null,
+    competition: {
+      id: 2021,
+      name: m.league,
+      code: m.competition_code || "PL",
+      type: "LEAGUE",
+      emblem: "",
+    },
+    homeTeam: {
+      id: findTeamId(m.home_team) || 0,
+      name: m.home_team,
+      shortName: m.home_team,
+      tla: m.home_team.slice(0, 3).toUpperCase(),
+      crest: m.home_logo || "",
+    },
+    awayTeam: {
+      id: findTeamId(m.away_team) || 0,
+      name: m.away_team,
+      shortName: m.away_team,
+      tla: m.away_team.slice(0, 3).toUpperCase(),
+      crest: m.away_logo || "",
+    },
+    score: {
+      winner: null,
+      duration: "REGULAR",
+      fullTime: { home: null, away: null },
+      halfTime: { home: null, away: null },
+    },
+    referees: [],
+  }));
 }
 
 // Get competition scorers
