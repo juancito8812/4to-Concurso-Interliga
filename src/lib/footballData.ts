@@ -25,6 +25,13 @@ export interface FDMatch {
   matchday: number;
   stage: string;
   group: string | null;
+  competition?: {
+    id: number;
+    name: string;
+    code: string;
+    type: string;
+    emblem: string;
+  };
   homeTeam: {
     id: number;
     name: string;
@@ -216,6 +223,7 @@ export const teamIds: Record<string, number> = {
   "Newcastle United FC": 67,
   "Nottingham Forest": 351,
   "Nottingham Forest FC": 351,
+  "Nott. Forest": 351,
   "Southampton": 340,
   "Southampton FC": 340,
   "Tottenham": 73,
@@ -224,14 +232,17 @@ export const teamIds: Record<string, number> = {
   "West Ham United FC": 563,
   "Wolverhampton": 76,
   "Wolverhampton Wanderers FC": 76,
+  "Wolves": 76,
   "Sunderland": 71,
   "Sunderland AFC": 71,
 
   // LaLiga
   "Athletic Club": 77,
   "Athletic Club de Bilbao": 77,
+  "Athletic Bilbao": 77,
   "Atlético Madrid": 78,
   "Club Atlético de Madrid": 78,
+  "Atletico Madrid": 78,
   "Barcelona": 81,
   "FC Barcelona": 81,
   "Real Madrid": 86,
@@ -261,19 +272,24 @@ export const teamIds: Record<string, number> = {
   "Espanyol": 80,
   "RCD Espanyol de Barcelona": 80,
   "Leganes": 250,
+  "Leganés": 250,
   "CD Leganés": 250,
   "Alavés": 263,
   "Deportivo Alavés": 263,
   "Valladolid": 262,
+  "Real Valladolid": 262,
   "Real Valladolid CF": 262,
   "Elche": 285,
   "Elche CF": 285,
+  "Getafe": 82,
+  "Getafe CF": 82,
 
   // Serie A
   "Inter Milan": 108,
   "FC Internazionale Milano": 108,
   "Inter": 108,
   "AC Milan": 98,
+  "Milan": 98,
   "Juventus": 109,
   "Juventus FC": 109,
   "Napoli": 113,
@@ -310,6 +326,10 @@ export const teamIds: Record<string, number> = {
   "Venezia FC": 118,
   "Como": 101,
   "Como 1907": 101,
+  "Verona": 99,
+  "Hellas Verona FC": 99,
+  "Frosinone": 470,
+  "Salernitana": 455,
 
   // Bundesliga
   "Bayern Munich": 5,
@@ -346,33 +366,57 @@ export const teamIds: Record<string, number> = {
   "Darmstadt": 44,
   "1. FC Heidenheim": 122,
   "Heidenheim": 122,
+  "Holstein Kiel": 720,
+  "Fortuna Düsseldorf": 24,
+  "Düsseldorf": 24,
+
+  // European / other
+  "Paris Saint-Germain": 524,
+  "PSG": 524,
+  "Benfica": 1903,
+  "Porto": 503,
+  "FC Porto": 503,
+  "Olympique Lyon": 523,
+  "Lyon": 523,
+  "Club Brujas": 851,
+  "Club Brugge": 851,
+  "AZ Alkmaar": 678,
+  "Dinamo Zagreb": 755,
+  "Genk": 832,
+  "PAOK": 732,
 };
+
+// Clean string for fuzzy matching
+function cleanNameForMatch(name: string): string {
+  return (name || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\bfc\b|\bcf\b|\bafc\b|\bssc\b|\bas\b|\bacf\b|\bss\b|\bus\b|\brc\b|\bcd\b|\bud\b|\brcd\b/gi, "")
+    .replace(/[^a-z0-9]/g, "")
+    .trim();
+}
 
 // Find team ID by name (handles Supabase names → football-data.org API)
 export function findTeamId(teamName: string): number | null {
+  if (!teamName) return null;
+
   // Exact match
   if (teamIds[teamName]) return teamIds[teamName];
 
-  // Case-insensitive exact
-  const lower = teamName.toLowerCase();
+  const cleanSearch = cleanNameForMatch(teamName);
+
+  // Clean exact match
   for (const [name, id] of Object.entries(teamIds)) {
-    if (name.toLowerCase() === lower) return id;
+    if (cleanNameForMatch(name) === cleanSearch) return id;
   }
 
-  // Partial match: API name contains search OR search contains API name
+  // Partial match
   for (const [name, id] of Object.entries(teamIds)) {
-    const nameLower = name.toLowerCase();
-    if (nameLower.includes(lower) || lower.includes(nameLower)) {
+    const cleanEntry = cleanNameForMatch(name);
+    if (cleanEntry.includes(cleanSearch) || cleanSearch.includes(cleanEntry)) {
       return id;
     }
-  }
-
-  // Word-level match: any word from teamName matches any word from API name
-  const searchWords = lower.split(/\s+/);
-  for (const [name, id] of Object.entries(teamIds)) {
-    const nameWords = name.toLowerCase().split(/\s+/);
-    const hasMatch = searchWords.some(sw => nameWords.some(nw => nw === sw || nw.includes(sw) || sw.includes(nw)));
-    if (hasMatch) return id;
   }
 
   return null;

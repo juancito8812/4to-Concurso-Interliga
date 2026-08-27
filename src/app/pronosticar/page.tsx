@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
-import { leagueColors, leagueLogos } from "@/lib/leagueConfig";
+import { leagueColors, leagueLogos, normalizeMatchLeague } from "@/lib/leagueConfig";
 import { getTeamMatches, FDMatch, findTeamId } from "@/lib/footballData";
 
 interface Match {
@@ -61,14 +61,6 @@ export default function PronosticarPage() {
   const [error, setError] = useState("");
   const [dataSource, setDataSource] = useState<"api" | "supabase">("api");
 
-  const getLeagueName = (matchId: number): string => {
-    if (matchId < 500000) return "Premier League";
-    if (matchId < 600000) return "LaLiga";
-    if (matchId < 700000) return "Serie A";
-    if (matchId < 800000) return "Bundesliga";
-    return "Champions League";
-  };
-
   const fetchPlayersFromSupabase = async (teamNames: string[]) => {
     const { data: playersData } = await supabase
       .from("players")
@@ -93,7 +85,11 @@ export default function PronosticarPage() {
       .limit(3);
 
     if (matchesData) {
-      setMatches(matchesData);
+      const normalizedMatches: Match[] = matchesData.map(m => ({
+        ...m,
+        league: normalizeMatchLeague(m.home_team, m.away_team, m.match_date, m.league),
+      }));
+      setMatches(normalizedMatches);
 
       const teamNames = new Set<string>();
       matchesData.forEach(m => {
@@ -170,15 +166,24 @@ export default function PronosticarPage() {
           if (apiMatches.length > 0 && isMounted) {
             setDataSource("api");
             const next3Matches = apiMatches.slice(0, 3);
-            const mappedMatches: Match[] = next3Matches.map((f: FDMatch) => ({
-              id: String(f.id),
-              home_team: f.homeTeam.name,
-              away_team: f.awayTeam.name,
-              match_date: f.utcDate,
-              league: getLeagueName(f.id),
-              home_logo: f.homeTeam.crest,
-              away_logo: f.awayTeam.crest,
-            }));
+            const mappedMatches: Match[] = next3Matches.map((f: FDMatch) => {
+              const apiComp = f.competition?.name || f.competition?.code || "";
+              const resolvedLeague = normalizeMatchLeague(
+                f.homeTeam.name,
+                f.awayTeam.name,
+                f.utcDate,
+                apiComp
+              );
+              return {
+                id: String(f.id),
+                home_team: f.homeTeam.name,
+                away_team: f.awayTeam.name,
+                match_date: f.utcDate,
+                league: resolvedLeague,
+                home_logo: f.homeTeam.crest,
+                away_logo: f.awayTeam.crest,
+              };
+            });
             setMatches(mappedMatches);
 
             const logos: Record<string, string> = {};

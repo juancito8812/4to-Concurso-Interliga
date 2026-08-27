@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
-import { leagueColors, leagueLogos } from "@/lib/leagueConfig";
+import { leagueColors, leagueLogos, normalizeMatchLeague } from "@/lib/leagueConfig";
 import { calculateScore } from "@/lib/scoring";
 
 interface ScorerInfo {
@@ -154,7 +154,12 @@ export default function MisPronosticosPage() {
           match_date: match?.match_date || "",
           result_home: match?.result_home,
           result_away: match?.result_away,
-          league: match?.league || "",
+          league: normalizeMatchLeague(
+            match?.home_team || "",
+            match?.away_team || "",
+            match?.match_date || "",
+            match?.league || ""
+          ),
           home_logo: teamsMap[match?.home_team] || "",
           away_logo: teamsMap[match?.away_team] || "",
           scorers: matchScorers,
