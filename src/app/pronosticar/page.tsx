@@ -176,6 +176,7 @@ export default function PronosticarPage() {
   };
 
   const handleScoreChange = (matchId: string, field: "home_score" | "away_score", value: string) => {
+    if (value !== "" && (parseInt(value) < 0 || parseInt(value) > 20)) return;
     setPredictions((prev) => ({
       ...prev,
       [matchId]: {
@@ -348,7 +349,10 @@ export default function PronosticarPage() {
   if (authLoading || loading) {
     return (
       <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4 flex items-center justify-center">
-        <div className="inline-block w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin"></div>
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-10 h-10 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+          <p className="text-silver text-xs">Cargando partidos...</p>
+        </div>
       </div>
     );
   }
@@ -356,10 +360,16 @@ export default function PronosticarPage() {
   if (!userTeam) {
     return (
       <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4 flex items-center justify-center">
-        <div className="bg-navy-mid border border-border rounded-2xl p-8 text-center max-w-md">
-          <span className="text-4xl mb-3 block">⚽</span>
-          <p className="text-white text-sm font-bold mb-2">Elegí tu equipo primero</p>
-          <p className="text-silver text-xs">Para pronosticar, primero seleccioná tu equipo en la página principal</p>
+        <div className="bg-navy-mid border border-border rounded-2xl p-10 text-center max-w-md">
+          <span className="text-5xl mb-4 block">⚽</span>
+          <p className="text-white text-base font-bold mb-2">Elegí tu equipo primero</p>
+          <p className="text-silver text-sm mb-6">Para pronosticar, primero seleccioná tu equipo en la página principal</p>
+          <Link
+            href="/"
+            className="inline-block bg-gold text-navy-black font-bold px-6 py-2.5 rounded-full text-sm hover:bg-gold-light transition-colors"
+          >
+            Ir al Inicio
+          </Link>
         </div>
       </div>
     );
@@ -376,272 +386,318 @@ export default function PronosticarPage() {
   };
 
   return (
-    <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4">
-      <div className="max-w-2xl mx-auto">
-        <Link href="/" className="inline-flex items-center gap-2 text-silver hover:text-white mb-4 transition-colors text-sm"><span className="text-gold">←</span> Volver al inicio</Link>
-        <div className="flex items-center gap-3 mb-6">
-          <img src={userTeam.logo_url} alt={userTeam.name} className="w-12 h-12 rounded-full object-contain bg-white p-0.5" />
+    <div className="min-h-screen pt-16 sm:pt-20 pb-24 px-4">
+      <div className="max-w-3xl mx-auto">
+        {/* Header */}
+        <Link href="/" className="inline-flex items-center gap-1.5 text-silver hover:text-white mb-5 transition-colors text-xs">
+          <span className="text-gold">←</span> Volver al inicio
+        </Link>
+
+        <div className="flex items-center gap-4 mb-8">
+          <img
+            src={userTeam.logo_url}
+            alt={userTeam.name}
+            className="w-14 h-14 rounded-full object-contain bg-white p-1"
+          />
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-white">Pronosticar</h1>
-            <p className="text-silver text-sm">{userTeam.name} — Próximos 3 partidos</p>
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">Pronosticar</h1>
+            <p className="text-silver text-sm">{userTeam.name} — {matches.length} partido{matches.length !== 1 ? "s" : ""}</p>
           </div>
         </div>
 
         {matches.length === 0 ? (
-          <div className="bg-navy-mid border border-border rounded-2xl p-8 text-center">
-            <span className="text-4xl mb-3 block">📅</span>
-            <p className="text-silver text-sm">No hay partidos programados para {userTeam.name}</p>
+          <div className="bg-navy-mid border border-border rounded-2xl p-10 text-center">
+            <span className="text-5xl mb-4 block">📅</span>
+            <p className="text-white font-bold mb-1">Sin partidos programados</p>
+            <p className="text-silver text-sm">No hay partidos próximos para {userTeam.name}</p>
           </div>
         ) : (
-          <div className="space-y-4">
-            {matches.map((match) => {
-              const pred = predictions[match.id];
-              const isExpanded = expandedMatch === match.id;
-              const locked = isMatchLocked(match.id, match.match_date);
-              const homeScorers = (pred?.scorers ?? []).filter(s => s.team === "home");
-              const awayScorers = (pred?.scorers ?? []).filter(s => s.team === "away");
-              const homePlayers = getPlayersForTeam(match.home_team);
-              const awayPlayers = getPlayersForTeam(match.away_team);
+          <>
+            {/* Match Rows */}
+            <div className="space-y-3">
+              {matches.map((match) => {
+                const pred = predictions[match.id];
+                const isExpanded = expandedMatch === match.id;
+                const locked = isMatchLocked(match.id, match.match_date);
+                const leagueColor = leagueColors[match.league] || "#1e2d4a";
+                const homeScorers = (pred?.scorers ?? []).filter(s => s.team === "home" && s.player_name);
+                const awayScorers = (pred?.scorers ?? []).filter(s => s.team === "away" && s.player_name);
+                const homePlayers = getPlayersForTeam(match.home_team);
+                const awayPlayers = getPlayersForTeam(match.away_team);
+                const hasScorers = homeScorers.length > 0 || awayScorers.length > 0;
 
-              return (
-                <div key={match.id} className={`relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border ${locked ? "opacity-60" : ""}`}>
-                  {locked && (
-                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-navy-black/50 rounded-xl sm:rounded-2xl">
-                      <div className="text-center">
-                        <span className="text-3xl block mb-2">🔒</span>
-                        <p className="text-white text-sm font-bold">
-                          {pred?.prediction_id ? "Guardado" : "Cerrado"}
-                        </p>
-                        <p className="text-silver text-[10px]">
-                          {pred?.prediction_id ? "Pronóstico ya enviado" : "Ya comenzó el partido"}
-                        </p>
+                return (
+                  <div
+                    key={match.id}
+                    className={`relative rounded-xl sm:rounded-2xl bg-navy-mid border border-border overflow-hidden transition-all ${locked ? "opacity-60" : ""}`}
+                  >
+                    {/* League color accent */}
+                    <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl sm:rounded-l-2xl" style={{ backgroundColor: leagueColor }} />
+
+                    {/* Locked overlay */}
+                    {locked && (
+                      <div className="absolute inset-0 z-20 flex items-center justify-center bg-navy-black/60 backdrop-blur-[1px]">
+                        <div className="text-center">
+                          <span className="text-4xl block mb-2">🔒</span>
+                          <p className="text-white text-sm font-bold">
+                            {pred?.prediction_id ? "Guardado" : "Cerrado"}
+                          </p>
+                          <p className="text-silver text-[11px]">
+                            {pred?.prediction_id ? "Pronóstico enviado" : "Ya comenzó el partido"}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                    {match.league && (
-                      <div className="flex items-center gap-1.5 mb-2">
+                    )}
+
+                    {/* Match Header */}
+                    <div className="px-5 pt-4 pb-3">
+                      <div className="flex items-center gap-2 mb-3">
                         {leagueLogos[match.league] && (
                           <img src={leagueLogos[match.league]} alt={match.league} className="w-4 h-4 object-contain" />
                         )}
-                        <span className="text-[10px] font-medium" style={{ color: leagueColors[match.league] }}>{match.league}</span>
+                        <span className="text-[11px] font-semibold" style={{ color: leagueColor }}>{match.league}</span>
+                        <span className="text-border">·</span>
+                        <span className="text-silver text-[11px]">{getMatchDate(match.match_date)}</span>
+                        <span className="bg-navy-card px-2 py-0.5 rounded text-silver text-[11px] ml-auto">{getMatchTime(match.match_date)}</span>
+                      </div>
+
+                      {/* Teams + Score */}
+                      <div className="flex items-center gap-3">
+                        {/* Home */}
+                        <div className="flex-1 flex items-center justify-end gap-2.5">
+                          <span className="text-white text-sm font-bold text-right truncate">{match.home_team}</span>
+                          {teamLogos[match.home_team] && (
+                            <img src={teamLogos[match.home_team]} alt={match.home_team} className="w-10 h-10 rounded-full object-contain bg-white p-0.5 shrink-0" />
+                          )}
+                        </div>
+
+                        {/* Score Inputs */}
+                        <div className="flex items-center gap-2 shrink-0">
+                          <input
+                            type="number"
+                            min={0}
+                            max={20}
+                            value={pred?.home_score ?? ""}
+                            onChange={(e) => handleScoreChange(match.id, "home_score", e.target.value)}
+                            className="w-12 h-12 bg-navy-card border border-border rounded-xl text-center text-white text-lg font-black focus:outline-none focus:border-gold transition-colors"
+                          />
+                          <span className="text-gold font-black text-sm">VS</span>
+                          <input
+                            type="number"
+                            min={0}
+                            max={20}
+                            value={pred?.away_score ?? ""}
+                            onChange={(e) => handleScoreChange(match.id, "away_score", e.target.value)}
+                            className="w-12 h-12 bg-navy-card border border-border rounded-xl text-center text-white text-lg font-black focus:outline-none focus:border-gold transition-colors"
+                          />
+                        </div>
+
+                        {/* Away */}
+                        <div className="flex-1 flex items-center gap-2.5">
+                          {teamLogos[match.away_team] && (
+                            <img src={teamLogos[match.away_team]} alt={match.away_team} className="w-10 h-10 rounded-full object-contain bg-white p-0.5 shrink-0" />
+                          )}
+                          <span className="text-white text-sm font-bold truncate">{match.away_team}</span>
+                        </div>
+                      </div>
+
+                      {/* Scorer Summary (collapsed) */}
+                      {!isExpanded && hasScorers && (
+                        <div className="flex flex-wrap justify-center gap-1.5 mt-3">
+                          {homeScorers.map((s, i) => (
+                            <span key={`h-${i}`} className="inline-flex items-center gap-1 bg-gold/10 border border-gold/20 text-gold text-[10px] font-medium px-2 py-0.5 rounded-full">
+                              ⚽ {s.player_name}{s.goals > 1 ? ` ×${s.goals}` : ""}
+                            </span>
+                          ))}
+                          {awayScorers.map((s, i) => (
+                            <span key={`a-${i}`} className="inline-flex items-center gap-1 bg-gold/10 border border-gold/20 text-gold text-[10px] font-medium px-2 py-0.5 rounded-full">
+                              ⚽ {s.player_name}{s.goals > 1 ? ` ×${s.goals}` : ""}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Expand Button */}
+                    {!locked && (
+                      <button
+                        onClick={() => handleExpand(match.id)}
+                        className="w-full border-t border-border px-5 py-2.5 flex items-center justify-center gap-2 text-xs font-semibold hover:bg-navy-card transition-colors"
+                      >
+                        <span className="text-gold">
+                          {isExpanded
+                            ? "Ocultar goleadores"
+                            : hasScorers
+                              ? "Editar goleadores"
+                              : "Agregar goleadores"}
+                        </span>
+                        <span className={`text-gold transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}>▼</span>
+                      </button>
+                    )}
+
+                    {/* Expanded Scorer Section */}
+                    {isExpanded && !locked && (
+                      <div className="border-t border-border px-5 py-4">
+                        <div className="grid grid-cols-2 gap-4">
+                          {/* Home Scorers */}
+                          <div>
+                            <div className="flex items-center gap-2 mb-3">
+                              {teamLogos[match.home_team] && (
+                                <img src={teamLogos[match.home_team]} alt={match.home_team} className="w-5 h-5 rounded-full object-contain bg-white p-0.5" />
+                              )}
+                              <span className="text-white text-xs font-bold uppercase tracking-wider truncate">{match.home_team}</span>
+                            </div>
+                            <div className="space-y-2">
+                              {[0, 1, 2].map((slotIdx) => {
+                                const scorer = homeScorers[slotIdx];
+                                const globalIdx = pred?.scorers?.findIndex(s => s === scorer) ?? -1;
+                                return (
+                                  <div key={slotIdx} className="flex items-center gap-1.5">
+                                    <span className="text-gold text-[10px] font-bold w-3 text-center shrink-0">{slotIdx + 1}</span>
+                                    <select
+                                      value={scorer?.player_name ?? ""}
+                                      onChange={(e) => {
+                                        if (globalIdx >= 0) updateScorer(match.id, globalIdx, "player_name", e.target.value);
+                                      }}
+                                      className="flex-1 min-w-0 bg-navy-card border border-border rounded-lg px-2.5 py-2 text-white text-[11px] focus:outline-none focus:border-gold truncate"
+                                    >
+                                      <option value="">Seleccionar</option>
+                                      {homePlayers.map((player) => (
+                                        <option key={player.id} value={player.name}>
+                                          {player.name}
+                                        </option>
+                                      ))}
+                                    </select>
+                                    {scorer && (
+                                      <>
+                                        <div className="flex items-center gap-0.5 shrink-0">
+                                          <button
+                                            onClick={() => updateScorer(match.id, globalIdx, "goals", Math.max(1, scorer.goals - 1))}
+                                            className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white flex items-center justify-center"
+                                          >
+                                            −
+                                          </button>
+                                          <span className="text-gold text-xs font-bold w-5 text-center">{scorer.goals}</span>
+                                          <button
+                                            onClick={() => updateScorer(match.id, globalIdx, "goals", Math.min(10, scorer.goals + 1))}
+                                            className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white flex items-center justify-center"
+                                          >
+                                            +
+                                          </button>
+                                        </div>
+                                        <button
+                                          onClick={() => removeScorer(match.id, globalIdx)}
+                                          className="text-red-400/60 text-xs hover:text-red-400 shrink-0"
+                                        >
+                                          ✕
+                                        </button>
+                                      </>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+
+                          {/* Away Scorers */}
+                          <div>
+                            <div className="flex items-center gap-2 mb-3">
+                              {teamLogos[match.away_team] && (
+                                <img src={teamLogos[match.away_team]} alt={match.away_team} className="w-5 h-5 rounded-full object-contain bg-white p-0.5" />
+                              )}
+                              <span className="text-white text-xs font-bold uppercase tracking-wider truncate">{match.away_team}</span>
+                            </div>
+                            <div className="space-y-2">
+                              {[0, 1, 2].map((slotIdx) => {
+                                const scorer = awayScorers[slotIdx];
+                                const globalIdx = pred?.scorers?.findIndex(s => s === scorer) ?? -1;
+                                return (
+                                  <div key={slotIdx} className="flex items-center gap-1.5">
+                                    <span className="text-gold text-[10px] font-bold w-3 text-center shrink-0">{slotIdx + 1}</span>
+                                    <select
+                                      value={scorer?.player_name ?? ""}
+                                      onChange={(e) => {
+                                        if (globalIdx >= 0) updateScorer(match.id, globalIdx, "player_name", e.target.value);
+                                      }}
+                                      className="flex-1 min-w-0 bg-navy-card border border-border rounded-lg px-2.5 py-2 text-white text-[11px] focus:outline-none focus:border-gold truncate"
+                                    >
+                                      <option value="">Seleccionar</option>
+                                      {awayPlayers.map((player) => (
+                                        <option key={player.id} value={player.name}>
+                                          {player.name}
+                                        </option>
+                                      ))}
+                                    </select>
+                                    {scorer && (
+                                      <>
+                                        <div className="flex items-center gap-0.5 shrink-0">
+                                          <button
+                                            onClick={() => updateScorer(match.id, globalIdx, "goals", Math.max(1, scorer.goals - 1))}
+                                            className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white flex items-center justify-center"
+                                          >
+                                            −
+                                          </button>
+                                          <span className="text-gold text-xs font-bold w-5 text-center">{scorer.goals}</span>
+                                          <button
+                                            onClick={() => updateScorer(match.id, globalIdx, "goals", Math.min(10, scorer.goals + 1))}
+                                            className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white flex items-center justify-center"
+                                          >
+                                            +
+                                          </button>
+                                        </div>
+                                        <button
+                                          onClick={() => removeScorer(match.id, globalIdx)}
+                                          className="text-red-400/60 text-xs hover:text-red-400 shrink-0"
+                                        >
+                                          ✕
+                                        </button>
+                                      </>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </div>
+
+                        <p className="text-silver/60 text-[10px] mt-3 text-center">
+                          Máximo 3 goleadores por equipo · Dejá vacío si no querés usar todos
+                        </p>
                       </div>
                     )}
-                    <div className="flex items-center justify-between text-silver text-xs mb-3">
-                      <span>{getMatchDate(match.match_date)}</span>
-                      <span className="bg-navy-card px-2 py-0.5 rounded">{getMatchTime(match.match_date)}</span>
-                    </div>
-                    
-                    <div className="flex items-start gap-3">
-                      <div className="flex-1 text-right">
-                        <div className="flex items-center gap-2 justify-end">
-                          <span className="text-white text-sm font-medium">{match.home_team}</span>
-                          {teamLogos[match.home_team] && (
-                            <img src={teamLogos[match.home_team]} alt={match.home_team} className="w-8 h-8 rounded-full object-contain bg-white p-0.5" />
-                          )}
-                        </div>
-                        {homeScorers.some(s => s.player_name) && (
-                          <div className="mt-1.5 flex flex-wrap justify-end gap-1">
-                            {homeScorers.filter(s => s.player_name).map((s, i) => (
-                              <span key={i} className="text-[10px] text-gold">⚽ {s.player_name}{s.goals > 1 ? ` (${s.goals})` : ""}</span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex flex-col items-center gap-1 pt-1">
-                        <input
-                          type="number"
-                          min={0}
-                          max={20}
-                          value={pred?.home_score ?? ""}
-                          onChange={(e) => handleScoreChange(match.id, "home_score", e.target.value)}
-                          className="w-14 bg-navy-card border border-border rounded-lg px-2 py-2 text-center text-white text-sm font-bold focus:outline-none focus:border-gold"
-                        />
-                        <span className="text-gold text-xs font-bold">VS</span>
-                        <input
-                          type="number"
-                          min={0}
-                          max={20}
-                          value={pred?.away_score ?? ""}
-                          onChange={(e) => handleScoreChange(match.id, "away_score", e.target.value)}
-                          className="w-14 bg-navy-card border border-border rounded-lg px-2 py-2 text-center text-white text-sm font-bold focus:outline-none focus:border-gold"
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          {teamLogos[match.away_team] && (
-                            <img src={teamLogos[match.away_team]} alt={match.away_team} className="w-8 h-8 rounded-full object-contain bg-white p-0.5" />
-                          )}
-                          <span className="text-white text-sm font-medium">{match.away_team}</span>
-                        </div>
-                        {awayScorers.some(s => s.player_name) && (
-                          <div className="mt-1.5 flex flex-wrap gap-1">
-                            {awayScorers.filter(s => s.player_name).map((s, i) => (
-                              <span key={i} className="text-[10px] text-gold">⚽ {s.player_name}{s.goals > 1 ? ` (${s.goals})` : ""}</span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                  </div>
+                );
+              })}
+            </div>
 
-                  <button
-                    onClick={() => handleExpand(match.id)}
-                    className="block w-full text-center bg-gold/10 border border-gold/30 text-gold font-bold py-2.5 rounded-full text-xs hover:bg-gold/20 transition-colors mt-3"
-                  >
-                    <span>{isExpanded ? "Ocultar goleadores" : (homeScorers.some(s => s.player_name) || awayScorers.some(s => s.player_name)) ? "Editar goleadores" : "Agregar goleadores"}</span>
-                    <span className={`inline-block ml-1 transform transition-transform ${isExpanded ? "rotate-180" : ""}`}>▼</span>
-                  </button>
-
-                  {isExpanded && (
-                    <div className="mt-4 pt-4 border-t border-border">
-                      {/* Home Team Scorers - 3 slots */}
-                      <div className="mb-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          {teamLogos[match.home_team] && (
-                            <img src={teamLogos[match.home_team]} alt={match.home_team} className="w-5 h-5 rounded-full object-contain bg-white p-0.5" />
-                          )}
-                          <span className="text-white text-xs font-medium">{match.home_team}</span>
-                        </div>
-                        {[0, 1, 2].map((slotIdx) => {
-                          const scorer = homeScorers[slotIdx];
-                          return (
-                            <div key={slotIdx} className="flex items-center gap-2 mb-2">
-                              <span className="text-silver text-[10px] w-4 text-center">{slotIdx + 1}</span>
-                              <select
-                                value={scorer?.player_name ?? ""}
-                                onChange={(e) => {
-                                  const globalIdx = pred?.scorers?.findIndex(s => s === scorer) ?? -1;
-                                  if (globalIdx >= 0) {
-                                    updateScorer(match.id, globalIdx, "player_name", e.target.value);
-                                  }
-                                }}
-                                className="flex-1 bg-navy-card border border-border rounded-lg px-3 py-1.5 text-white text-xs focus:outline-none focus:border-gold"
-                              >
-                                <option value="">Seleccionar jugador</option>
-                                {homePlayers.map((player) => (
-                                  <option key={player.id} value={player.name}>
-                                    {player.name} ({player.position})
-                                  </option>
-                                ))}
-                              </select>
-                              {scorer && (
-                                <>
-                                  <div className="flex items-center gap-1">
-                                    <button
-                                      onClick={() => updateScorer(match.id, pred?.scorers?.indexOf(scorer) ?? 0, "goals", Math.max(1, scorer.goals - 1))}
-                                      className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white"
-                                    >
-                                      -
-                                    </button>
-                                    <span className="text-gold text-xs font-bold w-6 text-center">{scorer.goals}</span>
-                                    <button
-                                      onClick={() => updateScorer(match.id, pred?.scorers?.indexOf(scorer) ?? 0, "goals", Math.min(10, scorer.goals + 1))}
-                                      className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white"
-                                    >
-                                      +
-                                    </button>
-                                  </div>
-                                  <button
-                                    onClick={() => removeScorer(match.id, pred?.scorers?.indexOf(scorer) ?? 0)}
-                                    className="text-red-400 text-xs hover:text-red-300"
-                                  >
-                                    ✕
-                                  </button>
-                                </>
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      {/* Away Team Scorers - 3 slots */}
-                      <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          {teamLogos[match.away_team] && (
-                            <img src={teamLogos[match.away_team]} alt={match.away_team} className="w-5 h-5 rounded-full object-contain bg-white p-0.5" />
-                          )}
-                          <span className="text-white text-xs font-medium">{match.away_team}</span>
-                        </div>
-                        {[0, 1, 2].map((slotIdx) => {
-                          const scorer = awayScorers[slotIdx];
-                          return (
-                            <div key={slotIdx} className="flex items-center gap-2 mb-2">
-                              <span className="text-silver text-[10px] w-4 text-center">{slotIdx + 1}</span>
-                              <select
-                                value={scorer?.player_name ?? ""}
-                                onChange={(e) => {
-                                  const globalIdx = pred?.scorers?.findIndex(s => s === scorer) ?? -1;
-                                  if (globalIdx >= 0) {
-                                    updateScorer(match.id, globalIdx, "player_name", e.target.value);
-                                  }
-                                }}
-                                className="flex-1 bg-navy-card border border-border rounded-lg px-3 py-1.5 text-white text-xs focus:outline-none focus:border-gold"
-                              >
-                                <option value="">Seleccionar jugador</option>
-                                {awayPlayers.map((player) => (
-                                  <option key={player.id} value={player.name}>
-                                    {player.name} ({player.position})
-                                  </option>
-                                ))}
-                              </select>
-                              {scorer && (
-                                <>
-                                  <div className="flex items-center gap-1">
-                                    <button
-                                      onClick={() => updateScorer(match.id, pred?.scorers?.indexOf(scorer) ?? 0, "goals", Math.max(1, scorer.goals - 1))}
-                                      className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white"
-                                    >
-                                      -
-                                    </button>
-                                    <span className="text-gold text-xs font-bold w-6 text-center">{scorer.goals}</span>
-                                    <button
-                                      onClick={() => updateScorer(match.id, pred?.scorers?.indexOf(scorer) ?? 0, "goals", Math.min(10, scorer.goals + 1))}
-                                      className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white"
-                                    >
-                                      +
-                                    </button>
-                                  </div>
-                                  <button
-                                    onClick={() => removeScorer(match.id, pred?.scorers?.indexOf(scorer) ?? 0)}
-                                    className="text-red-400 text-xs hover:text-red-300"
-                                  >
-                                    ✕
-                                  </button>
-                                </>
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      <p className="text-silver text-[10px] mt-3 text-center">
-                        Máximo 3 goleadores por equipo · Dejá vacío si no querés usar todos
-                      </p>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-
-            <div className="pt-4">
+            {/* Save Section */}
+            <div className="mt-6 sticky bottom-4">
               {error && (
-                <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3 mb-4">
-                  <p className="text-red-400 text-xs">{error}</p>
+                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3 mb-3">
+                  <p className="text-red-400 text-xs text-center">{error}</p>
                 </div>
               )}
               {success && (
-                <div className="bg-green/10 border border-green/20 rounded-lg p-3 mb-4">
-                  <p className="text-green text-xs">¡Pronósticos guardados!</p>
+                <div className="bg-green/10 border border-green/20 rounded-xl p-3 mb-3">
+                  <p className="text-green text-xs text-center font-medium">¡Pronósticos guardados!</p>
                 </div>
               )}
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="w-full bg-gold text-navy-black font-bold py-3 rounded-full text-sm hover:bg-gold-light transition-colors disabled:opacity-50"
+                className="w-full bg-gold text-navy-black font-black py-3.5 rounded-full text-sm hover:bg-gold-light transition-colors disabled:opacity-50 tracking-wide"
               >
-                {saving ? "Guardando..." : "Guardar Pronósticos"}
+                {saving ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <span className="w-4 h-4 border-2 border-navy-black border-t-transparent rounded-full animate-spin" />
+                    Guardando...
+                  </span>
+                ) : (
+                  "Guardar Pronósticos"
+                )}
               </button>
             </div>
-          </div>
+          </>
         )}
       </div>
     </div>
