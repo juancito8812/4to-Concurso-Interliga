@@ -111,12 +111,12 @@ export default function Home() {
                 2
               </span>
               <p className="text-sm leading-relaxed text-silver mb-3">
-                Elegí <span className="text-gold font-semibold">10 partidos</span> por jornada y pronosticá el resultado exacto de cada uno.
+                Pronosticá los <span className="text-gold font-semibold">partidos de tu equipo</span> en cada jornada, indicando el marcador exacto y goleadores.
               </p>
               <ul className="text-[11px] text-silver/80 space-y-1 mb-4 flex-1">
-                <li>• Seleccioná el marcador de cada partido</li>
+                <li>• Seleccioná el marcador exacto de cada encuentro</li>
                 <li>• Elegí hasta <span className="text-gold">3 goleadores</span> por partido</li>
-                <li>• Sumá puntos con cada acierto</li>
+                <li>• Sumá puntos y competí por los primeros puestos</li>
               </ul>
               <Link
                 href="/pronosticar/"
