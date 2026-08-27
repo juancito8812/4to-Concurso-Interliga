@@ -84,19 +84,20 @@ export default function PronosticarPage() {
   const fetchFromSupabase = async (teamData: TeamInfo) => {
     setDataSource("supabase");
     
+    const nowIso = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
     const { data: matchesData } = await supabase
       .from("matches")
       .select("*")
       .or(`home_team.eq.${teamData.name},away_team.eq.${teamData.name}`)
-      .gte("match_date", new Date().toISOString().split("T")[0])
+      .gte("match_date", nowIso)
       .order("match_date", { ascending: true })
-      .limit(10);
+      .limit(3);
 
     if (matchesData) {
-      setMatches(matchesData.slice(0, 3));
+      setMatches(matchesData);
 
       const teamNames = new Set<string>();
-      matchesData.slice(0, 3).forEach(m => {
+      matchesData.forEach(m => {
         teamNames.add(m.home_team);
         teamNames.add(m.away_team);
       });
@@ -169,7 +170,8 @@ export default function PronosticarPage() {
 
           if (apiMatches.length > 0 && isMounted) {
             setDataSource("api");
-            const mappedMatches: Match[] = apiMatches.slice(0, 3).map((f: FDMatch) => ({
+            const next3Matches = apiMatches.slice(0, 3);
+            const mappedMatches: Match[] = next3Matches.map((f: FDMatch) => ({
               id: String(f.id),
               home_team: f.homeTeam.name,
               away_team: f.awayTeam.name,
@@ -181,7 +183,7 @@ export default function PronosticarPage() {
             setMatches(mappedMatches);
 
             const logos: Record<string, string> = {};
-            apiMatches.forEach((f: FDMatch) => {
+            next3Matches.forEach((f: FDMatch) => {
               logos[f.homeTeam.name] = f.homeTeam.crest;
               logos[f.awayTeam.name] = f.awayTeam.crest;
             });
@@ -189,7 +191,7 @@ export default function PronosticarPage() {
 
             const teamNames = new Set<string>();
             teamNames.add(teamData.name);
-            apiMatches.forEach((f: FDMatch) => {
+            next3Matches.forEach((f: FDMatch) => {
               teamNames.add(f.homeTeam.name);
               teamNames.add(f.awayTeam.name);
             });
@@ -320,7 +322,7 @@ export default function PronosticarPage() {
 
   const handleExpand = (matchId: string) => {
     const match = matches.find(m => m.id === matchId);
-    if (match && isMatchLocked(matchId, match.match_date)) return;
+    if (match && isMatchLocked(match.match_date)) return;
 
     if (expandedMatch === matchId) {
       setExpandedMatch(null);
@@ -337,15 +339,32 @@ export default function PronosticarPage() {
     if (awayScorers.length < 3) ensureThreeScorers(matchId, "away");
   };
 
-  const isMatchLocked = (matchId: string, matchDate: string) => {
-    const pred = predictions[matchId];
-    const hasBeenSaved = !!pred?.prediction_id;
-    const now = new Date();
-    const matchTime = new Date(matchDate);
-    const diffMs = matchTime.getTime() - now.getTime();
-    const diffMin = diffMs / (1000 * 60);
-    const within30Min = diffMin <= 30;
-    return hasBeenSaved || within30Min;
+  const isMatchLocked = (matchDate: string): boolean => {
+    const matchTime = new Date(matchDate).getTime();
+    const diffMin = (matchTime - Date.now()) / (1000 * 60);
+    if (isNaN(diffMin)) return true;
+    return diffMin <= 10;
+  };
+
+  const getTimeRemaining = (
+    matchDate: string
+  ): { label: string; isUrgent: boolean; isClosed: boolean } => {
+    const matchTime = new Date(matchDate).getTime();
+    const diffMin = (matchTime - Date.now()) / (1000 * 60);
+
+    if (isNaN(diffMin) || diffMin <= 10) {
+      return { label: "Cerrado", isUrgent: false, isClosed: true };
+    }
+    if (diffMin <= 60) {
+      const mins = Math.max(1, Math.round(diffMin - 10));
+      return { label: `Cierra en ${mins} min`, isUrgent: true, isClosed: false };
+    }
+    if (diffMin <= 1440) {
+      const hours = Math.round((diffMin - 10) / 60);
+      return { label: `Cierra en ${hours} h`, isUrgent: false, isClosed: false };
+    }
+    const days = Math.round(diffMin / 1440);
+    return { label: `En ${days} d`, isUrgent: false, isClosed: false };
   };
 
   const handleSave = async () => {
@@ -357,7 +376,7 @@ export default function PronosticarPage() {
     try {
       const unlockedMatches = Object.keys(predictions).filter(matchId => {
         const match = matches.find(m => m.id === matchId);
-        return match && !isMatchLocked(matchId, match.match_date);
+        return match && !isMatchLocked(match.match_date);
       });
 
       for (const matchId of unlockedMatches) {
@@ -379,6 +398,14 @@ export default function PronosticarPage() {
         if (predError) throw predError;
 
         if (predData) {
+          setPredictions((prev) => ({
+            ...prev,
+            [matchId]: {
+              ...prev[matchId],
+              prediction_id: predData.id,
+            },
+          }));
+
           await supabase
             .from("prediction_scorers")
             .delete()
@@ -490,7 +517,8 @@ export default function PronosticarPage() {
               {matches.map((match) => {
                 const pred = predictions[match.id];
                 const isExpanded = expandedMatch === match.id;
-                const locked = isMatchLocked(match.id, match.match_date);
+                const locked = isMatchLocked(match.match_date);
+                const timeRemaining = getTimeRemaining(match.match_date);
                 const leagueColor = leagueColors[match.league] || "#1e2d4a";
                 const homeScorers = (pred?.scorers ?? []).filter(s => s.team === "home" && s.player_name);
                 const awayScorers = (pred?.scorers ?? []).filter(s => s.team === "away" && s.player_name);
@@ -515,10 +543,10 @@ export default function PronosticarPage() {
                         <div className="text-center">
                           <span className="text-4xl block mb-2">🔒</span>
                           <p className="text-white text-sm font-bold">
-                            {pred?.prediction_id ? "Guardado" : "Cerrado"}
+                            Pronóstico Cerrado
                           </p>
                           <p className="text-silver text-[11px]">
-                            {pred?.prediction_id ? "Pronóstico enviado" : "Ya comenzó el partido"}
+                            {pred?.prediction_id ? "Pronóstico guardado" : "Tiempo para pronosticar finalizado"}
                           </p>
                         </div>
                       </div>
