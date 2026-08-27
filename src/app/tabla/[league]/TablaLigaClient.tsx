@@ -3,32 +3,27 @@
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import {
+  getEspnStandings,
+  getEspnScorers,
+  getEspnScoreboard,
+  Standing,
+  PlayerStat,
+  CupMatch,
+} from "@/lib/espnApi";
 import { getStandings, getScorers, FDScorer } from "@/lib/footballData";
 import { leagueColors, leagueLogos } from "@/lib/leagueConfig";
 
-const leagueData: Record<string, { name: string; fdCode: string; country: string; hasApi: boolean }> = {
-  premier: { name: "Premier League", fdCode: "PL", country: "GBR", hasApi: true },
-  laliga: { name: "LaLiga", fdCode: "PD", country: "ESP", hasApi: true },
-  seriea: { name: "Serie A", fdCode: "SA", country: "ITA", hasApi: true },
-  bundesliga: { name: "Bundesliga", fdCode: "BL1", country: "GER", hasApi: true },
-  champions: { name: "Champions League", fdCode: "CL", country: "EUR", hasApi: true },
-  europa: { name: "Europa League", fdCode: "EL", country: "EUR", hasApi: false },
-  conference: { name: "Conference League", fdCode: "ECL", country: "EUR", hasApi: false },
-  coppaitalia: { name: "Copa Italia", fdCode: "CI", country: "ITA", hasApi: false },
+const leagueData: Record<string, { name: string; fdCode: string; country: string; isCup?: boolean }> = {
+  premier: { name: "Premier League", fdCode: "PL", country: "GBR" },
+  laliga: { name: "LaLiga", fdCode: "PD", country: "ESP" },
+  seriea: { name: "Serie A", fdCode: "SA", country: "ITA" },
+  bundesliga: { name: "Bundesliga", fdCode: "BL1", country: "GER" },
+  champions: { name: "Champions League", fdCode: "CL", country: "EUR" },
+  europa: { name: "Europa League", fdCode: "EL", country: "EUR" },
+  conference: { name: "Conference League", fdCode: "ECL", country: "EUR" },
+  coppaitalia: { name: "Copa Italia", fdCode: "CI", country: "ITA", isCup: true },
 };
-
-interface Standing {
-  rank: number;
-  team: { name: string; logo: string };
-  points: number;
-  goalsDiff: number;
-  played: number;
-  win: number;
-  draw: number;
-  lose: number;
-  goalsFor: number;
-  goalsAgainst: number;
-}
 
 interface FDTableEntry {
   position: number;
@@ -47,86 +42,115 @@ interface FDTableEntry {
   goalDifference: number;
 }
 
-interface PlayerStat {
-  rank: number;
-  name: string;
-  team: string;
-  value: number;
-}
-
-type Tab = "standings" | "scorers";
-
-const tabs: { id: Tab; label: string; icon: string }[] = [
-  { id: "standings", label: "Tabla", icon: "📊" },
-  { id: "scorers", label: "Goleadores", icon: "⚽" },
-];
+type Tab = "standings" | "scorers" | "matches";
 
 export default function TablaLigaClient() {
   const params = useParams();
   const league = params.league as string;
   const data = leagueData[league];
-  const leagueColor = leagueColors[league] || "#c9a84c";
-  const leagueLogo = leagueLogos[league] || "";
+  const leagueColor = leagueColors[data?.name || ""] || "#c9a84c";
+  const leagueLogo = leagueLogos[data?.name || ""] || "";
 
   const [standings, setStandings] = useState<Standing[]>([]);
   const [scorers, setScorers] = useState<PlayerStat[]>([]);
-  const [activeTab, setActiveTab] = useState<Tab>("standings");
+  const [cupMatches, setCupMatches] = useState<CupMatch[]>([]);
+  const [activeTab, setActiveTab] = useState<Tab>(data?.isCup ? "matches" : "standings");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const tabs: { id: Tab; label: string; icon: string }[] = data?.isCup
+    ? [{ id: "matches", label: "Partidos", icon: "⚽" }]
+    : [
+        { id: "standings", label: "Tabla", icon: "📊" },
+        { id: "scorers", label: "Goleadores", icon: "⚽" },
+      ];
 
   useEffect(() => {
     if (!data) return;
 
+    let isMounted = true;
+
     const fetchData = async () => {
       try {
-        if (data.hasApi) {
-          // Fetch standings from football-data.org
-          const standingsData = await getStandings(data.fdCode);
-          if (standingsData.length > 0) {
-            const table = standingsData[0]?.table || [];
-            const mapped: Standing[] = (table as FDTableEntry[]).map((entry) => ({
-              rank: entry.position,
-              team: {
-                name: entry.team.shortName || entry.team.name,
-                logo: entry.team.crest || "",
-              },
-              points: entry.points,
-              goalsDiff: entry.goalDifference,
-              played: entry.playedGames,
-              win: entry.won,
-              draw: entry.draw,
-              lose: entry.lost,
-              goalsFor: entry.goalsFor,
-              goalsAgainst: entry.goalsAgainst,
-            }));
-            setStandings(mapped);
-          } else {
-            setError("No se pudo cargar la clasificación");
-          }
+        setError("");
 
-          // Fetch scorers from football-data.org
-          const scorersData = await getScorers(data.fdCode);
-          if (scorersData.length > 0) {
-            const mappedScorers: PlayerStat[] = scorersData.slice(0, 20).map((s: FDScorer, i: number) => ({
-              rank: i + 1,
-              name: s.player.name,
-              team: s.team.shortName || s.team.name,
-              value: s.goals,
-            }));
-            setScorers(mappedScorers);
+        if (data.isCup) {
+          // Cup competitions (e.g. Coppa Italia)
+          const matches = await getEspnScoreboard(league);
+          if (isMounted) {
+            setCupMatches(matches);
+            setActiveTab("matches");
           }
         } else {
-          setError("Liga no disponible en la API gratuita");
+          // League / Group stage competitions
+          // 1. Fetch standings from ESPN API (CORS enabled & free)
+          let parsedStandings = await getEspnStandings(league);
+
+          // Fallback to football-data.org if ESPN returns empty
+          if (parsedStandings.length === 0 && data.fdCode) {
+            const fdStandings = await getStandings(data.fdCode);
+            if (fdStandings.length > 0) {
+              const table = fdStandings[0]?.table || [];
+              parsedStandings = (table as FDTableEntry[]).map((entry) => ({
+                rank: entry.position,
+                team: {
+                  name: entry.team.shortName || entry.team.name,
+                  logo: entry.team.crest || "",
+                },
+                points: entry.points,
+                goalsDiff: entry.goalDifference,
+                played: entry.playedGames,
+                win: entry.won,
+                draw: entry.draw,
+                lose: entry.lost,
+                goalsFor: entry.goalsFor,
+                goalsAgainst: entry.goalsAgainst,
+              }));
+            }
+          }
+
+          if (isMounted) {
+            if (parsedStandings.length > 0) {
+              setStandings(parsedStandings);
+            } else {
+              setError("No se pudo cargar la clasificación en este momento.");
+            }
+          }
+
+          // 2. Fetch top scorers
+          let parsedScorers = await getEspnScorers(league);
+          if (parsedScorers.length === 0 && data.fdCode) {
+            const fdScorers = await getScorers(data.fdCode);
+            if (fdScorers.length > 0) {
+              parsedScorers = fdScorers.slice(0, 20).map((s: FDScorer, i: number) => ({
+                rank: i + 1,
+                name: s.player.name,
+                team: s.team.shortName || s.team.name,
+                value: s.goals,
+              }));
+            }
+          }
+
+          if (isMounted) {
+            setScorers(parsedScorers);
+          }
         }
-      } catch {
-        setError("Error al conectar con la API");
+      } catch (err) {
+        console.error("Error fetching league data:", err);
+        if (isMounted) {
+          setError("Error al conectar con el servicio de datos en vivo");
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
 
     fetchData();
-  }, [data]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [data, league]);
 
   if (!data) {
     return (
@@ -266,6 +290,61 @@ export default function TablaLigaClient() {
                       <p className="text-silver text-sm">Goleadores no disponibles para esta liga</p>
                     </div>
                   )
+              )}
+
+              {activeTab === "matches" && (
+                cupMatches.length > 0 ? (
+                  <div className="divide-y divide-border/50">
+                    {cupMatches.map((m) => (
+                      <div key={m.id} className="p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 hover:bg-navy-card/50 transition-colors">
+                        <div className="flex-1 w-full flex items-center justify-between sm:justify-start gap-4 sm:gap-6">
+                          {/* Home team */}
+                          <div className="flex items-center gap-2 sm:gap-3 flex-1 justify-end text-right">
+                            <span className="text-white text-xs sm:text-sm font-semibold truncate">{m.homeTeam}</span>
+                            {m.homeLogo && <img src={m.homeLogo} alt="" className="w-6 h-6 object-contain" />}
+                          </div>
+
+                          {/* Score or VS */}
+                          <div className="px-3 py-1 bg-navy-dark/80 rounded-lg border border-border/60 text-center min-w-[70px]">
+                            {m.homeScore !== undefined && m.awayScore !== undefined ? (
+                              <span className="text-sm sm:text-base font-bold text-gold font-mono">
+                                {m.homeScore} - {m.awayScore}
+                              </span>
+                            ) : (
+                              <span className="text-xs text-silver font-medium">VS</span>
+                            )}
+                          </div>
+
+                          {/* Away team */}
+                          <div className="flex items-center gap-2 sm:gap-3 flex-1 justify-start">
+                            {m.awayLogo && <img src={m.awayLogo} alt="" className="w-6 h-6 object-contain" />}
+                            <span className="text-white text-xs sm:text-sm font-semibold truncate">{m.awayTeam}</span>
+                          </div>
+                        </div>
+
+                        {/* Status / Date */}
+                        <div className="w-full sm:w-auto text-right sm:text-right border-t sm:border-t-0 pt-2 sm:pt-0 border-border/30">
+                          <span className="text-[11px] text-silver block font-mono">
+                            {new Date(m.date).toLocaleDateString("es-ES", {
+                              day: "numeric",
+                              month: "short",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                          </span>
+                          <span className="text-[10px] text-gold/80 uppercase font-semibold">
+                            {m.status}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-8 sm:p-12 text-center">
+                    <span className="text-4xl mb-3 block">🏆</span>
+                    <p className="text-silver text-sm">No hay partidos programados actualmente para esta copa.</p>
+                  </div>
+                )
               )}
             </>
           )}
