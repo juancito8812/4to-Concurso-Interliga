@@ -55,7 +55,6 @@ export default function PronosticarPage() {
   const [players, setPlayers] = useState<Player[]>([]);
   const [teamLogos, setTeamLogos] = useState<Record<string, string>>({});
   const [predictions, setPredictions] = useState<Record<string, Prediction>>({});
-  const [expandedMatch, setExpandedMatch] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -223,8 +222,8 @@ export default function PronosticarPage() {
 
           predsMap[pred.match_id] = {
             match_id: pred.match_id,
-            home_score: pred.home_score === 0 ? "" : String(pred.home_score),
-            away_score: pred.away_score === 0 ? "" : String(pred.away_score),
+            home_score: pred.home_score !== null && pred.home_score !== undefined ? String(pred.home_score) : "",
+            away_score: pred.away_score !== null && pred.away_score !== undefined ? String(pred.away_score) : "",
             scorers: scorersData || [],
             prediction_id: pred.id,
           };
@@ -241,6 +240,7 @@ export default function PronosticarPage() {
       isMounted = false;
     };
   }, [user, authLoading]);
+
   const getPlayersForTeam = (teamName: string) => {
     return players.filter(p => p.team === teamName);
   };
@@ -260,44 +260,47 @@ export default function PronosticarPage() {
     }));
   };
 
-  const ensureThreeScorers = (matchId: string, team: "home" | "away") => {
+  const addScorerSlot = (matchId: string, team: "home" | "away") => {
     setPredictions((prev) => {
-      const current = prev[matchId];
-      const scorers = [...(current?.scorers ?? [])];
-      const teamScorers = scorers.filter(s => s.team === team);
-
+      const current = prev[matchId] || {
+        match_id: matchId,
+        home_score: "",
+        away_score: "",
+        scorers: [],
+      };
+      const teamScorers = (current.scorers ?? []).filter((s) => s.team === team);
       if (teamScorers.length >= 3) return prev;
-
-      const needed = 3 - teamScorers.length;
-      for (let i = 0; i < needed; i++) {
-        scorers.push({ player_name: "", goals: 1, team });
-      }
 
       return {
         ...prev,
         [matchId]: {
-          match_id: matchId,
-          home_score: current?.home_score ?? "",
-          away_score: current?.away_score ?? "",
-          scorers,
-          prediction_id: current?.prediction_id,
+          ...current,
+          scorers: [
+            ...(current.scorers ?? []),
+            { player_name: "", goals: 1, team },
+          ],
         },
       };
     });
   };
 
-  const updateScorer = (matchId: string, index: number, field: keyof Scorer, value: string | number) => {
+  const updateScorer = (
+    matchId: string,
+    index: number,
+    field: keyof Scorer,
+    value: string | number
+  ) => {
     setPredictions((prev) => {
-      const scorers = [...(prev[matchId]?.scorers ?? [])];
+      const current = prev[matchId];
+      if (!current) return prev;
+      const scorers = [...(current.scorers ?? [])];
+      if (index < 0 || index >= scorers.length) return prev;
       scorers[index] = { ...scorers[index], [field]: value };
       return {
         ...prev,
         [matchId]: {
-          match_id: matchId,
-          home_score: prev[matchId]?.home_score ?? "",
-          away_score: prev[matchId]?.away_score ?? "",
+          ...current,
           scorers,
-          prediction_id: prev[matchId]?.prediction_id,
         },
       };
     });
@@ -305,38 +308,19 @@ export default function PronosticarPage() {
 
   const removeScorer = (matchId: string, index: number) => {
     setPredictions((prev) => {
-      const scorers = [...(prev[matchId]?.scorers ?? [])];
+      const current = prev[matchId];
+      if (!current) return prev;
+      const scorers = [...(current.scorers ?? [])];
+      if (index < 0 || index >= scorers.length) return prev;
       scorers.splice(index, 1);
       return {
         ...prev,
         [matchId]: {
-          match_id: matchId,
-          home_score: prev[matchId]?.home_score ?? "",
-          away_score: prev[matchId]?.away_score ?? "",
+          ...current,
           scorers,
-          prediction_id: prev[matchId]?.prediction_id,
         },
       };
     });
-  };
-
-  const handleExpand = (matchId: string) => {
-    const match = matches.find(m => m.id === matchId);
-    if (match && isMatchLocked(match.match_date)) return;
-
-    if (expandedMatch === matchId) {
-      setExpandedMatch(null);
-      return;
-    }
-
-    setExpandedMatch(matchId);
-
-    const pred = predictions[matchId];
-    const homeScorers = (pred?.scorers ?? []).filter(s => s.team === "home");
-    const awayScorers = (pred?.scorers ?? []).filter(s => s.team === "away");
-
-    if (homeScorers.length < 3) ensureThreeScorers(matchId, "home");
-    if (awayScorers.length < 3) ensureThreeScorers(matchId, "away");
   };
 
   const isMatchLocked = (matchDate: string): boolean => {
@@ -374,8 +358,8 @@ export default function PronosticarPage() {
     setSuccess(false);
 
     try {
-      const unlockedMatches = Object.keys(predictions).filter(matchId => {
-        const match = matches.find(m => m.id === matchId);
+      const unlockedMatches = Object.keys(predictions).filter((matchId) => {
+        const match = matches.find((m) => m.id === matchId);
         return match && !isMatchLocked(match.match_date);
       });
 
@@ -386,12 +370,15 @@ export default function PronosticarPage() {
 
         const { data: predData, error: predError } = await supabase
           .from("predictions")
-          .upsert({
-            user_id: user.id,
-            match_id: matchId,
-            home_score: homeScore,
-            away_score: awayScore,
-          }, { onConflict: "user_id,match_id" })
+          .upsert(
+            {
+              user_id: user.id,
+              match_id: matchId,
+              home_score: homeScore,
+              away_score: awayScore,
+            },
+            { onConflict: "user_id,match_id" }
+          )
           .select("id")
           .single();
 
@@ -411,10 +398,10 @@ export default function PronosticarPage() {
             .delete()
             .eq("prediction_id", predData.id);
 
-          if (pred.scorers.length > 0) {
+          if (pred.scorers && pred.scorers.length > 0) {
             const scorersToInsert = pred.scorers
-              .filter(s => s.player_name.trim() !== "")
-              .map(s => ({
+              .filter((s) => s.player_name.trim() !== "")
+              .map((s) => ({
                 prediction_id: predData.id,
                 player_name: s.player_name,
                 goals: s.goals,
@@ -481,6 +468,8 @@ export default function PronosticarPage() {
     return date.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" });
   };
 
+  const hasSavedPredictions = Object.values(predictions).some((p) => !!p.prediction_id);
+
   return (
     <div className="min-h-screen pt-16 sm:pt-20 pb-24 px-4">
       <div className="max-w-3xl mx-auto">
@@ -493,7 +482,7 @@ export default function PronosticarPage() {
           <img
             src={userTeam.logo_url}
             alt={userTeam.name}
-            className="w-14 h-14 rounded-full object-contain bg-white p-1"
+            className="w-14 h-14 rounded-full object-contain bg-white p-1 shrink-0"
           />
           <div>
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">Pronosticar</h1>
@@ -512,289 +501,356 @@ export default function PronosticarPage() {
           </div>
         ) : (
           <>
-            {/* Match Rows */}
-            <div className="space-y-3">
+            {/* Match Cards */}
+            <div className="space-y-6">
               {matches.map((match) => {
                 const pred = predictions[match.id];
-                const isExpanded = expandedMatch === match.id;
                 const locked = isMatchLocked(match.match_date);
                 const timeRemaining = getTimeRemaining(match.match_date);
                 const leagueColor = leagueColors[match.league] || "#1e2d4a";
-                const homeScorers = (pred?.scorers ?? []).filter(s => s.team === "home" && s.player_name);
-                const awayScorers = (pred?.scorers ?? []).filter(s => s.team === "away" && s.player_name);
                 const homePlayers = getPlayersForTeam(match.home_team);
                 const awayPlayers = getPlayersForTeam(match.away_team);
-                const hasScorers = homeScorers.length > 0 || awayScorers.length > 0;
 
                 const homeLogo = match.home_logo || teamLogos[match.home_team] || "";
                 const awayLogo = match.away_logo || teamLogos[match.away_team] || "";
 
+                const allScorers = pred?.scorers ?? [];
+                const homeScorerEntries = allScorers
+                  .map((scorer, index) => ({ scorer, index }))
+                  .filter((item) => item.scorer.team === "home");
+                const awayScorerEntries = allScorers
+                  .map((scorer, index) => ({ scorer, index }))
+                  .filter((item) => item.scorer.team === "away");
+
                 return (
                   <div
                     key={match.id}
-                    className={`relative rounded-xl sm:rounded-2xl bg-navy-mid border border-border overflow-hidden transition-all ${locked ? "opacity-60" : ""}`}
+                    className={`rounded-2xl bg-navy-mid border border-border/80 shadow-xl overflow-hidden relative transition-all ${
+                      locked ? "opacity-75" : ""
+                    }`}
                   >
-                    {/* League color accent */}
-                    <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-xl sm:rounded-l-2xl" style={{ backgroundColor: leagueColor }} />
+                    {/* League Color Top Accent Bar */}
+                    <div className="h-1 w-full" style={{ backgroundColor: leagueColor }} />
 
-                    {/* Locked overlay */}
-                    {locked && (
-                      <div className="absolute inset-0 z-20 flex items-center justify-center bg-navy-black/60 backdrop-blur-[1px]">
-                        <div className="text-center">
-                          <span className="text-4xl block mb-2">🔒</span>
-                          <p className="text-white text-sm font-bold">
-                            Pronóstico Cerrado
-                          </p>
-                          <p className="text-silver text-[11px]">
-                            {pred?.prediction_id ? "Pronóstico guardado" : "Tiempo para pronosticar finalizado"}
-                          </p>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Match Header */}
-                    <div className="px-5 pt-4 pb-3">
-                      <div className="flex items-center gap-2 mb-3">
-                        {leagueLogos[match.league] && (
-                          <img src={leagueLogos[match.league]} alt={match.league} className="w-4 h-4 object-contain" />
+                    {/* Card Header (Barra de Competencia Estilo TV) */}
+                    <div className="px-4 sm:px-6 py-3 bg-navy-card/80 border-b border-border/60 flex flex-wrap items-center justify-between gap-2.5">
+                      <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                        {leagueLogos[match.league] ? (
+                          <img
+                            src={leagueLogos[match.league]}
+                            alt={match.league}
+                            className="w-5 h-5 object-contain shrink-0"
+                          />
+                        ) : (
+                          <span className="text-sm">🏆</span>
                         )}
-                        <span className="text-[11px] font-semibold" style={{ color: leagueColor }}>{match.league}</span>
+                        <span
+                          className="text-xs sm:text-sm font-bold tracking-wide uppercase truncate"
+                          style={{ color: leagueColor }}
+                        >
+                          {match.league}
+                        </span>
                         <span className="text-border">·</span>
-                        <span className="text-silver text-[11px]">{getMatchDate(match.match_date)}</span>
-                        <span className="bg-navy-card px-2 py-0.5 rounded text-silver text-[11px] ml-auto">{getMatchTime(match.match_date)}</span>
+                        <span className="text-silver text-xs font-medium whitespace-nowrap">
+                          {getMatchDate(match.match_date)} · {getMatchTime(match.match_date)}
+                        </span>
                       </div>
 
-                      {/* Teams + Score */}
-                      <div className="flex items-center gap-3">
-                        {/* Home */}
-                        <div className="flex-1 flex items-center justify-end gap-2.5">
-                          <span className="text-white text-sm font-bold text-right truncate">{match.home_team}</span>
-                          {homeLogo && (
-                            <img src={homeLogo} alt={match.home_team} className="w-10 h-10 rounded-full object-contain bg-white p-0.5 shrink-0" />
-                          )}
-                        </div>
-
-                        {/* Score Inputs */}
-                        <div className="flex items-center gap-2 shrink-0">
-                          <input
-                            type="number"
-                            min={0}
-                            max={20}
-                            value={pred?.home_score ?? ""}
-                            onChange={(e) => handleScoreChange(match.id, "home_score", e.target.value)}
-                            className="w-12 h-12 bg-navy-card border border-border rounded-xl text-center text-white text-lg font-black focus:outline-none focus:border-gold transition-colors"
-                          />
-                          <span className="text-gold font-black text-sm">VS</span>
-                          <input
-                            type="number"
-                            min={0}
-                            max={20}
-                            value={pred?.away_score ?? ""}
-                            onChange={(e) => handleScoreChange(match.id, "away_score", e.target.value)}
-                            className="w-12 h-12 bg-navy-card border border-border rounded-xl text-center text-white text-lg font-black focus:outline-none focus:border-gold transition-colors"
-                          />
-                        </div>
-
-                        {/* Away */}
-                        <div className="flex-1 flex items-center gap-2.5">
-                          {awayLogo && (
-                            <img src={awayLogo} alt={match.away_team} className="w-10 h-10 rounded-full object-contain bg-white p-0.5 shrink-0" />
-                          )}
-                          <span className="text-white text-sm font-bold truncate">{match.away_team}</span>
-                        </div>
-                      </div>
-
-                      {/* Scorer Summary (collapsed) */}
-                      {!isExpanded && hasScorers && (
-                        <div className="flex flex-wrap justify-center gap-1.5 mt-3">
-                          {homeScorers.map((s, i) => (
-                            <span key={`h-${i}`} className="inline-flex items-center gap-1 bg-gold/10 border border-gold/20 text-gold text-[10px] font-medium px-2 py-0.5 rounded-full">
-                              ⚽ {s.player_name}{s.goals > 1 ? ` ×${s.goals}` : ""}
-                            </span>
-                          ))}
-                          {awayScorers.map((s, i) => (
-                            <span key={`a-${i}`} className="inline-flex items-center gap-1 bg-gold/10 border border-gold/20 text-gold text-[10px] font-medium px-2 py-0.5 rounded-full">
-                              ⚽ {s.player_name}{s.goals > 1 ? ` ×${s.goals}` : ""}
-                            </span>
-                          ))}
-                        </div>
+                      {/* Dynamic Status Badge */}
+                      {timeRemaining.isClosed ? (
+                        <span className="inline-flex items-center gap-1 bg-red-500/15 border border-red-500/30 text-red-400 text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0">
+                          🔒 Cerrado
+                        </span>
+                      ) : timeRemaining.isUrgent ? (
+                        <span className="inline-flex items-center gap-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0 animate-pulse">
+                          ⏱️ {timeRemaining.label}
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 bg-green/15 border border-green/30 text-green text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0">
+                          🟢 {timeRemaining.label}
+                        </span>
                       )}
                     </div>
 
-                    {/* Expand Button */}
-                    {!locked && (
-                      <button
-                        onClick={() => handleExpand(match.id)}
-                        className="w-full border-t border-border px-5 py-2.5 flex items-center justify-center gap-2 text-xs font-semibold hover:bg-navy-card transition-colors"
-                      >
-                        <span className="text-gold">
-                          {isExpanded
-                            ? "Ocultar goleadores"
-                            : hasScorers
-                              ? "Editar goleadores"
-                              : "Agregar goleadores"}
-                        </span>
-                        <span className={`text-gold transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}>▼</span>
-                      </button>
-                    )}
-
-                    {/* Expanded Scorer Section */}
-                    {isExpanded && !locked && (
-                      <div className="border-t border-border px-5 py-4">
-                        <div className="grid grid-cols-2 gap-4">
-                          {/* Home Scorers */}
-                          <div>
-                            <div className="flex items-center gap-2 mb-3">
-                              {homeLogo && (
-                                <img src={homeLogo} alt={match.home_team} className="w-5 h-5 rounded-full object-contain bg-white p-0.5" />
-                              )}
-                              <span className="text-white text-xs font-bold uppercase tracking-wider truncate">{match.home_team}</span>
-                            </div>
-                            <div className="space-y-2">
-                              {[0, 1, 2].map((slotIdx) => {
-                                const scorer = homeScorers[slotIdx];
-                                const globalIdx = pred?.scorers?.findIndex(s => s === scorer) ?? -1;
-                                return (
-                                  <div key={slotIdx} className="flex items-center gap-1.5">
-                                    <span className="text-gold text-[10px] font-bold w-3 text-center shrink-0">{slotIdx + 1}</span>
-                                    <select
-                                      value={scorer?.player_name ?? ""}
-                                      onChange={(e) => {
-                                        if (globalIdx >= 0) updateScorer(match.id, globalIdx, "player_name", e.target.value);
-                                      }}
-                                      className="flex-1 min-w-0 bg-navy-card border border-border rounded-lg px-2.5 py-2 text-white text-[11px] focus:outline-none focus:border-gold truncate"
-                                    >
-                                      <option value="">Seleccionar</option>
-                                      {homePlayers.map((player) => (
-                                        <option key={player.id} value={player.name}>
-                                          {player.name}
-                                        </option>
-                                      ))}
-                                    </select>
-                                    {scorer && (
-                                      <>
-                                        <div className="flex items-center gap-0.5 shrink-0">
-                                          <button
-                                            onClick={() => updateScorer(match.id, globalIdx, "goals", Math.max(1, scorer.goals - 1))}
-                                            className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white flex items-center justify-center"
-                                          >
-                                            −
-                                          </button>
-                                          <span className="text-gold text-xs font-bold w-5 text-center">{scorer.goals}</span>
-                                          <button
-                                            onClick={() => updateScorer(match.id, globalIdx, "goals", Math.min(10, scorer.goals + 1))}
-                                            className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white flex items-center justify-center"
-                                          >
-                                            +
-                                          </button>
-                                        </div>
-                                        <button
-                                          onClick={() => removeScorer(match.id, globalIdx)}
-                                          className="text-red-400/60 text-xs hover:text-red-400 shrink-0"
-                                        >
-                                          ✕
-                                        </button>
-                                      </>
-                                    )}
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-
-                          {/* Away Scorers */}
-                          <div>
-                            <div className="flex items-center gap-2 mb-3">
-                              {awayLogo && (
-                                <img src={awayLogo} alt={match.away_team} className="w-5 h-5 rounded-full object-contain bg-white p-0.5" />
-                              )}
-                              <span className="text-white text-xs font-bold uppercase tracking-wider truncate">{match.away_team}</span>
-                            </div>
-                            <div className="space-y-2">
-                              {[0, 1, 2].map((slotIdx) => {
-                                const scorer = awayScorers[slotIdx];
-                                const globalIdx = pred?.scorers?.findIndex(s => s === scorer) ?? -1;
-                                return (
-                                  <div key={slotIdx} className="flex items-center gap-1.5">
-                                    <span className="text-gold text-[10px] font-bold w-3 text-center shrink-0">{slotIdx + 1}</span>
-                                    <select
-                                      value={scorer?.player_name ?? ""}
-                                      onChange={(e) => {
-                                        if (globalIdx >= 0) updateScorer(match.id, globalIdx, "player_name", e.target.value);
-                                      }}
-                                      className="flex-1 min-w-0 bg-navy-card border border-border rounded-lg px-2.5 py-2 text-white text-[11px] focus:outline-none focus:border-gold truncate"
-                                    >
-                                      <option value="">Seleccionar</option>
-                                      {awayPlayers.map((player) => (
-                                        <option key={player.id} value={player.name}>
-                                          {player.name}
-                                        </option>
-                                      ))}
-                                    </select>
-                                    {scorer && (
-                                      <>
-                                        <div className="flex items-center gap-0.5 shrink-0">
-                                          <button
-                                            onClick={() => updateScorer(match.id, globalIdx, "goals", Math.max(1, scorer.goals - 1))}
-                                            className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white flex items-center justify-center"
-                                          >
-                                            −
-                                          </button>
-                                          <span className="text-gold text-xs font-bold w-5 text-center">{scorer.goals}</span>
-                                          <button
-                                            onClick={() => updateScorer(match.id, globalIdx, "goals", Math.min(10, scorer.goals + 1))}
-                                            className="w-6 h-6 bg-navy-card border border-border rounded text-silver text-xs hover:text-white flex items-center justify-center"
-                                          >
-                                            +
-                                          </button>
-                                        </div>
-                                        <button
-                                          onClick={() => removeScorer(match.id, globalIdx)}
-                                          className="text-red-400/60 text-xs hover:text-red-400 shrink-0"
-                                        >
-                                          ✕
-                                        </button>
-                                      </>
-                                    )}
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
+                    {/* Central Scoreboard (Estilo Transmisión TV) */}
+                    <div className="px-4 sm:px-6 py-5 sm:py-6">
+                      <div className="flex items-center justify-between gap-2 sm:gap-4">
+                        {/* Local Team */}
+                        <div className="flex-1 min-w-0 flex items-center justify-end gap-2.5 sm:gap-3">
+                          {homeLogo && (
+                            <img
+                              src={homeLogo}
+                              alt={match.home_team}
+                              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain bg-white p-1 shrink-0 shadow-md border border-border/40"
+                            />
+                          )}
+                          <span className="text-white text-sm sm:text-base font-bold text-right truncate">
+                            {match.home_team}
+                          </span>
+                          <input
+                            type="number"
+                            min={0}
+                            max={20}
+                            disabled={locked}
+                            value={pred?.home_score ?? ""}
+                            onChange={(e) => handleScoreChange(match.id, "home_score", e.target.value)}
+                            placeholder="-"
+                            className={`w-11 h-11 sm:w-14 sm:h-14 bg-navy-card border rounded-xl text-center text-white text-xl sm:text-2xl font-black shrink-0 transition-all ${
+                              locked
+                                ? "border-border/40 text-silver/50 bg-navy-card/40 cursor-not-allowed"
+                                : "border-border focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold hover:border-gold/40 shadow-inner"
+                            }`}
+                          />
                         </div>
 
-                        <p className="text-silver/60 text-[10px] mt-3 text-center">
-                          Máximo 3 goleadores por equipo · Dejá vacío si no querés usar todos
-                        </p>
+                        {/* Center Pill */}
+                        <div className="flex flex-col items-center justify-center shrink-0 px-1 sm:px-2">
+                          <span className="px-2.5 py-1 bg-navy-card border border-border/80 rounded-lg text-gold font-black text-xs sm:text-sm tracking-widest shadow-sm">
+                            VS
+                          </span>
+                        </div>
+
+                        {/* Away Team */}
+                        <div className="flex-1 min-w-0 flex items-center justify-start gap-2.5 sm:gap-3">
+                          <input
+                            type="number"
+                            min={0}
+                            max={20}
+                            disabled={locked}
+                            value={pred?.away_score ?? ""}
+                            onChange={(e) => handleScoreChange(match.id, "away_score", e.target.value)}
+                            placeholder="-"
+                            className={`w-11 h-11 sm:w-14 sm:h-14 bg-navy-card border rounded-xl text-center text-white text-xl sm:text-2xl font-black shrink-0 transition-all ${
+                              locked
+                                ? "border-border/40 text-silver/50 bg-navy-card/40 cursor-not-allowed"
+                                : "border-border focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold hover:border-gold/40 shadow-inner"
+                            }`}
+                          />
+                          <span className="text-white text-sm sm:text-base font-bold text-left truncate">
+                            {match.away_team}
+                          </span>
+                          {awayLogo && (
+                            <img
+                              src={awayLogo}
+                              alt={match.away_team}
+                              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain bg-white p-1 shrink-0 shadow-md border border-border/40"
+                            />
+                          )}
+                        </div>
                       </div>
-                    )}
+                    </div>
+
+                    {/* Goalscorer Panel in 2 Columns Directly Under Each Team */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-border/50 px-4 sm:px-6 pb-5">
+                      {/* Left Column: Home Scorers */}
+                      <div className="bg-navy-card/40 rounded-xl p-3 sm:p-4 border border-border/40 flex flex-col justify-between">
+                        <div>
+                          {/* Column Header */}
+                          <div className="flex items-center gap-2 mb-3 pb-2 border-b border-border/40">
+                            {homeLogo && (
+                              <img
+                                src={homeLogo}
+                                alt={match.home_team}
+                                className="w-5 h-5 rounded-full object-contain bg-white p-0.5 shrink-0"
+                              />
+                            )}
+                            <span className="text-white text-xs font-bold uppercase tracking-wider truncate">
+                              Goleadores {match.home_team}
+                            </span>
+                          </div>
+
+                          {/* Scorers List */}
+                          {homeScorerEntries.length === 0 ? (
+                            <p className="text-silver/50 text-[11px] italic text-center py-2.5">
+                              Sin goleadores seleccionados (opcional)
+                            </p>
+                          ) : (
+                            <div className="space-y-2 mb-3">
+                              {homeScorerEntries.map(({ scorer, index }) => (
+                                <div key={`home-scorer-${index}`} className="flex items-center gap-1.5">
+                                  <select
+                                    disabled={locked}
+                                    value={scorer.player_name}
+                                    onChange={(e) => updateScorer(match.id, index, "player_name", e.target.value)}
+                                    className="flex-1 min-w-0 bg-navy-card border border-border rounded-lg px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-gold truncate disabled:opacity-60 disabled:cursor-not-allowed"
+                                  >
+                                    <option value="">Seleccionar jugador</option>
+                                    {homePlayers.map((player) => (
+                                      <option key={player.id} value={player.name}>
+                                        {player.name} {player.position ? `(${player.position})` : ""}
+                                      </option>
+                                    ))}
+                                  </select>
+
+                                  {/* Goals Stepper */}
+                                  <div className="flex items-center gap-0.5 bg-navy-card border border-border rounded-lg p-0.5 shrink-0">
+                                    <button
+                                      type="button"
+                                      disabled={locked || scorer.goals <= 1}
+                                      onClick={() => updateScorer(match.id, index, "goals", Math.max(1, scorer.goals - 1))}
+                                      className="w-6 h-6 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent"
+                                    >
+                                      −
+                                    </button>
+                                    <span className="text-gold text-xs font-black w-5 text-center">{scorer.goals}</span>
+                                    <button
+                                      type="button"
+                                      disabled={locked || scorer.goals >= 10}
+                                      onClick={() => updateScorer(match.id, index, "goals", Math.min(10, scorer.goals + 1))}
+                                      className="w-6 h-6 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent"
+                                    >
+                                      +
+                                    </button>
+                                  </div>
+
+                                  {/* Remove Button */}
+                                  {!locked && (
+                                    <button
+                                      type="button"
+                                      onClick={() => removeScorer(match.id, index)}
+                                      className="w-6 h-6 rounded text-red-400/60 hover:text-red-400 hover:bg-red-500/10 flex items-center justify-center text-xs transition-colors shrink-0"
+                                      title="Eliminar goleador"
+                                    >
+                                      ✕
+                                    </button>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Add Home Scorer Button */}
+                        {homeScorerEntries.length < 3 && !locked && (
+                          <button
+                            type="button"
+                            onClick={() => addScorerSlot(match.id, "home")}
+                            className="w-full py-1.5 px-3 mt-1 border border-dashed border-border hover:border-gold/60 text-silver hover:text-gold rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors bg-navy-card/30 hover:bg-navy-card/70"
+                          >
+                            <span>+</span> Agregar goleador local
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Right Column: Away Scorers */}
+                      <div className="bg-navy-card/40 rounded-xl p-3 sm:p-4 border border-border/40 flex flex-col justify-between">
+                        <div>
+                          {/* Column Header */}
+                          <div className="flex items-center gap-2 mb-3 pb-2 border-b border-border/40">
+                            {awayLogo && (
+                              <img
+                                src={awayLogo}
+                                alt={match.away_team}
+                                className="w-5 h-5 rounded-full object-contain bg-white p-0.5 shrink-0"
+                              />
+                            )}
+                            <span className="text-white text-xs font-bold uppercase tracking-wider truncate">
+                              Goleadores {match.away_team}
+                            </span>
+                          </div>
+
+                          {/* Scorers List */}
+                          {awayScorerEntries.length === 0 ? (
+                            <p className="text-silver/50 text-[11px] italic text-center py-2.5">
+                              Sin goleadores seleccionados (opcional)
+                            </p>
+                          ) : (
+                            <div className="space-y-2 mb-3">
+                              {awayScorerEntries.map(({ scorer, index }) => (
+                                <div key={`away-scorer-${index}`} className="flex items-center gap-1.5">
+                                  <select
+                                    disabled={locked}
+                                    value={scorer.player_name}
+                                    onChange={(e) => updateScorer(match.id, index, "player_name", e.target.value)}
+                                    className="flex-1 min-w-0 bg-navy-card border border-border rounded-lg px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-gold truncate disabled:opacity-60 disabled:cursor-not-allowed"
+                                  >
+                                    <option value="">Seleccionar jugador</option>
+                                    {awayPlayers.map((player) => (
+                                      <option key={player.id} value={player.name}>
+                                        {player.name} {player.position ? `(${player.position})` : ""}
+                                      </option>
+                                    ))}
+                                  </select>
+
+                                  {/* Goals Stepper */}
+                                  <div className="flex items-center gap-0.5 bg-navy-card border border-border rounded-lg p-0.5 shrink-0">
+                                    <button
+                                      type="button"
+                                      disabled={locked || scorer.goals <= 1}
+                                      onClick={() => updateScorer(match.id, index, "goals", Math.max(1, scorer.goals - 1))}
+                                      className="w-6 h-6 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent"
+                                    >
+                                      −
+                                    </button>
+                                    <span className="text-gold text-xs font-black w-5 text-center">{scorer.goals}</span>
+                                    <button
+                                      type="button"
+                                      disabled={locked || scorer.goals >= 10}
+                                      onClick={() => updateScorer(match.id, index, "goals", Math.min(10, scorer.goals + 1))}
+                                      className="w-6 h-6 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent"
+                                    >
+                                      +
+                                    </button>
+                                  </div>
+
+                                  {/* Remove Button */}
+                                  {!locked && (
+                                    <button
+                                      type="button"
+                                      onClick={() => removeScorer(match.id, index)}
+                                      className="w-6 h-6 rounded text-red-400/60 hover:text-red-400 hover:bg-red-500/10 flex items-center justify-center text-xs transition-colors shrink-0"
+                                      title="Eliminar goleador"
+                                    >
+                                      ✕
+                                    </button>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Add Away Scorer Button */}
+                        {awayScorerEntries.length < 3 && !locked && (
+                          <button
+                            type="button"
+                            onClick={() => addScorerSlot(match.id, "away")}
+                            className="w-full py-1.5 px-3 mt-1 border border-dashed border-border hover:border-gold/60 text-silver hover:text-gold rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors bg-navy-card/30 hover:bg-navy-card/70"
+                          >
+                            <span>+</span> Agregar goleador visitante
+                          </button>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 );
               })}
             </div>
 
             {/* Save Section */}
-            <div className="mt-6 sticky bottom-4">
+            <div className="mt-8 sticky bottom-4 z-10">
               {error && (
-                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3 mb-3">
+                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3 mb-3 backdrop-blur-md">
                   <p className="text-red-400 text-xs text-center">{error}</p>
                 </div>
               )}
               {success && (
-                <div className="bg-green/10 border border-green/20 rounded-xl p-3 mb-3">
+                <div className="bg-green/10 border border-green/20 rounded-xl p-3 mb-3 backdrop-blur-md">
                   <p className="text-green text-xs text-center font-medium">¡Pronósticos guardados!</p>
                 </div>
               )}
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="w-full bg-gold text-navy-black font-black py-3.5 rounded-full text-sm hover:bg-gold-light transition-colors disabled:opacity-50 tracking-wide"
+                className="w-full bg-gold text-navy-black font-black py-3.5 rounded-full text-sm hover:bg-gold-light transition-colors disabled:opacity-50 tracking-wide shadow-lg cursor-pointer disabled:cursor-not-allowed"
               >
                 {saving ? (
                   <span className="flex items-center justify-center gap-2">
                     <span className="w-4 h-4 border-2 border-navy-black border-t-transparent rounded-full animate-spin" />
                     Guardando...
                   </span>
+                ) : hasSavedPredictions ? (
+                  "Actualizar Pronósticos"
                 ) : (
                   "Guardar Pronósticos"
                 )}
