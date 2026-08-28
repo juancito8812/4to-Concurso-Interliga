@@ -6,7 +6,7 @@
 
 **Architecture:** Actualización del componente de cliente `PronosticarPage` en `src/app/pronosticar/page.tsx` para sincronizar con Supabase (`predictions`, `prediction_scorers`, `matches`, `teams`, `players`), aplicando la regla de bloqueo de 10 minutos (`diffMin <= 10`), cálculo de tiempo restante y estructura simétrica en 2 columnas con Tailwind CSS v4.
 
-**Tech Stack:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Supabase Client.
+**Tech Stack:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Supabase Client, football-data.org API + fixtures oficiales 2026/27.
 
 ## Global Constraints
 
@@ -28,27 +28,18 @@
 - Consumes: Supabase `matches`, `teams`, `players`, `predictions`, `prediction_scorers`, `useAuth()`
 - Produces: `isMatchLocked(matchDate: string): boolean`, `getTimeRemainingLabel(matchDate: string): { label: string; isUrgent: boolean }`
 
-- [ ] **Step 1: Modificar la función `isMatchLocked` y agregar cálculo de tiempo restante**
+- [x] **Step 1: Modificar la función `isMatchLocked` y agregar cálculo de tiempo restante**
+  - `isMatchLocked`: Retorna `true` únicamente si `diffMin <= 10`.
+  - `getTimeRemaining(matchDate)`: Retorna badges formateados (`Cerrado`, `Cierra en X min`, `Cierra en X h`, `En X d`).
 
-Actualizar en `src/app/pronosticar/page.tsx`:
-- `isMatchLocked`: Retornar `true` únicamente si la diferencia en minutos entre la fecha del partido y el momento actual es `<= 10`. Ya no bloquear por `prediction_id` (permitiendo re-edición).
-- `getTimeRemaining(matchDate: string)`: Retornar texto formateado (ej. `"Cierra en 45 min"`, `"Cierra en 3 h"`, `"Cerrado"`, o `"En 2 días"`).
+- [x] **Step 2: Ajustar la carga de partidos para garantizar los 3 próximos partidos**
+  - Carga los 3 próximos partidos del equipo ordenados cronológicamente.
 
-- [ ] **Step 2: Ajustar la carga de partidos para garantizar los 3 próximos partidos**
+- [x] **Step 3: Verificar compilación con `npm run build`**
+  - Build exitoso sin errores.
 
-Asegurar que la consulta a Supabase y al endpoint de football-data tome los partidos cuya fecha y hora sea posterior a la actual (o con menos de 10 min de haber comenzado) y limite a 3 registros ordenados cronológicamente.
-
-- [ ] **Step 3: Verificar compilación con `npm run build`**
-
-Run: `npm run build`
-Expected: Build exitoso sin errores de TypeScript.
-
-- [ ] **Step 4: Commit**
-
-```bash
-git add src/app/pronosticar/page.tsx
-git commit -m "feat(pronosticos): actualizar regla de cierre a 10 min y permitir re-edicion"
-```
+- [x] **Step 4: Commit**
+  - Completado.
 
 ---
 
@@ -58,34 +49,22 @@ git commit -m "feat(pronosticos): actualizar regla de cierre a 10 min y permitir
 - Modify: `src/app/pronosticar/page.tsx`
 
 **Interfaces:**
-- Consumes: `leagueConfig.ts` (`leagueColors`, `leagueLogos`), `teamLogos`
+- Consumes: `leagueConfig.ts` (`leagueColors`, `leagueLogos`, `normalizeMatchLeague`), `teamLogos`
 - Produces: Broadcast header, TV scoreboard center, status badge con cuenta regresiva.
 
-- [ ] **Step 1: Implementar cabecera de transmisión de liga**
+- [x] **Step 1: Implementar cabecera de transmisión de liga**
+  - Barra superior con gradiente de color de la competición, logo oficial, nombre de liga y badge de cuenta regresiva.
 
-En cada tarjeta de partido:
-- Barra superior con color temático de la competición.
-- Logo oficial de la liga (`leagueLogos[match.league]`), nombre de la competencia en tipografía destacada.
-- Badge con fecha, hora local y estado dinámico (`🟢 Abierto`, `⏱️ Cierra en X min`, `🔒 Cerrado`).
+- [x] **Step 2: Diseñar el marcador central estilo transmisión de TV**
+  - Lado izquierdo: Escudo circular del Local + Nombre del equipo.
+  - Centro: Inputs de marcador digital estilo broadcast con pill `VS`.
+  - Lado derecho: Nombre del equipo Visitante + Escudo circular.
 
-- [ ] **Step 2: Diseñar el marcador central estilo transmisión de TV**
+- [x] **Step 3: Verificar compilación con `npm run build`**
+  - Build exitoso sin errores.
 
-- Lado izquierdo: Escudo circular con borde dorado y fondo blanco + Nombre del equipo Local en negrita.
-- Centro: Display digital para input de goles del Local, separador `: / VS`, input de goles del Visitante.
-- Lado derecho: Escudo circular + Nombre del equipo Visitante.
-- Diseño responsivo adaptado para pantallas móviles y desktop.
-
-- [ ] **Step 3: Verificar compilación con `npm run build`**
-
-Run: `npm run build`
-Expected: Build exitoso sin errores de TypeScript.
-
-- [ ] **Step 4: Commit**
-
-```bash
-git add src/app/pronosticar/page.tsx
-git commit -m "feat(ui): implementar cabecera y marcador estilo transmision de TV en pronosticos"
-```
+- [x] **Step 4: Commit**
+  - Completado.
 
 ---
 
@@ -98,53 +77,28 @@ git commit -m "feat(ui): implementar cabecera y marcador estilo transmision de T
 - Consumes: `getPlayersForTeam(teamName)`, `updateScorer`, `removeScorer`, `addScorer`
 - Produces: Panel de goleadores locales bajo equipo local (izquierda) y visitantes bajo equipo visitante (derecha).
 
-- [ ] **Step 1: Estructurar columnas simétricas para goleadores**
+- [x] **Step 1: Estructurar columnas simétricas para goleadores**
+  - Columna Local (izquierda) con lista de goleadores locales y botón `+ Agregar goleador local`.
+  - Columna Visitante (derecha) con lista de goleadores visitantes y botón `+ Agregar goleador visitante`.
 
-Debajo del marcador:
-- **Columna Local (Izquierda):**
-  - Título sutil con escudo pequeño del local.
-  - Lista de goleadores locales asignados: selector de jugador de la plantilla local, contador de goles `[-] N [+]`, botón eliminar `✕`.
-  - Botón interactivo `+ Goleador Local` (hasta 3 goleadores).
-- **Columna Visitante (Derecha):**
-  - Título sutil con escudo pequeño del visitante.
-  - Lista de goleadores visitantes asignados: selector de jugador de la plantilla visitante, contador de goles `[-] N [+]`, botón eliminar `✕`.
-  - Botón interactivo `+ Goleador Visitante` (hasta 3 goleadores).
+- [x] **Step 2: Ajustar lógica de sincronización y botón de Guardar / Actualizar**
+  - Botón dinámico `"Guardar Pronósticos"` / `"Actualizar Pronósticos"`.
 
-- [ ] **Step 2: Ajustar lógica de sincronización y botón de Guardar / Actualizar**
+- [x] **Step 3: Verificar compilación con `npm run build`**
+  - Build exitoso sin errores.
 
-- El botón inferior mostrará dinámicamente:
-  - `"Guardar Pronósticos"` si no existían previos.
-  - `"Actualizar Pronósticos"` si ya habían sido guardados anteriormente y se modificaron.
-- Mensaje de confirmación y manejo de errores.
-
-- [ ] **Step 3: Verificar compilación con `npm run build`**
-
-Run: `npm run build`
-Expected: Build exitoso sin errores de TypeScript.
-
-- [ ] **Step 4: Commit**
-
-```bash
-git add src/app/pronosticar/page.tsx
-git commit -m "feat(scorers): implementar seleccion de goleadores en dos columnas bajo cada equipo"
-```
+- [x] **Step 4: Commit**
+  - Completado.
 
 ---
 
 ### Task 4: Verificación integral y pruebas
 
 **Files:**
-- Test & Verify: `src/app/pronosticar/page.tsx`
+- Test & Verify: `src/app/pronosticar/page.tsx`, `src/lib/footballData.ts`, `src/lib/leagueConfig.ts`
 
-- [ ] **Step 1: Ejecutar verificación de build y tipos**
+- [x] **Step 1: Ejecutar verificación de build y tipos**
+  - `npm run build` completado exitosamente con 0 errores.
 
-Run: `npm run build`
-Expected: Static export completado exitosamente sin errores de compilación ni linter.
-
-- [ ] **Step 2: Commit final y actualización de documentación**
-
-Actualizar `AGENTS.md` y `CLAUDE.md` con la nueva regla de 10 minutos y diseño de pronósticos.
-```bash
-git add AGENTS.md CLAUDE.md
-git commit -m "docs: actualizar reglas de pronosticos con cierre a 10 min y diseno broadcast"
-```
+- [x] **Step 2: Commit final y actualización de documentación**
+  - Documentación en `AGENTS.md`, `CLAUDE.md`, `README.md` y `DESIGN.md` completamente actualizada y sincronizada.

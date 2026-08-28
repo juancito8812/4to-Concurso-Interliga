@@ -16,13 +16,17 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ### Estructura
 
-- **Landing principal:** `src/app/page.tsx` — Componente `"use client"` con datos hardcodeados (reglas, puntuación, premios, logos de ligas)
-- **Tablas de posiciones:** `src/app/tabla/[league]/TablaLigaClient.tsx` — Fetch client-side a ESPN API + datos de ejemplo
-- **Autenticación:** Supabase Auth — registro, login, recuperación de contraseña
-- **Base de datos:** Supabase PostgreSQL — tablas profiles, matches, predictions, prediction_scorers, teams, players
-- **Colores:** Definidos en `src/app/globals.css` con `@theme` de Tailwind v4
-- **Config de ligas:** `src/lib/leagueConfig.ts` — Colores y logos de ligas (fuente única)
-- **Configuración:** `next.config.ts` — `basePath: "/4to-Concurso-Interliga"` es OBLIGATORIO para GitHub Pages
+- **Landing principal:** `src/app/page.tsx` — Componente `"use client"` con datos y reglas del concurso.
+- **Tablas de posiciones:** `src/app/tabla/[league]/TablaLigaClient.tsx` — Fetch client-side a ESPN API.
+- **Pronósticos:** `src/app/pronosticar/page.tsx` — Marcadores TV broadcast y 2 columnas de goleadores.
+- **Historial de Pronósticos:** `src/app/mis-pronosticos/page.tsx` — Historial con desglose de puntos.
+- **Autenticación:** Supabase Auth — registro, login, recuperación de contraseña.
+- **Base de datos:** Supabase PostgreSQL — tablas `profiles`, `teams`, `players`, `matches`, `predictions`, `prediction_scorers`.
+- **Calendario oficial 2026/27:** `src/data/officialFixtures.json` — 1.406 partidos de Premier, LaLiga, Serie A y Bundesliga.
+- **Normalización de Ligas:** `src/lib/leagueConfig.ts` — `normalizeMatchLeague` resuelve competencias reales y cruces europeos.
+- **Cliente Football API:** `src/lib/footballData.ts` — `getOfficialTeamMatches` con API en vivo + fallback de calendario oficial.
+- **Colores:** Definidos en `src/app/globals.css` con `@theme` de Tailwind v4.
+- **Configuración:** `next.config.ts` — `basePath: "/4to-Concurso-Interliga"` es OBLIGATORIO para GitHub Pages.
 
 ### Páginas
 
@@ -34,11 +38,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `/olvide-contrasena` | `src/app/olvide-contrasena/page.tsx` | Recuperar contraseña |
 | `/perfil` | `src/app/perfil/page.tsx` | Editar perfil (requiere auth) |
 | `/pronosticar` | `src/app/pronosticar/page.tsx` | Hacer pronósticos (requiere auth) |
-| `/mis-pronosticos` | `src/app/mis-pronosticos/page.tsx` | Historial (requiere auth) |
-| `/ranking` | `src/app/ranking/page.tsx` | Tabla de posiciones |
+| `/mis-pronosticos` | `src/app/mis-pronosticos/page.tsx` | Historial de pronósticos y puntos (requiere auth) |
+| `/ranking` | `src/app/ranking/page.tsx` | Tabla de posiciones general |
 | `/tabla/[league]` | `src/app/tabla/[league]/TablaLigaClient.tsx` | Tabla de posiciones por liga |
 
-### Componentes
+### Componentes y Módulos Clave
 
 | Archivo | Descripción |
 |---------|-------------|
@@ -46,16 +50,19 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `src/app/Footer.tsx` | Footer con ligas, navegación, reglas, créditos |
 | `src/app/TeamSelectorCard.tsx` | Selección de equipo en landing (bloqueada una vez elegida) |
 | `src/app/CompetitionStatusCard.tsx` | Estado de competición (VIVO/KO) |
-| `src/lib/leagueConfig.ts` | Colores y logos de ligas (compartido) |
+| `src/lib/leagueConfig.ts` | Colores, logos y normalización de competiciones (`normalizeMatchLeague`) |
+| `src/lib/footballData.ts` | `getOfficialTeamMatches` (API + fallback pre-empaquetado) |
+| `src/lib/espnApi.ts` | Cliente ESPN API para tablas de posiciones |
+| `src/lib/scoring.ts` | Motor de cálculo de puntajes del concurso |
 
 ### Base de datos (tablas Supabase)
 
-- **profiles** — user_id, display_name, team_id (FK → teams)
-- **teams** — name, league, logo_url (86+ equipos con logos de TheSportsDB)
-- **players** — name, team, league, position (500+ jugadores)
-- **matches** — home_team, away_team, match_date, league, result_home, result_away
-- **predictions** — user_id, match_id, home_score, away_score, points (UNIQUE user_id+match_id)
-- **prediction_scorers** — prediction_id, player_name, goals, team
+- **profiles** — `user_id`, `display_name`, `team_id` (FK → teams)
+- **teams** — `name`, `league`, `logo_url` (89 equipos)
+- **players** — `name`, `team`, `league`, `position` (500+ jugadores)
+- **matches** — `home_team`, `away_team`, `match_date`, `league`, `result_home`, `result_away`
+- **predictions** — `user_id`, `match_id`, `home_score`, `away_score`, `points` (UNIQUE user_id+match_id)
+- **prediction_scorers** — `prediction_id`, `player_name`, `goals`, `team`
 
 ### Paleta de colores (globals.css)
 
@@ -71,7 +78,7 @@ silver: #8a9bb5        (texto secundario)
 border: #1e2d4a        (bordes)
 ```
 
-### Liga colors (src/lib/leagueConfig.ts)
+### Ligas y Colores (src/lib/leagueConfig.ts)
 
 ```
 Premier League: #3d195b (violeta)
@@ -84,37 +91,26 @@ Conference League: #00843d (verde)
 Copa Italia: #024494 (azul)
 ```
 
-### Convenciones
+### Convenciones y Buenas Prácticas
 
-- Usar clases de Tailwind, no CSS inline (excepto colores de liga que vienen de leagueConfig.ts)
-- Los componentes de página usan `"use client"` porque necesitan hooks o datos dinámicos
-- Las rutas dinámicas (`[league]`) requieren `generateStaticParams()` en un Server Component wrapper
-- No hay backend propio — todo es estático con fetch client-side
-- Supabase se usa directamente desde el browser via JS client
-- **Supabase foreign key relations return arrays, not objects** — hacer queries separadas
-- `<Link>` auto-adds basePath; `<img>` NO — manual prefix requerido para img src
+- Usar clases de Tailwind CSS, no CSS inline (excepto colores dinámicos de liga).
+- Los componentes interactivos usan `"use client"`.
+- Las rutas dinámicas (`[league]`) requieren `generateStaticParams()` en un Server Component wrapper.
+- El cierre de pronósticos es a los **10 minutos antes del inicio** (`diffMin <= 10`).
+- Se permite **re-editar** pronósticos guardados mientras el partido esté abierto (`diffMin > 10`).
+- Siempre usar `normalizeMatchLeague` al mostrar ligas para asegurar que partidos de torneos europeos muestren su competición correcta.
+- `<Link>` agrega automáticamente `basePath`; `<img>` NO — requiere el prefijo manual `/4to-Concurso-Interliga/`.
 
 ### Variables de entorno
 
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=https://ilkndkqcmxvlufxaugog.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu-anon-key
+NEXT_PUBLIC_FOOTBALL_DATA_KEY=733c2feed2bf441292e9779c91af2e09
 ```
-
-Copiar `.env.example` a `.env.local` y completar.
 
 ### Deploy
 
 - Push a `main` triggers GitHub Actions → build → deploy a GitHub Pages
 - `npm run build` genera `./out/` con archivos estáticos
-- **NUNCA** agregar `basePath` a las URLs de fetch de API, solo a assets internos
 - `.env.local` NO se commitea (está en .gitignore)
-
-### Errores comunes
-
-- Si los logos no se ven: verificar que las rutas en `img src` incluyan `/4to-Concurso-Interliga/` como prefijo
-- Si el CSS no carga: verificar que `basePath` esté en `next.config.ts`
-- Si las tablas no cargan: la API de ESPN funciona sin key, verificar CORS en browser
-- Si auth no funciona: verificar que `.env.local` tenga las credenciales correctas de Supabase
-- Si el build falla: verificar que no haya errores de TypeScript con `npm run build`
-- Si los logos de equipo no se ven: TheSportsDB es rate-limited, usar delays de 3s entre requests
