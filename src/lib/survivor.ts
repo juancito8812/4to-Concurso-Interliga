@@ -1,5 +1,5 @@
-import { supabase } from "@/lib/supabase";
-import { normalizeTeamName, cleanTeamName } from "@/lib/leagueConfig";
+import { supabase } from "./supabase";
+import { normalizeTeamName } from "./leagueConfig";
 
 export interface SurvivorTransferHistory {
   from_team: string;
@@ -114,19 +114,31 @@ export async function getUserCupSurvivors(userId: string): Promise<Record<string
     }
 
     const result: Record<string, TournamentSurvivor> = {};
-    (data || []).forEach((row: any) => {
-      result[row.tournament_slug] = {
-        id: row.id,
-        user_id: row.user_id,
-        tournament_slug: row.tournament_slug,
-        active_team_id: row.active_team_id,
-        active_team_name: row.teams?.name || "",
-        active_team_logo: row.teams?.logo_url || "",
-        status: row.status,
-        eliminated_at_round: row.eliminated_at_round,
-        history: Array.isArray(row.history) ? row.history : [],
-        created_at: row.created_at,
-        updated_at: row.updated_at,
+    (data || []).forEach((row) => {
+      const rowData = row as unknown as {
+        id?: string;
+        user_id: string;
+        tournament_slug: string;
+        active_team_id: string;
+        teams?: { name?: string; logo_url?: string };
+        status: 'ALIVE' | 'ELIMINATED';
+        eliminated_at_round?: string | null;
+        history?: SurvivorTransferHistory[];
+        created_at?: string;
+        updated_at?: string;
+      };
+      result[rowData.tournament_slug] = {
+        id: rowData.id,
+        user_id: rowData.user_id,
+        tournament_slug: rowData.tournament_slug,
+        active_team_id: rowData.active_team_id,
+        active_team_name: rowData.teams?.name || "",
+        active_team_logo: rowData.teams?.logo_url || "",
+        status: rowData.status,
+        eliminated_at_round: rowData.eliminated_at_round,
+        history: Array.isArray(rowData.history) ? rowData.history : [],
+        created_at: rowData.created_at,
+        updated_at: rowData.updated_at,
       };
     });
 
