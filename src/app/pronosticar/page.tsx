@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
-import { leagueColors, leagueLogos, normalizeMatchLeague } from "@/lib/leagueConfig";
+import { leagueColors, leagueLogos, normalizeMatchLeague, normalizeTeamName, cleanTeamName } from "@/lib/leagueConfig";
 import { getOfficialTeamMatches, FDMatch, findTeamId } from "@/lib/footballData";
 
 interface Match {
@@ -62,10 +62,18 @@ export default function PronosticarPage() {
   const [dataSource, setDataSource] = useState<"api" | "supabase">("api");
 
   const fetchPlayersFromSupabase = async (teamNames: string[]) => {
+    const queryTeams = new Set<string>();
+    teamNames.forEach((t) => {
+      if (t) {
+        queryTeams.add(t);
+        queryTeams.add(normalizeTeamName(t));
+      }
+    });
+
     const { data: playersData } = await supabase
       .from("players")
       .select("*")
-      .in("team", teamNames)
+      .in("team", Array.from(queryTeams))
       .order("position")
       .order("name");
 
@@ -85,14 +93,20 @@ export default function PronosticarPage() {
       .limit(3);
 
     if (matchesData) {
-      const normalizedMatches: Match[] = matchesData.map(m => ({
-        ...m,
-        league: normalizeMatchLeague(m.home_team, m.away_team, m.match_date, m.league),
-      }));
+      const normalizedMatches: Match[] = matchesData.map(m => {
+        const homeNorm = normalizeTeamName(m.home_team);
+        const awayNorm = normalizeTeamName(m.away_team);
+        return {
+          ...m,
+          home_team: homeNorm,
+          away_team: awayNorm,
+          league: normalizeMatchLeague(homeNorm, awayNorm, m.match_date, m.league),
+        };
+      });
       setMatches(normalizedMatches);
 
       const teamNames = new Set<string>();
-      matchesData.forEach(m => {
+      normalizedMatches.forEach(m => {
         teamNames.add(m.home_team);
         teamNames.add(m.away_team);
       });
@@ -108,14 +122,7 @@ export default function PronosticarPage() {
         setTeamLogos(logosMap);
       }
 
-      const { data: playersData } = await supabase
-        .from("players")
-        .select("*")
-        .in("team", Array.from(teamNames))
-        .order("position")
-        .order("name");
-
-      if (playersData) setPlayers(playersData);
+      await fetchPlayersFromSupabase(Array.from(teamNames));
     }
   };
 
@@ -166,17 +173,19 @@ export default function PronosticarPage() {
         if (officialMatches.length > 0 && isMounted) {
           const next3Matches = officialMatches.slice(0, 3);
           const mappedMatches: Match[] = next3Matches.map((f: FDMatch) => {
+            const homeNorm = normalizeTeamName(f.homeTeam.name);
+            const awayNorm = normalizeTeamName(f.awayTeam.name);
             const apiComp = f.competition?.name || f.competition?.code || "";
             const resolvedLeague = normalizeMatchLeague(
-              f.homeTeam.name,
-              f.awayTeam.name,
+              homeNorm,
+              awayNorm,
               f.utcDate,
               apiComp
             );
             return {
               id: String(f.id),
-              home_team: f.homeTeam.name,
-              away_team: f.awayTeam.name,
+              home_team: homeNorm,
+              away_team: awayNorm,
               match_date: f.utcDate,
               league: resolvedLeague,
               home_logo: f.homeTeam.crest,
@@ -186,17 +195,17 @@ export default function PronosticarPage() {
           setMatches(mappedMatches);
 
           const logos: Record<string, string> = {};
-          next3Matches.forEach((f: FDMatch) => {
-            if (f.homeTeam.crest) logos[f.homeTeam.name] = f.homeTeam.crest;
-            if (f.awayTeam.crest) logos[f.awayTeam.name] = f.awayTeam.crest;
+          mappedMatches.forEach((m) => {
+            if (m.home_logo) logos[m.home_team] = m.home_logo;
+            if (m.away_logo) logos[m.away_team] = m.away_logo;
           });
           setTeamLogos(logos);
 
           const teamNames = new Set<string>();
           teamNames.add(teamData.name);
-          next3Matches.forEach((f: FDMatch) => {
-            teamNames.add(f.homeTeam.name);
-            teamNames.add(f.awayTeam.name);
+          mappedMatches.forEach((m) => {
+            teamNames.add(m.home_team);
+            teamNames.add(m.away_team);
           });
 
           await fetchPlayersFromSupabase(Array.from(teamNames));
@@ -243,7 +252,20 @@ export default function PronosticarPage() {
   }, [user, authLoading]);
 
   const getPlayersForTeam = (teamName: string) => {
-    return players.filter(p => p.team === teamName);
+    const norm = normalizeTeamName(teamName);
+    const cTarget = cleanTeamName(teamName);
+    return players.filter((p) => {
+      const pNorm = normalizeTeamName(p.team);
+      const cPlayerTeam = cleanTeamName(p.team);
+      return (
+        p.team === teamName ||
+        p.team === norm ||
+        pNorm === norm ||
+        cPlayerTeam === cTarget ||
+        cPlayerTeam.includes(cTarget) ||
+        cTarget.includes(cPlayerTeam)
+      );
+    });
   };
 
   const handleScoreChange = (matchId: string, field: "home_score" | "away_score", value: string) => {
@@ -683,33 +705,38 @@ export default function PronosticarPage() {
                                     ))}
                                   </select>
 
-                                  {/* Goals Stepper */}
-                                  <div className="flex items-center gap-0.5 bg-navy-card border border-border rounded-lg p-0.5 shrink-0">
-                                    <button
-                                      type="button"
-                                      disabled={locked || scorer.goals <= 1}
-                                      onClick={() => updateScorer(match.id, index, "goals", Math.max(1, scorer.goals - 1))}
-                                      className="w-6 h-6 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent"
-                                    >
-                                      −
-                                    </button>
-                                    <span className="text-gold text-xs font-black w-5 text-center">{scorer.goals}</span>
-                                    <button
-                                      type="button"
-                                      disabled={locked || scorer.goals >= 10}
-                                      onClick={() => updateScorer(match.id, index, "goals", Math.min(10, scorer.goals + 1))}
-                                      className="w-6 h-6 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent"
-                                    >
-                                      +
-                                    </button>
-                                  </div>
+                                  {/* Goals Stepper (only shown when a player is selected) */}
+                                  {scorer.player_name ? (
+                                    <div className="flex items-center gap-1 bg-navy-card border border-border rounded-lg px-1.5 py-0.5 shrink-0" title="Cantidad de goles que anotará">
+                                      <span className="text-[11px] select-none text-silver">⚽</span>
+                                      <button
+                                        type="button"
+                                        disabled={locked || scorer.goals <= 1}
+                                        onClick={() => updateScorer(match.id, index, "goals", Math.max(1, scorer.goals - 1))}
+                                        className="w-5 h-5 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+                                        title="Menos goles"
+                                      >
+                                        −
+                                      </button>
+                                      <span className="text-gold text-xs font-black min-w-3 text-center">{scorer.goals}</span>
+                                      <button
+                                        type="button"
+                                        disabled={locked || scorer.goals >= 10}
+                                        onClick={() => updateScorer(match.id, index, "goals", Math.min(10, scorer.goals + 1))}
+                                        className="w-5 h-5 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+                                        title="Más goles"
+                                      >
+                                        +
+                                      </button>
+                                    </div>
+                                  ) : null}
 
                                   {/* Remove Button */}
                                   {!locked && (
                                     <button
                                       type="button"
                                       onClick={() => removeScorer(match.id, index)}
-                                      className="w-6 h-6 rounded text-red-400/60 hover:text-red-400 hover:bg-red-500/10 flex items-center justify-center text-xs transition-colors shrink-0"
+                                      className="w-6 h-6 rounded text-red-400/60 hover:text-red-400 hover:bg-red-500/10 flex items-center justify-center text-xs transition-colors shrink-0 cursor-pointer"
                                       title="Eliminar goleador"
                                     >
                                       ✕
@@ -726,7 +753,7 @@ export default function PronosticarPage() {
                           <button
                             type="button"
                             onClick={() => addScorerSlot(match.id, "home")}
-                            className="w-full py-1.5 px-3 mt-1 border border-dashed border-border hover:border-gold/60 text-silver hover:text-gold rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors bg-navy-card/30 hover:bg-navy-card/70"
+                            className="w-full py-1.5 px-3 mt-1 border border-dashed border-border hover:border-gold/60 text-silver hover:text-gold rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors bg-navy-card/30 hover:bg-navy-card/70 cursor-pointer"
                           >
                             <span>+</span> Agregar goleador local
                           </button>
@@ -773,33 +800,38 @@ export default function PronosticarPage() {
                                     ))}
                                   </select>
 
-                                  {/* Goals Stepper */}
-                                  <div className="flex items-center gap-0.5 bg-navy-card border border-border rounded-lg p-0.5 shrink-0">
-                                    <button
-                                      type="button"
-                                      disabled={locked || scorer.goals <= 1}
-                                      onClick={() => updateScorer(match.id, index, "goals", Math.max(1, scorer.goals - 1))}
-                                      className="w-6 h-6 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent"
-                                    >
-                                      −
-                                    </button>
-                                    <span className="text-gold text-xs font-black w-5 text-center">{scorer.goals}</span>
-                                    <button
-                                      type="button"
-                                      disabled={locked || scorer.goals >= 10}
-                                      onClick={() => updateScorer(match.id, index, "goals", Math.min(10, scorer.goals + 1))}
-                                      className="w-6 h-6 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent"
-                                    >
-                                      +
-                                    </button>
-                                  </div>
+                                  {/* Goals Stepper (only shown when a player is selected) */}
+                                  {scorer.player_name ? (
+                                    <div className="flex items-center gap-1 bg-navy-card border border-border rounded-lg px-1.5 py-0.5 shrink-0" title="Cantidad de goles que anotará">
+                                      <span className="text-[11px] select-none text-silver">⚽</span>
+                                      <button
+                                        type="button"
+                                        disabled={locked || scorer.goals <= 1}
+                                        onClick={() => updateScorer(match.id, index, "goals", Math.max(1, scorer.goals - 1))}
+                                        className="w-5 h-5 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+                                        title="Menos goles"
+                                      >
+                                        −
+                                      </button>
+                                      <span className="text-gold text-xs font-black min-w-3 text-center">{scorer.goals}</span>
+                                      <button
+                                        type="button"
+                                        disabled={locked || scorer.goals >= 10}
+                                        onClick={() => updateScorer(match.id, index, "goals", Math.min(10, scorer.goals + 1))}
+                                        className="w-5 h-5 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+                                        title="Más goles"
+                                      >
+                                        +
+                                      </button>
+                                    </div>
+                                  ) : null}
 
                                   {/* Remove Button */}
                                   {!locked && (
                                     <button
                                       type="button"
                                       onClick={() => removeScorer(match.id, index)}
-                                      className="w-6 h-6 rounded text-red-400/60 hover:text-red-400 hover:bg-red-500/10 flex items-center justify-center text-xs transition-colors shrink-0"
+                                      className="w-6 h-6 rounded text-red-400/60 hover:text-red-400 hover:bg-red-500/10 flex items-center justify-center text-xs transition-colors shrink-0 cursor-pointer"
                                       title="Eliminar goleador"
                                     >
                                       ✕
@@ -816,7 +848,7 @@ export default function PronosticarPage() {
                           <button
                             type="button"
                             onClick={() => addScorerSlot(match.id, "away")}
-                            className="w-full py-1.5 px-3 mt-1 border border-dashed border-border hover:border-gold/60 text-silver hover:text-gold rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors bg-navy-card/30 hover:bg-navy-card/70"
+                            className="w-full py-1.5 px-3 mt-1 border border-dashed border-border hover:border-gold/60 text-silver hover:text-gold rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors bg-navy-card/30 hover:bg-navy-card/70 cursor-pointer"
                           >
                             <span>+</span> Agregar goleador visitante
                           </button>

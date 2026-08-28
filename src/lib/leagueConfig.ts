@@ -46,15 +46,169 @@ export const leagueSlugToName: Record<string, string> = {
   coppaitalia: "Copa Italia",
 };
 
+export const canonicalDbTeams = [
+  "AC Milan", "Alavés", "Almería", "Arsenal", "Aston Villa", "Atalanta",
+  "Athletic Bilbao", "Atlético Madrid", "Augsburg", "AZ Alkmaar", "Barcelona",
+  "Bayer Leverkusen", "Bayern Munich", "Benfica", "Bochum", "Bologna",
+  "Borussia Dortmund", "Borussia Mönchengladbach", "Bournemouth", "Brentford",
+  "Brighton", "Cagliari", "Celta Vigo", "Chelsea", "Club Brujas", "Como",
+  "Crystal Palace", "Darmstadt", "Dinamo Zagreb", "Düsseldorf",
+  "Eintracht Frankfurt", "Elche", "Empoli", "Espanyol", "Everton",
+  "Fiorentina", "Freiburg", "Frosinone", "Fulham", "Genk", "Genoa",
+  "Getafe", "Girona", "Heidenheim", "Hoffenheim", "Holstein Kiel",
+  "Inter Milan", "Ipswich Town", "Juventus", "Köln", "Las Palmas",
+  "Lazio", "Lecce", "Leganés", "Leicester City", "Liverpool",
+  "Mainz", "Mallorca", "Manchester City", "Manchester United", "Monza",
+  "Napoli", "Newcastle", "Nott. Forest", "Olympique Lyon", "Osasuna",
+  "PAOK", "Paris Saint-Germain", "Parma", "Porto", "RB Leipzig",
+  "Rayo Vallecano", "Real Betis", "Real Madrid", "Real Sociedad",
+  "Real Valladolid", "Roma", "Salernitana", "Sassuolo", "Sevilla",
+  "Southampton", "Stuttgart", "Torino", "Tottenham", "Udinese",
+  "Union Berlin", "Valencia", "Venezia", "Verona", "Villarreal",
+  "Werder Bremen", "West Ham", "Wolfsburg", "Wolves"
+];
+
 // Normalized team names cleaner
-function cleanTeamName(name: string): string {
+export function cleanTeamName(name: string): string {
   return (name || "")
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\bfc\b|\bcf\b|\bafc\b|\bssc\b|\bas\b|\bacf\b|\bss\b|\bus\b|\brc\b|\bcd\b|\bud\b|\brcd\b/gi, "")
+    .replace(/\bfc\b|\bcf\b|\bafc\b|\bssc\b|\bas\b|\bacf\b|\bss\b|\bus\b|\brc\b|\bcd\b|\bud\b|\brcd\b|\bca\b|\b1\.\b|\bvfb\b|\bvfl\b|\btsg\b|\bfsv\b|\bsv\b|\brb\b|\bbvb\b/gi, "")
     .replace(/[^a-z0-9]/g, "")
     .trim();
+}
+
+const aliasMap: Record<string, string> = {
+  "brightonandhovealbion": "Brighton",
+  "nottinghamforest": "Nott. Forest",
+  "wolverhamptonwanderers": "Wolves",
+  "athleticclub": "Athletic Bilbao",
+  "athleticclubdebilbao": "Athletic Bilbao",
+  "clubatletico": "Atlético Madrid",
+  "clubatleticodemadrid": "Atlético Madrid",
+  "atletico": "Atlético Madrid",
+  "atleticodemadrid": "Atlético Madrid",
+  "atleticomadrid": "Atlético Madrid",
+  "celtadevigo": "Celta Vigo",
+  "rcceltadevigo": "Celta Vigo",
+  "caosasuna": "Osasuna",
+  "osasuna": "Osasuna",
+  "rcdmallorca": "Mallorca",
+  "mallorca": "Mallorca",
+  "laspalmas": "Las Palmas",
+  "udlaspalmas": "Las Palmas",
+  "rayovallecano": "Rayo Vallecano",
+  "rayovallecanodemadrid": "Rayo Vallecano",
+  "espanyol": "Espanyol",
+  "rcdespanyol": "Espanyol",
+  "rcdespanyoldebarcelona": "Espanyol",
+  "espanyoldebarcelona": "Espanyol",
+  "cdleganes": "Leganés",
+  "leganes": "Leganés",
+  "deportivoalaves": "Alavés",
+  "alaves": "Alavés",
+  "realvalladolid": "Real Valladolid",
+  "realbetis": "Real Betis",
+  "realbetisbalompie": "Real Betis",
+  "internazionale": "Inter Milan",
+  "internazionalemilano": "Inter Milan",
+  "inter": "Inter Milan",
+  "intermilan": "Inter Milan",
+  "asroma": "Roma",
+  "roma": "Roma",
+  "sslazio": "Lazio",
+  "lazio": "Lazio",
+  "acffiorentina": "Fiorentina",
+  "fiorentina": "Fiorentina",
+  "torino": "Torino",
+  "bologna": "Bologna",
+  "bologna1909": "Bologna",
+  "genoa": "Genoa",
+  "acmonza": "Monza",
+  "monza": "Monza",
+  "cagliari": "Cagliari",
+  "cagliaricalcio": "Cagliari",
+  "udinese": "Udinese",
+  "udinesecalcio": "Udinese",
+  "sassuolo": "Sassuolo",
+  "ussassuolo": "Sassuolo",
+  "empoli": "Empoli",
+  "lecce": "Lecce",
+  "uslecce": "Lecce",
+  "parma": "Parma",
+  "parmacalcio": "Parma",
+  "parmacalcio1913": "Parma",
+  "venezia": "Venezia",
+  "como": "Como",
+  "como1907": "Como",
+  "verona": "Verona",
+  "hellasverona": "Verona",
+  "bayern": "Bayern Munich",
+  "bayernmunchen": "Bayern Munich",
+  "bayernmunich": "Bayern Munich",
+  "bayerleverkusen": "Bayer Leverkusen",
+  "bayer04leverkusen": "Bayer Leverkusen",
+  "mainz": "Mainz",
+  "mainz05": "Mainz",
+  "augsburg": "Augsburg",
+  "werderbremen": "Werder Bremen",
+  "unionberlin": "Union Berlin",
+  "heidenheim": "Heidenheim",
+  "heidenheim1846": "Heidenheim",
+  "koln": "Köln",
+  "bochum": "Bochum",
+  "bochum1848": "Bochum",
+  "darmstadt": "Darmstadt",
+  "darmstadt98": "Darmstadt",
+  "dusseldorf": "Düsseldorf",
+  "fortunadusseldorf": "Düsseldorf",
+  "stuttgart": "Stuttgart",
+  "hoffenheim": "Hoffenheim",
+  "1899hoffenheim": "Hoffenheim",
+  "manchesterunited": "Manchester United",
+  "manchesterunitedfc": "Manchester United",
+  "manunited": "Manchester United",
+  "manchestercity": "Manchester City",
+  "manchestercityfc": "Manchester City",
+  "mancity": "Manchester City",
+  "ipswichtown": "Ipswich Town",
+  "ipswichtownfc": "Ipswich Town",
+  "everton": "Everton",
+  "evertonfc": "Everton",
+  "arsenal": "Arsenal",
+  "arsenalfc": "Arsenal",
+  "chelsea": "Chelsea",
+  "chelseafc": "Chelsea",
+  "liverpool": "Liverpool",
+  "liverpoolfc": "Liverpool",
+  "tottenham": "Tottenham",
+  "tottenhamhotspur": "Tottenham",
+  "tottenhamhotspurfc": "Tottenham",
+  "westham": "West Ham",
+  "westhamunited": "West Ham",
+  "westhamunitedfc": "West Ham",
+  "newcastle": "Newcastle",
+  "newcastleunited": "Newcastle",
+  "newcastleunitedfc": "Newcastle"
+};
+
+/**
+ * Normalizes any external or API team name to the exact Supabase DB name
+ */
+export function normalizeTeamName(name: string): string {
+  if (!name) return "";
+  const cleaned = cleanTeamName(name);
+  if (aliasMap[cleaned]) return aliasMap[cleaned];
+
+  for (const dbName of canonicalDbTeams) {
+    if (cleanTeamName(dbName) === cleaned) return dbName;
+  }
+  for (const dbName of canonicalDbTeams) {
+    const cDb = cleanTeamName(dbName);
+    if (cleaned.includes(cDb) || cDb.includes(cleaned)) return dbName;
+  }
+  return name;
 }
 
 // Known Interliga tournament match pairings
@@ -134,19 +288,16 @@ export function normalizeMatchLeague(
   matchDate?: string,
   originalLeague?: string
 ): string {
-  // 1. Check API parsed league first if valid and specific
   const parsedFromOriginal = parseCompetitionName(originalLeague);
   
   const cHome = cleanTeamName(homeTeam);
   const cAway = cleanTeamName(awayTeam);
   const pairKey = `${cHome}-${cAway}`;
 
-  // 2. Check known tournament pairings (highest priority to fix database anomalies)
   if (conferenceKeyPairs.has(pairKey)) return "Conference League";
   if (europaKeyPairs.has(pairKey)) return "Europa League";
   if (championsKeyPairs.has(pairKey)) return "Champions League";
 
-  // 3. Check Copa Italia dates (mid-December Italian cup fixtures)
   if (matchDate) {
     const d = new Date(matchDate);
     if (d.getMonth() === 11 && d.getDate() >= 16 && d.getDate() <= 19) {
@@ -154,9 +305,7 @@ export function normalizeMatchLeague(
     }
   }
 
-  // 4. Return parsed if valid
   if (parsedFromOriginal) return parsedFromOriginal;
 
-  // 5. Fallback to original league or default
   return originalLeague || "Premier League";
 }
