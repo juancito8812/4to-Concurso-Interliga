@@ -380,7 +380,12 @@ export default function PronosticarPage() {
   };
 
   const handleScoreChange = (matchId: string, field: "home_score" | "away_score", value: string) => {
-    if (value !== "" && (parseInt(value) < 0 || parseInt(value) > 20)) return;
+    let sanitizedValue = "";
+    if (value !== "") {
+      const parsed = parseInt(value, 10);
+      if (isNaN(parsed) || parsed < 0 || parsed > 20) return;
+      sanitizedValue = String(parsed);
+    }
     setPredictions((prev) => ({
       ...prev,
       [matchId]: {
@@ -389,7 +394,7 @@ export default function PronosticarPage() {
         away_score: prev[matchId]?.away_score ?? "",
         scorers: prev[matchId]?.scorers ?? [],
         prediction_id: prev[matchId]?.prediction_id,
-        [field]: value,
+        [field]: sanitizedValue,
       },
     }));
   };
@@ -429,7 +434,15 @@ export default function PronosticarPage() {
       if (!current) return prev;
       const scorers = [...(current.scorers ?? [])];
       if (index < 0 || index >= scorers.length) return prev;
-      scorers[index] = { ...scorers[index], [field]: value };
+
+      if (field === "goals") {
+        const g = typeof value === "number" ? value : parseInt(value, 10);
+        if (isNaN(g) || g < 1 || g > 10) return prev;
+        scorers[index] = { ...scorers[index], goals: g };
+      } else {
+        scorers[index] = { ...scorers[index], [field]: String(value).slice(0, 60) };
+      }
+
       return {
         ...prev,
         [matchId]: {

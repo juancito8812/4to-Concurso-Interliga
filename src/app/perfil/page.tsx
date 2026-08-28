@@ -37,19 +37,22 @@ export default function PerfilPage() {
     e.preventDefault();
     if (!user) return;
 
+    const sanitizedName = displayName.trim().replace(/[\x00-\x1F\x7F]/g, "").slice(0, 40);
+
     setLoading(true);
     setError("");
     setSuccess(false);
 
     const { error } = await supabase
       .from("profiles")
-      .upsert({ user_id: user.id, display_name: displayName }, { onConflict: "user_id" });
+      .upsert({ user_id: user.id, display_name: sanitizedName }, { onConflict: "user_id" });
 
     setLoading(false);
 
     if (error) {
       setError("Error al guardar: " + error.message);
     } else {
+      setDisplayName(sanitizedName);
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     }
@@ -86,6 +89,7 @@ export default function PerfilPage() {
             <input
               type="text"
               value={displayName}
+              maxLength={40}
               onChange={(e) => setDisplayName(e.target.value)}
               className="w-full bg-navy-card border border-border rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-gold transition-colors"
               placeholder="Tu nombre en el concurso"
