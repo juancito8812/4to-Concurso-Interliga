@@ -180,8 +180,13 @@ export async function getOfficialTeamMatches(
   teamName: string,
   teamId?: number | null
 ): Promise<FDMatch[]> {
-  // 1. Try live API first if teamId is available
-  if (teamId) {
+  // football-data.org only allows CORS from localhost; on GitHub Pages it always
+  // fails, so skip the live call there and use the bundled official calendar.
+  const isGitHubPages =
+    typeof window !== "undefined" && window.location.hostname.endsWith("github.io");
+
+  // 1. Try live API first if teamId is available (only outside GitHub Pages)
+  if (teamId && !isGitHubPages) {
     try {
       const liveMatches = await getTeamMatches(teamId, "SCHEDULED");
       if (liveMatches && liveMatches.length > 0) {
