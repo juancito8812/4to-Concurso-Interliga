@@ -16,11 +16,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ### Estructura
 
-- **Landing principal:** `src/app/page.tsx` — Componente `"use client"` con datos y reglas del concurso.
+- **Landing principal:** `src/app/page.tsx` — Componente `"use client"` con podio de premios, reglas y selector de club.
 - **Tablas de posiciones:** `src/app/tabla/[league]/TablaLigaClient.tsx` — Fetch client-side a ESPN API.
-- **Pronósticos:** `src/app/pronosticar/page.tsx` — Marcadores TV broadcast y 2 columnas de goleadores con selector progresivo.
-- **Historial de Pronósticos:** `src/app/mis-pronosticos/page.tsx` — Historial con desglose de puntos.
-- **Autenticación:** Supabase Auth — registro, login, recuperación de contraseña.
+- **Pronósticos:** `src/app/pronosticar/page.tsx` — Ventana de 3 partidos estilo TV broadcast, panel de goleadores en 2 columnas y stepper de goles.
+- **Historial de Pronósticos:** `src/app/mis-pronosticos/page.tsx` — Historial con desglose de puntos (+3 resultado, +2 marcador exacto, +1/+2 goleador).
+- **Ranking General en Vivo:** `src/app/ranking/page.tsx` — Tabla global multiusuario conectada a Supabase, Podio de Honor y búsqueda.
+- **Autenticación y Perfil:** `src/contexts/AuthContext.tsx` y `src/app/perfil/page.tsx` — Registro con username, login, recuperación de clave, reinicio de club y eliminación de cuenta.
 - **Base de datos:** Supabase PostgreSQL — tablas `profiles`, `teams`, `players`, `matches`, `predictions`, `prediction_scorers`.
 - **Calendario oficial 2026/27:** `src/data/officialFixtures.json` — 1.406 partidos de Premier, LaLiga, Serie A y Bundesliga.
 - **Plantillas oficiales 2026/27:** `src/data/officialPlayers.json` — 3.031 jugadores de 95 clubes con posiciones y fichajes actualizados.
@@ -34,36 +35,39 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | Ruta | Archivo | Descripción |
 |------|---------|-------------|
 | `/` | `src/app/page.tsx` | Landing principal |
-| `/registro` | `src/app/registro/page.tsx` | Crear cuenta |
+| `/registro` | `src/app/registro/page.tsx` | Crear cuenta con nombre de usuario |
 | `/login` | `src/app/login/page.tsx` | Iniciar sesión |
 | `/olvide-contrasena` | `src/app/olvide-contrasena/page.tsx` | Recuperar contraseña |
-| `/perfil` | `src/app/perfil/page.tsx` | Editar perfil (requiere auth) |
-| `/pronosticar` | `src/app/pronosticar/page.tsx` | Hacer pronósticos (requiere auth) |
+| `/perfil` | `src/app/perfil/page.tsx` | Editar perfil, reiniciar datos y eliminar cuenta (requiere auth) |
+| `/pronosticar` | `src/app/pronosticar/page.tsx` | Hacer pronósticos con ventana rodante de 3 partidos (requiere auth) |
 | `/mis-pronosticos` | `src/app/mis-pronosticos/page.tsx` | Historial de pronósticos y puntos (requiere auth) |
-| `/ranking` | `src/app/ranking/page.tsx` | Tabla de posiciones general |
+| `/ranking` | `src/app/ranking/page.tsx` | Tabla de posiciones general y Podio de Honor en vivo |
 | `/tabla/[league]` | `src/app/tabla/[league]/TablaLigaClient.tsx` | Tabla de posiciones por liga |
 
 ### Componentes y Módulos Clave
 
 | Archivo | Descripción |
 |---------|-------------|
-| `src/app/Navbar.tsx` | Navbar con estado de auth y equipo del usuario |
+| `src/app/Navbar.tsx` | Navbar con nombre de usuario dinámico y dropdown |
 | `src/app/Footer.tsx` | Footer con ligas, navegación, reglas, créditos |
-| `src/app/TeamSelectorCard.tsx` | Selección de equipo en landing (bloqueada una vez elegida) |
+| `src/app/TeamSelectorCard.tsx` | Selección y bloqueo de club en landing |
 | `src/app/CompetitionStatusCard.tsx` | Estado de competición (VIVO/KO) |
 | `src/lib/leagueConfig.ts` | Colores, logos, normalización de competiciones (`normalizeMatchLeague`) y mapeo de nombres de equipos (`normalizeTeamName`) |
 | `src/lib/footballData.ts` | `getOfficialTeamMatches`, `getOfficialPlayersForTeams` (API + fallback de fixtures y 3.031 jugadores) |
 | `src/lib/espnApi.ts` | Cliente ESPN API para tablas de posiciones |
 | `src/lib/scoring.ts` | Motor de cálculo de puntajes del concurso |
+| `src/contexts/AuthContext.tsx` | Context de autenticación, perfil en vivo y `deleteAccount` |
 
-### Base de datos (tablas Supabase)
+### Base de datos (Supabase PostgreSQL)
 
-- **profiles** — `user_id`, `display_name`, `team_id` (FK → teams)
-- **teams** — `name`, `league`, `logo_url` (89 equipos canónicos)
-- **players** — `name`, `team`, `league`, `position` (500+ jugadores en DB + 3.031 en bundle oficial)
-- **matches** — `home_team`, `away_team`, `match_date`, `league`, `result_home`, `result_away`
-- **predictions** — `user_id`, `match_id`, `home_score`, `away_score`, `points` (UNIQUE user_id+match_id)
-- **prediction_scorers** — `prediction_id`, `player_name`, `goals`, `team`
+- **profiles** — `user_id` (PK), `display_name`, `team_id` (FK → teams). Políticas RLS habilitan lectura pública para el ranking general.
+- **teams** — `id`, `name`, `league`, `logo_url` (89 equipos canónicos).
+- **players** — `name`, `team`, `league`, `position` (500+ jugadores en DB + 3.031 en bundle oficial).
+- **matches** — `id`, `home_team`, `away_team`, `match_date`, `league`, `result_home`, `result_away`.
+- **predictions** — `id`, `user_id`, `match_id`, `home_score`, `away_score`, `points` (UNIQUE user_id+match_id).
+- **prediction_scorers** — `prediction_id`, `player_name`, `goals`, `team`.
+- **Trigger `handle_new_user`:** Al crearse un registro en `auth.users`, se inserta automáticamente en `profiles`.
+- **RPC `delete_user_account`:** Función `SECURITY DEFINER` que purga predicciones, perfiles y elimina la fila de `auth.users`, liberando el email inmediatamente.
 
 ### Paleta de colores (globals.css)
 
