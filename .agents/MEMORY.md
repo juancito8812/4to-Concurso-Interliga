@@ -5,8 +5,8 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 8 ligas/copas europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`, workflow `.github/workflows/deploy.yml`).
-- **Última sesión:** 2026-08-28 15:05
-- **Versión de memoria:** 1.3
+- **Última sesión:** 2026-08-28 15:25
+- **Versión de memoria:** 1.4
 
 ## Arquitectura
 
@@ -16,9 +16,11 @@
 - `src/lib/scoring.ts` — Motor oficial de cálculo de puntuación (`calculateScore`) para aciertos de signo, marcador exacto, diferencia de 1 gol y goleadores.
 - `src/lib/supabase.ts` — Cliente Supabase para profiles, teams, players, matches, predictions, prediction_scorers y tournament_survivors.
 - `src/lib/leagueConfig.ts` — Colores de marca, normalizador unificado de nombres de equipos (`normalizeTeamName`) y logos de las 8 ligas.
+- `src/contexts/AuthContext.tsx` — Context de autenticación, perfil en vivo, traducción inteligente de errores de auth (rate limits / spam protection) y eliminación de cuenta (`deleteAccount`).
 
 ## Decisiones Clave
 
+- **2026-08-28** — **Traducción y gestión de Rate Limits de Supabase Auth en `src/contexts/AuthContext.tsx`**: Helper `translateAuthError` que traduce mensajes técnicos de Supabase (como `over_email_send_rate_limit`) a explicaciones claras en español sobre la pausa de seguridad de 1-2 minutos antes de reintentar registros.
 - **2026-08-28** — **Cierre de pronósticos ajustado a 1 minuto antes del inicio (`diffMin <= 1`)**: Se modificó `checkIsMatchLocked` y `calculateTimeRemaining` en `src/app/pronosticar/page.tsx` para permitir pronósticos y re-ediciones hasta 1 minuto antes del pitazo inicial de cada partido.
 - **2026-08-28** — **Sistema de Sobreviviente y Herencia de Camisetas en Copas Knockout (`tournament_survivors`)**: Tabla dedicada en PostgreSQL con RLS y campo `history` JSONB para registrar transferencias de club al acertar victorias del rival en copas de eliminación directa.
 - **2026-08-28** — **Sincronización exacta con calendario en vivo (1.842 partidos y 3.822 jugadores 2026/27)**: Se integró y validó el calendario oficial en vivo alineado con la jornada activa de la temporada 2026/27 (*Bayern Munich vs Stuttgart* hoy viernes a las 18:30 UTC / 20:30 CEST en Bundesliga, *Crystal Palace vs Manchester City* en Premier League, *AC Milan vs Venezia* en Serie A, *Alavés vs Betis* en LaLiga) en `src/data/officialFixtures.json`.
@@ -36,6 +38,8 @@
 ## Cambios Recientes
 
 - **2026-08-28**:
+  - Traducción inteligente de errores de Supabase Auth en `src/contexts/AuthContext.tsx`.
+  - Reducción del tiempo de cierre de pronósticos a 1 minuto antes del partido en `src/app/pronosticar/page.tsx`.
   - Implementación completa del plan de Superviviente Knockout (Tasks 1 a 6):
     - Migración DDL y RLS de `tournament_survivors` en `supabase/schema.sql` y `DISASTER_RECOVERY_AND_SCHEMA.md`.
     - Módulo de evaluación de supervivencia pura y helpers en `src/lib/survivor.ts`.
