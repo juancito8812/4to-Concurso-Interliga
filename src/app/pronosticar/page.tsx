@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
-import { leagueColors, leagueLogos, normalizeMatchLeague, normalizeTeamName, cleanTeamName } from "@/lib/leagueConfig";
+import { leagueColors, leagueLogos, normalizeMatchLeague, normalizeTeamName, cleanTeamName, matchIdToUuid } from "@/lib/leagueConfig";
 import { getOfficialTeamMatches, getOfficialPlayersForTeams, FDMatch, findTeamId } from "@/lib/footballData";
 
 interface Match {
@@ -142,10 +142,12 @@ export default function PronosticarPage() {
 
     if (matchesData) {
       const normalizedMatches: Match[] = matchesData.map(m => {
+        const matchId = matchIdToUuid(m.id);
         const homeNorm = normalizeTeamName(m.home_team);
         const awayNorm = normalizeTeamName(m.away_team);
         return {
           ...m,
+          id: matchId,
           home_team: homeNorm,
           away_team: awayNorm,
           league: normalizeMatchLeague(homeNorm, awayNorm, m.match_date, m.league),
@@ -221,6 +223,7 @@ export default function PronosticarPage() {
         if (officialMatches.length > 0 && isMounted) {
           const next3Matches = officialMatches.slice(0, 3);
           const mappedMatches: Match[] = next3Matches.map((f: FDMatch) => {
+            const matchId = matchIdToUuid(f.id);
             const homeNorm = normalizeTeamName(f.homeTeam.name);
             const awayNorm = normalizeTeamName(f.awayTeam.name);
             const apiComp = f.competition?.name || f.competition?.code || "";
@@ -231,7 +234,7 @@ export default function PronosticarPage() {
               apiComp
             );
             return {
-              id: String(f.id),
+              id: matchId,
               home_team: homeNorm,
               away_team: awayNorm,
               match_date: f.utcDate,
@@ -436,6 +439,18 @@ export default function PronosticarPage() {
 
       for (const matchId of unlockedMatches) {
         const pred = predictions[matchId];
+        if (!pred) continue;
+
+        // If completely empty and never saved before, skip
+        if (
+          pred.home_score === "" &&
+          pred.away_score === "" &&
+          (!pred.scorers || pred.scorers.length === 0) &&
+          !pred.prediction_id
+        ) {
+          continue;
+        }
+
         const homeScore = pred.home_score === "" ? 0 : parseInt(pred.home_score);
         const awayScore = pred.away_score === "" ? 0 : parseInt(pred.away_score);
 
@@ -491,7 +506,7 @@ export default function PronosticarPage() {
       }
 
       setSuccess(true);
-      setTimeout(() => setSuccess(false), 3000);
+      setTimeout(() => setSuccess(false), 4000);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Error desconocido";
       setError("Error al guardar: " + msg);
@@ -522,7 +537,7 @@ export default function PronosticarPage() {
             href="/"
             className="inline-block bg-gold text-navy-black font-bold px-6 py-2.5 rounded-full text-sm hover:bg-gold-light transition-colors"
           >
-            Ir al Inicio
+            Ir a inicio
           </Link>
         </div>
       </div>
@@ -539,27 +554,50 @@ export default function PronosticarPage() {
     return date.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" });
   };
 
-  const hasSavedPredictions = Object.values(predictions).some((p) => !!p.prediction_id);
+  const hasSavedPredictions = Object.values(predictions).some((p) => p.prediction_id);
 
   return (
-    <div className="min-h-screen pt-16 sm:pt-20 pb-24 px-4">
-      <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen pb-12 pt-16 sm:pt-20 px-3 sm:px-6">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <Link href="/" className="inline-flex items-center gap-1.5 text-silver hover:text-white mb-5 transition-colors text-xs">
-          <span className="text-gold">←</span> Volver al inicio
-        </Link>
+        <div className="flex items-center gap-3 mb-6">
+          <Link
+            href="/"
+            className="text-silver hover:text-gold text-sm font-semibold transition-colors flex items-center gap-1"
+          >
+            ← Volver
+          </Link>
+          <span className="text-border">/</span>
+          <span className="text-gold text-sm font-semibold">Pronosticar</span>
+        </div>
 
-        <div className="flex items-center gap-4 mb-8">
-          <img
-            src={userTeam.logo_url}
-            alt={userTeam.name}
-            className="w-14 h-14 rounded-full object-contain bg-white p-1 shrink-0"
-          />
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">Pronosticar</h1>
-            <p className="text-silver text-sm">{userTeam.name} — {matches.length} partido{matches.length !== 1 ? "s" : ""}</p>
-            {dataSource === "api" && (
-              <p className="text-gold/60 text-[10px]">Datos en vivo via football-data.org</p>
+        {/* Title & Team Info */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8 bg-navy-mid border border-border rounded-2xl p-4 sm:p-6">
+          <div className="flex items-center gap-3 sm:gap-4">
+            {userTeam.logo_url && (
+              <img
+                src={userTeam.logo_url}
+                alt={userTeam.name}
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-contain bg-white p-1 shrink-0 shadow-lg"
+              />
+            )}
+            <div>
+              <h1 className="text-xl sm:text-2xl font-black text-white">{userTeam.name}</h1>
+              <p className="text-silver text-xs sm:text-sm font-medium">
+                {userTeam.league} · Próximos 3 Partidos Oficiales
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 sm:self-center">
+            {hasSavedPredictions ? (
+              <span className="inline-flex items-center gap-1.5 bg-green/15 border border-green/30 text-green text-xs font-bold px-3 py-1.5 rounded-full">
+                <span>✅</span> Pronósticos Activos
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold px-3 py-1.5 rounded-full">
+                <span>⏱️</span> Pronósticos Pendientes
+              </span>
             )}
           </div>
         </div>
@@ -627,20 +665,42 @@ export default function PronosticarPage() {
                         </span>
                       </div>
 
-                      {/* Dynamic Status Badge */}
-                      {timeRemaining.isClosed ? (
-                        <span className="inline-flex items-center gap-1 bg-red-500/15 border border-red-500/30 text-red-400 text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0">
-                          🔒 Cerrado
-                        </span>
-                      ) : timeRemaining.isUrgent ? (
-                        <span className="inline-flex items-center gap-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0 animate-pulse">
-                          ⏱️ {timeRemaining.label}
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1 bg-green/15 border border-green/30 text-green text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0">
-                          🟢 {timeRemaining.label}
-                        </span>
-                      )}
+                      {/* Prediction Status & Time Remaining Badges */}
+                      <div className="flex items-center gap-2">
+                        {pred?.prediction_id ? (
+                          <span
+                            className="inline-flex items-center gap-1 bg-green/15 border border-green/30 text-green text-[11px] font-bold px-2.5 py-0.5 rounded-full shrink-0"
+                            title="Pronóstico guardado. Podés editarlo antes del cierre."
+                          >
+                            <span>✅</span> Pronosticado {pred.home_score !== "" && pred.away_score !== "" ? `(${pred.home_score} - ${pred.away_score})` : ""}
+                          </span>
+                        ) : pred && (pred.home_score !== "" || pred.away_score !== "" || (pred.scorers && pred.scorers.length > 0)) ? (
+                          <span
+                            className="inline-flex items-center gap-1 bg-gold/15 border border-gold/30 text-gold text-[11px] font-bold px-2.5 py-0.5 rounded-full shrink-0 animate-pulse"
+                            title="Tenés cambios pendientes por guardar"
+                          >
+                            <span>✏️</span> Sin guardar
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 bg-navy-card/90 border border-border text-silver/60 text-[11px] font-medium px-2.5 py-0.5 rounded-full shrink-0">
+                            <span>⏳</span> Pendiente
+                          </span>
+                        )}
+
+                        {timeRemaining.isClosed ? (
+                          <span className="inline-flex items-center gap-1 bg-red-500/15 border border-red-500/30 text-red-400 text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0">
+                            🔒 Cerrado
+                          </span>
+                        ) : timeRemaining.isUrgent ? (
+                          <span className="inline-flex items-center gap-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0 animate-pulse">
+                            ⏱️ {timeRemaining.label}
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 bg-green/15 border border-green/30 text-green text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0">
+                            🟢 {timeRemaining.label}
+                          </span>
+                        )}
+                      </div>
                     </div>
 
                     {/* Central Scoreboard (Estilo Transmisión TV) */}

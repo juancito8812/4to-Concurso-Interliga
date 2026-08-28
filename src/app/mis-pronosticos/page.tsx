@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
-import { leagueColors, leagueLogos, normalizeMatchLeague } from "@/lib/leagueConfig";
+import { leagueColors, leagueLogos, normalizeMatchLeague, normalizeTeamName, matchIdToUuid } from "@/lib/leagueConfig";
 import { calculateScore } from "@/lib/scoring";
+import officialFixtures from "@/data/officialFixtures.json";
 
 interface ScorerInfo {
   player_name: string;
@@ -101,6 +102,30 @@ export default function MisPronosticosPage() {
         teamsData.forEach((t) => {
           teamsMap[t.name] = t.logo_url || "";
         });
+      }
+
+      // Also resolve official fixtures for any match_id not found in supabase matches table
+      for (const pred of predsData) {
+        if (!matchesMap[pred.match_id]) {
+          const found = officialFixtures.find(
+            (f) => matchIdToUuid(f.id) === pred.match_id || String(f.id) === pred.match_id
+          );
+          if (found) {
+            const homeNorm = normalizeTeamName(found.home_team);
+            const awayNorm = normalizeTeamName(found.away_team);
+            matchesMap[pred.match_id] = {
+              id: pred.match_id,
+              home_team: homeNorm,
+              away_team: awayNorm,
+              match_date: found.match_date,
+              result_home: null,
+              result_away: null,
+              league: normalizeMatchLeague(homeNorm, awayNorm, found.match_date, found.league),
+            };
+            if (found.home_logo) teamsMap[homeNorm] = found.home_logo;
+            if (found.away_logo) teamsMap[awayNorm] = found.away_logo;
+          }
+        }
       }
 
       const predIds = predsData.map((p) => p.id);

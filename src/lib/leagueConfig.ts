@@ -309,3 +309,25 @@ export function normalizeMatchLeague(
 
   return originalLeague || "Premier League";
 }
+
+/**
+ * Converts any match identifier (numeric API id, string, or UUID) to a valid, deterministic UUID
+ */
+export function matchIdToUuid(id: string | number): string {
+  const str = String(id).trim();
+  if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str)) {
+    return str.toLowerCase();
+  }
+  const num = parseInt(str.replace(/\D/g, ""), 10);
+  if (!isNaN(num) && num > 0) {
+    const hex = num.toString(16).padStart(12, "0").slice(-12);
+    return `00000000-0000-4000-8000-${hex}`;
+  }
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0;
+  }
+  const hex = Math.abs(hash).toString(16).padStart(12, "0").slice(-12);
+  return `00000000-0000-4000-8000-${hex}`;
+}
