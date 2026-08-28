@@ -81,6 +81,7 @@ public/
 - **Re-edición:** Se permite editar y actualizar los pronósticos libremente mientras falten más de 10 minutos para el inicio.
 - **Plantillas Oficiales 2026/27:** Más de 3.000 jugadores actualizados con sus fichajes vigentes (Mbappé, Lamine Yamal, Haaland, Kane, De Ligt, Zirkzee, etc.) ordenados prioritariamente por posición (Delanteros y Mediocampistas primero).
 - **Selector Progresivo de Goleadores:** Al presionar `+ Agregar goleador`, se despliega la plantilla del club; al elegir al jugador, se muestra el contador con balón `⚽ [-] 1 [+]` para ajustar goles.
+- **Podio Oficial de Premios:** Sección de recompensas estilo Champions League con podio jerárquico (Oro 🥇, Plata 🥈, Bronce 🥉), halo radiante para el 1er lugar y desglose de artículos con chips temáticos (Camiseta oficial, short, balón, jarra de colección, gorra, etc.).
 - **Competiciones y Equipos:** Detección automática y precisa de torneos europeos (Champions, Europa League, Conference League) y normalización canónica de equipos entre API y base de datos.
 
 ## Comandos

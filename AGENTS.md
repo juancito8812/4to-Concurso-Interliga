@@ -101,6 +101,7 @@ Copa Italia: #024494 (azul)
 - Se permite **re-editar** pronósticos guardados mientras el partido esté abierto (`diffMin > 10`).
 - Siempre usar `normalizeMatchLeague` y `normalizeTeamName` para asegurar correspondencia con plantillas y torneos.
 - El selector de goleadores muestra la plantilla oficial completa (3.031 jugadores clasificados por posición) y despliega el contador `⚽ [-] 1 [+]` únicamente al elegir un jugador.
+- La sección de premios en la landing (`src/app/page.tsx`) presenta un Podio de Campeones con medallas metálicas (Oro 🥇, Plata 🥈, Bronce 🥉) y chips visuales independientes para cada artículo del kit.
 - `<Link>` agrega automáticamente `basePath`; `<img>` NO — requiere el prefijo manual `/4to-Concurso-Interliga/`.
 
 ### Variables de entorno

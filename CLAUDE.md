@@ -51,6 +51,7 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - Diseño estilo transmisión oficial de TV: cabecera con logo y color de competencia + cuenta regresiva dinámica.
 - Marcador central TV con inputs numéricos de puntuación.
 - Goleadores en 2 columnas simétricas directamente debajo de cada equipo (dropdown con plantilla oficial 2026/27 clasificada por posición + stepper progresivo de goles `⚽ [-] 1 [+]` al seleccionar jugador).
+- Sección de premios en landing en Podio de Campeones con medallas metálicas (Oro 🥇, Plata 🥈, Bronce 🥉) y chips visuales para cada artículo.
 - Cierre exacto a los **10 minutos antes del partido** (`diffMin <= 10`).
 - Re-edición permitida libremente antes del cierre (`diffMin > 10`).
 - Detección precisa de competiciones europeas (`normalizeMatchLeague`) y mapeo canónico de clubes (`normalizeTeamName`).
