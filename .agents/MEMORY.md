@@ -29,22 +29,27 @@
 - **2026-08-26** — **Motor de scoring en `src/lib/scoring.ts`**: Implementa las 5 reglas de puntuación con normalización de nombres de jugadores (tildes/mayúsculas) para calcular puntos tanto en `/mis-pronosticos` como en `/ranking`.
 - **2026-08-26** — **Consultas desacopladas en Supabase (`src/app/ranking/page.tsx`)**: Se reemplazó la consulta unida `select("..., profiles(display_name)")` (que fallaba con `PGRST200`) por consultas independientes coordinadas por `user_id`.
 
-- **2026-08-28** — **Evaluación Oficial de Milanarg (5 pts, AC Milan 2-0 Venezia)**: Se procesó la predicción de `Milanarg` (`3-0`, goles de Gonçalo Ramos y Rabiot) frente al resultado oficial `2-0` (gol de Gonçalo Ramos). Obtuvo +3 por signo, +1 por diferencia de 1 gol y +1 por goleador acertado (total: 5 puntos), posicionándolo como líder en el ranking.
+- **2026-08-28** — **Arquitectura 100% Automática de Resultados y Puntuación**:
+  - **Capa Cliente en Vivo (`src/lib/espnResultsFetcher.ts`)**: Consulta la API de ESPN Scoreboard en tiempo real con caché de 30s para obtener partidos finalizados (`completed: true`), marcadores y goleadores oficiales directamente en el navegador del usuario al abrir `/ranking` o `/mis-pronosticos`.
+  - **Capa Servidor/Cron (`.github/workflows/auto-evaluate-matches.yml` + `scripts/auto-sync-espn-results.js`)**: Ejecución programada cada 2 horas en GitHub Actions para extraer resultados de las 8 competiciones, actualizar `officialEvaluatedMatches.json`, calcular puntos de todos los usuarios y commitear automáticamente.
 
 ## Estado Actual
 
 - **Branch:** `main` (desplegado a GitHub Pages).
 - **Build Status:** `npm run build` y `npm run lint` pasando con 0 errores (19 rutas estáticas generadas).
 - **Deploy:** GitHub Actions activado con éxito en `main`.
+- **Automatización:** 100% desatendida (cliente en vivo + cron de fondo).
 
 ## Cambios Recientes
 
 - **2026-08-28**:
+  - Implementación del sistema 100% automático de resultados y puntuación (ESPN API + GitHub Actions Cron).
+  - Algoritmo de emparejamiento inteligente de jugadores (`arePlayersMatching`) con normalización fonética y variantes de nombres.
   - Evaluación y asignación oficial de 5 puntos a `Milanarg` (AC Milan vs Venezia).
   - Creación de almacén de partidos evaluados (`src/data/officialEvaluatedMatches.json` y `src/data/officialEvaluatedPredictions.json`).
   - Actualización de documentación ([`README.md`](file:///home/jr/Documentos/programacion/4to-Concurso-Interliga/README.md), [`CLAUDE.md`](file:///home/jr/Documentos/programacion/4to-Concurso-Interliga/CLAUDE.md), [`AGENTS.md`](file:///home/jr/Documentos/programacion/4to-Concurso-Interliga/AGENTS.md), [`DISASTER_RECOVERY_AND_SCHEMA.md`](file:///home/jr/Documentos/programacion/4to-Concurso-Interliga/DISASTER_RECOVERY_AND_SCHEMA.md)).
   - Explicación y mejora UX en `/mis-pronosticos` indicando que los puntos se calcularán al finalizar el partido.
-  - Creación de `scripts/evaluate-matches.js` y `scripts/assign-points.js` para evaluación y carga de marcadores reales.
+  - Creación de `scripts/evaluate-matches.js`, `scripts/assign-points.js` y `scripts/auto-sync-espn-results.js`.
   - Traducción inteligente de errores de Supabase Auth en `src/contexts/AuthContext.tsx`.
   - Reducción del tiempo de cierre de pronósticos a 1 minuto antes del partido en `src/app/pronosticar/page.tsx`.
   - Implementación completa del plan de Superviviente Knockout (Tasks 1 a 6):
