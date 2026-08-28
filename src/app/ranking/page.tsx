@@ -53,106 +53,6 @@ interface ScorerRow {
   team: string;
 }
 
-// Realistic baseline participants representing the active Interliga community
-const DEFAULT_COMMUNITY_PARTICIPANTS: RankingEntry[] = [
-  {
-    user_id: "demo-user-1",
-    display_name: "Franco_Inter",
-    total_points: 38,
-    exact_scores: 6,
-    predictions_count: 12,
-    correct_signs: 9,
-    scorer_hits: 5,
-    team_name: "Inter de Milán",
-    team_logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg",
-    rank: 1,
-  },
-  {
-    user_id: "demo-user-2",
-    display_name: "Lucas DT",
-    total_points: 34,
-    exact_scores: 5,
-    predictions_count: 12,
-    correct_signs: 8,
-    scorer_hits: 4,
-    team_name: "Real Madrid CF",
-    team_logo: "https://crests.football-data.org/86.png",
-    rank: 2,
-  },
-  {
-    user_id: "demo-user-3",
-    display_name: "Martín_United",
-    total_points: 31,
-    exact_scores: 4,
-    predictions_count: 11,
-    correct_signs: 8,
-    scorer_hits: 3,
-    team_name: "Manchester United FC",
-    team_logo: "https://crests.football-data.org/66.png",
-    rank: 3,
-  },
-  {
-    user_id: "demo-user-4",
-    display_name: "Valen_Madrid",
-    total_points: 27,
-    exact_scores: 3,
-    predictions_count: 12,
-    correct_signs: 7,
-    scorer_hits: 3,
-    team_name: "Arsenal FC",
-    team_logo: "https://crests.football-data.org/57.png",
-    rank: 4,
-  },
-  {
-    user_id: "demo-user-5",
-    display_name: "Mateo_City",
-    total_points: 25,
-    exact_scores: 3,
-    predictions_count: 10,
-    correct_signs: 6,
-    scorer_hits: 2,
-    team_name: "Manchester City FC",
-    team_logo: "https://crests.football-data.org/65.png",
-    rank: 5,
-  },
-  {
-    user_id: "demo-user-6",
-    display_name: "Joaquín_Barça",
-    total_points: 22,
-    exact_scores: 2,
-    predictions_count: 11,
-    correct_signs: 5,
-    scorer_hits: 2,
-    team_name: "FC Barcelona",
-    team_logo: "https://crests.football-data.org/81.png",
-    rank: 6,
-  },
-  {
-    user_id: "demo-user-7",
-    display_name: "Santi_Bayern",
-    total_points: 19,
-    exact_scores: 2,
-    predictions_count: 9,
-    correct_signs: 4,
-    scorer_hits: 1,
-    team_name: "FC Bayern München",
-    team_logo: "https://crests.football-data.org/5.png",
-    rank: 7,
-  },
-  {
-    user_id: "demo-user-8",
-    display_name: "Agus_Juve",
-    total_points: 16,
-    exact_scores: 1,
-    predictions_count: 10,
-    correct_signs: 4,
-    scorer_hits: 1,
-    team_name: "Juventus FC",
-    team_logo: "https://crests.football-data.org/109.png",
-    rank: 8,
-  },
-];
-
 export default function RankingPage() {
   const { user } = useAuth();
   const [rankings, setRankings] = useState<RankingEntry[]>([]);
@@ -166,7 +66,7 @@ export default function RankingPage() {
 
     const fetchRankings = async () => {
       try {
-        // 1. Fetch profiles
+        // 1. Fetch profiles from Supabase
         const { data: profilesData } = await supabase
           .from("profiles")
           .select("user_id, display_name, team_id");
@@ -229,20 +129,7 @@ export default function RankingPage() {
           });
         }
 
-        const userStats: Record<
-          string,
-          {
-            user_id: string;
-            display_name: string;
-            total_points: number;
-            exact_scores: number;
-            predictions_count: number;
-            correct_signs: number;
-            scorer_hits: number;
-            team_name?: string;
-            team_logo?: string;
-          }
-        > = {};
+        const userStats: Record<string, RankingEntry> = {};
 
         // Initialize with real profiles from Supabase
         Object.entries(profilesMap).forEach(([uid, prof]) => {
@@ -256,6 +143,7 @@ export default function RankingPage() {
             scorer_hits: 0,
             team_name: prof.team_name,
             team_logo: prof.team_logo,
+            rank: 0,
           };
         });
 
@@ -274,6 +162,7 @@ export default function RankingPage() {
                 scorer_hits: 0,
                 team_name: prof?.team_name,
                 team_logo: prof?.team_logo,
+                rank: 0,
               };
             }
 
@@ -330,6 +219,7 @@ export default function RankingPage() {
                 scorer_hits: 0,
                 team_name: localTeam?.name || undefined,
                 team_logo: localTeam?.logo_url || undefined,
+                rank: 0,
               };
             }
 
@@ -345,17 +235,11 @@ export default function RankingPage() {
           }
         }
 
-        // Merge real participants with baseline community pool to ensure a complete, vibrant tournament
+        // 100% Real Live Rankings
         const realUsersList = Object.values(userStats);
-        const realUserIds = new Set(realUsersList.map((u) => u.user_id));
-
-        const combinedList: RankingEntry[] = [
-          ...realUsersList.map((u) => ({ ...u, rank: 0 })),
-          ...DEFAULT_COMMUNITY_PARTICIPANTS.filter((d) => !realUserIds.has(d.user_id)),
-        ];
 
         // Sort by total points (desc), then exact scores (desc), then predictions count (desc)
-        const sorted = combinedList
+        const sorted = realUsersList
           .sort((a, b) => {
             if (b.total_points !== a.total_points) return b.total_points - a.total_points;
             if (b.exact_scores !== a.exact_scores) return b.exact_scores - a.exact_scores;
@@ -374,7 +258,7 @@ export default function RankingPage() {
       } catch (err) {
         console.error("Error loading rankings:", err);
         if (isMounted) {
-          setRankings(DEFAULT_COMMUNITY_PARTICIPANTS);
+          setRankings([]);
           setLoading(false);
         }
       }
@@ -522,6 +406,20 @@ export default function RankingPage() {
           <div className="flex flex-col items-center justify-center py-20">
             <div className="inline-block w-10 h-10 border-3 border-gold border-t-transparent rounded-full animate-spin mb-4"></div>
             <p className="text-silver text-sm">Cargando clasificación y resultados oficiales...</p>
+          </div>
+        ) : rankings.length === 0 ? (
+          <div className="bg-navy-mid border border-border rounded-2xl p-8 sm:p-12 text-center space-y-4 my-8 shadow-xl">
+            <span className="text-5xl block mb-2">🏆</span>
+            <h3 className="text-xl sm:text-2xl font-bold text-white">¡Comienza la competencia en vivo!</h3>
+            <p className="text-silver text-sm max-w-md mx-auto leading-relaxed">
+              Aún no hay participantes con pronósticos evaluados en la tabla. ¡Elegí tu equipo, enviá tus pronósticos y sé el primero en liderar el ranking oficial!
+            </p>
+            <Link
+              href="/pronosticar/"
+              className="inline-block bg-gold text-navy-black font-bold px-6 py-2.5 rounded-full text-xs hover:bg-gold-light transition-all shadow-md mt-2"
+            >
+              Ir a Pronosticar
+            </Link>
           </div>
         ) : (
           <>
