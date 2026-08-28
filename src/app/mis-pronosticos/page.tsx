@@ -14,6 +14,8 @@ import {
   KnockoutCupSlug,
 } from "@/lib/survivor";
 import officialFixtures from "@/data/officialFixtures.json";
+import officialEvaluatedMatches from "@/data/officialEvaluatedMatches.json";
+import officialEvaluatedPredictions from "@/data/officialEvaluatedPredictions.json";
 
 interface ScorerInfo {
   player_name: string;
@@ -147,6 +149,19 @@ export default function MisPronosticosPage() {
         console.warn("Error fetching Supabase predictions:", e);
       }
 
+      // Merge official evaluated predictions for user if any
+      (officialEvaluatedPredictions as Array<{ id: string; user_id: string; match_id: string; home_score: number; away_score: number; scorers?: ScorerInfo[] }>).forEach((op) => {
+        if (op.user_id === user.id && !predsData.some((p) => p.match_id === op.match_id)) {
+          predsData.push({
+            id: op.id,
+            match_id: op.match_id,
+            home_score: op.home_score,
+            away_score: op.away_score,
+            points: null,
+          });
+        }
+      });
+
       // Merge local predictions into predsData
       const seenMatchIds = new Set(predsData.map((p) => p.match_id));
       for (const [matchId, localPred] of Object.entries(localMap)) {
@@ -180,9 +195,25 @@ export default function MisPronosticosPage() {
         result_home: number | null;
         result_away: number | null;
         league: string;
+        scorers?: Array<{ player_name: string; goals: number; team?: string }>;
       }
 
       const matchesMap: Record<string, MatchData> = {};
+      
+      // 1. Populate from official evaluated matches first
+      (officialEvaluatedMatches as Array<{ id: string; home_team: string; away_team: string; match_date: string; league: string; result_home: number; result_away: number; scorers?: Array<{ player_name: string; goals: number; team?: string }> }>).forEach((m) => {
+        matchesMap[m.id] = {
+          id: m.id,
+          home_team: normalizeTeamName(m.home_team),
+          away_team: normalizeTeamName(m.away_team),
+          match_date: m.match_date,
+          result_home: m.result_home,
+          result_away: m.result_away,
+          league: m.league,
+          scorers: m.scorers,
+        };
+      });
+
       if (matchesData) {
         (matchesData as MatchData[]).forEach((m) => {
           matchesMap[m.id] = m;
@@ -244,6 +275,14 @@ export default function MisPronosticosPage() {
       }
 
       const scorersMap: Record<string, ScorerInfo[]> = {};
+      
+      // Merge official evaluated prediction scorers
+      (officialEvaluatedPredictions as Array<{ id: string; scorers?: ScorerInfo[] }>).forEach((op) => {
+        if (op.scorers) {
+          scorersMap[op.id] = op.scorers;
+        }
+      });
+
       if (scorersData) {
         scorersData.forEach((s) => {
           if (!scorersMap[s.prediction_id]) scorersMap[s.prediction_id] = [];
@@ -276,6 +315,7 @@ export default function MisPronosticosPage() {
             {
               result_home: match.result_home,
               result_away: match.result_away,
+              scorers: match.scorers,
             }
           );
           if (earnedPoints === null) {

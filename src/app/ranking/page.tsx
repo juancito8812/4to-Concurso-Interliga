@@ -4,7 +4,9 @@ import Link from "next/link";
 import { useEffect, useState, useMemo } from "react";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/contexts/AuthContext";
-import { calculateScore, PredictedScorer } from "@/lib/scoring";
+import { calculateScore, PredictedScorer, RealScorer } from "@/lib/scoring";
+import officialEvaluatedMatches from "@/data/officialEvaluatedMatches.json";
+import officialEvaluatedPredictions from "@/data/officialEvaluatedPredictions.json";
 
 interface RankingEntry {
   user_id: string;
@@ -35,6 +37,7 @@ interface MatchRow {
   id: string;
   result_home: number | null;
   result_away: number | null;
+  scorers?: RealScorer[];
 }
 
 interface PredictionRow {
@@ -107,30 +110,71 @@ export default function RankingPage() {
           });
         }
 
-        // 3. Fetch only evaluated matches with results (drastically reduces bandwidth)
+        // 3. Fetch evaluated matches (from bundle and Supabase)
+        const matchesMap: Record<string, MatchRow> = {};
+        
+        // Load official evaluated fixtures first
+        (officialEvaluatedMatches as Array<{ id: string; result_home: number; result_away: number; scorers?: RealScorer[] }>).forEach((m) => {
+          matchesMap[m.id] = {
+            id: m.id,
+            result_home: m.result_home,
+            result_away: m.result_away,
+            scorers: m.scorers,
+          };
+        });
+
         const { data: matchesData } = await supabase
           .from("matches")
           .select("id, result_home, result_away")
           .not("result_home", "is", null);
 
-        const matchesMap: Record<string, MatchRow> = {};
         if (matchesData) {
           (matchesData as MatchRow[]).forEach((m) => {
             matchesMap[m.id] = m;
           });
         }
 
-        // 4. Fetch predictions
+        // 4. Fetch predictions (combine Supabase + official evaluated predictions)
+        const allPredictions: PredictionRow[] = [];
+        
+        // Include official evaluated predictions
+        (officialEvaluatedPredictions as Array<{ id: string; user_id: string; match_id: string; home_score: number; away_score: number }>).forEach((p) => {
+          allPredictions.push({
+            id: p.id,
+            user_id: p.user_id,
+            match_id: p.match_id,
+            home_score: p.home_score,
+            away_score: p.away_score,
+            points: null,
+          });
+        });
+
         const { data: predsData } = await supabase
           .from("predictions")
           .select("id, user_id, match_id, home_score, away_score, points");
 
+        if (predsData) {
+          (predsData as PredictionRow[]).forEach((p) => {
+            if (!allPredictions.some((ap) => ap.user_id === p.user_id && ap.match_id === p.match_id)) {
+              allPredictions.push(p);
+            }
+          });
+        }
+
         // 5. Fetch prediction scorers
+        const scorersMap: Record<string, PredictedScorer[]> = {};
+        
+        // Include official evaluated scorers
+        (officialEvaluatedPredictions as Array<{ id: string; scorers?: PredictedScorer[] }>).forEach((p) => {
+          if (p.scorers) {
+            scorersMap[p.id] = p.scorers;
+          }
+        });
+
         const { data: scorersData } = await supabase
           .from("prediction_scorers")
           .select("prediction_id, player_name, goals, team");
 
-        const scorersMap: Record<string, PredictedScorer[]> = {};
         if (scorersData) {
           (scorersData as ScorerRow[]).forEach((s) => {
             if (!scorersMap[s.prediction_id]) scorersMap[s.prediction_id] = [];
@@ -160,9 +204,9 @@ export default function RankingPage() {
           };
         });
 
-        // Compute points from real Supabase predictions
-        if (predsData) {
-          (predsData as PredictionRow[]).forEach((p) => {
+        // Compute points from all predictions
+        if (allPredictions && allPredictions.length > 0) {
+          allPredictions.forEach((p) => {
             if (!userStats[p.user_id]) {
               const prof = profilesMap[p.user_id];
               userStats[p.user_id] = {
@@ -194,6 +238,7 @@ export default function RankingPage() {
                 {
                   result_home: match.result_home,
                   result_away: match.result_away,
+                  scorers: match.scorers || [],
                 }
               );
 
