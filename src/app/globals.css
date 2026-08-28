@@ -18,6 +18,20 @@ body {
   background: #080e1c;
   color: #ffffff;
   font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* View Transitions API (Modern Chromium and supported browsers) */
+@view-transition {
+  navigation: auto;
+}
+
+/* Performance optimizations: content visibility for heavy components */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 350px;
 }
 
 /* Hide number input spinner arrows */

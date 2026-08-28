@@ -146,6 +146,10 @@ export default function Home() {
                 <img
                   src={league.logo}
                   alt={league.name}
+                  width={64}
+                  height={64}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-contain transition-transform group-hover:scale-105"
                 />
               </div>

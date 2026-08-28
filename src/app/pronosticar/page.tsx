@@ -666,7 +666,7 @@ export default function PronosticarPage() {
                 return (
                   <div
                     key={match.id}
-                    className={`rounded-2xl bg-navy-mid border border-border/80 shadow-xl overflow-hidden relative transition-all ${
+                    className={`rounded-2xl bg-navy-mid border border-border/80 shadow-xl overflow-hidden relative transition-all content-visibility-auto ${
                       locked ? "opacity-75" : ""
                     }`}
                   >
@@ -680,6 +680,10 @@ export default function PronosticarPage() {
                           <img
                             src={leagueLogos[match.league]}
                             alt={match.league}
+                            width={20}
+                            height={20}
+                            loading="lazy"
+                            decoding="async"
                             className="w-5 h-5 object-contain shrink-0"
                           />
                         ) : (
@@ -744,6 +748,10 @@ export default function PronosticarPage() {
                             <img
                               src={homeLogo}
                               alt={match.home_team}
+                              width={48}
+                              height={48}
+                              loading="lazy"
+                              decoding="async"
                               className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain bg-white p-1 shrink-0 shadow-md border border-border/40"
                             />
                           )}
@@ -796,6 +804,10 @@ export default function PronosticarPage() {
                             <img
                               src={awayLogo}
                               alt={match.away_team}
+                              width={48}
+                              height={48}
+                              loading="lazy"
+                              decoding="async"
                               className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain bg-white p-1 shrink-0 shadow-md border border-border/40"
                             />
                           )}

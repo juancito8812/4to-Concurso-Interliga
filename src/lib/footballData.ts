@@ -252,14 +252,50 @@ export async function getOfficialTeamMatches(
   }));
 }
 
-// Get official updated squads for teams
-export function getOfficialPlayersForTeams(teamNames: string[]): PlayerData[] {
-  const cleanTargets = teamNames.map(t => cleanNameForMatch(t));
+// Pre-indexed squad cache by cleaned team name for O(1) instant lookups
+const playerIndexMap = new Map<string, PlayerData[]>();
+for (const p of (officialPlayers as PlayerData[])) {
+  const cTeam = cleanNameForMatch(p.team);
+  if (!playerIndexMap.has(cTeam)) {
+    playerIndexMap.set(cTeam, []);
+  }
+  playerIndexMap.get(cTeam)!.push(p);
+}
 
-  return (officialPlayers as PlayerData[]).filter(p => {
-    const cTeam = cleanNameForMatch(p.team);
-    return cleanTargets.some(target => cTeam === target || cTeam.includes(target) || target.includes(cTeam));
-  });
+// Get official updated squads for teams with fast Map lookup
+export function getOfficialPlayersForTeams(teamNames: string[]): PlayerData[] {
+  const result: PlayerData[] = [];
+  const addedIds = new Set<string>();
+
+  for (const teamName of teamNames) {
+    const cleanTarget = cleanNameForMatch(teamName);
+    
+    // Direct match
+    const directMatches = playerIndexMap.get(cleanTarget);
+    if (directMatches) {
+      for (const p of directMatches) {
+        if (!addedIds.has(p.id)) {
+          addedIds.add(p.id);
+          result.push(p);
+        }
+      }
+      continue;
+    }
+
+    // Substring / fuzzy match across keys
+    for (const [cTeam, teamPlayers] of playerIndexMap.entries()) {
+      if (cTeam.includes(cleanTarget) || cleanTarget.includes(cTeam)) {
+        for (const p of teamPlayers) {
+          if (!addedIds.has(p.id)) {
+            addedIds.add(p.id);
+            result.push(p);
+          }
+        }
+      }
+    }
+  }
+
+  return result;
 }
 
 // Get competition scorers
