@@ -51,12 +51,43 @@ export default function MisPronosticosPage() {
     let isMounted = true;
 
     const fetchPredictions = async () => {
-      const { data: predsData } = await supabase
-        .from("predictions")
-        .select("id, match_id, home_score, away_score, points")
-        .eq("user_id", user.id);
+      const storageKey = `interliga_predictions_${user.id}`;
+      let localMap: Record<string, { id?: string; match_id: string; home_score: string | number; away_score: string | number; scorers?: ScorerInfo[]; points?: number }> = {};
+      try {
+        const raw = localStorage.getItem(storageKey);
+        if (raw) {
+          localMap = JSON.parse(raw);
+        }
+      } catch (e) {
+        console.warn("Error reading local predictions:", e);
+      }
 
-      if (!predsData || predsData.length === 0) {
+      let predsData: Array<{ id: string; match_id: string; home_score: number; away_score: number; points: number | null }> = [];
+      try {
+        const { data } = await supabase
+          .from("predictions")
+          .select("id, match_id, home_score, away_score, points")
+          .eq("user_id", user.id);
+        if (data) predsData = data;
+      } catch (e) {
+        console.warn("Error fetching Supabase predictions:", e);
+      }
+
+      // Merge local predictions into predsData
+      const seenMatchIds = new Set(predsData.map((p) => p.match_id));
+      for (const [matchId, localPred] of Object.entries(localMap)) {
+        if (!seenMatchIds.has(matchId) && (localPred.home_score !== "" || localPred.away_score !== "")) {
+          predsData.push({
+            id: localPred.id || `local-${matchId}`,
+            match_id: matchId,
+            home_score: typeof localPred.home_score === "string" ? parseInt(localPred.home_score) || 0 : localPred.home_score,
+            away_score: typeof localPred.away_score === "string" ? parseInt(localPred.away_score) || 0 : localPred.away_score,
+            points: null,
+          });
+        }
+      }
+
+      if (predsData.length === 0) {
         if (isMounted) setLoading(false);
         return;
       }
@@ -128,11 +159,15 @@ export default function MisPronosticosPage() {
         }
       }
 
-      const predIds = predsData.map((p) => p.id);
-      const { data: scorersData } = await supabase
-        .from("prediction_scorers")
-        .select("prediction_id, player_name, goals, team")
-        .in("prediction_id", predIds);
+      const predIds = predsData.map((p) => p.id).filter((id) => !id.startsWith("local-"));
+      let scorersData: Array<{ prediction_id: string; player_name: string; goals: number; team: string }> = [];
+      if (predIds.length > 0) {
+        const { data: sData } = await supabase
+          .from("prediction_scorers")
+          .select("prediction_id, player_name, goals, team")
+          .in("prediction_id", predIds);
+        if (sData) scorersData = sData;
+      }
 
       const scorersMap: Record<string, ScorerInfo[]> = {};
       if (scorersData) {
@@ -140,6 +175,14 @@ export default function MisPronosticosPage() {
           if (!scorersMap[s.prediction_id]) scorersMap[s.prediction_id] = [];
           scorersMap[s.prediction_id].push(s);
         });
+      }
+
+      // Merge local scorers
+      for (const [matchId, localPred] of Object.entries(localMap)) {
+        const pId = localPred.id || `local-${matchId}`;
+        if (!scorersMap[pId] && localPred.scorers && localPred.scorers.length > 0) {
+          scorersMap[pId] = localPred.scorers;
+        }
       }
 
       const result: PredictionWithMatch[] = predsData.map((pred) => {

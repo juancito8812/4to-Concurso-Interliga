@@ -268,31 +268,50 @@ export default function PronosticarPage() {
         await fetchFromSupabase(teamData);
       }
 
-      const { data: predsData } = await supabase
-        .from("predictions")
-        .select("id, match_id, home_score, away_score")
-        .eq("user_id", user.id);
+      const storageKey = `interliga_predictions_${user.id}`;
+      let loadedPredsMap: Record<string, Prediction> = {};
 
-      if (predsData && isMounted) {
-        const predsMap: Record<string, Prediction> = {};
-        for (const pred of predsData) {
-          const { data: scorersData } = await supabase
-            .from("prediction_scorers")
-            .select("player_name, goals, team")
-            .eq("prediction_id", pred.id);
-
-          predsMap[pred.match_id] = {
-            match_id: pred.match_id,
-            home_score: pred.home_score !== null && pred.home_score !== undefined ? String(pred.home_score) : "",
-            away_score: pred.away_score !== null && pred.away_score !== undefined ? String(pred.away_score) : "",
-            scorers: scorersData || [],
-            prediction_id: pred.id,
-          };
+      // 1. Load from localStorage (instant, offline-first)
+      try {
+        const savedRaw = localStorage.getItem(storageKey);
+        if (savedRaw) {
+          loadedPredsMap = JSON.parse(savedRaw);
         }
-        setPredictions(predsMap);
+      } catch (e) {
+        console.warn("Error reading local predictions:", e);
       }
 
-      if (isMounted) setLoading(false);
+      // 2. Fetch and merge from Supabase
+      try {
+        const { data: predsData } = await supabase
+          .from("predictions")
+          .select("id, match_id, home_score, away_score")
+          .eq("user_id", user.id);
+
+        if (predsData && predsData.length > 0) {
+          for (const pred of predsData) {
+            const { data: scorersData } = await supabase
+              .from("prediction_scorers")
+              .select("player_name, goals, team")
+              .eq("prediction_id", pred.id);
+
+            loadedPredsMap[pred.match_id] = {
+              match_id: pred.match_id,
+              home_score: pred.home_score !== null && pred.home_score !== undefined ? String(pred.home_score) : "",
+              away_score: pred.away_score !== null && pred.away_score !== undefined ? String(pred.away_score) : "",
+              scorers: scorersData || loadedPredsMap[pred.match_id]?.scorers || [],
+              prediction_id: pred.id,
+            };
+          }
+        }
+      } catch (e) {
+        console.warn("Supabase predictions load error:", e);
+      }
+
+      if (isMounted) {
+        setPredictions(loadedPredsMap);
+        setLoading(false);
+      }
     };
 
     loadUserData();
@@ -437,8 +456,11 @@ export default function PronosticarPage() {
         return match && !isMatchLocked(match.match_date);
       });
 
+      const storageKey = `interliga_predictions_${user.id}`;
+      const updatedPreds = { ...predictions };
+
       for (const matchId of unlockedMatches) {
-        const pred = predictions[matchId];
+        const pred = updatedPreds[matchId];
         if (!pred) continue;
 
         // If completely empty and never saved before, skip
@@ -454,57 +476,67 @@ export default function PronosticarPage() {
         const homeScore = pred.home_score === "" ? 0 : parseInt(pred.home_score);
         const awayScore = pred.away_score === "" ? 0 : parseInt(pred.away_score);
 
-        const { data: predData, error: predError } = await supabase
-          .from("predictions")
-          .upsert(
-            {
-              user_id: user.id,
-              match_id: matchId,
-              home_score: homeScore,
-              away_score: awayScore,
-            },
-            { onConflict: "user_id,match_id" }
-          )
-          .select("id")
-          .single();
+        // Mark as saved with client ID if none
+        const currentPredId = pred.prediction_id || `pred-${Date.now()}-${matchId}`;
+        updatedPreds[matchId] = {
+          ...pred,
+          prediction_id: currentPredId,
+        };
 
-        if (predError) throw predError;
+        // Try syncing to Supabase in background
+        try {
+          const { data: predData, error: predError } = await supabase
+            .from("predictions")
+            .upsert(
+              {
+                user_id: user.id,
+                match_id: matchId,
+                home_score: homeScore,
+                away_score: awayScore,
+              },
+              { onConflict: "user_id,match_id" }
+            )
+            .select("id")
+            .single();
 
-        if (predData) {
-          setPredictions((prev) => ({
-            ...prev,
-            [matchId]: {
-              ...prev[matchId],
-              prediction_id: predData.id,
-            },
-          }));
+          if (!predError && predData) {
+            updatedPreds[matchId].prediction_id = predData.id;
 
-          await supabase
-            .from("prediction_scorers")
-            .delete()
-            .eq("prediction_id", predData.id);
+            await supabase
+              .from("prediction_scorers")
+              .delete()
+              .eq("prediction_id", predData.id);
 
-          if (pred.scorers && pred.scorers.length > 0) {
-            const scorersToInsert = pred.scorers
-              .filter((s) => s.player_name.trim() !== "")
-              .map((s) => ({
-                prediction_id: predData.id,
-                player_name: s.player_name,
-                goals: s.goals,
-                team: s.team,
-              }));
+            if (pred.scorers && pred.scorers.length > 0) {
+              const scorersToInsert = pred.scorers
+                .filter((s) => s.player_name.trim() !== "")
+                .map((s) => ({
+                  prediction_id: predData.id,
+                  player_name: s.player_name,
+                  goals: s.goals,
+                  team: s.team,
+                }));
 
-            if (scorersToInsert.length > 0) {
-              const { error: scorersError } = await supabase
-                .from("prediction_scorers")
-                .insert(scorersToInsert);
-
-              if (scorersError) throw scorersError;
+              if (scorersToInsert.length > 0) {
+                await supabase
+                  .from("prediction_scorers")
+                  .insert(scorersToInsert);
+              }
             }
           }
+        } catch (dbErr) {
+          console.warn("Supabase upsert error (saved locally):", dbErr);
         }
       }
 
+      // Save to localStorage for instant, offline & persistent retention
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(updatedPreds));
+      } catch (stErr) {
+        console.warn("Error saving to localStorage:", stErr);
+      }
+
+      setPredictions(updatedPreds);
       setSuccess(true);
       setTimeout(() => setSuccess(false), 4000);
     } catch (err: unknown) {
