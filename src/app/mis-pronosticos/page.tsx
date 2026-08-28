@@ -394,7 +394,11 @@ export default function MisPronosticosPage() {
       });
 
       if (isMounted) {
-        result.sort((a, b) => new Date(b.match_date).getTime() - new Date(a.match_date).getTime());
+        const sortTime = (d: string) => {
+          const t = new Date(d).getTime();
+          return isNaN(t) ? 0 : t;
+        };
+        result.sort((a, b) => sortTime(b.match_date) - sortTime(a.match_date));
         setPredictions(result);
         setLoading(false);
       }
@@ -701,13 +705,18 @@ export default function MisPronosticosPage() {
                         )}
                       </div>
                       <span className="text-silver text-xs font-mono shrink-0">
-                        {new Date(p.match_date).toLocaleDateString("es-AR", {
-                          weekday: "short",
-                          day: "numeric",
-                          month: "short",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
+                        {p.match_date &&
+                        !isNaN(new Date(p.match_date).getTime()) ? (
+                          new Date(p.match_date).toLocaleDateString("es-AR", {
+                            weekday: "short",
+                            day: "numeric",
+                            month: "short",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })
+                        ) : (
+                          <span className="text-silver/70 italic">Fecha por confirmar</span>
+                        )}
                       </span>
                     </div>
 
