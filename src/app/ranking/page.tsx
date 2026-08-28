@@ -208,11 +208,17 @@ export default function RankingPage() {
         if (scorersData) {
           (scorersData as ScorerRow[]).forEach((s) => {
             if (!scorersMap[s.prediction_id]) scorersMap[s.prediction_id] = [];
-            scorersMap[s.prediction_id].push({
-              player_name: s.player_name,
-              goals: s.goals,
-              team: s.team,
-            });
+            // Evita doble conteo cuando el mismo pronóstico existe en JSON y en Supabase
+            const exists = scorersMap[s.prediction_id].some(
+              (x) => x.player_name === s.player_name && x.goals === s.goals && (x.team || "") === (s.team || "")
+            );
+            if (!exists) {
+              scorersMap[s.prediction_id].push({
+                player_name: s.player_name,
+                goals: s.goals,
+                team: s.team,
+              });
+            }
           });
         }
 

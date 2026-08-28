@@ -331,7 +331,11 @@ export default function MisPronosticosPage() {
       if (scorersData) {
         scorersData.forEach((s) => {
           if (!scorersMap[s.prediction_id]) scorersMap[s.prediction_id] = [];
-          scorersMap[s.prediction_id].push(s);
+          // Evita doble conteo cuando el mismo pronóstico existe en JSON y en Supabase
+          const exists = scorersMap[s.prediction_id].some(
+            (x) => x.player_name === s.player_name && x.goals === s.goals && (x.team || "") === (s.team || "")
+          );
+          if (!exists) scorersMap[s.prediction_id].push(s);
         });
       }
 
