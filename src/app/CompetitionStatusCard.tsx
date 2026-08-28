@@ -61,7 +61,7 @@ export default function CompetitionStatusCard() {
       </span>
 
       <p className="text-sm leading-relaxed text-silver">
-        Las copas nacionales son de{" "}
+        Las copas nacionales e internacionales son de{" "}
         <span className="text-gold font-semibold">eliminación directa</span>:{" "}
         si fallás tu pronóstico en fase de Knock-out, quedás fuera de esa ronda.
       </p>
