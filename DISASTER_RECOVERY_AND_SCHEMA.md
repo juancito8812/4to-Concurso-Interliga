@@ -181,6 +181,25 @@ CREATE POLICY "Usuarios administran su estado de torneo"
   WITH CHECK (auth.uid() = user_id);
 ```
 
+#### Estructura del campo `history` (JSONB) en `tournament_survivors`:
+El historial de transferencias almacena las camisetas heredadas al predecir y acertar victorias del rival en fases de eliminación directa:
+```json
+[
+  {
+    "from_team": "Real Madrid",
+    "to_team": "Manchester City",
+    "match_id": "93b2a265-7fe9-4e7a-9a9c-0c4a01c80088",
+    "round": "Cuartos de final",
+    "date": "2026-04-08T19:00:00Z"
+  }
+]
+```
+Módulo de evaluación pura y helpers en `src/lib/survivor.ts`:
+- `evaluateSurvivorProgression`: Función pura que computa si el participante se mantiene `ALIVE`, es eliminado a `ELIMINATED` o transfiere su camiseta (`transferred: true`).
+- `getUserCupSurvivors(userId)`: Obtiene los estados del participante en las 4 copas con JOIN a `teams(name, logo_url)`.
+- `setInitialCupSurvivor(userId, tournamentSlug, teamId)`: Inicializa el club representante.
+- `updateCupSurvivor(survivor)`: Guarda progresiones y transferencias.
+
 ---
 
 ## 🛡️ 4. Configuración de Seguridad y RLS

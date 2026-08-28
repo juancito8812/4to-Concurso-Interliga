@@ -34,10 +34,11 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - `src/data/officialFixtures.json` — 1.842 partidos oficiales 2026/27 pre-sincronizados
 - `src/data/officialPlayers.json` — 3.822 jugadores 2026/27 con posiciones y roles actualizados
 - `src/lib/supabase.ts` — Cliente Supabase
+- `src/lib/survivor.ts` — Módulo de supervivencia multitorneo KO, evaluación de partidos (`evaluateSurvivorProgression`) y herencia de camisetas
 - `src/lib/leagueConfig.ts` — Colores, logos, normalizadores `normalizeMatchLeague` y `normalizeTeamName`
 - `src/lib/scoring.ts` — Motor de cálculo de puntos
 - `src/contexts/AuthContext.tsx` — Context de autenticación, sync de perfiles y `deleteAccount`
-- `supabase/schema.sql` — Script DDL maestro con las 6 tablas, 13 índices, RLS, triggers y 89 equipos oficiales
+- `supabase/schema.sql` — Script DDL maestro con las 7 tablas, 15 índices, RLS, triggers y 89 equipos oficiales
 - `DISASTER_RECOVERY_AND_SCHEMA.md` — Manual de restauración paso a paso ante pérdida total
 - `next.config.ts` — basePath para GitHub Pages
 
@@ -46,8 +47,9 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - Registro con nombre de usuario, login y recuperación de contraseña vía Supabase Auth.
 - Perfil extendido en tabla `profiles` (`user_id`, `display_name`, `team_id`).
 - Trigger `handle_new_user` en Supabase crea automáticamente el perfil en el registro.
-- Políticas RLS habilitan lectura pública para `profiles`, `predictions` y `prediction_scorers`.
-- RPC `delete_user_account` elimina cuenta, datos y libera el correo en `auth.users`.
+- Políticas RLS habilitan lectura pública para `profiles`, `predictions`, `prediction_scorers` y `tournament_survivors`.
+- Tabla `tournament_survivors` (`user_id`, `tournament_slug`, `active_team_id`, `status`, `eliminated_at_round`, `history`) para el seguimiento independiente por copa.
+- RPC `delete_user_account` elimina cuenta, purga datos y libera el correo en `auth.users`.
 - Rutas protegidas: `/perfil`, `/pronosticar`, `/mis-pronosticos`.
 
 ## Funcionalidades y Reglas de Pronósticos
@@ -57,6 +59,7 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - **Diseño Transmisión TV:** Cabecera con logo de competencia, marcador con badges y cuenta regresiva dinámica.
 - **Goleadores Simétricos:** 2 columnas bajo cada club con dropdown clasificado por posición y stepper de goles `⚽ [-] 1 [+]`.
 - **Ranking Multiusuario:** Podio de Honor dinámico (Oro 🥇, Plata 🥈, Bronce 🥉) con escudos oficiales, puntos reales y filtros.
+- **Superviviente en Copas Knockout (Champions, Europa, Conference, Copa Italia):** Estado independiente por copa (`ALIVE` / `ELIMINATED`). Si el participante pronostica la victoria del rival y acierta, hereda la camiseta del rival para las siguientes fases (`history` JSONB), mientras su club base en liga regular permanece 100% fijo.
 
 ## Comandos útiles
 

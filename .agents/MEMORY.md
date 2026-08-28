@@ -5,19 +5,25 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 8 ligas/copas europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`, workflow `.github/workflows/deploy.yml`).
-- **Última sesión:** 2026-08-28 12:55
-- **Versión de memoria:** 1.2
+- **Última sesión:** 2026-08-28 15:05
+- **Versión de memoria:** 1.3
 
 ## Arquitectura
 
 - `src/app/` — Páginas de Next.js (`/`, `/registro`, `/login`, `/olvide-contrasena`, `/perfil`, `/pronosticar`, `/mis-pronosticos`, `/ranking`, `/tabla/[league]`).
+- `src/lib/survivor.ts` — Módulo de supervivencia multitorneo KO (`evaluateSurvivorProgression`, `getUserCupSurvivors`, `setInitialCupSurvivor`, `updateCupSurvivor`).
 - `src/lib/espnApi.ts` — API client para estadísticas en vivo, clasificaciones y fixtures de las 8 competiciones sin restricciones de CORS ni límites de API key.
 - `src/lib/scoring.ts` — Motor oficial de cálculo de puntuación (`calculateScore`) para aciertos de signo, marcador exacto, diferencia de 1 gol y goleadores.
-- `src/lib/supabase.ts` — Cliente Supabase para profiles, teams, players, matches, predictions y prediction_scorers.
+- `src/lib/supabase.ts` — Cliente Supabase para profiles, teams, players, matches, predictions, prediction_scorers y tournament_survivors.
 - `src/lib/leagueConfig.ts` — Colores de marca, normalizador unificado de nombres de equipos (`normalizeTeamName`) y logos de las 8 ligas.
 
 ## Decisiones Clave
 
+- **2026-08-28** — **Mecánica de Superviviente y Herencia de Equipo en Copas Knockout**:
+  - Implementación completa del sistema de supervivencia para las 4 copas de eliminación directa (Champions League, Europa League, Conference League, Copa Italia).
+  - Nueva tabla `tournament_survivors` en Supabase con RLS público de lectura y ALL restringido al propietario.
+  - Regla de herencia de camiseta: acertar la victoria del rival transfiere su camiseta (`active_team_id`) y registra la transferencia en `history` JSONB, manteniendo el club base (`profiles.team_id`) 100% fijo.
+  - Integración en `CompetitionStatusCard.tsx` (Paso 3 interactivo), `/pronosticar` (bloqueo/alertas KO y selector inicial de copa) y `/mis-pronosticos` (resumen de estado, timeline de camisetas heredadas y badges por partido).
 - **2026-08-28** — **Sincronización exacta con calendario en vivo (1.842 partidos y 3.822 jugadores 2026/27)**: Se integró y validó el calendario oficial en vivo alineado con la jornada activa de la temporada 2026/27 (*Bayern Munich vs Stuttgart* hoy viernes a las 18:30 UTC / 20:30 CEST en Bundesliga, *Crystal Palace vs Manchester City* en Premier League, *AC Milan vs Venezia* en Serie A, *Alavés vs Betis* en LaLiga) en `src/data/officialFixtures.json`.
 - **2026-08-28** — **Pestaña "Partidos" en todas las ligas (`TablaLigaClient.tsx`)**: Se habilitó la pestaña de calendario/partidos no solo para copas sino para las 8 competiciones con resolución en vivo de ESPN y fallback al bundle oficial.
 - **2026-08-26** — **Migración a ESPN API pública en `src/lib/espnApi.ts`**: Resuelve el problema de CORS en GitHub Pages que tenía `football-data.org` (que devolvía `Access-Control-Allow-Origin: http://localhost`) y da soporte completo a Europa League, Conference League y Copa Italia.
@@ -33,15 +39,19 @@
 ## Cambios Recientes
 
 - **2026-08-28**:
+  - Implementación completa del plan de Superviviente Knockout (Tasks 1 a 6):
+    - Migración DDL y RLS de `tournament_survivors` en `supabase/schema.sql` y `DISASTER_RECOVERY_AND_SCHEMA.md`.
+    - Módulo de evaluación de supervivencia pura y helpers en `src/lib/survivor.ts`.
+    - Suite de pruebas unitarias en `scripts/test-survivor.js` pasando con 100% de éxito.
+    - Componente interactivo multitorneo en `CompetitionStatusCard.tsx`.
+    - Integración de alertas, bloqueo KO y selector inicial en `src/app/pronosticar/page.tsx`.
+    - Historial de superviviente, línea de tiempo de camisetas heredadas y badges en `src/app/mis-pronosticos/page.tsx`.
+    - Documentación actualizada en `README.md`, `CLAUDE.md`, `AGENTS.md`, `DISASTER_RECOVERY_AND_SCHEMA.md` y `.agents/MEMORY.md`.
   - Sincronización del partido inaugural de hoy viernes de la Bundesliga (*Bayern Munich vs Stuttgart*, 18:30 UTC / 20:30 CEST) y jornadas oficiales de las 8 competiciones en `src/data/officialFixtures.json` (1.842 partidos oficiales).
   - Carga y normalización de 3.822 jugadores oficiales 2026/27 en `src/data/officialPlayers.json` (100% de los clubes con nómina completa de delanteros, medios, defensas y arqueros).
-  - Normalizador universal de equipos en `src/lib/leagueConfig.ts` con cobertura del 100% de aliases (`FC Bayern München`, `Bayer 04 Leverkusen`, `Köln`, `Wolves`, `PSG`, etc.).
-  - Actualización de `src/lib/footballData.ts` para resolver siempre los próximos partidos reales oficiales de la temporada activa.
-  - Pestaña "Partidos" añadida a las 8 ligas en `src/app/tabla/[league]/TablaLigaClient.tsx`.
-  - Corrección del warning de React `set-state-in-effect` en `TeamSelectorCard.tsx`.
-  - Corrección de etiquetas de ligas cruzadas en la base de datos Supabase `matches`.
 
 ## Próximos Pasos / Ideas Futuras
 
 - [ ] Cargar usuarios y resultados reales a medida que avance el calendario deportivo.
 - [ ] Opcional: Agregar selector de jornadas pasadas en las tablas de ligas.
+
