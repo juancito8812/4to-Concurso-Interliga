@@ -11,6 +11,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, displayName?: string) => Promise<{ error?: string }>;
   signIn: (email: string, password: string) => Promise<{ error?: string }>;
   signOut: () => Promise<void>;
+  deleteAccount: () => Promise<{ error?: string }>;
   resetPassword: (email: string) => Promise<{ error?: string }>;
   refreshProfile: () => Promise<void>;
 }
@@ -131,6 +132,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setDisplayName(null);
   };
 
+  const deleteAccount = async () => {
+    try {
+      const { error } = await supabase.rpc("delete_user_account");
+      if (error) return { error: error.message };
+
+      // Clear local storage and session completely
+      try {
+        if (typeof window !== "undefined") {
+          Object.keys(localStorage).forEach((key) => {
+            if (key.startsWith("interliga_") || key.startsWith("sb-")) {
+              localStorage.removeItem(key);
+            }
+          });
+        }
+      } catch (e) {
+        console.warn("Storage cleanup:", e);
+      }
+
+      await signOut();
+      return {};
+    } catch (err: unknown) {
+      return { error: err instanceof Error ? err.message : "Error al eliminar cuenta" };
+    }
+  };
+
   const resetPassword = async (email: string) => {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/4to-Concurso-Interliga/actualizar-contrasena/`,
@@ -140,7 +166,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, displayName, loading, signUp, signIn, signOut, resetPassword, refreshProfile }}>
+    <AuthContext.Provider value={{ user, displayName, loading, signUp, signIn, signOut, deleteAccount, resetPassword, refreshProfile }}>
       {children}
     </AuthContext.Provider>
   );
