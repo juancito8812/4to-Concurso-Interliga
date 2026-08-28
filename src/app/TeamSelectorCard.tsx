@@ -50,8 +50,14 @@ export default function TeamSelectorCard() {
                 if (team) {
                   setSelectedTeam(team);
                   setTeamLocked(true);
+                } else {
+                  setSelectedTeam(null);
+                  setTeamLocked(false);
                 }
               });
+          } else {
+            setSelectedTeam(null);
+            setTeamLocked(false);
           }
         });
     }

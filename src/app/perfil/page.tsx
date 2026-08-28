@@ -58,6 +58,62 @@ export default function PerfilPage() {
     }
   };
 
+  const [resetting, setResetting] = useState(false);
+  const [showConfirmReset, setShowConfirmReset] = useState(false);
+
+  const handleResetData = async () => {
+    if (!user) return;
+    setResetting(true);
+    setError("");
+
+    try {
+      // 1. Delete user predictions from Supabase
+      const { data: userPreds } = await supabase
+        .from("predictions")
+        .select("id")
+        .eq("user_id", user.id);
+
+      if (userPreds && userPreds.length > 0) {
+        const predIds = userPreds.map((p) => p.id);
+        await supabase.from("prediction_scorers").delete().in("prediction_id", predIds);
+        await supabase.from("predictions").delete().eq("user_id", user.id);
+      }
+
+      // 2. Clear team and display name in profiles
+      await supabase
+        .from("profiles")
+        .upsert({ user_id: user.id, team_id: null, display_name: null }, { onConflict: "user_id" });
+
+      // 3. Clear localStorage on device
+      try {
+        localStorage.removeItem(`interliga_predictions_${user.id}`);
+        localStorage.removeItem("interliga_predictions_anon");
+        localStorage.removeItem("interliga_predictions_guest");
+        localStorage.removeItem("interliga_predictions_default");
+        localStorage.removeItem("interliga_selected_team");
+        localStorage.removeItem("interliga_selected_team_name");
+        localStorage.removeItem("interliga_user_profile");
+        // Clear any other interliga keys
+        Object.keys(localStorage).forEach((key) => {
+          if (key.startsWith("interliga_")) {
+            localStorage.removeItem(key);
+          }
+        });
+      } catch (e) {
+        console.warn("Error clearing localStorage:", e);
+      }
+
+      setResetting(false);
+      setShowConfirmReset(false);
+      // Redirect to home with fresh state
+      router.push("/?reset=success");
+    } catch (err: unknown) {
+      console.error("Error resetting account:", err);
+      setError("Error al reiniciar datos");
+      setResetting(false);
+    }
+  };
+
   if (authLoading || !user) {
     return (
       <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4 flex items-center justify-center">
@@ -68,10 +124,14 @@ export default function PerfilPage() {
 
   return (
     <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4">
-      <div className="max-w-md mx-auto">
-        <Link href="/" className="inline-flex items-center gap-2 text-silver hover:text-white mb-4 transition-colors text-sm"><span className="text-gold">←</span> Volver al inicio</Link>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Mi Perfil</h1>
-        <p className="text-silver text-sm mb-8">Editá tu información personal</p>
+      <div className="max-w-md mx-auto space-y-6">
+        <div>
+          <Link href="/" className="inline-flex items-center gap-2 text-silver hover:text-white mb-4 transition-colors text-sm">
+            <span className="text-gold">←</span> Volver al inicio
+          </Link>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Mi Perfil</h1>
+          <p className="text-silver text-sm">Editá tu información personal o administrá tu cuenta</p>
+        </div>
 
         <form onSubmit={handleSubmit} className="bg-navy-mid border border-border rounded-2xl p-6 sm:p-8 space-y-4">
           <div>
@@ -111,11 +171,56 @@ export default function PerfilPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gold text-navy-black font-bold py-3 rounded-full text-sm hover:bg-gold-light transition-colors disabled:opacity-50"
+            className="w-full bg-gold text-navy-black font-bold py-3 rounded-full text-sm hover:bg-gold-light transition-colors disabled:opacity-50 cursor-pointer shadow-md"
           >
             {loading ? "Guardando..." : "Guardar Cambios"}
           </button>
         </form>
+
+        {/* Danger Zone: Reset Account Data */}
+        <div className="bg-navy-mid border border-red-500/30 rounded-2xl p-6 space-y-3">
+          <div className="flex items-center gap-2 text-red-400 font-bold text-sm">
+            <span>⚠️</span>
+            <span>Reiniciar Participación (Empezar de cero)</span>
+          </div>
+          <p className="text-silver/80 text-xs leading-relaxed">
+            Borra tu equipo confirmado actual y todos tus pronósticos para que puedas elegir club nuevamente y reiniciar tu cuenta desde cero.
+          </p>
+
+          {!showConfirmReset ? (
+            <button
+              type="button"
+              onClick={() => setShowConfirmReset(true)}
+              className="w-full bg-red-500/15 border border-red-500/40 text-red-300 hover:bg-red-500/25 hover:text-white font-semibold py-2.5 rounded-xl text-xs transition-colors cursor-pointer"
+            >
+              🔄 Reiniciar mis datos y empezar de 0
+            </button>
+          ) : (
+            <div className="bg-navy-dark/90 border border-red-500/40 rounded-xl p-4 space-y-3">
+              <p className="text-red-300 text-xs font-semibold text-center">
+                ¿Estás seguro de que querés borrar tu equipo y pronósticos para empezar de cero?
+              </p>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  disabled={resetting}
+                  onClick={handleResetData}
+                  className="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-2 rounded-lg text-xs transition-colors disabled:opacity-50 cursor-pointer"
+                >
+                  {resetting ? "Borrando..." : "Sí, borrar y reiniciar"}
+                </button>
+                <button
+                  type="button"
+                  disabled={resetting}
+                  onClick={() => setShowConfirmReset(false)}
+                  className="flex-1 bg-navy-card hover:bg-navy-card/80 text-silver border border-border py-2 rounded-lg text-xs transition-colors cursor-pointer"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
