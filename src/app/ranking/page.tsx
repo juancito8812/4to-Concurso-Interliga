@@ -53,10 +53,13 @@ interface ScorerRow {
   team: string;
 }
 
+let cachedRankingsData: { timestamp: number; data: RankingEntry[] } | null = null;
+const CACHE_TTL_MS = 25000; // 25s client-side cache to protect Free Tier egress & CPU
+
 export default function RankingPage() {
   const { user, displayName } = useAuth();
-  const [rankings, setRankings] = useState<RankingEntry[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [rankings, setRankings] = useState<RankingEntry[]>(() => cachedRankingsData?.data || []);
+  const [loading, setLoading] = useState(() => !cachedRankingsData?.data?.length);
   const [activeTab, setActiveTab] = useState<"general" | "plenos" | "efectividad">("general");
   const [searchTerm, setSearchTerm] = useState("");
   const [showRulesModal, setShowRulesModal] = useState(false);
@@ -65,6 +68,15 @@ export default function RankingPage() {
     let isMounted = true;
 
     const fetchRankings = async () => {
+      // Check cache first
+      if (cachedRankingsData && Date.now() - cachedRankingsData.timestamp < CACHE_TTL_MS) {
+        if (isMounted) {
+          setRankings(cachedRankingsData.data);
+          setLoading(false);
+        }
+        return;
+      }
+
       try {
         // 1. Fetch profiles from Supabase
         const { data: profilesData } = await supabase
@@ -95,10 +107,11 @@ export default function RankingPage() {
           });
         }
 
-        // 3. Fetch matches
+        // 3. Fetch only evaluated matches with results (drastically reduces bandwidth)
         const { data: matchesData } = await supabase
           .from("matches")
-          .select("id, result_home, result_away");
+          .select("id, result_home, result_away")
+          .not("result_home", "is", null);
 
         const matchesMap: Record<string, MatchRow> = {};
         if (matchesData) {
@@ -250,6 +263,8 @@ export default function RankingPage() {
             ...entry,
             rank: i + 1,
           }));
+
+        cachedRankingsData = { timestamp: Date.now(), data: sorted };
 
         if (isMounted) {
           setRankings(sorted);

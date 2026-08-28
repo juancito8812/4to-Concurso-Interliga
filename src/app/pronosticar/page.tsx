@@ -115,27 +115,24 @@ export default function PronosticarPage() {
   const now = useSyncExternalStore(subscribeToTimer, getTimeSnapshot, getServerTimeSnapshot);
 
   const loadPlayersForMatches = async (teamNames: string[]) => {
-    // 1. Get official updated 2026/27 squads (3,031 players)
+    // 1. Get official updated 2026/27 squads (3,031 players instantly from memory bundle)
     const officialList: Player[] = getOfficialPlayersForTeams(teamNames);
 
-    // 2. Also query Supabase database to ensure all player records are covered
-    const queryTeams = new Set<string>();
-    teamNames.forEach((t) => {
-      if (t) {
-        queryTeams.add(t);
-        queryTeams.add(normalizeTeamName(t));
-      }
-    });
+    // 2. Only query Supabase database if any team is not found in the official bundle
+    const teamsInBundle = new Set(officialList.map((p) => p.team));
+    const missingTeams = teamNames.filter((t) => !teamsInBundle.has(t) && !teamsInBundle.has(normalizeTeamName(t)));
 
     let dbList: Player[] = [];
-    try {
-      const { data: playersData } = await supabase
-        .from("players")
-        .select("*")
-        .in("team", Array.from(queryTeams));
-      if (playersData) dbList = playersData;
-    } catch (e) {
-      console.warn("Supabase players fetch error:", e);
+    if (missingTeams.length > 0) {
+      try {
+        const { data: playersData } = await supabase
+          .from("players")
+          .select("name, team, position")
+          .in("team", missingTeams);
+        if (playersData) dbList = playersData as Player[];
+      } catch (e) {
+        console.warn("Supabase players fetch error:", e);
+      }
     }
 
     // 3. Merge and deduplicate by player name + team

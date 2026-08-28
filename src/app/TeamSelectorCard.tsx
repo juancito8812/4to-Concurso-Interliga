@@ -12,23 +12,32 @@ interface Team {
   logo_url: string;
 }
 
+let cachedTeamsList: Team[] | null = null;
+
 export default function TeamSelectorCard() {
   const { user, displayName } = useAuth();
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
-  const [teams, setTeams] = useState<Team[]>([]);
+  const [teams, setTeams] = useState<Team[]>(() => cachedTeamsList || []);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [teamLocked, setTeamLocked] = useState(false);
 
   useEffect(() => {
+    if (cachedTeamsList && cachedTeamsList.length > 0) {
+      setTeams(cachedTeamsList);
+      return;
+    }
     supabase
       .from("teams")
       .select("id, name, league, logo_url")
       .order("league")
       .order("name")
       .then(({ data }) => {
-        if (data) setTeams(data);
+        if (data) {
+          cachedTeamsList = data;
+          setTeams(data);
+        }
       });
   }, []);
 
