@@ -40,7 +40,7 @@ src/
 │   └── officialFixtures.json       # Calendario oficial 2026/27 (1.406 partidos)
 ├── lib/
 │   ├── supabase.ts                 # Cliente Supabase
-│   ├── leagueConfig.ts             # Normalizador universal de ligas y torneos
+│   ├── leagueConfig.ts             # Normalizador universal de ligas, torneos y equipos
 │   ├── footballData.ts             # Cliente football-data.org + fallback
 │   ├── espnApi.ts                  # Cliente ESPN API para tablas
 │   └── scoring.ts                  # Motor de cálculo de puntajes
@@ -78,7 +78,8 @@ public/
 - **Cierre:** El pronóstico se bloquea exactamente **10 minutos antes del inicio del partido** (`diffMin <= 10`).
 - **Re-edición:** Se permite editar y actualizar los pronósticos libremente mientras falten más de 10 minutos para el inicio.
 - **Goleadores:** Panel simétrico en 2 columnas directamente ubicado debajo de cada club (Local a la izquierda, Visitante a la derecha, hasta 3 por equipo).
-- **Competiciones:** Detección automática y precisa de torneos europeos (Champions, Europa League, Conference League) y ligas domésticas.
+- **Selector Progresivo de Goleadores:** Al agregar un goleador, se despliega la plantilla completa con posiciones; al seleccionar el jugador, se habilita el contador de goles `⚽ [-] 1 [+]` para indicar dobletes o tripletes.
+- **Competiciones y Equipos:** Detección automática y precisa de torneos europeos (Champions, Europa League, Conference League) y normalización canónica de equipos entre API y base de datos.
 
 ## Comandos
 
@@ -95,7 +96,7 @@ Copiar `.env.example` a `.env.local` y completar:
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://tu-proyecto.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu-anon-key
-NEXT_PUBLIC_FOOTBALL_DATA_KEY=tu-football-data-api-key
+NEXT_PUBLIC_FOOTBALL_DATA_KEY=733c2feed2bf441292e9779c91af2e09
 ```
 
 ## Deploy

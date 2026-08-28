@@ -42,8 +42,8 @@ Rediseñar la pantalla de pronósticos (`/pronosticar`) para ofrecer una experie
     - Input para marcador de goles local (display numérico tipo broadcast).
     - Debajo del equipo local: Sección exclusiva para goleadores del equipo local.
     - Cada fila de goleador local permite:
-      - Desplegable con jugadores del equipo local ordenados por posición (Delanteros, Mediocampistas, etc.).
-      - Contador de goles con botones `[-]`, valor numérico, `[+]`.
+      - Desplegable con jugadores de la plantilla del equipo local ordenados por posición (Delanteros, Mediocampistas, etc.) mediante normalización de nombres canónicos.
+      - Al agregar un slot, se muestra el selector limpio; una vez elegido el jugador, se activa progresivamente el contador de goles `⚽ [-] N [+]`.
       - Botón para eliminar goleador `✕`.
       - Posibilidad de definir hasta 3 goleadores locales.
   - **Centro:**
@@ -53,8 +53,8 @@ Rediseñar la pantalla de pronósticos (`/pronosticar`) para ofrecer una experie
     - Escudo del club visitante + Nombre en negrita.
     - Debajo del equipo visitante: Sección exclusiva para goleadores del equipo visitante.
     - Cada fila de goleador visitante permite:
-      - Desplegable con jugadores del equipo visitante.
-      - Contador de goles con botones `[-]`, valor numérico, `[+]`.
+      - Desplegable con jugadores de la plantilla visitante.
+      - Contador progresivo de goles `⚽ [-] N [+]` al seleccionar el jugador.
       - Botón para eliminar goleador `✕`.
       - Posibilidad de definir hasta 3 goleadores visitantes.
 

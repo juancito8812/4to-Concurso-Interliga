@@ -29,7 +29,7 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - `src/app/tabla/[league]/TablaLigaClient.tsx` — Clasificación por liga (ESPN API)
 - `src/data/officialFixtures.json` — 1.406 partidos oficiales 2026/27 pre-sincronizados
 - `src/lib/supabase.ts` — Cliente Supabase
-- `src/lib/leagueConfig.ts` — Colores, logos y normalizador universal `normalizeMatchLeague`
+- `src/lib/leagueConfig.ts` — Colores, logos, normalizadores `normalizeMatchLeague` y `normalizeTeamName`
 - `src/lib/footballData.ts` — `getOfficialTeamMatches` con API en vivo + fallback de fixtures oficiales
 - `src/contexts/AuthContext.tsx` — Context de autenticación
 - `next.config.ts` — basePath para GitHub Pages
@@ -48,10 +48,10 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - Pronósticos filtrados por el equipo del usuario (exactamente los 3 siguientes partidos oficiales).
 - Diseño estilo transmisión oficial de TV: cabecera con logo y color de competencia + cuenta regresiva dinámica.
 - Marcador central TV con inputs numéricos de puntuación.
-- Goleadores en 2 columnas simétricas directamente debajo de cada equipo (dropdown + stepper de goles + eliminar, hasta 3 por club).
+- Goleadores en 2 columnas simétricas directamente debajo de cada equipo (dropdown con plantilla completa + stepper progresivo de goles `⚽ [-] 1 [+]` al seleccionar jugador).
 - Cierre exacto a los **10 minutos antes del partido** (`diffMin <= 10`).
 - Re-edición permitida libremente antes del cierre (`diffMin > 10`).
-- Detección precisa de competiciones europeas y copas con `normalizeMatchLeague`.
+- Detección precisa de competiciones europeas (`normalizeMatchLeague`) y mapeo canónico de clubes (`normalizeTeamName`).
 
 ## Comandos útiles
 
