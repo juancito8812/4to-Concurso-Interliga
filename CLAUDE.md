@@ -54,10 +54,9 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 
 ## Funcionalidades y Reglas de Pronósticos
 
-- **Ventana Rodante:** Visualización exacta de los 3 siguientes partidos oficiales del equipo; al finalizar uno, entra el siguiente del fixture.
-- **Cierre y Re-edición:** Cierre a los **10 minutos antes del partido** (`diffMin <= 10`). Re-edición permitida libremente antes del cierre (`diffMin > 10`).
-- **Diseño Transmisión TV:** Cabecera con logo de competencia, marcador con badges y cuenta regresiva dinámica.
-- **Goleadores Simétricos:** 2 columnas bajo cada club con dropdown clasificado por posición y stepper de goles `⚽ [-] 1 [+]`.
+- **Ventana de 3 Partidos:** `/pronosticar` muestra siempre los 3 próximos partidos no finalizados del equipo.
+- **Cierre y Re-edición:** Cierre a **1 minuto antes del partido** (`diffMin <= 1`). Re-edición permitida libremente antes del cierre (`diffMin > 1`).
+- **Goleadores:** Divididos en 2 columnas directamente debajo de cada equipo con selector numérico `[-] N [+]` (máx 3 goleadores en total por partido).
 - **Ranking Multiusuario:** Podio de Honor dinámico (Oro 🥇, Plata 🥈, Bronce 🥉) con escudos oficiales, puntos reales y filtros.
 - **Superviviente en Copas Knockout (Champions, Europa, Conference, Copa Italia):** Estado independiente por copa (`ALIVE` / `ELIMINATED`). Si el participante pronostica la victoria del rival y acierta, hereda la camiseta del rival para las siguientes fases (`history` JSONB), mientras su club base en liga regular permanece 100% fijo.
 

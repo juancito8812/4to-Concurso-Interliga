@@ -105,8 +105,8 @@ Copa Italia: #024494 (azul)
 - Usar clases de Tailwind CSS, no CSS inline (excepto colores dinámicos de liga).
 - Los componentes interactivos usan `"use client"`.
 - Las rutas dinámicas (`[league]`) requieren `generateStaticParams()` en un Server Component wrapper.
-- El cierre de pronósticos es a los **10 minutos antes del inicio** (`diffMin <= 10`).
-- Se permite **re-editar** pronósticos guardados mientras el partido esté abierto (`diffMin > 10`).
+- El cierre de pronósticos es a **1 minuto antes del inicio** (`diffMin <= 1`).
+- Se permite **re-editar** pronósticos guardados mientras el partido esté abierto (`diffMin > 1`).
 - Siempre usar `normalizeMatchLeague` y `normalizeTeamName` para asegurar correspondencia con plantillas y torneos.
 - El selector de goleadores muestra la plantilla oficial completa (3.822 jugadores clasificados por posición) y despliega el contador `⚽ [-] 1 [+]` únicamente al elegir un jugador.
 - La sección de premios en la landing (`src/app/page.tsx`) presenta un Podio de Campeones con medallas metálicas (Oro 🥇, Plata 🥈, Bronce 🥉) y chips visuales independientes para cada artículo del kit.

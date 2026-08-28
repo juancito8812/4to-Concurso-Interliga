@@ -19,11 +19,8 @@
 
 ## Decisiones Clave
 
-- **2026-08-28** — **Mecánica de Superviviente y Herencia de Equipo en Copas Knockout**:
-  - Implementación completa del sistema de supervivencia para las 4 copas de eliminación directa (Champions League, Europa League, Conference League, Copa Italia).
-  - Nueva tabla `tournament_survivors` en Supabase con RLS público de lectura y ALL restringido al propietario.
-  - Regla de herencia de camiseta: acertar la victoria del rival transfiere su camiseta (`active_team_id`) y registra la transferencia en `history` JSONB, manteniendo el club base (`profiles.team_id`) 100% fijo.
-  - Integración en `CompetitionStatusCard.tsx` (Paso 3 interactivo), `/pronosticar` (bloqueo/alertas KO y selector inicial de copa) y `/mis-pronosticos` (resumen de estado, timeline de camisetas heredadas y badges por partido).
+- **2026-08-28** — **Cierre de pronósticos ajustado a 1 minuto antes del inicio (`diffMin <= 1`)**: Se modificó `checkIsMatchLocked` y `calculateTimeRemaining` en `src/app/pronosticar/page.tsx` para permitir pronósticos y re-ediciones hasta 1 minuto antes del pitazo inicial de cada partido.
+- **2026-08-28** — **Sistema de Sobreviviente y Herencia de Camisetas en Copas Knockout (`tournament_survivors`)**: Tabla dedicada en PostgreSQL con RLS y campo `history` JSONB para registrar transferencias de club al acertar victorias del rival en copas de eliminación directa.
 - **2026-08-28** — **Sincronización exacta con calendario en vivo (1.842 partidos y 3.822 jugadores 2026/27)**: Se integró y validó el calendario oficial en vivo alineado con la jornada activa de la temporada 2026/27 (*Bayern Munich vs Stuttgart* hoy viernes a las 18:30 UTC / 20:30 CEST en Bundesliga, *Crystal Palace vs Manchester City* en Premier League, *AC Milan vs Venezia* en Serie A, *Alavés vs Betis* en LaLiga) en `src/data/officialFixtures.json`.
 - **2026-08-28** — **Pestaña "Partidos" en todas las ligas (`TablaLigaClient.tsx`)**: Se habilitó la pestaña de calendario/partidos no solo para copas sino para las 8 competiciones con resolución en vivo de ESPN y fallback al bundle oficial.
 - **2026-08-26** — **Migración a ESPN API pública en `src/lib/espnApi.ts`**: Resuelve el problema de CORS en GitHub Pages que tenía `football-data.org` (que devolvía `Access-Control-Allow-Origin: http://localhost`) y da soporte completo a Europa League, Conference League y Copa Italia.

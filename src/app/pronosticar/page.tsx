@@ -91,7 +91,7 @@ function checkIsMatchLocked(matchDate: string, timeRef: number): boolean {
   const matchTime = new Date(matchDate).getTime();
   const diffMin = (matchTime - timeRef) / (1000 * 60);
   if (isNaN(diffMin)) return true;
-  return diffMin <= 10;
+  return diffMin <= 1;
 }
 
 function calculateTimeRemaining(
@@ -102,15 +102,15 @@ function calculateTimeRemaining(
   const matchTime = new Date(matchDate).getTime();
   const diffMin = (matchTime - timeRef) / (1000 * 60);
 
-  if (isNaN(diffMin) || diffMin <= 10) {
+  if (isNaN(diffMin) || diffMin <= 1) {
     return { label: "Cerrado", isUrgent: false, isClosed: true };
   }
   if (diffMin <= 60) {
-    const mins = Math.max(1, Math.round(diffMin - 10));
+    const mins = Math.max(1, Math.round(diffMin - 1));
     return { label: `Cierra en ${mins} min`, isUrgent: true, isClosed: false };
   }
   if (diffMin <= 1440) {
-    const hours = Math.round((diffMin - 10) / 60);
+    const hours = Math.round((diffMin - 1) / 60);
     return { label: `Cierra en ${hours} h`, isUrgent: false, isClosed: false };
   }
   const days = Math.round(diffMin / 1440);
@@ -118,12 +118,12 @@ function calculateTimeRemaining(
 }
 
 function subscribeToTimer(callback: () => void) {
-  const interval = setInterval(callback, 30000);
+  const interval = setInterval(callback, 10000);
   return () => clearInterval(interval);
 }
 
 function getTimeSnapshot() {
-  return typeof window !== "undefined" ? Math.floor(Date.now() / 10000) * 10000 : 0;
+  return typeof window !== "undefined" ? Math.floor(Date.now() / 5000) * 5000 : 0;
 }
 
 function getServerTimeSnapshot() {

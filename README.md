@@ -93,9 +93,9 @@ src/
 - Cada participante visualiza exactamente los **3 próximos partidos oficiales** de su club elegido.
 - Cuando un partido finaliza, sale de la lista y la ventana **avanza automáticamente al siguiente partido del calendario**.
 
-### 3. Regla de Cierre de 10 Minutos y Re-edición
-- Cada encuentro se bloquea para edición **10 minutos antes de su pitazo inicial** (`diffMin <= 10`).
-- Mientras falten más de 10 minutos, los pronósticos pueden modificarse y guardarse tantas veces como se desee.
+### 3. Regla de Cierre de 1 Minuto y Re-edición
+- Cada encuentro se bloquea para edición **1 minuto antes de su pitazo inicial** (`diffMin <= 1`).
+- Mientras falte más de 1 minuto, los pronósticos pueden modificarse y guardarse tantas veces como se desee.
 
 ### 4. Goleadores en Doble Columna Simétrica
 - Panel integrado debajo de cada club con dropdown clasificado por posición (Delanteros y Centrocampistas primero) y selector de goles `⚽ [-] 1 [+]`.
