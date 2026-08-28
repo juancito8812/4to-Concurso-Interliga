@@ -10,8 +10,9 @@ Concurso de pronósticos de fútbol para la temporada 2026-27. Los participantes
 - **TypeScript:** 5
 - **Deploy:** GitHub Pages (`output: "export"`)
 - **APIs de Fútbol:**
-  - `football-data.org` API (calendario oficial en vivo de partidos 2026/27)
+  - `football-data.org` API (calendario y plantillas oficiales en vivo de la temporada 2026/27)
   - `src/data/officialFixtures.json` (1.406 partidos oficiales pre-sincronizados como fallback offline/CORS)
+  - `src/data/officialPlayers.json` (3.031 jugadores oficiales 2026/27 de 95 clubes con posiciones traducidas)
   - ESPN API (tablas de posiciones y clasificaciones en vivo sin API key)
 - **Auth y DB:** Supabase (autenticación + PostgreSQL)
 
@@ -37,11 +38,12 @@ src/
 │   ├── mis-pronosticos/page.tsx    # Historial de predicciones y puntos
 │   └── ranking/page.tsx            # Tabla general de posiciones
 ├── data/
-│   └── officialFixtures.json       # Calendario oficial 2026/27 (1.406 partidos)
+│   ├── officialFixtures.json       # Calendario oficial 2026/27 (1.406 partidos)
+│   └── officialPlayers.json        # Plantillas oficiales 2026/27 (3.031 jugadores)
 ├── lib/
 │   ├── supabase.ts                 # Cliente Supabase
 │   ├── leagueConfig.ts             # Normalizador universal de ligas, torneos y equipos
-│   ├── footballData.ts             # Cliente football-data.org + fallback
+│   ├── footballData.ts             # Cliente football-data.org + plantillas 2026/27
 │   ├── espnApi.ts                  # Cliente ESPN API para tablas
 │   └── scoring.ts                  # Motor de cálculo de puntajes
 └── contexts/
@@ -72,13 +74,13 @@ public/
 | `/tabla/conference` | Clasificación Conference League | No |
 | `/tabla/coppaitalia` | Clasificación Copa Italia | No |
 
-## Reglas de Pronósticos
+## Reglas y Funcionalidades de Pronósticos
 
 - **Filtro:** El usuario solo visualiza los **3 siguientes partidos oficiales** de su equipo seleccionado.
 - **Cierre:** El pronóstico se bloquea exactamente **10 minutos antes del inicio del partido** (`diffMin <= 10`).
 - **Re-edición:** Se permite editar y actualizar los pronósticos libremente mientras falten más de 10 minutos para el inicio.
-- **Goleadores:** Panel simétrico en 2 columnas directamente ubicado debajo de cada club (Local a la izquierda, Visitante a la derecha, hasta 3 por equipo).
-- **Selector Progresivo de Goleadores:** Al agregar un goleador, se despliega la plantilla completa con posiciones; al seleccionar el jugador, se habilita el contador de goles `⚽ [-] 1 [+]` para indicar dobletes o tripletes.
+- **Plantillas Oficiales 2026/27:** Más de 3.000 jugadores actualizados con sus fichajes vigentes (Mbappé, Lamine Yamal, Haaland, Kane, De Ligt, Zirkzee, etc.) ordenados prioritariamente por posición (Delanteros y Mediocampistas primero).
+- **Selector Progresivo de Goleadores:** Al presionar `+ Agregar goleador`, se despliega la plantilla del club; al elegir al jugador, se muestra el contador con balón `⚽ [-] 1 [+]` para ajustar goles.
 - **Competiciones y Equipos:** Detección automática y precisa de torneos europeos (Champions, Europa League, Conference League) y normalización canónica de equipos entre API y base de datos.
 
 ## Comandos

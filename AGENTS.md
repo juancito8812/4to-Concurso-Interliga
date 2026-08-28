@@ -23,8 +23,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **Autenticación:** Supabase Auth — registro, login, recuperación de contraseña.
 - **Base de datos:** Supabase PostgreSQL — tablas `profiles`, `teams`, `players`, `matches`, `predictions`, `prediction_scorers`.
 - **Calendario oficial 2026/27:** `src/data/officialFixtures.json` — 1.406 partidos de Premier, LaLiga, Serie A y Bundesliga.
+- **Plantillas oficiales 2026/27:** `src/data/officialPlayers.json` — 3.031 jugadores de 95 clubes con posiciones y fichajes actualizados.
 - **Normalización de Ligas y Equipos:** `src/lib/leagueConfig.ts` — `normalizeMatchLeague` y `normalizeTeamName` mapean nombres canónicos y competencias exactas.
-- **Cliente Football API:** `src/lib/footballData.ts` — `getOfficialTeamMatches` con API en vivo + fallback de calendario oficial pre-sincronizado.
+- **Cliente Football API:** `src/lib/footballData.ts` — `getOfficialTeamMatches` y `getOfficialPlayersForTeams` con API en vivo + fallback de fixtures y plantillas oficiales pre-sincronizadas.
 - **Colores:** Definidos en `src/app/globals.css` con `@theme` de Tailwind v4.
 - **Configuración:** `next.config.ts` — `basePath: "/4to-Concurso-Interliga"` es OBLIGATORIO para GitHub Pages.
 
@@ -51,7 +52,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `src/app/TeamSelectorCard.tsx` | Selección de equipo en landing (bloqueada una vez elegida) |
 | `src/app/CompetitionStatusCard.tsx` | Estado de competición (VIVO/KO) |
 | `src/lib/leagueConfig.ts` | Colores, logos, normalización de competiciones (`normalizeMatchLeague`) y mapeo de nombres de equipos (`normalizeTeamName`) |
-| `src/lib/footballData.ts` | `getOfficialTeamMatches` (API + fallback pre-empaquetado) |
+| `src/lib/footballData.ts` | `getOfficialTeamMatches`, `getOfficialPlayersForTeams` (API + fallback de fixtures y 3.031 jugadores) |
 | `src/lib/espnApi.ts` | Cliente ESPN API para tablas de posiciones |
 | `src/lib/scoring.ts` | Motor de cálculo de puntajes del concurso |
 
@@ -59,7 +60,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - **profiles** — `user_id`, `display_name`, `team_id` (FK → teams)
 - **teams** — `name`, `league`, `logo_url` (89 equipos canónicos)
-- **players** — `name`, `team`, `league`, `position` (500+ jugadores con FK lógica hacia teams)
+- **players** — `name`, `team`, `league`, `position` (500+ jugadores en DB + 3.031 en bundle oficial)
 - **matches** — `home_team`, `away_team`, `match_date`, `league`, `result_home`, `result_away`
 - **predictions** — `user_id`, `match_id`, `home_score`, `away_score`, `points` (UNIQUE user_id+match_id)
 - **prediction_scorers** — `prediction_id`, `player_name`, `goals`, `team`
@@ -99,7 +100,7 @@ Copa Italia: #024494 (azul)
 - El cierre de pronósticos es a los **10 minutos antes del inicio** (`diffMin <= 10`).
 - Se permite **re-editar** pronósticos guardados mientras el partido esté abierto (`diffMin > 10`).
 - Siempre usar `normalizeMatchLeague` y `normalizeTeamName` para asegurar correspondencia con plantillas y torneos.
-- El selector de goleadores muestra la plantilla completa y despliega el contador `⚽ [-] 1 [+]` únicamente al elegir un jugador.
+- El selector de goleadores muestra la plantilla oficial completa (3.031 jugadores clasificados por posición) y despliega el contador `⚽ [-] 1 [+]` únicamente al elegir un jugador.
 - `<Link>` agrega automáticamente `basePath`; `<img>` NO — requiere el prefijo manual `/4to-Concurso-Interliga/`.
 
 ### Variables de entorno

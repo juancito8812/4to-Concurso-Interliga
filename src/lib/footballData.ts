@@ -1,4 +1,5 @@
 import officialFixtures from "@/data/officialFixtures.json";
+import officialPlayers from "@/data/officialPlayers.json";
 
 const BASE_URL = "https://api.football-data.org/v4";
 
@@ -7,6 +8,15 @@ const API_KEY = process.env.NEXT_PUBLIC_FOOTBALL_DATA_KEY || "733c2feed2bf441292
 const headers = {
   "X-Auth-Token": API_KEY,
 };
+
+export interface PlayerData {
+  id: string;
+  name: string;
+  team: string;
+  league: string;
+  position: string;
+  nationality?: string;
+}
 
 // Competition codes for football-data.org
 export const competitionCodes: Record<string, string> = {
@@ -240,6 +250,16 @@ export async function getOfficialTeamMatches(
     },
     referees: [],
   }));
+}
+
+// Get official updated squads for teams
+export function getOfficialPlayersForTeams(teamNames: string[]): PlayerData[] {
+  const cleanTargets = teamNames.map(t => cleanNameForMatch(t));
+
+  return (officialPlayers as PlayerData[]).filter(p => {
+    const cTeam = cleanNameForMatch(p.team);
+    return cleanTargets.some(target => cTeam === target || cTeam.includes(target) || target.includes(cTeam));
+  });
 }
 
 // Get competition scorers

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { leagueColors, leagueLogos, normalizeMatchLeague, normalizeTeamName, cleanTeamName } from "@/lib/leagueConfig";
-import { getOfficialTeamMatches, FDMatch, findTeamId } from "@/lib/footballData";
+import { getOfficialTeamMatches, getOfficialPlayersForTeams, FDMatch, findTeamId } from "@/lib/footballData";
 
 interface Match {
   id: string;
@@ -47,6 +47,15 @@ interface TeamInfo {
   logo_url: string;
 }
 
+const positionRank = (pos: string) => {
+  const p = (pos || "").toLowerCase();
+  if (p.includes("delantero") || p.includes("forward") || p.includes("striker") || p.includes("offen")) return 1;
+  if (p.includes("medio") || p.includes("midfield") || p.includes("centrocampista")) return 2;
+  if (p.includes("defen") || p.includes("back")) return 3;
+  if (p.includes("arquero") || p.includes("portero") || p.includes("goal") || p.includes("keeper")) return 4;
+  return 2;
+};
+
 export default function PronosticarPage() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
@@ -61,7 +70,11 @@ export default function PronosticarPage() {
   const [error, setError] = useState("");
   const [dataSource, setDataSource] = useState<"api" | "supabase">("api");
 
-  const fetchPlayersFromSupabase = async (teamNames: string[]) => {
+  const loadPlayersForMatches = async (teamNames: string[]) => {
+    // 1. Get official updated 2026/27 squads (3,031 players)
+    const officialList: Player[] = getOfficialPlayersForTeams(teamNames);
+
+    // 2. Also query Supabase database to ensure all player records are covered
     const queryTeams = new Set<string>();
     teamNames.forEach((t) => {
       if (t) {
@@ -70,14 +83,49 @@ export default function PronosticarPage() {
       }
     });
 
-    const { data: playersData } = await supabase
-      .from("players")
-      .select("*")
-      .in("team", Array.from(queryTeams))
-      .order("position")
-      .order("name");
+    let dbList: Player[] = [];
+    try {
+      const { data: playersData } = await supabase
+        .from("players")
+        .select("*")
+        .in("team", Array.from(queryTeams));
+      if (playersData) dbList = playersData;
+    } catch (e) {
+      console.warn("Supabase players fetch error:", e);
+    }
 
-    if (playersData) setPlayers(playersData);
+    // 3. Merge and deduplicate by player name + team
+    const seen = new Set<string>();
+    const merged: Player[] = [];
+
+    // Prioritize official updated 2026/27 list
+    for (const p of officialList) {
+      const key = `${p.name.toLowerCase().trim()}-${p.team}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        merged.push(p);
+      }
+    }
+
+    for (const p of dbList) {
+      const key = `${p.name.toLowerCase().trim()}-${normalizeTeamName(p.team)}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        merged.push({
+          ...p,
+          team: normalizeTeamName(p.team),
+        });
+      }
+    }
+
+    // 4. Sort: Delanteros first, then Mediocampistas, then Defensores, then Arqueros
+    merged.sort((a, b) => {
+      const rankDiff = positionRank(a.position) - positionRank(b.position);
+      if (rankDiff !== 0) return rankDiff;
+      return a.name.localeCompare(b.name);
+    });
+
+    setPlayers(merged);
   };
 
   const fetchFromSupabase = async (teamData: TeamInfo) => {
@@ -122,7 +170,7 @@ export default function PronosticarPage() {
         setTeamLogos(logosMap);
       }
 
-      await fetchPlayersFromSupabase(Array.from(teamNames));
+      await loadPlayersForMatches(Array.from(teamNames));
     }
   };
 
@@ -208,7 +256,7 @@ export default function PronosticarPage() {
             teamNames.add(m.away_team);
           });
 
-          await fetchPlayersFromSupabase(Array.from(teamNames));
+          await loadPlayersForMatches(Array.from(teamNames));
         } else {
           await fetchFromSupabase(teamData);
         }
