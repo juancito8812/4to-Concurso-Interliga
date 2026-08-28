@@ -173,8 +173,6 @@ export default function PronosticarPage() {
   };
 
   const fetchFromSupabase = async (teamData: TeamInfo) => {
-    setDataSource("supabase");
-    
     const nowIso = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
     const { data: matchesData } = await supabase
       .from("matches")
@@ -259,7 +257,6 @@ export default function PronosticarPage() {
       if (isMounted) setUserTeam(teamData);
 
       const apiTeamId = findTeamId(teamData.name);
-      setDataSource("api");
 
       try {
         const officialMatches = await getOfficialTeamMatches(teamData.name, apiTeamId);
