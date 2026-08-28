@@ -3,15 +3,14 @@
     "id": "00000000-0000-4000-8000-00006399b6d3",
     "home_team": "AC Milan",
     "away_team": "Venezia",
-    "match_date": "2026-08-28T18:45:00Z",
+    "match_date": "2026-08-28T22:11:05.887Z",
     "league": "Serie A",
     "result_home": 2,
     "result_away": 0,
     "scorers": [
       {
         "player_name": "Gonçalo Ramos",
-        "goals": 1,
-        "team": "home"
+        "goals": 1
       }
     ]
   }

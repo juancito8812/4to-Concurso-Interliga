@@ -60,6 +60,66 @@ export function normalizePlayerName(name: string): string {
 }
 
 /**
+ * Phonetic/clean normalization to handle spelling variants (ç/z/s, y/i, b/v)
+ */
+export function cleanPhonetic(str: string): string {
+  return (str || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[czs]/g, "s")
+    .replace(/[yi]/g, "i")
+    .replace(/[bv]/g, "b")
+    .replace(/[^a-z0-9]/g, "");
+}
+
+/**
+ * Intelligent player name matcher handling full names, single names, initials, and spelling variants.
+ */
+export function arePlayersMatching(nameA: string, nameB: string): boolean {
+  const normA = normalizePlayerName(nameA);
+  const normB = normalizePlayerName(nameB);
+  if (!normA || !normB) return false;
+  if (normA === normB) return true;
+
+  const cleanA = cleanPhonetic(normA);
+  const cleanB = cleanPhonetic(normB);
+  if (cleanA === cleanB) return true;
+
+  const wordsA = normA.split(/[\s.-]+/).filter((w) => w.length > 0);
+  const wordsB = normB.split(/[\s.-]+/).filter((w) => w.length > 0);
+
+  // If one is single name (e.g. "Kane", "Mbappe", "Vinicius", "Rodri")
+  if (wordsA.length === 1 || wordsB.length === 1) {
+    const single = wordsA.length === 1 ? wordsA[0] : wordsB[0];
+    const multi = wordsA.length === 1 ? wordsB : wordsA;
+    if (single.length >= 3) {
+      const cleanSingle = cleanPhonetic(single);
+      return multi.some((w) => {
+        const cleanW = cleanPhonetic(w);
+        return cleanW === cleanSingle || (cleanSingle.length >= 5 && (cleanW.includes(cleanSingle) || cleanSingle.includes(cleanW)));
+      });
+    }
+  }
+
+  // Both are multi-word (e.g. "Nico Williams" vs "N. Williams", "Gonçalo Ramos" vs "Gonzalo Ramos")
+  const lastA = cleanPhonetic(wordsA[wordsA.length - 1]);
+  const lastB = cleanPhonetic(wordsB[wordsB.length - 1]);
+  const firstA = cleanPhonetic(wordsA[0]);
+  const firstB = cleanPhonetic(wordsB[0]);
+
+  if (lastA === lastB) {
+    // Check first name or initial
+    if (firstA === firstB) return true;
+    if (firstA[0] === firstB[0] && (firstA.length === 1 || firstB.length === 1)) return true;
+    if (firstA.length >= 4 && firstB.length >= 4 && (firstA.includes(firstB) || firstB.includes(firstA))) return true;
+    return false;
+  }
+
+  return false;
+}
+
+/**
  * Calculate total points and itemized breakdown for a prediction against the real match outcome.
  */
 export function calculateScore(
@@ -108,20 +168,17 @@ export function calculateScore(
   let scorersNameHits = 0;
   let scorersQuantityHits = 0;
 
-  const realScorersMap = new Map<string, number>();
-  if (real.scorers) {
-    for (const s of real.scorers) {
-      const key = normalizePlayerName(s.player_name);
-      realScorersMap.set(key, (realScorersMap.get(key) || 0) + (s.goals || 1));
-    }
-  }
+  const realScorersList: RealScorer[] = real.scorers || [];
 
   if (prediction.scorers && prediction.scorers.length > 0) {
     for (const predScorer of prediction.scorers.slice(0, 3)) {
-      const normName = normalizePlayerName(predScorer.player_name);
-      const actualGoals = realScorersMap.get(normName) || 0;
+      // Find matching real scorer using intelligent matching
+      const matchedRealScorer = realScorersList.find((rs) =>
+        arePlayersMatching(predScorer.player_name, rs.player_name)
+      );
 
-      if (actualGoals > 0) {
+      if (matchedRealScorer && (matchedRealScorer.goals || 1) > 0) {
+        const actualGoals = matchedRealScorer.goals || 1;
         // Goleador acertado (nombre) -> 1 pt
         scorersNameHits += 1;
         pointsScorersName += 1;

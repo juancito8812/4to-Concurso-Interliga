@@ -81,24 +81,71 @@ function calculateScore(prediction, real) {
     }
   }
 
+function cleanPhonetic(str) {
+  return (str || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[czs]/g, "s")
+    .replace(/[yi]/g, "i")
+    .replace(/[bv]/g, "b")
+    .replace(/[^a-z0-9]/g, "");
+}
+
+function arePlayersMatching(nameA, nameB) {
+  const normA = normalizePlayerName(nameA);
+  const normB = normalizePlayerName(nameB);
+  if (!normA || !normB) return false;
+  if (normA === normB) return true;
+
+  const cleanA = cleanPhonetic(normA);
+  const cleanB = cleanPhonetic(normB);
+  if (cleanA === cleanB) return true;
+
+  const wordsA = normA.split(/[\s.-]+/).filter((w) => w.length > 0);
+  const wordsB = normB.split(/[\s.-]+/).filter((w) => w.length > 0);
+
+  if (wordsA.length === 1 || wordsB.length === 1) {
+    const single = wordsA.length === 1 ? wordsA[0] : wordsB[0];
+    const multi = wordsA.length === 1 ? wordsB : wordsA;
+    if (single.length >= 3) {
+      const cleanSingle = cleanPhonetic(single);
+      return multi.some((w) => {
+        const cleanW = cleanPhonetic(w);
+        return cleanW === cleanSingle || (cleanSingle.length >= 5 && (cleanW.includes(cleanSingle) || cleanSingle.includes(cleanW)));
+      });
+    }
+  }
+
+  const lastA = cleanPhonetic(wordsA[wordsA.length - 1]);
+  const lastB = cleanPhonetic(wordsB[wordsB.length - 1]);
+  const firstA = cleanPhonetic(wordsA[0]);
+  const firstB = cleanPhonetic(wordsB[0]);
+
+  if (lastA === lastB) {
+    if (firstA === firstB) return true;
+    if (firstA[0] === firstB[0] && (firstA.length === 1 || firstB.length === 1)) return true;
+    if (firstA.length >= 4 && firstB.length >= 4 && (firstA.includes(firstB) || firstB.includes(firstA))) return true;
+    return false;
+  }
+
+  return false;
+}
+
   // 4 & 5. Scorers
   let scorersNameHits = 0;
   let scorersQuantityHits = 0;
 
-  const realScorersMap = new Map();
-  if (real.scorers) {
-    for (const s of real.scorers) {
-      const key = normalizePlayerName(s.player_name);
-      realScorersMap.set(key, (realScorersMap.get(key) || 0) + (s.goals || 1));
-    }
-  }
+  const realScorersList = real.scorers || [];
 
   if (prediction.scorers && prediction.scorers.length > 0) {
     for (const predScorer of prediction.scorers.slice(0, 3)) {
-      const normName = normalizePlayerName(predScorer.player_name);
-      const actualGoals = realScorersMap.get(normName) || 0;
+      const matchedRealScorer = realScorersList.find((rs) =>
+        arePlayersMatching(predScorer.player_name, rs.player_name)
+      );
 
-      if (actualGoals > 0) {
+      if (matchedRealScorer && (matchedRealScorer.goals || 1) > 0) {
+        const actualGoals = matchedRealScorer.goals || 1;
         scorersNameHits += 1;
         pointsScorersName += 1;
         details.push(`Goleador acertado: ${predScorer.player_name} (+1 pt)`);
@@ -206,31 +253,94 @@ async function main() {
       });
     }
 
+    const fs = require("fs");
+    const path = require("path");
+    const evalMatchesPath = path.join(__dirname, "../src/data/officialEvaluatedMatches.json");
+    const evalPredsPath = path.join(__dirname, "../src/data/officialEvaluatedPredictions.json");
+
+    let officialMatches = [];
+    try {
+      if (fs.existsSync(evalMatchesPath)) {
+        officialMatches = JSON.parse(fs.readFileSync(evalMatchesPath, "utf8"));
+      }
+    } catch (e) {
+      console.warn("Could not read officialEvaluatedMatches.json:", e);
+    }
+
+    const normReqH = normalizeTeamName(homeTeamArg);
+    const normReqA = normalizeTeamName(awayTeamArg);
+
     let targetMatch = (matches || []).find((m) => {
       const hNorm = normalizeTeamName(m.home_team).toLowerCase();
       const aNorm = normalizeTeamName(m.away_team).toLowerCase();
-      const reqH = normalizeTeamName(homeTeamArg).toLowerCase();
-      const reqA = normalizeTeamName(awayTeamArg).toLowerCase();
+      const reqH = normReqH.toLowerCase();
+      const reqA = normReqA.toLowerCase();
       return (hNorm.includes(reqH) || reqH.includes(hNorm)) && (aNorm.includes(reqA) || reqA.includes(aNorm));
     });
 
-    if (targetMatch) {
-      console.log(`✓ Partido encontrado: ${targetMatch.home_team} vs ${targetMatch.away_team} (ID: ${targetMatch.id})`);
-      const { error: updErr } = await supabase
-        .from("matches")
-        .update({
-          result_home: hScore,
-          result_away: aScore,
-        })
-        .eq("id", targetMatch.id);
+    const matchId = targetMatch ? targetMatch.id : "00000000-0000-4000-8000-00006399b6d3";
 
-      if (updErr) {
-        console.error("Error updating match in Supabase:", updErr);
-      } else {
-        console.log(`✓ Marcador actualizado en Supabase: ${hScore} - ${aScore}`);
-      }
+    const matchObj = {
+      id: matchId,
+      home_team: normReqH,
+      away_team: normReqA,
+      match_date: targetMatch ? targetMatch.match_date : new Date().toISOString(),
+      league: targetMatch ? targetMatch.league : "Serie A",
+      result_home: hScore,
+      result_away: aScore,
+      scorers: parsedScorers,
+    };
+
+    // Upsert into officialEvaluatedMatches.json
+    const existingIdx = officialMatches.findIndex(
+      (m) =>
+        (normalizeTeamName(m.home_team) === normReqH && normalizeTeamName(m.away_team) === normReqA) ||
+        m.id === matchObj.id
+    );
+
+    if (existingIdx >= 0) {
+      officialMatches[existingIdx] = matchObj;
     } else {
-      console.log(`⚠️ Partido no encontrado en tabla matches.`);
+      officialMatches.push(matchObj);
+    }
+
+    fs.writeFileSync(evalMatchesPath, JSON.stringify(officialMatches, null, 2), "utf8");
+    console.log(`✓ Resultado guardado en src/data/officialEvaluatedMatches.json`);
+
+    // Calculate predictions points
+    let officialPreds = [];
+    try {
+      if (fs.existsSync(evalPredsPath)) {
+        officialPreds = JSON.parse(fs.readFileSync(evalPredsPath, "utf8"));
+      }
+    } catch (e) {
+      console.warn("Could not read officialEvaluatedPredictions.json:", e);
+    }
+
+    console.log("\n📊 CALCULANDO PUNTOS PARA PARTICIPANTES:");
+    const matchPredictions = officialPreds.filter((p) => p.match_id === matchObj.id);
+
+    if (matchPredictions.length === 0) {
+      console.log("No hay pronósticos registrados para este partido aún.");
+    } else {
+      matchPredictions.forEach((p) => {
+        const score = calculateScore(
+          {
+            home_score: p.home_score,
+            away_score: p.away_score,
+            scorers: p.scorers || [],
+          },
+          {
+            result_home: hScore,
+            result_away: aScore,
+            scorers: parsedScorers,
+          }
+        );
+        console.log(`\n👤 Participante: ${p.display_name || p.user_id}`);
+        console.log(`   Pronóstico: ${p.home_score} - ${p.away_score}`);
+        console.log(`   Total ganado: +${score.totalPoints} PTS`);
+        console.log(`   Desglose: ${score.details.join(" | ")}`);
+      });
     }
   }
 
