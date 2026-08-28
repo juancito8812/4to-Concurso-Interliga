@@ -14,6 +14,7 @@ import {
   matchIdToUuid,
 } from "@/lib/leagueConfig";
 import { getOfficialTeamMatches, getOfficialPlayersForTeams, FDMatch, findTeamId } from "@/lib/footballData";
+import officialFixtures from "@/data/officialFixtures.json";
 import {
   getUserCupSurvivors,
   setInitialCupSurvivor,
@@ -216,9 +217,18 @@ export default function PronosticarPage() {
 
     if (matchesData) {
       const normalizedMatches: Match[] = matchesData.map(m => {
-        const matchId = matchIdToUuid(m.id);
         const homeNorm = normalizeTeamName(m.home_team);
         const awayNorm = normalizeTeamName(m.away_team);
+        // Prefer the canonical official fixture id so predictions join evaluated matches
+        const fixture = officialFixtures.find((f) => {
+          const hF = normalizeTeamName(f.home_team).toLowerCase();
+          const aF = normalizeTeamName(f.away_team).toLowerCase();
+          return (
+            (hF.includes(homeNorm.toLowerCase()) || homeNorm.toLowerCase().includes(hF)) &&
+            (aF.includes(awayNorm.toLowerCase()) || awayNorm.toLowerCase().includes(aF))
+          );
+        });
+        const matchId = fixture ? matchIdToUuid(fixture.id) : matchIdToUuid(m.id);
         return {
           ...m,
           id: matchId,

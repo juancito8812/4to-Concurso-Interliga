@@ -5,8 +5,10 @@ import { useEffect, useState, useMemo } from "react";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/contexts/AuthContext";
 import { calculateScore, PredictedScorer, RealScorer } from "@/lib/scoring";
+import { normalizeTeamName, matchIdToUuid } from "@/lib/leagueConfig";
 import officialEvaluatedMatches from "@/data/officialEvaluatedMatches.json";
 import officialEvaluatedPredictions from "@/data/officialEvaluatedPredictions.json";
+import officialFixtures from "@/data/officialFixtures.json";
 import { fetchLiveFinishedMatches } from "@/lib/espnResultsFetcher";
 
 interface RankingEntry {
@@ -36,6 +38,8 @@ interface TeamRow {
 
 interface MatchRow {
   id: string;
+  home_team?: string;
+  away_team?: string;
   result_home: number | null;
   result_away: number | null;
   scorers?: RealScorer[];
@@ -115,9 +119,11 @@ export default function RankingPage() {
         const matchesMap: Record<string, MatchRow> = {};
         
         // 1. Load official evaluated fixtures first
-        (officialEvaluatedMatches as Array<{ id: string; result_home: number; result_away: number; scorers?: RealScorer[] }>).forEach((m) => {
+        (officialEvaluatedMatches as Array<{ id: string; home_team?: string; away_team?: string; result_home: number; result_away: number; scorers?: RealScorer[] }>).forEach((m) => {
           matchesMap[m.id] = {
             id: m.id,
+            home_team: m.home_team ? normalizeTeamName(m.home_team) : undefined,
+            away_team: m.away_team ? normalizeTeamName(m.away_team) : undefined,
             result_home: m.result_home,
             result_away: m.result_away,
             scorers: m.scorers,
@@ -130,6 +136,8 @@ export default function RankingPage() {
           liveFinished.forEach((lm) => {
             matchesMap[lm.id] = {
               id: lm.id,
+              home_team: normalizeTeamName(lm.home_team),
+              away_team: normalizeTeamName(lm.away_team),
               result_home: lm.result_home,
               result_away: lm.result_away,
               scorers: lm.scorers,
@@ -146,6 +154,7 @@ export default function RankingPage() {
 
         if (matchesData) {
           (matchesData as MatchRow[]).forEach((m) => {
+            if (m.result_home === null || m.result_away === null) return;
             matchesMap[m.id] = {
               ...matchesMap[m.id],
               id: m.id,
@@ -246,7 +255,25 @@ export default function RankingPage() {
 
             userStats[p.user_id].predictions_count += 1;
 
-            const match = matchesMap[p.match_id];
+            let match = matchesMap[p.match_id];
+
+            // Fallback: join by fixture team names when the prediction id is orphaned
+            if (!match) {
+              const fixture = officialFixtures.find(
+                (f) => matchIdToUuid(f.id) === p.match_id || String(f.id) === p.match_id
+              );
+              if (fixture) {
+                const fh = normalizeTeamName(fixture.home_team).toLowerCase();
+                const fa = normalizeTeamName(fixture.away_team).toLowerCase();
+                const byName = Object.values(matchesMap).find((m) => {
+                  const mh = normalizeTeamName(m.home_team || "").toLowerCase();
+                  const ma = normalizeTeamName(m.away_team || "").toLowerCase();
+                  return (mh === fh && ma === fa) || (mh.includes(fh) && ma.includes(fa));
+                });
+                if (byName) match = byName;
+              }
+            }
+
             let pts = p.points;
 
             if (match && match.result_home !== null && match.result_away !== null) {

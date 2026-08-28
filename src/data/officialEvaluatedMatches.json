@@ -1,6 +1,6 @@
 [
   {
-    "id": "espn-401874758",
+    "id": "00000000-0000-4000-8000-000017f41f46",
     "home_team": "AC Milan",
     "away_team": "Venezia",
     "match_date": "2026-08-28T18:45Z",
@@ -17,7 +17,7 @@
     "completed": true
   },
   {
-    "id": "espn-401882900",
+    "id": "00000000-0000-4000-8000-000017f43f14",
     "home_team": "Racing Santander",
     "away_team": "Elche",
     "match_date": "2026-08-28T17:00Z",
@@ -177,8 +177,8 @@
     "completed": true
   },
   {
-    "id": "espn-401862911",
-    "home_team": "SC Freiburg",
+    "id": "00000000-0000-4000-8000-000017f3f0ff",
+    "home_team": "Freiburg",
     "away_team": "Aston Villa",
     "match_date": "2026-05-20T19:00Z",
     "league": "Europa League",
@@ -204,7 +204,7 @@
     "completed": true
   },
   {
-    "id": "espn-401862929",
+    "id": "00000000-0000-4000-8000-000017f3f111",
     "home_team": "Crystal Palace",
     "away_team": "Rayo Vallecano",
     "match_date": "2026-05-27T19:00Z",

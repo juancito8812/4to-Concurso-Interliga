@@ -334,3 +334,69 @@ VALUES
   ('f8d30f38-d711-45ca-a65b-d573a7aa3c07', 'Verona', 'Serie A', 'https://r2.thesportsdb.com/images/media/team/badge/ti1upd1645219152.png')
 ON CONFLICT (name, league) DO UPDATE
 SET logo_url = EXCLUDED.logo_url;
+
+-- ---------------------------------------------------------------------------
+-- F. RPCs de sincronización automática (llamables con la anon key desde el cron)
+-- SECURITY DEFINER: el cron (sin sesión de usuario) puede persistir resultados
+-- y puntos aunque RLS restrinja los UPDATE directos.
+-- ---------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.update_match_results(p_updates jsonb)
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+BEGIN
+  UPDATE public.matches m
+  SET result_home = (u.value ->> 'result_home')::int,
+      result_away = (u.value ->> 'result_away')::int
+  FROM jsonb_array_elements(p_updates) AS u
+  WHERE m.id::text = u.value ->> 'id'
+    AND (u.value ->> 'id') IS NOT NULL
+    AND m.result_home IS NULL
+    AND m.result_away IS NULL;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION public.update_prediction_points(p_updates jsonb)
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+BEGIN
+  UPDATE public.predictions pr
+  SET points = (u.value ->> 'points')::int
+  FROM jsonb_array_elements(p_updates) AS u
+  WHERE pr.id::text = u.value ->> 'id'
+    AND (u.value ->> 'id') IS NOT NULL;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.update_match_results(jsonb) FROM PUBLIC;
+REVOKE ALL ON FUNCTION public.update_prediction_points(jsonb) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.update_match_results(jsonb) TO anon;
+GRANT EXECUTE ON FUNCTION public.update_prediction_points(jsonb) TO anon;
+
+CREATE OR REPLACE FUNCTION public.update_survivors(p_updates jsonb)
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+BEGIN
+  UPDATE public.tournament_survivors ts
+  SET active_team_id = COALESCE((u.value ->> 'active_team_id')::uuid, ts.active_team_id),
+      status = COALESCE(NULLIF(u.value ->> 'status', ''), ts.status)::text,
+      eliminated_at_round = NULLIF(u.value ->> 'eliminated_at_round', '')::text,
+      history = COALESCE((u.value ->> 'history')::jsonb, ts.history),
+      updated_at = now()
+  FROM jsonb_array_elements(p_updates) AS u
+  WHERE ts.id::text = u.value ->> 'id'
+    AND (u.value ->> 'id') IS NOT NULL;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.update_survivors(jsonb) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.update_survivors(jsonb) TO anon;

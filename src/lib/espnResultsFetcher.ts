@@ -81,7 +81,7 @@ export async function fetchLiveFinishedMatches(): Promise<EvaluatedMatchResult[]
   const promises = LEAGUE_SLUGS.map(async (slug) => {
     try {
       const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${slug}/scoreboard`;
-      const res = await fetch(url);
+      const res = await fetch(url, { signal: AbortSignal.timeout(10000) });
       if (!res.ok) return;
 
       const data = await res.json();

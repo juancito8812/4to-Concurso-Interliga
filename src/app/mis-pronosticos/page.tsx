@@ -5,11 +5,13 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
-import { leagueColors, leagueLogos, normalizeMatchLeague, normalizeTeamName, matchIdToUuid } from "@/lib/leagueConfig";
+import { leagueColors, leagueLogos, normalizeMatchLeague, normalizeTeamName, matchIdToUuid, isKnockoutMatch } from "@/lib/leagueConfig";
 import { calculateScore } from "@/lib/scoring";
 import {
   getUserCupSurvivors,
   isKnockoutCup,
+  evaluateSurvivorProgression,
+  updateCupSurvivor,
   TournamentSurvivor,
   KnockoutCupSlug,
 } from "@/lib/survivor";
@@ -100,6 +102,7 @@ export default function MisPronosticosPage() {
 
     const fetchData = async () => {
       // 1. Fetch user's primary team and survivor status
+      let userSurvivors: Record<string, TournamentSurvivor> = {};
       try {
         const { data: profile } = await supabase
           .from("profiles")
@@ -119,9 +122,9 @@ export default function MisPronosticosPage() {
           }
         }
 
-        const userSurvivors = await getUserCupSurvivors(user.id);
+        userSurvivors = (await getUserCupSurvivors(user.id)) || {};
         if (isMounted) {
-          setSurvivors(userSurvivors || {});
+          setSurvivors(userSurvivors);
         }
       } catch (err) {
         console.warn("Error fetching profile and survivor data:", err);
@@ -236,6 +239,7 @@ export default function MisPronosticosPage() {
 
       if (matchesData) {
         (matchesData as MatchData[]).forEach((m) => {
+          if (m.result_home === null || m.result_away === null) return;
           matchesMap[m.id] = {
             ...matchesMap[m.id],
             id: m.id,
@@ -278,15 +282,27 @@ export default function MisPronosticosPage() {
           if (found) {
             const homeNorm = normalizeTeamName(found.home_team);
             const awayNorm = normalizeTeamName(found.away_team);
-            matchesMap[pred.match_id] = {
-              id: pred.match_id,
-              home_team: homeNorm,
-              away_team: awayNorm,
-              match_date: found.match_date,
-              result_home: null,
-              result_away: null,
-              league: normalizeMatchLeague(homeNorm, awayNorm, found.match_date, found.league),
-            };
+
+            // Fallback: join by team names against already-loaded results (ESPN live/evaluated)
+            const byName = Object.values(matchesMap).find(
+              (m) =>
+                normalizeTeamName(m.home_team) === homeNorm &&
+                normalizeTeamName(m.away_team) === awayNorm
+            );
+
+            if (byName) {
+              matchesMap[pred.match_id] = { ...byName, id: pred.match_id };
+            } else {
+              matchesMap[pred.match_id] = {
+                id: pred.match_id,
+                home_team: homeNorm,
+                away_team: awayNorm,
+                match_date: found.match_date,
+                result_home: null,
+                result_away: null,
+                league: normalizeMatchLeague(homeNorm, awayNorm, found.match_date, found.league),
+              };
+            }
             if (found.home_logo) teamsMap[homeNorm] = found.home_logo;
             if (found.away_logo) teamsMap[awayNorm] = found.away_logo;
           }
@@ -381,6 +397,84 @@ export default function MisPronosticosPage() {
         result.sort((a, b) => new Date(b.match_date).getTime() - new Date(a.match_date).getTime());
         setPredictions(result);
         setLoading(false);
+      }
+
+      // 3. Automatic Survivor progression for finished knockout matches
+      for (const pred of predsData) {
+        const match = matchesMap[pred.match_id];
+        if (!match || match.result_home === null || match.result_away === null) continue;
+
+        const league = normalizeMatchLeague(match.home_team, match.away_team, match.match_date, match.league);
+        if (!isKnockoutMatch(match.home_team, match.away_team, league)) continue;
+
+        const cupSlug = getKnockoutCupSlugFromLeague(league);
+        if (!cupSlug) continue;
+
+        const sur = userSurvivors[cupSlug];
+        if (!sur || sur.status !== "ALIVE") continue;
+        if (sur.history.some((h) => h.match_id === pred.match_id)) continue;
+
+        const activeTeamName = sur.active_team_name || "";
+        if (!activeTeamName) continue;
+        // Only the active team's own knockout tie advances the survivor
+        if (match.home_team !== activeTeamName && match.away_team !== activeTeamName) continue;
+
+        // Draws (and penalty shootouts) can't resolve a winner from the scoreline
+        if (match.result_home === match.result_away) continue;
+        if (pred.home_score === pred.away_score) continue;
+
+        const actualWinner = match.result_home > match.result_away ? match.home_team : match.away_team;
+        const predictedWinner = pred.home_score > pred.away_score ? match.home_team : match.away_team;
+
+        const outcome = evaluateSurvivorProgression({
+          activeTeamName,
+          predictedWinner,
+          actualWinner,
+          matchId: pred.match_id,
+          roundName: "Ronda KO",
+          matchDate: match.match_date,
+          currentHistory: sur.history,
+        });
+
+        if (!outcome.transferred && outcome.newStatus === "ALIVE") continue;
+
+        let activeTeamId = sur.active_team_id;
+        if (outcome.transferred) {
+          const { data: teamRow } = await supabase
+            .from("teams")
+            .select("id")
+            .eq("name", outcome.newTeamName)
+            .single();
+          if (teamRow) activeTeamId = teamRow.id;
+        }
+
+        const eliminatedAtRound = outcome.newStatus === "ELIMINATED" ? "Ronda KO" : null;
+        const ok = await updateCupSurvivor({
+          userId: user.id,
+          tournamentSlug: cupSlug,
+          activeTeamId,
+          status: outcome.newStatus,
+          eliminatedAtRound,
+          history: outcome.updatedHistory,
+        });
+
+        if (ok) {
+          userSurvivors[cupSlug] = {
+            ...sur,
+            active_team_id: activeTeamId,
+            active_team_name: outcome.newTeamName,
+            status: outcome.newStatus,
+            eliminated_at_round: eliminatedAtRound || sur.eliminated_at_round,
+            history: outcome.updatedHistory,
+          };
+          console.log(
+            `🏆 Survivor ${cupSlug}: ${outcome.newStatus}${outcome.transferred ? `, camiseta heredada: ${outcome.newTeamName}` : ""}`
+          );
+        }
+      }
+
+      if (isMounted) {
+        setSurvivors(userSurvivors);
       }
     };
 

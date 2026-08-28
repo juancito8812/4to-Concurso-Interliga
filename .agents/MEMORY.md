@@ -5,8 +5,8 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 8 ligas/copas europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`, workflow `.github/workflows/deploy.yml`).
-- **Última sesión:** 2026-08-28 15:25
-- **Versión de memoria:** 1.4
+- **Última sesión:** 2026-08-28 19:45
+- **Versión de memoria:** 1.5
 
 ## Arquitectura
 
@@ -38,9 +38,22 @@
 - **Branch:** `main` (desplegado a GitHub Pages).
 - **Build Status:** `npm run build` y `npm run lint` pasando con 0 errores (19 rutas estáticas generadas).
 - **Deploy:** GitHub Actions activado con éxito en `main`.
-- **Automatización:** 100% desatendida (cliente en vivo + cron de fondo).
+- **Automatización:** 100% desatendida (cliente en vivo + cron de fondo + persistencia Supabase vía RPC).
 
 ## Cambios Recientes
+
+- **2026-08-28** — **Cadena de puntuación 100% automática end-to-end (revisión integral)**:
+  - **Fix crítico de IDs aleatorios** en `src/lib/footballData.ts`: `Number(uuid) || Math.random()` hacía que cada carga de página generara un id distinto y ningún pronóstico nuevo pudiera puntuarse. Ahora se preserva el id canónico del fixture y el path de API en vivo re-mapea el fixture por nombres.
+  - **IDs unificados en toda la cadena**: cron, fetcher cliente y evaluador usan siempre `matchIdToUuid(fixture.id | evento)`; join por nombres como fallback en ranking/mis-pronosticos/cron.
+  - **Módulo compartido `scripts/lib/score-utils.js`** (normalizeTeamName con alias completo, matchIdToUuid, matching fonético, calculateScore, isKnockoutMatch, evaluateSurvivorProgression) + datos extraídos a `src/data/teamAliases.json` (aliasMap, canonicalDbTeams, knockoutPairs).
+  - **Fix de FK crítica**: `predictions.match_id` referenciaba `matches(id)` con UUIDs aleatorios → ningún pronóstico podía guardarse en Supabase. Se re-sembró `matches` con los 1.842 ids canónicos de `officialFixtures.json`.
+  - **Fix de 34 IDs duplicados** en `officialFixtures.json` (placeholders compartidos por hasta 7 partidos): 169 ids regenerados determinísticamente (0 duplicados).
+  - **RPCs `SECURITY DEFINER` en producción** (5): `update_match_results`, `update_prediction_points`, `upsert_fixture_matches`, `update_survivors` (+ `schema.sql`).
+  - **Tabla `tournament_survivors` creada en producción** (faltaba migrar el DDL de schema.sql).
+  - **Survivor automatizado server-side**: el cron evalúa la progresión KO (solo emparejamientos oficiales, idempotente por match_id en history) y persiste vía RPC; refuerzo client-side en `/mis-pronosticos`.
+  - **Backfill de 3 días** en el cron (ESPN `?dates=YYYYMMDD,..`): no se pierden resultados si el job falla un día.
+  - **Persistencia verificada end-to-end**: predicción de Milanarg (AC Milan 3-0 vs Venezia) = 5 PTS en JSON + Supabase (predictions, prediction_scorers, points vía RPC).
+  - **Menores**: guard de nulos en merge Supabase, `AbortSignal.timeout` en fetcher ESPN, `goals ?? 0` en scoring, `npm ci` eliminado del workflow cron, loader JSON arreglado en `scripts/test-survivor.js` (7/7 tests OK).
 
 - **2026-08-28**:
   - Implementación del sistema 100% automático de resultados y puntuación (ESPN API + GitHub Actions Cron).

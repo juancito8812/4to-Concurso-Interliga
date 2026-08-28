@@ -1,57 +1,36 @@
-/**
- * Interliga Football Prediction Contest Scoring System
- *
- * Scoring Rules:
- * 1. Resultado correcto (Signo 1X2): 3 puntos
- * 2. Marcador exacto: 2 puntos
- * 3. Diferencia de 1 gol en el marcador: 1 punto (cuando no es exacto)
- * 4. Goleador acertado (nombre): 1 punto por cada goleador que anote
- * 5. Cantidad exacta de goles del goleador: 2 puntos por goleador acertado en cantidad
- */
+const fs = require("fs");
+const path = require("path");
 
-export interface PredictedScorer {
-  player_name: string;
-  goals: number;
-  team?: string;
+const teamData = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../../src/data/teamAliases.json"), "utf8")
+);
+
+function cleanTeamName(name) {
+  return (name || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\bfc\b|\bcf\b|\bafc\b|\bssc\b|\bas\b|\bacf\b|\bss\b|\bus\b|\brc\b|\bcd\b|\bud\b|\brcd\b|\bca\b|\b1\.\b|\bvfb\b|\bvfl\b|\btsg\b|\bfsv\b|\bsv\b|\brb\b|\bbvb\b/gi, "")
+    .replace(/[^a-z0-9]/g, "")
+    .trim();
 }
 
-export interface RealScorer {
-  player_name: string;
-  goals: number;
-  team?: string;
+function normalizeTeamName(name) {
+  if (!name) return "";
+  const cleaned = cleanTeamName(name);
+  if (teamData.aliasMap[cleaned]) return teamData.aliasMap[cleaned];
+
+  for (const dbName of teamData.canonicalDbTeams) {
+    if (cleanTeamName(dbName) === cleaned) return dbName;
+  }
+  for (const dbName of teamData.canonicalDbTeams) {
+    const cDb = cleanTeamName(dbName);
+    if (cleaned.includes(cDb) || cDb.includes(cleaned)) return dbName;
+  }
+  return name;
 }
 
-export interface PredictionScoreInput {
-  home_score: number;
-  away_score: number;
-  scorers?: PredictedScorer[];
-}
-
-export interface MatchResultInput {
-  result_home: number;
-  result_away: number;
-  scorers?: RealScorer[];
-}
-
-export interface ScoringBreakdown {
-  totalPoints: number;
-  correctSign: boolean;
-  pointsSign: number;
-  exactScore: boolean;
-  pointsExactScore: number;
-  goalDiffClose: boolean;
-  pointsGoalDiff: number;
-  scorersNameHits: number;
-  pointsScorersName: number;
-  scorersQuantityHits: number;
-  pointsScorersQuantity: number;
-  details: string[];
-}
-
-/**
- * Normalizes player name for reliable comparison (case-insensitive, trimmed, no accents)
- */
-export function normalizePlayerName(name: string): string {
+function normalizePlayerName(name) {
   return (name || "")
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -59,10 +38,80 @@ export function normalizePlayerName(name: string): string {
     .toLowerCase();
 }
 
-/**
- * Phonetic/clean normalization to handle spelling variants (ç/z/s, y/i, b/v)
- */
-export function cleanPhonetic(str: string): string {
+const knockoutPairs = {
+  conference: new Set(teamData.knockoutPairs?.conference || []),
+  europa: new Set(teamData.knockoutPairs?.europa || []),
+  champions: new Set(teamData.knockoutPairs?.champions || []),
+};
+
+function isKnockoutMatch(homeTeam, awayTeam, league) {
+  const cHome = cleanTeamName(homeTeam);
+  const cAway = cleanTeamName(awayTeam);
+  const pairKey = `${cHome}-${cAway}`;
+  if (knockoutPairs.conference.has(pairKey)) return true;
+  if (knockoutPairs.europa.has(pairKey)) return true;
+  if (knockoutPairs.champions.has(pairKey)) return true;
+  if (league && String(league).toLowerCase().includes("copa italia")) return true;
+  return false;
+}
+
+function evaluateSurvivorProgression(params) {
+  const activeNorm = normalizeTeamName(params.activeTeamName);
+  const predNorm = normalizeTeamName(params.predictedWinner);
+  const actualNorm = normalizeTeamName(params.actualWinner);
+
+  if (predNorm === actualNorm) {
+    if (predNorm !== activeNorm) {
+      const transferRecord = {
+        from_team: activeNorm,
+        to_team: predNorm,
+        match_id: params.matchId,
+        round: params.roundName,
+        date: params.matchDate,
+      };
+      return {
+        newStatus: 'ALIVE',
+        newTeamName: predNorm,
+        updatedHistory: [...params.currentHistory, transferRecord],
+        transferred: true,
+      };
+    }
+    return {
+      newStatus: 'ALIVE',
+      newTeamName: activeNorm,
+      updatedHistory: params.currentHistory,
+      transferred: false,
+    };
+  }
+
+  return {
+    newStatus: 'ELIMINATED',
+    newTeamName: activeNorm,
+    updatedHistory: params.currentHistory,
+    transferred: false,
+  };
+}
+
+function matchIdToUuid(id) {
+  const str = String(id).trim();
+  if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str)) {
+    return str.toLowerCase();
+  }
+  const num = parseInt(str.replace(/\D/g, ""), 10);
+  if (!isNaN(num) && num > 0) {
+    const hex = num.toString(16).padStart(12, "0").slice(-12);
+    return `00000000-0000-4000-8000-${hex}`;
+  }
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0;
+  }
+  const hex = Math.abs(hash).toString(16).padStart(12, "0").slice(-12);
+  return `00000000-0000-4000-8000-${hex}`;
+}
+
+function cleanPhonetic(str) {
   return (str || "")
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -73,10 +122,7 @@ export function cleanPhonetic(str: string): string {
     .replace(/[^a-z0-9]/g, "");
 }
 
-/**
- * Intelligent player name matcher handling full names, single names, initials, and spelling variants.
- */
-export function arePlayersMatching(nameA: string, nameB: string): boolean {
+function arePlayersMatching(nameA, nameB) {
   const normA = normalizePlayerName(nameA);
   const normB = normalizePlayerName(nameB);
   if (!normA || !normB) return false;
@@ -89,7 +135,6 @@ export function arePlayersMatching(nameA: string, nameB: string): boolean {
   const wordsA = normA.split(/[\s.-]+/).filter((w) => w.length > 0);
   const wordsB = normB.split(/[\s.-]+/).filter((w) => w.length > 0);
 
-  // If one is single name (e.g. "Kane", "Mbappe", "Vinicius", "Rodri")
   if (wordsA.length === 1 || wordsB.length === 1) {
     const single = wordsA.length === 1 ? wordsA[0] : wordsB[0];
     const multi = wordsA.length === 1 ? wordsB : wordsA;
@@ -102,14 +147,12 @@ export function arePlayersMatching(nameA: string, nameB: string): boolean {
     }
   }
 
-  // Both are multi-word (e.g. "Nico Williams" vs "N. Williams", "Gonçalo Ramos" vs "Gonzalo Ramos")
   const lastA = cleanPhonetic(wordsA[wordsA.length - 1]);
   const lastB = cleanPhonetic(wordsB[wordsB.length - 1]);
   const firstA = cleanPhonetic(wordsA[0]);
   const firstB = cleanPhonetic(wordsB[0]);
 
   if (lastA === lastB) {
-    // Check first name or initial
     if (firstA === firstB) return true;
     if (firstA[0] === firstB[0] && (firstA.length === 1 || firstB.length === 1)) return true;
     if (firstA.length >= 4 && firstB.length >= 4 && (firstA.includes(firstB) || firstB.includes(firstA))) return true;
@@ -119,31 +162,23 @@ export function arePlayersMatching(nameA: string, nameB: string): boolean {
   return false;
 }
 
-/**
- * Calculate total points and itemized breakdown for a prediction against the real match outcome.
- */
-export function calculateScore(
-  prediction: PredictionScoreInput,
-  real: MatchResultInput
-): ScoringBreakdown {
+function calculateScore(prediction, real) {
   let pointsSign = 0;
   let pointsExactScore = 0;
   let pointsGoalDiff = 0;
   let pointsScorersName = 0;
   let pointsScorersQuantity = 0;
-  const details: string[] = [];
+  const details = [];
 
   const predSign = Math.sign(prediction.home_score - prediction.away_score);
   const realSign = Math.sign(real.result_home - real.result_away);
 
-  // 1. Sign (Resultado correcto: Local, Empate, Visitante) -> 3 pts
   const correctSign = predSign === realSign;
   if (correctSign) {
     pointsSign = 3;
     details.push("Resultado correcto (+3 pts)");
   }
 
-  // 2. Exact Score (Marcador exacto) -> 2 pts
   const exactScore =
     prediction.home_score === real.result_home &&
     prediction.away_score === real.result_away;
@@ -152,8 +187,6 @@ export function calculateScore(
     pointsExactScore = 2;
     details.push("Marcador exacto (+2 pts)");
   } else {
-    // 3. Difference of 1 goal (Diferencia de 1 gol en el marcador) -> 1 pt
-    // Defined as off by 1 goal total across the score (e.g. predicted 2-1, real 2-0 or 3-1)
     const diffHome = Math.abs(prediction.home_score - real.result_home);
     const diffAway = Math.abs(prediction.away_score - real.result_away);
     const totalDiff = diffHome + diffAway;
@@ -164,27 +197,23 @@ export function calculateScore(
     }
   }
 
-  // 4 & 5. Scorers (Goleadores acertados y cantidad de goles)
   let scorersNameHits = 0;
   let scorersQuantityHits = 0;
 
-  const realScorersList: RealScorer[] = real.scorers || [];
+  const realScorersList = real.scorers || [];
 
   if (prediction.scorers && prediction.scorers.length > 0) {
     for (const predScorer of prediction.scorers.slice(0, 3)) {
-      // Find matching real scorer using intelligent matching
       const matchedRealScorer = realScorersList.find((rs) =>
         arePlayersMatching(predScorer.player_name, rs.player_name)
       );
 
       if (matchedRealScorer && (matchedRealScorer.goals ?? 0) > 0) {
         const actualGoals = matchedRealScorer.goals ?? 0;
-        // Goleador acertado (nombre) -> 1 pt
         scorersNameHits += 1;
         pointsScorersName += 1;
         details.push(`Goleador acertado: ${predScorer.player_name} (+1 pt)`);
 
-        // Cantidad exacta de goles del goleador -> 2 pts
         if (predScorer.goals === actualGoals) {
           scorersQuantityHits += 1;
           pointsScorersQuantity += 2;
@@ -216,3 +245,15 @@ export function calculateScore(
     details,
   };
 }
+
+module.exports = {
+  cleanTeamName,
+  normalizeTeamName,
+  normalizePlayerName,
+  matchIdToUuid,
+  cleanPhonetic,
+  arePlayersMatching,
+  calculateScore,
+  isKnockoutMatch,
+  evaluateSurvivorProgression,
+};

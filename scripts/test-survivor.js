@@ -40,6 +40,14 @@ export async function resolve(specifier, context, nextResolve) {
   }
   return nextResolve(spec, context);
 }
+
+export async function load(url, context, nextLoad) {
+  if (url.endsWith('.json')) {
+    const source = fs.readFileSync(fileURLToPath(url), 'utf8');
+    return { format: 'json', source, shortCircuit: true };
+  }
+  return nextLoad(url, context);
+}
 `;
 
 register('data:text/javascript;base64,' + Buffer.from(loaderHook).toString('base64'), pathToFileURL('./'));

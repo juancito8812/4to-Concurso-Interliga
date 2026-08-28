@@ -1,9 +1,9 @@
 [
   {
-    "id": "pred-milanarg-milan-venezia",
+    "id": "8408fa39-5b46-4925-bae2-4e6ace765463",
     "user_id": "31acfd09-439a-41ae-9552-489e3c69a7db",
     "display_name": "Milanarg",
-    "match_id": "00000000-0000-4000-8000-00006399b6d3",
+    "match_id": "00000000-0000-4000-8000-000017f41f46",
     "home_score": 3,
     "away_score": 0,
     "scorers": [
@@ -17,6 +17,12 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Gonçalo Ramos (+1 pt)"
     ]
   }
 ]

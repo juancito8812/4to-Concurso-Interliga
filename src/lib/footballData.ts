@@ -32,7 +32,7 @@ export const competitionCodes: Record<string, string> = {
 };
 
 export interface FDMatch {
-  id: number;
+  id: string | number;
   utcDate: string;
   status: string;
   matchday: number;
@@ -185,7 +185,24 @@ export async function getOfficialTeamMatches(
     try {
       const liveMatches = await getTeamMatches(teamId, "SCHEDULED");
       if (liveMatches && liveMatches.length > 0) {
-        return liveMatches;
+        // Re-attach the canonical official fixture id so predictions join evaluated matches
+        return liveMatches.map((m) => {
+          const homeNorm = normalizeTeamName(m.homeTeam.name);
+          const awayNorm = normalizeTeamName(m.awayTeam.name);
+          const fixture = (officialFixtures as Array<{
+            id: string;
+            home_team: string;
+            away_team: string;
+          }>).find((f) => {
+            const hF = normalizeTeamName(f.home_team).toLowerCase();
+            const aF = normalizeTeamName(f.away_team).toLowerCase();
+            return (
+              (hF.includes(homeNorm.toLowerCase()) || homeNorm.toLowerCase().includes(hF)) &&
+              (aF.includes(awayNorm.toLowerCase()) || awayNorm.toLowerCase().includes(aF))
+            );
+          });
+          return fixture ? { ...m, id: fixture.id } : m;
+        });
       }
     } catch (err) {
       console.warn("Live football-data.org fetch failed, falling back to official fixtures bundle:", err);
@@ -222,7 +239,7 @@ export async function getOfficialTeamMatches(
   filtered.sort((a, b) => new Date(a.match_date).getTime() - new Date(b.match_date).getTime());
 
   return filtered.map((m) => ({
-    id: Number(m.id) || Math.floor(Math.random() * 1000000),
+    id: m.id,
     utcDate: m.match_date,
     status: "SCHEDULED",
     matchday: m.matchday || 1,

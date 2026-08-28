@@ -1,5 +1,12 @@
 const fs = require("fs");
 const path = require("path");
+const {
+  normalizeTeamName,
+  matchIdToUuid,
+  calculateScore,
+  isKnockoutMatch,
+  evaluateSurvivorProgression,
+} = require("./lib/score-utils");
 
 const LEAGUE_SLUGS = [
   "esp.1",
@@ -23,163 +30,282 @@ const LEAGUE_MAP = {
   "ita.coppa_italia": "Copa Italia",
 };
 
-function normalizeTeamName(name) {
-  if (!name) return "";
-  const cleaned = (name || "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\bfc\b|\bcf\b|\bafc\b|\bssc\b|\bas\b|\bacf\b|\bss\b|\bus\b|\brc\b|\bcd\b|\bud\b|\brcd\b|\bca\b|\b1\.\b|\bvfb\b|\bvfl\b|\btsg\b|\bfsv\b|\bsv\b|\brb\b|\bbvb\b/gi, "")
-    .replace(/[^a-z0-9]/g, "")
-    .trim();
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://ilkndkqcmxvlufxaugog.supabase.co";
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlsa25ka3FjbXh2bHVmeGF1Z29nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc2OTI5MTksImV4cCI6MjEwMzI2ODkxOX0.2AAajeD5mX0RxUXe1Fi5b_SefDBH5MClGKRXdIEZZcY";
 
-  const aliasMap = {
-    bayernmunchen: "Bayern Munich",
-    bayern: "Bayern Munich",
-    stuttgart: "Stuttgart",
-    mancity: "Manchester City",
-    manchestercity: "Manchester City",
-    crystalpalace: "Crystal Palace",
-    acmilan: "AC Milan",
-    milan: "AC Milan",
-    venezia: "Venezia",
-    realbetis: "Real Betis",
-    betis: "Real Betis",
-    alaves: "Alavés",
-    deportivoalaves: "Alavés",
-    realmadrid: "Real Madrid",
-    barcelona: "Barcelona",
-    arsenal: "Arsenal",
-    liverpool: "Liverpool",
-    chelsea: "Chelsea",
-    juventus: "Juventus",
-    intermilan: "Inter Milan",
-    inter: "Inter Milan",
-  };
-
-  return aliasMap[cleaned] || name;
+async function supabaseGet(path) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+    },
+  });
+  if (!res.ok) throw new Error(`supabase GET ${path} -> ${res.status}`);
+  return res.json();
 }
 
-function cleanPhonetic(str) {
-  return (str || "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[czs]/g, "s")
-    .replace(/[yi]/g, "i")
-    .replace(/[bv]/g, "b")
-    .replace(/[^a-z0-9]/g, "");
+async function callRpc(name, payload) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${name}`, {
+    method: "POST",
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) throw new Error(`rpc ${name} -> ${res.status}: ${await res.text()}`);
 }
 
-function arePlayersMatching(nameA, nameB) {
-  const normA = (nameA || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
-  const normB = (nameB || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
-  if (!normA || !normB) return false;
-  if (normA === normB) return true;
+// ESPN scoreboard solo devuelve el día actual; con ?dates=YYYYMMDD,.. retrocedemos
+// hasta BACKFILL_DAYS días para no perder resultados si el cron no corrió un día.
+const BACKFILL_DAYS = 3;
 
-  const cleanA = cleanPhonetic(normA);
-  const cleanB = cleanPhonetic(normB);
-  if (cleanA === cleanB) return true;
+function datesParam() {
+  const dates = [];
+  for (let i = 0; i <= BACKFILL_DAYS; i++) {
+    const d = new Date(Date.now() - i * 86400000);
+    dates.push(d.toISOString().slice(0, 10).replace(/-/g, ""));
+  }
+  return dates.join(",");
+}
 
-  const wordsA = normA.split(/[\s.-]+/).filter((w) => w.length > 0);
-  const wordsB = normB.split(/[\s.-]+/).filter((w) => w.length > 0);
-
-  if (wordsA.length === 1 || wordsB.length === 1) {
-    const single = wordsA.length === 1 ? wordsA[0] : wordsB[0];
-    const multi = wordsA.length === 1 ? wordsB : wordsA;
-    if (single.length >= 3) {
-      const cleanSingle = cleanPhonetic(single);
-      return multi.some((w) => {
-        const cleanW = cleanPhonetic(w);
-        return cleanW === cleanSingle || (cleanSingle.length >= 5 && (cleanW.includes(cleanSingle) || cleanSingle.includes(cleanW)));
-      });
+// Mantiene la tabla matches de Supabase alineada con el calendario oficial del repo
+async function syncFixturesToSupabase(officialFixtures) {
+  try {
+    const CHUNK = 300;
+    for (let i = 0; i < officialFixtures.length; i += CHUNK) {
+      const part = officialFixtures.slice(i, i + CHUNK).map((f) => ({
+        id: f.id,
+        home_team: f.home_team,
+        away_team: f.away_team,
+        match_date: f.match_date,
+        league: f.league,
+      }));
+      await callRpc("upsert_fixture_matches", { p_fixtures: part });
     }
+    console.log(`💾 Calendario sincronizado en Supabase matches: ${officialFixtures.length} fixtures`);
+  } catch (e) {
+    console.warn("Could not sync fixtures to Supabase:", e.message);
   }
-
-  const lastA = cleanPhonetic(wordsA[wordsA.length - 1]);
-  const lastB = cleanPhonetic(wordsB[wordsB.length - 1]);
-  const firstA = cleanPhonetic(wordsA[0]);
-  const firstB = cleanPhonetic(wordsB[0]);
-
-  if (lastA === lastB) {
-    if (firstA === firstB) return true;
-    if (firstA[0] === firstB[0] && (firstA.length === 1 || firstB.length === 1)) return true;
-    if (firstA.length >= 4 && firstB.length >= 4 && (firstA.includes(firstB) || firstB.includes(firstA))) return true;
-    return false;
-  }
-
-  return false;
 }
 
-function calculateScore(prediction, real) {
-  let pointsSign = 0;
-  let pointsExactScore = 0;
-  let pointsGoalDiff = 0;
-  let pointsScorersName = 0;
-  let pointsScorersQuantity = 0;
-  const details = [];
+// Evaluación automática de la mecánica de Superviviente en copas KO.
+// Solo se procesan partidos de los emparejamientos oficiales (isKnockoutMatch),
+// idempotente por match_id en history. Persiste vía RPC SECURITY DEFINER.
+async function evaluateSurvivors(officialMatches) {
+  try {
+    const [survivors, preds, teamsData] = await Promise.all([
+      supabaseGet("tournament_survivors?select=id,user_id,tournament_slug,active_team_id,status,history,teams(name)"),
+      supabaseGet("predictions?select=user_id,match_id,home_score,away_score"),
+      supabaseGet("teams?select=id,name"),
+    ]);
 
-  const predSign = Math.sign(prediction.home_score - prediction.away_score);
-  const realSign = Math.sign(real.result_home - real.result_away);
+    const teamsByName = {};
+    (teamsData || []).forEach((t) => {
+      teamsByName[normalizeTeamName(t.name)] = t.id;
+    });
 
-  const correctSign = predSign === realSign;
-  if (correctSign) {
-    pointsSign = 3;
-    details.push("Resultado correcto (+3 pts)");
-  }
-
-  const exactScore =
-    prediction.home_score === real.result_home &&
-    prediction.away_score === real.result_away;
-
-  if (exactScore) {
-    pointsExactScore = 2;
-    details.push("Marcador exacto (+2 pts)");
-  } else {
-    const diffHome = Math.abs(prediction.home_score - real.result_home);
-    const diffAway = Math.abs(prediction.away_score - real.result_away);
-    const totalDiff = diffHome + diffAway;
-
-    if (totalDiff === 1) {
-      pointsGoalDiff = 1;
-      details.push("Diferencia de 1 gol (+1 pt)");
-    }
-  }
-
-  let scorersNameHits = 0;
-  let scorersQuantityHits = 0;
-
-  const realScorersList = real.scorers || [];
-
-  if (prediction.scorers && prediction.scorers.length > 0) {
-    for (const predScorer of prediction.scorers.slice(0, 3)) {
-      const matchedRealScorer = realScorersList.find((rs) =>
-        arePlayersMatching(predScorer.player_name, rs.player_name)
-      );
-
-      if (matchedRealScorer && (matchedRealScorer.goals || 1) > 0) {
-        const actualGoals = matchedRealScorer.goals || 1;
-        scorersNameHits += 1;
-        pointsScorersName += 1;
-        details.push(`Goleador acertado: ${predScorer.player_name} (+1 pt)`);
-
-        if (predScorer.goals === actualGoals) {
-          scorersQuantityHits += 1;
-          pointsScorersQuantity += 2;
-          details.push(`Goles exactos de ${predScorer.player_name}: ${predScorer.goals} (+2 pts)`);
-        }
+    const finishedMap = new Map();
+    for (const m of officialMatches) {
+      if (m.result_home !== null && m.result_home !== undefined) {
+        finishedMap.set(m.id, m);
       }
     }
+
+    const predsByUser = new Map();
+    (preds || []).forEach((p) => {
+      const arr = predsByUser.get(p.user_id) || [];
+      arr.push(p);
+      predsByUser.set(p.user_id, arr);
+    });
+
+    const updates = [];
+
+    for (const sur of survivors || []) {
+      if (sur.status !== "ALIVE") continue;
+      const activeName = normalizeTeamName(sur.teams?.name || "");
+      if (!activeName) continue;
+
+      const history = Array.isArray(sur.history) ? sur.history : [];
+      const doneMatches = new Set(history.map((h) => h.match_id));
+      let current = { activeTeamId: sur.active_team_id, activeName, status: "ALIVE", history };
+
+      for (const p of predsByUser.get(sur.user_id) || []) {
+        if (current.status !== "ALIVE") break;
+
+        const match = finishedMap.get(p.match_id);
+        if (!match) continue;
+        if (!isKnockoutMatch(match.home_team, match.away_team, match.league)) continue;
+
+        const mh = normalizeTeamName(match.home_team).toLowerCase();
+        const ma = normalizeTeamName(match.away_team).toLowerCase();
+        const an = current.activeName.toLowerCase();
+        if (mh !== an && ma !== an) continue;
+        if (doneMatches.has(match.id)) continue;
+        if (match.result_home === match.result_away || p.home_score === p.away_score) continue;
+
+        const actualWinner = match.result_home > match.result_away ? match.home_team : match.away_team;
+        const predictedWinner = p.home_score > p.away_score ? match.home_team : match.away_team;
+
+        const outcome = evaluateSurvivorProgression({
+          activeTeamName: current.activeName,
+          predictedWinner,
+          actualWinner,
+          matchId: match.id,
+          roundName: "Ronda KO",
+          matchDate: match.match_date,
+          currentHistory: current.history,
+        });
+
+        if (!outcome.transferred && outcome.newStatus === "ALIVE") continue;
+        doneMatches.add(match.id);
+
+        let activeTeamId = current.activeTeamId;
+        if (outcome.transferred) {
+          activeTeamId = teamsByName[outcome.newTeamName] || activeTeamId;
+        }
+        current = {
+          activeTeamId,
+          activeName: outcome.newTeamName,
+          status: outcome.newStatus,
+          history: outcome.updatedHistory,
+        };
+        console.log(
+          `🏆 Survivor ${sur.tournament_slug} (${sur.user_id}): ${outcome.newStatus}${outcome.transferred ? `, camiseta heredada: ${outcome.newTeamName}` : ""}`
+        );
+      }
+
+      const changed =
+        current.activeTeamId !== sur.active_team_id ||
+        current.status !== sur.status ||
+        current.activeName !== activeName;
+      if (changed) {
+        updates.push({
+          id: sur.id,
+          active_team_id: current.activeTeamId,
+          status: current.status,
+          eliminated_at_round: current.status === "ELIMINATED" ? "Ronda KO" : "",
+          history: current.history,
+        });
+      }
+    }
+
+    if (updates.length > 0) {
+      await callRpc("update_survivors", { p_updates: updates });
+      console.log(`💾 Survivors actualizados en Supabase: ${updates.length}`);
+    }
+  } catch (e) {
+    console.warn("Could not evaluate survivors:", e.message);
   }
+}
 
-  const totalPoints =
-    pointsSign +
-    pointsExactScore +
-    pointsGoalDiff +
-    pointsScorersName +
-    pointsScorersQuantity;
+// Persiste resultados y puntos en Supabase vía RPC SECURITY DEFINER (no requiere sesión)
+async function persistToSupabase(officialMatches, officialPreds) {
+  try {
+    const [dbMatches, dbPreds] = await Promise.all([
+      supabaseGet("matches?select=id,home_team,away_team,match_date,result_home,result_away"),
+      supabaseGet("predictions?select=id,user_id,match_id"),
+    ]);
 
-  return { totalPoints, details, exactScore, correctSign, scorersNameHits };
+    // 1. Resultados de partidos: match por nombres normalizados + fecha (solo filas sin resultado)
+    const resultUpdates = [];
+    for (const m of officialMatches) {
+      if (m.result_home === null || m.result_home === undefined) continue;
+      const datePart = String(m.match_date || "").slice(0, 10);
+      const mh = normalizeTeamName(m.home_team).toLowerCase();
+      const ma = normalizeTeamName(m.away_team).toLowerCase();
+      const row = (dbMatches || []).find((r) => {
+        if (r.result_home !== null) return false;
+        const rh = normalizeTeamName(r.home_team).toLowerCase();
+        const ra = normalizeTeamName(r.away_team).toLowerCase();
+        if (rh !== mh || ra !== ma) return false;
+        if (!datePart || !r.match_date) return true;
+        return String(r.match_date).slice(0, 10) === datePart;
+      });
+      if (row) {
+        resultUpdates.push({ id: row.id, result_home: m.result_home, result_away: m.result_away });
+      }
+    }
+    if (resultUpdates.length > 0) {
+      await callRpc("update_match_results", { p_updates: resultUpdates });
+      console.log(`💾 Resultados persistidos en Supabase matches: ${resultUpdates.length}`);
+    }
+
+    // 2. Puntos de pronósticos: solo filas reales de la DB (ids uuid de supabase)
+    const dbByKey = new Map();
+    (dbPreds || []).forEach((p) => dbByKey.set(`${p.user_id}|${p.match_id}`, p.id));
+
+    const predUpdates = [];
+    for (const p of officialPreds) {
+      if (p.points === undefined || p.points === null) continue;
+      const dbId = dbByKey.get(`${p.user_id}|${p.match_id}`);
+      if (dbId) {
+        predUpdates.push({ id: dbId, points: p.points });
+      }
+    }
+    if (predUpdates.length > 0) {
+      await callRpc("update_prediction_points", { p_updates: predUpdates });
+      console.log(`💾 Puntos persistidos en Supabase predictions: ${predUpdates.length}`);
+    }
+  } catch (e) {
+    console.warn("Could not persist to Supabase:", e.message);
+  }
+}
+
+async function fetchSupabasePredictions() {
+  try {
+    const [preds, scorers, profiles] = await Promise.all([
+      supabaseGet("predictions?select=id,user_id,match_id,home_score,away_score"),
+      supabaseGet("prediction_scorers?select=prediction_id,player_name,goals,team"),
+      supabaseGet("profiles?select=user_id,display_name"),
+    ]);
+
+    const scorersMap = {};
+    (scorers || []).forEach((s) => {
+      (scorersMap[s.prediction_id] = scorersMap[s.prediction_id] || []).push({
+        player_name: s.player_name,
+        goals: s.goals,
+        team: s.team,
+      });
+    });
+
+    const namesMap = {};
+    (profiles || []).forEach((p) => {
+      namesMap[p.user_id] = p.display_name || "Participante";
+    });
+
+    return (preds || []).map((p) => ({
+      id: p.id,
+      user_id: p.user_id,
+      display_name: namesMap[p.user_id] || "Participante",
+      match_id: p.match_id,
+      home_score: p.home_score,
+      away_score: p.away_score,
+      scorers: scorersMap[p.id] || [],
+    }));
+  } catch (e) {
+    console.warn("Could not fetch predictions from Supabase:", e.message);
+    return [];
+  }
+}
+
+function resolveMatchId(evId, fixture) {
+  if (fixture) return matchIdToUuid(fixture.id);
+  return matchIdToUuid(evId || "unknown");
+}
+
+function findFixture(officialFixtures, homeName, awayName) {
+  return officialFixtures.find((f) => {
+    const hF = normalizeTeamName(f.home_team).toLowerCase();
+    const aF = normalizeTeamName(f.away_team).toLowerCase();
+    const hN = homeName.toLowerCase();
+    const aN = awayName.toLowerCase();
+    return (
+      (hF.includes(hN) || hN.includes(hF)) &&
+      (aF.includes(aN) || aN.includes(aF))
+    );
+  });
 }
 
 async function autoSync() {
@@ -216,11 +342,25 @@ async function autoSync() {
     console.warn("Could not read officialEvaluatedPredictions.json:", e.message);
   }
 
+  // Merge Supabase predictions (new predictions made in the app) into the evaluated record
+  const supabasePreds = await fetchSupabasePredictions();
+  for (const sp of supabasePreds) {
+    const idx = officialPreds.findIndex(
+      (p) => p.user_id === sp.user_id && p.match_id === sp.match_id
+    );
+    if (idx >= 0) {
+      officialPreds[idx] = { ...officialPreds[idx], ...sp };
+    } else {
+      officialPreds.push(sp);
+    }
+  }
+  console.log(`📝 Pronósticos a evaluar: ${officialPreds.length} (JSON + ${supabasePreds.length} de Supabase)`);
+
   let newResultsCount = 0;
 
   for (const slug of LEAGUE_SLUGS) {
     try {
-      const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${slug}/scoreboard`;
+      const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${slug}/scoreboard?dates=${datesParam()}`;
       const res = await fetch(url);
       if (!res.ok) continue;
 
@@ -272,14 +412,8 @@ async function autoSync() {
         }));
 
         // Find match in official fixtures
-        const fixture = officialFixtures.find((f) => {
-          const hF = normalizeTeamName(f.home_team).toLowerCase();
-          const aF = normalizeTeamName(f.away_team).toLowerCase();
-          return (hF.includes(homeName.toLowerCase()) || homeName.toLowerCase().includes(hF)) &&
-                 (aF.includes(awayName.toLowerCase()) || awayName.toLowerCase().includes(aF));
-        });
-
-        const matchId = fixture ? fixture.id : `espn-${ev.id || `${homeName}-${awayName}`}`;
+        const fixture = findFixture(officialFixtures, homeName, awayName);
+        const matchId = resolveMatchId(ev.id, fixture);
 
         const matchObj = {
           id: matchId,
@@ -322,9 +456,23 @@ async function autoSync() {
   let totalPointsDistributed = 0;
 
   officialPreds.forEach((pred) => {
-    const match = officialMatches.find((m) => m.id === pred.match_id || 
-      (normalizeTeamName(m.home_team).toLowerCase().includes(pred.match_id.toLowerCase()))
-    );
+    let match = officialMatches.find((m) => m.id === pred.match_id);
+
+    // Fallback: join by fixture team names when the prediction id is orphaned
+    if (!match) {
+      const fixture = officialFixtures.find(
+        (f) => matchIdToUuid(f.id) === pred.match_id || String(f.id) === pred.match_id
+      );
+      if (fixture) {
+        const fh = normalizeTeamName(fixture.home_team).toLowerCase();
+        const fa = normalizeTeamName(fixture.away_team).toLowerCase();
+        match = officialMatches.find((m) => {
+          const mh = normalizeTeamName(m.home_team).toLowerCase();
+          const ma = normalizeTeamName(m.away_team).toLowerCase();
+          return (mh === fh && ma === fa) || (mh.includes(fh) && ma.includes(fa));
+        });
+      }
+    }
 
     if (match && match.result_home !== null && match.result_away !== null) {
       const score = calculateScore(
@@ -350,6 +498,10 @@ async function autoSync() {
 
   fs.writeFileSync(evalPredsPath, JSON.stringify(officialPreds, null, 2), "utf8");
   console.log(`\n🎉 ¡SINCRONIZACIÓN AUTOMÁTICA COMPLETADA EXITOSAMENTE! (Puntos distribuidos: ${totalPointsDistributed} pts)`);
+
+  await syncFixturesToSupabase(officialFixtures);
+  await persistToSupabase(officialMatches, officialPreds);
+  await evaluateSurvivors(officialMatches);
 }
 
 autoSync();
