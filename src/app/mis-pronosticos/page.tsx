@@ -279,53 +279,194 @@ export default function MisPronosticosPage() {
             </Link>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-4">
             {predictions.map((p) => {
+              const homeScorers = p.scorers.filter(
+                (s) => s.team === "home" || s.team === p.home_team
+              );
+              const awayScorers = p.scorers.filter(
+                (s) => s.team === "away" || s.team === p.away_team
+              );
+              const leagueColor = leagueColors[p.league] || "#1e2d4a";
+
               return (
-                <div key={p.id} className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border">
-                    {p.league && (
-                      <div className="flex items-center gap-1.5 mb-2">
+                <div
+                  key={p.id}
+                  className="rounded-2xl bg-navy-mid border border-border/80 shadow-lg overflow-hidden relative transition-all content-visibility-auto"
+                >
+                  {/* League Color Top Accent Bar */}
+                  <div className="h-1 w-full" style={{ backgroundColor: leagueColor }} />
+
+                  <div className="p-4 sm:p-5 space-y-3">
+                    {/* Header: League & Date */}
+                    <div className="flex items-center justify-between gap-2 pb-2 border-b border-border/40">
+                      <div className="flex items-center gap-1.5 min-w-0">
                         {leagueLogos[p.league] && (
-                          <img src={leagueLogos[p.league]} alt={p.league} className="w-4 h-4 object-contain" />
+                          <img
+                            src={leagueLogos[p.league]}
+                            alt={p.league}
+                            width={18}
+                            height={18}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-4 h-4 object-contain shrink-0"
+                          />
                         )}
-                        <span className="text-[10px] font-medium" style={{ color: leagueColors[p.league] }}>{p.league}</span>
+                        <span className="text-xs font-bold uppercase truncate" style={{ color: leagueColor }}>
+                          {p.league}
+                        </span>
                       </div>
-                    )}
-                    <div className="text-silver text-xs mb-2">
-                      {new Date(p.match_date).toLocaleDateString("es-AR", {
-                        weekday: "short",
-                        day: "numeric",
-                        month: "short",
-                      })}
+                      <span className="text-silver text-xs font-mono shrink-0">
+                        {new Date(p.match_date).toLocaleDateString("es-AR", {
+                          weekday: "short",
+                          day: "numeric",
+                          month: "short",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-2 flex-1 justify-end">
-                        <span className="text-white text-sm font-medium">{p.home_team}</span>
-                        {p.home_logo && (
-                          <img src={p.home_logo} alt={p.home_team} className="w-8 h-8 rounded-full object-contain bg-white p-0.5" />
+
+                    {/* Central Scoreboard (Estilo Transmisión TV) */}
+                    <div className="flex items-center justify-between gap-2 sm:gap-4 py-1">
+                      {/* Local Team */}
+                      <div className="flex items-center gap-2 sm:gap-3 flex-1 justify-end text-right min-w-0">
+                        <span className="text-white text-xs sm:text-sm font-bold truncate">
+                          {p.home_team}
+                        </span>
+                        {p.home_logo ? (
+                          <img
+                            src={p.home_logo}
+                            alt={p.home_team}
+                            width={36}
+                            height={36}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-contain bg-white p-0.5 shrink-0 shadow-sm"
+                          />
+                        ) : (
+                          <div className="w-8 h-8 rounded-full bg-navy-card border border-border flex items-center justify-center text-xs shrink-0">
+                            ⚽
+                          </div>
                         )}
                       </div>
-                      <div className="flex items-center gap-2 mx-2">
-                        <span className="text-gold font-bold text-lg">{p.home_score}</span>
-                        <span className="text-silver text-xs">vs</span>
-                        <span className="text-gold font-bold text-lg">{p.away_score}</span>
+
+                      {/* Score Box */}
+                      <div className="flex items-center gap-2 px-3 py-1.5 bg-navy-dark/90 rounded-xl border border-border/80 text-center shrink-0 shadow-inner">
+                        <span className="text-gold font-black text-lg sm:text-xl font-mono min-w-[18px]">
+                          {p.home_score}
+                        </span>
+                        <span className="text-silver/60 text-xs font-semibold uppercase">vs</span>
+                        <span className="text-gold font-black text-lg sm:text-xl font-mono min-w-[18px]">
+                          {p.away_score}
+                        </span>
                       </div>
-                      <div className="flex items-center gap-2 flex-1">
-                        {p.away_logo && (
-                          <img src={p.away_logo} alt={p.away_team} className="w-8 h-8 rounded-full object-contain bg-white p-0.5" />
+
+                      {/* Away Team */}
+                      <div className="flex items-center gap-2 sm:gap-3 flex-1 justify-start text-left min-w-0">
+                        {p.away_logo ? (
+                          <img
+                            src={p.away_logo}
+                            alt={p.away_team}
+                            width={36}
+                            height={36}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-contain bg-white p-0.5 shrink-0 shadow-sm"
+                          />
+                        ) : (
+                          <div className="w-8 h-8 rounded-full bg-navy-card border border-border flex items-center justify-center text-xs shrink-0">
+                            ⚽
+                          </div>
                         )}
-                        <span className="text-white text-sm font-medium">{p.away_team}</span>
+                        <span className="text-white text-xs sm:text-sm font-bold truncate">
+                          {p.away_team}
+                        </span>
                       </div>
                     </div>
-                    {p.scorers.length > 0 && (
-                      <div className="mt-2 flex flex-wrap justify-center gap-x-3 gap-y-1">
-                        {p.scorers.map((s, i) => (
-                          <span key={i} className="text-[10px] text-gold">
-                            ⚽ {s.player_name}{s.goals > 1 ? ` (${s.goals})` : ""}
+
+                    {/* Goalscorers in 2 Columns Directly Under Each Club */}
+                    <div className="pt-3 border-t border-border/40 grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                      {/* Local Scorers */}
+                      <div className="bg-navy-dark/70 rounded-xl p-2.5 border border-border/50">
+                        <div className="flex items-center gap-1.5 mb-1.5">
+                          {p.home_logo && (
+                            <img
+                              src={p.home_logo}
+                              alt=""
+                              width={16}
+                              height={16}
+                              loading="lazy"
+                              decoding="async"
+                              className="w-4 h-4 object-contain shrink-0"
+                            />
+                          )}
+                          <span className="text-[11px] font-bold text-silver uppercase truncate">
+                            Goleadores {p.home_team}
                           </span>
-                        ))}
+                        </div>
+                        {homeScorers.length > 0 ? (
+                          <div className="space-y-1">
+                            {homeScorers.map((s, i) => (
+                              <div
+                                key={i}
+                                className="flex items-center justify-between bg-navy-mid/90 px-2.5 py-1 rounded-lg border border-border/40 text-xs"
+                              >
+                                <span className="text-white font-medium truncate flex items-center gap-1.5">
+                                  <span>⚽</span> {s.player_name}
+                                </span>
+                                <span className="text-gold font-bold font-mono text-[11px] shrink-0 ml-1.5">
+                                  {s.goals} {s.goals === 1 ? "gol" : "goles"}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-silver/50 text-[11px] italic">Sin goleadores pronosticados</p>
+                        )}
                       </div>
-                    )}
+
+                      {/* Away Scorers */}
+                      <div className="bg-navy-dark/70 rounded-xl p-2.5 border border-border/50">
+                        <div className="flex items-center gap-1.5 mb-1.5">
+                          {p.away_logo && (
+                            <img
+                              src={p.away_logo}
+                              alt=""
+                              width={16}
+                              height={16}
+                              loading="lazy"
+                              decoding="async"
+                              className="w-4 h-4 object-contain shrink-0"
+                            />
+                          )}
+                          <span className="text-[11px] font-bold text-silver uppercase truncate">
+                            Goleadores {p.away_team}
+                          </span>
+                        </div>
+                        {awayScorers.length > 0 ? (
+                          <div className="space-y-1">
+                            {awayScorers.map((s, i) => (
+                              <div
+                                key={i}
+                                className="flex items-center justify-between bg-navy-mid/90 px-2.5 py-1 rounded-lg border border-border/40 text-xs"
+                              >
+                                <span className="text-white font-medium truncate flex items-center gap-1.5">
+                                  <span>⚽</span> {s.player_name}
+                                </span>
+                                <span className="text-gold font-bold font-mono text-[11px] shrink-0 ml-1.5">
+                                  {s.goals} {s.goals === 1 ? "gol" : "goles"}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-silver/50 text-[11px] italic">Sin goleadores pronosticados</p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Match Result & Points Breakdown */}
                     {p.result_home !== null && (
                       <div className="mt-3 pt-3 border-t border-border/40 text-center">
                         <div className="flex items-center justify-center gap-2 mb-1.5">
@@ -352,6 +493,7 @@ export default function MisPronosticosPage() {
                         )}
                       </div>
                     )}
+                  </div>
                 </div>
               );
             })}
