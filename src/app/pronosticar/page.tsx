@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { leagueColors, leagueLogos, normalizeMatchLeague, normalizeTeamName, cleanTeamName, matchIdToUuid } from "@/lib/leagueConfig";
@@ -56,6 +56,50 @@ const positionRank = (pos: string) => {
   return 2;
 };
 
+function checkIsMatchLocked(matchDate: string, timeRef: number): boolean {
+  if (!timeRef) return false;
+  const matchTime = new Date(matchDate).getTime();
+  const diffMin = (matchTime - timeRef) / (1000 * 60);
+  if (isNaN(diffMin)) return true;
+  return diffMin <= 10;
+}
+
+function calculateTimeRemaining(
+  matchDate: string,
+  timeRef: number
+): { label: string; isUrgent: boolean; isClosed: boolean } {
+  if (!timeRef) return { label: "...", isUrgent: false, isClosed: false };
+  const matchTime = new Date(matchDate).getTime();
+  const diffMin = (matchTime - timeRef) / (1000 * 60);
+
+  if (isNaN(diffMin) || diffMin <= 10) {
+    return { label: "Cerrado", isUrgent: false, isClosed: true };
+  }
+  if (diffMin <= 60) {
+    const mins = Math.max(1, Math.round(diffMin - 10));
+    return { label: `Cierra en ${mins} min`, isUrgent: true, isClosed: false };
+  }
+  if (diffMin <= 1440) {
+    const hours = Math.round((diffMin - 10) / 60);
+    return { label: `Cierra en ${hours} h`, isUrgent: false, isClosed: false };
+  }
+  const days = Math.round(diffMin / 1440);
+  return { label: `En ${days} d`, isUrgent: false, isClosed: false };
+}
+
+function subscribeToTimer(callback: () => void) {
+  const interval = setInterval(callback, 30000);
+  return () => clearInterval(interval);
+}
+
+function getTimeSnapshot() {
+  return typeof window !== "undefined" ? Math.floor(Date.now() / 10000) * 10000 : 0;
+}
+
+function getServerTimeSnapshot() {
+  return 0;
+}
+
 export default function PronosticarPage() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
@@ -68,7 +112,7 @@ export default function PronosticarPage() {
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
-  const [dataSource, setDataSource] = useState<"api" | "supabase">("api");
+  const now = useSyncExternalStore(subscribeToTimer, getTimeSnapshot, getServerTimeSnapshot);
 
   const loadPlayersForMatches = async (teamNames: string[]) => {
     // 1. Get official updated 2026/27 squads (3,031 players)
@@ -416,36 +460,9 @@ export default function PronosticarPage() {
     });
   };
 
-  const isMatchLocked = (matchDate: string): boolean => {
-    const matchTime = new Date(matchDate).getTime();
-    const diffMin = (matchTime - Date.now()) / (1000 * 60);
-    if (isNaN(diffMin)) return true;
-    return diffMin <= 10;
-  };
-
-  const getTimeRemaining = (
-    matchDate: string
-  ): { label: string; isUrgent: boolean; isClosed: boolean } => {
-    const matchTime = new Date(matchDate).getTime();
-    const diffMin = (matchTime - Date.now()) / (1000 * 60);
-
-    if (isNaN(diffMin) || diffMin <= 10) {
-      return { label: "Cerrado", isUrgent: false, isClosed: true };
-    }
-    if (diffMin <= 60) {
-      const mins = Math.max(1, Math.round(diffMin - 10));
-      return { label: `Cierra en ${mins} min`, isUrgent: true, isClosed: false };
-    }
-    if (diffMin <= 1440) {
-      const hours = Math.round((diffMin - 10) / 60);
-      return { label: `Cierra en ${hours} h`, isUrgent: false, isClosed: false };
-    }
-    const days = Math.round(diffMin / 1440);
-    return { label: `En ${days} d`, isUrgent: false, isClosed: false };
-  };
-
   const handleSave = async () => {
     if (!user) return;
+    const saveTimestamp = Date.now();
     setSaving(true);
     setError("");
     setSuccess(false);
@@ -453,7 +470,7 @@ export default function PronosticarPage() {
     try {
       const unlockedMatches = Object.keys(predictions).filter((matchId) => {
         const match = matches.find((m) => m.id === matchId);
-        return match && !isMatchLocked(match.match_date);
+        return match && !checkIsMatchLocked(match.match_date, saveTimestamp);
       });
 
       const storageKey = `interliga_predictions_${user.id}`;
@@ -477,7 +494,7 @@ export default function PronosticarPage() {
         const awayScore = pred.away_score === "" ? 0 : parseInt(pred.away_score);
 
         // Mark as saved with client ID if none
-        const currentPredId = pred.prediction_id || `pred-${Date.now()}-${matchId}`;
+        const currentPredId = pred.prediction_id || `pred-${saveTimestamp}-${matchId}`;
         updatedPreds[matchId] = {
           ...pred,
           prediction_id: currentPredId,
@@ -646,8 +663,8 @@ export default function PronosticarPage() {
             <div className="space-y-6">
               {matches.map((match) => {
                 const pred = predictions[match.id];
-                const locked = isMatchLocked(match.match_date);
-                const timeRemaining = getTimeRemaining(match.match_date);
+                const locked = checkIsMatchLocked(match.match_date, now);
+                const timeRemaining = calculateTimeRemaining(match.match_date, now);
                 const leagueColor = leagueColors[match.league] || "#1e2d4a";
                 const homePlayers = getPlayersForTeam(match.home_team);
                 const awayPlayers = getPlayersForTeam(match.away_team);
