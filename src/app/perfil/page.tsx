@@ -146,15 +146,18 @@ export default function PerfilPage() {
           </div>
 
           <div>
-            <label className="block text-silver text-xs mb-1.5">Nombre para mostrar</label>
+            <label className="block text-silver text-xs mb-1.5 font-medium">Nombre de usuario (Apodo en el concurso)</label>
             <input
               type="text"
               value={displayName}
               maxLength={40}
               onChange={(e) => setDisplayName(e.target.value)}
               className="w-full bg-navy-card border border-border rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-gold transition-colors"
-              placeholder="Tu nombre en el concurso"
+              placeholder="Ej: JuanRaudel, LucasDT, Franco10"
             />
+            <span className="text-[11px] text-silver/70 mt-1 block">
+              Este nombre de usuario es el que aparecerá en la tabla de posiciones, podio y estadísticas del concurso.
+            </span>
           </div>
 
           {error && (
