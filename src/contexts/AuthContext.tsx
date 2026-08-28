@@ -18,6 +18,26 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+function translateAuthError(errMessage: string): string {
+  const msg = (errMessage || "").toLowerCase();
+  if (msg.includes("rate limit") || msg.includes("over_email_send_rate_limit") || msg.includes("too many requests")) {
+    return "Límite de seguridad alcanzado: Por protección contra spam, Supabase requiere esperar 1 a 2 minutos antes de volver a enviar un correo de confirmación a esta cuenta.";
+  }
+  if (msg.includes("already registered") || msg.includes("user already exists")) {
+    return "Este correo ya está registrado en el sistema. Puedes iniciar sesión o recuperar tu contraseña.";
+  }
+  if (msg.includes("invalid login credentials") || msg.includes("invalid_credentials")) {
+    return "Correo o contraseña incorrectos.";
+  }
+  if (msg.includes("password should be at least")) {
+    return "La contraseña debe tener al menos 6 caracteres.";
+  }
+  if (msg.includes("email address is invalid") || msg.includes("invalid email")) {
+    return "El formato del correo electrónico no es válido.";
+  }
+  return errMessage;
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [displayName, setDisplayName] = useState<string | null>(null);
@@ -97,7 +117,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         },
       },
     });
-    if (error) return { error: error.message };
+    if (error) return { error: translateAuthError(error.message) };
 
     if (data.user) {
       try {
@@ -119,7 +139,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) return { error: error.message };
+    if (error) return { error: translateAuthError(error.message) };
     if (data.user) {
       await fetchProfile(data.user);
     }
