@@ -29,6 +29,8 @@
 - **2026-08-26** — **Motor de scoring en `src/lib/scoring.ts`**: Implementa las 5 reglas de puntuación con normalización de nombres de jugadores (tildes/mayúsculas) para calcular puntos tanto en `/mis-pronosticos` como en `/ranking`.
 - **2026-08-26** — **Consultas desacopladas en Supabase (`src/app/ranking/page.tsx`)**: Se reemplazó la consulta unida `select("..., profiles(display_name)")` (que fallaba con `PGRST200`) por consultas independientes coordinadas por `user_id`.
 
+- **2026-08-28** — **Diagnóstico y Herramienta de Evaluación de Partidos y Puntuación (`scripts/evaluate-matches.js`)**: Se documentó e implementó el flujo completo de evaluación de pronósticos. Se añadió banner explicativo de "Partido pendiente de juego" en `/mis-pronosticos` para partidos no finalizados (`result_home === null`), y se creó el script `scripts/evaluate-matches.js` para registrar resultados de partidos y calcular puntos con el motor `calculateScore`.
+
 ## Estado Actual
 
 - **Branch:** `main`.
@@ -38,6 +40,8 @@
 ## Cambios Recientes
 
 - **2026-08-28**:
+  - Explicación y mejora UX en `/mis-pronosticos` indicando que los puntos se calcularán al finalizar el partido.
+  - Creación de `scripts/evaluate-matches.js` para evaluación y carga de marcadores reales.
   - Traducción inteligente de errores de Supabase Auth en `src/contexts/AuthContext.tsx`.
   - Reducción del tiempo de cierre de pronósticos a 1 minuto antes del partido en `src/app/pronosticar/page.tsx`.
   - Implementación completa del plan de Superviviente Knockout (Tasks 1 a 6):
@@ -53,6 +57,6 @@
 
 ## Próximos Pasos / Ideas Futuras
 
-- [ ] Cargar usuarios y resultados reales a medida que avance el calendario deportivo.
+- [ ] Cargar resultados reales de partidos conforme concluyan en la vida real para otorgar puntos.
 - [ ] Opcional: Agregar selector de jornadas pasadas en las tablas de ligas.
 

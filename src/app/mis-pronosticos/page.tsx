@@ -702,7 +702,7 @@ export default function MisPronosticosPage() {
                     </div>
 
                     {/* Match Result & Points Breakdown */}
-                    {p.result_home !== null && (
+                    {p.result_home !== null ? (
                       <div className="mt-3 pt-3 border-t border-border/40 text-center">
                         <div className="flex items-center justify-center gap-2 mb-1.5">
                           <span className="text-silver text-xs">
@@ -726,6 +726,11 @@ export default function MisPronosticosPage() {
                             ))}
                           </div>
                         )}
+                      </div>
+                    ) : (
+                      <div className="mt-3 pt-2.5 border-t border-border/40 flex items-center justify-center gap-2 text-[11px] text-silver/80">
+                        <span className="inline-block w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                        <span>Partido pendiente de juego · Los puntos se calcularán automáticamente al finalizar el encuentro</span>
                       </div>
                     )}
                   </div>
