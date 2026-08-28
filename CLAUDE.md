@@ -35,9 +35,10 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - `src/data/officialPlayers.json` — 3.031 jugadores 2026/27 de 95 clubes con posiciones traducidas
 - `src/lib/supabase.ts` — Cliente Supabase
 - `src/lib/leagueConfig.ts` — Colores, logos, normalizadores `normalizeMatchLeague` y `normalizeTeamName`
-- `src/lib/footballData.ts` — `getOfficialTeamMatches`, `getOfficialPlayersForTeams` con API en vivo + fallback
 - `src/lib/scoring.ts` — Motor de cálculo de puntos
 - `src/contexts/AuthContext.tsx` — Context de autenticación, sync de perfiles y `deleteAccount`
+- `supabase/schema.sql` — Script DDL maestro con las 6 tablas, 13 índices, RLS, triggers y 89 equipos oficiales
+- `DISASTER_RECOVERY_AND_SCHEMA.md` — Manual de restauración paso a paso ante pérdida total
 - `next.config.ts` — basePath para GitHub Pages
 
 ## Autenticación y Base de Datos

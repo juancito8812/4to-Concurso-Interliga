@@ -137,6 +137,14 @@ NEXT_PUBLIC_FOOTBALL_DATA_KEY=733c2feed2bf441292e9779c91af2e09
 
 ---
 
+## 🗄️ Base de Datos y Recuperación ante Desastres
+
+El repositorio incluye el **script maestro DDL y semilla SQL** en [`supabase/schema.sql`](./supabase/schema.sql) y el manual completo de recuperación:
+
+👉 **[Consulte el Manual de Restauración Total (DISASTER_RECOVERY_AND_SCHEMA.md)](./DISASTER_RECOVERY_AND_SCHEMA.md)** para recrear el 100% de la base de datos, índices de rendimiento, triggers y políticas RLS en caso de migración o pérdida total.
+
+---
+
 ## 🚀 Despliegue en Producción
 
 El despliegue es completamente automático vía **GitHub Actions** al hacer push a la rama `main`.

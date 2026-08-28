@@ -57,6 +57,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `src/lib/espnApi.ts` | Cliente ESPN API para tablas de posiciones |
 | `src/lib/scoring.ts` | Motor de cálculo de puntajes del concurso |
 | `src/contexts/AuthContext.tsx` | Context de autenticación, perfil en vivo y `deleteAccount` |
+| `supabase/schema.sql` | Esquema DDL maestro con 6 tablas, 13 índices, RLS, triggers y 89 equipos |
+| `DISASTER_RECOVERY_AND_SCHEMA.md` | Manual maestro de restauración total ante desastres |
 
 ### Base de datos (Supabase PostgreSQL)
 
