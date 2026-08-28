@@ -29,19 +29,22 @@
 - **2026-08-26** — **Motor de scoring en `src/lib/scoring.ts`**: Implementa las 5 reglas de puntuación con normalización de nombres de jugadores (tildes/mayúsculas) para calcular puntos tanto en `/mis-pronosticos` como en `/ranking`.
 - **2026-08-26** — **Consultas desacopladas en Supabase (`src/app/ranking/page.tsx`)**: Se reemplazó la consulta unida `select("..., profiles(display_name)")` (que fallaba con `PGRST200`) por consultas independientes coordinadas por `user_id`.
 
-- **2026-08-28** — **Diagnóstico y Herramienta de Evaluación de Partidos y Puntuación (`scripts/evaluate-matches.js`)**: Se documentó e implementó el flujo completo de evaluación de pronósticos. Se añadió banner explicativo de "Partido pendiente de juego" en `/mis-pronosticos` para partidos no finalizados (`result_home === null`), y se creó el script `scripts/evaluate-matches.js` para registrar resultados de partidos y calcular puntos con el motor `calculateScore`.
+- **2026-08-28** — **Evaluación Oficial de Milanarg (5 pts, AC Milan 2-0 Venezia)**: Se procesó la predicción de `Milanarg` (`3-0`, goles de Gonçalo Ramos y Rabiot) frente al resultado oficial `2-0` (gol de Gonçalo Ramos). Obtuvo +3 por signo, +1 por diferencia de 1 gol y +1 por goleador acertado (total: 5 puntos), posicionándolo como líder en el ranking.
 
 ## Estado Actual
 
-- **Branch:** `main`.
+- **Branch:** `main` (desplegado a GitHub Pages).
 - **Build Status:** `npm run build` y `npm run lint` pasando con 0 errores (19 rutas estáticas generadas).
-- **Deploy:** Despliegue automatizado en GitHub Pages.
+- **Deploy:** GitHub Actions activado con éxito en `main`.
 
 ## Cambios Recientes
 
 - **2026-08-28**:
+  - Evaluación y asignación oficial de 5 puntos a `Milanarg` (AC Milan vs Venezia).
+  - Creación de almacén de partidos evaluados (`src/data/officialEvaluatedMatches.json` y `src/data/officialEvaluatedPredictions.json`).
+  - Actualización de documentación ([`README.md`](file:///home/jr/Documentos/programacion/4to-Concurso-Interliga/README.md), [`CLAUDE.md`](file:///home/jr/Documentos/programacion/4to-Concurso-Interliga/CLAUDE.md), [`AGENTS.md`](file:///home/jr/Documentos/programacion/4to-Concurso-Interliga/AGENTS.md), [`DISASTER_RECOVERY_AND_SCHEMA.md`](file:///home/jr/Documentos/programacion/4to-Concurso-Interliga/DISASTER_RECOVERY_AND_SCHEMA.md)).
   - Explicación y mejora UX en `/mis-pronosticos` indicando que los puntos se calcularán al finalizar el partido.
-  - Creación de `scripts/evaluate-matches.js` para evaluación y carga de marcadores reales.
+  - Creación de `scripts/evaluate-matches.js` y `scripts/assign-points.js` para evaluación y carga de marcadores reales.
   - Traducción inteligente de errores de Supabase Auth en `src/contexts/AuthContext.tsx`.
   - Reducción del tiempo de cierre de pronósticos a 1 minuto antes del partido en `src/app/pronosticar/page.tsx`.
   - Implementación completa del plan de Superviviente Knockout (Tasks 1 a 6):
