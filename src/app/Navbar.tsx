@@ -6,7 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 
 export default function Navbar() {
-  const { user, signOut } = useAuth();
+  const { user, displayName, signOut } = useAuth();
   const [teamName, setTeamName] = useState("");
   const [teamLogo, setTeamLogo] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -89,7 +89,7 @@ export default function Navbar() {
                   ) : (
                     <span className="text-xs">⚽</span>
                   )}
-                  <span className="max-w-[80px] sm:max-w-[100px] truncate">{user.email?.split("@")[0]}</span>
+                  <span className="max-w-[80px] sm:max-w-[110px] truncate">{displayName || user.email?.split("@")[0]}</span>
                   <span className={`text-[9px] transition-transform duration-200 ${menuOpen ? "rotate-180" : ""}`}>▼</span>
                 </button>
                 <div
@@ -97,8 +97,12 @@ export default function Navbar() {
                     menuOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"
                   }`}
                 >
+                  <div className="px-4 py-2.5 border-b border-border/70">
+                    <p className="text-xs text-white font-bold truncate">{displayName || "Participante"}</p>
+                    <p className="text-[10px] text-silver truncate">{user.email}</p>
+                  </div>
                   {teamName && (
-                    <div className="px-4 py-2.5 border-b border-border/70 flex items-center gap-2">
+                    <div className="px-4 py-2.5 border-b border-border/70 flex items-center gap-2 bg-navy-card/50">
                       {teamLogo && <img src={teamLogo} alt="" className="w-4 h-4 rounded-full object-contain bg-white p-0.5" />}
                       <span className="text-xs text-silver font-medium truncate">{teamName}</span>
                     </div>

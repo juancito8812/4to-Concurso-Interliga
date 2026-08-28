@@ -54,7 +54,7 @@ interface ScorerRow {
 }
 
 export default function RankingPage() {
-  const { user } = useAuth();
+  const { user, displayName } = useAuth();
   const [rankings, setRankings] = useState<RankingEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"general" | "plenos" | "efectividad">("general");
@@ -211,7 +211,7 @@ export default function RankingPage() {
             if (!userStats[user.id]) {
               userStats[user.id] = {
                 user_id: user.id,
-                display_name: user.email?.split("@")[0] || "Mi Usuario",
+                display_name: displayName || user.user_metadata?.display_name || user.email?.split("@")[0] || "Mi Usuario",
                 total_points: 0,
                 exact_scores: 0,
                 predictions_count: 0,

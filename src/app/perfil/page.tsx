@@ -7,7 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 
 export default function PerfilPage() {
-  const { user, loading: authLoading } = useAuth();
+  const { user, refreshProfile, loading: authLoading } = useAuth();
   const router = useRouter();
   const [displayName, setDisplayName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -53,6 +53,7 @@ export default function PerfilPage() {
       setError("Error al guardar: " + error.message);
     } else {
       setDisplayName(sanitizedName);
+      await refreshProfile();
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     }

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function RegistroPage() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -17,6 +18,12 @@ export default function RegistroPage() {
     e.preventDefault();
     setError("");
 
+    const trimmedUser = username.trim();
+    if (trimmedUser.length < 2) {
+      setError("El nombre de usuario debe tener al menos 2 caracteres");
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError("Las contraseñas no coinciden");
       return;
@@ -28,7 +35,7 @@ export default function RegistroPage() {
     }
 
     setLoading(true);
-    const { error } = await signUp(email, password);
+    const { error } = await signUp(email, password, trimmedUser);
     setLoading(false);
 
     if (error) {
@@ -46,7 +53,7 @@ export default function RegistroPage() {
           <h1 className="text-2xl font-bold text-white mb-4">¡Revisa tu correo!</h1>
           <p className="text-silver text-sm mb-6">
             Te enviamos un link de confirmación a <span className="text-gold">{email}</span>.
-            Hacé clic en el link para activar tu cuenta.
+            Hacé clic en el link para activar tu cuenta de <strong className="text-white">{username}</strong>.
           </p>
           <Link href="/login" className="inline-block bg-gold text-navy-black font-bold px-6 py-3 rounded-full text-sm hover:bg-gold-light transition-colors">
             Ir a Iniciar Sesión
@@ -65,7 +72,24 @@ export default function RegistroPage() {
 
         <form onSubmit={handleSubmit} className="bg-navy-mid border border-border rounded-2xl p-6 sm:p-8 space-y-4">
           <div>
-            <label className="block text-silver text-xs mb-1.5">Correo electrónico</label>
+            <label className="block text-silver text-xs mb-1.5 font-medium">
+              Nombre de usuario <span className="text-gold">*</span>
+            </label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              minLength={2}
+              maxLength={30}
+              className="w-full bg-navy-card border border-border rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-gold transition-colors"
+              placeholder="Ej: JuanRaudel, LucasDT, Franco10"
+            />
+            <span className="text-[11px] text-silver/70 mt-1 block">Este nombre aparecerá en la tabla de posiciones y ranking</span>
+          </div>
+
+          <div>
+            <label className="block text-silver text-xs mb-1.5 font-medium">Correo electrónico <span className="text-gold">*</span></label>
             <input
               type="email"
               value={email}
@@ -77,7 +101,7 @@ export default function RegistroPage() {
           </div>
 
           <div>
-            <label className="block text-silver text-xs mb-1.5">Contraseña</label>
+            <label className="block text-silver text-xs mb-1.5 font-medium">Contraseña <span className="text-gold">*</span></label>
             <input
               type="password"
               value={password}
@@ -90,7 +114,7 @@ export default function RegistroPage() {
           </div>
 
           <div>
-            <label className="block text-silver text-xs mb-1.5">Confirmar contraseña</label>
+            <label className="block text-silver text-xs mb-1.5 font-medium">Confirmar contraseña <span className="text-gold">*</span></label>
             <input
               type="password"
               value={confirmPassword}
@@ -110,7 +134,7 @@ export default function RegistroPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gold text-navy-black font-bold py-3 rounded-full text-sm hover:bg-gold-light transition-colors disabled:opacity-50"
+            className="w-full bg-gold text-navy-black font-bold py-3 rounded-full text-sm hover:bg-gold-light transition-colors disabled:opacity-50 cursor-pointer shadow-md"
           >
             {loading ? "Creando cuenta..." : "Crear Cuenta"}
           </button>
