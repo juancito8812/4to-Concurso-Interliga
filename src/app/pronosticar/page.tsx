@@ -5,8 +5,22 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
-import { leagueColors, leagueLogos, normalizeMatchLeague, normalizeTeamName, cleanTeamName, matchIdToUuid } from "@/lib/leagueConfig";
+import {
+  leagueColors,
+  leagueLogos,
+  normalizeMatchLeague,
+  normalizeTeamName,
+  cleanTeamName,
+  matchIdToUuid,
+} from "@/lib/leagueConfig";
 import { getOfficialTeamMatches, getOfficialPlayersForTeams, FDMatch, findTeamId } from "@/lib/footballData";
+import {
+  getUserCupSurvivors,
+  setInitialCupSurvivor,
+  isKnockoutCup,
+  KnockoutCupSlug,
+  TournamentSurvivor,
+} from "@/lib/survivor";
 
 interface Match {
   id: string;
@@ -45,6 +59,22 @@ interface TeamInfo {
   name: string;
   league: string;
   logo_url: string;
+}
+
+function getKnockoutCupSlug(league: string): KnockoutCupSlug | null {
+  if (!isKnockoutCup(league)) return null;
+  const norm = league.toLowerCase().trim();
+  if (norm.includes("champions") || norm === "cl") return "champions";
+  if (norm.includes("europa") || norm === "el") return "europa";
+  if (norm.includes("conference") || norm === "ecl") return "conference";
+  if (
+    norm.includes("copa italia") ||
+    norm.includes("coppa") ||
+    norm === "ci" ||
+    norm === "coppaitalia"
+  )
+    return "coppaitalia";
+  return null;
 }
 
 const positionRank = (pos: string) => {
@@ -108,6 +138,11 @@ export default function PronosticarPage() {
   const [players, setPlayers] = useState<Player[]>([]);
   const [teamLogos, setTeamLogos] = useState<Record<string, string>>({});
   const [predictions, setPredictions] = useState<Record<string, Prediction>>({});
+  const [cupSurvivors, setCupSurvivors] = useState<Record<string, TournamentSurvivor>>({});
+  const [availableTeams, setAvailableTeams] = useState<TeamInfo[]>([]);
+  const [selectedInitialTeam, setSelectedInitialTeam] = useState<Record<string, string>>({});
+  const [settingCupTeam, setSettingCupTeam] = useState<string | null>(null);
+  const [cupTeamSuccess, setCupTeamSuccess] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -253,6 +288,31 @@ export default function PronosticarPage() {
 
       if (isMounted) setUserTeam(teamData);
 
+      // Fetch cup survivors state
+      try {
+        const userSurvivors = await getUserCupSurvivors(user.id);
+        if (isMounted) {
+          setCupSurvivors(userSurvivors || {});
+        }
+      } catch (err) {
+        console.warn("Error fetching cup survivors:", err);
+      }
+
+      // Fetch all teams for cup selection dropdown
+      try {
+        const { data: allTeamsData } = await supabase
+          .from("teams")
+          .select("id, name, league, logo_url")
+          .order("league")
+          .order("name");
+
+        if (allTeamsData && isMounted) {
+          setAvailableTeams(allTeamsData as TeamInfo[]);
+        }
+      } catch (err) {
+        console.warn("Error fetching all teams:", err);
+      }
+
       const apiTeamId = findTeamId(teamData.name);
 
       try {
@@ -358,6 +418,39 @@ export default function PronosticarPage() {
       isMounted = false;
     };
   }, [user, authLoading]);
+
+  const handleSetInitialCupTeam = async (cupSlug: KnockoutCupSlug, teamId: string) => {
+    if (!user || !teamId) return;
+    setSettingCupTeam(cupSlug);
+    setError("");
+
+    try {
+      const ok = await setInitialCupSurvivor(user.id, cupSlug, teamId);
+      if (ok) {
+        const updated = await getUserCupSurvivors(user.id);
+        setCupSurvivors(updated || {});
+        const chosenTeam = availableTeams.find((t) => t.id === teamId);
+        setCupTeamSuccess((prev) => ({
+          ...prev,
+          [cupSlug]: `¡Club ${chosenTeam?.name || ""} seleccionado como representante para esta copa!`,
+        }));
+        setTimeout(() => {
+          setCupTeamSuccess((prev) => {
+            const next = { ...prev };
+            delete next[cupSlug];
+            return next;
+          });
+        }, 4000);
+      } else {
+        setError("No se pudo registrar el club para la copa. Por favor, reintente.");
+      }
+    } catch (err) {
+      console.error("Error setting initial cup survivor:", err);
+      setError("Error al registrar el club para la copa");
+    } finally {
+      setSettingCupTeam(null);
+    }
+  };
 
   const getPlayersForTeam = (teamName: string) => {
     const norm = normalizeTeamName(teamName);
@@ -477,7 +570,11 @@ export default function PronosticarPage() {
     try {
       const unlockedMatches = Object.keys(predictions).filter((matchId) => {
         const match = matches.find((m) => m.id === matchId);
-        return match && !checkIsMatchLocked(match.match_date, saveTimestamp);
+        if (!match) return false;
+        if (checkIsMatchLocked(match.match_date, saveTimestamp)) return false;
+        const cupSlug = getKnockoutCupSlug(match.league);
+        if (cupSlug && cupSurvivors[cupSlug]?.status === "ELIMINATED") return false;
+        return true;
       });
 
       const storageKey = `interliga_predictions_${user.id}`;
@@ -679,6 +776,31 @@ export default function PronosticarPage() {
                 const homeLogo = match.home_logo || teamLogos[match.home_team] || "";
                 const awayLogo = match.away_logo || teamLogos[match.away_team] || "";
 
+                // Knockout Survivor Status Calculation
+                const cupSlug = getKnockoutCupSlug(match.league);
+                const isKnockout = !!cupSlug;
+                const cupRecord = cupSlug ? cupSurvivors[cupSlug] : undefined;
+
+                const isBaseTeamPlaying =
+                  normalizeTeamName(match.home_team) === normalizeTeamName(userTeam.name) ||
+                  normalizeTeamName(match.away_team) === normalizeTeamName(userTeam.name);
+
+                const hasCupRecord = !!cupRecord;
+                const isEliminated = isKnockout && cupRecord?.status === "ELIMINATED";
+                const eliminatedRound = cupRecord?.eliminated_at_round;
+
+                const hasActiveTeam = hasCupRecord || isBaseTeamPlaying;
+                const activeTeamName = cupRecord?.active_team_name || (isBaseTeamPlaying ? userTeam.name : "");
+                const activeTeamLogo = cupRecord?.active_team_logo || (isBaseTeamPlaying ? userTeam.logo_url : "");
+
+                const history = cupRecord?.history || [];
+                const lastTransfer = history.length > 0 ? history[history.length - 1] : null;
+                const inheritedFrom = lastTransfer
+                  ? lastTransfer.from_team || (lastTransfer as unknown as { from_team_name?: string }).from_team_name || null
+                  : null;
+
+                const isMatchDisabled = locked || isEliminated || (isKnockout && !hasActiveTeam);
+
                 const allScorers = pred?.scorers ?? [];
                 const homeScorerEntries = allScorers
                   .map((scorer, index) => ({ scorer, index }))
@@ -687,11 +809,22 @@ export default function PronosticarPage() {
                   .map((scorer, index) => ({ scorer, index }))
                   .filter((item) => item.scorer.team === "away");
 
+                const matchHomeTeamObj = availableTeams.find(
+                  (t) =>
+                    normalizeTeamName(t.name) === normalizeTeamName(match.home_team) ||
+                    cleanTeamName(t.name) === cleanTeamName(match.home_team)
+                );
+                const matchAwayTeamObj = availableTeams.find(
+                  (t) =>
+                    normalizeTeamName(t.name) === normalizeTeamName(match.away_team) ||
+                    cleanTeamName(t.name) === cleanTeamName(match.away_team)
+                );
+
                 return (
                   <div
                     key={match.id}
                     className={`rounded-2xl bg-navy-mid border border-border/80 shadow-xl overflow-hidden relative transition-all content-visibility-auto ${
-                      locked ? "opacity-75" : ""
+                      locked || isEliminated ? "opacity-80" : ""
                     }`}
                   >
                     {/* League Color Top Accent Bar */}
@@ -727,7 +860,21 @@ export default function PronosticarPage() {
 
                       {/* Prediction Status & Time Remaining Badges */}
                       <div className="flex items-center gap-2">
-                        {pred?.prediction_id ? (
+                        {isEliminated ? (
+                          <span
+                            className="inline-flex items-center gap-1 bg-red-500/20 border border-red-500/40 text-red-400 text-[11px] font-bold px-2.5 py-0.5 rounded-full shrink-0"
+                            title="Eliminado de esta competición. No se pueden enviar pronósticos."
+                          >
+                            <span>⛔</span> KO Eliminado
+                          </span>
+                        ) : isKnockout && !hasActiveTeam ? (
+                          <span
+                            className="inline-flex items-center gap-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[11px] font-bold px-2.5 py-0.5 rounded-full shrink-0"
+                            title="Debes elegir tu club representante antes de pronosticar"
+                          >
+                            <span>⚠️</span> Elegir Club
+                          </span>
+                        ) : pred?.prediction_id ? (
                           <span
                             className="inline-flex items-center gap-1 bg-green/15 border border-green/30 text-green text-[11px] font-bold px-2.5 py-0.5 rounded-full shrink-0"
                             title="Pronóstico guardado. Podés editarlo antes del cierre."
@@ -763,6 +910,162 @@ export default function PronosticarPage() {
                       </div>
                     </div>
 
+                    {/* Knockout Survivor Alert / Selector / Banner */}
+                    {isKnockout && cupSlug && (
+                      <div className="px-4 sm:px-6 pt-4 pb-1">
+                        {isEliminated ? (
+                          /* Eliminated Banner */
+                          <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div className="flex items-start sm:items-center gap-2.5 min-w-0">
+                              <span className="text-xl sm:text-2xl shrink-0">⛔</span>
+                              <div className="min-w-0">
+                                <div className="flex items-center gap-2 flex-wrap">
+                                  <span className="text-xs font-bold text-red-400 uppercase tracking-wider">
+                                    Eliminado de esta copa (KO)
+                                  </span>
+                                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-500/20 border border-red-500/40 text-red-400 text-[10px] font-black uppercase tracking-wider shrink-0">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+                                    KO
+                                  </span>
+                                  {eliminatedRound && (
+                                    <span className="text-silver/70 text-[11px]">
+                                      (en {eliminatedRound})
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-xs text-silver mt-1">
+                                  Has quedado eliminado de <strong className="text-white">{match.league}</strong> en una ronda anterior. No puedes enviar nuevos pronósticos para este torneo.
+                                </p>
+                              </div>
+                            </div>
+                            <span className="text-[11px] text-red-400 font-bold shrink-0 bg-red-500/15 px-3 py-1.5 rounded-lg border border-red-500/30 text-center">
+                              🔒 Pronósticos Bloqueados
+                            </span>
+                          </div>
+                        ) : !hasActiveTeam ? (
+                          /* Select Initial Representative Club Banner */
+                          <div className="bg-navy-card/90 border border-gold/40 rounded-xl p-4 sm:p-5 shadow-lg">
+                            <div className="flex items-start gap-3 mb-3">
+                              <span className="text-2xl shrink-0">🏆</span>
+                              <div>
+                                <h3 className="text-xs sm:text-sm font-bold text-gold flex items-center gap-1.5">
+                                  <span>Elegí tu club representante para {match.league}</span>
+                                </h3>
+                                <p className="text-xs text-silver mt-1 leading-relaxed">
+                                  Tu equipo base (<strong className="text-white">{userTeam.name}</strong>) no disputa este partido o copa. Seleccioná tu club representante para participar en el modo supervivencia.
+                                </p>
+                              </div>
+                            </div>
+
+                            {cupTeamSuccess[cupSlug] && (
+                              <div className="bg-green/15 border border-green/30 text-green text-xs font-semibold px-3 py-2 rounded-lg mb-3">
+                                {cupTeamSuccess[cupSlug]}
+                              </div>
+                            )}
+
+                            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+                              <select
+                                value={selectedInitialTeam[cupSlug] || ""}
+                                onChange={(e) =>
+                                  setSelectedInitialTeam((prev) => ({
+                                    ...prev,
+                                    [cupSlug]: e.target.value,
+                                  }))
+                                }
+                                className="flex-1 bg-navy-mid border border-border rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-gold truncate"
+                              >
+                                <option value="">Seleccionar club representante...</option>
+                                {(matchHomeTeamObj || matchAwayTeamObj) && (
+                                  <optgroup label="Clubes de este partido">
+                                    {matchHomeTeamObj && (
+                                      <option value={matchHomeTeamObj.id}>
+                                        {matchHomeTeamObj.name} ({match.league})
+                                      </option>
+                                    )}
+                                    {matchAwayTeamObj && (
+                                      <option value={matchAwayTeamObj.id}>
+                                        {matchAwayTeamObj.name} ({match.league})
+                                      </option>
+                                    )}
+                                  </optgroup>
+                                )}
+                                {Object.entries(
+                                  availableTeams.reduce<Record<string, TeamInfo[]>>((acc, t) => {
+                                    if (!acc[t.league]) acc[t.league] = [];
+                                    acc[t.league].push(t);
+                                    return acc;
+                                  }, {})
+                                ).map(([league, leagueTeams]) => (
+                                  <optgroup key={league} label={league}>
+                                    {leagueTeams.map((t) => (
+                                      <option key={t.id} value={t.id}>
+                                        {t.name}
+                                      </option>
+                                    ))}
+                                  </optgroup>
+                                ))}
+                              </select>
+
+                              <button
+                                type="button"
+                                disabled={!selectedInitialTeam[cupSlug] || settingCupTeam === cupSlug}
+                                onClick={() => handleSetInitialCupTeam(cupSlug, selectedInitialTeam[cupSlug])}
+                                className="bg-gold text-navy-black font-bold px-4 py-2 rounded-xl text-xs hover:bg-gold-light transition-colors disabled:opacity-50 shrink-0 cursor-pointer disabled:cursor-not-allowed flex items-center justify-center gap-1.5 shadow-md"
+                              >
+                                {settingCupTeam === cupSlug ? (
+                                  <>
+                                    <span className="w-3 h-3 border-2 border-navy-black border-t-transparent rounded-full animate-spin" />
+                                    <span>Guardando...</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <span>✓</span>
+                                    <span>Confirmar Club</span>
+                                  </>
+                                )}
+                              </button>
+                            </div>
+                          </div>
+                        ) : (
+                          /* Active Survivor Banner */
+                          <div className="bg-gold/10 border border-gold/30 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div className="flex items-start sm:items-center gap-2.5 min-w-0">
+                              <span className="text-xl sm:text-2xl shrink-0">⚔️</span>
+                              <div className="min-w-0">
+                                <div className="flex items-center gap-2 flex-wrap">
+                                  <span className="text-xs font-bold text-gold uppercase tracking-wider">
+                                    Modo Eliminación Directa
+                                  </span>
+                                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green/15 border border-green/30 text-green text-[10px] font-black uppercase tracking-wider shrink-0">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
+                                    VIVO
+                                  </span>
+                                  {inheritedFrom && (
+                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gold/15 border border-gold/30 text-gold text-[10px] font-bold shrink-0">
+                                      👑 Heredado de {inheritedFrom}
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-xs text-silver mt-1">
+                                  Tu club en esta copa es <strong className="text-white font-bold">{activeTeamName}</strong>. Si pronosticas que gana el rival y aciertas, ¡heredarás su camiseta!
+                                </p>
+                              </div>
+                            </div>
+                            {activeTeamLogo && (
+                              <div className="flex items-center gap-2 shrink-0 self-start sm:self-center bg-navy-card/90 border border-border/80 px-2.5 py-1.5 rounded-lg shadow-sm">
+                                <img
+                                  src={activeTeamLogo}
+                                  alt={activeTeamName}
+                                  className="w-5 h-5 rounded-full object-contain bg-white p-0.5 shrink-0"
+                                />
+                                <span className="text-xs font-bold text-white truncate max-w-[130px]">{activeTeamName}</span>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
                     {/* Central Scoreboard (Estilo Transmisión TV) */}
                     <div className="px-4 sm:px-6 py-5 sm:py-6">
                       <div className="flex items-center justify-between gap-2 sm:gap-4">
@@ -786,12 +1089,12 @@ export default function PronosticarPage() {
                             type="number"
                             min={0}
                             max={20}
-                            disabled={locked}
+                            disabled={isMatchDisabled}
                             value={pred?.home_score ?? ""}
                             onChange={(e) => handleScoreChange(match.id, "home_score", e.target.value)}
                             placeholder="-"
                             className={`w-11 h-11 sm:w-14 sm:h-14 bg-navy-card border rounded-xl text-center text-white text-xl sm:text-2xl font-black shrink-0 transition-all ${
-                              locked
+                              isMatchDisabled
                                 ? "border-border/40 text-silver/50 bg-navy-card/40 cursor-not-allowed"
                                 : "border-border focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold hover:border-gold/40 shadow-inner"
                             }`}
@@ -811,12 +1114,12 @@ export default function PronosticarPage() {
                             type="number"
                             min={0}
                             max={20}
-                            disabled={locked}
+                            disabled={isMatchDisabled}
                             value={pred?.away_score ?? ""}
                             onChange={(e) => handleScoreChange(match.id, "away_score", e.target.value)}
                             placeholder="-"
                             className={`w-11 h-11 sm:w-14 sm:h-14 bg-navy-card border rounded-xl text-center text-white text-xl sm:text-2xl font-black shrink-0 transition-all ${
-                              locked
+                              isMatchDisabled
                                 ? "border-border/40 text-silver/50 bg-navy-card/40 cursor-not-allowed"
                                 : "border-border focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold hover:border-gold/40 shadow-inner"
                             }`}
@@ -868,7 +1171,7 @@ export default function PronosticarPage() {
                               {homeScorerEntries.map(({ scorer, index }) => (
                                 <div key={`home-scorer-${index}`} className="flex items-center gap-1.5">
                                   <select
-                                    disabled={locked}
+                                    disabled={isMatchDisabled}
                                     value={scorer.player_name}
                                     onChange={(e) => updateScorer(match.id, index, "player_name", e.target.value)}
                                     className="flex-1 min-w-0 bg-navy-card border border-border rounded-lg px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-gold truncate disabled:opacity-60 disabled:cursor-not-allowed"
@@ -887,7 +1190,7 @@ export default function PronosticarPage() {
                                       <span className="text-[11px] select-none text-silver">⚽</span>
                                       <button
                                         type="button"
-                                        disabled={locked || scorer.goals <= 1}
+                                        disabled={isMatchDisabled || scorer.goals <= 1}
                                         onClick={() => updateScorer(match.id, index, "goals", Math.max(1, scorer.goals - 1))}
                                         className="w-5 h-5 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
                                         title="Menos goles"
@@ -897,7 +1200,7 @@ export default function PronosticarPage() {
                                       <span className="text-gold text-xs font-black min-w-3 text-center">{scorer.goals}</span>
                                       <button
                                         type="button"
-                                        disabled={locked || scorer.goals >= 10}
+                                        disabled={isMatchDisabled || scorer.goals >= 10}
                                         onClick={() => updateScorer(match.id, index, "goals", Math.min(10, scorer.goals + 1))}
                                         className="w-5 h-5 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
                                         title="Más goles"
@@ -908,7 +1211,7 @@ export default function PronosticarPage() {
                                   ) : null}
 
                                   {/* Remove Button */}
-                                  {!locked && (
+                                  {!isMatchDisabled && (
                                     <button
                                       type="button"
                                       onClick={() => removeScorer(match.id, index)}
@@ -925,7 +1228,7 @@ export default function PronosticarPage() {
                         </div>
 
                         {/* Add Home Scorer Button */}
-                        {homeScorerEntries.length < 3 && !locked && (
+                        {homeScorerEntries.length < 3 && !isMatchDisabled && (
                           <button
                             type="button"
                             onClick={() => addScorerSlot(match.id, "home")}
@@ -963,7 +1266,7 @@ export default function PronosticarPage() {
                               {awayScorerEntries.map(({ scorer, index }) => (
                                 <div key={`away-scorer-${index}`} className="flex items-center gap-1.5">
                                   <select
-                                    disabled={locked}
+                                    disabled={isMatchDisabled}
                                     value={scorer.player_name}
                                     onChange={(e) => updateScorer(match.id, index, "player_name", e.target.value)}
                                     className="flex-1 min-w-0 bg-navy-card border border-border rounded-lg px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-gold truncate disabled:opacity-60 disabled:cursor-not-allowed"
@@ -982,7 +1285,7 @@ export default function PronosticarPage() {
                                       <span className="text-[11px] select-none text-silver">⚽</span>
                                       <button
                                         type="button"
-                                        disabled={locked || scorer.goals <= 1}
+                                        disabled={isMatchDisabled || scorer.goals <= 1}
                                         onClick={() => updateScorer(match.id, index, "goals", Math.max(1, scorer.goals - 1))}
                                         className="w-5 h-5 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
                                         title="Menos goles"
@@ -992,7 +1295,7 @@ export default function PronosticarPage() {
                                       <span className="text-gold text-xs font-black min-w-3 text-center">{scorer.goals}</span>
                                       <button
                                         type="button"
-                                        disabled={locked || scorer.goals >= 10}
+                                        disabled={isMatchDisabled || scorer.goals >= 10}
                                         onClick={() => updateScorer(match.id, index, "goals", Math.min(10, scorer.goals + 1))}
                                         className="w-5 h-5 rounded text-silver hover:text-white hover:bg-navy-mid flex items-center justify-center font-bold text-xs disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
                                         title="Más goles"
@@ -1003,7 +1306,7 @@ export default function PronosticarPage() {
                                   ) : null}
 
                                   {/* Remove Button */}
-                                  {!locked && (
+                                  {!isMatchDisabled && (
                                     <button
                                       type="button"
                                       onClick={() => removeScorer(match.id, index)}
@@ -1020,7 +1323,7 @@ export default function PronosticarPage() {
                         </div>
 
                         {/* Add Away Scorer Button */}
-                        {awayScorerEntries.length < 3 && !locked && (
+                        {awayScorerEntries.length < 3 && !isMatchDisabled && (
                           <button
                             type="button"
                             onClick={() => addScorerSlot(match.id, "away")}
