@@ -56,7 +56,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex items-center gap-1.5 sm:gap-3">
           {user ? (
             <>
               <Link
@@ -82,14 +82,14 @@ export default function Navbar() {
                   onClick={() => setMenuOpen((prev) => !prev)}
                   aria-expanded={menuOpen}
                   aria-haspopup="true"
-                  className="bg-gold text-navy-black font-bold px-3.5 py-1.5 rounded-full text-xs hover:bg-gold-light transition-all flex items-center gap-2 shadow-sm cursor-pointer"
+                  className="bg-gold text-navy-black font-bold px-3 py-1.5 rounded-full text-xs hover:bg-gold-light transition-all flex items-center gap-1.5 sm:gap-2 shadow-sm cursor-pointer"
                 >
                   {teamLogo ? (
-                    <img src={teamLogo} alt={teamName} className="w-5 h-5 rounded-full object-contain bg-white p-0.5" />
+                    <img src={teamLogo} alt={teamName} className="w-4 h-4 sm:w-5 sm:h-5 rounded-full object-contain bg-white p-0.5" />
                   ) : (
                     <span className="text-xs">⚽</span>
                   )}
-                  <span className="max-w-[100px] truncate">{user.email?.split("@")[0]}</span>
+                  <span className="max-w-[80px] sm:max-w-[100px] truncate">{user.email?.split("@")[0]}</span>
                   <span className={`text-[9px] transition-transform duration-200 ${menuOpen ? "rotate-180" : ""}`}>▼</span>
                 </button>
                 <div
@@ -146,14 +146,21 @@ export default function Navbar() {
           ) : (
             <>
               <Link
-                href="/login/"
-                className="text-silver text-xs font-semibold hover:text-white transition-colors"
+                href="/ranking/"
+                className="text-silver text-xs font-semibold hover:text-white transition-colors flex items-center gap-1 px-1.5 py-1"
               >
-                Iniciar Sesión
+                <span>🏆</span>
+                <span className="hidden sm:inline">Ranking</span>
+              </Link>
+              <Link
+                href="/login/"
+                className="text-silver text-xs font-semibold hover:text-white transition-colors px-2 py-1"
+              >
+                Ingresar
               </Link>
               <Link
                 href="/registro/"
-                className="bg-gold text-navy-black font-bold px-4 py-1.5 rounded-full text-xs hover:bg-gold-light transition-all shadow-sm"
+                className="bg-gold text-navy-black font-bold px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-xs hover:bg-gold-light transition-all shadow-sm shrink-0"
               >
                 Registrarse
               </Link>

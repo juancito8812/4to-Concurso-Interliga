@@ -787,16 +787,16 @@ export default function RankingPage() {
             {/* Complete Leaderboard Table */}
             <div className="bg-navy-mid border border-border rounded-2xl overflow-hidden shadow-xl content-visibility-auto">
               <div className="overflow-x-auto">
-                <table className="w-full min-w-[520px]">
+                <table className="w-full">
                   <thead>
-                    <tr className="border-b border-border text-[11px] text-silver uppercase bg-navy-card/60 tracking-wider">
-                      <th className="px-3 sm:px-4 py-3.5 text-center w-12 sm:w-16">Puesto</th>
-                      <th className="px-3 sm:px-4 py-3.5 text-left">Participante & Club</th>
-                      <th className="px-3 sm:px-4 py-3.5 text-center w-20">PJ</th>
-                      <th className="px-3 sm:px-4 py-3.5 text-center w-24">Plenos</th>
+                    <tr className="border-b border-border text-[10px] sm:text-[11px] text-silver uppercase bg-navy-card/60 tracking-wider">
+                      <th className="px-2 sm:px-4 py-3 text-center w-9 sm:w-16">#</th>
+                      <th className="px-2 sm:px-4 py-3 text-left">Participante & Club</th>
+                      <th className="hidden sm:table-cell px-3 sm:px-4 py-3.5 text-center w-20">PJ</th>
+                      <th className="hidden sm:table-cell px-3 sm:px-4 py-3.5 text-center w-24">Plenos</th>
                       <th className="hidden sm:table-cell px-3 sm:px-4 py-3.5 text-center w-24">Signos</th>
                       <th className="hidden md:table-cell px-3 sm:px-4 py-3.5 text-center w-24">Goleadores</th>
-                      <th className="px-4 sm:px-6 py-3.5 text-center w-24 sm:w-28 font-bold text-gold">PUNTOS</th>
+                      <th className="px-3 sm:px-6 py-3 text-right sm:text-center w-16 sm:w-28 font-black text-gold">PTS</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border/40">
@@ -816,9 +816,9 @@ export default function RankingPage() {
                           }`}
                         >
                           {/* Puesto */}
-                          <td className="px-3 sm:px-4 py-3.5 text-center">
+                          <td className="px-2 sm:px-4 py-3 sm:py-3.5 text-center">
                             <span
-                              className={`text-sm sm:text-base font-black font-mono ${
+                              className={`text-xs sm:text-base font-black font-mono ${
                                 displayRank === 1
                                   ? "text-gold"
                                   : displayRank === 2
@@ -833,8 +833,8 @@ export default function RankingPage() {
                           </td>
 
                           {/* Participante & Club */}
-                          <td className="px-3 sm:px-4 py-3.5">
-                            <div className="flex items-center gap-3">
+                          <td className="px-2 sm:px-4 py-3 sm:py-3.5">
+                            <div className="flex items-center gap-2 sm:gap-3">
                               {r.team_logo ? (
                                 <img
                                   src={r.team_logo}
@@ -843,15 +843,15 @@ export default function RankingPage() {
                                   height={28}
                                   loading="lazy"
                                   decoding="async"
-                                  className="w-7 h-7 rounded-full object-contain bg-white p-0.5 shrink-0 shadow-sm"
+                                  className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-contain bg-white p-0.5 shrink-0 shadow-sm"
                                 />
                               ) : (
-                                <div className="w-7 h-7 rounded-full bg-navy-card border border-border flex items-center justify-center text-xs text-silver shrink-0">
+                                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-navy-card border border-border flex items-center justify-center text-xs text-silver shrink-0">
                                   ⚽
                                 </div>
                               )}
-                              <div className="min-w-0">
-                                <div className="flex items-center gap-2">
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-center gap-1.5">
                                   <span className="text-white text-xs sm:text-sm font-bold truncate block">
                                     {r.display_name}
                                   </span>
@@ -865,21 +865,28 @@ export default function RankingPage() {
                                   )}
                                 </div>
                                 {r.team_name && (
-                                  <span className="text-[11px] text-silver/80 truncate block">
+                                  <span className="text-[10px] sm:text-[11px] text-silver/80 truncate block">
                                     {r.team_name}
                                   </span>
                                 )}
+                                {/* Mobile-only compact stats chips */}
+                                <div className="flex sm:hidden items-center gap-2 mt-0.5 text-[10px] text-silver/70 font-mono">
+                                  <span>{r.predictions_count} PJ</span>
+                                  {r.exact_scores > 0 && (
+                                    <span className="text-gold font-semibold">{r.exact_scores} 🎯</span>
+                                  )}
+                                </div>
                               </div>
                             </div>
                           </td>
 
-                          {/* PJ (Pronósticos Jugados) */}
-                          <td className="px-3 sm:px-4 py-3.5 text-center text-silver text-xs font-mono">
+                          {/* PJ (Pronósticos Jugados) - Desktop/Tablet */}
+                          <td className="hidden sm:table-cell px-3 sm:px-4 py-3.5 text-center text-silver text-xs font-mono">
                             {r.predictions_count}
                           </td>
 
-                          {/* Plenos */}
-                          <td className="px-3 sm:px-4 py-3.5 text-center">
+                          {/* Plenos - Desktop/Tablet */}
+                          <td className="hidden sm:table-cell px-3 sm:px-4 py-3.5 text-center">
                             {r.exact_scores > 0 ? (
                               <span className="text-gold font-bold font-mono text-xs sm:text-sm bg-gold/10 px-2 py-0.5 rounded-full border border-gold/20">
                                 {r.exact_scores} 🎯
@@ -900,8 +907,8 @@ export default function RankingPage() {
                           </td>
 
                           {/* Puntos Totales */}
-                          <td className="px-4 sm:px-6 py-3.5 text-center">
-                            <span className="text-gold font-black text-sm sm:text-base font-mono bg-navy-dark/90 px-3 py-1 rounded-xl border border-gold/30 shadow-inner inline-block min-w-[50px]">
+                          <td className="px-3 sm:px-6 py-3 sm:py-3.5 text-right sm:text-center">
+                            <span className="text-gold font-black text-xs sm:text-base font-mono bg-navy-dark/90 px-2.5 sm:px-3 py-1 rounded-lg sm:rounded-xl border border-gold/30 shadow-inner inline-block min-w-[38px] sm:min-w-[50px] text-center">
                               {r.total_points}
                             </span>
                           </td>

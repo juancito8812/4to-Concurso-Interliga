@@ -1,13 +1,13 @@
 // League colors for UI
 export const leagueColors: Record<string, string> = {
-  "Premier League": "#3d195b",
-  "LaLiga": "#ee8707",
-  "Serie A": "#024494",
-  "Bundesliga": "#d20515",
-  "Champions League": "#1a4b8e",
-  "Europa League": "#f37920",
-  "Conference League": "#00843d",
-  "Copa Italia": "#024494",
+  "Premier League": "#c084fc",
+  "LaLiga": "#fb923c",
+  "Serie A": "#38bdf8",
+  "Bundesliga": "#f87171",
+  "Champions League": "#60a5fa",
+  "Europa League": "#fb923c",
+  "Conference League": "#4ade80",
+  "Copa Italia": "#38bdf8",
 };
 
 // League logos (local files)

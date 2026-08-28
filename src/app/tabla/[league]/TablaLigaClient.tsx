@@ -167,22 +167,25 @@ export default function TablaLigaClient() {
     <div className="overflow-x-auto">
       <table className="w-full min-w-[280px]">
         <thead>
-          <tr className="border-b border-border text-[10px] sm:text-xs text-silver uppercase">
-            <th className="px-2 sm:px-4 py-2 sm:py-3 text-left w-8 sm:w-12">#</th>
+          <tr className="border-b border-border text-[10px] sm:text-xs text-silver uppercase bg-navy-card/40">
+            <th className="px-2 sm:px-4 py-2 sm:py-3 text-left w-7 sm:w-12">#</th>
             <th className="px-2 sm:px-4 py-2 sm:py-3 text-left">Jugador</th>
             <th className="hidden sm:table-cell px-4 py-3 text-left">Equipo</th>
-            <th className="px-2 sm:px-4 py-2 sm:py-3 text-center w-16 font-bold" style={{ color: leagueColor }}>{valueLabel}</th>
+            <th className="px-2 sm:px-4 py-2 sm:py-3 text-center w-16 font-black text-gold">{valueLabel}</th>
           </tr>
         </thead>
         <tbody>
           {players.map((p) => (
             <tr key={p.rank} className="border-b border-border/50 hover:bg-navy-card transition-colors">
-              <td className="px-2 sm:px-4 py-2.5 sm:py-3 text-silver text-xs sm:text-sm">{p.rank}</td>
+              <td className="px-2 sm:px-4 py-2.5 sm:py-3 text-silver font-mono text-xs sm:text-sm">{p.rank}</td>
               <td className="px-2 sm:px-4 py-2.5 sm:py-3">
-                <span className="text-white text-xs sm:text-sm font-medium">{p.name}</span>
+                <span className="text-white text-xs sm:text-sm font-medium block">{p.name}</span>
+                {p.team && (
+                  <span className="block sm:hidden text-[10px] text-silver/70 truncate">{p.team}</span>
+                )}
               </td>
               <td className="hidden sm:table-cell px-4 py-3 text-silver text-xs sm:text-sm">{p.team}</td>
-              <td className="px-2 sm:px-4 py-2.5 sm:py-3 text-center font-bold text-xs sm:text-sm" style={{ color: leagueColor }}>{p.value}</td>
+              <td className="px-2 sm:px-4 py-2.5 sm:py-3 text-center font-black font-mono text-xs sm:text-sm text-gold">{p.value}</td>
             </tr>
           ))}
         </tbody>
@@ -241,25 +244,25 @@ export default function TablaLigaClient() {
             <>
               {activeTab === "standings" && (
                 <div className="overflow-x-auto">
-                  <table className="w-full min-w-[320px]">
+                  <table className="w-full min-w-[300px]">
                     <thead>
-                      <tr className="border-b border-border text-[10px] sm:text-xs text-silver uppercase">
-                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-left w-8 sm:w-12">#</th>
+                      <tr className="border-b border-border text-[10px] sm:text-xs text-silver uppercase bg-navy-card/40">
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-left w-7 sm:w-12">#</th>
                         <th className="px-2 sm:px-4 py-2 sm:py-3 text-left">Equipo</th>
                         <th className="hidden sm:table-cell px-4 py-3 text-center w-12">PJ</th>
                         <th className="hidden sm:table-cell px-4 py-3 text-center w-12">G</th>
                         <th className="hidden sm:table-cell px-4 py-3 text-center w-12">E</th>
                         <th className="hidden sm:table-cell px-4 py-3 text-center w-12">P</th>
-                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-center w-10 sm:w-12">GF</th>
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-center w-8 sm:w-12">GF</th>
                         <th className="hidden sm:table-cell px-4 py-3 text-center w-12">GC</th>
-                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-center w-12 sm:w-16">DG</th>
-                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-center w-10 sm:w-14 font-bold" style={{ color: leagueColor }}>Pts</th>
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-center w-10 sm:w-16">DG</th>
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-center w-10 sm:w-14 font-black text-gold">PTS</th>
                       </tr>
                     </thead>
                     <tbody>
                       {standings.map((s) => (
                         <tr key={s.rank} className="border-b border-border/50 hover:bg-navy-card transition-colors">
-                          <td className="px-2 sm:px-4 py-2.5 sm:py-3 text-silver text-xs sm:text-sm">{s.rank}</td>
+                          <td className="px-2 sm:px-4 py-2.5 sm:py-3 text-silver font-mono text-xs sm:text-sm">{s.rank}</td>
                           <td className="px-2 sm:px-4 py-2.5 sm:py-3">
                             <div className="flex items-center gap-2 sm:gap-3">
                               {s.team.logo && (
@@ -270,10 +273,10 @@ export default function TablaLigaClient() {
                                   height={24}
                                   loading="lazy"
                                   decoding="async"
-                                  className="w-5 h-5 sm:w-6 sm:h-6 object-contain"
+                                  className="w-5 h-5 sm:w-6 sm:h-6 object-contain shrink-0"
                                 />
                               )}
-                              <span className="text-white text-xs sm:text-sm font-medium truncate max-w-[140px] sm:max-w-none">{s.team.name}</span>
+                              <span className="text-white text-xs sm:text-sm font-medium truncate max-w-[130px] sm:max-w-none">{s.team.name}</span>
                             </div>
                           </td>
                           <td className="hidden sm:table-cell px-4 py-3 text-center text-silver text-sm">{s.played}</td>
@@ -282,8 +285,8 @@ export default function TablaLigaClient() {
                           <td className="hidden sm:table-cell px-4 py-3 text-center text-silver text-sm">{s.lose}</td>
                           <td className="px-2 sm:px-4 py-2.5 sm:py-3 text-center text-silver text-xs sm:text-sm">{s.goalsFor}</td>
                           <td className="hidden sm:table-cell px-4 py-3 text-center text-silver text-sm">{s.goalsAgainst}</td>
-                          <td className="px-2 sm:px-4 py-2.5 sm:py-3 text-center text-silver text-xs sm:text-sm">{s.goalsDiff > 0 ? `+${s.goalsDiff}` : s.goalsDiff}</td>
-                          <td className="px-2 sm:px-4 py-2.5 sm:py-3 text-center font-bold text-xs sm:text-sm" style={{ color: leagueColor }}>{s.points}</td>
+                          <td className="px-2 sm:px-4 py-2.5 sm:py-3 text-center text-silver text-xs sm:text-sm font-mono">{s.goalsDiff > 0 ? `+${s.goalsDiff}` : s.goalsDiff}</td>
+                          <td className="px-2 sm:px-4 py-2.5 sm:py-3 text-center font-black text-xs sm:text-sm text-gold font-mono">{s.points}</td>
                         </tr>
                       ))}
                     </tbody>
