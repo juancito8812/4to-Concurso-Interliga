@@ -27,7 +27,9 @@ La plataforma está diseñada con una arquitectura resiliente y desacoplada:
 | **Autenticación** | Supabase Auth (Email/Pass) | Proyecto Supabase | `auth.users` + Trigger automático |
 | **Calendario Oficial** | 1.842 Partidos 2026/27 | `src/data/officialFixtures.json` | Pre-sincronizado localmente |
 | **Plantillas Oficiales** | 3.822 Jugadores 2026/27 | `src/data/officialPlayers.json` | Pre-sincronizado localmente |
+| **Partidos Evaluados** | Resultados y marcadores oficiales | `src/data/officialEvaluatedMatches.json` | Pre-sincronizado / Versionado |
 | **Tablas en Vivo** | ESPN API sin API Key | `src/lib/espnApi.ts` | En vivo / Fallback automático |
+| **Scripts de Evaluación** | Evaluador CLI de marcadores y puntos | `scripts/evaluate-matches.js` | Versionado en Git (`main`) |
 
 ---
 

@@ -33,6 +33,11 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - `src/app/tabla/[league]/TablaLigaClient.tsx` — Clasificación, goleadores y partidos por liga (ESPN API)
 - `src/data/officialFixtures.json` — 1.842 partidos oficiales 2026/27 pre-sincronizados
 - `src/data/officialPlayers.json` — 3.822 jugadores 2026/27 con posiciones y roles actualizados
+- `src/data/officialEvaluatedMatches.json` — Resultados oficiales de partidos jugados y goleadores reales
+- `src/data/officialEvaluatedPredictions.json` — Pronósticos evaluados y sincronizados
+- `scripts/evaluate-matches.js` — Evaluador CLI de partidos y cálculo de puntuación
+- `scripts/assign-points.js` — Asignación directa de puntos y pronósticos
+- `scripts/test-survivor.js` — Suite de pruebas unitarias (100% PASS)
 - `src/lib/supabase.ts` — Cliente Supabase
 - `src/lib/survivor.ts` — Módulo de supervivencia multitorneo KO, evaluación de partidos (`evaluateSurvivorProgression`) y herencia de camisetas
 - `src/lib/leagueConfig.ts` — Colores, logos, normalizadores `normalizeMatchLeague` y `normalizeTeamName`

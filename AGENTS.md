@@ -58,6 +58,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `src/lib/espnApi.ts` | Cliente ESPN API para tablas de posiciones, goleadores y partidos |
 | `src/lib/scoring.ts` | Motor de cálculo de puntajes del concurso |
 | `src/contexts/AuthContext.tsx` | Context de autenticación, perfil en vivo y `deleteAccount` |
+| `src/data/officialEvaluatedMatches.json` | Resultados oficiales finalizados y goleadores reales |
+| `src/data/officialEvaluatedPredictions.json` | Pronósticos evaluados y sincronizados |
+| `scripts/evaluate-matches.js` | Evaluador CLI de partidos y cálculo de puntuación |
+| `scripts/assign-points.js` | Asignación directa de puntos y pronósticos |
 | `supabase/schema.sql` | Esquema DDL maestro con 7 tablas, 15 índices, RLS, triggers y 89 equipos |
 | `DISASTER_RECOVERY_AND_SCHEMA.md` | Manual maestro de restauración total ante desastres |
 

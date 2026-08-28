@@ -44,7 +44,9 @@ src/
 │   └── ranking/page.tsx            # Ranking general en vivo, Podio de Honor y búsqueda
 ├── data/
 │   ├── officialFixtures.json       # Calendario oficial 2026/27 (1.842 partidos)
-│   └── officialPlayers.json        # Plantillas oficiales 2026/27 (3.822 jugadores)
+│   ├── officialPlayers.json        # Plantillas oficiales 2026/27 (3.822 jugadores)
+│   ├── officialEvaluatedMatches.json # Resultados oficiales finalizados y goleadores reales
+│   └── officialEvaluatedPredictions.json # Pronósticos evaluados y sincronizados
 ├── lib/
 │   ├── supabase.ts                 # Cliente Supabase
 │   ├── survivor.ts                 # Motor de supervivencia y herencia de camisetas en copas KO
@@ -52,6 +54,10 @@ src/
 │   ├── footballData.ts             # Cliente football-data.org + plantillas oficiales 2026/27
 │   ├── espnApi.ts                  # Cliente ESPN API para tablas de posiciones, goleadores y partidos
 │   └── scoring.ts                  # Motor de cálculo y auditoría de puntuación
+├── scripts/
+│   ├── evaluate-matches.js         # Evaluador CLI de partidos concluidos y cálculo de puntos
+│   ├── assign-points.js            # Asignación y actualización directa de pronósticos y puntos
+│   └── test-survivor.js            # Suite de pruebas unitarias del sistema de superviviente
 └── contexts/
     └── AuthContext.tsx             # Context de autenticación, perfil y gestión de cuenta
 ```
