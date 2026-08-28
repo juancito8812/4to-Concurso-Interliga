@@ -45,8 +45,8 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
 2. Abrir el archivo [`supabase/schema.sql`](./supabase/schema.sql) de este repositorio.
 3. Copiar todo el contenido, pegarlo en el editor y hacer clic en **Run**.
 4. ✅ Esto creará automáticamente:
-   - Las 6 tablas (`teams`, `profiles`, `players`, `matches`, `predictions`, `prediction_scorers`).
-   - Los 13 índices de alta velocidad.
+   - Las 7 tablas (`teams`, `profiles`, `players`, `matches`, `predictions`, `prediction_scorers`, `tournament_survivors`).
+   - Los 15 índices de alta velocidad.
    - Las políticas RLS de lectura y escritura.
    - La función y trigger de registro automático (`handle_new_user`).
    - La función RPC de eliminación de cuenta (`delete_user_account`).
@@ -76,7 +76,19 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
 
 El esquema relacional completo se encuentra en [`supabase/schema.sql`](./supabase/schema.sql).
 
-### Resumen de Tablas:
+### Tabla Resumen del Esquema:
+
+| Tabla | Descripción | Clave Primaria | Relaciones / Claves Foráneas |
+|---|---|---|---|
+| `teams` | Clubes oficiales de las ligas y torneos | `id` | - |
+| `profiles` | Perfiles de participantes y equipo favorito | `id` | `user_id` $\rightarrow$ `auth.users`, `team_id` $\rightarrow$ `teams` |
+| `players` | Plantillas de jugadores oficiales | `id` | - |
+| `matches` | Partidos oficiales, fechas y marcadores | `id` | - |
+| `predictions` | Pronósticos de marcadores por participante | `id` | `user_id` $\rightarrow$ `auth.users`, `match_id` $\rightarrow$ `matches` |
+| `prediction_scorers` | Goleadores pronosticados por partido | `id` | `prediction_id` $\rightarrow$ `predictions` |
+| `tournament_survivors` | Supervivencia y herencia de equipo en torneos KO | `id` | `user_id` $\rightarrow$ `auth.users`, `active_team_id` $\rightarrow$ `teams` |
+
+### Diagrama Entidad-Relación:
 
 ```mermaid
 erDiagram
@@ -85,6 +97,8 @@ erDiagram
     auth_users ||--o{ predictions : "user_id (1:N)"
     predictions ||--o{ prediction_scorers : "prediction_id (1:N)"
     matches ||--o{ predictions : "match_id (1:N)"
+    auth_users ||--o{ tournament_survivors : "user_id (1:N)"
+    teams ||--o{ tournament_survivors : "active_team_id (1:N)"
 
     teams {
         uuid id PK
@@ -122,6 +136,49 @@ erDiagram
         int result_home
         int result_away
     }
+    tournament_survivors {
+        uuid id PK
+        uuid user_id FK
+        text tournament_slug
+        uuid active_team_id FK
+        text status
+        text eliminated_at_round
+        jsonb history
+        timestamptz created_at
+        timestamptz updated_at
+    }
+```
+
+### Definición SQL de `tournament_survivors`:
+
+```sql
+-- TABLA: tournament_survivors (Estado de supervivencia y herencia de equipo en torneos de eliminación directa)
+CREATE TABLE IF NOT EXISTS tournament_survivors (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  tournament_slug TEXT NOT NULL, -- 'champions', 'europa', 'conference', 'coppaitalia'
+  active_team_id UUID REFERENCES teams(id) NOT NULL,
+  status TEXT NOT NULL DEFAULT 'ALIVE' CHECK (status IN ('ALIVE', 'ELIMINATED')),
+  eliminated_at_round TEXT,
+  history JSONB NOT NULL DEFAULT '[]'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE(user_id, tournament_slug)
+);
+
+CREATE INDEX IF NOT EXISTS idx_tournament_survivors_user ON tournament_survivors(user_id);
+CREATE INDEX IF NOT EXISTS idx_tournament_survivors_slug ON tournament_survivors(tournament_slug);
+
+ALTER TABLE tournament_survivors ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Lectura pública de tournament_survivors"
+  ON tournament_survivors FOR SELECT
+  USING (true);
+
+CREATE POLICY "Usuarios administran su estado de torneo"
+  ON tournament_survivors FOR ALL
+  USING (auth.uid() = user_id)
+  WITH CHECK (auth.uid() = user_id);
 ```
 
 ---
@@ -141,6 +198,9 @@ Todas las tablas cuentan con **Row Level Security (RLS)** para proteger los dato
    - `ALL`: Permitido para gestión de goleadores pronosticados.
 4. **`teams`, `players`, `matches`:**
    - `SELECT`: Público (`USING (true)`).
+5. **`tournament_survivors`:**
+   - `SELECT`: Público (`USING (true)`).
+   - `ALL`: Restringido al propio usuario (`auth.uid() = user_id`).
 
 ---
 
@@ -152,6 +212,7 @@ Para garantizar un rendimiento ultra-rápido y costo $0 con **200+ usuarios conc
    - `idx_profiles_user_id`, `idx_profiles_team_id`
    - `idx_predictions_user_match` (Índice compuesto en `user_id, match_id`)
    - `idx_matches_date`, `idx_matches_home`, `idx_matches_away`
+   - `idx_tournament_survivors_user`, `idx_tournament_survivors_slug`
 2. **Caché en Cliente (25s TTL):**
    - El ranking utiliza caché en memoria para evitar saturar la base de datos con peticiones repetitivas.
 3. **Zero DB Reads en Plantillas:**
@@ -196,6 +257,7 @@ BEGIN
     SELECT id FROM public.predictions WHERE user_id = v_user_id
   );
   DELETE FROM public.predictions WHERE user_id = v_user_id;
+  DELETE FROM public.tournament_survivors WHERE user_id = v_user_id;
   DELETE FROM public.profiles WHERE user_id = v_user_id;
   DELETE FROM auth.users WHERE id = v_user_id;
 END;

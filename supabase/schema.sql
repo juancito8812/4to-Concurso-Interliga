@@ -3,7 +3,7 @@
 -- ==============================================================================
 -- Este script recrea completamente la base de datos desde cero en Supabase:
 -- 1. Extensiones requeridas (pgcrypto, uuid-ossp).
--- 2. Tablas del sistema (teams, profiles, players, matches, predictions, prediction_scorers).
+-- 2. Tablas del sistema (teams, profiles, players, matches, predictions, prediction_scorers, tournament_survivors).
 -- 3. Índices de alto rendimiento (optimizados para Free Tier).
 -- 4. Políticas de Row Level Security (RLS).
 -- 5. Funciones y Triggers (handle_new_user, delete_user_account).
@@ -81,6 +81,20 @@ CREATE TABLE IF NOT EXISTS public.prediction_scorers (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
+-- G. TOURNAMENT_SURVIVORS (Estado de supervivencia y herencia de equipo en torneos de eliminación directa)
+CREATE TABLE IF NOT EXISTS public.tournament_survivors (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  tournament_slug TEXT NOT NULL, -- 'champions', 'europa', 'conference', 'coppaitalia'
+  active_team_id UUID REFERENCES public.teams(id) NOT NULL,
+  status TEXT NOT NULL DEFAULT 'ALIVE' CHECK (status IN ('ALIVE', 'ELIMINATED')),
+  eliminated_at_round TEXT,
+  history JSONB NOT NULL DEFAULT '[]'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE(user_id, tournament_slug)
+);
+
 -- 3. ÍNDICES DE RENDIMIENTO (SUB-MILISEGUNDO PARA PLAN FREE)
 CREATE INDEX IF NOT EXISTS idx_profiles_user_id ON public.profiles(user_id);
 CREATE INDEX IF NOT EXISTS idx_profiles_team_id ON public.profiles(team_id);
@@ -100,6 +114,9 @@ CREATE INDEX IF NOT EXISTS idx_teams_league ON public.teams(league);
 CREATE INDEX IF NOT EXISTS idx_teams_name ON public.teams(name);
 CREATE INDEX IF NOT EXISTS idx_players_team ON public.players(team);
 CREATE INDEX IF NOT EXISTS idx_players_name ON public.players(name);
+
+CREATE INDEX IF NOT EXISTS idx_tournament_survivors_user ON public.tournament_survivors(user_id);
+CREATE INDEX IF NOT EXISTS idx_tournament_survivors_slug ON public.tournament_survivors(tournament_slug);
 
 -- 4. SEGURIDAD Y POLÍTICAS ROW LEVEL SECURITY (RLS)
 
@@ -155,6 +172,19 @@ ALTER TABLE public.matches ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Matches viewable by everyone" ON public.matches;
 CREATE POLICY "Matches viewable by everyone" ON public.matches FOR SELECT USING (true);
 
+-- E. Tournament Survivors RLS
+ALTER TABLE public.tournament_survivors ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Lectura pública de tournament_survivors" ON public.tournament_survivors;
+CREATE POLICY "Lectura pública de tournament_survivors"
+  ON public.tournament_survivors FOR SELECT
+  USING (true);
+
+DROP POLICY IF EXISTS "Usuarios administran su estado de torneo" ON public.tournament_survivors;
+CREATE POLICY "Usuarios administran su estado de torneo"
+  ON public.tournament_survivors FOR ALL
+  USING (auth.uid() = user_id)
+  WITH CHECK (auth.uid() = user_id);
+
 -- 5. FUNCIONES Y TRIGGERS AUTOMÁTICOS
 
 -- Trigger para crear/sincronizar perfil al registrarse un usuario en auth.users
@@ -197,10 +227,13 @@ BEGIN
   -- 2. Eliminar pronósticos
   DELETE FROM public.predictions WHERE user_id = v_user_id;
 
-  -- 3. Eliminar perfil
+  -- 3. Eliminar estado de supervivencia en torneos
+  DELETE FROM public.tournament_survivors WHERE user_id = v_user_id;
+
+  -- 4. Eliminar perfil
   DELETE FROM public.profiles WHERE user_id = v_user_id;
 
-  -- 4. Eliminar cuenta de auth.users (libera el correo)
+  -- 5. Eliminar cuenta de auth.users (libera el correo)
   DELETE FROM auth.users WHERE id = v_user_id;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
