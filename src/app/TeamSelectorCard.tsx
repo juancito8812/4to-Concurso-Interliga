@@ -13,7 +13,7 @@ interface Team {
 }
 
 export default function TeamSelectorCard() {
-  const { user } = useAuth();
+  const { user, displayName } = useAuth();
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(false);
@@ -72,7 +72,14 @@ export default function TeamSelectorCard() {
 
     const { error: updateError } = await supabase
       .from("profiles")
-      .upsert({ user_id: user.id, team_id: teamId }, { onConflict: "user_id" });
+      .upsert(
+        {
+          user_id: user.id,
+          team_id: teamId,
+          display_name: displayName || user.user_metadata?.display_name || user.email?.split("@")[0],
+        },
+        { onConflict: "user_id" }
+      );
 
     if (updateError) {
       setError("Error al guardar");

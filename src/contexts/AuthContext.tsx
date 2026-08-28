@@ -28,24 +28,35 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return;
     }
     const metaName = u.user_metadata?.display_name || u.user_metadata?.name;
+    const fallbackName = metaName || u.email?.split("@")[0] || "Participante";
+
     try {
       const { data } = await supabase
         .from("profiles")
         .select("display_name")
         .eq("user_id", u.id)
         .single();
+
       if (data?.display_name?.trim()) {
         setDisplayName(data.display_name.trim());
         return;
+      } else {
+        // Auto-create or ensure profile exists in Supabase so user is visible in ranking
+        await supabase.from("profiles").upsert(
+          {
+            user_id: u.id,
+            display_name: fallbackName,
+          },
+          { onConflict: "user_id" }
+        );
+        setDisplayName(fallbackName);
+        return;
       }
     } catch {
-      // Ignore
+      // Fallback
     }
-    if (metaName && typeof metaName === "string" && metaName.trim()) {
-      setDisplayName(metaName.trim());
-    } else {
-      setDisplayName(u.email?.split("@")[0] || "Participante");
-    }
+
+    setDisplayName(fallbackName);
   };
 
   const refreshProfile = async () => {
