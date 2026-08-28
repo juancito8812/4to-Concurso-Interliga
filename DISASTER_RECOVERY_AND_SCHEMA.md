@@ -25,8 +25,8 @@ La plataforma está diseñada con una arquitectura resiliente y desacoplada:
 | **Frontend Web** | Next.js 16 + React 19 + Tailwind v4 | GitHub Repository | Versionado en Git (`main`) |
 | **Base de Datos** | Supabase PostgreSQL | Proyecto Supabase | `supabase/schema.sql` |
 | **Autenticación** | Supabase Auth (Email/Pass) | Proyecto Supabase | `auth.users` + Trigger automático |
-| **Calendario Oficial** | 1.406 Partidos 2026/27 | `src/data/officialFixtures.json` | Pre-sincronizado localmente |
-| **Plantillas Oficiales** | 3.031 Jugadores 2026/27 | `src/data/officialPlayers.json` | Pre-sincronizado localmente |
+| **Calendario Oficial** | 1.842 Partidos 2026/27 | `src/data/officialFixtures.json` | Pre-sincronizado localmente |
+| **Plantillas Oficiales** | 3.822 Jugadores 2026/27 | `src/data/officialPlayers.json` | Pre-sincronizado localmente |
 | **Tablas en Vivo** | ESPN API sin API Key | `src/lib/espnApi.ts` | En vivo / Fallback automático |
 
 ---
@@ -155,7 +155,7 @@ Para garantizar un rendimiento ultra-rápido y costo $0 con **200+ usuarios conc
 2. **Caché en Cliente (25s TTL):**
    - El ranking utiliza caché en memoria para evitar saturar la base de datos con peticiones repetitivas.
 3. **Zero DB Reads en Plantillas:**
-   - 3.031 jugadores pre-cargados en bundle en memoria (`officialPlayers.json`).
+   - 3.822 jugadores pre-cargados en bundle en memoria (`officialPlayers.json`).
 
 ---
 

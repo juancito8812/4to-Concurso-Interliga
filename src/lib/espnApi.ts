@@ -1,8 +1,5 @@
-/**
- * ESPN API Integration for Interliga
- * Provides live standings, top scorers, and match scoreboards for all 8 competitions.
- * No API key required and fully supports browser CORS.
- */
+import officialFixtures from "@/data/officialFixtures.json";
+import { normalizeTeamName, leagueSlugToName } from "@/lib/leagueConfig";
 
 export interface Standing {
   rank: number;
@@ -143,11 +140,14 @@ export async function getEspnStandings(leagueSlug: string): Promise<Standing[]> 
         statsMap[s.name] = s.value;
       }
 
+      const rawName = entry.team.displayName || entry.team.name;
+      const normalizedName = normalizeTeamName(rawName);
+
       return {
         rank: statsMap.rank || index + 1,
         team: {
-          name: entry.team.displayName || entry.team.name,
-          shortName: entry.team.shortDisplayName || entry.team.name,
+          name: normalizedName,
+          shortName: entry.team.shortDisplayName || normalizedName,
           logo: entry.team.logos?.[0]?.href || "",
         },
         points: statsMap.points ?? 0,
@@ -192,13 +192,16 @@ export async function getEspnScorers(leagueSlug: string): Promise<PlayerStat[]> 
     const leaders: ESPNScorerLeader[] = goalsCategory?.leaders || [];
     if (!leaders || leaders.length === 0) return [];
 
-    return leaders.slice(0, 20).map((l, i) => ({
-      rank: i + 1,
-      name: l.athlete?.displayName || "Jugador",
-      team: l.athlete?.team?.displayName || l.athlete?.team?.name || "",
-      value: l.value ?? 0,
-      photo: l.athlete?.headshot?.href,
-    }));
+    return leaders.slice(0, 20).map((l, i) => {
+      const rawTeam = l.athlete?.team?.displayName || l.athlete?.team?.name || "";
+      return {
+        rank: i + 1,
+        name: l.athlete?.displayName || "Jugador",
+        team: normalizeTeamName(rawTeam),
+        value: l.value ?? 0,
+        photo: l.athlete?.headshot?.href,
+      };
+    });
   } catch (error) {
     console.error(`Failed to fetch ESPN scorers for ${leagueSlug}:`, error);
     return [];
@@ -206,9 +209,44 @@ export async function getEspnScorers(leagueSlug: string): Promise<PlayerStat[]> 
 }
 
 /**
- * Fetch matches/scoreboard for a tournament or league (e.g. Coppa Italia or matchdays)
+ * Fetch matches/scoreboard for a tournament or league (e.g. Bundesliga, Champions, Coppa Italia)
  */
 export async function getEspnScoreboard(leagueSlug: string): Promise<CupMatch[]> {
+  // 1. Prioritize official verified 2026/27 calendar from bundle
+  const leagueName = leagueSlugToName[leagueSlug] || leagueSlug;
+  const nowIso = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
+  const localMatches = (officialFixtures as Array<{
+    id: string;
+    home_team: string;
+    away_team: string;
+    match_date: string;
+    league: string;
+    home_logo?: string;
+    away_logo?: string;
+    matchday?: number;
+  }>).filter((m) => {
+    const lMatch = m.league.toLowerCase().trim() === leagueName.toLowerCase().trim();
+    return lMatch && m.match_date >= nowIso;
+  });
+
+  if (localMatches.length > 0) {
+    return localMatches.slice(0, 20).map((m) => {
+      const homeNorm = normalizeTeamName(m.home_team);
+      const awayNorm = normalizeTeamName(m.away_team);
+      return {
+        id: m.id,
+        name: `${homeNorm} vs ${awayNorm}`,
+        date: m.match_date,
+        status: "Programado",
+        homeTeam: homeNorm,
+        homeLogo: m.home_logo || "",
+        awayTeam: awayNorm,
+        awayLogo: m.away_logo || "",
+      };
+    });
+  }
+
+  // 2. Fallback to live ESPN API if no local matches found
   const espnCode = leagueEspnCodes[leagueSlug];
   if (!espnCode) return [];
 
@@ -216,31 +254,37 @@ export async function getEspnScoreboard(leagueSlug: string): Promise<CupMatch[]>
 
   try {
     const res = await fetch(url);
-    if (!res.ok) return [];
+    if (res.ok) {
+      const data = await res.json();
+      const events: ESPNScoreboardEvent[] = data.events || [];
 
-    const data = await res.json();
-    const events: ESPNScoreboardEvent[] = data.events || [];
+      if (events.length > 0) {
+        return events.map((event) => {
+          const competition = event.competitions?.[0];
+          const home = competition?.competitors?.find((c) => c.homeAway === "home");
+          const away = competition?.competitors?.find((c) => c.homeAway === "away");
 
-    return events.map((event) => {
-      const competition = event.competitions?.[0];
-      const home = competition?.competitors?.find((c) => c.homeAway === "home");
-      const away = competition?.competitors?.find((c) => c.homeAway === "away");
+          const homeName = normalizeTeamName(home?.team?.displayName || "Local");
+          const awayName = normalizeTeamName(away?.team?.displayName || "Visitante");
 
-      return {
-        id: event.id,
-        name: event.name,
-        date: event.date,
-        status: event.status?.type?.detail || "Programado",
-        homeTeam: home?.team?.displayName || "Local",
-        homeLogo: home?.team?.logo || "",
-        homeScore: home?.score !== undefined ? parseInt(home.score) : undefined,
-        awayTeam: away?.team?.displayName || "Visitante",
-        awayLogo: away?.team?.logo || "",
-        awayScore: away?.score !== undefined ? parseInt(away.score) : undefined,
-      };
-    });
+          return {
+            id: event.id,
+            name: `${homeName} vs ${awayName}`,
+            date: event.date,
+            status: event.status?.type?.detail || "Programado",
+            homeTeam: homeName,
+            homeLogo: home?.team?.logo || "",
+            homeScore: home?.score !== undefined ? parseInt(home.score) : undefined,
+            awayTeam: awayName,
+            awayLogo: away?.team?.logo || "",
+            awayScore: away?.score !== undefined ? parseInt(away.score) : undefined,
+          };
+        });
+      }
+    }
   } catch (error) {
     console.error(`Failed to fetch ESPN scoreboard for ${leagueSlug}:`, error);
-    return [];
   }
+
+  return [];
 }

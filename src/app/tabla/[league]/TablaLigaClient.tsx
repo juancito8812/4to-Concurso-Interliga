@@ -63,6 +63,7 @@ export default function TablaLigaClient() {
     : [
         { id: "standings", label: "Tabla", icon: "📊" },
         { id: "scorers", label: "Goleadores", icon: "⚽" },
+        { id: "matches", label: "Partidos", icon: "🗓️" },
       ];
 
   useEffect(() => {
@@ -74,16 +75,19 @@ export default function TablaLigaClient() {
       try {
         setError("");
 
+        // 1. Fetch matches / scoreboard for all leagues/cups
+        const matches = await getEspnScoreboard(league);
+        if (isMounted) {
+          setCupMatches(matches);
+        }
+
         if (data.isCup) {
-          // Cup competitions (e.g. Coppa Italia)
-          const matches = await getEspnScoreboard(league);
           if (isMounted) {
-            setCupMatches(matches);
             setActiveTab("matches");
           }
         } else {
           // League / Group stage competitions
-          // 1. Fetch standings from ESPN API (CORS enabled & free)
+          // 2. Fetch standings from ESPN API (CORS enabled & free)
           let parsedStandings = await getEspnStandings(league);
 
           // Fallback to football-data.org if ESPN returns empty
@@ -117,7 +121,7 @@ export default function TablaLigaClient() {
             }
           }
 
-          // 2. Fetch top scorers
+          // 3. Fetch top scorers
           let parsedScorers = await getEspnScorers(league);
           if (parsedScorers.length === 0 && data.fdCode) {
             const fdScorers = await getScorers(data.fdCode);
@@ -205,7 +209,7 @@ export default function TablaLigaClient() {
           <h1 className="text-2xl sm:text-3xl font-bold text-white">{data.name}</h1>
         </div>
         <p className="text-silver text-xs sm:text-sm mb-6 sm:mb-8">
-          Estadísticas en vivo · football-data.org
+          Estadísticas oficiales en vivo · Temporada 2026/27
         </p>
 
         {/* Tabs */}

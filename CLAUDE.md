@@ -12,9 +12,9 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - Tailwind CSS v4 (colores custom en `globals.css` con `@theme`)
 - TypeScript estricto
 - Supabase (Auth + PostgreSQL con RLS público y RPC `delete_user_account`)
-- `football-data.org` API + bundle oficial de 1.406 partidos 2026/27 (`src/data/officialFixtures.json`)
-- Base de datos oficial de 3.031 jugadores 2026/27 de 95 clubes (`src/data/officialPlayers.json`)
-- ESPN API para tablas de clasificación en vivo
+- `src/data/officialFixtures.json` — 1.842 partidos oficiales 2026/27 para las 8 competiciones
+- `src/data/officialPlayers.json` — Base de datos oficial de 3.822 jugadores 2026/27 clasificados por posición
+- ESPN API pública para tablas de clasificación, goleadores y partidos en vivo (CORS habilitado)
 
 ## Archivos importantes
 
@@ -30,9 +30,9 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - `src/app/pronosticar/page.tsx` — Tarjetas estilo transmisión TV con ventana de 3 partidos y goleadores
 - `src/app/mis-pronosticos/page.tsx` — Historial con logos y desglose de puntos
 - `src/app/ranking/page.tsx` — Ranking general en vivo con Podio de Honor y búsqueda
-- `src/app/tabla/[league]/TablaLigaClient.tsx` — Clasificación por liga (ESPN API)
-- `src/data/officialFixtures.json` — 1.406 partidos oficiales 2026/27 pre-sincronizados
-- `src/data/officialPlayers.json` — 3.031 jugadores 2026/27 de 95 clubes con posiciones traducidas
+- `src/app/tabla/[league]/TablaLigaClient.tsx` — Clasificación, goleadores y partidos por liga (ESPN API)
+- `src/data/officialFixtures.json` — 1.842 partidos oficiales 2026/27 pre-sincronizados
+- `src/data/officialPlayers.json` — 3.822 jugadores 2026/27 con posiciones y roles actualizados
 - `src/lib/supabase.ts` — Cliente Supabase
 - `src/lib/leagueConfig.ts` — Colores, logos, normalizadores `normalizeMatchLeague` y `normalizeTeamName`
 - `src/lib/scoring.ts` — Motor de cálculo de puntos

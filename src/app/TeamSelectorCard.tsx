@@ -24,10 +24,8 @@ export default function TeamSelectorCard() {
   const [teamLocked, setTeamLocked] = useState(false);
 
   useEffect(() => {
-    if (cachedTeamsList && cachedTeamsList.length > 0) {
-      setTeams(cachedTeamsList);
-      return;
-    }
+    if (cachedTeamsList && cachedTeamsList.length > 0) return;
+    
     supabase
       .from("teams")
       .select("id, name, league, logo_url")

@@ -11,10 +11,9 @@ Plataforma oficial de pronósticos de fútbol para la temporada 2026-27. Los par
 - **Lenguaje:** TypeScript 5 en modo estricto.
 - **Base de Datos & Auth:** [Supabase](https://supabase.com/) (Autenticación + PostgreSQL con Row Level Security y RPCs seguras).
 - **APIs de Fútbol y Datos Oficiales:**
-  - `football-data.org` API (calendario y plantillas oficiales en vivo de la temporada 2026/27).
-  - `src/data/officialFixtures.json` (1.406 partidos oficiales 2026/27 pre-sincronizados como fallback offline/CORS).
-  - `src/data/officialPlayers.json` (3.031 jugadores oficiales 2026/27 de 95 clubes clasificados por posición).
-  - ESPN API (tablas de clasificación y posiciones en vivo).
+  - `src/data/officialFixtures.json` (**1.842 partidos oficiales** de la temporada 2026/27 pre-sincronizados para las 8 competiciones).
+  - `src/data/officialPlayers.json` (**3.822 jugadores oficiales** de la temporada 2026/27 de todos los clubes participantes clasificados por posición).
+  - ESPN API pública (tablas de clasificación, máximos goleadores y resultados en vivo sin restricciones de CORS).
 - **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`).
 
 ---
@@ -35,7 +34,7 @@ src/
 │   ├── tabla/
 │   │   └── [league]/
 │   │       ├── page.tsx            # Generador de rutas estáticas (SSG)
-│   │       └── TablaLigaClient.tsx # Clasificación de liga en vivo (ESPN API)
+│   │       └── TablaLigaClient.tsx # Clasificación, goleadores y calendario de partidos (ESPN API)
 │   ├── registro/page.tsx           # Registro con nombre de usuario obligatorio
 │   ├── login/page.tsx              # Inicio de sesión
 │   ├── olvide-contrasena/page.tsx  # Recuperación de clave por correo
@@ -44,13 +43,13 @@ src/
 │   ├── mis-pronosticos/page.tsx    # Historial de predicciones, estado y desglose de puntos
 │   └── ranking/page.tsx            # Ranking general en vivo, Podio de Honor y búsqueda
 ├── data/
-│   ├── officialFixtures.json       # Calendario oficial 2026/27 (1.406 partidos)
-│   └── officialPlayers.json        # Plantillas oficiales 2026/27 (3.031 jugadores)
+│   ├── officialFixtures.json       # Calendario oficial 2026/27 (1.842 partidos)
+│   └── officialPlayers.json        # Plantillas oficiales 2026/27 (3.822 jugadores)
 ├── lib/
 │   ├── supabase.ts                 # Cliente Supabase
 │   ├── leagueConfig.ts             # Normalizador canónico de ligas, torneos y equipos
-│   ├── footballData.ts             # Cliente football-data.org + plantillas 2026/27
-│   ├── espnApi.ts                  # Cliente ESPN API para tablas de posiciones
+│   ├── footballData.ts             # Cliente football-data.org + plantillas oficiales 2026/27
+│   ├── espnApi.ts                  # Cliente ESPN API para tablas de posiciones, goleadores y partidos
 │   └── scoring.ts                  # Motor de cálculo y auditoría de puntuación
 └── contexts/
     └── AuthContext.tsx             # Context de autenticación, perfil y gestión de cuenta

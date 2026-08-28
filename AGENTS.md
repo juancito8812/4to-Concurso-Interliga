@@ -17,14 +17,14 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ### Estructura
 
 - **Landing principal:** `src/app/page.tsx` — Componente `"use client"` con podio de premios, reglas y selector de club.
-- **Tablas de posiciones:** `src/app/tabla/[league]/TablaLigaClient.tsx` — Fetch client-side a ESPN API.
+- **Tablas de posiciones:** `src/app/tabla/[league]/TablaLigaClient.tsx` — Clasificación, goleadores y partidos vía ESPN API con fallback.
 - **Pronósticos:** `src/app/pronosticar/page.tsx` — Ventana de 3 partidos estilo TV broadcast, panel de goleadores en 2 columnas y stepper de goles.
 - **Historial de Pronósticos:** `src/app/mis-pronosticos/page.tsx` — Historial con desglose de puntos (+3 resultado, +2 marcador exacto, +1/+2 goleador).
 - **Ranking General en Vivo:** `src/app/ranking/page.tsx` — Tabla global multiusuario conectada a Supabase, Podio de Honor y búsqueda.
 - **Autenticación y Perfil:** `src/contexts/AuthContext.tsx` y `src/app/perfil/page.tsx` — Registro con username, login, recuperación de clave, reinicio de club y eliminación de cuenta.
 - **Base de datos:** Supabase PostgreSQL — tablas `profiles`, `teams`, `players`, `matches`, `predictions`, `prediction_scorers`.
-- **Calendario oficial 2026/27:** `src/data/officialFixtures.json` — 1.406 partidos de Premier, LaLiga, Serie A y Bundesliga.
-- **Plantillas oficiales 2026/27:** `src/data/officialPlayers.json` — 3.031 jugadores de 95 clubes con posiciones y fichajes actualizados.
+- **Calendario oficial 2026/27:** `src/data/officialFixtures.json` — 1.842 partidos oficiales de las 8 competiciones.
+- **Plantillas oficiales 2026/27:** `src/data/officialPlayers.json` — 3.822 jugadores de todos los clubes con posiciones y fichajes actualizados.
 - **Normalización de Ligas y Equipos:** `src/lib/leagueConfig.ts` — `normalizeMatchLeague` y `normalizeTeamName` mapean nombres canónicos y competencias exactas.
 - **Cliente Football API:** `src/lib/footballData.ts` — `getOfficialTeamMatches` y `getOfficialPlayersForTeams` con API en vivo + fallback de fixtures y plantillas oficiales pre-sincronizadas.
 - **Colores:** Definidos en `src/app/globals.css` con `@theme` de Tailwind v4.
@@ -42,7 +42,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `/pronosticar` | `src/app/pronosticar/page.tsx` | Hacer pronósticos con ventana rodante de 3 partidos (requiere auth) |
 | `/mis-pronosticos` | `src/app/mis-pronosticos/page.tsx` | Historial de pronósticos y puntos (requiere auth) |
 | `/ranking` | `src/app/ranking/page.tsx` | Tabla de posiciones general y Podio de Honor en vivo |
-| `/tabla/[league]` | `src/app/tabla/[league]/TablaLigaClient.tsx` | Tabla de posiciones por liga |
+| `/tabla/[league]` | `src/app/tabla/[league]/TablaLigaClient.tsx` | Tabla de posiciones, goleadores y partidos por liga |
 
 ### Componentes y Módulos Clave
 
@@ -53,8 +53,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `src/app/TeamSelectorCard.tsx` | Selección y bloqueo de club en landing |
 | `src/app/CompetitionStatusCard.tsx` | Estado de competición (VIVO/KO) |
 | `src/lib/leagueConfig.ts` | Colores, logos, normalización de competiciones (`normalizeMatchLeague`) y mapeo de nombres de equipos (`normalizeTeamName`) |
-| `src/lib/footballData.ts` | `getOfficialTeamMatches`, `getOfficialPlayersForTeams` (API + fallback de fixtures y 3.031 jugadores) |
-| `src/lib/espnApi.ts` | Cliente ESPN API para tablas de posiciones |
+| `src/lib/footballData.ts` | `getOfficialTeamMatches`, `getOfficialPlayersForTeams` (API + fallback de fixtures y 3.822 jugadores) |
+| `src/lib/espnApi.ts` | Cliente ESPN API para tablas de posiciones, goleadores y partidos |
 | `src/lib/scoring.ts` | Motor de cálculo de puntajes del concurso |
 | `src/contexts/AuthContext.tsx` | Context de autenticación, perfil en vivo y `deleteAccount` |
 | `supabase/schema.sql` | Esquema DDL maestro con 6 tablas, 13 índices, RLS, triggers y 89 equipos |

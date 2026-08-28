@@ -1,5 +1,6 @@
 import officialFixtures from "@/data/officialFixtures.json";
 import officialPlayers from "@/data/officialPlayers.json";
+import { normalizeTeamName, cleanTeamName } from "@/lib/leagueConfig";
 
 const BASE_URL = "https://api.football-data.org/v4";
 
@@ -192,7 +193,8 @@ export async function getOfficialTeamMatches(
   }
 
   // 2. Fallback to pre-bundled official 2026/27 season fixtures
-  const cleanSearch = cleanNameForMatch(teamName);
+  const normTarget = normalizeTeamName(teamName);
+  const cleanTarget = cleanTeamName(teamName);
   const nowIso = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
 
   const filtered = (officialFixtures as Array<{
@@ -206,9 +208,14 @@ export async function getOfficialTeamMatches(
     away_logo?: string;
     matchday?: number;
   }>).filter((m) => {
-    const cleanHome = cleanNameForMatch(m.home_team);
-    const cleanAway = cleanNameForMatch(m.away_team);
-    const isTeam = cleanHome.includes(cleanSearch) || cleanAway.includes(cleanSearch) || cleanSearch.includes(cleanHome) || cleanSearch.includes(cleanAway);
+    const normHome = normalizeTeamName(m.home_team);
+    const normAway = normalizeTeamName(m.away_team);
+    const isExact = normHome === normTarget || normAway === normTarget;
+    if (isExact) return m.match_date >= nowIso;
+
+    const cHome = cleanTeamName(m.home_team);
+    const cAway = cleanTeamName(m.away_team);
+    const isTeam = cHome.includes(cleanTarget) || cAway.includes(cleanTarget) || cleanTarget.includes(cHome) || cleanTarget.includes(cAway);
     return isTeam && m.match_date >= nowIso;
   });
 
@@ -255,11 +262,17 @@ export async function getOfficialTeamMatches(
 // Pre-indexed squad cache by cleaned team name for O(1) instant lookups
 const playerIndexMap = new Map<string, PlayerData[]>();
 for (const p of (officialPlayers as PlayerData[])) {
-  const cTeam = cleanNameForMatch(p.team);
-  if (!playerIndexMap.has(cTeam)) {
-    playerIndexMap.set(cTeam, []);
+  const normTeam = normalizeTeamName(p.team);
+  if (!playerIndexMap.has(normTeam)) {
+    playerIndexMap.set(normTeam, []);
   }
-  playerIndexMap.get(cTeam)!.push(p);
+  playerIndexMap.get(normTeam)!.push(p);
+
+  const cleanT = cleanTeamName(p.team);
+  if (!playerIndexMap.has(cleanT)) {
+    playerIndexMap.set(cleanT, []);
+  }
+  playerIndexMap.get(cleanT)!.push(p);
 }
 
 // Get official updated squads for teams with fast Map lookup
@@ -268,15 +281,19 @@ export function getOfficialPlayersForTeams(teamNames: string[]): PlayerData[] {
   const addedIds = new Set<string>();
 
   for (const teamName of teamNames) {
-    const cleanTarget = cleanNameForMatch(teamName);
+    const normTarget = normalizeTeamName(teamName);
+    const cleanTarget = cleanTeamName(teamName);
     
-    // Direct match
-    const directMatches = playerIndexMap.get(cleanTarget);
+    // Direct match with normalized name
+    const directMatches = playerIndexMap.get(normTarget) || playerIndexMap.get(cleanTarget);
     if (directMatches) {
       for (const p of directMatches) {
         if (!addedIds.has(p.id)) {
           addedIds.add(p.id);
-          result.push(p);
+          result.push({
+            ...p,
+            team: normTarget,
+          });
         }
       }
       continue;
@@ -288,7 +305,10 @@ export function getOfficialPlayersForTeams(teamNames: string[]): PlayerData[] {
         for (const p of teamPlayers) {
           if (!addedIds.has(p.id)) {
             addedIds.add(p.id);
-            result.push(p);
+            result.push({
+              ...p,
+              team: normTarget,
+            });
           }
         }
       }
@@ -523,33 +543,28 @@ export const teamIds: Record<string, number> = {
 };
 
 // Clean string for fuzzy matching
-function cleanNameForMatch(name: string): string {
-  return (name || "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\bfc\b|\bcf\b|\bafc\b|\bssc\b|\bas\b|\bacf\b|\bss\b|\bus\b|\brc\b|\bcd\b|\bud\b|\brcd\b/gi, "")
-    .replace(/[^a-z0-9]/g, "")
-    .trim();
+export function cleanNameForMatch(name: string): string {
+  return cleanTeamName(name);
 }
 
 // Find team ID by name (handles Supabase names → football-data.org API)
 export function findTeamId(teamName: string): number | null {
   if (!teamName) return null;
 
-  // Exact match
+  const normName = normalizeTeamName(teamName);
+  if (teamIds[normName]) return teamIds[normName];
   if (teamIds[teamName]) return teamIds[teamName];
 
-  const cleanSearch = cleanNameForMatch(teamName);
+  const cleanSearch = cleanTeamName(teamName);
 
   // Clean exact match
   for (const [name, id] of Object.entries(teamIds)) {
-    if (cleanNameForMatch(name) === cleanSearch) return id;
+    if (cleanTeamName(name) === cleanSearch) return id;
   }
 
   // Partial match
   for (const [name, id] of Object.entries(teamIds)) {
-    const cleanEntry = cleanNameForMatch(name);
+    const cleanEntry = cleanTeamName(name);
     if (cleanEntry.includes(cleanSearch) || cleanSearch.includes(cleanEntry)) {
       return id;
     }
