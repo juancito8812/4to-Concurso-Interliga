@@ -1,0 +1,38 @@
+name: Auto-Sync ESPN Match Results & Score Predictions
+
+on:
+  schedule:
+    # Runs every 2 hours automatically
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-and-evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync finished match results from ESPN
+        run: node scripts/auto-sync-espn-results.js
+
+      - name: Commit & push updated results if changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/officialEvaluatedMatches.json src/data/officialEvaluatedPredictions.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(cron): auto-sync finished match results from ESPN" && git push origin main)

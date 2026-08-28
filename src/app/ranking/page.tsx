@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { calculateScore, PredictedScorer, RealScorer } from "@/lib/scoring";
 import officialEvaluatedMatches from "@/data/officialEvaluatedMatches.json";
 import officialEvaluatedPredictions from "@/data/officialEvaluatedPredictions.json";
+import { fetchLiveFinishedMatches } from "@/lib/espnResultsFetcher";
 
 interface RankingEntry {
   user_id: string;
@@ -113,7 +114,7 @@ export default function RankingPage() {
         // 3. Fetch evaluated matches (from bundle and Supabase)
         const matchesMap: Record<string, MatchRow> = {};
         
-        // Load official evaluated fixtures first
+        // 1. Load official evaluated fixtures first
         (officialEvaluatedMatches as Array<{ id: string; result_home: number; result_away: number; scorers?: RealScorer[] }>).forEach((m) => {
           matchesMap[m.id] = {
             id: m.id,
@@ -123,6 +124,21 @@ export default function RankingPage() {
           };
         });
 
+        // 2. Fetch live finished matches from ESPN API
+        try {
+          const liveFinished = await fetchLiveFinishedMatches();
+          liveFinished.forEach((lm) => {
+            matchesMap[lm.id] = {
+              id: lm.id,
+              result_home: lm.result_home,
+              result_away: lm.result_away,
+              scorers: lm.scorers,
+            };
+          });
+        } catch (e) {
+          console.warn("Could not fetch live finished matches from ESPN:", e);
+        }
+
         const { data: matchesData } = await supabase
           .from("matches")
           .select("id, result_home, result_away")
@@ -130,7 +146,12 @@ export default function RankingPage() {
 
         if (matchesData) {
           (matchesData as MatchRow[]).forEach((m) => {
-            matchesMap[m.id] = m;
+            matchesMap[m.id] = {
+              ...matchesMap[m.id],
+              id: m.id,
+              result_home: m.result_home,
+              result_away: m.result_away,
+            };
           });
         }
 

@@ -16,6 +16,7 @@ import {
 import officialFixtures from "@/data/officialFixtures.json";
 import officialEvaluatedMatches from "@/data/officialEvaluatedMatches.json";
 import officialEvaluatedPredictions from "@/data/officialEvaluatedPredictions.json";
+import { fetchLiveFinishedMatches } from "@/lib/espnResultsFetcher";
 
 interface ScorerInfo {
   player_name: string;
@@ -214,9 +215,37 @@ export default function MisPronosticosPage() {
         };
       });
 
+      // 2. Fetch live finished matches from ESPN API
+      try {
+        const liveFinished = await fetchLiveFinishedMatches();
+        liveFinished.forEach((lm) => {
+          matchesMap[lm.id] = {
+            id: lm.id,
+            home_team: normalizeTeamName(lm.home_team),
+            away_team: normalizeTeamName(lm.away_team),
+            match_date: lm.match_date,
+            result_home: lm.result_home,
+            result_away: lm.result_away,
+            league: lm.league,
+            scorers: lm.scorers,
+          };
+        });
+      } catch (e) {
+        console.warn("Could not fetch live finished matches from ESPN:", e);
+      }
+
       if (matchesData) {
         (matchesData as MatchData[]).forEach((m) => {
-          matchesMap[m.id] = m;
+          matchesMap[m.id] = {
+            ...matchesMap[m.id],
+            id: m.id,
+            home_team: normalizeTeamName(m.home_team),
+            away_team: normalizeTeamName(m.away_team),
+            match_date: m.match_date,
+            result_home: m.result_home,
+            result_away: m.result_away,
+            league: m.league,
+          };
         });
       }
 
