@@ -137,5 +137,30 @@
         "team": "away"
       }
     ]
+  },
+  {
+    "id": "0f02f08f-9de9-49ba-b1b1-349a32bbb769",
+    "user_id": "266b309a-4eb0-474a-85db-aca42e055913",
+    "display_name": "JR_DT",
+    "match_id": "00000000-0000-4000-8000-000017f4be32",
+    "home_score": 3,
+    "away_score": 0,
+    "scorers": [
+      {
+        "player_name": "Amad Diallo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Matheus Cunha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kobbie Mainoo",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
   }
 ]
