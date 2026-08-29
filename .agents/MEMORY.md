@@ -5,8 +5,8 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 8 ligas/copas europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`, workflow `.github/workflows/deploy.yml`).
-- **Última sesión:** 2026-08-29 00:50
-- **Versión de memoria:** 1.7
+- **Última sesión:** 2026-08-29 (auditoría completa de calendarios)
+- **Versión de memoria:** 1.8
 
 ## Arquitectura
 
@@ -20,6 +20,7 @@
 
 ## Decisiones Clave
 
+- **2026-08-29** — **Regeneración completa del calendario 2026/27 con datos 100% reales (0 fabricados)**: La auditoría reveló que `officialFixtures.json` estaba basado en equipos/cruces de la temporada 2025/26 (LaLiga 448 con Almería/Elche, Serie A con Como jugando 2 partidos el mismo día ×71, Bundesliga 374 con Darmstadt/Düsseldorf, PL con Leicester/Southampton/West Ham/Wolves, UCL 2026/27 inventada con 0 coincidencias vs ESPN, UEL 18 y UECL 10 fabricadas). Se reescribió `scripts/sync-official-fixtures.js` para regenerar SOLO desde fuentes reales: 4 ligas (football-data API: 380/380/380/306), UCL fase liga 144 (ESPN), Copa Italia 28 (ESPN). `scripts/validate-fixtures.js` cruza cada partido contra su fuente (1446/1446 liga + 144/144 UCL + 28/28 Coppa idénticos). UEL/UECL (36 equipos reales de Wikipedia, sorteo 28/8 sin publicar) y rondas KO se agregan cuando las fuentes las publiquen. `teamAliases.json`: 136+ canónicos, alias de fuentes, `teamCups` derivado (179 equipos), `knockoutPairs` vacío + detección KO europea por fecha (feb-jul) en `isKnockoutMatch`. DB re-sembrada: `matches` 1618 exactos, `teams` 179 reales, 4 predicciones remapeadas a ids reales (2 de partidos inexistentes eliminadas), 5 resultados reales persistidos, `officialPlayers.json` Paphos FC→Pafos FC. Sin deploy (pendiente de revisión del usuario).
 - **2026-08-28** — **Traducción y gestión de Rate Limits de Supabase Auth en `src/contexts/AuthContext.tsx`**: Helper `translateAuthError` que traduce mensajes técnicos de Supabase (como `over_email_send_rate_limit`) a explicaciones claras en español sobre la pausa de seguridad de 1-2 minutos antes de reintentar registros.
 - **2026-08-28** — **Cierre de pronósticos ajustado a 1 minuto antes del inicio (`diffMin <= 1`)**: Se modificó `checkIsMatchLocked` y `calculateTimeRemaining` en `src/app/pronosticar/page.tsx` para permitir pronósticos y re-ediciones hasta 1 minuto antes del pitazo inicial de cada partido.
 - **2026-08-28** — **Sistema de Sobreviviente y Herencia de Camisetas en Copas Knockout (`tournament_survivors`)**: Tabla dedicada en PostgreSQL con RLS y campo `history` JSONB para registrar transferencias de club al acertar victorias del rival en copas de eliminación directa.

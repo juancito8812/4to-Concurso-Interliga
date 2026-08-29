@@ -165,16 +165,217 @@
     "fcckobenhavn": "FC København",
     "kobenhavn": "FC København",
     "copenhagen": "FC København",
-    "paphos": "Paphos FC",
-    "paphosfc": "Paphos FC"
+    "paphos": "Pafos FC",
+    "paphosfc": "Pafos FC",
+    "aekathens": "AEK Athens",
+    "fenerbahce": "Fenerbahçe",
+    "fenerbahçe": "Fenerbahçe",
+    "feyenoord": "Feyenoord",
+    "feyenoordrotterdam": "Feyenoord",
+    "lasklinz": "LASK Linz",
+    "lask": "LASK Linz",
+    "lens": "Lens",
+    "lille": "Lille",
+    "losclille": "Lille",
+    "shakhtardonetsk": "Shakhtar Donetsk",
+    "shakhtar": "Shakhtar Donetsk",
+    "slovanbratislava": "Slovan Bratislava",
+    "slovan": "Slovan Bratislava",
+    "sabah": "SABAH FK",
+    "sabahfk": "SABAH FK",
+    "viking": "Viking FK",
+    "vikingfk": "Viking FK",
+    "celtic": "Celtic",
+    "celticfc": "Celtic",
+    "slaviaprague": "SK Slavia Praha",
+    "olympiacos": "PAE Olympiakos SFP",
+    "olympiacosfc": "PAE Olympiakos SFP",
+    "rscanderlecht": "Anderlecht",
+    "anderlecht": "Anderlecht",
+    "fcararatarmenia": "Ararat-Armenia",
+    "araratarmenia": "Ararat-Armenia",
+    "besiktas": "Beşiktaş",
+    "beşiktaş": "Beşiktaş",
+    "nkcelje": "Celje",
+    "celje": "Celje",
+    "ferencvaros": "Ferencváros",
+    "ferencváros": "Ferencváros",
+    "hapoelbeersheva": "Hapoel Be'er Sheva",
+    "hapoelbe'ersheva": "Hapoel Be'er Sheva",
+    "jagiellonia": "Jagiellonia",
+    "jagielloniabialystok": "Jagiellonia",
+    "jagielloniabiałystok": "Jagiellonia",
+    "lechpoznan": "Lech Poznań",
+    "lechpoznań": "Lech Poznań",
+    "levskisofia": "Levski Sofia",
+    "lillestrom": "Lillestrøm",
+    "lillestrøm": "Lillestrøm",
+    "nec": "NEC",
+    "necnijmegen": "NEC",
+    "ofi": "OFI",
+    "oficrete": "OFI",
+    "redbullsalzburg": "Red Bull Salzburg",
+    "salzburg": "Red Bull Salzburg",
+    "staderennais": "Rennes",
+    "rennes": "Rennes",
+    "spartaprague": "Sparta Prague",
+    "sparta": "Sparta Prague",
+    "sturmgraz": "Sturm Graz",
+    "sturm": "Sturm Graz",
+    "sunderland": "Sunderland",
+    "sunderlandafc": "Sunderland",
+    "torreense": "Torreense",
+    "viktoriaplzen": "Viktoria Plzeň",
+    "viktoriaplzeň": "Viktoria Plzeň",
+    "plzen": "Viktoria Plzeň",
+    "usg": "Royale Union Saint-Gilloise",
+    "unionsaintgilloise": "Royale Union Saint-Gilloise",
+    "olympiquelyonnais": "Olympique Lyon",
+    "lyon": "Olympique Lyon",
+    "agf": "AGF",
+    "aarhusgymnastikforening": "AGF",
+    "fkboracbanjaluka": "Borac Banja Luka",
+    "boracbanjaluka": "Borac Banja Luka",
+    "borac": "Borac Banja Luka",
+    "scbraga": "Braga",
+    "braga": "Braga",
+    "skbrann": "Brann",
+    "brann": "Brann",
+    "pfcsskasofia": "CSKA Sofia",
+    "csksofia": "CSKA Sofia",
+    "kfegnatia": "Egnatia",
+    "egnatia": "Egnatia",
+    "fccopenhagen": "FC København",
+    "kaagent": "Gent",
+    "gent": "Gent",
+    "hnkhajduksplit": "Hajduk Split",
+    "hajduksplit": "Hajduk Split",
+    "hajduk": "Hajduk Split",
+    "heartofmidlothian": "Hearts",
+    "hearts": "Hearts",
+    "fciberia1999": "Iberia 1999",
+    "iberia1999": "Iberia 1999",
+    "iberia": "Iberia 1999",
+    "interclubdescaldes": "Inter Club d'Escaldes",
+    "fkjablonec": "Jablonec",
+    "jablonec": "Jablonec",
+    "kaunozalgiris": "Kauno Žalgiris",
+    "kaunožalgiris": "Kauno Žalgiris",
+    "kups": "KuPS",
+    "lincolnredimps": "Lincoln Red Imps",
+    "fclugano": "Lugano",
+    "lugano": "Lugano",
+    "fcmidtjylland": "Midtjylland",
+    "midtjylland": "Midtjylland",
+    "mjallby": "Mjällby",
+    "mjällby": "Mjällby",
+    "mjallbyaif": "Mjällby",
+    "fcnordsjaelland": "Nordsjælland",
+    "nordsjaelland": "Nordsjælland",
+    "nordsjælland": "Nordsjælland",
+    "pafos": "Pafos FC",
+    "pafosfc": "Pafos FC",
+    "panathinaikos": "Panathinaikos",
+    "redstarbelgrade": "Red Star Belgrade",
+    "redstar": "Red Star Belgrade",
+    "crvenazvezda": "Red Star Belgrade",
+    "rigafc": "Riga",
+    "riga": "Riga",
+    "sinttruiden": "Sint-Truiden",
+    "sinttruidense": "Sint-Truiden",
+    "fcthun": "Thun",
+    "thun": "Thun",
+    "trabzonspor": "Trabzonspor",
+    "fctwente": "Twente",
+    "twente": "Twente",
+    "universitateacraiova": "Universitatea Craiova",
+    "craiova": "Universitatea Craiova",
+    "realracing": "Racing Santander",
+    "realracingclubdesantander": "Racing Santander",
+    "racingsantander": "Racing Santander",
+    "santander": "Racing Santander",
+    "levante": "Levante",
+    "levantetud": "Levante",
+    "deportivo": "Deportivo La Coruña",
+    "deportivolacoruna": "Deportivo La Coruña",
+    "rcdeportivolacoruna": "Deportivo La Coruña",
+    "deportivolacoruña": "Deportivo La Coruña",
+    "malaga": "Málaga",
+    "malagacf": "Málaga",
+    "málaga": "Málaga",
+    "coventrycity": "Coventry City",
+    "coventrycityfc": "Coventry City",
+    "hullcity": "Hull City",
+    "hullcityafc": "Hull City",
+    "leedsunited": "Leeds United",
+    "leedsunitedfc": "Leeds United",
+    "1fckoln": "Köln",
+    "1fcunionberlin": "Union Berlin",
+    "1fsvmainz05": "Mainz",
+    "fsvmainz05": "Mainz",
+    "svwerderbremen": "Werder Bremen",
+    "tsg1899hoffenheim": "Hoffenheim",
+    "tsghoffenheim": "Hoffenheim",
+    "vfbstuttgart": "Stuttgart",
+    "borussiamonchengladbach": "Borussia Mönchengladbach",
+    "fceintrachtfrankfurt": "Eintracht Frankfurt",
+    "eintrachtfrankfurt": "Eintracht Frankfurt",
+    "scfreiburg": "Freiburg",
+    "rbleipzig": "RB Leipzig",
+    "fcaugsburg": "Augsburg",
+    "alavés": "Alavés",
+    "getafecf": "Getafe",
+    "sevillafc": "Sevilla",
+    "rcdepor": "Deportivo La Coruña",
+    "elchecf": "Elche",
+    "atleticoclub": "Athletic Bilbao",
+    "rccelta": "Celta Vigo",
+    "cavosasuna": "Osasuna",
+    "realmadridcf": "Real Madrid",
+    "fcbarcelona": "Barcelona",
+    "valenciacf": "Valencia",
+    "acmilan": "AC Milan",
+    "atalantabc": "Atalanta",
+    "bolognafc1909": "Bologna",
+    "fcinternazionalemilano": "Inter Milan",
+    "frosinonecalcio": "Frosinone",
+    "genoacfc": "Genoa",
+    "juventusfc": "Juventus",
+    "sscnapoli": "Napoli",
+    "torinofc": "Torino",
+    "ussassuolocalcio": "Sassuolo",
+    "veneziafc": "Venezia",
+    "afcbournemouth": "Bournemouth",
+    "brightonhovealbionfc": "Brighton",
+    "brightonhovealbion": "Brighton",
+    "nottinghamforestfc": "Nott. Forest",
+    "astonvillafc": "Aston Villa",
+    "brentfordfc": "Brentford",
+    "crystalpalacefc": "Crystal Palace",
+    "fulhamfc": "Fulham",
+    "leicestercityfc": "Leicester City",
+    "southamptonfc": "Southampton",
+    "brugge": "Club Brujas",
+    "pseindhoven": "PSV",
+    "porto": "Porto",
+    "bodo": "FK Bodø/Glimt",
+    "bodøglimt": "FK Bodø/Glimt",
+    "acomonia": "AC Omonia",
+    "omonia": "AC Omonia"
   },
   "canonicalDbTeams": [
-    "AFC Ajax",
     "AC Milan",
+    "AEK Athens",
+    "AFC Ajax",
+    "AGF",
     "Alavés",
     "Almería",
+    "Anderlecht",
+    "Ararat-Armenia",
+    "Arezzo",
     "Arsenal",
     "AS Monaco FC",
+    "Ascoli",
     "Aston Villa",
     "Atalanta",
     "Athletic Bilbao",
@@ -184,29 +385,48 @@
     "Barcelona",
     "Bayer Leverkusen",
     "Bayern Munich",
+    "Benevento",
     "Benfica",
+    "Beşiktaş",
     "Bochum",
     "Bologna",
+    "Borac Banja Luka",
     "Borussia Dortmund",
     "Borussia Mönchengladbach",
     "Bournemouth",
+    "Braga",
+    "Brann",
     "Brentford",
     "Brighton",
     "Cagliari",
+    "Carrarese",
+    "Catania",
+    "Catanzaro",
+    "Celje",
     "Celta Vigo",
+    "Celtic",
+    "Cesena",
     "Chelsea",
     "Club Brujas",
     "Como",
+    "Coventry City",
+    "Cremonese",
     "Crystal Palace",
+    "CSKA Sofia",
     "Darmstadt",
+    "Deportivo La Coruña",
     "Dinamo Zagreb",
     "Düsseldorf",
+    "Egnatia",
     "Eintracht Frankfurt",
     "Elche",
     "Empoli",
     "Espanyol",
     "Everton",
     "FC København",
+    "Fenerbahçe",
+    "Ferencváros",
+    "Feyenoord",
     "Fiorentina",
     "FK Bodø/Glimt",
     "FK Kairat",
@@ -216,537 +436,709 @@
     "Galatasaray SK",
     "Genk",
     "Genoa",
+    "Gent",
     "Getafe",
     "Girona",
+    "Hajduk Split",
+    "Hamburger SV",
+    "Hapoel Be'er Sheva",
+    "Hearts",
     "Heidenheim",
     "Hoffenheim",
     "Holstein Kiel",
+    "Hull City",
+    "Iberia 1999",
+    "Inter Club d'Escaldes",
     "Inter Milan",
     "Ipswich Town",
+    "Jablonec",
+    "Jagiellonia",
+    "Juve Stabia",
     "Juventus",
+    "Kauno Žalgiris",
     "Köln",
+    "KuPS",
     "Las Palmas",
+    "LASK Linz",
     "Lazio",
     "Lecce",
+    "Lech Poznań",
+    "Leeds United",
     "Leganés",
     "Leicester City",
+    "Lens",
+    "Levante",
+    "Levski Sofia",
+    "Lille",
+    "Lillestrøm",
+    "Lincoln Red Imps",
     "Liverpool",
+    "Lugano",
     "Mainz",
+    "Málaga",
     "Mallorca",
     "Manchester City",
     "Manchester United",
+    "Mantova",
+    "Midtjylland",
+    "Mjällby",
+    "Modena",
     "Monza",
     "Napoli",
+    "NEC",
     "Newcastle",
+    "Nordsjælland",
     "Nott. Forest",
+    "OFI",
     "Olympique de Marseille",
     "Olympique Lyon",
     "Osasuna",
+    "Padova",
     "PAE Olympiakos SFP",
+    "Pafos FC",
+    "Palermo",
+    "Panathinaikos",
     "PAOK",
+    "Paphos FC",
     "Paris Saint-Germain",
     "Parma",
-    "Paphos FC",
+    "Pisa",
     "Porto",
+    "Potenza",
     "PSV",
     "Qarabağ Ağdam FK",
-    "RB Leipzig",
+    "Racing Santander",
+    "Ravenna",
     "Rayo Vallecano",
+    "RB Leipzig",
     "Real Betis",
     "Real Madrid",
     "Real Sociedad",
     "Real Valladolid",
+    "Red Bull Salzburg",
+    "Red Star Belgrade",
+    "Rennes",
+    "Riga",
     "Roma",
     "Royale Union Saint-Gilloise",
+    "SABAH FK",
     "Salernitana",
+    "Sampdoria",
     "Sassuolo",
+    "SC Paderborn 07",
+    "Schalke 04",
     "Sevilla",
+    "Shakhtar Donetsk",
+    "Sint-Truiden",
     "SK Slavia Praha",
+    "Slovan Bratislava",
     "Southampton",
+    "Sparta Prague",
     "Sporting Clube de Portugal",
+    "Sturm Graz",
     "Stuttgart",
+    "Sudtirol",
+    "Sunderland",
+    "SV 07 Elversberg",
+    "TBD Away",
+    "TBD Home",
+    "Thun",
     "Torino",
+    "Torreense",
     "Tottenham",
+    "Trabzonspor",
+    "Twente",
     "Udinese",
     "Union Berlin",
+    "Union Brescia",
+    "Universitatea Craiova",
+    "US Avellino",
     "Valencia",
     "Venezia",
     "Verona",
+    "Vicenza",
+    "Viking FK",
+    "Viktoria Plzeň",
     "Villarreal",
+    "Virtus Entella",
     "Werder Bremen",
     "West Ham",
     "Wolfsburg",
-    "Wolves",
-    "Hamburger SV",
-    "SC Paderborn 07",
-    "Schalke 04",
-    "SV 07 Elversberg",
-    "Arezzo",
-    "Ascoli",
-    "Benevento",
-    "Carrarese",
-    "Catania",
-    "Catanzaro",
-    "Cesena",
-    "Cremonese",
-    "Juve Stabia",
-    "Mantova",
-    "Modena",
-    "Padova",
-    "Palermo",
-    "Pisa",
-    "Potenza",
-    "Ravenna",
-    "Sampdoria",
-    "Sudtirol",
-    "US Avellino",
-    "Union Brescia",
-    "Vicenza",
-    "Virtus Entella",
-    "TBD Home",
-    "TBD Away"
+    "Wolves"
   ],
   "knockoutPairs": {
-    "conference": [
-      "fiorentina-westham",
-      "westham-fiorentina",
-      "villarreal-clubbrujas",
-      "clubbrujas-villarreal",
-      "villarreal-brujas",
-      "brujas-villarreal",
-      "villarreal-clubbrugge",
-      "clubbrugge-villarreal",
-      "westham-villarreal",
-      "villarreal-westham",
-      "fiorentina-clubbrujas",
-      "clubbrujas-fiorentina",
-      "fiorentina-brujas",
-      "brujas-fiorentina",
-      "fiorentina-clubbrugge",
-      "clubbrugge-fiorentina",
-      "fiorentina-villarreal",
-      "villarreal-fiorentina",
-      "clubbrujas-westham",
-      "westham-clubbrujas",
-      "brujas-westham",
-      "westham-brujas",
-      "clubbrugge-westham",
-      "westham-clubbrugge"
-    ],
-    "europa": [
-      "manchesterunited-roma",
-      "roma-manchesterunited",
-      "manunited-roma",
-      "roma-manunited",
-      "manchesterunited-realsociedad",
-      "realsociedad-manchesterunited",
-      "manunited-realsociedad",
-      "realsociedad-manunited",
-      "manchesterunited-bayerleverkusen",
-      "bayerleverkusen-manchesterunited",
-      "manunited-bayerleverkusen",
-      "bayerleverkusen-manunited",
-      "manchesterunited-leverkusen",
-      "leverkusen-manchesterunited",
-      "tottenham-bayerleverkusen",
-      "bayerleverkusen-tottenham",
-      "tottenham-leverkusen",
-      "leverkusen-tottenham",
-      "tottenham-roma",
-      "roma-tottenham",
-      "tottenham-olympiquelyon",
-      "olympiquelyon-tottenham",
-      "tottenham-lyon",
-      "lyon-tottenham",
-      "realsociedad-tottenham",
-      "tottenham-realsociedad",
-      "roma-bayerleverkusen",
-      "bayerleverkusen-roma",
-      "roma-leverkusen",
-      "leverkusen-roma",
-      "bayerleverkusen-lazio",
-      "lazio-bayerleverkusen",
-      "leverkusen-lazio",
-      "lazio-leverkusen",
-      "lazio-realsociedad",
-      "realsociedad-lazio",
-      "realsociedad-atalanta",
-      "atalanta-realsociedad",
-      "atalanta-olympiquelyon",
-      "olympiquelyon-atalanta",
-      "atalanta-lyon",
-      "lyon-atalanta",
-      "olympiquelyon-lazio",
-      "lazio-olympiquelyon",
-      "lyon-lazio",
-      "lazio-lyon",
-      "olympiquelyon-manchesterunited",
-      "manchesterunited-olympiquelyon",
-      "lyon-manunited",
-      "manunited-lyon",
-      "azalkmaar-dinamozagreb",
-      "dinamozagreb-azalkmaar",
-      "genk-paok",
-      "paok-genk",
-      "paok-azalkmaar",
-      "azalkmaar-paok",
-      "dinamozagreb-genk",
-      "genk-dinamozagreb",
-      "azalkmaar-genk",
-      "genk-azalkmaar",
-      "paok-dinamozagreb",
-      "dinamozagreb-paok"
-    ],
-    "champions": [
-      "manchestercity-realmadrid",
-      "realmadrid-manchestercity",
-      "mancity-realmadrid",
-      "realmadrid-mancity",
-      "barcelona-bayernmunich",
-      "bayernmunich-barcelona",
-      "barcelona-bayern",
-      "bayern-barcelona",
-      "arsenal-parissaintgermain",
-      "parissaintgermain-arsenal",
-      "arsenal-psg",
-      "psg-arsenal",
-      "liverpool-intermilan",
-      "intermilan-liverpool",
-      "liverpool-inter",
-      "inter-liverpool",
-      "borussiadortmund-napoli",
-      "napoli-borussiadortmund",
-      "dortmund-napoli",
-      "napoli-dortmund",
-      "acmilan-chelsea",
-      "chelsea-acmilan",
-      "milan-chelsea",
-      "chelsea-milan",
-      "atleticomadrid-juventus",
-      "juventus-atleticomadrid",
-      "atletico-juventus",
-      "juventus-atletico",
-      "rbleipzig-benfica",
-      "benfica-rbleipzig",
-      "leipzig-benfica",
-      "benfica-leipzig",
-      "barcelona-arsenal",
-      "arsenal-barcelona",
-      "realmadrid-liverpool",
-      "liverpool-realmadrid",
-      "manchestercity-intermilan",
-      "intermilan-manchestercity",
-      "mancity-inter",
-      "inter-mancity",
-      "bayernmunich-parissaintgermain",
-      "parissaintgermain-bayernmunich",
-      "bayern-psg",
-      "psg-bayern"
-    ]
+    "champions": [],
+    "europa": [],
+    "conference": []
   },
   "teamCups": {
-    "Real Madrid": [
-      "champions",
-      "copadelrey"
+    "AC Milan": [
+      "coppaitalia",
+      "europa"
     ],
-    "Barcelona": [
-      "champions",
-      "copadelrey"
+    "AC Omonia": [
+      "europa"
     ],
-    "Atlético Madrid": [
-      "champions",
-      "copadelrey"
+    "AEK Athens": [
+      "champions"
     ],
-    "Athletic Bilbao": [
-      "copadelrey"
+    "AFC Ajax": [
+      "conference"
     ],
-    "Real Sociedad": [
-      "copadelrey"
-    ],
-    "Real Betis": [
-      "copadelrey"
-    ],
-    "Real Valladolid": [
-      "copadelrey"
-    ],
-    "Villarreal": [
-      "copadelrey"
-    ],
-    "Sevilla": [
-      "copadelrey"
-    ],
-    "Valencia": [
-      "copadelrey"
-    ],
-    "Celta Vigo": [
-      "copadelrey"
-    ],
-    "Getafe": [
-      "copadelrey"
-    ],
-    "Osasuna": [
-      "copadelrey"
-    ],
-    "Mallorca": [
-      "copadelrey"
-    ],
-    "Rayo Vallecano": [
-      "copadelrey"
+    "AGF": [
+      "conference"
     ],
     "Alavés": [
       "copadelrey"
     ],
-    "Girona": [
-      "copadelrey"
+    "Anderlecht": [
+      "europa"
     ],
-    "Las Palmas": [
-      "copadelrey"
+    "Ararat-Armenia": [
+      "europa"
     ],
-    "Leganés": [
-      "copadelrey"
-    ],
-    "Espanyol": [
-      "copadelrey"
-    ],
-    "Elche": [
-      "copadelrey"
-    ],
-    "Almería": [
-      "copadelrey"
+    "Arezzo": [
+      "coppaitalia"
     ],
     "Arsenal": [
-      "champions",
-      "facup"
+      "facup",
+      "champions"
     ],
-    "Manchester City": [
-      "champions",
-      "facup"
+    "AS Monaco FC": [
+      "conference"
     ],
-    "Liverpool": [
-      "champions",
-      "facup"
+    "Ascoli": [
+      "coppaitalia"
     ],
     "Aston Villa": [
-      "champions",
-      "facup"
+      "facup",
+      "champions"
     ],
-    "Tottenham": [
-      "champions",
-      "facup"
+    "Atalanta": [
+      "coppaitalia",
+      "conference"
     ],
-    "Chelsea": [
-      "champions",
-      "facup"
+    "Athletic Bilbao": [
+      "copadelrey"
     ],
-    "Manchester United": [
-      "champions",
-      "facup"
-    ],
-    "Newcastle": [
-      "champions",
-      "facup"
-    ],
-    "Brighton": [
-      "facup"
-    ],
-    "West Ham": [
-      "facup"
-    ],
-    "Bournemouth": [
-      "facup"
-    ],
-    "Fulham": [
-      "facup"
-    ],
-    "Brentford": [
-      "facup"
-    ],
-    "Crystal Palace": [
-      "facup"
-    ],
-    "Wolves": [
-      "facup"
-    ],
-    "Everton": [
-      "facup"
-    ],
-    "Nott. Forest": [
-      "facup"
-    ],
-    "Ipswich Town": [
-      "facup"
-    ],
-    "Leicester City": [
-      "facup"
-    ],
-    "Southampton": [
-      "facup"
-    ],
-    "Bayern Munich": [
-      "champions",
-      "dfbpokal"
-    ],
-    "Borussia Dortmund": [
-      "champions",
-      "dfbpokal"
-    ],
-    "Bayer Leverkusen": [
-      "champions",
-      "dfbpokal"
-    ],
-    "RB Leipzig": [
-      "champions",
-      "dfbpokal"
-    ],
-    "Eintracht Frankfurt": [
-      "champions",
-      "dfbpokal"
-    ],
-    "Stuttgart": [
-      "dfbpokal"
-    ],
-    "Wolfsburg": [
-      "dfbpokal"
-    ],
-    "Freiburg": [
-      "dfbpokal"
-    ],
-    "Mainz": [
-      "dfbpokal"
-    ],
-    "Borussia Mönchengladbach": [
-      "dfbpokal"
-    ],
-    "Hoffenheim": [
-      "dfbpokal"
-    ],
-    "Union Berlin": [
-      "dfbpokal"
-    ],
-    "Werder Bremen": [
-      "dfbpokal"
+    "Atlético Madrid": [
+      "copadelrey",
+      "champions"
     ],
     "Augsburg": [
       "dfbpokal"
     ],
-    "Heidenheim": [
-      "dfbpokal"
+    "AZ Alkmaar": [
+      "europa"
     ],
-    "Darmstadt": [
-      "dfbpokal"
+    "Barcelona": [
+      "copadelrey",
+      "champions"
     ],
-    "Bochum": [
-      "dfbpokal"
+    "Bayer Leverkusen": [
+      "dfbpokal",
+      "europa"
     ],
-    "Köln": [
-      "dfbpokal"
+    "Bayern Munich": [
+      "dfbpokal",
+      "champions"
     ],
-    "Düsseldorf": [
-      "dfbpokal"
-    ],
-    "Holstein Kiel": [
-      "dfbpokal"
-    ],
-    "Inter Milan": [
-      "champions",
+    "Benevento": [
       "coppaitalia"
     ],
-    "AC Milan": [
-      "champions",
-      "coppaitalia"
+    "Benfica": [
+      "europa"
     ],
-    "Juventus": [
-      "champions",
-      "coppaitalia"
-    ],
-    "Napoli": [
-      "champions",
-      "coppaitalia"
-    ],
-    "Atalanta": [
-      "champions",
-      "coppaitalia"
-    ],
-    "Lazio": [
-      "coppaitalia"
-    ],
-    "Roma": [
-      "coppaitalia"
-    ],
-    "Fiorentina": [
-      "coppaitalia"
+    "Beşiktaş": [
+      "europa"
     ],
     "Bologna": [
       "coppaitalia"
     ],
-    "Torino": [
-      "coppaitalia"
+    "Borac Banja Luka": [
+      "conference"
     ],
-    "Monza": [
-      "coppaitalia"
+    "Borussia Dortmund": [
+      "dfbpokal",
+      "champions"
     ],
-    "Genoa": [
-      "coppaitalia"
+    "Borussia Mönchengladbach": [
+      "dfbpokal"
+    ],
+    "Bournemouth": [
+      "facup",
+      "europa"
+    ],
+    "Braga": [
+      "conference"
+    ],
+    "Brann": [
+      "conference"
+    ],
+    "Brentford": [
+      "facup"
+    ],
+    "Brighton": [
+      "facup",
+      "conference"
     ],
     "Cagliari": [
       "coppaitalia"
     ],
-    "Udinese": [
+    "Carrarese": [
       "coppaitalia"
     ],
-    "Sassuolo": [
+    "Catania": [
       "coppaitalia"
+    ],
+    "Catanzaro": [
+      "coppaitalia"
+    ],
+    "Celje": [
+      "europa"
+    ],
+    "Celta Vigo": [
+      "copadelrey",
+      "europa"
+    ],
+    "Celtic": [
+      "europa"
+    ],
+    "Cesena": [
+      "coppaitalia"
+    ],
+    "Chelsea": [
+      "facup"
+    ],
+    "Club Brujas": [
+      "champions"
+    ],
+    "Como": [
+      "coppaitalia",
+      "champions"
+    ],
+    "Coventry City": [
+      "facup"
+    ],
+    "Cremonese": [
+      "coppaitalia"
+    ],
+    "Crystal Palace": [
+      "facup",
+      "europa"
+    ],
+    "CSKA Sofia": [
+      "conference"
+    ],
+    "Deportivo La Coruña": [
+      "copadelrey"
+    ],
+    "Dinamo Zagreb": [
+      "europa"
+    ],
+    "Egnatia": [
+      "conference"
+    ],
+    "Eintracht Frankfurt": [
+      "dfbpokal"
+    ],
+    "Elche": [
+      "copadelrey"
     ],
     "Empoli": [
+      "coppaitalia"
+    ],
+    "Espanyol": [
+      "copadelrey"
+    ],
+    "Everton": [
+      "facup"
+    ],
+    "FC København": [
+      "conference"
+    ],
+    "Fenerbahçe": [
+      "champions"
+    ],
+    "Ferencváros": [
+      "europa"
+    ],
+    "Feyenoord": [
+      "champions"
+    ],
+    "Fiorentina": [
+      "coppaitalia"
+    ],
+    "FK Bodø/Glimt": [
+      "champions"
+    ],
+    "FK Kairat": [
+      "conference"
+    ],
+    "Freiburg": [
+      "dfbpokal",
+      "conference"
+    ],
+    "Frosinone": [
+      "coppaitalia"
+    ],
+    "Fulham": [
+      "facup"
+    ],
+    "Galatasaray SK": [
+      "champions"
+    ],
+    "Genoa": [
+      "coppaitalia"
+    ],
+    "Gent": [
+      "conference"
+    ],
+    "Getafe": [
+      "copadelrey",
+      "conference"
+    ],
+    "Hajduk Split": [
+      "conference"
+    ],
+    "Hamburger SV": [
+      "dfbpokal"
+    ],
+    "Hapoel Be'er Sheva": [
+      "europa"
+    ],
+    "Hearts": [
+      "conference"
+    ],
+    "Hoffenheim": [
+      "dfbpokal",
+      "europa"
+    ],
+    "Hull City": [
+      "facup"
+    ],
+    "Iberia 1999": [
+      "conference"
+    ],
+    "Inter Club d'Escaldes": [
+      "conference"
+    ],
+    "Inter Milan": [
+      "coppaitalia",
+      "champions"
+    ],
+    "Ipswich Town": [
+      "facup"
+    ],
+    "Jablonec": [
+      "conference"
+    ],
+    "Jagiellonia": [
+      "europa"
+    ],
+    "Juve Stabia": [
+      "coppaitalia"
+    ],
+    "Juventus": [
+      "coppaitalia",
+      "europa"
+    ],
+    "Kauno Žalgiris": [
+      "conference"
+    ],
+    "Köln": [
+      "dfbpokal"
+    ],
+    "KuPS": [
+      "conference"
+    ],
+    "LASK Linz": [
+      "champions"
+    ],
+    "Lazio": [
       "coppaitalia"
     ],
     "Lecce": [
       "coppaitalia"
     ],
+    "Lech Poznań": [
+      "europa"
+    ],
+    "Leeds United": [
+      "facup"
+    ],
+    "Lens": [
+      "champions"
+    ],
+    "Levante": [
+      "copadelrey"
+    ],
+    "Levski Sofia": [
+      "europa"
+    ],
+    "Lille": [
+      "champions"
+    ],
+    "Lillestrøm": [
+      "europa"
+    ],
+    "Lincoln Red Imps": [
+      "conference"
+    ],
+    "Liverpool": [
+      "facup",
+      "champions"
+    ],
+    "Lugano": [
+      "conference"
+    ],
+    "Mainz": [
+      "dfbpokal"
+    ],
+    "Málaga": [
+      "copadelrey"
+    ],
+    "Manchester City": [
+      "facup",
+      "champions"
+    ],
+    "Manchester United": [
+      "facup",
+      "champions"
+    ],
+    "Mantova": [
+      "coppaitalia"
+    ],
+    "Midtjylland": [
+      "conference"
+    ],
+    "Mjällby": [
+      "conference"
+    ],
+    "Modena": [
+      "coppaitalia"
+    ],
+    "Monza": [
+      "coppaitalia"
+    ],
+    "Napoli": [
+      "coppaitalia",
+      "champions"
+    ],
+    "NEC": [
+      "europa"
+    ],
+    "Newcastle": [
+      "facup"
+    ],
+    "Nordsjælland": [
+      "conference"
+    ],
+    "Nott. Forest": [
+      "facup"
+    ],
+    "OFI": [
+      "europa"
+    ],
+    "Olympique de Marseille": [
+      "europa"
+    ],
+    "Olympique Lyon": [
+      "europa"
+    ],
+    "Osasuna": [
+      "copadelrey"
+    ],
+    "Padova": [
+      "coppaitalia"
+    ],
+    "PAE Olympiakos SFP": [
+      "europa"
+    ],
+    "Pafos FC": [
+      "conference"
+    ],
+    "Palermo": [
+      "coppaitalia"
+    ],
+    "Panathinaikos": [
+      "conference"
+    ],
+    "Paris Saint-Germain": [
+      "champions"
+    ],
     "Parma": [
+      "coppaitalia"
+    ],
+    "Pisa": [
+      "coppaitalia"
+    ],
+    "Porto": [
+      "champions"
+    ],
+    "Potenza": [
+      "coppaitalia"
+    ],
+    "PSV": [
+      "champions"
+    ],
+    "Racing Santander": [
+      "copadelrey"
+    ],
+    "Ravenna": [
+      "coppaitalia"
+    ],
+    "Rayo Vallecano": [
+      "copadelrey"
+    ],
+    "RB Leipzig": [
+      "dfbpokal",
+      "champions"
+    ],
+    "Real Betis": [
+      "copadelrey",
+      "champions"
+    ],
+    "Real Madrid": [
+      "copadelrey",
+      "champions"
+    ],
+    "Real Sociedad": [
+      "copadelrey",
+      "europa"
+    ],
+    "Red Bull Salzburg": [
+      "europa"
+    ],
+    "Red Star Belgrade": [
+      "conference"
+    ],
+    "Rennes": [
+      "europa"
+    ],
+    "Riga": [
+      "conference"
+    ],
+    "Roma": [
+      "coppaitalia",
+      "champions"
+    ],
+    "Royale Union Saint-Gilloise": [
+      "europa"
+    ],
+    "SABAH FK": [
+      "champions"
+    ],
+    "Sampdoria": [
+      "coppaitalia"
+    ],
+    "Sassuolo": [
+      "coppaitalia"
+    ],
+    "SC Paderborn 07": [
+      "dfbpokal"
+    ],
+    "Schalke 04": [
+      "dfbpokal"
+    ],
+    "Sevilla": [
+      "copadelrey"
+    ],
+    "Shakhtar Donetsk": [
+      "champions"
+    ],
+    "Sint-Truiden": [
+      "conference"
+    ],
+    "SK Slavia Praha": [
+      "champions"
+    ],
+    "Slovan Bratislava": [
+      "champions"
+    ],
+    "Sparta Prague": [
+      "europa"
+    ],
+    "Sporting Clube de Portugal": [
+      "champions"
+    ],
+    "Sturm Graz": [
+      "europa"
+    ],
+    "Stuttgart": [
+      "dfbpokal",
+      "champions"
+    ],
+    "Sudtirol": [
+      "coppaitalia"
+    ],
+    "Sunderland": [
+      "facup",
+      "europa"
+    ],
+    "SV 07 Elversberg": [
+      "dfbpokal"
+    ],
+    "Thun": [
+      "conference"
+    ],
+    "Torino": [
+      "coppaitalia"
+    ],
+    "Torreense": [
+      "europa"
+    ],
+    "Tottenham": [
+      "facup"
+    ],
+    "Trabzonspor": [
+      "conference"
+    ],
+    "Twente": [
+      "conference"
+    ],
+    "Udinese": [
+      "coppaitalia"
+    ],
+    "Union Berlin": [
+      "dfbpokal"
+    ],
+    "Union Brescia": [
+      "coppaitalia"
+    ],
+    "Universitatea Craiova": [
+      "conference"
+    ],
+    "US Avellino": [
+      "coppaitalia"
+    ],
+    "Valencia": [
+      "copadelrey"
+    ],
+    "Venezia": [
       "coppaitalia"
     ],
     "Verona": [
       "coppaitalia"
     ],
-    "Como": [
+    "Vicenza": [
       "coppaitalia"
     ],
-    "Venezia": [
-      "coppaitalia"
-    ],
-    "Frosinone": [
-      "coppaitalia"
-    ],
-    "Salernitana": [
-      "coppaitalia"
-    ],
-    "Paris Saint-Germain": [
+    "Viking FK": [
       "champions"
     ],
-    "Benfica": [
-      "champions"
-    ],
-    "Porto": [
-      "champions"
-    ],
-    "AZ Alkmaar": [
+    "Viktoria Plzeň": [
       "europa"
     ],
-    "Dinamo Zagreb": [
-      "conference"
+    "Villarreal": [
+      "copadelrey",
+      "champions"
     ],
-    "Genk": [
-      "conference"
+    "Virtus Entella": [
+      "coppaitalia"
     ],
-    "Olympique Lyon": [
-      "europa"
-    ],
-    "PAOK": [
-      "conference"
-    ],
-    "Club Brujas": [
-      "conference"
+    "Werder Bremen": [
+      "dfbpokal"
     ]
   }
 }

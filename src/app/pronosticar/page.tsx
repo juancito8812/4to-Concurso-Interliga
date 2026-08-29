@@ -14,6 +14,7 @@ import {
   matchIdToUuid,
   getKnockoutCupSlug,
   getKnockoutRound,
+  isKnockoutMatch,
 } from "@/lib/leagueConfig";
 import { getOfficialTeamMatches, getOfficialPlayersForTeams, FDMatch, findTeamId } from "@/lib/footballData";
 import officialFixtures from "@/data/officialFixtures.json";
@@ -196,7 +197,10 @@ export default function PronosticarPage() {
       .limit(3);
 
     if (matchesData) {
-      const normalizedMatches: Match[] = matchesData.map(m => {
+      const visibleMatches = matchesData.filter(
+        (m) => !m.home_team.includes("TBD") && !m.away_team.includes("TBD")
+      );
+      const normalizedMatches: Match[] = visibleMatches.map(m => {
         const homeNorm = normalizeTeamName(m.home_team);
         const awayNorm = normalizeTeamName(m.away_team);
         // Prefer the canonical official fixture id so predictions join evaluated matches
@@ -522,7 +526,7 @@ export default function PronosticarPage() {
         if (!match) return false;
         if (checkIsMatchLocked(match.match_date, saveTimestamp)) return false;
         const cupSlug = getKnockoutCupSlug(match.league);
-        if (cupSlug && cupSurvivors[cupSlug]?.status === "ELIMINATED") return false;
+        if (cupSlug && isKnockoutMatch(match.home_team, match.away_team, match.league, match.match_date) && cupSurvivors[cupSlug]?.status === "ELIMINATED") return false;
         return true;
       });
 
@@ -740,7 +744,7 @@ export default function PronosticarPage() {
 
                 // Knockout Survivor Status Calculation
                 const cupSlug = getKnockoutCupSlug(match.league);
-                const isKnockout = !!cupSlug;
+                const isKnockout = !!cupSlug && isKnockoutMatch(match.home_team, match.away_team, match.league, match.match_date);
                 const knockoutRound = isKnockout && cupSlug ? getKnockoutRound(match.match_date, cupSlug) : null;
                 const cupRecord = cupSlug ? cupSurvivors[cupSlug] : undefined;
 

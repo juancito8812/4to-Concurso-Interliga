@@ -101,8 +101,10 @@ function getKnockoutRound(matchDate, tournamentSlug) {
   const day = d.getUTCDate();
 
   if (tournamentSlug === "champions" || tournamentSlug === "europa" || tournamentSlug === "conference") {
-    if (month === 2 || (month === 3 && day <= 20)) return "Octavos de Final";
-    if ((month === 3 && day > 20) || (month === 4 && day <= 20)) return "Cuartos de Final";
+    // Formato 2026/27 (36 equipos): feb = playoff R32, mar = R16, abr = QF, abr-may = SF, may = F
+    if (month === 2) return "Dieciseisavos de Final";
+    if (month === 3) return "Octavos de Final";
+    if (month === 4 && day <= 20) return "Cuartos de Final";
     if ((month === 4 && day > 20) || (month === 5 && day <= 15)) return "Semifinal";
     if (month >= 5) return "Final";
   }
@@ -143,7 +145,7 @@ function getTeamCups(teamName) {
   return Array.isArray(cups) ? cups : [];
 }
 
-function isKnockoutMatch(homeTeam, awayTeam, league) {
+function isKnockoutMatch(homeTeam, awayTeam, league, matchDate) {
   const cHome = cleanTeamName(homeTeam);
   const cAway = cleanTeamName(awayTeam);
   const pairKey = `${cHome}-${cAway}`;
@@ -156,6 +158,17 @@ function isKnockoutMatch(homeTeam, awayTeam, league) {
     if (lower.includes("fa cup")) return true;
     if (lower.includes("copa del rey")) return true;
     if (lower.includes("dfb-pokal") || lower.includes("dfb pokal")) return true;
+    // Competiciones europeas: fase liga termina en enero; desde febrero hasta agosto son rondas KO
+    if (
+      (lower.includes("champions") ||
+        (lower.includes("europa") && !lower.includes("conference")) ||
+        lower.includes("conference")) &&
+      matchDate
+    ) {
+      const d = new Date(matchDate);
+      const m = d.getUTCMonth();
+      if (!isNaN(d.getTime()) && m >= 1 && m <= 7) return true;
+    }
   }
   return false;
 }

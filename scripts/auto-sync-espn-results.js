@@ -271,7 +271,7 @@ async function evaluateSurvivors(finishedMatches) {
 
         const match = finishedMap.get(p.match_id);
         if (!match) continue;
-        if (!isKnockoutMatch(match.home_team, match.away_team, match.league)) continue;
+        if (!isKnockoutMatch(match.home_team, match.away_team, match.league, match.match_date)) continue;
 
         const mh = normalizeTeamName(match.home_team).toLowerCase();
         const ma = normalizeTeamName(match.away_team).toLowerCase();

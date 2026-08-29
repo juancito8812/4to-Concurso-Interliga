@@ -94,9 +94,9 @@ export function normalizeTeamName(name: string): string {
 }
 
 // Known Interliga tournament match pairings
-const conferenceKeyPairs = new Set(teamData.knockoutPairs.conference);
-const europaKeyPairs = new Set(teamData.knockoutPairs.europa);
-const championsKeyPairs = new Set(teamData.knockoutPairs.champions);
+const conferenceKeyPairs = new Set<string>(teamData.knockoutPairs.conference ?? []);
+const europaKeyPairs = new Set<string>(teamData.knockoutPairs.europa ?? []);
+const championsKeyPairs = new Set<string>(teamData.knockoutPairs.champions ?? []);
 
 /**
  * Parse an API competition code or name to standard league name
@@ -168,8 +168,10 @@ export function getKnockoutRound(matchDate: string, tournamentSlug: string): str
   const day = d.getUTCDate();
 
   if (tournamentSlug === "champions" || tournamentSlug === "europa" || tournamentSlug === "conference") {
-    if (month === 2 || (month === 3 && day <= 20)) return "Octavos de Final";
-    if ((month === 3 && day > 20) || (month === 4 && day <= 20)) return "Cuartos de Final";
+    // Formato 2026/27 (36 equipos): feb = playoff R32, mar = R16, abr = QF, abr-may = SF, may = F
+    if (month === 2) return "Dieciseisavos de Final";
+    if (month === 3) return "Octavos de Final";
+    if (month === 4 && day <= 20) return "Cuartos de Final";
     if ((month === 4 && day > 20) || (month === 5 && day <= 15)) return "Semifinal";
     if (month >= 5) return "Final";
   }
@@ -209,7 +211,7 @@ export function getKnockoutRound(matchDate: string, tournamentSlug: string): str
  * True when a match belongs to the contest's official knockout pairings
  * (or domestic cups), used by the Survivor mechanic. Group-stage cup games are NOT knockout.
  */
-export function isKnockoutMatch(homeTeam: string, awayTeam: string, league?: string): boolean {
+export function isKnockoutMatch(homeTeam: string, awayTeam: string, league?: string, matchDate?: string): boolean {
   // 1. Verificar por pares pre-enumerados (Champions, Europa, Conference)
   const cHome = cleanTeamName(homeTeam);
   const cAway = cleanTeamName(awayTeam);
@@ -225,6 +227,17 @@ export function isKnockoutMatch(homeTeam: string, awayTeam: string, league?: str
     if (lower.includes("fa cup")) return true;
     if (lower.includes("copa del rey")) return true;
     if (lower.includes("dfb-pokal") || lower.includes("dfb pokal")) return true;
+    // 3. Competiciones europeas: fase liga termina en enero; desde febrero hasta agosto son rondas KO
+    if (
+      (lower.includes("champions") ||
+        (lower.includes("europa") && !lower.includes("conference")) ||
+        lower.includes("conference")) &&
+      matchDate
+    ) {
+      const d = new Date(matchDate);
+      const m = d.getUTCMonth();
+      if (!isNaN(d.getTime()) && m >= 1 && m <= 7) return true;
+    }
   }
   return false;
 }

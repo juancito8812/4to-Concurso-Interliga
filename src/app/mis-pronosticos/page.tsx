@@ -413,7 +413,7 @@ export default function MisPronosticosPage() {
         if (!match || match.result_home === null || match.result_away === null) continue;
 
         const league = normalizeMatchLeague(match.home_team, match.away_team, match.match_date, match.league);
-        if (!isKnockoutMatch(match.home_team, match.away_team, league)) continue;
+        if (!isKnockoutMatch(match.home_team, match.away_team, league, match.match_date)) continue;
 
         const cupSlug = getKnockoutCupSlug(league);
         if (!cupSlug) continue;

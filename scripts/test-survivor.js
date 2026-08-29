@@ -308,6 +308,15 @@ runTest('Scenario 8: Knockout Match Detection by League Name (Domestic & Europea
   assert.equal(isKnockoutMatch('Inter Milan', 'Juventus', 'Copa Italia'), true);
   assert.equal(isKnockoutMatch('Arsenal', 'Chelsea', 'Premier League'), false);
   assert.equal(isKnockoutMatch('Real Madrid', 'Barcelona', 'LaLiga'), false);
+  // Fase liga europea (sep-ene) NO es KO
+  assert.equal(isKnockoutMatch('Real Madrid', 'Barcelona', 'Champions League', '2026-11-03'), false);
+  assert.equal(isKnockoutMatch('Arsenal', 'Chelsea', 'Europa League', '2026-10-01'), false);
+  assert.equal(isKnockoutMatch('Como', 'Napoli', 'Conference League', '2026-12-10'), false);
+  // Rondas KO europeas (feb+) SÍ son KO aunque los cruces sean TBD
+  assert.equal(isKnockoutMatch('TBD Home', 'TBD Away', 'Champions League', '2027-02-17'), true);
+  assert.equal(isKnockoutMatch('TBD Home', 'TBD Away', 'Europa League', '2027-03-11'), true);
+  assert.equal(isKnockoutMatch('TBD Home', 'TBD Away', 'Conference League', '2027-04-08'), true);
+  assert.equal(isKnockoutMatch('TBD Home', 'TBD Away', 'Champions League', '2027-05-31'), true);
 });
 
 // -------------------------------------------------------------
@@ -328,9 +337,12 @@ runTest('Scenario 9: getKnockoutCupSlug Slug Mapping', () => {
 // Scenario 10: getKnockoutRound Real Round Names
 // -------------------------------------------------------------
 runTest('Scenario 10: getKnockoutRound Date to Round Resolution', () => {
-  assert.equal(getKnockoutRound('2026-02-18', 'champions'), 'Octavos de Final');
+  // Formato 2026/27 (36 equipos): feb = playoff R32, mar = R16, abr = QF, abr-may = SF, may = F
+  assert.equal(getKnockoutRound('2026-02-18', 'champions'), 'Dieciseisavos de Final');
+  assert.equal(getKnockoutRound('2026-03-11', 'champions'), 'Octavos de Final');
   assert.equal(getKnockoutRound('2026-04-08', 'champions'), 'Cuartos de Final');
   assert.equal(getKnockoutRound('2026-05-01', 'champions'), 'Semifinal');
+  assert.equal(getKnockoutRound('2026-05-20', 'champions'), 'Final');
   assert.equal(getKnockoutRound('2026-05-30', 'champions'), 'Final');
 
   assert.equal(getKnockoutRound('2026-01-10', 'facup'), 'Tercera Ronda');
@@ -350,26 +362,27 @@ runTest('Scenario 10: getKnockoutRound Date to Round Resolution', () => {
 // Scenario 11: getTeamCups Auto-Subscription Mapping (89 Clubs)
 // -------------------------------------------------------------
 runTest('Scenario 11: getTeamCups Auto-Subscription Mapping', () => {
+  const sorted = (cups) => [...cups].sort();
   const rmCups = getTeamCups('Real Madrid');
-  assert.deepEqual(rmCups, ['champions', 'copadelrey']);
+  assert.deepEqual(sorted(rmCups), ['champions', 'copadelrey']);
 
   const arsCups = getTeamCups('Arsenal');
-  assert.deepEqual(arsCups, ['champions', 'facup']);
+  assert.deepEqual(sorted(arsCups), ['champions', 'facup']);
 
   const bayCups = getTeamCups('Bayern Munich');
-  assert.deepEqual(bayCups, ['champions', 'dfbpokal']);
+  assert.deepEqual(sorted(bayCups), ['champions', 'dfbpokal']);
 
   const intCups = getTeamCups('Inter Milan');
-  assert.deepEqual(intCups, ['champions', 'coppaitalia']);
+  assert.deepEqual(sorted(intCups), ['champions', 'coppaitalia']);
 
   const sevCups = getTeamCups('Sevilla');
   assert.deepEqual(sevCups, ['copadelrey']);
 
-  const whuCups = getTeamCups('West Ham');
-  assert.deepEqual(whuCups, ['facup']);
+  const covCups = getTeamCups('Coventry City');
+  assert.deepEqual(covCups, ['facup']);
 
-  const stutCups = getTeamCups('Stuttgart');
-  assert.deepEqual(stutCups, ['dfbpokal']);
+  const hsvCups = getTeamCups('Hamburger SV');
+  assert.deepEqual(hsvCups, ['dfbpokal']);
 });
 
 // -------------------------------------------------------------

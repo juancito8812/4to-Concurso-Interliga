@@ -137,6 +137,7 @@ export default function TeamSelectorCard() {
                 src={selectedTeam.logo_url}
                 alt={selectedTeam.name}
                 className="w-10 h-10 rounded-full object-contain bg-white p-0.5"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
               />
               <div>
                 <p className="text-sm font-bold text-white">{selectedTeam.name}</p>

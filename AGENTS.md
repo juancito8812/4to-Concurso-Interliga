@@ -23,7 +23,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **Ranking General en Vivo:** `src/app/ranking/page.tsx` — Tabla global multiusuario conectada a Supabase, Podio de Honor y búsqueda.
 - **Autenticación y Perfil:** `src/contexts/AuthContext.tsx` y `src/app/perfil/page.tsx` — Registro con username, login, recuperación de clave, reinicio de club y eliminación de cuenta.
 - **Base de datos:** Supabase PostgreSQL — tablas `profiles`, `teams`, `players`, `matches`, `predictions`, `prediction_scorers`.
-- **Calendario oficial 2026/27:** `src/data/officialFixtures.json` — 1.842 partidos oficiales de las 8 competiciones.
+- **Calendario oficial 2026/27:** `src/data/officialFixtures.json` — 1.618 partidos REALES verificados (0 fabricados): 4 ligas domésticas (football-data API), UCL fase liga + Copa Italia (ESPN). Regenerable con `scripts/sync-official-fixtures.js` (idempotente); validación cruzada contra las fuentes con `scripts/validate-fixtures.js`. UEL/UECL (sorteo del 28/8) y rondas KO se sincronizan cuando las fuentes las publiquen.
 - **Plantillas oficiales 2026/27:** `src/data/officialPlayers.json` — 3.822 jugadores de todos los clubes con posiciones y fichajes actualizados.
 - **Normalización de Ligas y Equipos:** `src/lib/leagueConfig.ts` — `normalizeMatchLeague` y `normalizeTeamName` mapean nombres canónicos y competencias exactas.
 - **Cliente Football API:** `src/lib/footballData.ts` — `getOfficialTeamMatches` y `getOfficialPlayersForTeams` con API en vivo + fallback de fixtures y plantillas oficiales pre-sincronizadas.
@@ -67,15 +67,15 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `src/data/officialEvaluatedPredictions.json` | Pronósticos evaluados y sincronizados |
 | `scripts/evaluate-matches.js` | Evaluador CLI de partidos y cálculo de puntuación |
 | `scripts/assign-points.js` | Asignación directa de puntos y pronósticos |
-| `supabase/schema.sql` | Esquema DDL maestro con 8 tablas, índices, RLS, triggers y 89 equipos |
+| `supabase/schema.sql` | Esquema DDL maestro con 8 tablas, índices, RLS y triggers |
 | `DISASTER_RECOVERY_AND_SCHEMA.md` | Manual maestro de restauración total ante desastres |
 
 ### Base de datos (Supabase PostgreSQL)
 
 - **profiles** — `user_id` (PK), `display_name`, `team_id` (FK → teams). Políticas RLS habilitan lectura pública para el ranking general.
-- **teams** — `id`, `name`, `league`, `logo_url` (89 equipos canónicos).
+- **teams** — `id`, `name`, `league`, `logo_url` (equipos reales 2026/27 sincronizados por `scripts/sync-db.js`).
 - **players** — `name`, `team`, `league`, `position` (500+ jugadores en DB + 3.822 en bundle oficial).
-- **matches** — `id` (IDs canónicos de fixtures), `home_team`, `away_team`, `match_date`, `league`, `result_home`, `result_away` (1.842 filas re-sembradas).
+- **matches** — `id` (IDs canónicos de fixtures), `home_team`, `away_team`, `match_date`, `league`, `result_home`, `result_away` (1.618 filas re-sembradas).
 - **predictions** — `id`, `user_id`, `match_id`, `home_score`, `away_score`, `points` (UNIQUE user_id+match_id; FK → matches con IDs canónicos).
 - **prediction_scorers** — `prediction_id`, `player_name`, `goals`, `team`. Escritura SOLO del dueño del pronóstico (IDOR fix).
 - **tournament_survivors** — `id` (PK), `user_id` (FK → auth.users), `tournament_slug` (TEXT: 'champions', 'europa', 'conference', 'coppaitalia', 'facup', 'copadelrey', 'dfbpokal'), `active_team_id` (FK → teams), `status` ('ALIVE' | 'ELIMINATED'), `eliminated_at_round` (TEXT), `history` (JSONB: lista de transferencias de camisetas), `created_at`, `updated_at`. RLS: SELECT público, ALL restringido al propio usuario (`auth.uid() = user_id`).
