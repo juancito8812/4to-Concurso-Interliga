@@ -21,17 +21,18 @@ interface CupConfig {
   slug: KnockoutCupSlug;
   name: string;
   shortName: string;
+  logoUrl: string;
   emoji: string;
 }
 
 const CUPS: CupConfig[] = [
-  { slug: "champions", name: "Champions League", shortName: "Champions", emoji: "⭐" },
-  { slug: "europa", name: "Europa League", shortName: "Europa", emoji: "🟠" },
-  { slug: "conference", name: "Conference League", shortName: "Conference", emoji: "🟢" },
-  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", emoji: "🇮🇹" },
-  { slug: "facup", name: "FA Cup", shortName: "FA Cup", emoji: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
-  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", emoji: "🇪🇸" },
-  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", emoji: "🇩🇪" },
+  { slug: "champions", name: "Champions League", shortName: "Champions", logoUrl: "/4to-Concurso-Interliga/logos/champions.png", emoji: "⭐" },
+  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/4to-Concurso-Interliga/logos/europa.png", emoji: "🟠" },
+  { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/4to-Concurso-Interliga/logos/conference.png", emoji: "🟢" },
+  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/4to-Concurso-Interliga/logos/coppaitalia.png", emoji: "🇮🇹" },
+  { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/4to-Concurso-Interliga/logos/facup.png", emoji: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
+  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/4to-Concurso-Interliga/logos/copadelrey.png", emoji: "🇪🇸" },
+  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/4to-Concurso-Interliga/logos/dfbpokal.png", emoji: "🇩🇪" },
 ];
 
 interface EffectiveStatus {
@@ -178,9 +179,14 @@ export default function CompetitionStatusCard() {
                             : "bg-navy-card/80 border border-border/80 text-silver hover:text-white hover:border-silver/40"
                         }`}
                       >
-                        <span className="truncate mr-1">
-                          {cup.emoji} {cup.shortName}
-                        </span>
+                        <div className="flex items-center gap-1.5 min-w-0 mr-1">
+                          <img
+                            src={cup.logoUrl}
+                            alt={cup.name}
+                            className="w-4 h-4 object-contain shrink-0"
+                          />
+                          <span className="truncate">{cup.shortName}</span>
+                        </div>
                         <span
                           className={`w-2 h-2 rounded-full shrink-0 ${
                             isAlive
@@ -197,8 +203,14 @@ export default function CompetitionStatusCard() {
               {/* Selected cup detail */}
               <div className="bg-navy-card/90 border border-border/90 rounded-xl p-3 flex flex-col gap-2">
                 <div className="flex items-center justify-between gap-2 border-b border-border/60 pb-2">
-                  <div className="flex items-center gap-1.5 min-w-0">
-                    <span className="text-sm">{activeCupConfig.emoji}</span>
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="w-5 h-5 rounded-full bg-navy-mid p-0.5 flex items-center justify-center shrink-0">
+                      <img
+                        src={activeCupConfig.logoUrl}
+                        alt={activeCupConfig.name}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
                     <span className="text-xs font-bold text-white uppercase tracking-wider truncate">
                       {activeCupConfig.name}
                     </span>

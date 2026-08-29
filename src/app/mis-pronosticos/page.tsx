@@ -23,6 +23,7 @@ import {
   updateCupSurvivor,
   TournamentSurvivor,
   KnockoutCupSlug,
+  getTeamCups,
 } from "@/lib/survivor";
 import officialFixtures from "@/data/officialFixtures.json";
 import officialEvaluatedMatches from "@/data/officialEvaluatedMatches.json";
@@ -63,32 +64,20 @@ interface KnockoutCupInfo {
   slug: KnockoutCupSlug;
   name: string;
   shortName: string;
+  logoUrl: string;
   emoji: string;
   color: string;
 }
 
 const KNOCKOUT_CUPS: KnockoutCupInfo[] = [
-  { slug: "champions", name: "Champions League", shortName: "Champions", emoji: "⭐", color: "#1a4b8e" },
-  { slug: "europa", name: "Europa League", shortName: "Europa", emoji: "🟠", color: "#f37920" },
-  { slug: "conference", name: "Conference League", shortName: "Conference", emoji: "🟢", color: "#00843d" },
-  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", emoji: "🇮🇹", color: "#024494" },
+  { slug: "champions", name: "Champions League", shortName: "Champions", logoUrl: "/4to-Concurso-Interliga/logos/champions.png", emoji: "⭐", color: "#60a5fa" },
+  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/4to-Concurso-Interliga/logos/europa.png", emoji: "🟠", color: "#fb923c" },
+  { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/4to-Concurso-Interliga/logos/conference.png", emoji: "🟢", color: "#4ade80" },
+  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/4to-Concurso-Interliga/logos/coppaitalia.png", emoji: "🇮🇹", color: "#38bdf8" },
+  { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/4to-Concurso-Interliga/logos/facup.png", emoji: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", color: "#f43f5e" },
+  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/4to-Concurso-Interliga/logos/copadelrey.png", emoji: "🇪🇸", color: "#eab308" },
+  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/4to-Concurso-Interliga/logos/dfbpokal.png", emoji: "🇩🇪", color: "#22c55e" },
 ];
-
-function getKnockoutCupSlugFromLeague(league: string): KnockoutCupSlug | null {
-  if (!isKnockoutCup(league)) return null;
-  const norm = league.toLowerCase().trim();
-  if (norm.includes("champions") || norm === "cl") return "champions";
-  if (norm.includes("europa") || norm === "el") return "europa";
-  if (norm.includes("conference") || norm === "ecl") return "conference";
-  if (
-    norm.includes("copa italia") ||
-    norm.includes("coppa") ||
-    norm === "ci" ||
-    norm === "coppaitalia"
-  )
-    return "coppaitalia";
-  return null;
-}
 
 export default function MisPronosticosPage() {
   const { user, loading: authLoading } = useAuth();
@@ -424,7 +413,7 @@ export default function MisPronosticosPage() {
         const league = normalizeMatchLeague(match.home_team, match.away_team, match.match_date, match.league);
         if (!isKnockoutMatch(match.home_team, match.away_team, league)) continue;
 
-        const cupSlug = getKnockoutCupSlugFromLeague(league);
+        const cupSlug = getKnockoutCupSlug(league);
         if (!cupSlug) continue;
 
         const sur = userSurvivors[cupSlug];
@@ -551,7 +540,14 @@ export default function MisPronosticosPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {KNOCKOUT_CUPS.map((cup) => {
+            {(primaryTeam
+              ? KNOCKOUT_CUPS.filter(
+                  (c) =>
+                    getTeamCups(primaryTeam.name).includes(c.slug) ||
+                    !!survivors[c.slug]
+                )
+              : KNOCKOUT_CUPS
+            ).map((cup) => {
               const sur = survivors[cup.slug];
               const isAlive = (sur?.status || "ALIVE") === "ALIVE";
               const activeTeamName = sur?.active_team_name || primaryTeam?.name || "Sin equipo asignado";
@@ -571,10 +567,18 @@ export default function MisPronosticosPage() {
 
                   {/* Cup Header & Status */}
                   <div className="flex items-center justify-between gap-1.5 pt-0.5">
-                    <span className="text-xs font-bold text-white flex items-center gap-1.5 truncate">
-                      <span>{cup.emoji}</span>
-                      <span className="truncate">{cup.shortName}</span>
-                    </span>
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <div className="w-5 h-5 rounded-full bg-navy-mid p-0.5 flex items-center justify-center shrink-0">
+                        <img
+                          src={cup.logoUrl}
+                          alt={cup.name}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <span className="text-xs font-bold text-white truncate">
+                        {cup.shortName}
+                      </span>
+                    </div>
                     {isAlive ? (
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green/15 border border-green/30 text-green text-[10px] font-black uppercase tracking-wider shrink-0">
                         <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
@@ -674,7 +678,7 @@ export default function MisPronosticosPage() {
               );
               const leagueColor = leagueColors[p.league] || "#1e2d4a";
               const isKnockout = isKnockoutCup(p.league);
-              const cupSlug = getKnockoutCupSlugFromLeague(p.league);
+              const cupSlug = getKnockoutCupSlug(p.league);
               const cupSurvivor = cupSlug ? survivors[cupSlug] : null;
               const cupActiveTeam = cupSurvivor?.active_team_name || primaryTeam?.name;
               const isCupAlive = cupSurvivor ? cupSurvivor.status === "ALIVE" : true;
@@ -691,9 +695,9 @@ export default function MisPronosticosPage() {
                     {/* Header: League & Date & Knockout Survivor Badge */}
                     <div className="flex items-center justify-between gap-2 pb-2 border-b border-border/40">
                       <div className="flex items-center gap-1.5 min-w-0">
-                        {leagueLogos[p.league] && (
+                        {(leagueLogos[p.league] || leagueLogos[normalizeMatchLeague(p.home_team, p.away_team, p.match_date, p.league)]) && (
                           <img
-                            src={leagueLogos[p.league]}
+                            src={leagueLogos[p.league] || leagueLogos[normalizeMatchLeague(p.home_team, p.away_team, p.match_date, p.league)]}
                             alt={p.league}
                             width={18}
                             height={18}

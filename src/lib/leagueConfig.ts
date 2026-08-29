@@ -8,6 +8,9 @@ export const leagueColors: Record<string, string> = {
   "Europa League": "#fb923c",
   "Conference League": "#4ade80",
   "Copa Italia": "#38bdf8",
+  "FA Cup": "#f43f5e",
+  "Copa del Rey": "#eab308",
+  "DFB-Pokal": "#22c55e",
 };
 
 // League logos (local files)
@@ -20,6 +23,9 @@ export const leagueLogos: Record<string, string> = {
   "Europa League": "/4to-Concurso-Interliga/logos/europa.png",
   "Conference League": "/4to-Concurso-Interliga/logos/conference.png",
   "Copa Italia": "/4to-Concurso-Interliga/logos/coppaitalia.png",
+  "FA Cup": "/4to-Concurso-Interliga/logos/facup.png",
+  "Copa del Rey": "/4to-Concurso-Interliga/logos/copadelrey.png",
+  "DFB-Pokal": "/4to-Concurso-Interliga/logos/dfbpokal.png",
 };
 
 // Map league name to slug
@@ -32,6 +38,9 @@ export const leagueNameToSlug: Record<string, string> = {
   "Europa League": "europa",
   "Conference League": "conference",
   "Copa Italia": "coppaitalia",
+  "FA Cup": "facup",
+  "Copa del Rey": "copadelrey",
+  "DFB-Pokal": "dfbpokal",
 };
 
 // Map slug to display name
@@ -44,6 +53,9 @@ export const leagueSlugToName: Record<string, string> = {
   europa: "Europa League",
   conference: "Conference League",
   coppaitalia: "Copa Italia",
+  facup: "FA Cup",
+  copadelrey: "Copa del Rey",
+  dfbpokal: "DFB-Pokal",
 };
 
 import teamData from "@/data/teamAliases.json";
@@ -102,6 +114,9 @@ export function parseCompetitionName(compNameOrCode?: string): string | null {
   if (val === "EL" || lower.includes("europa league")) return "Europa League";
   if (val === "ECL" || lower.includes("conference")) return "Conference League";
   if (val === "CLI" || val === "CIT" || lower.includes("coppa italia") || lower.includes("copa italia")) return "Copa Italia";
+  if (val === "FAC" || val === "FA" || lower.includes("fa cup") || lower === "eng.fa") return "FA Cup";
+  if (val === "CDR" || lower.includes("copa del rey") || lower === "esp.copa_del_rey") return "Copa del Rey";
+  if (val === "DFB" || lower.includes("dfb-pokal") || lower.includes("dfb pokal") || lower === "ger.dfb_pokal") return "DFB-Pokal";
 
   return null;
 }

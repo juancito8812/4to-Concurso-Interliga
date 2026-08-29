@@ -11,6 +11,9 @@ const ligas = [
   { name: "Europa League", slug: "europa" },
   { name: "Conference League", slug: "conference" },
   { name: "Copa Italia", slug: "coppaitalia" },
+  { name: "FA Cup", slug: "facup" },
+  { name: "Copa del Rey", slug: "copadelrey" },
+  { name: "DFB-Pokal", slug: "dfbpokal" },
 ];
 
 const paginas = [

@@ -49,6 +49,9 @@ export const leagueEspnCodes: Record<string, string> = {
   europa: "uefa.europa",
   conference: "uefa.europa.conf",
   coppaitalia: "ita.coppa_italia",
+  facup: "eng.fa",
+  copadelrey: "esp.copa_del_rey",
+  dfbpokal: "ger.dfb_pokal",
 };
 
 interface ESPNStatItem {

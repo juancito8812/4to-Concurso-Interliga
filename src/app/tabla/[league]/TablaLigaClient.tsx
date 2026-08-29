@@ -23,6 +23,9 @@ const leagueData: Record<string, { name: string; fdCode: string; country: string
   europa: { name: "Europa League", fdCode: "EL", country: "EUR" },
   conference: { name: "Conference League", fdCode: "ECL", country: "EUR" },
   coppaitalia: { name: "Copa Italia", fdCode: "CI", country: "ITA", isCup: true },
+  facup: { name: "FA Cup", fdCode: "FAC", country: "GBR", isCup: true },
+  copadelrey: { name: "Copa del Rey", fdCode: "CDR", country: "ESP", isCup: true },
+  dfbpokal: { name: "DFB-Pokal", fdCode: "DFB", country: "GER", isCup: true },
 };
 
 interface FDTableEntry {

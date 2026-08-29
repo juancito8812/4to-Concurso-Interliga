@@ -17,6 +17,9 @@ const leagues = [
   { name: "Europa League", logo: `${basePath}/logos/europa.png`, slug: "europa" },
   { name: "Conference League", logo: `${basePath}/logos/conference.png`, slug: "conference" },
   { name: "Copa Italia", logo: `${basePath}/logos/coppaitalia.png`, slug: "coppaitalia" },
+  { name: "FA Cup", logo: `${basePath}/logos/facup.png`, slug: "facup" },
+  { name: "Copa del Rey", logo: `${basePath}/logos/copadelrey.png`, slug: "copadelrey" },
+  { name: "DFB-Pokal", logo: `${basePath}/logos/dfbpokal.png`, slug: "dfbpokal" },
 ];
 
 const scoring = [
@@ -134,7 +137,7 @@ export default function Home() {
         </p>
 
         {/* League Logos */}
-        <div className="grid grid-cols-4 gap-2.5 sm:gap-4 max-w-md sm:max-w-2xl">
+        <div className="grid grid-cols-4 sm:grid-cols-6 gap-2.5 sm:gap-4 max-w-md sm:max-w-3xl">
           {leagues.map((league) => (
             <Link
               key={league.name}

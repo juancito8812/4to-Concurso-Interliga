@@ -10,6 +10,9 @@ export function generateStaticParams() {
     { league: "europa" },
     { league: "conference" },
     { league: "coppaitalia" },
+    { league: "facup" },
+    { league: "copadelrey" },
+    { league: "dfbpokal" },
   ];
 }
 

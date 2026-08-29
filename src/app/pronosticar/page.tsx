@@ -762,9 +762,9 @@ export default function PronosticarPage() {
                     {/* Card Header (Barra de Competencia Estilo TV) */}
                     <div className="px-4 sm:px-6 py-3 bg-navy-card/80 border-b border-border/60 flex flex-wrap items-center justify-between gap-2.5">
                       <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
-                        {leagueLogos[match.league] ? (
+                        {(leagueLogos[match.league] || leagueLogos[normalizeMatchLeague(match.home_team, match.away_team, match.match_date, match.league)]) ? (
                           <img
-                            src={leagueLogos[match.league]}
+                            src={leagueLogos[match.league] || leagueLogos[normalizeMatchLeague(match.home_team, match.away_team, match.match_date, match.league)]}
                             alt={match.league}
                             width={20}
                             height={20}
