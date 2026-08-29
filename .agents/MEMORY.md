@@ -5,8 +5,8 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 8 ligas/copas europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`, workflow `.github/workflows/deploy.yml`).
-- **Última sesión:** 2026-08-29 (rediseño estético de logos de ligas en landing)
-- **Versión de memoria:** 2.1
+- **Última sesión:** 2026-08-29 (PWA habilitada — instalable en móvil)
+- **Versión de memoria:** 2.2
 
 ## Arquitectura
 
@@ -60,6 +60,12 @@
 
 ## Cambios Recientes
 
+- **2026-08-29** — **PWA habilitada — instalable en móvil (`4ecc799`)**:
+  - `public/icon.svg` — Icono de la app (4° INTERLIGA en gold sobre navy)
+  - `public/manifest.json` — Metadata PWA (nombre, colores, display standalone, scope)
+  - `public/sw.js` — Service worker mínimo (caché app shell + offline fallback con network-first)
+  - `src/app/RegisterSW.tsx` — Componente client que registra el service worker
+  - `src/app/layout.tsx` — Meta tags: manifest, apple-mobile-web-app-capable, theme-color, viewport (sin zoom)
 - **2026-08-29** — **Rediseño estético de logos de ligas en landing**:
   - Los logos de las 11 competiciones se reorganizaron en 3 filas con parejas liga→copa:
     - Fila 1: LaLiga, Premier League, Serie A, Bundesliga (ligas nacionales)

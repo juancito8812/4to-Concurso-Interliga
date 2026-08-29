@@ -156,6 +156,15 @@ SUPABASE_SERVICE_ROLE_KEY=tu-service-key   # SOLO en GitHub Secrets y .env.local
 - `npm run build` genera `./out/` con archivos estáticos
 - `.env.local` NO se commitea (está en .gitignore)
 
+### PWA (Progressive Web App)
+
+- **Archivos:** `public/manifest.json`, `public/sw.js`, `public/icon.svg`
+- **Componente:** `src/app/RegisterSW.tsx` — registra el service worker en el cliente
+- **Meta tags en `layout.tsx`:** `manifest`, `apple-mobile-web-app-capable`, `theme-color` (#c9a84c), `viewport` (sin zoom)
+- **Service worker:** network-first con fallback a caché offline
+- **Instalación en Android (Chrome):** ícono "⋮" → "Instalar app"
+- **Instalación en iOS (Safari):** ícono compartir □↑ → "Agregar a pantalla de inicio"
+
 ### Operaciones y Troubleshooting
 
 - **Auth caído (nadie puede loguearse):** Si los endpoints `/auth/v1/*` se cuelgan (timeout) pero REST (`/rest/v1/*`) responde 200 y el proyecto figura `ACTIVE_HEALTHY`, el servicio GoTrue está colgado. Reiniciar el proyecto (NO tocar código):

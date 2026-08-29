@@ -61,6 +61,8 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - `supabase/schema.sql` — Script DDL maestro (8 tablas, índices, RLS endurecido, triggers, app_meta)
 - `DISASTER_RECOVERY_AND_SCHEMA.md` — Manual de restauración paso a paso ante pérdida total
 - `next.config.ts` — basePath para GitHub Pages
+- `public/manifest.json` + `public/sw.js` + `public/icon.svg` — PWA (instalable en móvil)
+- `src/app/RegisterSW.tsx` — Registro del service worker
 
 ## Autenticación y Base de Datos
 
