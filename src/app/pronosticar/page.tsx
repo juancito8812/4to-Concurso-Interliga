@@ -122,7 +122,6 @@ export default function PronosticarPage() {
   const [teamLogos, setTeamLogos] = useState<Record<string, string>>({});
   const [predictions, setPredictions] = useState<Record<string, Prediction>>({});
   const [cupSurvivors, setCupSurvivors] = useState<Record<string, TournamentSurvivor>>({});
-  const [availableTeams, setAvailableTeams] = useState<TeamInfo[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -285,21 +284,6 @@ export default function PronosticarPage() {
         }
       } catch (err) {
         console.warn("Error fetching cup survivors:", err);
-      }
-
-      // Fetch all teams for cup selection dropdown
-      try {
-        const { data: allTeamsData } = await supabase
-          .from("teams")
-          .select("id, name, league, logo_url")
-          .order("league")
-          .order("name");
-
-        if (allTeamsData && isMounted) {
-          setAvailableTeams(allTeamsData as TeamInfo[]);
-        }
-      } catch (err) {
-        console.warn("Error fetching all teams:", err);
       }
 
       const apiTeamId = findTeamId(teamData.name);

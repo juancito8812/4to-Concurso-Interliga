@@ -8,6 +8,7 @@ import {
   getUserCupSurvivors,
   TournamentSurvivor,
   KnockoutCupSlug,
+  getTeamCups,
 } from "@/lib/survivor";
 
 interface PrimaryTeam {
@@ -73,6 +74,10 @@ export default function CompetitionStatusCard() {
 
           if (team && isMounted) {
             setPrimaryTeam(team);
+            const teamCups = getTeamCups(team.name);
+            if (teamCups.length > 0) {
+              setSelectedCup(teamCups[0] as KnockoutCupSlug);
+            }
           }
         }
 
@@ -95,6 +100,11 @@ export default function CompetitionStatusCard() {
       isMounted = false;
     };
   }, [user]);
+
+  const userCupSlugs = primaryTeam ? getTeamCups(primaryTeam.name) : [];
+  const eligibleCups = CUPS.filter(
+    (c) => userCupSlugs.includes(c.slug) || !!survivors[c.slug]
+  );
 
   const getEffectiveStatus = (slug: KnockoutCupSlug): EffectiveStatus => {
     const record = survivors[slug];
@@ -123,7 +133,11 @@ export default function CompetitionStatusCard() {
     };
   };
 
-  const activeCupConfig = CUPS.find((c) => c.slug === selectedCup) || CUPS[0];
+  const activeCupSlug = (selectedCup && eligibleCups.some((c) => c.slug === selectedCup))
+    ? selectedCup
+    : eligibleCups[0]?.slug || "champions";
+
+  const activeCupConfig = CUPS.find((c) => c.slug === activeCupSlug) || CUPS[0];
   const activeCupStatus = getEffectiveStatus(activeCupConfig.slug);
 
   return (
@@ -145,39 +159,40 @@ export default function CompetitionStatusCard() {
       {!loading && (
         user ? (
           primaryTeam ? (
-            <div className="mt-2 space-y-2.5">
-              {/* Cup selector tabs */}
-              <div className="grid grid-cols-2 gap-1.5">
-                {CUPS.map((cup) => {
-                  const statusData = getEffectiveStatus(cup.slug);
-                  const isSelected = selectedCup === cup.slug;
-                  const isAlive = statusData.status === "ALIVE";
-                  return (
-                    <button
-                      key={cup.slug}
-                      type="button"
-                      onClick={() => setSelectedCup(cup.slug)}
-                      className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all text-left cursor-pointer ${
-                        isSelected
-                          ? "bg-gold/15 border border-gold text-gold font-bold shadow-[0_0_10px_rgba(201,168,76,0.15)]"
-                          : "bg-navy-card/80 border border-border/80 text-silver hover:text-white hover:border-silver/40"
-                      }`}
-                    >
-                      <span className="truncate mr-1">
-                        {cup.emoji} {cup.shortName}
-                      </span>
-                      <span
-                        className={`w-2 h-2 rounded-full shrink-0 ${
-                          isAlive
-                            ? "bg-green shadow-[0_0_6px_rgba(34,197,94,0.6)]"
-                            : "bg-red-500 shadow-[0_0_6px_rgba(239,68,68,0.6)]"
+            eligibleCups.length > 0 ? (
+              <div className="mt-2 space-y-2.5">
+                {/* Cup selector tabs - only show classified cups */}
+                <div className={`grid gap-1.5 ${eligibleCups.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}>
+                  {eligibleCups.map((cup) => {
+                    const statusData = getEffectiveStatus(cup.slug);
+                    const isSelected = selectedCup === cup.slug;
+                    const isAlive = statusData.status === "ALIVE";
+                    return (
+                      <button
+                        key={cup.slug}
+                        type="button"
+                        onClick={() => setSelectedCup(cup.slug)}
+                        className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all text-left cursor-pointer ${
+                          isSelected
+                            ? "bg-gold/15 border border-gold text-gold font-bold shadow-[0_0_10px_rgba(201,168,76,0.15)]"
+                            : "bg-navy-card/80 border border-border/80 text-silver hover:text-white hover:border-silver/40"
                         }`}
-                        title={isAlive ? "VIVO" : "KO"}
-                      />
-                    </button>
-                  );
-                })}
-              </div>
+                      >
+                        <span className="truncate mr-1">
+                          {cup.emoji} {cup.shortName}
+                        </span>
+                        <span
+                          className={`w-2 h-2 rounded-full shrink-0 ${
+                            isAlive
+                              ? "bg-green shadow-[0_0_6px_rgba(34,197,94,0.6)]"
+                              : "bg-red-500 shadow-[0_0_6px_rgba(239,68,68,0.6)]"
+                          }`}
+                          title={isAlive ? "VIVO" : "KO"}
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
 
               {/* Selected cup detail */}
               <div className="bg-navy-card/90 border border-border/90 rounded-xl p-3 flex flex-col gap-2">
@@ -245,12 +260,19 @@ export default function CompetitionStatusCard() {
               </div>
             </div>
           ) : (
-            <div className="bg-gold/10 border border-gold/30 rounded-xl p-3.5 mt-2 text-center">
-              <p className="text-gold text-xs font-semibold">
-                ⚽ Elegí tu equipo en el Paso 1 para activar tu estado en copas
+            <div className="bg-navy-card/80 border border-border/80 rounded-xl p-3.5 mt-2 text-center">
+              <p className="text-silver text-xs">
+                Tu club (<strong className="text-white">{primaryTeam.name}</strong>) no disputa copas de eliminación directa esta temporada.
               </p>
             </div>
           )
+        ) : (
+          <div className="bg-gold/10 border border-gold/30 rounded-xl p-3.5 mt-2 text-center">
+            <p className="text-gold text-xs font-semibold">
+              ⚽ Elegí tu equipo en el Paso 1 para activar tu estado en copas
+            </p>
+          </div>
+        )
         ) : (
           <div className="bg-navy-card/80 border border-border/80 rounded-xl p-3.5 mt-2 text-center flex flex-col gap-3">
             <p className="text-xs text-silver leading-relaxed">
