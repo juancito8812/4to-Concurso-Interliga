@@ -8,18 +8,24 @@ import CompetitionStatusCard from "./CompetitionStatusCard";
 
 const basePath = "/4to-Concurso-Interliga";
 
-const leagues = [
+const domesticLeagues = [
   { name: "LaLiga", logo: `${basePath}/logos/laliga.png`, slug: "laliga" },
   { name: "Premier League", logo: `${basePath}/logos/premier.png`, slug: "premier" },
   { name: "Serie A", logo: `${basePath}/logos/seriea.png`, slug: "seriea" },
   { name: "Bundesliga", logo: `${basePath}/logos/bundesliga.png`, slug: "bundesliga" },
-  { name: "Champions League", logo: `${basePath}/logos/champions.png`, slug: "champions" },
-  { name: "Europa League", logo: `${basePath}/logos/europa.svg`, slug: "europa" },
-  { name: "Conference League", logo: `${basePath}/logos/conference.svg`, slug: "conference" },
-  { name: "Copa Italia", logo: `${basePath}/logos/coppaitalia.svg`, slug: "coppaitalia" },
+];
+
+const domesticCups = [
   { name: "FA Cup", logo: `${basePath}/logos/facup.svg`, slug: "facup" },
   { name: "Copa del Rey", logo: `${basePath}/logos/copadelrey.svg`, slug: "copadelrey" },
   { name: "DFB-Pokal", logo: `${basePath}/logos/dfbpokal.svg`, slug: "dfbpokal" },
+  { name: "Copa Italia", logo: `${basePath}/logos/coppaitalia.svg`, slug: "coppaitalia" },
+];
+
+const europeanCups = [
+  { name: "Champions League", logo: `${basePath}/logos/champions.png`, slug: "champions" },
+  { name: "Europa League", logo: `${basePath}/logos/europa.svg`, slug: "europa" },
+  { name: "Conference League", logo: `${basePath}/logos/conference.svg`, slug: "conference" },
 ];
 
 const scoring = [
@@ -136,28 +142,79 @@ export default function Home() {
           <span className="text-green">PASIÓN</span>
         </p>
 
-        {/* League Logos */}
-        <div className="grid grid-cols-4 sm:grid-cols-6 gap-2.5 sm:gap-4 max-w-md sm:max-w-3xl">
-          {leagues.map((league) => (
-            <Link
-              key={league.name}
-              href={`/tabla/${league.slug}`}
-              title={league.name}
-              className="group aspect-square rounded-xl sm:rounded-2xl bg-navy-mid/90 border border-border/80 hover:border-gold/70 p-2 sm:p-2.5 flex items-center justify-center hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-all"
-            >
-              <div className="w-full h-full bg-white rounded-lg sm:rounded-xl p-1.5 sm:p-2 flex items-center justify-center shadow-inner">
-                <img
-                  src={league.logo}
-                  alt={league.name}
-                  width={64}
-                  height={64}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-contain transition-transform group-hover:scale-105"
-                />
-              </div>
-            </Link>
-          ))}
+        {/* League Logos - 3 filas */}
+        <div className="flex flex-col items-center gap-3 sm:gap-4 max-w-md sm:max-w-3xl w-full">
+          {/* Fila 1: Ligas nacionales */}
+          <div className="grid grid-cols-4 gap-2.5 sm:gap-4 w-full">
+            {domesticLeagues.map((league) => (
+              <Link
+                key={league.name}
+                href={`/tabla/${league.slug}`}
+                title={league.name}
+                className="group aspect-square rounded-xl sm:rounded-2xl bg-navy-mid/90 border border-border/80 hover:border-gold/70 p-2 sm:p-2.5 flex items-center justify-center hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-all"
+              >
+                <div className="w-full h-full bg-white rounded-lg sm:rounded-xl p-1.5 sm:p-2 flex items-center justify-center shadow-inner">
+                  <img
+                    src={league.logo}
+                    alt={league.name}
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-contain transition-transform group-hover:scale-105"
+                  />
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Fila 2: Copas nacionales */}
+          <div className="grid grid-cols-4 gap-2.5 sm:gap-4 w-full">
+            {domesticCups.map((league) => (
+              <Link
+                key={league.name}
+                href={`/tabla/${league.slug}`}
+                title={league.name}
+                className="group aspect-square rounded-xl sm:rounded-2xl bg-navy-mid/90 border border-border/80 hover:border-gold/70 p-2 sm:p-2.5 flex items-center justify-center hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-all"
+              >
+                <div className="w-full h-full bg-white rounded-lg sm:rounded-xl p-1.5 sm:p-2 flex items-center justify-center shadow-inner">
+                  <img
+                    src={league.logo}
+                    alt={league.name}
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-contain transition-transform group-hover:scale-105"
+                  />
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Fila 3: Copas europeas (centradas) */}
+          <div className="grid grid-cols-3 gap-2.5 sm:gap-4 w-full max-w-[75%]">
+            {europeanCups.map((league) => (
+              <Link
+                key={league.name}
+                href={`/tabla/${league.slug}`}
+                title={league.name}
+                className="group aspect-square rounded-xl sm:rounded-2xl bg-navy-mid/90 border border-border/80 hover:border-gold/70 p-2 sm:p-2.5 flex items-center justify-center hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-all"
+              >
+                <div className="w-full h-full bg-white rounded-lg sm:rounded-xl p-1.5 sm:p-2 flex items-center justify-center shadow-inner">
+                  <img
+                    src={league.logo}
+                    alt={league.name}
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-contain transition-transform group-hover:scale-105"
+                  />
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
