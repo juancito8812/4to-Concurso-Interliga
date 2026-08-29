@@ -12,9 +12,9 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - Tailwind CSS v4 (colores custom en `globals.css` con `@theme`)
 - TypeScript estricto
 - Supabase (Auth + PostgreSQL con RLS público y escrituras del cron vía **service role key**)
-- `src/data/officialFixtures.json` — 1.842 partidos oficiales 2026/27 para las 8 competiciones (IDs canónicos únicos)
-- `src/data/teamAliases.json` — Fuente única de normalización (aliasMap, canonicalDbTeams, knockoutPairs)
-- `src/data/officialPlayers.json` — Base de datos oficial de 3.822 jugadores 2026/27 clasificados por posición
+- `src/data/officialFixtures.json` — 1.618 partidos oficiales 2026/27 reales para las 8 competiciones (IDs canónicos únicos, 0 fabricados — verificado contra fuentes)
+- `src/data/teamAliases.json` — Fuente única de normalización (aliasMap, canonicalDbTeams, knockoutPairs, teamCups)
+- `src/data/officialPlayers.json` — Base de datos oficial de 4.749 jugadores 2026/27 clasificados por posición
 - ESPN API pública para tablas de clasificación, goleadores y partidos en vivo (CORS habilitado)
 - Automatización: cron GitHub Actions cada 2h (`auto-evaluate-matches.yml` + `scripts/auto-sync-espn-results.js`)
 
@@ -36,12 +36,18 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - `src/app/mis-pronosticos/page.tsx` — Historial con logos, desglose de puntos y evaluación automática del survivor
 - `src/app/ranking/page.tsx` — Ranking general en vivo con Podio de Honor y búsqueda
 - `src/app/tabla/[league]/TablaLigaClient.tsx` — Clasificación, goleadores y partidos por liga (ESPN API)
-- `src/data/officialFixtures.json` — 1.842 partidos oficiales 2026/27 pre-sincronizados
-- `src/data/teamAliases.json` — aliasMap + equipos canónicos + pares KO (consumido por TS y scripts)
-- `src/data/officialPlayers.json` — 3.822 jugadores 2026/27 con posiciones y roles actualizados
+- `src/data/officialFixtures.json` — 1.618 partidos oficiales 2026/27 reales pre-sincronizados
+- `src/data/teamAliases.json` — aliasMap + equipos canónicos + teamCups + pares KO (consumido por TS y scripts)
+- `src/data/officialPlayers.json` — 4.749 jugadores 2026/27 con posiciones y roles actualizados
 - `src/data/officialEvaluatedMatches.json` — Resultados oficiales de partidos jugados y goleadores reales
 - `src/data/officialEvaluatedPredictions.json` — Pronósticos evaluados y sincronizados (JSON + Supabase)
 - `scripts/auto-sync-espn-results.js` — Cron: sincroniza ESPN → evalúa puntos/survivors → persiste en Supabase
+- `scripts/sync-official-fixtures.js` — Regenera el calendario SOLO desde fuentes reales (football-data API + ESPN + Wikipedia); idempotente
+- `scripts/validate-fixtures.js` — Validación cruzada del calendario contra las fuentes (0 errores = 100% real)
+- `scripts/sync-db.js` — Sincroniza Supabase: matches (sin pisar resultados), remapeo de predicciones, teams reales
+- `scripts/sync-player-squads.js` — Completa plantillas con rosters ESPN reales (UCL + Copa Italia)
+- `scripts/rebuild-eval-preds.js` — Reconstruye predicciones evaluadas desde Supabase
+- `scripts/verify-logic.js` — 43 checks de lógica de negocio (scoring, normalización, KO, survivor, IDs)
 - `scripts/evaluate-matches.js` — Evaluador CLI manual de partidos (usa `scripts/lib/score-utils.js`)
 - `scripts/lib/score-utils.js` — Módulo compartido CJS: normalizeTeamName, matchIdToUuid, calculateScore, isKnockoutMatch, evaluateSurvivorProgression
 - `scripts/test-survivor.js` — Suite de pruebas unitarias de supervivencia y copas (12/12 PASS)
@@ -52,7 +58,7 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - `src/lib/espnResultsFetcher.ts` — Fetcher cliente de partidos finalizados ESPN (caché 30s, timeout 10s)
 - `src/lib/footballData.ts` — Plantillas oficiales + ventana de partidos (saltea API en vivo en GitHub Pages por CORS)
 - `src/contexts/AuthContext.tsx` — Context de autenticación, sync de perfiles y `deleteAccount`
-- `supabase/schema.sql` — Script DDL maestro (8 tablas, índices, RLS endurecido, triggers, 89 equipos, app_meta)
+- `supabase/schema.sql` — Script DDL maestro (8 tablas, índices, RLS endurecido, triggers, app_meta)
 - `DISASTER_RECOVERY_AND_SCHEMA.md` — Manual de restauración paso a paso ante pérdida total
 - `next.config.ts` — basePath para GitHub Pages
 
@@ -88,6 +94,8 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 npm run build    # Verificar que compila sin errores
 npm run dev      # Desarrollo local
 npm run lint     # Verificar ESLint
-node scripts/test-survivor.js    # Tests del sistema de superviviente (7/7)
+node scripts/test-survivor.js    # Tests del sistema de superviviente (12/12)
+node scripts/verify-logic.js     # 43 checks de lógica de negocio
+node scripts/validate-fixtures.js # Validación cruzada del calendario contra fuentes reales
 SUPABASE_SERVICE_ROLE_KEY=<key> node scripts/auto-sync-espn-results.js  # Cron local
 ```

@@ -11,8 +11,8 @@ Plataforma oficial de pronósticos de fútbol para la temporada 2026-27. Los par
 - **Lenguaje:** TypeScript 5 en modo estricto.
 - **Base de Datos & Auth:** [Supabase](https://supabase.com/) (Autenticación + PostgreSQL con Row Level Security y RPCs seguras).
 - **APIs de Fútbol y Datos Oficiales:**
-  - `src/data/officialFixtures.json` (**1.842 partidos oficiales** de la temporada 2026/27 pre-sincronizados para las 8 competiciones).
-  - `src/data/officialPlayers.json` (**3.822 jugadores oficiales** de la temporada 2026/27 de todos los clubes participantes clasificados por posición).
+  - `src/data/officialFixtures.json` (**1.618 partidos oficiales reales** de la temporada 2026/27 pre-sincronizados para las 8 competiciones, 0 fabricados — validación cruzada contra las fuentes en `scripts/validate-fixtures.js`).
+  - `src/data/officialPlayers.json` (**4.749 jugadores oficiales** de la temporada 2026/27 de todos los clubes participantes clasificados por posición).
   - ESPN API pública (tablas de clasificación, máximos goleadores y resultados en vivo sin restricciones de CORS).
 - **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`).
 
@@ -44,9 +44,9 @@ src/
 │   ├── mis-pronosticos/page.tsx    # Historial de predicciones, estado y desglose de puntos
 │   └── ranking/page.tsx            # Ranking general en vivo, Podio de Honor y búsqueda
 ├── data/
-│   ├── officialFixtures.json       # Calendario oficial 2026/27 (1.842 partidos, IDs canónicos únicos)
-│   ├── teamAliases.json            # Fuente única de normalización (aliasMap, equipos canónicos, pares KO)
-│   ├── officialPlayers.json        # Plantillas oficiales 2026/27 (3.822 jugadores)
+│   ├── officialFixtures.json       # Calendario oficial 2026/27 (1.618 partidos reales, IDs canónicos únicos)
+│   ├── teamAliases.json            # Fuente única de normalización (aliasMap, equipos canónicos, teamCups)
+│   ├── officialPlayers.json        # Plantillas oficiales 2026/27 (4.749 jugadores)
 │   ├── officialEvaluatedMatches.json # Resultados oficiales finalizados y goleadores reales
 │   └── officialEvaluatedPredictions.json # Pronósticos evaluados y sincronizados
 ├── lib/
@@ -59,6 +59,12 @@ src/
 │   └── scoring.ts                  # Motor de cálculo y auditoría de puntuación (+ matching fonético)
 ├── scripts/
 │   ├── auto-sync-espn-results.js   # Cron: ESPN → evaluación de puntos/survivors → Supabase (service key)
+│   ├── sync-official-fixtures.js   # Regenera el calendario SOLO desde fuentes reales (API + ESPN + Wikipedia)
+│   ├── validate-fixtures.js        # Validación cruzada del calendario contra las fuentes (0 errores)
+│   ├── sync-db.js                  # Sincroniza Supabase: matches, remapeo de predicciones, teams (179)
+│   ├── sync-player-squads.js       # Completa plantillas con rosters ESPN reales (UCL + Copa Italia)
+│   ├── rebuild-eval-preds.js       # Reconstruye predicciones evaluadas desde Supabase
+│   ├── verify-logic.js             # 43 checks de lógica de negocio (scoring, normalización, KO, survivor)
 │   ├── evaluate-matches.js         # Evaluador CLI de partidos concluidos y cálculo de puntos
 │   ├── assign-points.js            # Asignación y actualización directa de pronósticos y puntos
 │   ├── test-survivor.js            # Suite de pruebas unitarias del sistema de superviviente
@@ -122,7 +128,7 @@ src/
 
 ### 7. Superviviente y Herencia de Equipo en Copas Knockout (`src/lib/survivor.ts`)
 - **Competiciones Aplicables (7 Copas KO):** UEFA Champions League (`champions`), UEFA Europa League (`europa`), UEFA Conference League (`conference`), Copa Italia (`coppaitalia`), FA Cup (`facup`), Copa del Rey (`copadelrey`) y DFB-Pokal (`dfbpokal`).
-- **Suscripción Automática:** Al elegir su equipo en el landing, el usuario queda suscrito automáticamente a **todas las copas knockout** en las que su club compite según el mapeo oficial de 89 equipos (`teamCups` en `teamAliases.json`).
+- **Suscripción Automática:** Al elegir su equipo en el landing, el usuario queda suscrito automáticamente a **todas las copas knockout** en las que su club compite según el mapeo oficial de la temporada 2026/27 (179 equipos reales, `teamCups` en `teamAliases.json`).
 - **Estado de Supervivencia Independiente:** Cada usuario cuenta con un registro en la tabla `tournament_survivors` por copa con estado `ALIVE` (🟢 VIVO) o `ELIMINATED` (🔴 KO).
 - **Mecánica de Eliminación Directa:** Si el equipo activo del participante pierde en una ronda KO (incluyendo definición por penales), queda eliminado (`ELIMINATED`) de esa copa y se registra la ronda real (Octavos, Cuartos, Semi, Final) en `eliminated_at_round`.
 - **Mecánica de Herencia de Camiseta (`👑`):** Si un participante pronostica la victoria del rival frente a su equipo activo y el rival gana/avanza, el participante permanece `ALIVE` y **hereda la camiseta del rival** (`active_team_id`) para las siguientes fases, registrando la transferencia en el historial (`history` JSONB).
@@ -145,6 +151,11 @@ npm run build
 
 # Ejecutar análisis de linter ESLint
 npm run lint
+
+# Verificaciones de lógica y calendario
+node scripts/verify-logic.js            # 43 checks de lógica de negocio
+node scripts/validate-fixtures.js       # Validación cruzada del calendario contra fuentes reales
+node scripts/test-survivor.js           # Tests del sistema de superviviente (12/12)
 ```
 
 ---

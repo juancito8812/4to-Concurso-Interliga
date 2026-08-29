@@ -262,7 +262,10 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 GRANT EXECUTE ON FUNCTION public.delete_user_account() TO authenticated;
 
--- 6. SEMILLA OFICIAL DE EQUIPOS (89 CLUBES)
+-- 6. SEMILLA OFICIAL DE EQUIPOS (histórica — 89 clubes)
+-- NOTA: Los equipos REALES de la temporada 2026/27 (179) se sincronizan automáticamente
+-- con `scripts/sync-db.js` (deriva los equipos del calendario real y elimina los stale
+-- que ningún perfil referencia). Esta semilla solo garantiza el esquema funcional inicial.
 INSERT INTO public.teams (id, name, league, logo_url)
 VALUES
   ('f4699b22-4cf2-494c-a83c-230fd511f884', 'Augsburg', 'Bundesliga', 'https://r2.thesportsdb.com/images/media/team/badge/xqyyvq1473453233.png'),
