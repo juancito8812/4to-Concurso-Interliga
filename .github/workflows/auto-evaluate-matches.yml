@@ -18,6 +18,8 @@ jobs:
 
       - name: Sync finished match results from ESPN
         run: node scripts/auto-sync-espn-results.js
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
 
       - name: Commit & push updated results if changed
         run: |

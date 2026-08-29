@@ -336,74 +336,62 @@ ON CONFLICT (name, league) DO UPDATE
 SET logo_url = EXCLUDED.logo_url;
 
 -- ---------------------------------------------------------------------------
--- F. RPCs de sincronización automática (llamables con la anon key desde el cron)
--- SECURITY DEFINER: el cron (sin sesión de usuario) puede persistir resultados
--- y puntos aunque RLS restrinja los UPDATE directos.
--- ---------------------------------------------------------------------------
+-- F. SEGURIDAD: el cron escribe vía service role key (REST directo, bypass RLS).
+--    Los RPCs públicos de escritura fueron ELIMINADOS (vector de manipulación de
+--    puntos/resultados con la anon key). delete_user_account queda para usuarios
+--    autenticados y handle_new_user como trigger interno.
 
-CREATE OR REPLACE FUNCTION public.update_match_results(p_updates jsonb)
-RETURNS void
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS trigger
 LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = public, pg_temp
 AS $$
 BEGIN
-  UPDATE public.matches m
-  SET result_home = (u.value ->> 'result_home')::int,
-      result_away = (u.value ->> 'result_away')::int
-  FROM jsonb_array_elements(p_updates) AS u
-  WHERE m.id::text = u.value ->> 'id'
-    AND (u.value ->> 'id') IS NOT NULL
-    AND m.result_home IS NULL
-    AND m.result_away IS NULL;
+  INSERT INTO public.profiles (user_id, display_name)
+  VALUES (
+    NEW.id,
+    COALESCE(NEW.raw_user_meta_data->>'display_name', split_part(NEW.email, '@', 1))
+  )
+  ON CONFLICT (user_id) DO UPDATE
+  SET display_name = EXCLUDED.display_name;
+  RETURN NEW;
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION public.update_prediction_points(p_updates jsonb)
+CREATE OR REPLACE FUNCTION public.delete_user_account()
 RETURNS void
 LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = public, pg_temp
 AS $$
+DECLARE
+  v_user_id uuid;
 BEGIN
-  UPDATE public.predictions pr
-  SET points = (u.value ->> 'points')::int
-  FROM jsonb_array_elements(p_updates) AS u
-  WHERE pr.id::text = u.value ->> 'id'
-    AND (u.value ->> 'id') IS NOT NULL;
+  v_user_id := auth.uid();
+  IF v_user_id IS NULL THEN
+    RAISE EXCEPTION 'Not authenticated';
+  END IF;
+
+  DELETE FROM public.prediction_scorers
+  WHERE prediction_id IN (
+    SELECT id FROM public.predictions WHERE user_id = v_user_id
+  );
+
+  DELETE FROM public.predictions WHERE user_id = v_user_id;
+  DELETE FROM public.tournament_survivors WHERE user_id = v_user_id;
+  DELETE FROM public.profiles WHERE user_id = v_user_id;
+  DELETE FROM auth.users WHERE id = v_user_id;
 END;
 $$;
 
-REVOKE ALL ON FUNCTION public.update_match_results(jsonb) FROM PUBLIC;
-REVOKE ALL ON FUNCTION public.update_prediction_points(jsonb) FROM PUBLIC;
-GRANT EXECUTE ON FUNCTION public.update_match_results(jsonb) TO anon;
-GRANT EXECUTE ON FUNCTION public.update_prediction_points(jsonb) TO anon;
+REVOKE ALL ON FUNCTION public.delete_user_account() FROM PUBLIC, anon;
+GRANT EXECUTE ON FUNCTION public.delete_user_account() TO authenticated;
 
-CREATE OR REPLACE FUNCTION public.update_survivors(p_updates jsonb)
-RETURNS void
-LANGUAGE plpgsql
-SECURITY DEFINER
-SET search_path = public, pg_temp
-AS $$
-BEGIN
-  UPDATE public.tournament_survivors ts
-  SET active_team_id = COALESCE((u.value ->> 'active_team_id')::uuid, ts.active_team_id),
-      status = COALESCE(NULLIF(u.value ->> 'status', ''), ts.status)::text,
-      eliminated_at_round = NULLIF(u.value ->> 'eliminated_at_round', '')::text,
-      history = COALESCE((u.value ->> 'history')::jsonb, ts.history),
-      updated_at = now()
-  FROM jsonb_array_elements(p_updates) AS u
-  WHERE ts.id::text = u.value ->> 'id'
-    AND (u.value ->> 'id') IS NOT NULL;
-END;
-$$;
+REVOKE ALL ON FUNCTION public.handle_new_user() FROM PUBLIC, anon, authenticated;
 
-REVOKE ALL ON FUNCTION public.update_survivors(jsonb) FROM PUBLIC;
-GRANT EXECUTE ON FUNCTION public.update_survivors(jsonb) TO anon;
-
--- ---------------------------------------------------------------------------
 -- G. app_meta (clave-valor) para marcas del cron (hash de calendario, etc.)
--- ---------------------------------------------------------------------------
+-- Solo accesible por service role (bypass RLS): sin grants directos para anon/authenticated.
 
 CREATE TABLE IF NOT EXISTS public.app_meta (
   key TEXT PRIMARY KEY,
@@ -413,29 +401,4 @@ CREATE TABLE IF NOT EXISTS public.app_meta (
 
 ALTER TABLE public.app_meta ENABLE ROW LEVEL SECURITY;
 
-CREATE OR REPLACE FUNCTION public.get_meta(p_key text)
-RETURNS text
-LANGUAGE sql
-SECURITY DEFINER
-SET search_path = public, pg_temp
-AS $$
-  SELECT value FROM public.app_meta WHERE key = p_key;
-$$;
-
-CREATE OR REPLACE FUNCTION public.set_meta(p_key text, p_value text)
-RETURNS void
-LANGUAGE plpgsql
-SECURITY DEFINER
-SET search_path = public, pg_temp
-AS $$
-BEGIN
-  INSERT INTO public.app_meta (key, value, updated_at)
-  VALUES (p_key, p_value, now())
-  ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value, updated_at = now();
-END;
-$$;
-
-REVOKE ALL ON FUNCTION public.get_meta(text) FROM PUBLIC;
-REVOKE ALL ON FUNCTION public.set_meta(text, text) FROM PUBLIC;
-GRANT EXECUTE ON FUNCTION public.get_meta(text) TO anon;
-GRANT EXECUTE ON FUNCTION public.set_meta(text, text) TO anon;
+REVOKE ALL ON TABLE public.app_meta FROM anon, authenticated;

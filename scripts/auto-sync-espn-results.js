@@ -30,33 +30,55 @@ const LEAGUE_MAP = {
   "ita.coppa_italia": "Copa Italia",
 };
 
+// Lecturas con la anon key (solo SELECT públicos por RLS).
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://ilkndkqcmxvlufxaugog.supabase.co";
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlsa25ka3FjbXh2bHVmeGF1Z29nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc2OTI5MTksImV4cCI6MjEwMzI2ODkxOX0.2AAajeD5mX0RxUXe1Fi5b_SefDBH5MClGKRXdIEZZcY";
+const ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlsa25ka3FjbXh2bHVmeGF1Z29nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc2OTI5MTksImV4cCI6MjEwMzI2ODkxOX0.2AAajeD5mX0RxUXe1Fi5b_SefDBH5MClGKRXdIEZZcY";
+
+// Escrituras con la service role key (bypass RLS). Se inyecta como secreto de
+// GitHub Actions (SUPABASE_SERVICE_ROLE_KEY) o variable de entorno local.
+const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+
+function authHeaders(key) {
+  return {
+    apikey: key,
+    Authorization: `Bearer ${key}`,
+    "Content-Type": "application/json",
+  };
+}
 
 async function supabaseGet(path) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
-    headers: {
-      apikey: SUPABASE_ANON_KEY,
-      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-    },
+    headers: authHeaders(ANON_KEY),
   });
   if (!res.ok) throw new Error(`supabase GET ${path} -> ${res.status}`);
   return res.json();
 }
 
-async function callRpc(name, payload) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${name}`, {
-    method: "POST",
-    headers: {
-      apikey: SUPABASE_ANON_KEY,
-      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
+async function supabaseWrite(method, path, body, prefer) {
+  if (!SERVICE_KEY) {
+    throw new Error("SUPABASE_SERVICE_ROLE_KEY no configurada (se requiere para escribir)");
+  }
+  const headers = authHeaders(SERVICE_KEY);
+  if (prefer) headers["Prefer"] = prefer;
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    method,
+    headers,
+    body: body ? JSON.stringify(body) : undefined,
   });
-  if (!res.ok) throw new Error(`rpc ${name} -> ${res.status}: ${await res.text()}`);
-  const text = await res.text();
-  return text ? JSON.parse(text) : null;
+  if (!res.ok) throw new Error(`supabase ${method} ${path} -> ${res.status}: ${await res.text()}`);
+  return res;
+}
+
+// Lecturas internas con la service role key (tablas sin acceso anon como app_meta)
+async function supabaseGetService(path) {
+  if (!SERVICE_KEY) {
+    throw new Error("SUPABASE_SERVICE_ROLE_KEY no configurada");
+  }
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    headers: authHeaders(SERVICE_KEY),
+  });
+  if (!res.ok) throw new Error(`supabase GET(service) ${path} -> ${res.status}`);
+  return res.json();
 }
 
 // ESPN scoreboard solo devuelve el día actual; con ?dates=YYYYMMDD,.. retrocedemos
@@ -80,8 +102,8 @@ async function syncFixturesToSupabase(officialFixtures) {
     const crypto = require("crypto");
     const hash = crypto.createHash("md5").update(JSON.stringify(officialFixtures)).digest("hex");
 
-    const prevHash = await callRpc("get_meta", { p_key: "fixtures_hash" }).catch(() => null);
-    if (prevHash && prevHash.trim() === hash) {
+    const rows = await supabaseGetService("app_meta?key=eq.fixtures_hash&select=value");
+    if (rows && rows.length > 0 && rows[0].value === hash) {
       return; // calendario sin cambios
     }
 
@@ -94,18 +116,70 @@ async function syncFixturesToSupabase(officialFixtures) {
         match_date: f.match_date,
         league: f.league,
       }));
-      await callRpc("upsert_fixture_matches", { p_fixtures: part });
+      await supabaseWrite("POST", `matches?on_conflict=id`, part, "resolution=merge-duplicates,return=minimal");
     }
-    await callRpc("set_meta", { p_key: "fixtures_hash", p_value: hash });
+    await supabaseWrite(
+      "POST",
+      "app_meta?on_conflict=key",
+      [{ key: "fixtures_hash", value: hash }],
+      "resolution=merge-duplicates,return=minimal"
+    );
     console.log(`💾 Calendario sincronizado en Supabase matches: ${officialFixtures.length} fixtures`);
   } catch (e) {
     console.warn("Could not sync fixtures to Supabase:", e.message);
   }
 }
 
+// Persiste resultados y puntos en Supabase con la service role key (REST directo).
+// Las filas de matches ya usan los ids canónicos de los fixtures: se actualizan por
+// id sin descargar la tabla completa (ahorra ~280KB por corrida).
+async function persistToSupabase(officialMatches, officialPreds) {
+  try {
+    // 1. Resultados de partidos: solo filas que aún no tienen resultado (PATCH por fila)
+    const withResults = (officialMatches || []).filter(
+      (m) => m.result_home !== null && m.result_home !== undefined
+    );
+    const ids = withResults.map((m) => m.id);
+    let persisted = 0;
+    if (ids.length > 0) {
+      const existing = await supabaseGet(`matches?select=id&result_home=is.null&id=in.(${ids.join(",")})`);
+      const pendingIds = new Set((existing || []).map((r) => r.id));
+      for (const m of withResults) {
+        if (!pendingIds.has(m.id)) continue;
+        await supabaseWrite(
+          "PATCH",
+          `matches?id=eq.${m.id}`,
+          { result_home: m.result_home, result_away: m.result_away }
+        );
+        persisted += 1;
+      }
+    }
+    if (persisted > 0) {
+      console.log(`💾 Resultados persistidos en Supabase matches: ${persisted}`);
+    }
+
+    // 2. Puntos de pronósticos: solo filas reales de la DB (PATCH por fila)
+    const dbPreds = await supabaseGet("predictions?select=id,user_id,match_id");
+    const dbByKey = new Map();
+    (dbPreds || []).forEach((p) => dbByKey.set(`${p.user_id}|${p.match_id}`, p.id));
+
+    let pointsPersisted = 0;
+    for (const p of officialPreds) {
+      if (p.points === undefined || p.points === null) continue;
+      const dbId = dbByKey.get(`${p.user_id}|${p.match_id}`);
+      if (!dbId) continue;
+      await supabaseWrite("PATCH", `predictions?id=eq.${dbId}`, { points: p.points });
+      pointsPersisted += 1;
+    }
+    if (pointsPersisted > 0) {
+      console.log(`💾 Puntos persistidos en Supabase predictions: ${pointsPersisted}`);
+    }
+  } catch (e) {
+    console.warn("Could not persist to Supabase:", e.message);
+  }
+}
+
 // Evaluación automática de la mecánica de Superviviente en copas KO.
-// Solo se procesan partidos de los emparejamientos oficiales (isKnockoutMatch),
-// idempotente por match_id en history. Persiste vía RPC SECURITY DEFINER.
 async function evaluateSurvivors(officialMatches) {
   try {
     const [survivors, preds, teamsData] = await Promise.all([
@@ -194,59 +268,27 @@ async function evaluateSurvivors(officialMatches) {
         current.status !== sur.status ||
         current.activeName !== activeName;
       if (changed) {
-        updates.push({
-          id: sur.id,
-          active_team_id: current.activeTeamId,
-          status: current.status,
-          eliminated_at_round: current.status === "ELIMINATED" ? "Ronda KO" : "",
-          history: current.history,
-        });
+        updates.push({ id: sur.id, ...current });
       }
     }
 
+    for (const u of updates) {
+      await supabaseWrite(
+        "PATCH",
+        `tournament_survivors?id=eq.${u.id}`,
+        {
+          active_team_id: u.activeTeamId,
+          status: u.status,
+          eliminated_at_round: u.status === "ELIMINATED" ? "Ronda KO" : null,
+          history: u.history,
+        }
+      );
+    }
     if (updates.length > 0) {
-      await callRpc("update_survivors", { p_updates: updates });
       console.log(`💾 Survivors actualizados en Supabase: ${updates.length}`);
     }
   } catch (e) {
     console.warn("Could not evaluate survivors:", e.message);
-  }
-}
-
-// Persiste resultados y puntos en Supabase vía RPC SECURITY DEFINER (no requiere sesión)
-// Las filas de matches ya usan los ids canónicos de los fixtures, así que se actualizan
-// por id directamente sin descargar la tabla completa (ahorra ~280KB por corrida).
-async function persistToSupabase(officialMatches, officialPreds) {
-  try {
-    // 1. Resultados de partidos: actualización directa por id (el RPC solo escribe filas sin resultado)
-    const resultUpdates = (officialMatches || [])
-      .filter((m) => m.result_home !== null && m.result_home !== undefined)
-      .map((m) => ({ id: m.id, result_home: m.result_home, result_away: m.result_away }));
-
-    if (resultUpdates.length > 0) {
-      await callRpc("update_match_results", { p_updates: resultUpdates });
-      console.log(`💾 Resultados persistidos en Supabase matches: ${resultUpdates.length}`);
-    }
-
-    // 2. Puntos de pronósticos: solo filas reales de la DB (ids uuid de supabase)
-    const dbPreds = await supabaseGet("predictions?select=id,user_id,match_id");
-    const dbByKey = new Map();
-    (dbPreds || []).forEach((p) => dbByKey.set(`${p.user_id}|${p.match_id}`, p.id));
-
-    const predUpdates = [];
-    for (const p of officialPreds) {
-      if (p.points === undefined || p.points === null) continue;
-      const dbId = dbByKey.get(`${p.user_id}|${p.match_id}`);
-      if (dbId) {
-        predUpdates.push({ id: dbId, points: p.points });
-      }
-    }
-    if (predUpdates.length > 0) {
-      await callRpc("update_prediction_points", { p_updates: predUpdates });
-      console.log(`💾 Puntos persistidos en Supabase predictions: ${predUpdates.length}`);
-    }
-  } catch (e) {
-    console.warn("Could not persist to Supabase:", e.message);
   }
 }
 
