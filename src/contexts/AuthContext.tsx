@@ -30,7 +30,10 @@ function translateAuthError(errMessage: string): string {
     return "Correo o contraseña incorrectos.";
   }
   if (msg.includes("password should be at least")) {
-    return "La contraseña debe tener al menos 6 caracteres.";
+    return "La contraseña debe tener al menos 8 caracteres e incluir mayúscula, número y símbolo.";
+  }
+  if (msg.includes("required characters") || msg.includes("must contain at least one")) {
+    return "La contraseña debe incluir al menos una mayúscula, un número y un símbolo.";
   }
   if (msg.includes("email address is invalid") || msg.includes("invalid email")) {
     return "El formato del correo electrónico no es válido.";
