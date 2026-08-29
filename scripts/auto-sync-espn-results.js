@@ -5,6 +5,10 @@ const {
   matchIdToUuid,
   calculateScore,
   isKnockoutMatch,
+  isKnockoutCup,
+  getKnockoutCupSlug,
+  getEspnSlug,
+  getKnockoutRound,
   evaluateSurvivorProgression,
 } = require("./lib/score-utils");
 
@@ -17,6 +21,9 @@ const LEAGUE_SLUGS = [
   "uefa.europa",
   "uefa.europa.conf",
   "ita.coppa_italia",
+  "eng.fa",
+  "esp.copa_del_rey",
+  "ger.dfb_pokal",
 ];
 
 const LEAGUE_MAP = {
@@ -28,6 +35,9 @@ const LEAGUE_MAP = {
   "uefa.europa": "Europa League",
   "uefa.europa.conf": "Conference League",
   "ita.coppa_italia": "Copa Italia",
+  "eng.fa": "FA Cup",
+  "esp.copa_del_rey": "Copa del Rey",
+  "ger.dfb_pokal": "DFB-Pokal",
 };
 
 // Lecturas con la anon key (solo SELECT públicos por RLS).
@@ -179,24 +189,62 @@ async function persistToSupabase(officialMatches, officialPreds) {
   }
 }
 
-// Evaluación automática de la mecánica de Superviviente en copas KO.
-async function evaluateSurvivors(officialMatches) {
+async function resolvePenaltyWinner(gameId, espnSlug) {
+  if (!espnSlug) return null;
   try {
-    const [survivors, preds, teamsData] = await Promise.all([
+    const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${espnSlug}/summary?event=${gameId}`;
+    const resp = await fetch(url, {
+      signal: AbortSignal.timeout(10000),
+      headers: { "User-Agent": "Mozilla/5.0" },
+    });
+    if (!resp.ok) return null;
+    const data = await resp.json();
+
+    const game = data?.gameInfo || data?.header?.competitions?.[0];
+    if (!game) return null;
+
+    const penalties = data?.penalties;
+    if (penalties && Array.isArray(penalties)) {
+      const winner = penalties.find((p) => p.winner);
+      if (winner) return winner.team?.displayName || winner.team?.name || null;
+    }
+
+    const competitors = game.competitors || [];
+    for (const c of competitors) {
+      if (c.winner === true) {
+        return c.team?.displayName || c.team?.name || null;
+      }
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+async function evaluateSurvivors(finishedMatches) {
+  if (!SERVICE_KEY) {
+    console.log("ℹ️  evaluateSurvivors saltado (no hay SUPABASE_SERVICE_ROLE_KEY)");
+    return;
+  }
+
+  try {
+    const [survivors, preds, teams] = await Promise.all([
       supabaseGet("tournament_survivors?select=id,user_id,tournament_slug,active_team_id,status,history,teams(name)"),
       supabaseGet("predictions?select=user_id,match_id,home_score,away_score"),
       supabaseGet("teams?select=id,name"),
     ]);
 
     const teamsByName = {};
-    (teamsData || []).forEach((t) => {
-      teamsByName[normalizeTeamName(t.name)] = t.id;
+    (teams || []).forEach((t) => {
+      teamsByName[t.name] = t.id;
     });
 
     const finishedMap = new Map();
-    for (const m of officialMatches) {
-      if (m.result_home !== null && m.result_home !== undefined) {
-        finishedMap.set(m.id, m);
+    for (const m of finishedMatches) {
+      finishedMap.set(m.id, m);
+      if (m.home_team && m.away_team) {
+        finishedMap.set(`${m.home_team}-${m.away_team}`, m);
       }
     }
 
@@ -216,7 +264,7 @@ async function evaluateSurvivors(officialMatches) {
 
       const history = Array.isArray(sur.history) ? sur.history : [];
       const doneMatches = new Set(history.map((h) => h.match_id));
-      let current = { activeTeamId: sur.active_team_id, activeName, status: "ALIVE", history };
+      let current = { activeTeamId: sur.active_team_id, activeName, status: "ALIVE", history, roundName: "Ronda KO" };
 
       for (const p of predsByUser.get(sur.user_id) || []) {
         if (current.status !== "ALIVE") break;
@@ -230,17 +278,24 @@ async function evaluateSurvivors(officialMatches) {
         const an = current.activeName.toLowerCase();
         if (mh !== an && ma !== an) continue;
         if (doneMatches.has(match.id)) continue;
-        if (match.result_home === match.result_away || p.home_score === p.away_score) continue;
 
-        const actualWinner = match.result_home > match.result_away ? match.home_team : match.away_team;
+        if (match.result_home === match.result_away) {
+          const penWinner = await resolvePenaltyWinner(match.id, getEspnSlug(match.league));
+          if (!penWinner) continue;
+          match._penaltyWinner = penWinner;
+        }
+        if (p.home_score === p.away_score) continue;
+
+        const actualWinner = match._penaltyWinner || (match.result_home > match.result_away ? match.home_team : match.away_team);
         const predictedWinner = p.home_score > p.away_score ? match.home_team : match.away_team;
+        const roundName = getKnockoutRound(match.match_date, getKnockoutCupSlug(match.league));
 
         const outcome = evaluateSurvivorProgression({
           activeTeamName: current.activeName,
           predictedWinner,
           actualWinner,
           matchId: match.id,
-          roundName: "Ronda KO",
+          roundName,
           matchDate: match.match_date,
           currentHistory: current.history,
         });
@@ -257,9 +312,10 @@ async function evaluateSurvivors(officialMatches) {
           activeName: outcome.newTeamName,
           status: outcome.newStatus,
           history: outcome.updatedHistory,
+          roundName,
         };
         console.log(
-          `🏆 Survivor ${sur.tournament_slug} (${sur.user_id}): ${outcome.newStatus}${outcome.transferred ? `, camiseta heredada: ${outcome.newTeamName}` : ""}`
+          `🏆 Survivor ${sur.tournament_slug} (${sur.user_id}): ${outcome.newStatus}${outcome.transferred ? `, camiseta heredada: ${outcome.newTeamName}` : ""} en ${roundName}`
         );
       }
 
@@ -279,7 +335,7 @@ async function evaluateSurvivors(officialMatches) {
         {
           active_team_id: u.activeTeamId,
           status: u.status,
-          eliminated_at_round: u.status === "ELIMINATED" ? "Ronda KO" : null,
+          eliminated_at_round: u.status === "ELIMINATED" ? u.roundName : null,
           history: u.history,
         }
       );

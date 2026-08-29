@@ -274,6 +274,15 @@ runTest('Scenario 7: Knockout Cup Helper (isKnockoutCup)', () => {
   assert.equal(isKnockoutCup('Copa Italia'), true);
   assert.equal(isKnockoutCup('CI'), true);
 
+  // 3 New Domestic Cups
+  assert.equal(isKnockoutCup('facup'), true);
+  assert.equal(isKnockoutCup('FA Cup'), true);
+  assert.equal(isKnockoutCup('copadelrey'), true);
+  assert.equal(isKnockoutCup('Copa del Rey'), true);
+  assert.equal(isKnockoutCup('dfbpokal'), true);
+  assert.equal(isKnockoutCup('DFB-Pokal'), true);
+  assert.equal(isKnockoutCup('dfb pokal'), true);
+
   // League competitions where team is fixed and survivor mechanics do not apply
   assert.equal(isKnockoutCup('premier'), false);
   assert.equal(isKnockoutCup('Premier League'), false);
@@ -283,6 +292,107 @@ runTest('Scenario 7: Knockout Cup Helper (isKnockoutCup)', () => {
   assert.equal(isKnockoutCup('Serie A'), false);
   assert.equal(isKnockoutCup('bundesliga'), false);
   assert.equal(isKnockoutCup('Bundesliga'), false);
+});
+
+// -------------------------------------------------------------
+// Scenario 8: Knockout Match Detection for all 7 competitions
+// -------------------------------------------------------------
+const { isKnockoutMatch, getKnockoutCupSlug, getKnockoutRound } = await import('../src/lib/leagueConfig.ts');
+const { getTeamCups } = await import('../src/lib/survivor.ts');
+
+runTest('Scenario 8: Knockout Match Detection by League Name (Domestic & European)', () => {
+  assert.equal(isKnockoutMatch('Arsenal', 'Chelsea', 'FA Cup'), true);
+  assert.equal(isKnockoutMatch('Real Madrid', 'Barcelona', 'Copa del Rey'), true);
+  assert.equal(isKnockoutMatch('Bayern Munich', 'Dortmund', 'DFB-Pokal'), true);
+  assert.equal(isKnockoutMatch('Bayern Munich', 'Dortmund', 'DFB Pokal'), true);
+  assert.equal(isKnockoutMatch('Inter Milan', 'Juventus', 'Copa Italia'), true);
+  assert.equal(isKnockoutMatch('Arsenal', 'Chelsea', 'Premier League'), false);
+  assert.equal(isKnockoutMatch('Real Madrid', 'Barcelona', 'LaLiga'), false);
+});
+
+// -------------------------------------------------------------
+// Scenario 9: getKnockoutCupSlug helper
+// -------------------------------------------------------------
+runTest('Scenario 9: getKnockoutCupSlug Slug Mapping', () => {
+  assert.equal(getKnockoutCupSlug('Champions League'), 'champions');
+  assert.equal(getKnockoutCupSlug('Europa League'), 'europa');
+  assert.equal(getKnockoutCupSlug('Conference League'), 'conference');
+  assert.equal(getKnockoutCupSlug('Copa Italia'), 'coppaitalia');
+  assert.equal(getKnockoutCupSlug('FA Cup'), 'facup');
+  assert.equal(getKnockoutCupSlug('Copa del Rey'), 'copadelrey');
+  assert.equal(getKnockoutCupSlug('DFB-Pokal'), 'dfbpokal');
+  assert.equal(getKnockoutCupSlug('Premier League'), null);
+});
+
+// -------------------------------------------------------------
+// Scenario 10: getKnockoutRound Real Round Names
+// -------------------------------------------------------------
+runTest('Scenario 10: getKnockoutRound Date to Round Resolution', () => {
+  assert.equal(getKnockoutRound('2026-02-18', 'champions'), 'Octavos de Final');
+  assert.equal(getKnockoutRound('2026-04-08', 'champions'), 'Cuartos de Final');
+  assert.equal(getKnockoutRound('2026-05-01', 'champions'), 'Semifinal');
+  assert.equal(getKnockoutRound('2026-05-30', 'champions'), 'Final');
+
+  assert.equal(getKnockoutRound('2026-01-10', 'facup'), 'Tercera Ronda');
+  assert.equal(getKnockoutRound('2026-02-05', 'facup'), 'Cuarta Ronda');
+  assert.equal(getKnockoutRound('2026-03-01', 'facup'), 'Quinta Ronda');
+  assert.equal(getKnockoutRound('2026-04-10', 'facup'), 'Cuartos de Final');
+
+  assert.equal(getKnockoutRound('2026-12-15', 'copadelrey'), 'Dieciseisavos');
+  assert.equal(getKnockoutRound('2026-01-20', 'copadelrey'), 'Octavos de Final');
+  assert.equal(getKnockoutRound('2026-02-10', 'copadelrey'), 'Cuartos de Final');
+
+  assert.equal(getKnockoutRound('2026-08-15', 'dfbpokal'), 'Primera Ronda');
+  assert.equal(getKnockoutRound('2026-10-28', 'dfbpokal'), 'Segunda Ronda');
+});
+
+// -------------------------------------------------------------
+// Scenario 11: getTeamCups Auto-Subscription Mapping (89 Clubs)
+// -------------------------------------------------------------
+runTest('Scenario 11: getTeamCups Auto-Subscription Mapping', () => {
+  const rmCups = getTeamCups('Real Madrid');
+  assert.deepEqual(rmCups, ['champions', 'copadelrey', 'supercopaespana']);
+
+  const arsCups = getTeamCups('Arsenal');
+  assert.deepEqual(arsCups, ['champions', 'facup']);
+
+  const bayCups = getTeamCups('Bayern Munich');
+  assert.deepEqual(bayCups, ['champions', 'dfbpokal', 'dflsupercup']);
+
+  const intCups = getTeamCups('Inter Milan');
+  assert.deepEqual(intCups, ['champions', 'coppaitalia', 'supercoppaitaliana']);
+
+  const sevCups = getTeamCups('Sevilla');
+  assert.deepEqual(sevCups, ['copadelrey']);
+
+  const whuCups = getTeamCups('West Ham');
+  assert.deepEqual(whuCups, ['facup']);
+
+  const stutCups = getTeamCups('Stuttgart');
+  assert.deepEqual(stutCups, ['dfbpokal']);
+});
+
+// -------------------------------------------------------------
+// Scenario 12: Penalty Shootout Progression
+// -------------------------------------------------------------
+runTest('Scenario 12: Penalty Shootout Winner Progression', () => {
+  // Tie ended 1-1, but Arsenal won on penalties. User predicted Arsenal to advance.
+  const result = evaluateSurvivorProgression({
+    activeTeamName: 'Paris Saint-Germain',
+    predictedWinner: 'Arsenal',
+    actualWinner: 'Arsenal', // Resolved from penalty shootout winner
+    matchId: 'match-cl-penalties',
+    roundName: 'Cuartos de Final',
+    matchDate: '2026-04-15',
+    currentHistory: [],
+  });
+
+  assert.equal(result.newStatus, 'ALIVE');
+  assert.equal(result.newTeamName, 'Arsenal');
+  assert.equal(result.transferred, true);
+  assert.equal(result.updatedHistory.length, 1);
+  assert.equal(result.updatedHistory[0].from_team, 'Paris Saint-Germain');
+  assert.equal(result.updatedHistory[0].to_team, 'Arsenal');
 });
 
 console.log('\n------------------------------------------------------------');

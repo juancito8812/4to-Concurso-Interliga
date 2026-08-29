@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS public.prediction_scorers (
 CREATE TABLE IF NOT EXISTS public.tournament_survivors (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
-  tournament_slug TEXT NOT NULL, -- 'champions', 'europa', 'conference', 'coppaitalia'
+  tournament_slug TEXT NOT NULL, -- 'champions', 'europa', 'conference', 'coppaitalia', 'facup', 'copadelrey', 'dfbpokal'
   active_team_id UUID REFERENCES public.teams(id) NOT NULL,
   status TEXT NOT NULL DEFAULT 'ALIVE' CHECK (status IN ('ALIVE', 'ELIMINATED')),
   eliminated_at_round TEXT,

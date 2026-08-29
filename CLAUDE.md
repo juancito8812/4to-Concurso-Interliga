@@ -44,10 +44,10 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - `scripts/auto-sync-espn-results.js` — Cron: sincroniza ESPN → evalúa puntos/survivors → persiste en Supabase
 - `scripts/evaluate-matches.js` — Evaluador CLI manual de partidos (usa `scripts/lib/score-utils.js`)
 - `scripts/lib/score-utils.js` — Módulo compartido CJS: normalizeTeamName, matchIdToUuid, calculateScore, isKnockoutMatch, evaluateSurvivorProgression
-- `scripts/test-survivor.js` — Suite de pruebas unitarias (7/7 PASS)
+- `scripts/test-survivor.js` — Suite de pruebas unitarias de supervivencia y copas (12/12 PASS)
 - `src/lib/supabase.ts` — Cliente Supabase
-- `src/lib/survivor.ts` — Módulo de supervivencia multitorneo KO, evaluación de partidos (`evaluateSurvivorProgression`) y herencia de camisetas
-- `src/lib/leagueConfig.ts` — Colores, logos, normalizadores `normalizeMatchLeague`, `normalizeTeamName`, `matchIdToUuid`, `isKnockoutMatch`
+- `src/lib/survivor.ts` — Módulo de supervivencia multitorneo KO (7 copas: Champions, Europa, Conference, Copa Italia, FA Cup, Copa del Rey, DFB-Pokal), evaluación de partidos (`evaluateSurvivorProgression`), auto-suscripción (`getTeamCups`) y herencia de camisetas
+- `src/lib/leagueConfig.ts` — Colores, logos, normalizadores `normalizeMatchLeague`, `normalizeTeamName`, `matchIdToUuid`, `isKnockoutMatch`, `getKnockoutCupSlug`, `getKnockoutRound`
 - `src/lib/scoring.ts` — Motor de cálculo de puntos (+ matching fonético `arePlayersMatching`)
 - `src/lib/espnResultsFetcher.ts` — Fetcher cliente de partidos finalizados ESPN (caché 30s, timeout 10s)
 - `src/lib/footballData.ts` — Plantillas oficiales + ventana de partidos (saltea API en vivo en GitHub Pages por CORS)

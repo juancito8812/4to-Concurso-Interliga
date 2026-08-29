@@ -121,15 +121,16 @@ src/
 - **Eliminación Total de Cuenta (`delete_user_account`):** Borra permanentemente los datos en Supabase y **libera el correo electrónico** para nuevos registros.
 
 ### 7. Superviviente y Herencia de Equipo en Copas Knockout (`src/lib/survivor.ts`)
-- **Competiciones Aplicables:** UEFA Champions League (`champions`), UEFA Europa League (`europa`), UEFA Conference League (`conference`) y Copa Italia (`coppaitalia`).
+- **Competiciones Aplicables (7 Copas KO):** UEFA Champions League (`champions`), UEFA Europa League (`europa`), UEFA Conference League (`conference`), Copa Italia (`coppaitalia`), FA Cup (`facup`), Copa del Rey (`copadelrey`) y DFB-Pokal (`dfbpokal`).
+- **Suscripción Automática:** Al elegir su equipo en el landing, el usuario queda suscrito automáticamente a **todas las copas knockout** en las que su club compite según el mapeo oficial de 89 equipos (`teamCups` en `teamAliases.json`).
 - **Estado de Supervivencia Independiente:** Cada usuario cuenta con un registro en la tabla `tournament_survivors` por copa con estado `ALIVE` (🟢 VIVO) o `ELIMINATED` (🔴 KO).
-- **Mecánica de Eliminación Directa:** Si el participante falla su pronóstico en un partido de copa, queda eliminado (`ELIMINATED`) de esa copa y se registra la ronda en `eliminated_at_round`.
+- **Mecánica de Eliminación Directa:** Si el equipo activo del participante pierde en una ronda KO (incluyendo definición por penales), queda eliminado (`ELIMINATED`) de esa copa y se registra la ronda real (Octavos, Cuartos, Semi, Final) en `eliminated_at_round`.
 - **Mecánica de Herencia de Camiseta (`👑`):** Si un participante pronostica la victoria del rival frente a su equipo activo y el rival gana/avanza, el participante permanece `ALIVE` y **hereda la camiseta del rival** (`active_team_id`) para las siguientes fases, registrando la transferencia en el historial (`history` JSONB).
 - **Aislamiento de Liga Regular:** El club favorito principal del participante (`profiles.team_id`) permanece **100% fijo** y jamás es modificado por eventos o transferencias en copas.
 - **Visualización:**
-  - `CompetitionStatusCard.tsx` (Paso 3 en landing) muestra el estado VIVO/KO y equipo activo por copa.
-  - `/pronosticar` alerta y deshabilita pronósticos si el usuario fue eliminado en esa copa o permite seleccionar club inicial.
-  - `/mis-pronosticos` detalla el resumen de estado y la línea de tiempo completa de camisetas heredadas.
+  - `CompetitionStatusCard.tsx` (Paso 3 en landing) muestra el estado VIVO/KO y equipo activo por cada una de las 7 copas.
+  - `/pronosticar` muestra el badge de club representante activo y deshabilita pronósticos si el usuario fue eliminado en esa copa o si su equipo no participa en ella.
+  - `/mis-pronosticos` detalla el resumen de estado con la ronda real y la línea de tiempo completa de camisetas heredadas.
 
 ---
 

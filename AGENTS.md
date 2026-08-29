@@ -53,14 +53,14 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `src/app/Footer.tsx` | Footer con ligas, navegación, reglas, créditos |
 | `src/app/TeamSelectorCard.tsx` | Selección y bloqueo de club en landing |
 | `src/app/CompetitionStatusCard.tsx` | Estado de competición (VIVO/KO) |
-| `src/lib/leagueConfig.ts` | Colores, logos, normalización de competiciones (`normalizeMatchLeague`), mapeo de nombres de equipos (`normalizeTeamName`), `matchIdToUuid` e `isKnockoutMatch` |
-| `src/lib/survivor.ts` | Lógica de supervivencia en copas KO (`evaluateSurvivorProgression`), consultas y estado de transferencias (`getUserCupSurvivors`, `setInitialCupSurvivor`, `updateCupSurvivor`) |
+| `src/lib/leagueConfig.ts` | Colores, logos, normalización de competiciones (`normalizeMatchLeague`), mapeo de nombres de equipos (`normalizeTeamName`), `matchIdToUuid`, `isKnockoutMatch`, `getKnockoutCupSlug`, `getKnockoutRound` |
+| `src/lib/survivor.ts` | Lógica de supervivencia en 7 copas KO (`evaluateSurvivorProgression`), auto-suscripción (`getTeamCups`), consultas y transferencias (`getUserCupSurvivors`, `setInitialCupSurvivor`, `updateCupSurvivor`) |
 | `src/lib/footballData.ts` | `getOfficialTeamMatches`, `getOfficialPlayersForTeams` (API + fallback de fixtures y 3.822 jugadores; en GitHub Pages saltea la API por CORS) |
 | `src/lib/espnApi.ts` | Cliente ESPN API para tablas de posiciones, goleadores y partidos |
 | `src/lib/espnResultsFetcher.ts` | Partidos finalizados ESPN en vivo para el cliente (caché 30s, `AbortSignal.timeout(10s)`) |
 | `src/lib/scoring.ts` | Motor de cálculo de puntajes del concurso (+ `arePlayersMatching` fonético) |
-| `src/data/teamAliases.json` | Fuente única: aliasMap de equipos, canonicalDbTeams y knockoutPairs (consumido por TS y scripts) |
-| `scripts/lib/score-utils.js` | Módulo CJS compartido: `normalizeTeamName`, `matchIdToUuid`, `calculateScore`, `isKnockoutMatch`, `evaluateSurvivorProgression` |
+| `src/data/teamAliases.json` | Fuente única: aliasMap de equipos, canonicalDbTeams, knockoutPairs y teamCups (consumido por TS y scripts) |
+| `scripts/lib/score-utils.js` | Módulo CJS compartido: `normalizeTeamName`, `matchIdToUuid`, `calculateScore`, `isKnockoutMatch`, `isKnockoutCup`, `getKnockoutCupSlug`, `getKnockoutRound`, `getTeamCups`, `evaluateSurvivorProgression` |
 | `scripts/auto-sync-espn-results.js` | Cron: ESPN (backfill 3 días) → JSON evaluados → persistencia en Supabase con service role key |
 | `src/contexts/AuthContext.tsx` | Context de autenticación, perfil en vivo y `deleteAccount` |
 | `src/data/officialEvaluatedMatches.json` | Resultados oficiales finalizados y goleadores reales |
@@ -78,7 +78,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **matches** — `id` (IDs canónicos de fixtures), `home_team`, `away_team`, `match_date`, `league`, `result_home`, `result_away` (1.842 filas re-sembradas).
 - **predictions** — `id`, `user_id`, `match_id`, `home_score`, `away_score`, `points` (UNIQUE user_id+match_id; FK → matches con IDs canónicos).
 - **prediction_scorers** — `prediction_id`, `player_name`, `goals`, `team`. Escritura SOLO del dueño del pronóstico (IDOR fix).
-- **tournament_survivors** — `id` (PK), `user_id` (FK → auth.users), `tournament_slug` (TEXT: 'champions', 'europa', 'conference', 'coppaitalia'), `active_team_id` (FK → teams), `status` ('ALIVE' | 'ELIMINATED'), `eliminated_at_round` (TEXT), `history` (JSONB: lista de transferencias de camisetas), `created_at`, `updated_at`. RLS: SELECT público, ALL restringido al propio usuario (`auth.uid() = user_id`).
+- **tournament_survivors** — `id` (PK), `user_id` (FK → auth.users), `tournament_slug` (TEXT: 'champions', 'europa', 'conference', 'coppaitalia', 'facup', 'copadelrey', 'dfbpokal'), `active_team_id` (FK → teams), `status` ('ALIVE' | 'ELIMINATED'), `eliminated_at_round` (TEXT), `history` (JSONB: lista de transferencias de camisetas), `created_at`, `updated_at`. RLS: SELECT público, ALL restringido al propio usuario (`auth.uid() = user_id`).
 - **app_meta** — tabla clave-valor (hash del calendario). Solo accesible por service role.
 - **Trigger `handle_new_user`:** Al crearse un registro en `auth.users`, se inserta automáticamente en `profiles`.
 - **RPC `delete_user_account`:** Función `SECURITY DEFINER` (solo `authenticated`) que purga predicciones, goleadores, tournament_survivors, perfiles y elimina la fila de `auth.users`, liberando el email inmediatamente.

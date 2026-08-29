@@ -28,6 +28,9 @@ const CUPS: CupConfig[] = [
   { slug: "europa", name: "Europa League", shortName: "Europa", emoji: "🟠" },
   { slug: "conference", name: "Conference League", shortName: "Conference", emoji: "🟢" },
   { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", emoji: "🇮🇹" },
+  { slug: "facup", name: "FA Cup", shortName: "FA Cup", emoji: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
+  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", emoji: "🇪🇸" },
+  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", emoji: "🇩🇪" },
 ];
 
 interface EffectiveStatus {

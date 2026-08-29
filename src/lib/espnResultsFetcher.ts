@@ -23,6 +23,9 @@ const LEAGUE_SLUGS = [
   "uefa.europa",
   "uefa.europa.conf",
   "ita.coppa_italia",
+  "eng.fa",
+  "esp.copa_del_rey",
+  "ger.dfb_pokal",
 ];
 
 const LEAGUE_MAP: Record<string, string> = {
@@ -34,6 +37,9 @@ const LEAGUE_MAP: Record<string, string> = {
   "uefa.europa": "Europa League",
   "uefa.europa.conf": "Conference League",
   "ita.coppa_italia": "Copa Italia",
+  "eng.fa": "FA Cup",
+  "esp.copa_del_rey": "Copa del Rey",
+  "ger.dfb_pokal": "DFB-Pokal",
 };
 
 let cachedResults: { timestamp: number; matches: EvaluatedMatchResult[] } | null = null;

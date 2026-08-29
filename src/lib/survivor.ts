@@ -1,6 +1,8 @@
 import { supabase } from "./supabase";
 import { normalizeTeamName } from "./leagueConfig";
 
+import teamAliasesData from "@/data/teamAliases.json";
+
 export interface SurvivorTransferHistory {
   from_team: string;
   to_team: string;
@@ -12,7 +14,7 @@ export interface SurvivorTransferHistory {
 export interface TournamentSurvivor {
   id?: string;
   user_id: string;
-  tournament_slug: string; // 'champions' | 'europa' | 'conference' | 'coppaitalia'
+  tournament_slug: string; // 'champions' | 'europa' | 'conference' | 'coppaitalia' | 'facup' | 'copadelrey' | 'dfbpokal'
   active_team_id: string;
   active_team_name?: string;
   active_team_logo?: string;
@@ -23,8 +25,21 @@ export interface TournamentSurvivor {
   updated_at?: string;
 }
 
-export const KNOCKOUT_CUP_SLUGS = ["champions", "europa", "conference", "coppaitalia"] as const;
+export const KNOCKOUT_CUP_SLUGS = [
+  "champions",
+  "europa",
+  "conference",
+  "coppaitalia",
+  "facup",
+  "copadelrey",
+  "dfbpokal",
+] as const;
 export type KnockoutCupSlug = (typeof KNOCKOUT_CUP_SLUGS)[number];
+
+export function getTeamCups(teamName: string): string[] {
+  const cups = (teamAliasesData as { teamCups?: Record<string, string[]> }).teamCups?.[teamName];
+  return Array.isArray(cups) ? cups : [];
+}
 
 export function isKnockoutCup(leagueOrSlug: string): boolean {
   const norm = leagueOrSlug.toLowerCase().trim();
@@ -34,10 +49,17 @@ export function isKnockoutCup(leagueOrSlug: string): boolean {
     norm.includes("conference") ||
     norm.includes("copa italia") ||
     norm.includes("coppa") ||
+    norm.includes("fa cup") ||
+    norm.includes("copa del rey") ||
+    norm.includes("dfb-pokal") ||
+    norm.includes("dfb pokal") ||
     norm === "cl" ||
     norm === "el" ||
     norm === "ecl" ||
-    norm === "ci"
+    norm === "ci" ||
+    norm === "facup" ||
+    norm === "copadelrey" ||
+    norm === "dfbpokal"
   );
 }
 

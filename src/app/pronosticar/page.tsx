@@ -12,14 +12,12 @@ import {
   normalizeTeamName,
   cleanTeamName,
   matchIdToUuid,
+  getKnockoutCupSlug,
 } from "@/lib/leagueConfig";
 import { getOfficialTeamMatches, getOfficialPlayersForTeams, FDMatch, findTeamId } from "@/lib/footballData";
 import officialFixtures from "@/data/officialFixtures.json";
 import {
   getUserCupSurvivors,
-  setInitialCupSurvivor,
-  isKnockoutCup,
-  KnockoutCupSlug,
   TournamentSurvivor,
 } from "@/lib/survivor";
 
@@ -60,22 +58,6 @@ interface TeamInfo {
   name: string;
   league: string;
   logo_url: string;
-}
-
-function getKnockoutCupSlug(league: string): KnockoutCupSlug | null {
-  if (!isKnockoutCup(league)) return null;
-  const norm = league.toLowerCase().trim();
-  if (norm.includes("champions") || norm === "cl") return "champions";
-  if (norm.includes("europa") || norm === "el") return "europa";
-  if (norm.includes("conference") || norm === "ecl") return "conference";
-  if (
-    norm.includes("copa italia") ||
-    norm.includes("coppa") ||
-    norm === "ci" ||
-    norm === "coppaitalia"
-  )
-    return "coppaitalia";
-  return null;
 }
 
 const positionRank = (pos: string) => {
@@ -141,9 +123,6 @@ export default function PronosticarPage() {
   const [predictions, setPredictions] = useState<Record<string, Prediction>>({});
   const [cupSurvivors, setCupSurvivors] = useState<Record<string, TournamentSurvivor>>({});
   const [availableTeams, setAvailableTeams] = useState<TeamInfo[]>([]);
-  const [selectedInitialTeam, setSelectedInitialTeam] = useState<Record<string, string>>({});
-  const [settingCupTeam, setSettingCupTeam] = useState<string | null>(null);
-  const [cupTeamSuccess, setCupTeamSuccess] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -428,39 +407,6 @@ export default function PronosticarPage() {
       isMounted = false;
     };
   }, [user, authLoading]);
-
-  const handleSetInitialCupTeam = async (cupSlug: KnockoutCupSlug, teamId: string) => {
-    if (!user || !teamId) return;
-    setSettingCupTeam(cupSlug);
-    setError("");
-
-    try {
-      const ok = await setInitialCupSurvivor(user.id, cupSlug, teamId);
-      if (ok) {
-        const updated = await getUserCupSurvivors(user.id);
-        setCupSurvivors(updated || {});
-        const chosenTeam = availableTeams.find((t) => t.id === teamId);
-        setCupTeamSuccess((prev) => ({
-          ...prev,
-          [cupSlug]: `¡Club ${chosenTeam?.name || ""} seleccionado como representante para esta copa!`,
-        }));
-        setTimeout(() => {
-          setCupTeamSuccess((prev) => {
-            const next = { ...prev };
-            delete next[cupSlug];
-            return next;
-          });
-        }, 4000);
-      } else {
-        setError("No se pudo registrar el club para la copa. Por favor, reintente.");
-      }
-    } catch (err) {
-      console.error("Error setting initial cup survivor:", err);
-      setError("Error al registrar el club para la copa");
-    } finally {
-      setSettingCupTeam(null);
-    }
-  };
 
   const getPlayersForTeam = (teamName: string) => {
     const norm = normalizeTeamName(teamName);
@@ -819,17 +765,6 @@ export default function PronosticarPage() {
                   .map((scorer, index) => ({ scorer, index }))
                   .filter((item) => item.scorer.team === "away");
 
-                const matchHomeTeamObj = availableTeams.find(
-                  (t) =>
-                    normalizeTeamName(t.name) === normalizeTeamName(match.home_team) ||
-                    cleanTeamName(t.name) === cleanTeamName(match.home_team)
-                );
-                const matchAwayTeamObj = availableTeams.find(
-                  (t) =>
-                    normalizeTeamName(t.name) === normalizeTeamName(match.away_team) ||
-                    cleanTeamName(t.name) === cleanTeamName(match.away_team)
-                );
-
                 return (
                   <div
                     key={match.id}
@@ -953,88 +888,12 @@ export default function PronosticarPage() {
                             </span>
                           </div>
                         ) : !hasActiveTeam ? (
-                          /* Select Initial Representative Club Banner */
-                          <div className="bg-navy-card/90 border border-gold/40 rounded-xl p-4 sm:p-5 shadow-lg">
-                            <div className="flex items-start gap-3 mb-3">
-                              <span className="text-2xl shrink-0">🏆</span>
-                              <div>
-                                <h3 className="text-xs sm:text-sm font-bold text-gold flex items-center gap-1.5">
-                                  <span>Elegí tu club representante para {match.league}</span>
-                                </h3>
-                                <p className="text-xs text-silver mt-1 leading-relaxed">
-                                  Tu equipo base (<strong className="text-white">{userTeam.name}</strong>) no disputa este partido o copa. Seleccioná tu club representante para participar en el modo supervivencia.
-                                </p>
-                              </div>
-                            </div>
-
-                            {cupTeamSuccess[cupSlug] && (
-                              <div className="bg-green/15 border border-green/30 text-green text-xs font-semibold px-3 py-2 rounded-lg mb-3">
-                                {cupTeamSuccess[cupSlug]}
-                              </div>
-                            )}
-
-                            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
-                              <select
-                                value={selectedInitialTeam[cupSlug] || ""}
-                                onChange={(e) =>
-                                  setSelectedInitialTeam((prev) => ({
-                                    ...prev,
-                                    [cupSlug]: e.target.value,
-                                  }))
-                                }
-                                className="flex-1 bg-navy-mid border border-border rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-gold truncate"
-                              >
-                                <option value="">Seleccionar club representante...</option>
-                                {(matchHomeTeamObj || matchAwayTeamObj) && (
-                                  <optgroup label="Clubes de este partido">
-                                    {matchHomeTeamObj && (
-                                      <option value={matchHomeTeamObj.id}>
-                                        {matchHomeTeamObj.name} ({match.league})
-                                      </option>
-                                    )}
-                                    {matchAwayTeamObj && (
-                                      <option value={matchAwayTeamObj.id}>
-                                        {matchAwayTeamObj.name} ({match.league})
-                                      </option>
-                                    )}
-                                  </optgroup>
-                                )}
-                                {Object.entries(
-                                  availableTeams.reduce<Record<string, TeamInfo[]>>((acc, t) => {
-                                    if (!acc[t.league]) acc[t.league] = [];
-                                    acc[t.league].push(t);
-                                    return acc;
-                                  }, {})
-                                ).map(([league, leagueTeams]) => (
-                                  <optgroup key={league} label={league}>
-                                    {leagueTeams.map((t) => (
-                                      <option key={t.id} value={t.id}>
-                                        {t.name}
-                                      </option>
-                                    ))}
-                                  </optgroup>
-                                ))}
-                              </select>
-
-                              <button
-                                type="button"
-                                disabled={!selectedInitialTeam[cupSlug] || settingCupTeam === cupSlug}
-                                onClick={() => handleSetInitialCupTeam(cupSlug, selectedInitialTeam[cupSlug])}
-                                className="bg-gold text-navy-black font-bold px-4 py-2 rounded-xl text-xs hover:bg-gold-light transition-colors disabled:opacity-50 shrink-0 cursor-pointer disabled:cursor-not-allowed flex items-center justify-center gap-1.5 shadow-md"
-                              >
-                                {settingCupTeam === cupSlug ? (
-                                  <>
-                                    <span className="w-3 h-3 border-2 border-navy-black border-t-transparent rounded-full animate-spin" />
-                                    <span>Guardando...</span>
-                                  </>
-                                ) : (
-                                  <>
-                                    <span>✓</span>
-                                    <span>Confirmar Club</span>
-                                  </>
-                                )}
-                              </button>
-                            </div>
+                          /* No Cup Participation Notice */
+                          <div className="bg-navy-card/90 border border-border/80 rounded-xl p-3 sm:p-4 flex items-center gap-3">
+                            <span className="text-xl shrink-0">ℹ️</span>
+                            <p className="text-xs text-silver leading-relaxed">
+                              Tu equipo base (<strong className="text-white">{userTeam.name}</strong>) no participa en <strong className="text-white">{match.league}</strong>. Solo los participantes con equipos clasificados compiten en esta copa.
+                            </p>
                           </div>
                         ) : (
                           /* Active Survivor Banner */

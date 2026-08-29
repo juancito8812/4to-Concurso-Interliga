@@ -106,18 +106,111 @@ export function parseCompetitionName(compNameOrCode?: string): string | null {
   return null;
 }
 
+export function isKnockoutCup(leagueOrSlug: string): boolean {
+  const norm = leagueOrSlug.toLowerCase().trim();
+  return (
+    norm.includes("champions") ||
+    norm.includes("europa") ||
+    norm.includes("conference") ||
+    norm.includes("copa italia") ||
+    norm.includes("coppa") ||
+    norm.includes("fa cup") ||
+    norm.includes("copa del rey") ||
+    norm.includes("dfb-pokal") ||
+    norm.includes("dfb pokal") ||
+    norm === "cl" ||
+    norm === "el" ||
+    norm === "ecl" ||
+    norm === "ci" ||
+    norm === "facup" ||
+    norm === "copadelrey" ||
+    norm === "dfbpokal"
+  );
+}
+
+export function getKnockoutCupSlug(league: string): string | null {
+  if (!league) return null;
+  const lower = league.toLowerCase();
+  if (lower.includes("champions")) return "champions";
+  if (lower.includes("europa") && !lower.includes("conference")) return "europa";
+  if (lower.includes("conference")) return "conference";
+  if (lower.includes("copa italia") || lower.includes("coppa")) return "coppaitalia";
+  if (lower.includes("fa cup")) return "facup";
+  if (lower.includes("copa del rey")) return "copadelrey";
+  if (lower.includes("dfb-pokal") || lower.includes("dfb pokal")) return "dfbpokal";
+  return null;
+}
+
+/**
+ * Returns the real round name for a knockout match based on date and tournament.
+ */
+export function getKnockoutRound(matchDate: string, tournamentSlug: string): string {
+  if (!matchDate) return "Ronda KO";
+  const d = new Date(matchDate);
+  if (isNaN(d.getTime())) return "Ronda KO";
+
+  const month = d.getUTCMonth() + 1;
+  const day = d.getUTCDate();
+
+  if (tournamentSlug === "champions" || tournamentSlug === "europa" || tournamentSlug === "conference") {
+    if (month === 2 || (month === 3 && day <= 20)) return "Octavos de Final";
+    if ((month === 3 && day > 20) || (month === 4 && day <= 20)) return "Cuartos de Final";
+    if ((month === 4 && day > 20) || (month === 5 && day <= 15)) return "Semifinal";
+    if (month >= 5) return "Final";
+  }
+  if (tournamentSlug === "coppaitalia") {
+    if (month === 12 || month === 1) return "Octavos de Final";
+    if (month === 2) return "Cuartos de Final";
+    if (month === 3 || month === 4) return "Semifinal";
+    if (month >= 5) return "Final";
+  }
+  if (tournamentSlug === "facup") {
+    if (month === 1) return "Tercera Ronda";
+    if (month === 2 && day <= 15) return "Cuarta Ronda";
+    if ((month === 2 && day > 15) || (month === 3 && day <= 10)) return "Quinta Ronda";
+    if ((month === 3 && day > 10) || (month === 4 && day <= 15)) return "Cuartos de Final";
+    if ((month === 4 && day > 15) || (month === 5 && day <= 10)) return "Semifinal";
+    if (month >= 5) return "Final";
+  }
+  if (tournamentSlug === "copadelrey") {
+    if (month === 12) return "Dieciseisavos";
+    if (month === 1) return "Octavos de Final";
+    if (month === 2) return "Cuartos de Final";
+    if (month === 3 || (month === 4 && day <= 15)) return "Semifinal";
+    if (month >= 4) return "Final";
+  }
+  if (tournamentSlug === "dfbpokal") {
+    if (month <= 8) return "Primera Ronda";
+    if (month === 9 || month === 10 || month === 11) return "Segunda Ronda";
+    if (month === 12 || month === 1) return "Octavos de Final";
+    if (month === 2) return "Cuartos de Final";
+    if (month === 3 || month === 4 || (month === 5 && day <= 15)) return "Semifinal";
+    if (month >= 5) return "Final";
+  }
+  return "Ronda KO";
+}
+
 /**
  * True when a match belongs to the contest's official knockout pairings
- * (or Copa Italia), used by the Survivor mechanic. Group-stage cup games are NOT knockout.
+ * (or domestic cups), used by the Survivor mechanic. Group-stage cup games are NOT knockout.
  */
 export function isKnockoutMatch(homeTeam: string, awayTeam: string, league?: string): boolean {
+  // 1. Verificar por pares pre-enumerados (Champions, Europa, Conference)
   const cHome = cleanTeamName(homeTeam);
   const cAway = cleanTeamName(awayTeam);
   const pairKey = `${cHome}-${cAway}`;
   if (conferenceKeyPairs.has(pairKey)) return true;
   if (europaKeyPairs.has(pairKey)) return true;
   if (championsKeyPairs.has(pairKey)) return true;
-  if (league && league.toLowerCase().includes("copa italia")) return true;
+
+  // 2. Verificar por nombre de competición (copas domésticas)
+  if (league) {
+    const lower = league.toLowerCase();
+    if (lower.includes("copa italia") || lower.includes("coppa")) return true;
+    if (lower.includes("fa cup")) return true;
+    if (lower.includes("copa del rey")) return true;
+    if (lower.includes("dfb-pokal") || lower.includes("dfb pokal")) return true;
+  }
   return false;
 }
 

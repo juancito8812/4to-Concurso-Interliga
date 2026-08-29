@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 
+import { getTeamCups, setInitialCupSurvivor, KnockoutCupSlug } from "@/lib/survivor";
+
 interface Team {
   id: string;
   name: string;
@@ -95,7 +97,20 @@ export default function TeamSelectorCard() {
     }
 
     const team = teams.find((t) => t.id === teamId);
-    if (team) setSelectedTeam(team);
+    if (team) {
+      setSelectedTeam(team);
+      // Auto-subscribe to all KO cups where this team participates
+      const cups = getTeamCups(team.name);
+      for (const cupSlug of cups) {
+        try {
+          await setInitialCupSurvivor(user.id, cupSlug as KnockoutCupSlug, teamId);
+        } catch (e) {
+          console.warn(`Error auto-subscribing to cup ${cupSlug}:`, e);
+        }
+      }
+      console.log(`Auto-suscrito a ${cups.length} copas KO:`, cups);
+    }
+
     setTeamLocked(true);
     setSuccess(true);
     setLoading(false);

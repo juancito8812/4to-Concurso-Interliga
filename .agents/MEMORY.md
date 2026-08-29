@@ -36,11 +36,20 @@
 ## Estado Actual
 
 - **Branch:** `main` (desplegado a GitHub Pages).
-- **Build Status:** `npm run build` y `npm run lint` pasando con 0 errores (19 rutas estáticas generadas).
+- **Build Status:** `npm run build` y `npm run lint` pasando con 0 errores (20 rutas estáticas generadas).
 - **Deploy:** GitHub Actions activado con éxito en `main`.
-- **Automatización:** 100% desatendida (cliente en vivo + cron de fondo + persistencia Supabase vía RPC).
+- **Automatización & Superviviente:** 100% desatendida en 7 copas knockout (Champions, Europa, Conference, Copa Italia, FA Cup, Copa del Rey, DFB-Pokal) con auto-suscripción, resolución de rondas reales y ganador por penales.
 
 ## Cambios Recientes
+
+- **2026-08-28** — **Fix Sistema KO + 3 Copas Nuevas (FA Cup, Copa del Rey, DFB-Pokal)**:
+  - **Expandido a 7 Competiciones KO**: Champions, Europa, Conference, Copa Italia, FA Cup (`facup`), Copa del Rey (`copadelrey`), DFB-Pokal (`dfbpokal`).
+  - **Suscripción Automática (`src/data/teamAliases.json`)**: Agregado `teamCups` mapeando los 89 clubes oficiales a sus copas KO correspondientes. Al seleccionar club en `TeamSelectorCard.tsx`, se auto-suscribe a todas sus copas en segundo plano.
+  - **Detección Automática de Partidos KO (`isKnockoutMatch`)**: Detección por nombre de liga para copas domésticas y pares pre-enumerados para torneos UEFA.
+  - **Resolución de Ganador en Empates/Penales (`resolvePenaltyWinner`)**: Consulta el summary de ESPN para extraer el ganador en definiciones por penales.
+  - **Nombre de Ronda Real (`getKnockoutRound`)**: Mapeo temporal preciso según fecha del partido y copa (ej. "Dieciseisavos", "Octavos de Final", "Cuartos de Final", "Semifinal", "Final", "Tercera Ronda", etc.).
+  - **UI / UX en `/pronosticar`**: Eliminado el dropdown de selección manual de copas. Si el club del usuario participa, muestra el badge activo; si no participa, muestra aviso informativo claro.
+  - **Tests Unitarios (`scripts/test-survivor.js`)**: 12/12 tests pasando con 100% de éxito.
 
 - **2026-08-28** — **Cadena de puntuación 100% automática end-to-end (revisión integral)**:
   - **Fix crítico de IDs aleatorios** en `src/lib/footballData.ts`: `Number(uuid) || Math.random()` hacía que cada carga de página generara un id distinto y ningún pronóstico nuevo pudiera puntuarse. Ahora se preserva el id canónico del fixture y el path de API en vivo re-mapea el fixture por nombres.

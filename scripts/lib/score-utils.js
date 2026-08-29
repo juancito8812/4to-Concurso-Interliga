@@ -44,6 +44,105 @@ const knockoutPairs = {
   champions: new Set(teamData.knockoutPairs?.champions || []),
 };
 
+function isKnockoutCup(leagueOrSlug) {
+  const norm = String(leagueOrSlug || "").toLowerCase().trim();
+  return (
+    norm.includes("champions") ||
+    norm.includes("europa") ||
+    norm.includes("conference") ||
+    norm.includes("copa italia") ||
+    norm.includes("coppa") ||
+    norm.includes("fa cup") ||
+    norm.includes("copa del rey") ||
+    norm.includes("dfb-pokal") ||
+    norm.includes("dfb pokal") ||
+    norm === "cl" ||
+    norm === "el" ||
+    norm === "ecl" ||
+    norm === "ci" ||
+    norm === "facup" ||
+    norm === "copadelrey" ||
+    norm === "dfbpokal"
+  );
+}
+
+function getKnockoutCupSlug(league) {
+  if (!league) return null;
+  const lower = String(league).toLowerCase();
+  if (lower.includes("champions")) return "champions";
+  if (lower.includes("europa") && !lower.includes("conference")) return "europa";
+  if (lower.includes("conference")) return "conference";
+  if (lower.includes("copa italia") || lower.includes("coppa")) return "coppaitalia";
+  if (lower.includes("fa cup")) return "facup";
+  if (lower.includes("copa del rey")) return "copadelrey";
+  if (lower.includes("dfb-pokal") || lower.includes("dfb pokal")) return "dfbpokal";
+  return null;
+}
+
+function getEspnSlug(league) {
+  if (!league) return null;
+  const lower = String(league).toLowerCase();
+  if (lower.includes("fa cup")) return "eng.fa";
+  if (lower.includes("copa del rey")) return "esp.copa_del_rey";
+  if (lower.includes("dfb-pokal") || lower.includes("dfb pokal")) return "ger.dfb_pokal";
+  if (lower.includes("copa italia") || lower.includes("coppa")) return "ita.coppa_italia";
+  if (lower.includes("champions")) return "uefa.champions";
+  if (lower.includes("europa") && !lower.includes("conference")) return "uefa.europa";
+  if (lower.includes("conference")) return "uefa.europa.conf";
+  return null;
+}
+
+function getKnockoutRound(matchDate, tournamentSlug) {
+  if (!matchDate) return "Ronda KO";
+  const d = new Date(matchDate);
+  if (isNaN(d.getTime())) return "Ronda KO";
+
+  const month = d.getUTCMonth() + 1;
+  const day = d.getUTCDate();
+
+  if (tournamentSlug === "champions" || tournamentSlug === "europa" || tournamentSlug === "conference") {
+    if (month === 2 || (month === 3 && day <= 20)) return "Octavos de Final";
+    if ((month === 3 && day > 20) || (month === 4 && day <= 20)) return "Cuartos de Final";
+    if ((month === 4 && day > 20) || (month === 5 && day <= 15)) return "Semifinal";
+    if (month >= 5) return "Final";
+  }
+  if (tournamentSlug === "coppaitalia") {
+    if (month === 12 || month === 1) return "Octavos de Final";
+    if (month === 2) return "Cuartos de Final";
+    if (month === 3 || month === 4) return "Semifinal";
+    if (month >= 5) return "Final";
+  }
+  if (tournamentSlug === "facup") {
+    if (month === 1) return "Tercera Ronda";
+    if (month === 2 && day <= 15) return "Cuarta Ronda";
+    if ((month === 2 && day > 15) || (month === 3 && day <= 10)) return "Quinta Ronda";
+    if ((month === 3 && day > 10) || (month === 4 && day <= 15)) return "Cuartos de Final";
+    if ((month === 4 && day > 15) || (month === 5 && day <= 10)) return "Semifinal";
+    if (month >= 5) return "Final";
+  }
+  if (tournamentSlug === "copadelrey") {
+    if (month === 12) return "Dieciseisavos";
+    if (month === 1) return "Octavos de Final";
+    if (month === 2) return "Cuartos de Final";
+    if (month === 3 || (month === 4 && day <= 15)) return "Semifinal";
+    if (month >= 4) return "Final";
+  }
+  if (tournamentSlug === "dfbpokal") {
+    if (month <= 8) return "Primera Ronda";
+    if (month === 9 || month === 10 || month === 11) return "Segunda Ronda";
+    if (month === 12 || month === 1) return "Octavos de Final";
+    if (month === 2) return "Cuartos de Final";
+    if (month === 3 || month === 4 || (month === 5 && day <= 15)) return "Semifinal";
+    if (month >= 5) return "Final";
+  }
+  return "Ronda KO";
+}
+
+function getTeamCups(teamName) {
+  const cups = teamData.teamCups?.[teamName];
+  return Array.isArray(cups) ? cups : [];
+}
+
 function isKnockoutMatch(homeTeam, awayTeam, league) {
   const cHome = cleanTeamName(homeTeam);
   const cAway = cleanTeamName(awayTeam);
@@ -51,7 +150,13 @@ function isKnockoutMatch(homeTeam, awayTeam, league) {
   if (knockoutPairs.conference.has(pairKey)) return true;
   if (knockoutPairs.europa.has(pairKey)) return true;
   if (knockoutPairs.champions.has(pairKey)) return true;
-  if (league && String(league).toLowerCase().includes("copa italia")) return true;
+  if (league) {
+    const lower = String(league).toLowerCase();
+    if (lower.includes("copa italia") || lower.includes("coppa")) return true;
+    if (lower.includes("fa cup")) return true;
+    if (lower.includes("copa del rey")) return true;
+    if (lower.includes("dfb-pokal") || lower.includes("dfb pokal")) return true;
+  }
   return false;
 }
 
@@ -255,5 +360,10 @@ module.exports = {
   arePlayersMatching,
   calculateScore,
   isKnockoutMatch,
+  isKnockoutCup,
+  getKnockoutCupSlug,
+  getEspnSlug,
+  getKnockoutRound,
+  getTeamCups,
   evaluateSurvivorProgression,
 };

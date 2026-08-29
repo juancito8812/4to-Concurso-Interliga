@@ -5,7 +5,16 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
-import { leagueColors, leagueLogos, normalizeMatchLeague, normalizeTeamName, matchIdToUuid, isKnockoutMatch } from "@/lib/leagueConfig";
+import {
+  leagueColors,
+  leagueLogos,
+  normalizeMatchLeague,
+  normalizeTeamName,
+  matchIdToUuid,
+  isKnockoutMatch,
+  getKnockoutCupSlug,
+  getKnockoutRound,
+} from "@/lib/leagueConfig";
 import { calculateScore } from "@/lib/scoring";
 import {
   getUserCupSurvivors,
@@ -433,13 +442,14 @@ export default function MisPronosticosPage() {
 
         const actualWinner = match.result_home > match.result_away ? match.home_team : match.away_team;
         const predictedWinner = pred.home_score > pred.away_score ? match.home_team : match.away_team;
+        const roundName = getKnockoutRound(match.match_date, cupSlug);
 
         const outcome = evaluateSurvivorProgression({
           activeTeamName,
           predictedWinner,
           actualWinner,
           matchId: pred.match_id,
-          roundName: "Ronda KO",
+          roundName,
           matchDate: match.match_date,
           currentHistory: sur.history,
         });
@@ -456,7 +466,7 @@ export default function MisPronosticosPage() {
           if (teamRow) activeTeamId = teamRow.id;
         }
 
-        const eliminatedAtRound = outcome.newStatus === "ELIMINATED" ? "Ronda KO" : null;
+        const eliminatedAtRound = outcome.newStatus === "ELIMINATED" ? roundName : null;
         const ok = await updateCupSurvivor({
           userId: user.id,
           tournamentSlug: cupSlug,
