@@ -16,10 +16,10 @@ const domesticLeagues = [
 ];
 
 const domesticCups = [
-  { name: "FA Cup", logo: `${basePath}/logos/facup.svg`, slug: "facup" },
   { name: "Copa del Rey", logo: `${basePath}/logos/copadelrey.svg`, slug: "copadelrey" },
-  { name: "DFB-Pokal", logo: `${basePath}/logos/dfbpokal.svg`, slug: "dfbpokal" },
+  { name: "FA Cup", logo: `${basePath}/logos/facup.svg`, slug: "facup" },
   { name: "Copa Italia", logo: `${basePath}/logos/coppaitalia.svg`, slug: "coppaitalia" },
+  { name: "DFB-Pokal", logo: `${basePath}/logos/dfbpokal.svg`, slug: "dfbpokal" },
 ];
 
 const europeanCups = [
