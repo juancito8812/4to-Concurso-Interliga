@@ -322,6 +322,16 @@ El cron `scripts/auto-sync-espn-results.js` escribe vía REST directo con `SUPAB
 
 ## ❓ 8. Preguntas Frecuentes y Diagnóstico
 
+### ¿Qué hacer si NADIE puede iniciar sesión (login colgado)?
+- **Síntoma:** `/auth/v1/token` y `/auth/v1/health` se cuelgan (timeout), pero `/rest/v1/*` responde 200 y el proyecto figura `ACTIVE_HEALTHY`.
+- **Diagnóstico:** el servicio de autenticación (GoTrue) del proyecto quedó colgado (incidente conocido de Supabase: *"401 errors due to JWT rejections"*, ago-2026).
+- **Solución:** reiniciar el proyecto con la Management API (equivalente a dashboard → Settings → General → Restart project):
+  ```bash
+  curl -X POST "https://api.supabase.com/v1/projects/ilkndkqcmxvlufxaugog/restart" \
+    -H "Authorization: Bearer <MANAGEMENT_API_TOKEN>"
+  ```
+- **Verificación:** esperar ~1 min y comprobar `GET /auth/v1/health` (debe responder 200 con `"version":"v2.x"`). Probar login con `POST /auth/v1/token?grant_type=password`.
+
 ### ¿Qué hacer si en el Ranking los usuarios solo se ven a sí mismos?
 - Ejecutar la sección de políticas RLS del archivo `supabase/schema.sql` en el SQL Editor para garantizar que `profiles` tenga la política `Public profiles are viewable by everyone`.
 

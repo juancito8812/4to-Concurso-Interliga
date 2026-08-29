@@ -5,8 +5,8 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 8 ligas/copas europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`, workflow `.github/workflows/deploy.yml`).
-- **Última sesión:** 2026-08-29 (verificación integral 100% + gestión de rebotes de email)
-- **Versión de memoria:** 1.9
+- **Última sesión:** 2026-08-29 (incidente de auth caído resuelto con restart del proyecto)
+- **Versión de memoria:** 2.0
 
 ## Arquitectura
 
@@ -20,6 +20,11 @@
 
 ## Decisiones Clave
 
+- **2026-08-29** — **Incidente: nadie podía logearse — Auth de Supabase caído (resuelto con restart)**:
+  - **Síntoma:** todos los endpoints de auth (`/auth/v1/token`, `/health`, `/settings`) se colgaban (timeout 20-25s) mientras REST (base de datos) respondía 200. El proyecto figuraba `ACTIVE_HEALTHY` en la Management API.
+  - **Causa raíz:** incidente del lado de Supabase (status.supabase.com): *"401 errors due to JWT rejections"* (14-28/08, rollout gradual) + *"Increased response times for requests"* (27-29/08). El servicio GoTrue (auth) de este proyecto quedó colgado; Supabase recomendó reiniciar el proyecto.
+  - **Solución:** `POST https://api.supabase.com/v1/projects/ilkndkqcmxvlufxaugog/restart` con el token de Management API (`sbp_...` en `~/.config/opencode/opencode.jsonc`) → HTTP 200. Tras ~1 min de arranque: `/auth/v1/health` → 200 (GoTrue v2.195.0), login real → 200 en 1.7s, app web verificada end-to-end (login bybit6118 → landing con sesión).
+  - **Para el futuro (cualquier agente):** si los endpoints auth cuelgan pero REST responde → reiniciar el proyecto con el comando anterior (o dashboard → Settings → General → Restart project). NO tocar código.
 - **2026-08-29** — **Verificación integral de toda la lógica (100% funcional)**:
   - **Code review completo (skill `anthropic-code-review`, 5 agentes paralelos)**: 12 issues corregidos — (1) CRÍTICO: `/pronosticar` trataba TODA la UCL como KO (fase liga bloqueada para eliminados, etiquetas falsas) → ahora usa `isKnockoutMatch` con fecha en la UI y el save gate; (2) sync-db `on_conflict=name` → `name,league` (constraint real); (3) sync-db ya no pisa resultados persistidos (upsert sin columnas de resultado); (4) remap de predicciones con clave `league|home|away` (Torino-Monza existe en Coppa Y Serie A); (5) aliases `paphos*` → Pafos FC; (6) `getKnockoutRound` formato 2026/27 (feb=Dieciseisavos/playoff, mar=Octavos, abr=Cuartos, abr-may=Semifinal, may=Final); (7) matchday UCL real por agrupación de fechas (8×18, no 2-fechas-por-jornada); (8-11) comentarios y docs; (12) plantillas completadas con rosters ESPN reales (`sync-player-squads.js`): 30/32 equipos (Shakhtar/SABAH sin fuente en ESPN/football-data — 403, NO se inventó nada). **Nota:** un bug de sync-db (select sin `league`) eliminó las 4 predicciones de la DB durante una corrida → restauradas desde `officialEvaluatedPredictions.json` (con scorers) y el script corregido.
   - **Verificación de puntos de todos los usuarios**: Milanarg 5 pts confirmados por el motor real (`calculateScore`: +3 resultado, +1 diferencia, +1 goleador Ramos); bybit6118 3 predicciones de Man Utd (partidos futuros → pendientes); resto 0 pts. Cron ejecutado local contra producción: evaluó y persistió correctamente (idempotente).
@@ -43,13 +48,24 @@
 
 ## Estado Actual
 
-- **Branch:** `main` (desplegado a GitHub Pages).
-- **Build Status:** `npm run build` y `npm run lint` pasando con 0 errores (20 rutas estáticas generadas).
+- **Branch:** `main` (desplegado a GitHub Pages, último deploy `aa5164c` exitoso).
+- **Build Status:** `npm run build` y `npx tsc --noEmit` pasando con 0 errores (23 rutas estáticas generadas).
 - **Deploy:** GitHub Actions activado con éxito en `main`.
 - **Automatización & Superviviente:** 100% desatendida en 7 copas knockout (Champions, Europa, Conference, Copa Italia, FA Cup, Copa del Rey, DFB-Pokal) con auto-suscripción, resolución de rondas reales y ganador por penales.
+- **Calendario:** 1.618 partidos reales (0 fabricados) — 4 ligas football-data API + UCL fase liga y Copa Italia ESPN. UEL/UECL (sorteo 28/8) y rondas KO pendientes de publicación por las fuentes.
+- **Plantillas:** 4.749 jugadores (30/32 equipos completados con rosters ESPN; Shakhtar/SABAH sin fuente — 403).
+- **Base de datos:** `matches` 1.618, `teams` 179 reales, 11 usuarios (8 confirmados, 3 sin confirmar: Sergio, Leyver Estrada, g3610811).
+- **Puntos:** Milanarg 5 pts (verificado con el motor de scoring y el cron); JR_DT 3 predicciones Man Utd pendientes; bybit6118 predicción Aston Villa-Arsenal (1-2 + Saka) guardada.
+- **Incidentes gestionados:** rebotes de email (cuentas de testing eliminadas: `test.debug.*` y Perico) y auth caído (restart del proyecto, resuelto).
 
 ## Cambios Recientes
 
+- **2026-08-29** — **Documentación actualizada al estado real 2026/27 (`aa5164c`)**:
+  - `AGENTS.md`/`README.md`/`CLAUDE.md`: calendario 1.618 reales, plantillas 4.749, 6 scripts nuevos (sync-official-fixtures, validate-fixtures, sync-db, sync-player-squads, rebuild-eval-preds, verify-logic), detección KO europea por fecha (feb-ago), rondas formato 2026/27, filtro TBD en pronosticar.
+  - `DISASTER_RECOVERY_AND_SCHEMA.md`: pasos post-restauración con scripts de sync, diagnóstico (179 equipos / 1.618 partidos).
+  - `supabase/schema.sql`: nota sobre semilla histórica de equipos (los reales se sincronizan con sync-db).
+  - `scripts/verify-logic.js` (nuevo, 43 checks) commiteado.
+  - `officialEvaluatedPredictions.json`: pointsDetails de Milanarg + predicción nueva de bybit6118 (Aston Villa 1-2 Arsenal + Saka, commiteada por el cron remoto — conflicto de rebase resuelto combinando ambas).
 - **2026-08-28** — **Fix Sistema KO + 3 Copas Nuevas (FA Cup, Copa del Rey, DFB-Pokal)**:
   - **Expandido a 7 Competiciones KO**: Champions, Europa, Conference, Copa Italia, FA Cup (`facup`), Copa del Rey (`copadelrey`), DFB-Pokal (`dfbpokal`).
   - **Suscripción Automática (`src/data/teamAliases.json`)**: Agregado `teamCups` mapeando los 89 clubes oficiales a sus copas KO correspondientes. Al seleccionar club en `TeamSelectorCard.tsx`, se auto-suscribe a todas sus copas en segundo plano.

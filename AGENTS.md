@@ -155,3 +155,15 @@ SUPABASE_SERVICE_ROLE_KEY=tu-service-key   # SOLO en GitHub Secrets y .env.local
 - Push a `main` triggers GitHub Actions → build → deploy a GitHub Pages
 - `npm run build` genera `./out/` con archivos estáticos
 - `.env.local` NO se commitea (está en .gitignore)
+
+### Operaciones y Troubleshooting
+
+- **Auth caído (nadie puede loguearse):** Si los endpoints `/auth/v1/*` se cuelgan (timeout) pero REST (`/rest/v1/*`) responde 200 y el proyecto figura `ACTIVE_HEALTHY`, el servicio GoTrue está colgado. Reiniciar el proyecto (NO tocar código):
+  ```bash
+  curl -X POST "https://api.supabase.com/v1/projects/ilkndkqcmxvlufxaugog/restart" \
+    -H "Authorization: Bearer <MANAGEMENT_API_TOKEN>"
+  ```
+  El token `sbp_...` está en `~/.config/opencode/opencode.jsonc`. Verificar luego con `GET /auth/v1/health` (debe devolver 200 con `"version":"v2.x"`). Incidente de referencia: status.supabase.com "401 errors due to JWT rejections" (ago-2026).
+- **Rebotes de email de Supabase:** Las cuentas sin confirmar (`confirmed_at IS NULL` en `auth.users`) son las que generan rebotes (el email de confirmación se envía a direcciones que pueden no existir). Para diagnosticar: `SELECT email, created_at FROM auth.users WHERE confirmed_at IS NULL`. Eliminar cuentas de testing/obsoletas con DELETE de `profiles` + `auth.users` (verificar dependencias primero). NO probar registros con emails inventados.
+- **Estado del proyecto:** `supabase_get_project` (MCP) → `status: ACTIVE_HEALTHY`. La DB se puede consultar con `supabase_execute_sql` (MCP, service role implícito).
+- **Verificación rápida de salud:** `node scripts/verify-logic.js` (43 checks), `node scripts/validate-fixtures.js` (0 errores), `node scripts/test-survivor.js` (12/12), `npx tsc --noEmit`, `npm run build`.

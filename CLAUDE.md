@@ -99,3 +99,11 @@ node scripts/verify-logic.js     # 43 checks de lógica de negocio
 node scripts/validate-fixtures.js # Validación cruzada del calendario contra fuentes reales
 SUPABASE_SERVICE_ROLE_KEY=<key> node scripts/auto-sync-espn-results.js  # Cron local
 ```
+
+## Troubleshooting rápido
+
+- **Login caído / auth colgado** (endpoints `/auth/v1/*` sin responder pero REST OK): reiniciar el proyecto vía Management API:
+  `curl -X POST "https://api.supabase.com/v1/projects/ilkndkqcmxvlufxaugog/restart" -H "Authorization: Bearer <sbp_token_en_opencode.jsonc>"`
+  Ver detalles en `AGENTS.md` → Operaciones y Troubleshooting.
+- **Rebotes de email de Supabase:** son las cuentas sin confirmar (`auth.users.confirmed_at IS NULL`). Eliminar las de testing; NO registrar emails inventados.
+- **Verificación de salud:** `node scripts/verify-logic.js`, `node scripts/validate-fixtures.js`, `node scripts/test-survivor.js`, `npx tsc --noEmit`, `npm run build`.
