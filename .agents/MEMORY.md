@@ -62,7 +62,7 @@
   - **Fix CORS football-data en GitHub Pages** (`e065e2e`): `getOfficialTeamMatches` saltea la API en vivo fuera de localhost (la API solo permite localhost); se usa el bundle oficial. 0 errores en consola del teléfono.
   - **Fix recuperación de contraseña** (`22aed96`): creada la página `/actualizar-contrasena` (el redirect del email apuntaba a una ruta inexistente → 404).
   - **Fix reset de participación**: `handleResetData` en `/perfil` ahora borra también `tournament_survivors`.
-  - ⚠️ Acción manual pendiente: agregar `https://juancito8812.github.io/4to-Concurso-Interliga/actualizar-contrasena` a Redirect URLs en Supabase Dashboard (Authentication → URL Configuration) para que el link del correo de recuperación funcione.
+  - ⚠️ ~~Acción manual pendiente~~ **RESUELTO**: URL agregada a Supabase vía Management API — `site_url` corregido a `https://juancito8812.github.io/4to-Concurso-Interliga` (antes apuntaba a localhost:3000, rompiendo los links de confirmación de registro en producción) y `uri_allow_list` con localhost + sitio + `/actualizar-contrasena`.
 
 - **2026-08-28**:
   - Implementación del sistema 100% automático de resultados y puntuación (ESPN API + GitHub Actions Cron).
