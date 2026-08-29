@@ -20,7 +20,7 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 
 ## Archivos importantes
 
-- `src/app/page.tsx` — Landing principal con selector de equipo y podio de premios
+- `src/app/page.tsx` — Landing principal con selector de equipo, logos de ligas en 3 filas (nacionales, copas nacionales pareadas liga→copa, europeas centradas) y podio de premios
 - `src/app/globals.css` — Paleta de colores (navy + gold)
 - `src/app/Navbar.tsx` — Navbar con nombre de usuario dinámico y dropdown
 - `src/app/Footer.tsx` — Footer completo

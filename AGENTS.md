@@ -16,7 +16,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ### Estructura
 
-- **Landing principal:** `src/app/page.tsx` — Componente `"use client"` con podio de premios, reglas y selector de club.
+- **Landing principal:** `src/app/page.tsx` — Componente `"use client"` con podio de premios, reglas y selector de club. Logos de ligas organizados en 3 filas: ligas nacionales, copas nacionales (parejas liga→copa), copas europeas centradas.
 - **Tablas de posiciones:** `src/app/tabla/[league]/TablaLigaClient.tsx` — Clasificación, goleadores y partidos vía ESPN API con fallback.
 - **Pronósticos:** `src/app/pronosticar/page.tsx` — Ventana de 3 partidos estilo TV broadcast, panel de goleadores en 2 columnas y stepper de goles.
 - **Historial de Pronósticos:** `src/app/mis-pronosticos/page.tsx` — Historial con desglose de puntos (+3 resultado, +2 marcador exacto, +1/+2 goleador).
