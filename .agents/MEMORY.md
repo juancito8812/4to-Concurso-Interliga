@@ -64,6 +64,12 @@
   - **Fix reset de participación**: `handleResetData` en `/perfil` ahora borra también `tournament_survivors`.
   - ⚠️ ~~Acción manual pendiente~~ **RESUELTO**: URL agregada a Supabase vía Management API — `site_url` corregido a `https://juancito8812.github.io/4to-Concurso-Interliga` (antes apuntaba a localhost:3000, rompiendo los links de confirmación de registro en producción) y `uri_allow_list` con localhost + sitio + `/actualizar-contrasena`.
 
+- **2026-08-28** — **Optimización + endurecimiento de Supabase con las skills oficiales** (`npx skills add supabase/agent-skills` + `supabase-postgres-best-practices`):
+  - **🔴 Vulnerabilidad cerrada**: los RPCs del cron (`update_match_results`, `update_prediction_points`, `update_survivors`, `upsert_fixture_matches`, `get_meta`, `set_meta`) eran `SECURITY DEFINER` ejecutables por cualquiera con la anon key pública → ataque simulado confirmado (HTTP 204 modificaba puntos). Se ELIMINARON; el cron ahora escribe con la **service role key** (secreto GitHub `SUPABASE_SERVICE_ROLE_KEY`) vía REST directo (bypass RLS). Puntos manipulados en la prueba restaurados (999 → 5).
+  - `search_path` fijo en `handle_new_user` y `delete_user_account` (WARN de advisors); `delete_user_account` solo para `authenticated`; `app_meta` sin grants para anon/authenticated (solo service role).
+  - **Advisors finales**: solo WARNs intencionales (rls_auto_enable interno de Supabase, delete_user_account para auth, INFO app_meta sin políticas) + leaked password protection (solo desde dashboard — pendiente manual).
+  - Cron verificado local con service key: evaluación OK, persistencia por PATCH por fila (corregido bug de batch con valores distintos), hash de calendario leído con service key.
+
 - **2026-08-28**:
   - Implementación del sistema 100% automático de resultados y puntuación (ESPN API + GitHub Actions Cron).
   - Algoritmo de emparejamiento inteligente de jugadores (`arePlayersMatching`) con normalización fonética y variantes de nombres.
