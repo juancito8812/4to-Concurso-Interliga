@@ -86,6 +86,26 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Gonçalo Ramos (+1 pt)"
+    ]
+  },
+  {
+    "id": "c23d0a74-f9c4-4703-a2ba-fef62eb003a9",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "bybit6118",
+    "match_id": "00000000-0000-4000-8000-000000088dad",
+    "home_score": 1,
+    "away_score": 2,
+    "scorers": [
+      {
+        "player_name": "Bukayo Saka",
+        "goals": 1,
+        "team": "away"
+      }
     ]
   }
 ]
