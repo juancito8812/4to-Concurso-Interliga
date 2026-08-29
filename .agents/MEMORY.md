@@ -5,8 +5,8 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 8 ligas/copas europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`, workflow `.github/workflows/deploy.yml`).
-- **Última sesión:** 2026-08-28 19:45
-- **Versión de memoria:** 1.5
+- **Última sesión:** 2026-08-28 20:30
+- **Versión de memoria:** 1.6
 
 ## Arquitectura
 
@@ -54,6 +54,15 @@
   - **Backfill de 3 días** en el cron (ESPN `?dates=YYYYMMDD,..`): no se pierden resultados si el job falla un día.
   - **Persistencia verificada end-to-end**: predicción de Milanarg (AC Milan 3-0 vs Venezia) = 5 PTS en JSON + Supabase (predictions, prediction_scorers, points vía RPC).
   - **Menores**: guard de nulos en merge Supabase, `AbortSignal.timeout` en fetcher ESPN, `goals ?? 0` en scoring, `npm ci` eliminado del workflow cron, loader JSON arreglado en `scripts/test-survivor.js` (7/7 tests OK).
+
+- **2026-08-28** — **Auditoría en teléfono vía ADB/CDP + revisión a fondo de toda la lógica**:
+  - Verificación en vivo (Samsung A12): landing, ranking (Milanarg 5 pts correctos), tabla LaLiga, login/registro/perfil, mis-pronosticos, pronosticar — todo OK.
+  - **Fix "Invalid Date"** (`1920fd8`): fechas vacías muestran "Fecha por confirmar" en mis-pronosticos (aplica a todos los usuarios).
+  - **Fix doble conteo de goleadores** (`15bca32`): ranking/mis-pronosticos deduplican scorers por (jugador, goles, equipo) cuando el pronóstico existe en JSON y Supabase a la vez.
+  - **Fix CORS football-data en GitHub Pages** (`e065e2e`): `getOfficialTeamMatches` saltea la API en vivo fuera de localhost (la API solo permite localhost); se usa el bundle oficial. 0 errores en consola del teléfono.
+  - **Fix recuperación de contraseña** (`22aed96`): creada la página `/actualizar-contrasena` (el redirect del email apuntaba a una ruta inexistente → 404).
+  - **Fix reset de participación**: `handleResetData` en `/perfil` ahora borra también `tournament_survivors`.
+  - ⚠️ Acción manual pendiente: agregar `https://juancito8812.github.io/4to-Concurso-Interliga/actualizar-contrasena` a Redirect URLs en Supabase Dashboard (Authentication → URL Configuration) para que el link del correo de recuperación funcione.
 
 - **2026-08-28**:
   - Implementación del sistema 100% automático de resultados y puntuación (ESPN API + GitHub Actions Cron).
