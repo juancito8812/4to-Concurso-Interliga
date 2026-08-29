@@ -133,7 +133,7 @@ ON public.profiles FOR INSERT WITH CHECK (auth.uid() = user_id);
 
 DROP POLICY IF EXISTS "Users can update their own profile" ON public.profiles;
 CREATE POLICY "Users can update their own profile" 
-ON public.profiles FOR UPDATE USING (auth.uid() = user_id);
+ON public.profiles FOR UPDATE USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
 
 -- B. Predictions RLS
 ALTER TABLE public.predictions ENABLE ROW LEVEL SECURITY;
@@ -147,7 +147,7 @@ ON public.predictions FOR INSERT WITH CHECK (auth.uid() = user_id);
 
 DROP POLICY IF EXISTS "Users can update own predictions" ON public.predictions;
 CREATE POLICY "Users can update own predictions" 
-ON public.predictions FOR UPDATE USING (auth.uid() = user_id);
+ON public.predictions FOR UPDATE USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
 
 -- C. Prediction Scorers RLS
 ALTER TABLE public.prediction_scorers ENABLE ROW LEVEL SECURITY;
@@ -155,9 +155,29 @@ DROP POLICY IF EXISTS "Scorers are viewable by everyone" ON public.prediction_sc
 CREATE POLICY "Scorers are viewable by everyone" 
 ON public.prediction_scorers FOR SELECT USING (true);
 
+-- Escritura solo para el dueño del pronóstico (IDOR fix); lectura pública para ranking/cron
 DROP POLICY IF EXISTS "Users can manage prediction scorers" ON public.prediction_scorers;
-CREATE POLICY "Users can manage prediction scorers" 
-ON public.prediction_scorers FOR ALL USING (true) WITH CHECK (true);
+
+CREATE POLICY "Users can insert own prediction scorers"
+ON public.prediction_scorers FOR INSERT
+WITH CHECK (
+  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = auth.uid())
+);
+
+CREATE POLICY "Users can update own prediction scorers"
+ON public.prediction_scorers FOR UPDATE
+USING (
+  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = auth.uid())
+)
+WITH CHECK (
+  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = auth.uid())
+);
+
+CREATE POLICY "Users can delete own prediction scorers"
+ON public.prediction_scorers FOR DELETE
+USING (
+  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = auth.uid())
+);
 
 -- D. Teams, Players, Matches RLS (Lectura Pública)
 ALTER TABLE public.teams ENABLE ROW LEVEL SECURITY;

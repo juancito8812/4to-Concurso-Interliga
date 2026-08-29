@@ -5,8 +5,8 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 8 ligas/copas europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`, workflow `.github/workflows/deploy.yml`).
-- **Última sesión:** 2026-08-28 20:30
-- **Versión de memoria:** 1.6
+- **Última sesión:** 2026-08-29 00:50
+- **Versión de memoria:** 1.7
 
 ## Arquitectura
 
@@ -64,7 +64,13 @@
   - **Fix reset de participación**: `handleResetData` en `/perfil` ahora borra también `tournament_survivors`.
   - ⚠️ ~~Acción manual pendiente~~ **RESUELTO**: URL agregada a Supabase vía Management API — `site_url` corregido a `https://juancito8812.github.io/4to-Concurso-Interliga` (antes apuntaba a localhost:3000, rompiendo los links de confirmación de registro en producción) y `uri_allow_list` con localhost + sitio + `/actualizar-contrasena`.
 
-- **2026-08-28** — **Optimización + endurecimiento de Supabase con las skills oficiales** (`npx skills add supabase/agent-skills` + `supabase-postgres-best-practices`):
+- **2026-08-29** — **Code review de seguridad (skill `security-review`) + documentación completa**:
+  - **IDOR fix en `prediction_scorers`**: la política era `FOR ALL USING (true) WITH CHECK (true)` — cualquier usuario autenticado podía modificar goleadores de cualquier pronóstico. Ahora la escritura valida ownership (`EXISTS` sobre predictions) y la lectura sigue siendo pública (ranking/cron). Verificado: INSERT anon → 401.
+  - **WITH CHECK agregado** a los UPDATE de `predictions` y `profiles` (evita reasignar `user_id`).
+  - Sin hallazgos de XSS/inyección: no hay `innerHTML`/`dangerouslySetInnerHTML`/`eval`; las URLs de logos son server-controlled; el bundle no contiene secretos (solo la anon key pública por diseño).
+  - Documentación actualizada: `README.md`, `AGENTS.md`, `CLAUDE.md`, `DISASTER_RECOVERY_AND_SCHEMA.md`, `.agents/MEMORY.md`.
+
+- **2026-08-29** — **Optimización + endurecimiento de Supabase con las skills oficiales** (`npx skills add supabase/agent-skills` + `supabase-postgres-best-practices`):
   - **🔴 Vulnerabilidad cerrada**: los RPCs del cron (`update_match_results`, `update_prediction_points`, `update_survivors`, `upsert_fixture_matches`, `get_meta`, `set_meta`) eran `SECURITY DEFINER` ejecutables por cualquiera con la anon key pública → ataque simulado confirmado (HTTP 204 modificaba puntos). Se ELIMINARON; el cron ahora escribe con la **service role key** (secreto GitHub `SUPABASE_SERVICE_ROLE_KEY`) vía REST directo (bypass RLS). Puntos manipulados en la prueba restaurados (999 → 5).
   - `search_path` fijo en `handle_new_user` y `delete_user_account` (WARN de advisors); `delete_user_account` solo para `authenticated`; `app_meta` sin grants para anon/authenticated (solo service role).
   - **Advisors finales**: solo WARNs intencionales (rls_auto_enable interno de Supabase, delete_user_account para auth, INFO app_meta sin políticas) + leaked password protection (solo desde dashboard — pendiente manual).

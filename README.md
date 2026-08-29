@@ -38,26 +38,31 @@ src/
 │   ├── registro/page.tsx           # Registro con nombre de usuario obligatorio
 │   ├── login/page.tsx              # Inicio de sesión
 │   ├── olvide-contrasena/page.tsx  # Recuperación de clave por correo
+│   ├── actualizar-contrasena/page.tsx # Destino del email de recuperación (nueva clave)
 │   ├── perfil/page.tsx             # Edición de perfil, reinicio de datos y eliminación de cuenta
 │   ├── pronosticar/page.tsx        # Pronósticos estilo transmisión TV con ventana de 3 partidos
 │   ├── mis-pronosticos/page.tsx    # Historial de predicciones, estado y desglose de puntos
 │   └── ranking/page.tsx            # Ranking general en vivo, Podio de Honor y búsqueda
 ├── data/
-│   ├── officialFixtures.json       # Calendario oficial 2026/27 (1.842 partidos)
+│   ├── officialFixtures.json       # Calendario oficial 2026/27 (1.842 partidos, IDs canónicos únicos)
+│   ├── teamAliases.json            # Fuente única de normalización (aliasMap, equipos canónicos, pares KO)
 │   ├── officialPlayers.json        # Plantillas oficiales 2026/27 (3.822 jugadores)
 │   ├── officialEvaluatedMatches.json # Resultados oficiales finalizados y goleadores reales
 │   └── officialEvaluatedPredictions.json # Pronósticos evaluados y sincronizados
 ├── lib/
 │   ├── supabase.ts                 # Cliente Supabase
 │   ├── survivor.ts                 # Motor de supervivencia y herencia de camisetas en copas KO
-│   ├── leagueConfig.ts             # Normalizador canónico de ligas, torneos y equipos
+│   ├── leagueConfig.ts             # Normalizador canónico de ligas, torneos y equipos (matchIdToUuid, isKnockoutMatch)
 │   ├── footballData.ts             # Cliente football-data.org + plantillas oficiales 2026/27
 │   ├── espnApi.ts                  # Cliente ESPN API para tablas de posiciones, goleadores y partidos
-│   └── scoring.ts                  # Motor de cálculo y auditoría de puntuación
+│   ├── espnResultsFetcher.ts       # Partidos finalizados ESPN en vivo para el cliente (caché 30s)
+│   └── scoring.ts                  # Motor de cálculo y auditoría de puntuación (+ matching fonético)
 ├── scripts/
+│   ├── auto-sync-espn-results.js   # Cron: ESPN → evaluación de puntos/survivors → Supabase (service key)
 │   ├── evaluate-matches.js         # Evaluador CLI de partidos concluidos y cálculo de puntos
 │   ├── assign-points.js            # Asignación y actualización directa de pronósticos y puntos
-│   └── test-survivor.js            # Suite de pruebas unitarias del sistema de superviviente
+│   ├── test-survivor.js            # Suite de pruebas unitarias del sistema de superviviente
+│   └── lib/score-utils.js          # Módulo compartido (normalización, ids canónicos, scoring, survivor)
 └── contexts/
     └── AuthContext.tsx             # Context de autenticación, perfil y gestión de cuenta
 ```
@@ -72,6 +77,7 @@ src/
 | `/registro` | Creación de cuenta con nombre de usuario | No |
 | `/login` | Inicio de sesión | No |
 | `/olvide-contrasena` | Solicitud de restablecimiento de contraseña | No |
+| `/actualizar-contrasena` | Destino del email de recuperación (nueva contraseña) | No |
 | `/perfil` | Edición de nombre de usuario, reinicio de club y eliminación de cuenta | **Sí** |
 | `/pronosticar` | Envío y re-edición de pronósticos en tarjetas estilo TV | **Sí** |
 | `/mis-pronosticos` | Historial de pronósticos enviados y desglose de puntos obtenidos | **Sí** |
@@ -150,7 +156,15 @@ Crear el archivo `.env.local` en la raíz con las siguientes credenciales:
 NEXT_PUBLIC_SUPABASE_URL=https://ilkndkqcmxvlufxaugog.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu-anon-key
 NEXT_PUBLIC_FOOTBALL_DATA_KEY=733c2feed2bf441292e9779c91af2e09
+SUPABASE_SERVICE_ROLE_KEY=tu-service-key   # SOLO local y GitHub Secrets (nunca en el bundle)
 ```
+
+## 🔒 Seguridad
+
+- **RLS en todas las tablas**: lectura pública para ranking/cron; escritura solo del dueño (`prediction_scorers` validado por ownership del pronóstico — IDOR fix).
+- **Sin RPCs públicos de escritura**: el cron usa la service role key vía GitHub Secrets; los intentos de manipulación con la anon key devuelven 404/401.
+- **Contraseñas**: mínimo 8 caracteres + mayúscula + número + símbolo (HIBP es solo Pro).
+- **Auth**: `site_url` y `uri_allow_list` configurados para GitHub Pages (confirmación de registro y recuperación de contraseña funcionando).
 
 ---
 
@@ -159,6 +173,26 @@ NEXT_PUBLIC_FOOTBALL_DATA_KEY=733c2feed2bf441292e9779c91af2e09
 El repositorio incluye el **script maestro DDL y semilla SQL** en [`supabase/schema.sql`](./supabase/schema.sql) y el manual completo de recuperación:
 
 👉 **[Consulte el Manual de Restauración Total (DISASTER_RECOVERY_AND_SCHEMA.md)](./DISASTER_RECOVERY_AND_SCHEMA.md)** para recrear el 100% de la base de datos, índices de rendimiento, triggers y políticas RLS en caso de migración o pérdida total.
+
+---
+
+## 🤖 Automatización 100% (Resultados → Puntos → Survivors → Ranking)
+
+### Cron cada 2 horas (`.github/workflows/auto-evaluate-matches.yml`)
+
+1. **Sincroniza ESPN** con backfill de 3 días (scoreboards de las 8 competiciones).
+2. **Actualiza `officialEvaluatedMatches.json`** con resultados y goleadores reales (IDs canónicos determinísticos).
+3. **Evalúa todos los pronósticos** (JSON + Supabase) aplicando las reglas oficiales de puntuación.
+4. **Persiste en Supabase** con la service role key (REST directo, bypass RLS):
+   - Resultados en `matches` (solo filas sin resultado).
+   - Puntos en `predictions`.
+   - Progresión de supervivencia en `tournament_survivors` (solo emparejamientos KO oficiales, idempotente).
+   - Calendario en `matches` solo cuando cambia `officialFixtures.json` (hash md5 en `app_meta`).
+
+### Cliente en vivo
+
+- `/ranking` y `/mis-pronosticos` recalculan puntos en el navegador con resultados ESPN en vivo (caché 30s) + fallback a los JSON oficiales.
+- El survivor también progresa client-side al abrir `/mis-pronosticos` (refuerzo idempotente).
 
 ---
 

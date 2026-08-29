@@ -85,10 +85,11 @@ El esquema relacional completo se encuentra en [`supabase/schema.sql`](./supabas
 | `teams` | Clubes oficiales de las ligas y torneos | `id` | - |
 | `profiles` | Perfiles de participantes y equipo favorito | `id` | `user_id` $\rightarrow$ `auth.users`, `team_id` $\rightarrow$ `teams` |
 | `players` | Plantillas de jugadores oficiales | `id` | - |
-| `matches` | Partidos oficiales, fechas y marcadores | `id` | - |
+| `matches` | Partidos oficiales, fechas y marcadores (IDs canónicos de fixtures) | `id` | - |
 | `predictions` | Pronósticos de marcadores por participante | `id` | `user_id` $\rightarrow$ `auth.users`, `match_id` $\rightarrow$ `matches` |
 | `prediction_scorers` | Goleadores pronosticados por partido | `id` | `prediction_id` $\rightarrow$ `predictions` |
 | `tournament_survivors` | Supervivencia y herencia de equipo en torneos KO | `id` | `user_id` $\rightarrow$ `auth.users`, `active_team_id` $\rightarrow$ `teams` |
+| `app_meta` | Clave-valor interna (hash del calendario para el cron) | `key` | - |
 
 ### Diagrama Entidad-Relación:
 
@@ -215,29 +216,38 @@ Todas las tablas cuentan con **Row Level Security (RLS)** para proteger los dato
    - `SELECT`: Público (`USING (true)`) para el cálculo de clasificaciones y puntos.
    - `INSERT` / `UPDATE`: Restringido al propio usuario (`auth.uid() = user_id`).
 3. **`prediction_scorers`:**
-   - `SELECT`: Público (`USING (true)`).
-   - `ALL`: Permitido para gestión de goleadores pronosticados.
+   - `SELECT`: Público (`USING (true)`) para el ranking y el cron.
+   - `INSERT` / `UPDATE` / `DELETE`: Solo el dueño del pronóstico (política con `EXISTS` sobre `predictions` — IDOR fix).
 4. **`teams`, `players`, `matches`:**
    - `SELECT`: Público (`USING (true)`).
 5. **`tournament_survivors`:**
    - `SELECT`: Público (`USING (true)`).
    - `ALL`: Restringido al propio usuario (`auth.uid() = user_id`).
+6. **`app_meta`:**
+   - Sin grants para `anon`/`authenticated` — solo accesible por la service role key (el cron la usa para el hash del calendario).
+
+> **Importante:** No existen RPCs públicos de escritura. El cron escribe en `matches`, `predictions`, `prediction_scorers` (no escribe), `tournament_survivors` y `app_meta` con la **service role key** vía REST directo (bypass RLS). Cualquier intento de escritura con la anon key desde el cliente es rechazado por RLS.
 
 ---
 
 ## 🚀 5. Optimizaciones para el Plan Free de Supabase
 
-Para garantizar un rendimiento ultra-rápido y costo $0 con **200+ usuarios concurrentes**:
+Para garantizar un rendimiento ultra-rápido y costo $0:
 
 1. **Índices B-Tree Estratégicos:**
    - `idx_profiles_user_id`, `idx_profiles_team_id`
    - `idx_predictions_user_match` (Índice compuesto en `user_id, match_id`)
    - `idx_matches_date`, `idx_matches_home`, `idx_matches_away`
    - `idx_tournament_survivors_user`, `idx_tournament_survivors_slug`
-2. **Caché en Cliente (25s TTL):**
+2. **Caché en Cliente (60s TTL):**
    - El ranking utiliza caché en memoria para evitar saturar la base de datos con peticiones repetitivas.
 3. **Zero DB Reads en Plantillas:**
    - 3.822 jugadores pre-cargados en bundle en memoria (`officialPlayers.json`).
+4. **Cron liviano (~2MB/mes de egress):**
+   - El sync del calendario (1.842 fixtures) solo corre cuando cambia `officialFixtures.json` (hash md5 en `app_meta`).
+   - La persistencia de resultados usa los IDs canónicos directos (sin descargar la tabla `matches` completa en cada corrida).
+5. **Mantenimiento de actividad:**
+   - El cron cada 2h mantiene el proyecto despierto (el plan Free pausa tras 7 días sin actividad).
 
 ---
 
@@ -257,14 +267,18 @@ En el panel de Supabase $\rightarrow$ **Authentication**:
 
 ---
 
-## 🛠️ 7. Funciones RPC Automatizadas
+## 🛠️ 7. Funciones y Escrituras Automatizadas
 
 ### Eliminación Completa de Cuenta (`delete_user_account`):
-Ejecuta la purga en cascada de predicciones, goleadores, perfil y elimina la fila de `auth.users`, liberando el email de forma inmediata:
+Ejecuta la purga en cascada de predicciones, goleadores, tournament_survivors, perfil y elimina la fila de `auth.users`, liberando el email de forma inmediata. Solo ejecutable por usuarios autenticados (`GRANT EXECUTE TO authenticated`):
 
 ```sql
 CREATE OR REPLACE FUNCTION public.delete_user_account()
-RETURNS void AS $$
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
 DECLARE
   v_user_id uuid;
 BEGIN
@@ -282,8 +296,20 @@ BEGIN
   DELETE FROM public.profiles WHERE user_id = v_user_id;
   DELETE FROM auth.users WHERE id = v_user_id;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$;
 ```
+
+### Escrituras del Cron (service role key, NO RPCs públicos):
+El cron `scripts/auto-sync-espn-results.js` escribe vía REST directo con `SUPABASE_SERVICE_ROLE_KEY` (GitHub Secret):
+
+| Operación | Endpoint REST |
+|---|---|
+| Upsert de calendario (solo si cambió el hash) | `POST /rest/v1/matches?on_conflict=id` + `app_meta` |
+| Resultados de partidos (solo filas sin resultado) | `PATCH /rest/v1/matches?id=eq.<id>` |
+| Puntos de pronósticos | `PATCH /rest/v1/predictions?id=eq.<id>` |
+| Progresión de survivors | `PATCH /rest/v1/tournament_survivors?id=eq.<id>` |
+
+> **Seguridad:** Los RPCs públicos de escritura (`update_match_results`, `update_prediction_points`, etc.) fueron ELIMINADOS porque cualquier cliente con la anon key podía manipular puntos (vulnerabilidad verificada y cerrada).
 
 ---
 

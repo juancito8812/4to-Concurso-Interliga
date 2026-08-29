@@ -38,7 +38,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `/registro` | `src/app/registro/page.tsx` | Crear cuenta con nombre de usuario |
 | `/login` | `src/app/login/page.tsx` | Iniciar sesión |
 | `/olvide-contrasena` | `src/app/olvide-contrasena/page.tsx` | Recuperar contraseña |
-| `/perfil` | `src/app/perfil/page.tsx` | Editar perfil, reiniciar datos y eliminar cuenta (requiere auth) |
+| `/actualizar-contrasena` | `src/app/actualizar-contrasena/page.tsx` | Destino del email de recuperación (nueva contraseña) |
+| `/perfil` | `src/app/perfil/page.tsx` | Editar perfil, reiniciar datos (limpia survivors) y eliminar cuenta (requiere auth) |
 | `/pronosticar` | `src/app/pronosticar/page.tsx` | Hacer pronósticos con ventana rodante de 3 partidos (requiere auth) |
 | `/mis-pronosticos` | `src/app/mis-pronosticos/page.tsx` | Historial de pronósticos y puntos (requiere auth) |
 | `/ranking` | `src/app/ranking/page.tsx` | Tabla de posiciones general y Podio de Honor en vivo |
@@ -52,17 +53,21 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `src/app/Footer.tsx` | Footer con ligas, navegación, reglas, créditos |
 | `src/app/TeamSelectorCard.tsx` | Selección y bloqueo de club en landing |
 | `src/app/CompetitionStatusCard.tsx` | Estado de competición (VIVO/KO) |
-| `src/lib/leagueConfig.ts` | Colores, logos, normalización de competiciones (`normalizeMatchLeague`) y mapeo de nombres de equipos (`normalizeTeamName`) |
+| `src/lib/leagueConfig.ts` | Colores, logos, normalización de competiciones (`normalizeMatchLeague`), mapeo de nombres de equipos (`normalizeTeamName`), `matchIdToUuid` e `isKnockoutMatch` |
 | `src/lib/survivor.ts` | Lógica de supervivencia en copas KO (`evaluateSurvivorProgression`), consultas y estado de transferencias (`getUserCupSurvivors`, `setInitialCupSurvivor`, `updateCupSurvivor`) |
-| `src/lib/footballData.ts` | `getOfficialTeamMatches`, `getOfficialPlayersForTeams` (API + fallback de fixtures y 3.822 jugadores) |
+| `src/lib/footballData.ts` | `getOfficialTeamMatches`, `getOfficialPlayersForTeams` (API + fallback de fixtures y 3.822 jugadores; en GitHub Pages saltea la API por CORS) |
 | `src/lib/espnApi.ts` | Cliente ESPN API para tablas de posiciones, goleadores y partidos |
-| `src/lib/scoring.ts` | Motor de cálculo de puntajes del concurso |
+| `src/lib/espnResultsFetcher.ts` | Partidos finalizados ESPN en vivo para el cliente (caché 30s, `AbortSignal.timeout(10s)`) |
+| `src/lib/scoring.ts` | Motor de cálculo de puntajes del concurso (+ `arePlayersMatching` fonético) |
+| `src/data/teamAliases.json` | Fuente única: aliasMap de equipos, canonicalDbTeams y knockoutPairs (consumido por TS y scripts) |
+| `scripts/lib/score-utils.js` | Módulo CJS compartido: `normalizeTeamName`, `matchIdToUuid`, `calculateScore`, `isKnockoutMatch`, `evaluateSurvivorProgression` |
+| `scripts/auto-sync-espn-results.js` | Cron: ESPN (backfill 3 días) → JSON evaluados → persistencia en Supabase con service role key |
 | `src/contexts/AuthContext.tsx` | Context de autenticación, perfil en vivo y `deleteAccount` |
 | `src/data/officialEvaluatedMatches.json` | Resultados oficiales finalizados y goleadores reales |
 | `src/data/officialEvaluatedPredictions.json` | Pronósticos evaluados y sincronizados |
 | `scripts/evaluate-matches.js` | Evaluador CLI de partidos y cálculo de puntuación |
 | `scripts/assign-points.js` | Asignación directa de puntos y pronósticos |
-| `supabase/schema.sql` | Esquema DDL maestro con 7 tablas, 15 índices, RLS, triggers y 89 equipos |
+| `supabase/schema.sql` | Esquema DDL maestro con 8 tablas, índices, RLS, triggers y 89 equipos |
 | `DISASTER_RECOVERY_AND_SCHEMA.md` | Manual maestro de restauración total ante desastres |
 
 ### Base de datos (Supabase PostgreSQL)
@@ -70,12 +75,14 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **profiles** — `user_id` (PK), `display_name`, `team_id` (FK → teams). Políticas RLS habilitan lectura pública para el ranking general.
 - **teams** — `id`, `name`, `league`, `logo_url` (89 equipos canónicos).
 - **players** — `name`, `team`, `league`, `position` (500+ jugadores en DB + 3.822 en bundle oficial).
-- **matches** — `id`, `home_team`, `away_team`, `match_date`, `league`, `result_home`, `result_away`.
-- **predictions** — `id`, `user_id`, `match_id`, `home_score`, `away_score`, `points` (UNIQUE user_id+match_id).
-- **prediction_scorers** — `prediction_id`, `player_name`, `goals`, `team`.
+- **matches** — `id` (IDs canónicos de fixtures), `home_team`, `away_team`, `match_date`, `league`, `result_home`, `result_away` (1.842 filas re-sembradas).
+- **predictions** — `id`, `user_id`, `match_id`, `home_score`, `away_score`, `points` (UNIQUE user_id+match_id; FK → matches con IDs canónicos).
+- **prediction_scorers** — `prediction_id`, `player_name`, `goals`, `team`. Escritura SOLO del dueño del pronóstico (IDOR fix).
 - **tournament_survivors** — `id` (PK), `user_id` (FK → auth.users), `tournament_slug` (TEXT: 'champions', 'europa', 'conference', 'coppaitalia'), `active_team_id` (FK → teams), `status` ('ALIVE' | 'ELIMINATED'), `eliminated_at_round` (TEXT), `history` (JSONB: lista de transferencias de camisetas), `created_at`, `updated_at`. RLS: SELECT público, ALL restringido al propio usuario (`auth.uid() = user_id`).
+- **app_meta** — tabla clave-valor (hash del calendario). Solo accesible por service role.
 - **Trigger `handle_new_user`:** Al crearse un registro en `auth.users`, se inserta automáticamente en `profiles`.
-- **RPC `delete_user_account`:** Función `SECURITY DEFINER` que purga predicciones, goleadores, tournament_survivors, perfiles y elimina la fila de `auth.users`, liberando el email inmediatamente.
+- **RPC `delete_user_account`:** Función `SECURITY DEFINER` (solo `authenticated`) que purga predicciones, goleadores, tournament_survivors, perfiles y elimina la fila de `auth.users`, liberando el email inmediatamente.
+- **Seguridad de escritura:** NO existen RPCs públicos de escritura. El cron (`scripts/auto-sync-espn-results.js`) escribe con la **service role key** (`SUPABASE_SERVICE_ROLE_KEY`, secreto de GitHub Actions) vía REST directo (bypass RLS).
 
 ### Paleta de colores (globals.css)
 
@@ -123,7 +130,16 @@ Copa Italia: #024494 (azul)
 NEXT_PUBLIC_SUPABASE_URL=https://ilkndkqcmxvlufxaugog.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu-anon-key
 NEXT_PUBLIC_FOOTBALL_DATA_KEY=733c2feed2bf441292e9779c91af2e09
+SUPABASE_SERVICE_ROLE_KEY=tu-service-key   # SOLO en GitHub Secrets y .env.local (nunca en el bundle)
 ```
+
+### Seguridad
+
+- La anon key es pública por diseño (va en el bundle del cliente); toda escritura sensible pasa por RLS o por la service role key del cron.
+- Política de contraseñas (plan Free): mínimo 8 caracteres + mayúscula + número + símbolo (HIBP es solo Pro).
+- `prediction_scorers`: escritura validada por ownership del pronóstico (EXISTS sobre predictions); lectura pública para ranking/cron.
+- `app_meta`: sin grants para anon/authenticated — solo service role.
+- No commitear `SUPABASE_SERVICE_ROLE_KEY` ni `.env.local` (gitignored).
 
 ### Deploy
 
