@@ -64,6 +64,7 @@ export default function PerfilPage() {
 
   const [deleting, setDeleting] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [deletePassword, setDeletePassword] = useState("");
 
   const handleResetData = async () => {
     if (!user) return;
@@ -123,8 +124,23 @@ export default function PerfilPage() {
 
   const handleDeleteAccount = async () => {
     if (!user) return;
+    if (!deletePassword) {
+      setError("Ingresá tu contraseña para confirmar la eliminación");
+      return;
+    }
     setDeleting(true);
     setError("");
+
+    // Re-authenticate before destructive action
+    const { error: authErr } = await supabase.auth.signInWithPassword({
+      email: user.email || "",
+      password: deletePassword,
+    });
+    if (authErr) {
+      setError("Contraseña incorrecta");
+      setDeleting(false);
+      return;
+    }
 
     const { error: delErr } = await deleteAccount();
     if (delErr) {
@@ -275,6 +291,16 @@ export default function PerfilPage() {
                 <p className="text-red-300 text-xs font-bold text-center leading-relaxed">
                   ⚠️ Esta acción es irreversible. Se eliminará tu cuenta y tu correo quedará libre. ¿Deseas continuar?
                 </p>
+                <div>
+                  <label className="block text-silver text-[11px] mb-1">Ingresá tu contraseña para confirmar</label>
+                  <input
+                    type="password"
+                    value={deletePassword}
+                    onChange={(e) => setDeletePassword(e.target.value)}
+                    placeholder="Tu contraseña actual"
+                    className="w-full bg-navy-card border border-red-500/30 rounded-lg px-3 py-2 text-white text-xs focus:outline-none focus:border-red-500 transition-colors"
+                  />
+                </div>
                 <div className="flex gap-2">
                   <button
                     type="button"

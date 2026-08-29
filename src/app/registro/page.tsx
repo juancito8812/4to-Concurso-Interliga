@@ -34,6 +34,11 @@ export default function RegistroPage() {
       return;
     }
 
+    if (!/(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9])/.test(password)) {
+      setError("La contraseña debe tener al menos una mayúscula, un número y un símbolo");
+      return;
+    }
+
     setLoading(true);
     const { error } = await signUp(email, password, trimmedUser);
     setLoading(false);

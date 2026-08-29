@@ -20,12 +20,12 @@ export const leagueLogos: Record<string, string> = {
   "Serie A": "/4to-Concurso-Interliga/logos/seriea.png",
   "Bundesliga": "/4to-Concurso-Interliga/logos/bundesliga.png",
   "Champions League": "/4to-Concurso-Interliga/logos/champions.png",
-  "Europa League": "/4to-Concurso-Interliga/logos/europa.png",
-  "Conference League": "/4to-Concurso-Interliga/logos/conference.png",
-  "Copa Italia": "/4to-Concurso-Interliga/logos/coppaitalia.png",
-  "FA Cup": "/4to-Concurso-Interliga/logos/facup.png",
-  "Copa del Rey": "/4to-Concurso-Interliga/logos/copadelrey.png",
-  "DFB-Pokal": "/4to-Concurso-Interliga/logos/dfbpokal.png",
+  "Europa League": "/4to-Concurso-Interliga/logos/europa.svg",
+  "Conference League": "/4to-Concurso-Interliga/logos/conference.svg",
+  "Copa Italia": "/4to-Concurso-Interliga/logos/coppaitalia.svg",
+  "FA Cup": "/4to-Concurso-Interliga/logos/facup.svg",
+  "Copa del Rey": "/4to-Concurso-Interliga/logos/copadelrey.svg",
+  "DFB-Pokal": "/4to-Concurso-Interliga/logos/dfbpokal.svg",
 };
 
 // Map league name to slug
@@ -248,13 +248,6 @@ export function normalizeMatchLeague(
   if (europaKeyPairs.has(pairKey)) return "Europa League";
   if (championsKeyPairs.has(pairKey)) return "Champions League";
 
-  if (matchDate) {
-    const d = new Date(matchDate);
-    if (d.getMonth() === 11 && d.getDate() >= 16 && d.getDate() <= 19) {
-      return "Copa Italia";
-    }
-  }
-
   if (parsedFromOriginal) return parsedFromOriginal;
 
   return originalLeague || "Premier League";
@@ -278,6 +271,8 @@ export function matchIdToUuid(id: string | number): string {
     hash = (hash << 5) - hash + str.charCodeAt(i);
     hash |= 0;
   }
-  const hex = Math.abs(hash).toString(16).padStart(12, "0").slice(-12);
-  return `00000000-0000-4000-8000-${hex}`;
+  // Use both hash and string length to reduce collision probability
+  const h1 = Math.abs(hash).toString(16).padStart(8, "0").slice(-8);
+  const h2 = Math.abs(hash * 0x45d9f3b + str.length).toString(16).padStart(4, "0").slice(-4);
+  return `00000000-0000-4000-8000-${h1}${h2}`;
 }

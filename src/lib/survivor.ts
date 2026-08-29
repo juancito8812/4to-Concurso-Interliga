@@ -41,27 +41,7 @@ export function getTeamCups(teamName: string): string[] {
   return Array.isArray(cups) ? cups : [];
 }
 
-export function isKnockoutCup(leagueOrSlug: string): boolean {
-  const norm = leagueOrSlug.toLowerCase().trim();
-  return (
-    norm.includes("champions") ||
-    norm.includes("europa") ||
-    norm.includes("conference") ||
-    norm.includes("copa italia") ||
-    norm.includes("coppa") ||
-    norm.includes("fa cup") ||
-    norm.includes("copa del rey") ||
-    norm.includes("dfb-pokal") ||
-    norm.includes("dfb pokal") ||
-    norm === "cl" ||
-    norm === "el" ||
-    norm === "ecl" ||
-    norm === "ci" ||
-    norm === "facup" ||
-    norm === "copadelrey" ||
-    norm === "dfbpokal"
-  );
-}
+export { isKnockoutCup } from "./leagueConfig";
 
 /**
  * Pure evaluation function for survivor progression in a knockout match.

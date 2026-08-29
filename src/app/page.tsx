@@ -14,12 +14,12 @@ const leagues = [
   { name: "Serie A", logo: `${basePath}/logos/seriea.png`, slug: "seriea" },
   { name: "Bundesliga", logo: `${basePath}/logos/bundesliga.png`, slug: "bundesliga" },
   { name: "Champions League", logo: `${basePath}/logos/champions.png`, slug: "champions" },
-  { name: "Europa League", logo: `${basePath}/logos/europa.png`, slug: "europa" },
-  { name: "Conference League", logo: `${basePath}/logos/conference.png`, slug: "conference" },
-  { name: "Copa Italia", logo: `${basePath}/logos/coppaitalia.png`, slug: "coppaitalia" },
-  { name: "FA Cup", logo: `${basePath}/logos/facup.png`, slug: "facup" },
-  { name: "Copa del Rey", logo: `${basePath}/logos/copadelrey.png`, slug: "copadelrey" },
-  { name: "DFB-Pokal", logo: `${basePath}/logos/dfbpokal.png`, slug: "dfbpokal" },
+  { name: "Europa League", logo: `${basePath}/logos/europa.svg`, slug: "europa" },
+  { name: "Conference League", logo: `${basePath}/logos/conference.svg`, slug: "conference" },
+  { name: "Copa Italia", logo: `${basePath}/logos/coppaitalia.svg`, slug: "coppaitalia" },
+  { name: "FA Cup", logo: `${basePath}/logos/facup.svg`, slug: "facup" },
+  { name: "Copa del Rey", logo: `${basePath}/logos/copadelrey.svg`, slug: "copadelrey" },
+  { name: "DFB-Pokal", logo: `${basePath}/logos/dfbpokal.svg`, slug: "dfbpokal" },
 ];
 
 const scoring = [

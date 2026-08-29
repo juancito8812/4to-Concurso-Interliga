@@ -35,6 +35,11 @@ export default function ActualizarContrasenaPage() {
       return;
     }
 
+    if (!/(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9])/.test(password)) {
+      setError("La contraseña debe tener al menos una mayúscula, un número y un símbolo");
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError("Las contraseñas no coinciden");
       return;

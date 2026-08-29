@@ -212,8 +212,9 @@ function matchIdToUuid(id) {
     hash = (hash << 5) - hash + str.charCodeAt(i);
     hash |= 0;
   }
-  const hex = Math.abs(hash).toString(16).padStart(12, "0").slice(-12);
-  return `00000000-0000-4000-8000-${hex}`;
+  const h1 = Math.abs(hash).toString(16).padStart(8, "0").slice(-8);
+  const h2 = Math.abs(hash * 0x45d9f3b + str.length).toString(16).padStart(4, "0").slice(-4);
+  return `00000000-0000-4000-8000-${h1}${h2}`;
 }
 
 function cleanPhonetic(str) {

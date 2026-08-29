@@ -138,15 +138,24 @@ export async function fetchLiveFinishedMatches(): Promise<EvaluatedMatchResult[]
           team: val.team,
         }));
 
-        // Match against official fixtures
-        const fixture = officialFixtures.find((f) => {
+        // Match against official fixtures — prefer exact match, fallback to substring
+        const homeLower = homeName.toLowerCase();
+        const awayLower = awayName.toLowerCase();
+        let fixture = officialFixtures.find((f) => {
           const hF = normalizeTeamName(f.home_team).toLowerCase();
           const aF = normalizeTeamName(f.away_team).toLowerCase();
-          return (
-            (hF.includes(homeName.toLowerCase()) || homeName.toLowerCase().includes(hF)) &&
-            (aF.includes(awayName.toLowerCase()) || awayName.toLowerCase().includes(aF))
-          );
+          return hF === homeLower && aF === awayLower;
         });
+        if (!fixture) {
+          fixture = officialFixtures.find((f) => {
+            const hF = normalizeTeamName(f.home_team).toLowerCase();
+            const aF = normalizeTeamName(f.away_team).toLowerCase();
+            return (
+              (hF.includes(homeLower) || homeLower.includes(hF)) &&
+              (aF.includes(awayLower) || awayLower.includes(aF))
+            );
+          });
+        }
 
         const matchId = fixture ? matchIdToUuid(fixture.id) : matchIdToUuid(ev.id || `${homeName}-${awayName}`);
 

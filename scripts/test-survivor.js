@@ -53,8 +53,8 @@ export async function load(url, context, nextLoad) {
 register('data:text/javascript;base64,' + Buffer.from(loaderHook).toString('base64'), pathToFileURL('./'));
 
 // Import domain modules dynamically after hook registration
-const { evaluateSurvivorProgression, isKnockoutCup } = await import('../src/lib/survivor.ts');
-const { normalizeTeamName, cleanTeamName } = await import('../src/lib/leagueConfig.ts');
+const { evaluateSurvivorProgression } = await import('../src/lib/survivor.ts');
+const { normalizeTeamName, cleanTeamName, isKnockoutCup } = await import('../src/lib/leagueConfig.ts');
 
 console.log('\n============================================================');
 console.log(' 🏆 KNOCKOUT SURVIVOR (HERENCIA DE EQUIPO) UNIT TEST SUITE');
@@ -351,16 +351,16 @@ runTest('Scenario 10: getKnockoutRound Date to Round Resolution', () => {
 // -------------------------------------------------------------
 runTest('Scenario 11: getTeamCups Auto-Subscription Mapping', () => {
   const rmCups = getTeamCups('Real Madrid');
-  assert.deepEqual(rmCups, ['champions', 'copadelrey', 'supercopaespana']);
+  assert.deepEqual(rmCups, ['champions', 'copadelrey']);
 
   const arsCups = getTeamCups('Arsenal');
   assert.deepEqual(arsCups, ['champions', 'facup']);
 
   const bayCups = getTeamCups('Bayern Munich');
-  assert.deepEqual(bayCups, ['champions', 'dfbpokal', 'dflsupercup']);
+  assert.deepEqual(bayCups, ['champions', 'dfbpokal']);
 
   const intCups = getTeamCups('Inter Milan');
-  assert.deepEqual(intCups, ['champions', 'coppaitalia', 'supercoppaitaliana']);
+  assert.deepEqual(intCups, ['champions', 'coppaitalia']);
 
   const sevCups = getTeamCups('Sevilla');
   assert.deepEqual(sevCups, ['copadelrey']);

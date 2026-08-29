@@ -68,7 +68,9 @@ CREATE TABLE IF NOT EXISTS public.predictions (
   points INTEGER DEFAULT NULL,
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now(),
-  CONSTRAINT predictions_user_id_match_id_key UNIQUE (user_id, match_id)
+  CONSTRAINT predictions_user_id_match_id_key UNIQUE (user_id, match_id),
+  CONSTRAINT predictions_home_score_check CHECK (home_score >= 0 AND home_score <= 20),
+  CONSTRAINT predictions_away_score_check CHECK (away_score >= 0 AND away_score <= 20)
 );
 
 -- F. PREDICTION_SCORERS (Goleadores pronosticados)

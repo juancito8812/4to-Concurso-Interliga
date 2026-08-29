@@ -27,12 +27,12 @@ interface CupConfig {
 
 const CUPS: CupConfig[] = [
   { slug: "champions", name: "Champions League", shortName: "Champions", logoUrl: "/4to-Concurso-Interliga/logos/champions.png", emoji: "⭐" },
-  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/4to-Concurso-Interliga/logos/europa.png", emoji: "🟠" },
-  { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/4to-Concurso-Interliga/logos/conference.png", emoji: "🟢" },
-  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/4to-Concurso-Interliga/logos/coppaitalia.png", emoji: "🇮🇹" },
-  { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/4to-Concurso-Interliga/logos/facup.png", emoji: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
-  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/4to-Concurso-Interliga/logos/copadelrey.png", emoji: "🇪🇸" },
-  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/4to-Concurso-Interliga/logos/dfbpokal.png", emoji: "🇩🇪" },
+  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/4to-Concurso-Interliga/logos/europa.svg", emoji: "🟠" },
+  { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/4to-Concurso-Interliga/logos/conference.svg", emoji: "🟢" },
+  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/4to-Concurso-Interliga/logos/coppaitalia.svg", emoji: "🇮🇹" },
+  { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/4to-Concurso-Interliga/logos/facup.svg", emoji: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
+  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/4to-Concurso-Interliga/logos/copadelrey.svg", emoji: "🇪🇸" },
+  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/4to-Concurso-Interliga/logos/dfbpokal.svg", emoji: "🇩🇪" },
 ];
 
 interface EffectiveStatus {

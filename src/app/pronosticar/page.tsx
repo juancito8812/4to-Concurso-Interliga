@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import {
@@ -13,6 +13,7 @@ import {
   cleanTeamName,
   matchIdToUuid,
   getKnockoutCupSlug,
+  getKnockoutRound,
 } from "@/lib/leagueConfig";
 import { getOfficialTeamMatches, getOfficialPlayersForTeams, FDMatch, findTeamId } from "@/lib/footballData";
 import officialFixtures from "@/data/officialFixtures.json";
@@ -127,6 +128,7 @@ export default function PronosticarPage() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const now = useSyncExternalStore(subscribeToTimer, getTimeSnapshot, getServerTimeSnapshot);
+  const lastSaveTime = useRef(0);
 
   const loadPlayersForMatches = async (teamNames: string[]) => {
     // 1. Get official updated 2026/27 squads (3,031 players instantly from memory bundle)
@@ -503,6 +505,13 @@ export default function PronosticarPage() {
   const handleSave = async () => {
     if (!user) return;
     const saveTimestamp = Date.now();
+    // Debounce: minimum 3 seconds between saves
+    if (saveTimestamp - lastSaveTime.current < 3000) {
+      setError("Esperá unos segundos antes de guardar de nuevo");
+      setTimeout(() => setError(""), 2000);
+      return;
+    }
+    lastSaveTime.current = saveTimestamp;
     setSaving(true);
     setError("");
     setSuccess(false);
@@ -563,26 +572,39 @@ export default function PronosticarPage() {
           if (!predError && predData) {
             updatedPreds[matchId].prediction_id = predData.id;
 
-            await supabase
-              .from("prediction_scorers")
-              .delete()
-              .eq("prediction_id", predData.id);
+            // Atomic-ish scorer update: delete old, then insert new with rollback on failure
+            const scorersToInsert = pred.scorers
+              ? pred.scorers
+                  .filter((s) => s.player_name.trim() !== "")
+                  .map((s) => ({
+                    prediction_id: predData.id,
+                    player_name: s.player_name,
+                    goals: s.goals,
+                    team: s.team,
+                  }))
+              : [];
 
-            if (pred.scorers && pred.scorers.length > 0) {
-              const scorersToInsert = pred.scorers
-                .filter((s) => s.player_name.trim() !== "")
-                .map((s) => ({
-                  prediction_id: predData.id,
-                  player_name: s.player_name,
-                  goals: s.goals,
-                  team: s.team,
-                }));
+            // Only delete if we have replacements, or if there are existing scorers to clean
+            if (scorersToInsert.length > 0) {
+              await supabase
+                .from("prediction_scorers")
+                .delete()
+                .eq("prediction_id", predData.id);
 
-              if (scorersToInsert.length > 0) {
-                await supabase
-                  .from("prediction_scorers")
-                  .insert(scorersToInsert);
+              const { error: insertErr } = await supabase
+                .from("prediction_scorers")
+                .insert(scorersToInsert);
+
+              // If insert failed, log but don't crash — data is in localStorage
+              if (insertErr) {
+                console.warn("Scorer insert failed (localStorage fallback):", insertErr.message);
               }
+            } else if (!pred.scorers || pred.scorers.length === 0) {
+              // No scorers at all — clean up any existing ones
+              await supabase
+                .from("prediction_scorers")
+                .delete()
+                .eq("prediction_id", predData.id);
             }
           }
         } catch (dbErr) {
@@ -719,6 +741,7 @@ export default function PronosticarPage() {
                 // Knockout Survivor Status Calculation
                 const cupSlug = getKnockoutCupSlug(match.league);
                 const isKnockout = !!cupSlug;
+                const knockoutRound = isKnockout && cupSlug ? getKnockoutRound(match.match_date, cupSlug) : null;
                 const cupRecord = cupSlug ? cupSurvivors[cupSlug] : undefined;
 
                 const isBaseTeamPlaying =
@@ -781,6 +804,14 @@ export default function PronosticarPage() {
                         >
                           {match.league}
                         </span>
+                        {knockoutRound && (
+                          <>
+                            <span className="text-border">·</span>
+                            <span className="text-gold text-[10px] font-bold uppercase tracking-wider">
+                              {knockoutRound}
+                            </span>
+                          </>
+                        )}
                         <span className="text-border">·</span>
                         <span className="text-silver text-xs font-medium whitespace-nowrap">
                           {getMatchDate(match.match_date)} · {getMatchTime(match.match_date)}

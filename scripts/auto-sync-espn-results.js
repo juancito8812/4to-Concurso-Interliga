@@ -237,7 +237,7 @@ async function evaluateSurvivors(finishedMatches) {
 
     const teamsByName = {};
     (teams || []).forEach((t) => {
-      teamsByName[t.name] = t.id;
+      teamsByName[normalizeTeamName(t.name)] = t.id;
     });
 
     const finishedMap = new Map();
@@ -279,12 +279,12 @@ async function evaluateSurvivors(finishedMatches) {
         if (mh !== an && ma !== an) continue;
         if (doneMatches.has(match.id)) continue;
 
+        if (p.home_score === p.away_score) continue;
         if (match.result_home === match.result_away) {
           const penWinner = await resolvePenaltyWinner(match.id, getEspnSlug(match.league));
           if (!penWinner) continue;
           match._penaltyWinner = penWinner;
         }
-        if (p.home_score === p.away_score) continue;
 
         const actualWinner = match._penaltyWinner || (match.result_home > match.result_away ? match.home_team : match.away_team);
         const predictedWinner = p.home_score > p.away_score ? match.home_team : match.away_team;
@@ -387,15 +387,24 @@ async function fetchSupabasePredictions() {
 
 function resolveMatchId(evId, fixture) {
   if (fixture) return matchIdToUuid(fixture.id);
-  return matchIdToUuid(evId || "unknown");
+  if (evId) return matchIdToUuid(evId);
+  return null;
 }
 
 function findFixture(officialFixtures, homeName, awayName) {
+  const hN = homeName.toLowerCase();
+  const aN = awayName.toLowerCase();
+  // Prefer exact normalized match
+  let found = officialFixtures.find((f) => {
+    const hF = normalizeTeamName(f.home_team).toLowerCase();
+    const aF = normalizeTeamName(f.away_team).toLowerCase();
+    return hF === hN && aF === aN;
+  });
+  if (found) return found;
+  // Fallback to bidirectional substring
   return officialFixtures.find((f) => {
     const hF = normalizeTeamName(f.home_team).toLowerCase();
     const aF = normalizeTeamName(f.away_team).toLowerCase();
-    const hN = homeName.toLowerCase();
-    const aN = awayName.toLowerCase();
     return (
       (hF.includes(hN) || hN.includes(hF)) &&
       (aF.includes(aN) || aN.includes(aF))
@@ -475,8 +484,8 @@ async function autoSync() {
         const homeName = normalizeTeamName(homeComp.team?.displayName || homeComp.team?.name || "");
         const awayName = normalizeTeamName(awayComp.team?.displayName || awayComp.team?.name || "");
 
-        const scoreHome = parseInt(homeComp.score, 10);
-        const scoreAway = parseInt(awayComp.score, 10);
+        const scoreHome = parseInt(homeComp.score || "0", 10);
+        const scoreAway = parseInt(awayComp.score || "0", 10);
 
         if (isNaN(scoreHome) || isNaN(scoreAway)) continue;
 
@@ -509,6 +518,7 @@ async function autoSync() {
         // Find match in official fixtures
         const fixture = findFixture(officialFixtures, homeName, awayName);
         const matchId = resolveMatchId(ev.id, fixture);
+        if (!matchId) continue;
 
         const matchObj = {
           id: matchId,

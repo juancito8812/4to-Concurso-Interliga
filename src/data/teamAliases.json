@@ -135,13 +135,46 @@
     "westhamunitedfc": "West Ham",
     "newcastle": "Newcastle",
     "newcastleunited": "Newcastle",
-    "newcastleunitedfc": "Newcastle"
+    "newcastleunitedfc": "Newcastle",
+    "afcajax": "AFC Ajax",
+    "ajax": "AFC Ajax",
+    "asmonaco": "AS Monaco FC",
+    "asmonacofc": "AS Monaco FC",
+    "monaco": "AS Monaco FC",
+    "fkbodoglimt": "FK Bodø/Glimt",
+    "bodoglimt": "FK Bodø/Glimt",
+    "fkkairat": "FK Kairat",
+    "kairat": "FK Kairat",
+    "galatasaray": "Galatasaray SK",
+    "galatasaraysk": "Galatasaray SK",
+    "olympiquemarseille": "Olympique de Marseille",
+    "marseille": "Olympique de Marseille",
+    "paeolympiakossfp": "PAE Olympiakos SFP",
+    "olympiakos": "PAE Olympiakos SFP",
+    "psv": "PSV",
+    "psveindhoven": "PSV",
+    "qarabag": "Qarabağ Ağdam FK",
+    "qarabagagdamfk": "Qarabağ Ağdam FK",
+    "royaleunionsaintgilloise": "Royale Union Saint-Gilloise",
+    "union": "Royale Union Saint-Gilloise",
+    "slaviapraha": "SK Slavia Praha",
+    "slavia": "SK Slavia Praha",
+    "sportingcp": "Sporting Clube de Portugal",
+    "sporting": "Sporting Clube de Portugal",
+    "fckobenhavn": "FC København",
+    "fcckobenhavn": "FC København",
+    "kobenhavn": "FC København",
+    "copenhagen": "FC København",
+    "paphos": "Paphos FC",
+    "paphosfc": "Paphos FC"
   },
   "canonicalDbTeams": [
+    "AFC Ajax",
     "AC Milan",
     "Alavés",
     "Almería",
     "Arsenal",
+    "AS Monaco FC",
     "Aston Villa",
     "Atalanta",
     "Athletic Bilbao",
@@ -173,10 +206,14 @@
     "Empoli",
     "Espanyol",
     "Everton",
+    "FC København",
     "Fiorentina",
+    "FK Bodø/Glimt",
+    "FK Kairat",
     "Freiburg",
     "Frosinone",
     "Fulham",
+    "Galatasaray SK",
     "Genk",
     "Genoa",
     "Getafe",
@@ -202,12 +239,17 @@
     "Napoli",
     "Newcastle",
     "Nott. Forest",
+    "Olympique de Marseille",
     "Olympique Lyon",
     "Osasuna",
+    "PAE Olympiakos SFP",
     "PAOK",
     "Paris Saint-Germain",
     "Parma",
+    "Paphos FC",
     "Porto",
+    "PSV",
+    "Qarabağ Ağdam FK",
     "RB Leipzig",
     "Rayo Vallecano",
     "Real Betis",
@@ -215,10 +257,13 @@
     "Real Sociedad",
     "Real Valladolid",
     "Roma",
+    "Royale Union Saint-Gilloise",
     "Salernitana",
     "Sassuolo",
     "Sevilla",
+    "SK Slavia Praha",
     "Southampton",
+    "Sporting Clube de Portugal",
     "Stuttgart",
     "Torino",
     "Tottenham",
@@ -231,7 +276,35 @@
     "Werder Bremen",
     "West Ham",
     "Wolfsburg",
-    "Wolves"
+    "Wolves",
+    "Hamburger SV",
+    "SC Paderborn 07",
+    "Schalke 04",
+    "SV 07 Elversberg",
+    "Arezzo",
+    "Ascoli",
+    "Benevento",
+    "Carrarese",
+    "Catania",
+    "Catanzaro",
+    "Cesena",
+    "Cremonese",
+    "Juve Stabia",
+    "Mantova",
+    "Modena",
+    "Padova",
+    "Palermo",
+    "Pisa",
+    "Potenza",
+    "Ravenna",
+    "Sampdoria",
+    "Sudtirol",
+    "US Avellino",
+    "Union Brescia",
+    "Vicenza",
+    "Virtus Entella",
+    "TBD Home",
+    "TBD Away"
   ],
   "knockoutPairs": {
     "conference": [
@@ -372,99 +445,308 @@
     ]
   },
   "teamCups": {
-    "Real Madrid": ["champions", "copadelrey", "supercopaespana"],
-    "Barcelona": ["champions", "copadelrey", "supercopaespana"],
-    "Atlético Madrid": ["champions", "copadelrey", "supercopaespana"],
-    "Athletic Bilbao": ["copadelrey"],
-    "Real Sociedad": ["copadelrey"],
-    "Real Betis": ["copadelrey"],
-    "Real Valladolid": ["copadelrey"],
-    "Villarreal": ["copadelrey"],
-    "Sevilla": ["copadelrey"],
-    "Valencia": ["copadelrey"],
-    "Celta Vigo": ["copadelrey"],
-    "Getafe": ["copadelrey"],
-    "Osasuna": ["copadelrey"],
-    "Mallorca": ["copadelrey"],
-    "Rayo Vallecano": ["copadelrey"],
-    "Alavés": ["copadelrey"],
-    "Girona": ["copadelrey"],
-    "Las Palmas": ["copadelrey"],
-    "Leganés": ["copadelrey"],
-    "Espanyol": ["copadelrey"],
-    "Elche": ["copadelrey"],
-    "Almería": ["copadelrey"],
-    "Arsenal": ["champions", "facup"],
-    "Manchester City": ["champions", "facup"],
-    "Liverpool": ["champions", "facup"],
-    "Aston Villa": ["champions", "facup"],
-    "Tottenham": ["champions", "facup"],
-    "Chelsea": ["champions", "facup"],
-    "Manchester United": ["champions", "facup"],
-    "Newcastle": ["champions", "facup"],
-    "Brighton": ["facup"],
-    "West Ham": ["facup"],
-    "Bournemouth": ["facup"],
-    "Fulham": ["facup"],
-    "Brentford": ["facup"],
-    "Crystal Palace": ["facup"],
-    "Wolves": ["facup"],
-    "Everton": ["facup"],
-    "Nott. Forest": ["facup"],
-    "Ipswich Town": ["facup"],
-    "Leicester City": ["facup"],
-    "Southampton": ["facup"],
-    "Bayern Munich": ["champions", "dfbpokal", "dflsupercup"],
-    "Borussia Dortmund": ["champions", "dfbpokal", "dflsupercup"],
-    "Bayer Leverkusen": ["champions", "dfbpokal", "dflsupercup"],
-    "RB Leipzig": ["champions", "dfbpokal", "dflsupercup"],
-    "Eintracht Frankfurt": ["champions", "dfbpokal"],
-    "Stuttgart": ["dfbpokal"],
-    "Wolfsburg": ["dfbpokal"],
-    "Freiburg": ["dfbpokal"],
-    "Mainz": ["dfbpokal"],
-    "Borussia Mönchengladbach": ["dfbpokal"],
-    "Hoffenheim": ["dfbpokal"],
-    "Union Berlin": ["dfbpokal"],
-    "Werder Bremen": ["dfbpokal"],
-    "Augsburg": ["dfbpokal"],
-    "Heidenheim": ["dfbpokal"],
-    "Darmstadt": ["dfbpokal"],
-    "Bochum": ["dfbpokal"],
-    "Köln": ["dfbpokal"],
-    "Düsseldorf": ["dfbpokal"],
-    "Holstein Kiel": ["dfbpokal"],
-    "Inter Milan": ["champions", "coppaitalia", "supercoppaitaliana"],
-    "AC Milan": ["champions", "coppaitalia", "supercoppaitaliana"],
-    "Juventus": ["champions", "coppaitalia", "supercoppaitaliana"],
-    "Napoli": ["champions", "coppaitalia", "supercoppaitaliana"],
-    "Atalanta": ["champions", "coppaitalia", "supercoppaitaliana"],
-    "Lazio": ["coppaitalia", "supercoppaitaliana"],
-    "Roma": ["coppaitalia", "supercoppaitaliana"],
-    "Fiorentina": ["coppaitalia", "supercoppaitaliana"],
-    "Bologna": ["coppaitalia", "supercoppaitaliana"],
-    "Torino": ["coppaitalia"],
-    "Monza": ["coppaitalia"],
-    "Genoa": ["coppaitalia"],
-    "Cagliari": ["coppaitalia"],
-    "Udinese": ["coppaitalia"],
-    "Sassuolo": ["coppaitalia"],
-    "Empoli": ["coppaitalia"],
-    "Lecce": ["coppaitalia"],
-    "Parma": ["coppaitalia"],
-    "Verona": ["coppaitalia"],
-    "Como": ["coppaitalia"],
-    "Venezia": ["coppaitalia"],
-    "Frosinone": ["coppaitalia"],
-    "Salernitana": ["coppaitalia"],
-    "Paris Saint-Germain": ["champions"],
-    "Benfica": ["champions"],
-    "Porto": ["champions"],
-    "AZ Alkmaar": ["europa"],
-    "Dinamo Zagreb": ["conference"],
-    "Genk": ["conference"],
-    "Olympique Lyon": ["europa"],
-    "PAOK": ["conference"],
-    "Club Brujas": ["conference"]
+    "Real Madrid": [
+      "champions",
+      "copadelrey"
+    ],
+    "Barcelona": [
+      "champions",
+      "copadelrey"
+    ],
+    "Atlético Madrid": [
+      "champions",
+      "copadelrey"
+    ],
+    "Athletic Bilbao": [
+      "copadelrey"
+    ],
+    "Real Sociedad": [
+      "copadelrey"
+    ],
+    "Real Betis": [
+      "copadelrey"
+    ],
+    "Real Valladolid": [
+      "copadelrey"
+    ],
+    "Villarreal": [
+      "copadelrey"
+    ],
+    "Sevilla": [
+      "copadelrey"
+    ],
+    "Valencia": [
+      "copadelrey"
+    ],
+    "Celta Vigo": [
+      "copadelrey"
+    ],
+    "Getafe": [
+      "copadelrey"
+    ],
+    "Osasuna": [
+      "copadelrey"
+    ],
+    "Mallorca": [
+      "copadelrey"
+    ],
+    "Rayo Vallecano": [
+      "copadelrey"
+    ],
+    "Alavés": [
+      "copadelrey"
+    ],
+    "Girona": [
+      "copadelrey"
+    ],
+    "Las Palmas": [
+      "copadelrey"
+    ],
+    "Leganés": [
+      "copadelrey"
+    ],
+    "Espanyol": [
+      "copadelrey"
+    ],
+    "Elche": [
+      "copadelrey"
+    ],
+    "Almería": [
+      "copadelrey"
+    ],
+    "Arsenal": [
+      "champions",
+      "facup"
+    ],
+    "Manchester City": [
+      "champions",
+      "facup"
+    ],
+    "Liverpool": [
+      "champions",
+      "facup"
+    ],
+    "Aston Villa": [
+      "champions",
+      "facup"
+    ],
+    "Tottenham": [
+      "champions",
+      "facup"
+    ],
+    "Chelsea": [
+      "champions",
+      "facup"
+    ],
+    "Manchester United": [
+      "champions",
+      "facup"
+    ],
+    "Newcastle": [
+      "champions",
+      "facup"
+    ],
+    "Brighton": [
+      "facup"
+    ],
+    "West Ham": [
+      "facup"
+    ],
+    "Bournemouth": [
+      "facup"
+    ],
+    "Fulham": [
+      "facup"
+    ],
+    "Brentford": [
+      "facup"
+    ],
+    "Crystal Palace": [
+      "facup"
+    ],
+    "Wolves": [
+      "facup"
+    ],
+    "Everton": [
+      "facup"
+    ],
+    "Nott. Forest": [
+      "facup"
+    ],
+    "Ipswich Town": [
+      "facup"
+    ],
+    "Leicester City": [
+      "facup"
+    ],
+    "Southampton": [
+      "facup"
+    ],
+    "Bayern Munich": [
+      "champions",
+      "dfbpokal"
+    ],
+    "Borussia Dortmund": [
+      "champions",
+      "dfbpokal"
+    ],
+    "Bayer Leverkusen": [
+      "champions",
+      "dfbpokal"
+    ],
+    "RB Leipzig": [
+      "champions",
+      "dfbpokal"
+    ],
+    "Eintracht Frankfurt": [
+      "champions",
+      "dfbpokal"
+    ],
+    "Stuttgart": [
+      "dfbpokal"
+    ],
+    "Wolfsburg": [
+      "dfbpokal"
+    ],
+    "Freiburg": [
+      "dfbpokal"
+    ],
+    "Mainz": [
+      "dfbpokal"
+    ],
+    "Borussia Mönchengladbach": [
+      "dfbpokal"
+    ],
+    "Hoffenheim": [
+      "dfbpokal"
+    ],
+    "Union Berlin": [
+      "dfbpokal"
+    ],
+    "Werder Bremen": [
+      "dfbpokal"
+    ],
+    "Augsburg": [
+      "dfbpokal"
+    ],
+    "Heidenheim": [
+      "dfbpokal"
+    ],
+    "Darmstadt": [
+      "dfbpokal"
+    ],
+    "Bochum": [
+      "dfbpokal"
+    ],
+    "Köln": [
+      "dfbpokal"
+    ],
+    "Düsseldorf": [
+      "dfbpokal"
+    ],
+    "Holstein Kiel": [
+      "dfbpokal"
+    ],
+    "Inter Milan": [
+      "champions",
+      "coppaitalia"
+    ],
+    "AC Milan": [
+      "champions",
+      "coppaitalia"
+    ],
+    "Juventus": [
+      "champions",
+      "coppaitalia"
+    ],
+    "Napoli": [
+      "champions",
+      "coppaitalia"
+    ],
+    "Atalanta": [
+      "champions",
+      "coppaitalia"
+    ],
+    "Lazio": [
+      "coppaitalia"
+    ],
+    "Roma": [
+      "coppaitalia"
+    ],
+    "Fiorentina": [
+      "coppaitalia"
+    ],
+    "Bologna": [
+      "coppaitalia"
+    ],
+    "Torino": [
+      "coppaitalia"
+    ],
+    "Monza": [
+      "coppaitalia"
+    ],
+    "Genoa": [
+      "coppaitalia"
+    ],
+    "Cagliari": [
+      "coppaitalia"
+    ],
+    "Udinese": [
+      "coppaitalia"
+    ],
+    "Sassuolo": [
+      "coppaitalia"
+    ],
+    "Empoli": [
+      "coppaitalia"
+    ],
+    "Lecce": [
+      "coppaitalia"
+    ],
+    "Parma": [
+      "coppaitalia"
+    ],
+    "Verona": [
+      "coppaitalia"
+    ],
+    "Como": [
+      "coppaitalia"
+    ],
+    "Venezia": [
+      "coppaitalia"
+    ],
+    "Frosinone": [
+      "coppaitalia"
+    ],
+    "Salernitana": [
+      "coppaitalia"
+    ],
+    "Paris Saint-Germain": [
+      "champions"
+    ],
+    "Benfica": [
+      "champions"
+    ],
+    "Porto": [
+      "champions"
+    ],
+    "AZ Alkmaar": [
+      "europa"
+    ],
+    "Dinamo Zagreb": [
+      "conference"
+    ],
+    "Genk": [
+      "conference"
+    ],
+    "Olympique Lyon": [
+      "europa"
+    ],
+    "PAOK": [
+      "conference"
+    ],
+    "Club Brujas": [
+      "conference"
+    ]
   }
 }

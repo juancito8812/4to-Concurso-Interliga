@@ -12,13 +12,13 @@ import {
   normalizeTeamName,
   matchIdToUuid,
   isKnockoutMatch,
+  isKnockoutCup,
   getKnockoutCupSlug,
   getKnockoutRound,
 } from "@/lib/leagueConfig";
 import { calculateScore } from "@/lib/scoring";
 import {
   getUserCupSurvivors,
-  isKnockoutCup,
   evaluateSurvivorProgression,
   updateCupSurvivor,
   TournamentSurvivor,
@@ -71,12 +71,12 @@ interface KnockoutCupInfo {
 
 const KNOCKOUT_CUPS: KnockoutCupInfo[] = [
   { slug: "champions", name: "Champions League", shortName: "Champions", logoUrl: "/4to-Concurso-Interliga/logos/champions.png", emoji: "⭐", color: "#60a5fa" },
-  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/4to-Concurso-Interliga/logos/europa.png", emoji: "🟠", color: "#fb923c" },
-  { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/4to-Concurso-Interliga/logos/conference.png", emoji: "🟢", color: "#4ade80" },
-  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/4to-Concurso-Interliga/logos/coppaitalia.png", emoji: "🇮🇹", color: "#38bdf8" },
-  { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/4to-Concurso-Interliga/logos/facup.png", emoji: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", color: "#f43f5e" },
-  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/4to-Concurso-Interliga/logos/copadelrey.png", emoji: "🇪🇸", color: "#eab308" },
-  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/4to-Concurso-Interliga/logos/dfbpokal.png", emoji: "🇩🇪", color: "#22c55e" },
+  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/4to-Concurso-Interliga/logos/europa.svg", emoji: "🟠", color: "#fb923c" },
+  { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/4to-Concurso-Interliga/logos/conference.svg", emoji: "🟢", color: "#4ade80" },
+  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/4to-Concurso-Interliga/logos/coppaitalia.svg", emoji: "🇮🇹", color: "#38bdf8" },
+  { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/4to-Concurso-Interliga/logos/facup.svg", emoji: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", color: "#f43f5e" },
+  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/4to-Concurso-Interliga/logos/copadelrey.svg", emoji: "🇪🇸", color: "#eab308" },
+  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/4to-Concurso-Interliga/logos/dfbpokal.svg", emoji: "🇩🇪", color: "#22c55e" },
 ];
 
 export default function MisPronosticosPage() {
@@ -85,6 +85,7 @@ export default function MisPronosticosPage() {
   const [predictions, setPredictions] = useState<PredictionWithMatch[]>([]);
   const [survivors, setSurvivors] = useState<Record<string, TournamentSurvivor>>({});
   const [primaryTeam, setPrimaryTeam] = useState<PrimaryTeam | null>(null);
+  const [pendingPenalties, setPendingPenalties] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -406,6 +407,7 @@ export default function MisPronosticosPage() {
       }
 
       // 3. Automatic Survivor progression for finished knockout matches
+      const pendingMatchIds = new Set<string>();
       for (const pred of predsData) {
         const match = matchesMap[pred.match_id];
         if (!match || match.result_home === null || match.result_away === null) continue;
@@ -425,8 +427,13 @@ export default function MisPronosticosPage() {
         // Only the active team's own knockout tie advances the survivor
         if (match.home_team !== activeTeamName && match.away_team !== activeTeamName) continue;
 
-        // Draws (and penalty shootouts) can't resolve a winner from the scoreline
-        if (match.result_home === match.result_away) continue;
+        // Draws (penalty shootouts) — track as pending for UI feedback
+        if (match.result_home === match.result_away) {
+          if (pred.home_score !== pred.away_score) {
+            pendingMatchIds.add(pred.match_id);
+          }
+          continue;
+        }
         if (pred.home_score === pred.away_score) continue;
 
         const actualWinner = match.result_home > match.result_away ? match.home_team : match.away_team;
@@ -482,6 +489,7 @@ export default function MisPronosticosPage() {
 
       if (isMounted) {
         setSurvivors(userSurvivors);
+        setPendingPenalties(pendingMatchIds);
       }
     };
 
@@ -712,13 +720,15 @@ export default function MisPronosticosPage() {
                         {isKnockout && (
                           <span
                             className={`ml-1 text-[9px] px-1.5 py-0.5 rounded font-black tracking-wider uppercase flex items-center gap-0.5 ${
-                              isCupAlive
-                                ? "bg-green/15 text-green border border-green/30"
-                                : "bg-red-500/15 text-red-400 border border-red-500/30"
+                              pendingPenalties.has(p.id)
+                                ? "bg-amber-500/15 text-amber-400 border border-amber-500/30"
+                                : isCupAlive
+                                  ? "bg-green/15 text-green border border-green/30"
+                                  : "bg-red-500/15 text-red-400 border border-red-500/30"
                             }`}
                           >
-                            <span>⚔️</span>
-                            <span>{isCupAlive ? "VIVO" : "KO"}</span>
+                            <span>{pendingPenalties.has(p.id) ? "⏳" : "⚔️"}</span>
+                            <span>{pendingPenalties.has(p.id) ? "PENALES" : isCupAlive ? "VIVO" : "KO"}</span>
                           </span>
                         )}
                       </div>
