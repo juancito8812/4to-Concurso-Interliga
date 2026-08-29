@@ -1,7 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans } from "next/font/google";
 import { Providers } from "./providers";
+import RegisterSW from "./RegisterSW";
 import "./globals.css";
+
+const basePath = "/4to-Concurso-Interliga";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -13,6 +16,20 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "4° Concurso Interliga | Temporada 2026-27",
   description: "Fútbol + Camiseta + Pasión. Elige tu equipo, pronostica y gana en el 4° Concurso Interliga.",
+  manifest: `${basePath}/manifest.json`,
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Interliga",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#c9a84c",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -21,6 +38,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="icon" href={`${basePath}/icon.svg`} type="image/svg+xml" />
+        <link rel="apple-touch-icon" href={`${basePath}/icon.svg`} />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link rel="preconnect" href="https://crests.football-data.org" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://upload.wikimedia.org" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://ilkndkqcmxvlufxaugog.supabase.co" crossOrigin="anonymous" />
@@ -29,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://ilkndkqcmxvlufxaugog.supabase.co" />
       </head>
       <body className="min-h-full flex flex-col">
+        <RegisterSW />
         <Providers>{children}</Providers>
       </body>
     </html>
