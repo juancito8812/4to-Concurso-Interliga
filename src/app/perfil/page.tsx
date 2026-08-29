@@ -83,6 +83,9 @@ export default function PerfilPage() {
         await supabase.from("predictions").delete().eq("user_id", user.id);
       }
 
+      // 1b. Reset cup survivor records (active teams, history and status)
+      await supabase.from("tournament_survivors").delete().eq("user_id", user.id);
+
       // 2. Clear team and display name in profiles
       await supabase
         .from("profiles")
