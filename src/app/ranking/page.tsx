@@ -62,7 +62,7 @@ interface ScorerRow {
 }
 
 let cachedRankingsData: { timestamp: number; data: RankingEntry[] } | null = null;
-const CACHE_TTL_MS = 25000; // 25s client-side cache to protect Free Tier egress & CPU
+const CACHE_TTL_MS = 60000; // 60s client-side cache to protect Free Tier egress & CPU
 
 export default function RankingPage() {
   const { user, displayName } = useAuth();

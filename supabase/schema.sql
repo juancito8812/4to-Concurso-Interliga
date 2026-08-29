@@ -400,3 +400,42 @@ $$;
 
 REVOKE ALL ON FUNCTION public.update_survivors(jsonb) FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION public.update_survivors(jsonb) TO anon;
+
+-- ---------------------------------------------------------------------------
+-- G. app_meta (clave-valor) para marcas del cron (hash de calendario, etc.)
+-- ---------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS public.app_meta (
+  key TEXT PRIMARY KEY,
+  value TEXT NOT NULL DEFAULT '',
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+ALTER TABLE public.app_meta ENABLE ROW LEVEL SECURITY;
+
+CREATE OR REPLACE FUNCTION public.get_meta(p_key text)
+RETURNS text
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+  SELECT value FROM public.app_meta WHERE key = p_key;
+$$;
+
+CREATE OR REPLACE FUNCTION public.set_meta(p_key text, p_value text)
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+BEGIN
+  INSERT INTO public.app_meta (key, value, updated_at)
+  VALUES (p_key, p_value, now())
+  ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value, updated_at = now();
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.get_meta(text) FROM PUBLIC;
+REVOKE ALL ON FUNCTION public.set_meta(text, text) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.get_meta(text) TO anon;
+GRANT EXECUTE ON FUNCTION public.set_meta(text, text) TO anon;

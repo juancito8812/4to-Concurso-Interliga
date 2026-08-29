@@ -55,6 +55,8 @@ async function callRpc(name, payload) {
     body: JSON.stringify(payload),
   });
   if (!res.ok) throw new Error(`rpc ${name} -> ${res.status}: ${await res.text()}`);
+  const text = await res.text();
+  return text ? JSON.parse(text) : null;
 }
 
 // ESPN scoreboard solo devuelve el día actual; con ?dates=YYYYMMDD,.. retrocedemos
@@ -70,9 +72,19 @@ function datesParam() {
   return dates.join(",");
 }
 
-// Mantiene la tabla matches de Supabase alineada con el calendario oficial del repo
+// Mantiene la tabla matches de Supabase alineada con el calendario oficial del repo.
+// Solo sincroniza cuando el calendario cambió (hash en app_meta) para no re-escribir
+// 1.842 filas en cada corrida del cron (~250KB x 12 corridas/día en el plan Free).
 async function syncFixturesToSupabase(officialFixtures) {
   try {
+    const crypto = require("crypto");
+    const hash = crypto.createHash("md5").update(JSON.stringify(officialFixtures)).digest("hex");
+
+    const prevHash = await callRpc("get_meta", { p_key: "fixtures_hash" }).catch(() => null);
+    if (prevHash && prevHash.trim() === hash) {
+      return; // calendario sin cambios
+    }
+
     const CHUNK = 300;
     for (let i = 0; i < officialFixtures.length; i += CHUNK) {
       const part = officialFixtures.slice(i, i + CHUNK).map((f) => ({
@@ -84,6 +96,7 @@ async function syncFixturesToSupabase(officialFixtures) {
       }));
       await callRpc("upsert_fixture_matches", { p_fixtures: part });
     }
+    await callRpc("set_meta", { p_key: "fixtures_hash", p_value: hash });
     console.log(`💾 Calendario sincronizado en Supabase matches: ${officialFixtures.length} fixtures`);
   } catch (e) {
     console.warn("Could not sync fixtures to Supabase:", e.message);
@@ -201,38 +214,22 @@ async function evaluateSurvivors(officialMatches) {
 }
 
 // Persiste resultados y puntos en Supabase vía RPC SECURITY DEFINER (no requiere sesión)
+// Las filas de matches ya usan los ids canónicos de los fixtures, así que se actualizan
+// por id directamente sin descargar la tabla completa (ahorra ~280KB por corrida).
 async function persistToSupabase(officialMatches, officialPreds) {
   try {
-    const [dbMatches, dbPreds] = await Promise.all([
-      supabaseGet("matches?select=id,home_team,away_team,match_date,result_home,result_away"),
-      supabaseGet("predictions?select=id,user_id,match_id"),
-    ]);
+    // 1. Resultados de partidos: actualización directa por id (el RPC solo escribe filas sin resultado)
+    const resultUpdates = (officialMatches || [])
+      .filter((m) => m.result_home !== null && m.result_home !== undefined)
+      .map((m) => ({ id: m.id, result_home: m.result_home, result_away: m.result_away }));
 
-    // 1. Resultados de partidos: match por nombres normalizados + fecha (solo filas sin resultado)
-    const resultUpdates = [];
-    for (const m of officialMatches) {
-      if (m.result_home === null || m.result_home === undefined) continue;
-      const datePart = String(m.match_date || "").slice(0, 10);
-      const mh = normalizeTeamName(m.home_team).toLowerCase();
-      const ma = normalizeTeamName(m.away_team).toLowerCase();
-      const row = (dbMatches || []).find((r) => {
-        if (r.result_home !== null) return false;
-        const rh = normalizeTeamName(r.home_team).toLowerCase();
-        const ra = normalizeTeamName(r.away_team).toLowerCase();
-        if (rh !== mh || ra !== ma) return false;
-        if (!datePart || !r.match_date) return true;
-        return String(r.match_date).slice(0, 10) === datePart;
-      });
-      if (row) {
-        resultUpdates.push({ id: row.id, result_home: m.result_home, result_away: m.result_away });
-      }
-    }
     if (resultUpdates.length > 0) {
       await callRpc("update_match_results", { p_updates: resultUpdates });
       console.log(`💾 Resultados persistidos en Supabase matches: ${resultUpdates.length}`);
     }
 
     // 2. Puntos de pronósticos: solo filas reales de la DB (ids uuid de supabase)
+    const dbPreds = await supabaseGet("predictions?select=id,user_id,match_id");
     const dbByKey = new Map();
     (dbPreds || []).forEach((p) => dbByKey.set(`${p.user_id}|${p.match_id}`, p.id));
 

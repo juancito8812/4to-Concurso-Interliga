@@ -209,7 +209,7 @@ export default function PronosticarPage() {
     const nowIso = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
     const { data: matchesData } = await supabase
       .from("matches")
-      .select("*")
+      .select("id, home_team, away_team, match_date, league, result_home, result_away")
       .or(`home_team.eq.${teamData.name},away_team.eq.${teamData.name}`)
       .gte("match_date", nowIso)
       .order("match_date", { ascending: true })
