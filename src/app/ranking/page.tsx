@@ -586,9 +586,6 @@ export default function RankingPage() {
                           <strong className="text-gold font-bold font-mono text-sm sm:text-base">{top2.exact_scores} 🎯</strong>
                         </div>
                       </div>
-                      <div className="mt-3 text-[10px] text-slate-300 font-semibold uppercase tracking-wide">
-                        🥈 Premio: Balón Oficial
-                      </div>
                     </div>
                   )}
 
@@ -631,9 +628,6 @@ export default function RankingPage() {
                         <strong className="text-amber-300 font-black font-mono text-xl sm:text-2xl">{top1.exact_scores} 🎯</strong>
                       </div>
                     </div>
-                    <div className="mt-3.5 text-[11px] text-gold font-bold uppercase tracking-wider bg-gold/10 px-3 py-1 rounded-full border border-gold/30">
-                      🏆 Camiseta + Balón + Corona
-                    </div>
                   </div>
 
                   {/* 3rd Place (Bronze) */}
@@ -672,9 +666,6 @@ export default function RankingPage() {
                           <span className="text-silver block text-[10px]">Plenos</span>
                           <strong className="text-gold font-bold font-mono text-sm sm:text-base">{top3.exact_scores} 🎯</strong>
                         </div>
-                      </div>
-                      <div className="mt-3 text-[10px] text-amber-500 font-semibold uppercase tracking-wide">
-                        🥉 Premio: Gorra Oficial
                       </div>
                     </div>
                   )}
