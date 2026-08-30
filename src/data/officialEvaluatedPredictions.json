@@ -92,5 +92,100 @@
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Gonçalo Ramos (+1 pt)"
     ]
+  },
+  {
+    "id": "c23d0a74-f9c4-4703-a2ba-fef62eb003a9",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "bybit6118",
+    "match_id": "00000000-0000-4000-8000-000000088dad",
+    "home_score": 1,
+    "away_score": 2,
+    "scorers": [
+      {
+        "player_name": "Bukayo Saka",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "1cc97d19-b436-458d-b844-e82967b344fb",
+    "user_id": "266e7258-c7f9-4159-9fa2-3281989af465",
+    "display_name": "Raudel",
+    "match_id": "00000000-0000-4000-8000-000000089db0",
+    "home_score": 4,
+    "away_score": 1,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Vinicius Junior",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Juan Melero",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "0f02f08f-9de9-49ba-b1b1-349a32bbb769",
+    "user_id": "266b309a-4eb0-474a-85db-aca42e055913",
+    "display_name": "JR_DT",
+    "match_id": "00000000-0000-4000-8000-000017f4be32",
+    "home_score": 3,
+    "away_score": 0,
+    "scorers": [
+      {
+        "player_name": "Amad Diallo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Matheus Cunha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kobbie Mainoo",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
+  },
+  {
+    "id": "95da6cba-c0e0-4833-9a14-7d1bd84d6967",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000000089db0",
+    "home_score": 4,
+    "away_score": 0,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Vinicius Junior",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
   }
 ]
