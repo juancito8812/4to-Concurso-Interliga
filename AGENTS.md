@@ -125,8 +125,9 @@ Copa Italia: #024494 (azul)
 - El cierre de pronósticos es a **1 minuto antes del inicio** (`diffMin <= 1`).
 - Se permite **re-editar** pronósticos guardados mientras el partido esté abierto (`diffMin > 1`).
 - Siempre usar `normalizeMatchLeague` y `normalizeTeamName` para asegurar correspondencia con plantillas y torneos.
-- El selector de goleadores muestra la plantilla oficial completa (4.749 jugadores clasificados por posición) y despliega el contador `⚽ [-] 1 [+]` únicamente al elegir un jugador (máx. 5 goleadores por equipo).
-- La sección de premios en la landing (`src/app/page.tsx`) presenta un Podio de Campeones con medallas metálicas (Oro 🥇, Plata 🥈, Bronce 🥉) y chips visuales independientes para cada artículo del kit.
+- El selector de goleadores muestra la plantilla oficial completa (4.749 jugadores clasificados por posición) y despliega el contador `[-] 1 [+]` únicamente al elegir un jugador (máx. 5 goleadores por equipo).
+- La sección de premios en la landing (`src/app/page.tsx`) presenta un Podio de Campeones con medallas de texto (1° Oro, 2° Plata, 3° Bronce) y chips visuales independientes para cada artículo del kit. No se usan emojis informativos en la UI.
+- **Política de emojis (Jul 2025):** No se usan emojis informativos (🏆👑🎯✅⚠️📊🔍 etc.) en la UI. Se permiten: emojis de acción (✕ ← →), emojis de premios (🎽 🩳 🧢 🚩 🍺 🕶️ 🖼️), e iconos decorativos en empty states dimmados (`text-silver/30`).
 - **Mecánica de Superviviente en Copas KO:** En Champions, Europa League, Conference League y Copa Italia, el participante compite de forma independiente (`tournament_survivors`). Si predice y acierta la victoria del equipo rival, hereda su camiseta (`active_team_id`) manteniendo intacto su club base en ligas (`profiles.team_id`).
 - **Detección de partidos KO (`isKnockoutMatch`):** copas domésticas siempre KO; competiciones europeas (Champions/Europa/Conference) fase liga de sep a ene y rondas KO de feb a ago (por fecha, funciona con cruces TBD).
 - **Rondas formato 2026/27 (`getKnockoutRound`):** feb = Dieciseisavos de Final (playoff R32), mar = Octavos, abr = Cuartos, abr-may = Semifinal, may = Final.

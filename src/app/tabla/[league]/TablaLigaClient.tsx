@@ -61,12 +61,12 @@ export default function TablaLigaClient() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const tabs: { id: Tab; label: string; icon: string }[] = data?.isCup
-    ? [{ id: "matches", label: "Partidos", icon: "⚽" }]
+  const tabs: { id: Tab; label: string }[] = data?.isCup
+    ? [{ id: "matches", label: "Partidos" }]
     : [
-        { id: "standings", label: "Tabla", icon: "📊" },
-        { id: "scorers", label: "Goleadores", icon: "⚽" },
-        { id: "matches", label: "Partidos", icon: "🗓️" },
+        { id: "standings", label: "Tabla" },
+        { id: "scorers", label: "Goleadores" },
+        { id: "matches", label: "Partidos" },
       ];
 
   useEffect(() => {
@@ -228,7 +228,6 @@ export default function TablaLigaClient() {
               }`}
               style={activeTab === tab.id ? { backgroundColor: leagueColor } : {}}
             >
-              <span>{tab.icon}</span>
               {tab.label}
             </button>
           ))}
@@ -243,7 +242,7 @@ export default function TablaLigaClient() {
             </div>
           ) : error ? (
             <div className="p-8 sm:p-12 text-center">
-              <span className="text-3xl mb-3 block">⚠️</span>
+              <span className="text-3xl mb-3 block text-silver/30">⚠️</span>
               <p className="text-silver text-sm">{error}</p>
               <Link href="/" className="inline-block mt-4 text-sm hover:underline" style={{ color: leagueColor }}>← Volver al inicio</Link>
             </div>
@@ -306,7 +305,6 @@ export default function TablaLigaClient() {
                   ? renderPlayerTable(scorers, "Goles")
                   : (
                     <div className="p-8 sm:p-12 text-center">
-                      <span className="text-4xl mb-3 block">⚽</span>
                       <p className="text-silver text-sm">Goleadores no disponibles para esta liga</p>
                     </div>
                   )
@@ -381,7 +379,7 @@ export default function TablaLigaClient() {
                   </div>
                 ) : (
                   <div className="p-8 sm:p-12 text-center">
-                    <span className="text-4xl mb-3 block">🏆</span>
+                    <span className="text-4xl mb-3 block text-silver/30">🏆</span>
                     <p className="text-silver text-sm">No hay partidos programados actualmente para esta copa.</p>
                   </div>
                 )

@@ -649,7 +649,7 @@ export default function PronosticarPage() {
     return (
       <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4 flex items-center justify-center">
         <div className="bg-navy-mid border border-border rounded-2xl p-10 text-center max-w-md">
-          <span className="text-5xl mb-4 block">⚽</span>
+          <span className="text-5xl mb-4 block text-silver/40">⚽</span>
           <p className="text-white text-base font-bold mb-2">Elegí tu equipo primero</p>
           <p className="text-silver text-sm mb-6">Para pronosticar, primero seleccioná tu equipo en la página principal</p>
           <Link
@@ -711,11 +711,11 @@ export default function PronosticarPage() {
           <div className="flex items-center gap-2 sm:self-center">
             {hasSavedPredictions ? (
               <span className="inline-flex items-center gap-1.5 bg-green/15 border border-green/30 text-green text-xs font-bold px-3 py-1.5 rounded-full">
-                <span>✅</span> Pronósticos Activos
+                Pronósticos Activos
               </span>
             ) : (
               <span className="inline-flex items-center gap-1.5 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold px-3 py-1.5 rounded-full">
-                <span>⏱️</span> Pronósticos Pendientes
+                Pronósticos Pendientes
               </span>
             )}
           </div>
@@ -723,7 +723,7 @@ export default function PronosticarPage() {
 
         {matches.length === 0 ? (
           <div className="bg-navy-mid border border-border rounded-2xl p-10 text-center">
-            <span className="text-5xl mb-4 block">📅</span>
+            <span className="text-5xl mb-4 block text-silver/40">📅</span>
             <p className="text-white font-bold mb-1">Sin partidos programados</p>
             <p className="text-silver text-sm">No hay partidos próximos para {userTeam.name}</p>
           </div>
@@ -800,7 +800,7 @@ export default function PronosticarPage() {
                             className="w-5 h-5 object-contain shrink-0"
                           />
                         ) : (
-                          <span className="text-sm">🏆</span>
+                          <span className="text-sm text-silver/40">⚽</span>
                         )}
                         <span
                           className="text-xs sm:text-sm font-bold tracking-wide uppercase truncate"
@@ -829,32 +829,32 @@ export default function PronosticarPage() {
                             className="inline-flex items-center gap-1 bg-red-500/20 border border-red-500/40 text-red-400 text-[11px] font-bold px-2.5 py-0.5 rounded-full shrink-0"
                             title="Eliminado de esta competición. No se pueden enviar pronósticos."
                           >
-                            <span>⛔</span> KO Eliminado
+                            KO Eliminado
                           </span>
                         ) : isKnockout && !hasActiveTeam ? (
                           <span
                             className="inline-flex items-center gap-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[11px] font-bold px-2.5 py-0.5 rounded-full shrink-0"
                             title="Debes elegir tu club representante antes de pronosticar"
                           >
-                            <span>⚠️</span> Elegir Club
+                            Elegir Club
                           </span>
                         ) : pred?.prediction_id ? (
                           <span
                             className="inline-flex items-center gap-1 bg-green/15 border border-green/30 text-green text-[11px] font-bold px-2.5 py-0.5 rounded-full shrink-0"
                             title="Pronóstico guardado. Podés editarlo antes del cierre."
                           >
-                            <span>✅</span> Pronosticado {pred.home_score !== "" && pred.away_score !== "" ? `(${pred.home_score} - ${pred.away_score})` : ""}
+                            Pronosticado {pred.home_score !== "" && pred.away_score !== "" ? `(${pred.home_score} - ${pred.away_score})` : ""}
                           </span>
                         ) : pred && (pred.home_score !== "" || pred.away_score !== "" || (pred.scorers && pred.scorers.length > 0)) ? (
                           <span
                             className="inline-flex items-center gap-1 bg-gold/15 border border-gold/30 text-gold text-[11px] font-bold px-2.5 py-0.5 rounded-full shrink-0 animate-pulse"
                             title="Tenés cambios pendientes por guardar"
                           >
-                            <span>✏️</span> Sin guardar
+                            Sin guardar
                           </span>
                         ) : (
                           <span className="inline-flex items-center gap-1 bg-navy-card/90 border border-border text-silver/60 text-[11px] font-medium px-2.5 py-0.5 rounded-full shrink-0">
-                            <span>⏳</span> Pendiente
+                            Pendiente
                           </span>
                         )}
 
@@ -864,11 +864,11 @@ export default function PronosticarPage() {
                           </span>
                         ) : timeRemaining.isUrgent ? (
                           <span className="inline-flex items-center gap-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0 animate-pulse">
-                            ⏱️ {timeRemaining.label}
+                            {timeRemaining.label}
                           </span>
                         ) : (
                           <span className="inline-flex items-center gap-1 bg-green/15 border border-green/30 text-green text-[11px] font-semibold px-2.5 py-0.5 rounded-full shrink-0">
-                            🟢 {timeRemaining.label}
+                            {timeRemaining.label}
                           </span>
                         )}
                       </div>
@@ -881,7 +881,6 @@ export default function PronosticarPage() {
                           /* Eliminated Banner */
                           <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div className="flex items-start sm:items-center gap-2.5 min-w-0">
-                              <span className="text-xl sm:text-2xl shrink-0">⛔</span>
                               <div className="min-w-0">
                                 <div className="flex items-center gap-2 flex-wrap">
                                   <span className="text-xs font-bold text-red-400 uppercase tracking-wider">
@@ -909,7 +908,6 @@ export default function PronosticarPage() {
                         ) : !hasActiveTeam ? (
                           /* No Cup Participation Notice */
                           <div className="bg-navy-card/90 border border-border/80 rounded-xl p-3 sm:p-4 flex items-center gap-3">
-                            <span className="text-xl shrink-0">ℹ️</span>
                             <p className="text-xs text-silver leading-relaxed">
                               Tu equipo base (<strong className="text-white">{userTeam.name}</strong>) no participa en <strong className="text-white">{match.league}</strong>. Solo los participantes con equipos clasificados compiten en esta copa.
                             </p>
@@ -918,7 +916,6 @@ export default function PronosticarPage() {
                           /* Active Survivor Banner */
                           <div className="bg-gold/10 border border-gold/30 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div className="flex items-start sm:items-center gap-2.5 min-w-0">
-                              <span className="text-xl sm:text-2xl shrink-0">⚔️</span>
                               <div className="min-w-0">
                                 <div className="flex items-center gap-2 flex-wrap">
                                   <span className="text-xs font-bold text-gold uppercase tracking-wider">
@@ -930,7 +927,7 @@ export default function PronosticarPage() {
                                   </span>
                                   {inheritedFrom && (
                                     <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gold/15 border border-gold/30 text-gold text-[10px] font-bold shrink-0">
-                                      👑 Heredado de {inheritedFrom}
+                                      Heredado de {inheritedFrom}
                                     </span>
                                   )}
                                 </div>
@@ -1075,7 +1072,7 @@ export default function PronosticarPage() {
                                   {/* Goals Stepper (only shown when a player is selected) */}
                                   {scorer.player_name ? (
                                     <div className="flex items-center gap-1 bg-navy-card border border-border rounded-lg px-1.5 py-0.5 shrink-0" title="Cantidad de goles que anotará">
-                                      <span className="text-[11px] select-none text-silver">⚽</span>
+                                      
                                       <button
                                         type="button"
                                         disabled={isMatchDisabled || scorer.goals <= 1}
@@ -1170,7 +1167,7 @@ export default function PronosticarPage() {
                                   {/* Goals Stepper (only shown when a player is selected) */}
                                   {scorer.player_name ? (
                                     <div className="flex items-center gap-1 bg-navy-card border border-border rounded-lg px-1.5 py-0.5 shrink-0" title="Cantidad de goles que anotará">
-                                      <span className="text-[11px] select-none text-silver">⚽</span>
+                                      
                                       <button
                                         type="button"
                                         disabled={isMatchDisabled || scorer.goals <= 1}

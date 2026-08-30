@@ -45,7 +45,6 @@ interface PodiumPrize {
   rank: 1 | 2 | 3;
   placeTitle: string;
   badgeTitle: string;
-  badgeIcon: string;
   theme: "gold" | "silver" | "bronze";
   cardBorder: string;
   cardGlow: string;
@@ -60,7 +59,6 @@ const podiumPrizes: PodiumPrize[] = [
     rank: 2,
     placeTitle: "2° LUGAR",
     badgeTitle: "SUBCAMPEÓN",
-    badgeIcon: "🥈",
     theme: "silver",
     cardBorder: "border-slate-400/50 hover:border-slate-300",
     cardGlow: "shadow-[0_0_30px_rgba(203,213,225,0.12)]",
@@ -81,7 +79,6 @@ const podiumPrizes: PodiumPrize[] = [
     rank: 1,
     placeTitle: "1° LUGAR",
     badgeTitle: "GRAN CAMPEÓN",
-    badgeIcon: "👑",
     theme: "gold",
     cardBorder: "border-2 border-gold shadow-[0_0_40px_rgba(201,168,76,0.25)] hover:border-gold-light",
     cardGlow: "shadow-[0_0_50px_rgba(201,168,76,0.25)]",
@@ -91,18 +88,15 @@ const podiumPrizes: PodiumPrize[] = [
     items: [
       { icon: "🎽", name: "Camiseta Oficial del Club" },
       { icon: "🩳", name: "Short Oficial de Juego" },
-      { icon: "⚽", name: "Balón Oficial de Fútbol" },
       { icon: "🍺", name: "Jarra Oficial de Colección" },
       { icon: "🚩", name: "Bandera Oficial del Club" },
       { icon: "🕶️", name: "Gafas de Sol Deportivas" },
-      { icon: "📖", name: "Revista / Anuario Exclusivo" },
     ],
   },
   {
     rank: 3,
     placeTitle: "3° LUGAR",
     badgeTitle: "TERCER LUGAR",
-    badgeIcon: "🥉",
     theme: "bronze",
     cardBorder: "border-amber-700/50 hover:border-amber-600",
     cardGlow: "shadow-[0_0_30px_rgba(180,83,9,0.12)]",
@@ -243,7 +237,7 @@ export default function Home() {
               </p>
               <ul className="text-[11px] text-silver/80 space-y-1 mb-4 flex-1">
                 <li>• Seleccioná el marcador exacto de cada encuentro</li>
-                <li>• Elegí hasta <span className="text-gold">3 goleadores</span> por partido</li>
+                <li>• Elegí hasta <span className="text-gold">5 goleadores</span> por partido</li>
                 <li>• Sumá puntos y competí por los primeros puestos</li>
               </ul>
               <Link
@@ -273,7 +267,7 @@ export default function Home() {
           </div>
 
           <p className="text-silver text-xs sm:text-sm mb-6 sm:mb-10">
-            Cada acierto suma puntos. ¡Máximo <span className="text-gold font-bold">3 goleadores</span> por partido!
+            Cada acierto suma puntos. ¡Máximo <span className="text-gold font-bold">5 goleadores</span> por partido!
           </p>
 
           <div className="flex gap-3 overflow-x-auto pb-2 sm:pb-0 sm:grid sm:grid-cols-3 md:grid-cols-5 sm:overflow-visible">
@@ -295,7 +289,7 @@ export default function Home() {
           <div className="mt-4 sm:mt-5 px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl bg-gold/10 border border-gold/20">
             <p className="text-[11px] sm:text-xs text-silver leading-relaxed">
               <span className="text-gold font-bold">Nota:</span>{" "}
-              si pronosticas varios goleadores, los puntos se multiplican a tu favor — máximo <span className="text-gold font-bold">3 jugadores</span> por partido.
+              si pronosticas varios goleadores, los puntos se multiplican a tu favor — máximo <span className="text-gold font-bold">5 jugadores</span> por partido.
             </p>
           </div>
         </div>
@@ -319,7 +313,7 @@ export default function Home() {
               </div>
             </div>
             <div className="inline-flex items-center gap-2 self-start sm:self-auto px-3.5 py-1.5 rounded-full bg-navy-card/80 border border-border text-xs font-semibold text-silver">
-              <span>🏆</span> 3 Podios Exclusivos
+              3 Podios Exclusivos
             </div>
           </div>
 
@@ -332,16 +326,13 @@ export default function Home() {
                 {/* Crown/Trophy Top Ribbon for 1st Place */}
                 {prize.rank === 1 && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 via-gold to-amber-500 text-navy-black font-black text-[11px] uppercase tracking-widest px-4 py-1 rounded-full shadow-lg flex items-center gap-1.5 shrink-0 select-none">
-                    <span>👑</span> MÁXIMO GALARDÓN
+                    MÁXIMO GALARDÓN
                   </div>
                 )}
 
                 {/* Header Badge */}
                 <div className="flex items-center justify-between gap-2 mb-4 pt-1">
                   <div className="flex items-center gap-2.5">
-                    <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center font-black text-lg sm:text-xl shadow-md shrink-0 ${prize.badgeBg}`}>
-                      {prize.badgeIcon}
-                    </div>
                     <div>
                       <h3 className={`text-base sm:text-lg font-black uppercase tracking-wider ${prize.textColor}`}>
                         {prize.placeTitle}

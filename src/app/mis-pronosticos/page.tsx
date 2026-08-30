@@ -65,18 +65,17 @@ interface KnockoutCupInfo {
   name: string;
   shortName: string;
   logoUrl: string;
-  emoji: string;
   color: string;
 }
 
 const KNOCKOUT_CUPS: KnockoutCupInfo[] = [
-  { slug: "champions", name: "Champions League", shortName: "Champions", logoUrl: "/4to-Concurso-Interliga/logos/champions.png", emoji: "⭐", color: "#60a5fa" },
-  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/4to-Concurso-Interliga/logos/europa.svg", emoji: "🟠", color: "#fb923c" },
-  { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/4to-Concurso-Interliga/logos/conference.svg", emoji: "🟢", color: "#4ade80" },
-  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/4to-Concurso-Interliga/logos/coppaitalia.svg", emoji: "🇮🇹", color: "#38bdf8" },
-  { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/4to-Concurso-Interliga/logos/facup.svg", emoji: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", color: "#f43f5e" },
-  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/4to-Concurso-Interliga/logos/copadelrey.svg", emoji: "🇪🇸", color: "#eab308" },
-  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/4to-Concurso-Interliga/logos/dfbpokal.svg", emoji: "🇩🇪", color: "#22c55e" },
+  { slug: "champions", name: "Champions League", shortName: "Champions", logoUrl: "/4to-Concurso-Interliga/logos/champions.png", color: "#60a5fa" },
+  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/4to-Concurso-Interliga/logos/europa.svg", color: "#fb923c" },
+  { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/4to-Concurso-Interliga/logos/conference.svg", color: "#4ade80" },
+  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/4to-Concurso-Interliga/logos/coppaitalia.svg", color: "#38bdf8" },
+  { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/4to-Concurso-Interliga/logos/facup.svg", color: "#f43f5e" },
+  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/4to-Concurso-Interliga/logos/copadelrey.svg", color: "#eab308" },
+  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/4to-Concurso-Interliga/logos/dfbpokal.svg", color: "#22c55e" },
 ];
 
 export default function MisPronosticosPage() {
@@ -482,7 +481,7 @@ export default function MisPronosticosPage() {
             history: outcome.updatedHistory,
           };
           console.log(
-            `🏆 Survivor ${cupSlug}: ${outcome.newStatus}${outcome.transferred ? `, camiseta heredada: ${outcome.newTeamName}` : ""}`
+            ` Survivor ${cupSlug}: ${outcome.newStatus}${outcome.transferred ? `, camiseta heredada: ${outcome.newTeamName}` : ""}`
           );
         }
       }
@@ -529,7 +528,7 @@ export default function MisPronosticosPage() {
         <div className="bg-navy-mid border border-border rounded-2xl p-4 sm:p-5 mb-6 shadow-lg">
           <div className="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-border/60">
             <div className="flex items-center gap-2">
-              <span className="text-xl">🏆</span>
+              <span className="text-xl"></span>
               <div>
                 <h2 className="text-sm sm:text-base font-bold text-white leading-tight">
                   Estado de Superviviente en Copas
@@ -614,7 +613,7 @@ export default function MisPronosticosPage() {
                       />
                     ) : (
                       <div className="w-6 h-6 rounded-full bg-navy-dark border border-border flex items-center justify-center text-[10px] shrink-0">
-                        ⚽
+                        
                       </div>
                     )}
                     <div className="min-w-0 flex-1">
@@ -631,7 +630,7 @@ export default function MisPronosticosPage() {
                   {history.length > 0 ? (
                     <div className="bg-gold/10 border border-gold/25 rounded-lg p-2 space-y-1">
                       <div className="flex items-center gap-1 text-[10px] font-bold text-gold uppercase tracking-wider">
-                        <span>👑</span>
+                        <span></span>
                         <span>Camisetas Heredadas</span>
                       </div>
                       <div className="space-y-1">
@@ -657,7 +656,7 @@ export default function MisPronosticosPage() {
                     </div>
                   ) : (
                     <div className="text-[10px] text-silver/60 italic flex items-center gap-1 px-1">
-                      <span>👕</span>
+                      <span></span>
                       <span>Club base original (sin transferencias)</span>
                     </div>
                   )}
@@ -669,7 +668,7 @@ export default function MisPronosticosPage() {
 
         {predictions.length === 0 ? (
           <div className="bg-navy-mid border border-border rounded-2xl p-8 text-center">
-            <span className="text-4xl mb-3 block">📝</span>
+            <span className="text-4xl mb-3 block"></span>
             <p className="text-silver text-sm">Todavía no hiciste pronósticos</p>
             <Link href="/pronosticar/" className="inline-block mt-4 bg-gold text-navy-black font-bold px-6 py-2 rounded-full text-xs hover:bg-gold-light transition-colors">
               Ir a Pronosticar
@@ -727,7 +726,7 @@ export default function MisPronosticosPage() {
                                   : "bg-red-500/15 text-red-400 border border-red-500/30"
                             }`}
                           >
-                            <span>{pendingPenalties.has(p.id) ? "⏳" : "⚔️"}</span>
+                            <span>{pendingPenalties.has(p.id) ? "" : ""}</span>
                             <span>{pendingPenalties.has(p.id) ? "PENALES" : isCupAlive ? "VIVO" : "KO"}</span>
                           </span>
                         )}
@@ -752,12 +751,12 @@ export default function MisPronosticosPage() {
                     {isKnockout && cupActiveTeam && (
                       <div className="bg-navy-dark/70 border border-border/60 rounded-lg px-2.5 py-1.5 text-[11px] flex items-center justify-between gap-2">
                         <span className="text-silver flex items-center gap-1.5 truncate">
-                          <span>🛡️</span>
+                          <span></span>
                           <span>Tu camiseta activa:</span>
                           <strong className="text-white font-bold truncate">{cupActiveTeam}</strong>
                         </span>
                         <span className="text-gold text-[10px] font-semibold shrink-0">
-                          {cupSurvivor?.history && cupSurvivor.history.length > 0 ? "👑 Heredado" : "👕 Original"}
+                          {cupSurvivor?.history && cupSurvivor.history.length > 0 ? " Heredado" : " Original"}
                         </span>
                       </div>
                     )}
@@ -781,7 +780,7 @@ export default function MisPronosticosPage() {
                           />
                         ) : (
                           <div className="w-8 h-8 rounded-full bg-navy-card border border-border flex items-center justify-center text-xs shrink-0">
-                            ⚽
+                            
                           </div>
                         )}
                       </div>
@@ -811,7 +810,7 @@ export default function MisPronosticosPage() {
                           />
                         ) : (
                           <div className="w-8 h-8 rounded-full bg-navy-card border border-border flex items-center justify-center text-xs shrink-0">
-                            ⚽
+                            
                           </div>
                         )}
                         <span className="text-white text-xs sm:text-sm font-bold truncate">
@@ -848,7 +847,7 @@ export default function MisPronosticosPage() {
                                 className="flex items-center justify-between bg-navy-mid/90 px-2.5 py-1 rounded-lg border border-border/40 text-xs"
                               >
                                 <span className="text-white font-medium truncate flex items-center gap-1.5">
-                                  <span>⚽</span> {s.player_name}
+                                  <span></span> {s.player_name}
                                 </span>
                                 <span className="text-gold font-bold font-mono text-[11px] shrink-0 ml-1.5">
                                   {s.goals} {s.goals === 1 ? "gol" : "goles"}
@@ -887,7 +886,7 @@ export default function MisPronosticosPage() {
                                 className="flex items-center justify-between bg-navy-mid/90 px-2.5 py-1 rounded-lg border border-border/40 text-xs"
                               >
                                 <span className="text-white font-medium truncate flex items-center gap-1.5">
-                                  <span>⚽</span> {s.player_name}
+                                  <span></span> {s.player_name}
                                 </span>
                                 <span className="text-gold font-bold font-mono text-[11px] shrink-0 ml-1.5">
                                   {s.goals} {s.goals === 1 ? "gol" : "goles"}
@@ -921,7 +920,7 @@ export default function MisPronosticosPage() {
                                 key={idx}
                                 className="text-[10px] bg-navy-dark/90 text-silver border border-border/60 px-2 py-0.5 rounded-md"
                               >
-                                ✓ {detail}
+                                 {detail}
                               </span>
                             ))}
                           </div>

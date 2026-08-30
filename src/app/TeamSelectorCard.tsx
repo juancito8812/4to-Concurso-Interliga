@@ -152,7 +152,7 @@ export default function TeamSelectorCard() {
 
           {teamLocked ? (
             <div className="w-full bg-navy-card border border-border rounded-lg px-3 py-2.5 text-silver text-xs flex items-center gap-2">
-              <span className="text-gold">🔒</span>
+              <span className="text-gold font-bold text-[10px]">BLOQUEADO</span>
               <span>Equipo confirmado — no se puede cambiar</span>
             </div>
           ) : (
@@ -176,7 +176,6 @@ export default function TeamSelectorCard() {
           )}
 
           <div className="flex items-center gap-1.5 text-xs text-gold-light bg-gold/10 border border-gold/20 rounded-lg px-2.5 py-2 mb-2 font-medium">
-            <span className="text-sm">⚠️</span>
             <span>No podés cambiar de equipo hasta la próxima temporada</span>
           </div>
 

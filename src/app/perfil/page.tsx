@@ -224,7 +224,6 @@ export default function PerfilPage() {
           {/* Opción 1: Reiniciar Pronósticos */}
           <div className="space-y-2.5">
             <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
-              <span>🔄</span>
               <span>Reiniciar Participación (Elegir otro club)</span>
             </div>
             <p className="text-silver/80 text-xs leading-relaxed">
@@ -237,7 +236,7 @@ export default function PerfilPage() {
                 onClick={() => setShowConfirmReset(true)}
                 className="w-full bg-amber-500/15 border border-amber-500/40 text-amber-300 hover:bg-amber-500/25 hover:text-white font-semibold py-2.5 rounded-xl text-xs transition-colors cursor-pointer"
               >
-                🔄 Reiniciar pronósticos y club (0 pts)
+                Reiniciar pronósticos y club (0 pts)
               </button>
             ) : (
               <div className="bg-navy-dark/90 border border-amber-500/40 rounded-xl p-4 space-y-3">
@@ -271,7 +270,6 @@ export default function PerfilPage() {
           {/* Opción 2: Eliminar Cuenta Totalmente y Liberar Email */}
           <div className="space-y-2.5">
             <div className="flex items-center gap-2 text-red-400 font-bold text-sm">
-              <span>🗑️</span>
               <span>Eliminar Cuenta Definitivamente</span>
             </div>
             <p className="text-silver/80 text-xs leading-relaxed">
@@ -284,12 +282,12 @@ export default function PerfilPage() {
                 onClick={() => setShowConfirmDelete(true)}
                 className="w-full bg-red-500/20 border border-red-500/50 text-red-400 hover:bg-red-600 hover:text-white font-bold py-2.5 rounded-xl text-xs transition-all cursor-pointer"
               >
-                🗑️ Eliminar mi cuenta y liberar mi correo
+                Eliminar mi cuenta y liberar mi correo
               </button>
             ) : (
               <div className="bg-navy-dark/95 border border-red-500/60 rounded-xl p-4 space-y-3 shadow-2xl">
                 <p className="text-red-300 text-xs font-bold text-center leading-relaxed">
-                  ⚠️ Esta acción es irreversible. Se eliminará tu cuenta y tu correo quedará libre. ¿Deseas continuar?
+                  Esta acción es irreversible. Se eliminará tu cuenta y tu correo quedará libre. ¿Deseas continuar?
                 </p>
                 <div>
                   <label className="block text-silver text-[11px] mb-1">Ingresá tu contraseña para confirmar</label>

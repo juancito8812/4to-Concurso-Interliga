@@ -440,7 +440,7 @@ export default function RankingPage() {
               <span className="text-gold font-bold">←</span> Volver al inicio
             </Link>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
-              <span>🏆 Ranking <span className="text-gold">General</span></span>
+              <span>Ranking <span className="text-gold">General</span></span>
               <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-gold/15 text-gold border border-gold/30 tracking-normal">
                 OFICIAL
               </span>
@@ -466,7 +466,7 @@ export default function RankingPage() {
               onClick={() => setShowRulesModal(!showRulesModal)}
               className="bg-navy-card hover:bg-navy-card/80 border border-border/80 text-silver hover:text-white px-3 py-2 rounded-xl text-xs font-medium transition-colors flex items-center gap-1.5"
             >
-              <span>ℹ️</span> Reglas de Puntos
+              Reglas de Puntos
             </button>
           </div>
         </div>
@@ -476,7 +476,7 @@ export default function RankingPage() {
           <div className="bg-navy-mid border border-gold/30 rounded-2xl p-5 sm:p-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-white font-bold text-sm sm:text-base flex items-center gap-2">
-                <span>📖</span> Sistema Oficial de Asignación de Puntos
+                Sistema Oficial de Asignación de Puntos
               </h3>
               <button
                 onClick={() => setShowRulesModal(false)}
@@ -523,7 +523,7 @@ export default function RankingPage() {
           </div>
         ) : rankings.length === 0 ? (
           <div className="bg-navy-mid border border-border rounded-2xl p-8 sm:p-12 text-center space-y-4 my-8 shadow-xl">
-            <span className="text-5xl block mb-2">🏆</span>
+            <span className="text-5xl block mb-2 text-silver/30">🏆</span>
             <h3 className="text-xl sm:text-2xl font-bold text-white">¡Comienza la competencia en vivo!</h3>
             <p className="text-silver text-sm max-w-md mx-auto leading-relaxed">
               Aún no hay participantes con pronósticos evaluados en la tabla. ¡Elegí tu equipo, enviá tus pronósticos y sé el primero en liderar el ranking oficial!
@@ -542,7 +542,7 @@ export default function RankingPage() {
               <div className="relative pt-6 pb-2">
                 <div className="text-center mb-5">
                   <span className="text-[11px] font-bold uppercase tracking-widest text-gold/80 block">
-                    ⚡ ZONA DE CAMPEONES
+                    ZONA DE CAMPEONES
                   </span>
                   <h2 className="text-xl sm:text-2xl font-black text-white">Podio de Honor</h2>
                 </div>
@@ -553,7 +553,7 @@ export default function RankingPage() {
                   {top2 && (
                     <div className="order-2 md:order-1 bg-gradient-to-b from-navy-mid to-navy-dark border border-slate-400/40 rounded-2xl p-5 text-center shadow-lg relative flex flex-col items-center group hover:border-slate-300 transition-all">
                       <div className="absolute -top-3.5 bg-slate-300 text-navy-black font-extrabold text-[11px] px-3 py-0.5 rounded-full shadow">
-                        🥈 2° PUESTO
+                        2° PUESTO
                       </div>
                       <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white border-2 border-slate-300 p-1.5 shadow-md flex items-center justify-center mb-3 mt-1">
                         {top2.team_logo ? (
@@ -567,7 +567,7 @@ export default function RankingPage() {
                             className="w-12 h-12 sm:w-14 sm:h-14 object-contain"
                           />
                         ) : (
-                          <span className="text-2xl">⚽</span>
+                          <span className="text-2xl"></span>
                         )}
                       </div>
                       <h4 className="text-white font-bold text-base sm:text-lg truncate max-w-full mb-0.5">
@@ -583,7 +583,7 @@ export default function RankingPage() {
                         <div className="w-px h-6 bg-border/60" />
                         <div>
                           <span className="text-silver block text-[10px]">Plenos</span>
-                          <strong className="text-gold font-bold font-mono text-sm sm:text-base">{top2.exact_scores} 🎯</strong>
+                          <span className="text-gold font-bold font-mono text-sm sm:text-base">{top2.exact_scores}</span>
                         </div>
                       </div>
                     </div>
@@ -592,10 +592,9 @@ export default function RankingPage() {
                   {/* 1st Place (Gold Champion - Elevated Center) */}
                   <div className="order-1 md:order-2 bg-gradient-to-b from-navy-card via-navy-mid to-navy-dark border-2 border-gold rounded-3xl p-6 text-center shadow-[0_0_40px_rgba(201,168,76,0.25)] relative flex flex-col items-center transform md:-translate-y-2">
                     <div className="absolute -top-5 bg-gradient-to-r from-gold via-amber-300 to-gold text-navy-black font-black text-xs sm:text-sm px-4 py-1 rounded-full shadow-lg flex items-center gap-1.5 tracking-wide">
-                      <span>👑</span> 1° GRAN LÍDER
+                      1° GRAN LÍDER
                     </div>
                     <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white border-4 border-gold p-2 shadow-xl flex items-center justify-center mb-3 mt-2 relative">
-                      <div className="absolute -top-3 -right-2 text-2xl animate-bounce">👑</div>
                       {top1.team_logo ? (
                         <img
                           src={top1.team_logo}
@@ -625,7 +624,7 @@ export default function RankingPage() {
                       <div className="w-px h-8 bg-gold/30" />
                       <div>
                         <span className="text-silver block text-[10px] uppercase font-bold">Plenos Exactos</span>
-                        <strong className="text-amber-300 font-black font-mono text-xl sm:text-2xl">{top1.exact_scores} 🎯</strong>
+                        <strong className="text-amber-300 font-black font-mono text-xl sm:text-2xl">{top1.exact_scores}</strong>
                       </div>
                     </div>
                   </div>
@@ -634,7 +633,7 @@ export default function RankingPage() {
                   {top3 && (
                     <div className="order-3 bg-gradient-to-b from-navy-mid to-navy-dark border border-amber-700/50 rounded-2xl p-5 text-center shadow-lg relative flex flex-col items-center group hover:border-amber-600 transition-all">
                       <div className="absolute -top-3.5 bg-amber-700 text-white font-extrabold text-[11px] px-3 py-0.5 rounded-full shadow">
-                        🥉 3° PUESTO
+                        3° PUESTO
                       </div>
                       <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white border-2 border-amber-700 p-1.5 shadow-md flex items-center justify-center mb-3 mt-1">
                         {top3.team_logo ? (
@@ -648,7 +647,7 @@ export default function RankingPage() {
                             className="w-12 h-12 sm:w-14 sm:h-14 object-contain"
                           />
                         ) : (
-                          <span className="text-2xl">⚽</span>
+                          <span className="text-2xl"></span>
                         )}
                       </div>
                       <h4 className="text-white font-bold text-base sm:text-lg truncate max-w-full mb-0.5">
@@ -664,7 +663,7 @@ export default function RankingPage() {
                         <div className="w-px h-6 bg-border/60" />
                         <div>
                           <span className="text-silver block text-[10px]">Plenos</span>
-                          <strong className="text-gold font-bold font-mono text-sm sm:text-base">{top3.exact_scores} 🎯</strong>
+                          <strong className="text-gold font-bold font-mono text-sm sm:text-base">{top3.exact_scores}</strong>
                         </div>
                       </div>
                     </div>
@@ -690,7 +689,7 @@ export default function RankingPage() {
                         className="w-9 h-9 object-contain"
                       />
                     ) : (
-                      <span className="text-xl">⭐</span>
+                      <span className="text-xl"></span>
                     )}
                   </div>
                   <div>
@@ -717,7 +716,7 @@ export default function RankingPage() {
                   </div>
                   <div className="text-center">
                     <span className="text-silver text-[10px] uppercase font-bold block">Plenos</span>
-                    <strong className="text-amber-300 text-lg sm:text-xl font-black font-mono">{currentUserEntry.exact_scores} 🎯</strong>
+                    <strong className="text-amber-300 text-lg sm:text-xl font-black font-mono">{currentUserEntry.exact_scores}</strong>
                   </div>
                   <Link
                     href="/pronosticar/"
@@ -742,7 +741,7 @@ export default function RankingPage() {
                       : "text-silver hover:text-white"
                   }`}
                 >
-                  🏆 General
+                  General
                 </button>
                 <button
                   onClick={() => setActiveTab("plenos")}
@@ -752,7 +751,7 @@ export default function RankingPage() {
                       : "text-silver hover:text-white"
                   }`}
                 >
-                  🎯 Más Plenos
+                  Más Plenos
                 </button>
                 <button
                   onClick={() => setActiveTab("efectividad")}
@@ -762,7 +761,7 @@ export default function RankingPage() {
                       : "text-silver hover:text-white"
                   }`}
                 >
-                  ⚡ Efectividad
+                   Efectividad
                 </button>
               </div>
 
@@ -775,7 +774,7 @@ export default function RankingPage() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full bg-navy-dark border border-border/70 rounded-xl px-3.5 py-1.5 text-xs text-white placeholder-silver/60 focus:outline-none focus:border-gold transition-colors pl-8"
                 />
-                <span className="absolute left-2.5 top-2 text-xs text-silver">🔍</span>
+                <span className="absolute left-2.5 top-2 text-xs text-silver"></span>
                 {searchTerm && (
                   <button
                     onClick={() => setSearchTerm("")}
@@ -831,7 +830,7 @@ export default function RankingPage() {
                                   : "text-silver/80"
                               }`}
                             >
-                              {displayRank === 1 ? "🥇" : displayRank === 2 ? "🥈" : displayRank === 3 ? "🥉" : displayRank}
+                              {displayRank === 1 ? "" : displayRank === 2 ? "" : displayRank === 3 ? "" : displayRank}
                             </span>
                           </td>
 
@@ -850,7 +849,7 @@ export default function RankingPage() {
                                 />
                               ) : (
                                 <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-navy-card border border-border flex items-center justify-center text-xs text-silver shrink-0">
-                                  ⚽
+                                  
                                 </div>
                               )}
                               <div className="min-w-0 flex-1">
@@ -864,7 +863,7 @@ export default function RankingPage() {
                                     </span>
                                   )}
                                   {displayRank === 1 && (
-                                    <span className="text-[10px] text-gold shrink-0">👑</span>
+                                    <span className="text-[10px] text-gold shrink-0"></span>
                                   )}
                                 </div>
                                 {r.team_name && (
@@ -876,7 +875,7 @@ export default function RankingPage() {
                                 <div className="flex sm:hidden items-center gap-2 mt-0.5 text-[10px] text-silver/70 font-mono">
                                   <span>{r.predictions_count} PJ</span>
                                   {r.exact_scores > 0 && (
-                                    <span className="text-gold font-semibold">{r.exact_scores} 🎯</span>
+                                    <span className="text-gold font-semibold">{r.exact_scores}</span>
                                   )}
                                 </div>
                               </div>
@@ -892,7 +891,7 @@ export default function RankingPage() {
                           <td className="hidden sm:table-cell px-3 sm:px-4 py-3.5 text-center">
                             {r.exact_scores > 0 ? (
                               <span className="text-gold font-bold font-mono text-xs sm:text-sm bg-gold/10 px-2 py-0.5 rounded-full border border-gold/20">
-                                {r.exact_scores} 🎯
+                                {r.exact_scores}
                               </span>
                             ) : (
                               <span className="text-silver/50 text-xs">—</span>
@@ -901,12 +900,12 @@ export default function RankingPage() {
 
                           {/* Signos */}
                           <td className="hidden sm:table-cell px-3 sm:px-4 py-3.5 text-center text-silver text-xs font-mono">
-                            {r.correct_signs > 0 ? `${r.correct_signs} ✅` : "—"}
+                            {r.correct_signs > 0 ? `${r.correct_signs} ` : "—"}
                           </td>
 
                           {/* Goleadores */}
                           <td className="hidden md:table-cell px-3 sm:px-4 py-3.5 text-center text-silver text-xs font-mono">
-                            {r.scorer_hits > 0 ? `${r.scorer_hits} ⚽` : "—"}
+                            {r.scorer_hits > 0 ? `${r.scorer_hits} ` : "—"}
                           </td>
 
                           {/* Puntos Totales */}
@@ -940,7 +939,7 @@ export default function RankingPage() {
                   href="/pronosticar/"
                   className="bg-gold hover:bg-gold-light text-navy-black font-extrabold px-6 py-3 rounded-full text-xs sm:text-sm transition-all shadow-lg hover:scale-105 flex items-center gap-2"
                 >
-                  <span>⚽</span> Pronosticar Ahora
+                  <span></span> Pronosticar Ahora
                 </Link>
               </div>
             </div>

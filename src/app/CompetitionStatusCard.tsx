@@ -22,17 +22,16 @@ interface CupConfig {
   name: string;
   shortName: string;
   logoUrl: string;
-  emoji: string;
 }
 
 const CUPS: CupConfig[] = [
-  { slug: "champions", name: "Champions League", shortName: "Champions", logoUrl: "/4to-Concurso-Interliga/logos/champions.png", emoji: "⭐" },
-  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/4to-Concurso-Interliga/logos/europa.svg", emoji: "🟠" },
-  { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/4to-Concurso-Interliga/logos/conference.svg", emoji: "🟢" },
-  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/4to-Concurso-Interliga/logos/coppaitalia.svg", emoji: "🇮🇹" },
-  { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/4to-Concurso-Interliga/logos/facup.svg", emoji: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
-  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/4to-Concurso-Interliga/logos/copadelrey.svg", emoji: "🇪🇸" },
-  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/4to-Concurso-Interliga/logos/dfbpokal.svg", emoji: "🇩🇪" },
+  { slug: "champions", name: "Champions League", shortName: "Champions", logoUrl: "/4to-Concurso-Interliga/logos/champions.png" },
+  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/4to-Concurso-Interliga/logos/europa.svg" },
+  { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/4to-Concurso-Interliga/logos/conference.svg" },
+  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/4to-Concurso-Interliga/logos/coppaitalia.svg" },
+  { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/4to-Concurso-Interliga/logos/facup.svg" },
+  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/4to-Concurso-Interliga/logos/copadelrey.svg" },
+  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/4to-Concurso-Interliga/logos/dfbpokal.svg" },
 ];
 
 interface EffectiveStatus {
@@ -241,8 +240,8 @@ export default function CompetitionStatusCard() {
                       />
                     </div>
                   ) : (
-                    <div className="w-7 h-7 rounded-full bg-navy-mid border border-border flex items-center justify-center shrink-0 text-xs">
-                      ⚽
+                    <div className="w-7 h-7 rounded-full bg-navy-mid border border-border flex items-center justify-center shrink-0 text-[10px] text-silver">
+                      --
                     </div>
                   )}
                   <div className="min-w-0 flex-1">
@@ -260,14 +259,12 @@ export default function CompetitionStatusCard() {
                 {/* Inheritance / Transfer info */}
                 {activeCupStatus.inheritedFrom ? (
                   <div className="bg-gold/10 border border-gold/30 rounded-lg px-2.5 py-1.5 text-[11px] text-gold flex items-center gap-1.5">
-                    <span>👑</span>
                     <span className="truncate">
                       Heredado de <strong className="font-bold">{activeCupStatus.inheritedFrom}</strong>
                     </span>
                   </div>
                 ) : activeCupStatus.status === "ALIVE" ? (
                   <div className="bg-navy-mid/60 border border-border/40 rounded-lg px-2.5 py-1 text-[10px] text-silver/70 flex items-center gap-1.5">
-                    <span>👕</span>
                     <span className="truncate">Club base asignado</span>
                   </div>
                 ) : null}
@@ -283,7 +280,7 @@ export default function CompetitionStatusCard() {
         ) : (
           <div className="bg-gold/10 border border-gold/30 rounded-xl p-3.5 mt-2 text-center">
             <p className="text-gold text-xs font-semibold">
-              ⚽ Elegí tu equipo en el Paso 1 para activar tu estado en copas
+              Elegí tu equipo en el Paso 1 para activar tu estado en copas
             </p>
           </div>
         )

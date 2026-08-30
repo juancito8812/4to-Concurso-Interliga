@@ -54,7 +54,6 @@ export default function RegistroPage() {
     return (
       <div className="min-h-screen pt-16 sm:pt-20 pb-8 px-4 flex items-center justify-center">
         <div className="max-w-md w-full text-center">
-          <span className="text-5xl mb-4 block">📧</span>
           <h1 className="text-2xl font-bold text-white mb-4">¡Revisa tu correo!</h1>
           <p className="text-silver text-sm mb-6">
             Te enviamos un link de confirmación a <span className="text-gold">{email}</span>.

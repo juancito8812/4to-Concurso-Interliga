@@ -86,9 +86,7 @@ export default function Navbar() {
                 >
                   {teamLogo ? (
                     <img src={teamLogo} alt={teamName} className="w-4 h-4 sm:w-5 sm:h-5 rounded-full object-contain bg-white p-0.5" />
-                  ) : (
-                    <span className="text-xs">⚽</span>
-                  )}
+                  ) : null}
                   <span className="max-w-[80px] sm:max-w-[110px] truncate">{displayName || user.email?.split("@")[0]}</span>
                   <span className={`text-[9px] transition-transform duration-200 ${menuOpen ? "rotate-180" : ""}`}>▼</span>
                 </button>
@@ -153,7 +151,6 @@ export default function Navbar() {
                 href="/ranking/"
                 className="text-silver text-xs font-semibold hover:text-white transition-colors flex items-center gap-1 px-1.5 py-1"
               >
-                <span>🏆</span>
                 <span className="hidden sm:inline">Ranking</span>
               </Link>
               <Link
