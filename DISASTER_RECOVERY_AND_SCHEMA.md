@@ -25,7 +25,7 @@ La plataforma está diseñada con una arquitectura resiliente y desacoplada:
 | **Frontend Web** | Next.js 16 + React 19 + Tailwind v4 | GitHub Repository | Versionado en Git (`main`) |
 | **Base de Datos** | Supabase PostgreSQL | Proyecto Supabase | `supabase/schema.sql` |
 | **Autenticación** | Supabase Auth (Email/Pass) | Proyecto Supabase | `auth.users` + Trigger automático |
-| **Calendario Oficial** | 1.618 Partidos 2026/27 reales | `src/data/officialFixtures.json` | Pre-sincronizado + regenerable con `scripts/sync-official-fixtures.js` |
+| **Calendario Oficial** | 1.650 Partidos 2026/27 reales | `src/data/officialFixtures.json` | Pre-sincronizado + regenerable con `scripts/sync-official-fixtures.js` |
 | **Plantillas Oficiales** | 4.749 Jugadores 2026/27 | `src/data/officialPlayers.json` | Pre-sincronizado + completable con `scripts/sync-player-squads.js` |
 | **Partidos Evaluados** | Resultados y marcadores oficiales | `src/data/officialEvaluatedMatches.json` | Pre-sincronizado / Versionado |
 | **Tablas en Vivo** | ESPN API sin API Key | `src/lib/espnApi.ts` | En vivo / Fallback automático |
@@ -57,7 +57,7 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
 > **Después de correr `schema.sql`** (y con la service role key disponible), ejecutar los scripts de sincronización para poblar los datos reales:
 > ```bash
 > node scripts/sync-official-fixtures.js   # Regenera officialFixtures.json desde fuentes reales
-> node scripts/sync-db.js                  # Puebla matches (1.618) y teams (179) reales en Supabase
+> node scripts/sync-db.js                  # Puebla matches (1.650) y teams (219) reales en Supabase
 > node scripts/validate-fixtures.js        # Verifica 0 errores contra las fuentes
 > ```
 
@@ -251,7 +251,7 @@ Para garantizar un rendimiento ultra-rápido y costo $0:
 3. **Zero DB Reads en Plantillas:**
    - 4.749 jugadores pre-cargados en bundle en memoria (`officialPlayers.json`).
 4. **Cron liviano (~2MB/mes de egress):**
-   - El sync del calendario (1.618 fixtures) solo corre cuando cambia `officialFixtures.json` (hash md5 en `app_meta`).
+   - El sync del calendario (1.650 fixtures) solo corre cuando cambia `officialFixtures.json` (hash md5 en `app_meta`).
    - La persistencia de resultados usa los IDs canónicos directos (sin descargar la tabla `matches` completa en cada corrida).
 5. **Mantenimiento de actividad:**
    - El cron cada 2h mantiene el proyecto despierto (el plan Free pausa tras 7 días sin actividad).
@@ -342,4 +342,4 @@ El cron `scripts/auto-sync-espn-results.js` escribe vía REST directo con `SUPAB
   SELECT count(*) as total_partidos FROM public.matches;
   SELECT count(*) as total_perfiles FROM public.profiles;
   ```
-  Debe retornar **179 equipos reales** (2026/27), **1.618 partidos** (igual al calendario oficial) y el total de perfiles activos. Si los conteos difieren, ejecutar `scripts/sync-db.js` con la service role key para repoblar.
+  Debe retornar **219 equipos reales** (2026/27), **1.650 partidos** (igual al calendario oficial) y el total de perfiles activos. Si los conteos difieren, ejecutar `scripts/sync-db.js` con la service role key para repoblar.

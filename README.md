@@ -1,6 +1,6 @@
 # 4° Concurso Interliga
 
-Plataforma oficial de pronósticos de fútbol para la temporada 2026-27. Los participantes eligen su club favorito y compiten pronosticando resultados, marcadores exactos y goleadores en las principales ligas y copas europeas (Premier League, LaLiga, Serie A, Bundesliga, Champions League, Europa League, Conference League y Copa Italia).
+Plataforma oficial de pronósticos de fútbol para la temporada 2026-27. Los participantes eligen su club favorito y compiten pronosticando resultados, marcadores exactos y goleadores en las principales ligas y copas europeas (Premier League, LaLiga, Serie A, Bundesliga, Champions League, Europa League, Conference League, Copa Italia y DFB-Pokal).
 
 ---
 
@@ -11,7 +11,7 @@ Plataforma oficial de pronósticos de fútbol para la temporada 2026-27. Los par
 - **Lenguaje:** TypeScript 5 en modo estricto.
 - **Base de Datos & Auth:** [Supabase](https://supabase.com/) (Autenticación + PostgreSQL con Row Level Security y RPCs seguras).
 - **APIs de Fútbol y Datos Oficiales:**
-  - `src/data/officialFixtures.json` (**1.618 partidos oficiales reales** de la temporada 2026/27 pre-sincronizados para las 8 competiciones, 0 fabricados — validación cruzada contra las fuentes en `scripts/validate-fixtures.js`).
+  - `src/data/officialFixtures.json` (**1.650 partidos oficiales reales** de la temporada 2026/27 pre-sincronizados para las 9 competiciones, 0 fabricados — validación cruzada contra las fuentes en `scripts/validate-fixtures.js`).
   - `src/data/officialPlayers.json` (**4.749 jugadores oficiales** de la temporada 2026/27 de todos los clubes participantes clasificados por posición).
   - ESPN API pública (tablas de clasificación, máximos goleadores y resultados en vivo sin restricciones de CORS).
 - **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`).
@@ -44,8 +44,8 @@ src/
 │   ├── mis-pronosticos/page.tsx    # Historial de predicciones, estado y desglose de puntos
 │   └── ranking/page.tsx            # Ranking general en vivo, Podio de Honor y búsqueda
 ├── data/
-│   ├── officialFixtures.json       # Calendario oficial 2026/27 (1.618 partidos reales, IDs canónicos únicos)
-│   ├── teamAliases.json            # Fuente única de normalización (aliasMap, equipos canónicos, teamCups)
+│   ├── officialFixtures.json       # Calendario oficial 2026/27 (1.650 partidos reales, IDs canónicos únicos)
+│   ├── teamAliases.json            # Fuente única de normalización (404 aliases, 241 equipos canónicos, 225 teamCups)
 │   ├── officialPlayers.json        # Plantillas oficiales 2026/27 (4.749 jugadores)
 │   ├── officialEvaluatedMatches.json # Resultados oficiales finalizados y goleadores reales
 │   └── officialEvaluatedPredictions.json # Pronósticos evaluados y sincronizados
@@ -61,7 +61,7 @@ src/
 │   ├── auto-sync-espn-results.js   # Cron: ESPN → evaluación de puntos/survivors → Supabase (service key)
 │   ├── sync-official-fixtures.js   # Regenera el calendario SOLO desde fuentes reales (API + ESPN + Wikipedia)
 │   ├── validate-fixtures.js        # Validación cruzada del calendario contra las fuentes (0 errores)
-│   ├── sync-db.js                  # Sincroniza Supabase: matches, remapeo de predicciones, teams (179)
+│   ├── sync-db.js                  # Sincroniza Supabase: matches, remapeo de predicciones, teams (219)
 │   ├── sync-player-squads.js       # Completa plantillas con rosters ESPN reales (UCL + Copa Italia)
 │   ├── rebuild-eval-preds.js       # Reconstruye predicciones evaluadas desde Supabase
 │   ├── verify-logic.js             # 43 checks de lógica de negocio (scoring, normalización, KO, survivor)
@@ -96,6 +96,7 @@ src/
 | `/tabla/europa` | Tabla de posiciones oficial de UEFA Europa League | No |
 | `/tabla/conference` | Tabla de posiciones oficial de UEFA Conference League | No |
 | `/tabla/coppaitalia` | Tabla de posiciones oficial de Copa Italia | No |
+| `/tabla/dfbpokal` | Tabla de posiciones oficial de DFB-Pokal | No |
 
 ---
 

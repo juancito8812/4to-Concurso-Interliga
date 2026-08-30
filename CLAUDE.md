@@ -12,8 +12,8 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - Tailwind CSS v4 (colores custom en `globals.css` con `@theme`)
 - TypeScript estricto
 - Supabase (Auth + PostgreSQL con RLS público y escrituras del cron vía **service role key**)
-- `src/data/officialFixtures.json` — 1.618 partidos oficiales 2026/27 reales para las 8 competiciones (IDs canónicos únicos, 0 fabricados — verificado contra fuentes)
-- `src/data/teamAliases.json` — Fuente única de normalización (aliasMap, canonicalDbTeams, knockoutPairs, teamCups)
+- `src/data/officialFixtures.json` — 1.650 partidos oficiales 2026/27 reales para las 9 competiciones (IDs canónicos únicos, 0 fabricados — verificado contra fuentes)
+- `src/data/teamAliases.json` — Fuente única de normalización (404 aliases, 241 equipos canónicos, knockoutPairs, teamCups de 225 equipos)
 - `src/data/officialPlayers.json` — Base de datos oficial de 4.749 jugadores 2026/27 clasificados por posición
 - ESPN API pública para tablas de clasificación, goleadores y partidos en vivo (CORS habilitado)
 - Automatización: cron GitHub Actions cada 2h (`auto-evaluate-matches.yml` + `scripts/auto-sync-espn-results.js`)
@@ -36,8 +36,8 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - `src/app/mis-pronosticos/page.tsx` — Historial con logos, desglose de puntos y evaluación automática del survivor
 - `src/app/ranking/page.tsx` — Ranking general en vivo con Podio de Honor y búsqueda
 - `src/app/tabla/[league]/TablaLigaClient.tsx` — Clasificación, goleadores y partidos por liga (ESPN API)
-- `src/data/officialFixtures.json` — 1.618 partidos oficiales 2026/27 reales pre-sincronizados
-- `src/data/teamAliases.json` — aliasMap + equipos canónicos + teamCups + pares KO (consumido por TS y scripts)
+- `src/data/officialFixtures.json` — 1.650 partidos oficiales 2026/27 reales pre-sincronizados
+- `src/data/teamAliases.json` — 404 aliases + 241 equipos canónicos + 225 teamCups + pares KO (consumido por TS y scripts)
 - `src/data/officialPlayers.json` — 4.749 jugadores 2026/27 con posiciones y roles actualizados
 - `src/data/officialEvaluatedMatches.json` — Resultados oficiales de partidos jugados y goleadores reales
 - `src/data/officialEvaluatedPredictions.json` — Pronósticos evaluados y sincronizados (JSON + Supabase)

@@ -23,7 +23,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **Ranking General en Vivo:** `src/app/ranking/page.tsx` — Tabla global multiusuario conectada a Supabase, Podio de Honor y búsqueda.
 - **Autenticación y Perfil:** `src/contexts/AuthContext.tsx` y `src/app/perfil/page.tsx` — Registro con username, login, recuperación de clave, reinicio de club y eliminación de cuenta.
 - **Base de datos:** Supabase PostgreSQL — tablas `profiles`, `teams`, `players`, `matches`, `predictions`, `prediction_scorers`, `tournament_survivors`, `app_meta`.
-- **Calendario oficial 2026/27:** `src/data/officialFixtures.json` — 1.618 partidos REALES verificados (0 fabricados): 4 ligas domésticas (football-data API), UCL fase liga + Copa Italia (ESPN). Regenerable con `scripts/sync-official-fixtures.js` (idempotente); validación cruzada contra las fuentes con `scripts/validate-fixtures.js` (0 errores). UEL/UECL (sorteo del 28/8) y rondas KO se sincronizan cuando las fuentes las publiquen (requieren extender el script).
+- **Calendario oficial 2026/27:** `src/data/officialFixtures.json` — 1.650 partidos REALES verificados (0 fabricados): 4 ligas domésticas (football-data API), UCL fase liga + Copa Italia + DFB-Pokal (ESPN). Regenerable con `scripts/sync-official-fixtures.js` (idempotente); validación cruzada contra las fuentes con `scripts/validate-fixtures.js` (0 errores). UEL/UECL (sorteo del 28/8), FA Cup y Copa del Rey se sincronizan cuando las fuentes las publiquen (requieren extender el script).
 - **Plantillas oficiales 2026/27:** `src/data/officialPlayers.json` — 4.749 jugadores de todos los clubes con posiciones (bundle + rosters ESPN reales vía `scripts/sync-player-squads.js`).
 - **Normalización de Ligas y Equipos:** `src/lib/leagueConfig.ts` — `normalizeMatchLeague` y `normalizeTeamName` mapean nombres canónicos y competencias exactas.
 - **Cliente Football API:** `src/lib/footballData.ts` — `getOfficialTeamMatches` y `getOfficialPlayersForTeams` con API en vivo + fallback de fixtures y plantillas oficiales pre-sincronizadas.
@@ -59,12 +59,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 | `src/lib/espnApi.ts` | Cliente ESPN API para tablas de posiciones, goleadores y partidos |
 | `src/lib/espnResultsFetcher.ts` | Partidos finalizados ESPN en vivo para el cliente (caché 30s, `AbortSignal.timeout(10s)`) |
 | `src/lib/scoring.ts` | Motor de cálculo de puntajes del concurso (+ `arePlayersMatching` fonético) |
-| `src/data/teamAliases.json` | Fuente única: aliasMap de equipos, canonicalDbTeams, knockoutPairs y teamCups (consumido por TS y scripts) |
+| `src/data/teamAliases.json` | Fuente única: aliasMap (404 aliases), canonicalDbTeams (241 equipos), knockoutPairs y teamCups (225 equipos; consumido por TS y scripts) |
 | `scripts/lib/score-utils.js` | Módulo CJS compartido: `normalizeTeamName`, `matchIdToUuid`, `calculateScore`, `isKnockoutMatch`, `isKnockoutCup`, `getKnockoutCupSlug`, `getKnockoutRound`, `getTeamCups`, `evaluateSurvivorProgression` |
 | `scripts/auto-sync-espn-results.js` | Cron: ESPN (backfill 3 días) → JSON evaluados → persistencia en Supabase con service role key |
 | `scripts/sync-official-fixtures.js` | Regenera el calendario SOLO desde fuentes reales (football-data API + ESPN + Wikipedia para equipos UEL/UECL); regenera `teamCups` y `knockoutPairs` |
 | `scripts/validate-fixtures.js` | Validación cruzada de `officialFixtures.json` contra las fuentes (0 errores = calendario 100% real) |
-| `scripts/sync-db.js` | Sincroniza Supabase: upsert de matches (sin pisar resultados), remapeo de predicciones a IDs reales, rebuild de la tabla teams (179 equipos) |
+| `scripts/sync-db.js` | Sincroniza Supabase: upsert de matches (sin pisar resultados), remapeo de predicciones a IDs reales, rebuild de la tabla teams (219 equipos) |
 | `scripts/sync-player-squads.js` | Completa `officialPlayers.json` con rosters ESPN reales (UCL + Copa Italia) |
 | `scripts/rebuild-eval-preds.js` | Reconstruye `officialEvaluatedPredictions.json` desde Supabase (source of truth) |
 | `scripts/verify-logic.js` | 43 checks de lógica de negocio (scoring, normalización, KO, survivor, IDs) |
@@ -81,7 +81,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **profiles** — `user_id` (PK), `display_name`, `team_id` (FK → teams). Políticas RLS habilitan lectura pública para el ranking general.
 - **teams** — `id`, `name`, `league`, `logo_url` (equipos reales 2026/27 sincronizados por `scripts/sync-db.js`).
 - **players** — `name`, `team`, `league`, `position` (500+ jugadores en DB + 4.749 en bundle oficial).
-- **matches** — `id` (IDs canónicos de fixtures), `home_team`, `away_team`, `match_date`, `league`, `result_home`, `result_away` (1.618 filas re-sembradas).
+- **matches** — `id` (IDs canónicos de fixtures), `home_team`, `away_team`, `match_date`, `league`, `result_home`, `result_away` (1.650 filas re-sembradas).
 - **predictions** — `id`, `user_id`, `match_id`, `home_score`, `away_score`, `points` (UNIQUE user_id+match_id; FK → matches con IDs canónicos).
 - **prediction_scorers** — `prediction_id`, `player_name`, `goals`, `team`. Escritura SOLO del dueño del pronóstico (IDOR fix).
 - **tournament_survivors** — `id` (PK), `user_id` (FK → auth.users), `tournament_slug` (TEXT: 'champions', 'europa', 'conference', 'coppaitalia', 'facup', 'copadelrey', 'dfbpokal'), `active_team_id` (FK → teams), `status` ('ALIVE' | 'ELIMINATED'), `eliminated_at_round` (TEXT), `history` (JSONB: lista de transferencias de camisetas), `created_at`, `updated_at`. RLS: SELECT público, ALL restringido al propio usuario (`auth.uid() = user_id`).
