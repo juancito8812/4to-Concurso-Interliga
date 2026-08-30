@@ -162,5 +162,30 @@
         "team": "home"
       }
     ]
+  },
+  {
+    "id": "95da6cba-c0e0-4833-9a14-7d1bd84d6967",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000000089db0",
+    "home_score": 4,
+    "away_score": 0,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Vinicius Junior",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
   }
 ]
