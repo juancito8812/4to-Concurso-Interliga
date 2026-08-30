@@ -361,7 +361,49 @@
     "bodo": "FK Bodø/Glimt",
     "bodøglimt": "FK Bodø/Glimt",
     "acomonia": "AC Omonia",
-    "omonia": "AC Omonia"
+    "omonia": "AC Omonia",
+    "1.fcheidenheim1846": "Heidenheim",
+    "1.fclfcunionberlin": "Union Berlin",
+    "fortunadüsseldorf": "Düsseldorf",
+    "svdarmstadt98": "Darmstadt",
+    "vflbochum": "Bochum",
+    "vflosnabruck": "VfL Osnabruck",
+    "vfl_osnabruck": "VfL Osnabruck",
+    "viktoria_köln": "Viktoria Köln",
+    "fcccologne": "Köln",
+    "1.fcnürnberg": "FC Nürnberg",
+    "fcnürnberg": "FC Nürnberg",
+    "nürnberg": "FC Nürnberg",
+    "spvgggreutherfürth": "SpVgg Greuther Fürth",
+    "spvgggreuther_fürth": "SpVgg Greuther Fürth",
+    "greutherfürth": "SpVgg Greuther Fürth",
+    "tsveintrachtbraunschweig": "TSV Eintracht Braunschweig",
+    "braunschweig": "TSV Eintracht Braunschweig",
+    "arminiabielefeld": "Arminia Bielefeld",
+    "kaiserslautern": "Kaiserslautern",
+    "fckaiserslautern": "Kaiserslautern",
+    "hannover96": "Hannover 96",
+    "hansarostock": "Hansa Rostock",
+    "herthaberlin": "Hertha Berlin",
+    "st.pauli": "St. Pauli",
+    "fcstpauli": "St. Pauli",
+    "tsv1860munich": "TSV 1860 Munich",
+    "1860munich": "TSV 1860 Munich",
+    "svdarmstadt": "Darmstadt",
+    "dynamoDresden": "Dynamo Dresden",
+    "dresdendynamo": "Dynamo Dresden",
+    "rot-weissessen": "Rot-Weiss Essen",
+    "rotweissessen": "Rot-Weiss Essen",
+    "karlsruhersc": "Karlsruher SC",
+    "preußenmünster": "Preußen Münster",
+    "msvduisburg": "MSV Duisburg",
+    "fcerzgebirgeaue": "FC Erzgebirge Aue",
+    "energiecottbus": "Energie Cottbus",
+    "fccarlzeissjena": "FC Carl Zeiss Jena",
+    "saarbrücken": "Saarbrücken",
+    "fcsaarbrücken": "Saarbrücken",
+    "hallescherfc": "Hallescher FC",
+    "scvelt1924": "SC Verl 1924"
   },
   "canonicalDbTeams": [
     "AC Milan",
@@ -564,7 +606,47 @@
     "Werder Bremen",
     "West Ham",
     "Wolfsburg",
-    "Wolves"
+    "Wolves",
+    "1. FC Magdeburg",
+    "Arminia Bielefeld",
+    "Bahlinger SC 1929",
+    "Dynamo Dresden",
+    "Eintracht Trier",
+    "Energie Cottbus",
+    "FC Carl Zeiss Jena",
+    "FC Erzgebirge Aue",
+    "FC Nürnberg",
+    "FC Phönix Lübeck",
+    "Hallescher FC",
+    "HEBC Hamburg",
+    "Hemelingen",
+    "Hertha Berlin",
+    "Hansa Rostock",
+    "Hannover 96",
+    "Karlsruher SC",
+    "Kaiserslautern",
+    "Lüneburger SK Hansa",
+    "MSV Duisburg",
+    "Preußen Münster",
+    "Rot-Weiss Essen",
+    "SC St. Tönis",
+    "SC Verl 1924",
+    "SG Sonnenhof Großaspach",
+    "SSV Jeddeloh II",
+    "Saarbrücken",
+    "Schott",
+    "SpVgg Greuther Fürth",
+    "St. Pauli",
+    "SV Waldhof Mannheim",
+    "SV Wehen Wiesbaden",
+    "TSV 1860 Munich",
+    "TSV Eintracht Braunschweig",
+    "VFB Krieschow",
+    "VSG Altglienicke",
+    "VfL Osnabruck",
+    "Viktoria Köln",
+    "Westfalia Rhynern",
+    "Würzburger Kickers"
   ],
   "knockoutPairs": {
     "champions": [],
@@ -572,6 +654,9 @@
     "conference": []
   },
   "teamCups": {
+    "1. FC Magdeburg": [
+      "dfbpokal"
+    ],
     "AC Milan": [
       "coppaitalia",
       "europa"
@@ -599,6 +684,9 @@
     ],
     "Arezzo": [
       "coppaitalia"
+    ],
+    "Arminia Bielefeld": [
+      "dfbpokal"
     ],
     "Arsenal": [
       "facup",
@@ -631,6 +719,9 @@
     "AZ Alkmaar": [
       "europa"
     ],
+    "Bahlinger SC 1929": [
+      "dfbpokal"
+    ],
     "Barcelona": [
       "copadelrey",
       "champions"
@@ -651,6 +742,9 @@
     ],
     "Beşiktaş": [
       "europa"
+    ],
+    "Bochum": [
+      "dfbpokal"
     ],
     "Bologna": [
       "coppaitalia"
@@ -730,16 +824,28 @@
     "CSKA Sofia": [
       "conference"
     ],
+    "Darmstadt": [
+      "dfbpokal"
+    ],
     "Deportivo La Coruña": [
       "copadelrey"
     ],
     "Dinamo Zagreb": [
       "europa"
     ],
+    "Düsseldorf": [
+      "dfbpokal"
+    ],
+    "Dynamo Dresden": [
+      "dfbpokal"
+    ],
     "Egnatia": [
       "conference"
     ],
     "Eintracht Frankfurt": [
+      "dfbpokal"
+    ],
+    "Eintracht Trier": [
       "dfbpokal"
     ],
     "Elche": [
@@ -748,14 +854,29 @@
     "Empoli": [
       "coppaitalia"
     ],
+    "Energie Cottbus": [
+      "dfbpokal"
+    ],
     "Espanyol": [
       "copadelrey"
     ],
     "Everton": [
       "facup"
     ],
+    "FC Carl Zeiss Jena": [
+      "dfbpokal"
+    ],
+    "FC Erzgebirge Aue": [
+      "dfbpokal"
+    ],
     "FC København": [
       "conference"
+    ],
+    "FC Nürnberg": [
+      "dfbpokal"
+    ],
+    "FC Phönix Lübeck": [
+      "dfbpokal"
     ],
     "Fenerbahçe": [
       "champions"
@@ -801,7 +922,16 @@
     "Hajduk Split": [
       "conference"
     ],
+    "Hallescher FC": [
+      "dfbpokal"
+    ],
     "Hamburger SV": [
+      "dfbpokal"
+    ],
+    "Hannover 96": [
+      "dfbpokal"
+    ],
+    "Hansa Rostock": [
       "dfbpokal"
     ],
     "Hapoel Be'er Sheva": [
@@ -810,9 +940,24 @@
     "Hearts": [
       "conference"
     ],
+    "HEBC Hamburg": [
+      "dfbpokal"
+    ],
+    "Heidenheim": [
+      "dfbpokal"
+    ],
+    "Hemelingen": [
+      "dfbpokal"
+    ],
+    "Hertha Berlin": [
+      "dfbpokal"
+    ],
     "Hoffenheim": [
       "dfbpokal",
       "europa"
+    ],
+    "Holstein Kiel": [
+      "dfbpokal"
     ],
     "Hull City": [
       "facup"
@@ -842,6 +987,12 @@
     "Juventus": [
       "coppaitalia",
       "europa"
+    ],
+    "Kaiserslautern": [
+      "dfbpokal"
+    ],
+    "Karlsruher SC": [
+      "dfbpokal"
     ],
     "Kauno Žalgiris": [
       "conference"
@@ -892,6 +1043,9 @@
     "Lugano": [
       "conference"
     ],
+    "Lüneburger SK Hansa": [
+      "dfbpokal"
+    ],
     "Mainz": [
       "dfbpokal"
     ],
@@ -920,6 +1074,9 @@
     ],
     "Monza": [
       "coppaitalia"
+    ],
+    "MSV Duisburg": [
+      "dfbpokal"
     ],
     "Napoli": [
       "coppaitalia",
@@ -979,6 +1136,9 @@
     "Potenza": [
       "coppaitalia"
     ],
+    "Preußen Münster": [
+      "dfbpokal"
+    ],
     "PSV": [
       "champions"
     ],
@@ -1023,8 +1183,14 @@
       "coppaitalia",
       "champions"
     ],
+    "Rot-Weiss Essen": [
+      "dfbpokal"
+    ],
     "Royale Union Saint-Gilloise": [
       "europa"
+    ],
+    "Saarbrücken": [
+      "dfbpokal"
     ],
     "SABAH FK": [
       "champions"
@@ -1038,11 +1204,23 @@
     "SC Paderborn 07": [
       "dfbpokal"
     ],
+    "SC St. Tönis": [
+      "dfbpokal"
+    ],
+    "SC Verl 1924": [
+      "dfbpokal"
+    ],
     "Schalke 04": [
+      "dfbpokal"
+    ],
+    "Schott": [
       "dfbpokal"
     ],
     "Sevilla": [
       "copadelrey"
+    ],
+    "SG Sonnenhof Großaspach": [
+      "dfbpokal"
     ],
     "Shakhtar Donetsk": [
       "champions"
@@ -1062,6 +1240,15 @@
     "Sporting Clube de Portugal": [
       "champions"
     ],
+    "SpVgg Greuther Fürth": [
+      "dfbpokal"
+    ],
+    "SSV Jeddeloh II": [
+      "dfbpokal"
+    ],
+    "St. Pauli": [
+      "dfbpokal"
+    ],
     "Sturm Graz": [
       "europa"
     ],
@@ -1079,6 +1266,12 @@
     "SV 07 Elversberg": [
       "dfbpokal"
     ],
+    "SV Waldhof Mannheim": [
+      "dfbpokal"
+    ],
+    "SV Wehen Wiesbaden": [
+      "dfbpokal"
+    ],
     "Thun": [
       "conference"
     ],
@@ -1093,6 +1286,12 @@
     ],
     "Trabzonspor": [
       "conference"
+    ],
+    "TSV 1860 Munich": [
+      "dfbpokal"
+    ],
+    "TSV Eintracht Braunschweig": [
+      "dfbpokal"
     ],
     "Twente": [
       "conference"
@@ -1121,11 +1320,20 @@
     "Verona": [
       "coppaitalia"
     ],
+    "VFB Krieschow": [
+      "dfbpokal"
+    ],
+    "VfL Osnabruck": [
+      "dfbpokal"
+    ],
     "Vicenza": [
       "coppaitalia"
     ],
     "Viking FK": [
       "champions"
+    ],
+    "Viktoria Köln": [
+      "dfbpokal"
     ],
     "Viktoria Plzeň": [
       "europa"
@@ -1137,7 +1345,19 @@
     "Virtus Entella": [
       "coppaitalia"
     ],
+    "VSG Altglienicke": [
+      "dfbpokal"
+    ],
     "Werder Bremen": [
+      "dfbpokal"
+    ],
+    "Westfalia Rhynern": [
+      "dfbpokal"
+    ],
+    "Wolfsburg": [
+      "dfbpokal"
+    ],
+    "Würzburger Kickers": [
       "dfbpokal"
     ]
   }

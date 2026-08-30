@@ -93,6 +93,9 @@ interface ESPNScoreboardEvent {
   id: string;
   name: string;
   date: string;
+  season?: {
+    year?: number;
+  };
   status: {
     type: {
       detail: string;
@@ -253,13 +256,15 @@ export async function getEspnScoreboard(leagueSlug: string): Promise<CupMatch[]>
   const espnCode = leagueEspnCodes[leagueSlug];
   if (!espnCode) return [];
 
-  const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${espnCode}/scoreboard`;
+  const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${espnCode}/scoreboard?dates=20260801-20270601&limit=500`;
 
   try {
     const res = await fetch(url);
     if (res.ok) {
       const data = await res.json();
-      const events: ESPNScoreboardEvent[] = data.events || [];
+      const allEvents: ESPNScoreboardEvent[] = data.events || [];
+      // Filter to current season only (prevent showing last season's final)
+      const events = allEvents.filter((e) => !e.season?.year || e.season.year >= 2026);
 
       if (events.length > 0) {
         return events.map((event) => {

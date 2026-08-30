@@ -297,6 +297,50 @@
     "matchday": 2
   },
   {
+    "id": "00000000-0000-4000-8000-000017f41fcf",
+    "home_team": "Preußen Münster",
+    "away_team": "Karlsruher SC",
+    "match_date": "2026-08-21T16:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420f5",
+    "home_team": "SC St. Tönis",
+    "away_team": "Eintracht Frankfurt",
+    "match_date": "2026-08-21T16:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420eb",
+    "home_team": "SV Waldhof Mannheim",
+    "away_team": "Kaiserslautern",
+    "match_date": "2026-08-21T16:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420f3",
+    "home_team": "Hansa Rostock",
+    "away_team": "Stuttgart",
+    "match_date": "2026-08-21T18:45Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
     "id": "00000000-0000-4000-8000-000000089da7",
     "home_team": "Real Betis",
     "away_team": "Real Sociedad",
@@ -319,6 +363,28 @@
     "matchday": 1
   },
   {
+    "id": "00000000-0000-4000-8000-000017f420e9",
+    "home_team": "Energie Cottbus",
+    "away_team": "Augsburg",
+    "match_date": "2026-08-22T11:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f41fcb",
+    "home_team": "SV Wehen Wiesbaden",
+    "away_team": "Bayer Leverkusen",
+    "match_date": "2026-08-22T11:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088d9f",
     "home_team": "Hull City",
     "away_team": "Manchester United",
@@ -328,6 +394,72 @@
     "home_logo": "https://crests.football-data.org/322.png",
     "away_logo": "https://crests.football-data.org/66.png",
     "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420f0",
+    "home_team": "FC Erzgebirge Aue",
+    "away_team": "Hoffenheim",
+    "match_date": "2026-08-22T13:30Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f41fd3",
+    "home_team": "Hemelingen",
+    "away_team": "Hannover 96",
+    "match_date": "2026-08-22T13:30Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420e8",
+    "home_team": "Lüneburger SK Hansa",
+    "away_team": "Werder Bremen",
+    "match_date": "2026-08-22T13:30Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420ea",
+    "home_team": "MSV Duisburg",
+    "away_team": "SV 07 Elversberg",
+    "match_date": "2026-08-22T13:30Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420ed",
+    "home_team": "Saarbrücken",
+    "away_team": "Hertha Berlin",
+    "match_date": "2026-08-22T13:30Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420ec",
+    "home_team": "Viktoria Köln",
+    "away_team": "FC Nürnberg",
+    "match_date": "2026-08-22T13:30Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
   },
   {
     "id": "00000000-0000-4000-8000-000000088da0",
@@ -372,6 +504,39 @@
     "home_logo": "https://crests.football-data.org/77.png",
     "away_logo": "https://crests.football-data.org/559.png",
     "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f41fcd",
+    "home_team": "Eintracht Trier",
+    "away_team": "RB Leipzig",
+    "match_date": "2026-08-22T16:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420f2",
+    "home_team": "SG Sonnenhof Großaspach",
+    "away_team": "Arminia Bielefeld",
+    "match_date": "2026-08-22T16:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f41fcc",
+    "home_team": "TSV 1860 Munich",
+    "away_team": "Holstein Kiel",
+    "match_date": "2026-08-22T16:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
   },
   {
     "id": "00000000-0000-4000-8000-000000088da3",
@@ -451,6 +616,28 @@
     "matchday": 2
   },
   {
+    "id": "00000000-0000-4000-8000-000017f41fd6",
+    "home_team": "SpVgg Greuther Fürth",
+    "away_team": "Bochum",
+    "match_date": "2026-08-23T11:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420ee",
+    "home_team": "SSV Jeddeloh II",
+    "away_team": "Heidenheim",
+    "match_date": "2026-08-23T11:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088da4",
     "home_team": "Manchester City",
     "away_team": "Bournemouth",
@@ -473,6 +660,72 @@
     "matchday": 1
   },
   {
+    "id": "00000000-0000-4000-8000-000017f420ef",
+    "home_team": "Bahlinger SC 1929",
+    "away_team": "1. FC Magdeburg",
+    "match_date": "2026-08-23T13:30Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420f1",
+    "home_team": "FC Carl Zeiss Jena",
+    "away_team": "Darmstadt",
+    "match_date": "2026-08-23T13:30Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f41fc9",
+    "home_team": "Schott",
+    "away_team": "Borussia Mönchengladbach",
+    "match_date": "2026-08-23T13:30Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f42112",
+    "home_team": "TSV Eintracht Braunschweig",
+    "away_team": "Union Berlin",
+    "match_date": "2026-08-23T13:30Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420f6",
+    "home_team": "VFB Krieschow",
+    "away_team": "Mainz",
+    "match_date": "2026-08-23T13:30Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420e7",
+    "home_team": "Westfalia Rhynern",
+    "away_team": "Dynamo Dresden",
+    "match_date": "2026-08-23T13:30Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
     "id": "00000000-0000-4000-8000-000000089da6",
     "home_team": "Atlético Madrid",
     "away_team": "Villarreal",
@@ -493,6 +746,39 @@
     "home_logo": "https://crests.football-data.org/67.png",
     "away_logo": "https://crests.football-data.org/64.png",
     "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f41fd4",
+    "home_team": "FC Phönix Lübeck",
+    "away_team": "SC Paderborn 07",
+    "match_date": "2026-08-23T16:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f41fd5",
+    "home_team": "Düsseldorf",
+    "away_team": "Freiburg",
+    "match_date": "2026-08-23T16:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420f4",
+    "home_team": "Rot-Weiss Essen",
+    "away_team": "St. Pauli",
+    "match_date": "2026-08-23T16:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
   },
   {
     "id": "00000000-0000-4000-8000-00000008862b",
@@ -561,6 +847,39 @@
     "matchday": 2
   },
   {
+    "id": "00000000-0000-4000-8000-000017f41fd2",
+    "home_team": "SC Verl 1924",
+    "away_team": "Hamburger SV",
+    "match_date": "2026-08-24T16:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f41fd1",
+    "home_team": "VSG Altglienicke",
+    "away_team": "Wolfsburg",
+    "match_date": "2026-08-24T16:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f41fd0",
+    "home_team": "Würzburger Kickers",
+    "away_team": "Köln",
+    "match_date": "2026-08-24T16:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088626",
     "home_team": "Bologna",
     "away_team": "Lazio",
@@ -581,6 +900,17 @@
     "home_logo": "https://crests.football-data.org/79.png",
     "away_logo": "https://crests.football-data.org/88.png",
     "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f41fca",
+    "home_team": "Hallescher FC",
+    "away_team": "Schalke 04",
+    "match_date": "2026-08-24T18:45Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
   },
   {
     "id": "00000000-0000-4000-8000-00000008862e",
@@ -1100,6 +1430,17 @@
     "matchday": null
   },
   {
+    "id": "00000000-0000-4000-8000-000017f42101",
+    "home_team": "HEBC Hamburg",
+    "away_team": "Borussia Dortmund",
+    "match_date": "2026-09-01T18:45Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
     "id": "00000000-0000-4000-8000-000017f4a7a0",
     "home_team": "Torino",
     "away_team": "Monza",
@@ -1128,6 +1469,17 @@
     "match_date": "2026-09-02T16:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f420e6",
+    "home_team": "VfL Osnabruck",
+    "away_team": "Bayern Munich",
+    "match_date": "2026-09-02T18:45Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
     "home_logo": "",
     "away_logo": "",
     "matchday": null

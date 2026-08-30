@@ -4,9 +4,9 @@
 //  - Premier League, LaLiga, Serie A, Bundesliga: football-data.org API (temporada 2026/27)
 //  - Champions League fase liga: ESPN scoreboard (144 partidos reales)
 //  - Copa Italia: ESPN scoreboard (partidos reales + QF del propio ESPN)
-//  - Europa/Conference League: SIN partidos aún (el sorteo del 28/8 no está publicado
-//    en ninguna fuente machine-readable; requieren extender este script cuando las
-//    fuentes publiquen los cruces reales)
+//  - DFB-Pokal: ESPN scoreboard (primera ronda 2026/27)
+//  - FA Cup, Copa del Rey: SIN fixtures 2026/27 aún (la competición no ha empezado)
+//  - Europa/Conference League: SIN partidos aún (sorteo del 28/8 no publicado)
 // También regenera teamAliases.json: teamCups derivado de los datos reales y knockoutPairs.
 // Ejecución: node scripts/sync-official-fixtures.js
 
@@ -438,10 +438,30 @@ async function main() {
   all.push(...coppa);
   coppa.forEach((f) => (sourceOf[f.id] = "ESPN:CopaItalia"));
 
-  // 3.5 UEL/UECL: sin partidos aún (sorteo 28/8 sin publicar en fuentes machine-readable).
+  // 3.5 DFB-Pokal (ESPN, primera ronda 2026/27)
+  const dfb = await fetchEspnFixtures("ger.dfb_pokal", "DFB-Pokal", "DFB", "20260801", "20270601");
+  console.log(`✅ DFB-Pokal: ${dfb.length} partidos (ESPN)`);
+  all.push(...dfb);
+  dfb.forEach((f) => (sourceOf[f.id] = "ESPN:DFBPokal"));
+
+  // 3.6 FA Cup: sin fixtures 2026/27 aún (la competición no ha empezado).
+  //     Cuando ESPN publique datos, descomentar:
+  // const facup = await fetchEspnFixtures("eng.fa", "FA Cup", "FAC", "20260801", "20270601");
+  // console.log(`✅ FA Cup: ${facup.length} partidos (ESPN)`);
+  // all.push(...facup);
+  // facup.forEach((f) => (sourceOf[f.id] = "ESPN:FACup"));
+
+  // 3.7 Copa del Rey: sin fixtures 2026/27 aún (la competición no ha empezado).
+  //     Cuando ESPN publique datos, descomentar:
+  // const cdr = await fetchEspnFixtures("esp.copa_del_rey", "Copa del Rey", "CDR", "20260801", "20270601");
+  // console.log(`✅ Copa del Rey: ${cdr.length} partidos (ESPN)`);
+  // all.push(...cdr);
+  // cdr.forEach((f) => (sourceOf[f.id] = "ESPN:CopaDelRey"));
+
+  // 3.8 UEL/UECL: sin partidos aún (sorteo 28/8 sin publicar en fuentes machine-readable).
   //     Solo se registran los equipos reales para teamCups (auto-suscripción survivor).
 
-  // 3.6 Regenerar teamCups con los equipos reales (derivados de las fuentes)
+  // 3.9 Regenerar teamCups con los equipos reales (derivados de las fuentes)
   {
     const teamCups = {};
     const addCup = (team, cup) => {
@@ -452,10 +472,11 @@ async function main() {
     const domCup = {
       "Premier League": "facup", "LaLiga": "copadelrey", "Serie A": "coppaitalia", "Bundesliga": "dfbpokal",
     };
+    const CUP_LEAGUES = new Set(["Copa Italia", "DFB-Pokal", "FA Cup", "Copa del Rey"]);
     const EUROPEAN_LEAGUES = new Set(["Champions League", "Europa League", "Conference League"]);
     const leagueTeams = {};
     all.forEach((f) => {
-      if (f.league === "Copa Italia" || EUROPEAN_LEAGUES.has(f.league)) return;
+      if (CUP_LEAGUES.has(f.league) || EUROPEAN_LEAGUES.has(f.league)) return;
       leagueTeams[f.league] = leagueTeams[f.league] || new Set();
       leagueTeams[f.league].add(f.home_team);
       leagueTeams[f.league].add(f.away_team);
@@ -465,6 +486,8 @@ async function main() {
     });
     // Copa Italia: participantes reales
     coppa.forEach((f) => { addCup(f.home_team, "coppaitalia"); addCup(f.away_team, "coppaitalia"); });
+    // DFB-Pokal: participantes reales
+    dfb.forEach((f) => { addCup(f.home_team, "dfbpokal"); addCup(f.away_team, "dfbpokal"); });
     // UCL: equipos reales de ESPN
     const uclTeams = [...new Set(ucl.flatMap((f) => [f.home_team, f.away_team]))];
     uclTeams.forEach((t) => addCup(t, "champions"));
@@ -490,7 +513,7 @@ async function main() {
     console.log(`✅ teamCups regenerado: ${Object.keys(aliasesData.teamCups).length} equipos (derivados de fuentes reales)`);
   }
 
-  // 3.7 Ordenar y escribir
+  // 3.10 Ordenar y escribir
   all.sort((a, b) => new Date(a.match_date) - new Date(b.match_date) || a.league.localeCompare(b.league));
   fs.writeFileSync(FIXTURES_PATH, JSON.stringify(all, null, 2) + "\n");
   console.log(`\n✅ officialFixtures.json escrito: ${all.length} fixtures`);
