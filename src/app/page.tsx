@@ -56,6 +56,26 @@ interface PodiumPrize {
 
 const podiumPrizes: PodiumPrize[] = [
   {
+    rank: 1,
+    placeTitle: "1° LUGAR",
+    badgeTitle: "GRAN CAMPEÓN",
+    theme: "gold",
+    cardBorder: "border-2 border-gold shadow-[0_0_40px_rgba(201,168,76,0.25)] hover:border-gold-light",
+    cardGlow: "shadow-[0_0_50px_rgba(201,168,76,0.25)]",
+    badgeBg: "bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 text-navy-black",
+    textColor: "text-gold",
+    orderClass: "order-1 md:order-2 md:-translate-y-4 md:mb-4 z-10",
+    items: [
+      { icon: "🎽", name: "Camiseta Oficial del Club" },
+      { icon: "🩳", name: "Short Oficial de Juego" },
+      { icon: "🧢", name: "Gorra Oficial del Club" },
+      { icon: "🚩", name: "Bandera Oficial del Club" },
+      { icon: "🍺", name: "Jarra Oficial de Colección" },
+      { icon: "🕶️", name: "Gafas de Sol Deportivas" },
+      { icon: "🖼️", name: "Póster de Campeones" },
+    ],
+  },
+  {
     rank: 2,
     placeTitle: "2° LUGAR",
     badgeTitle: "SUBCAMPEÓN",
@@ -71,26 +91,6 @@ const podiumPrizes: PodiumPrize[] = [
       { icon: "🧢", name: "Gorra Oficial del Club" },
       { icon: "🚩", name: "Bandera Oficial del Club" },
       { icon: "🍺", name: "Jarra Oficial de Colección" },
-      { icon: "🕶️", name: "Gafas de Sol Deportivas" },
-      { icon: "🖼️", name: "Póster de Campeones" },
-    ],
-  },
-  {
-    rank: 1,
-    placeTitle: "1° LUGAR",
-    badgeTitle: "GRAN CAMPEÓN",
-    theme: "gold",
-    cardBorder: "border-2 border-gold shadow-[0_0_40px_rgba(201,168,76,0.25)] hover:border-gold-light",
-    cardGlow: "shadow-[0_0_50px_rgba(201,168,76,0.25)]",
-    badgeBg: "bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 text-navy-black",
-    textColor: "text-gold",
-    orderClass: "order-1 md:order-2 md:-translate-y-4 md:mb-4 z-10",
-    items: [
-      { icon: "🎽", name: "Camiseta Oficial del Club" },
-      { icon: "🩳", name: "Short Oficial de Juego" },
-      { icon: "🍺", name: "Jarra Oficial de Colección" },
-      { icon: "🚩", name: "Bandera Oficial del Club" },
-      { icon: "🕶️", name: "Gafas de Sol Deportivas" },
     ],
   },
   {
@@ -331,12 +331,12 @@ export default function Home() {
                   </span>
                 </div>
                 <span className="text-xs font-bold text-silver/70 bg-navy-card/80 border border-border/50 px-2.5 py-1 rounded-lg">
-                  7 premios
+                  5 premios
                 </span>
               </div>
 
               <div className="space-y-2 my-2 flex-1">
-                {podiumPrizes[0].items.map((item, idx) => (
+                {podiumPrizes[1].items.map((item, idx) => (
                   <div
                     key={idx}
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-navy-card/40 border border-border/30 hover:bg-navy-card/70 transition-colors"
@@ -371,12 +371,12 @@ export default function Home() {
                   </span>
                 </div>
                 <span className="text-xs font-bold text-gold/80 bg-gold/10 border border-gold/30 px-2.5 py-1 rounded-lg">
-                  5 premios
+                  7 premios
                 </span>
               </div>
 
               <div className="space-y-2.5 my-2 flex-1">
-                {podiumPrizes[1].items.map((item, idx) => (
+                {podiumPrizes[0].items.map((item, idx) => (
                   <div
                     key={idx}
                     className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gold/5 border border-gold/20 hover:bg-gold/10 transition-colors"
