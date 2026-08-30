@@ -180,11 +180,13 @@ export default function CompetitionStatusCard() {
                         }`}
                       >
                         <div className="flex items-center gap-1.5 min-w-0 mr-1">
-                          <img
-                            src={cup.logoUrl}
-                            alt={cup.name}
-                            className="w-4 h-4 object-contain shrink-0"
-                          />
+                          <div className="w-4 h-4 rounded-sm bg-white p-px flex items-center justify-center shrink-0">
+                            <img
+                              src={cup.logoUrl}
+                              alt={cup.name}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
                           <span className="truncate">{cup.shortName}</span>
                         </div>
                         <span
@@ -204,7 +206,7 @@ export default function CompetitionStatusCard() {
               <div className="bg-navy-card/90 border border-border/90 rounded-xl p-3 flex flex-col gap-2">
                 <div className="flex items-center justify-between gap-2 border-b border-border/60 pb-2">
                   <div className="flex items-center gap-2 min-w-0">
-                    <div className="w-5 h-5 rounded-full bg-navy-mid p-0.5 flex items-center justify-center shrink-0">
+                    <div className="w-5 h-5 rounded-full bg-white p-0.5 flex items-center justify-center shrink-0">
                       <img
                         src={activeCupConfig.logoUrl}
                         alt={activeCupConfig.name}
