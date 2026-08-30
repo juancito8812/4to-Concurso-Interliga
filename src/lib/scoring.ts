@@ -171,7 +171,7 @@ export function calculateScore(
   const realScorersList: RealScorer[] = real.scorers || [];
 
   if (prediction.scorers && prediction.scorers.length > 0) {
-    for (const predScorer of prediction.scorers.slice(0, 3)) {
+    for (const predScorer of prediction.scorers.slice(0, 5)) {
       // Find matching real scorer using intelligent matching
       const matchedRealScorer = realScorersList.find((rs) =>
         arePlayersMatching(predScorer.player_name, rs.player_name)

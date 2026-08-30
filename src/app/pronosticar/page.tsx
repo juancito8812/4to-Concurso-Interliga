@@ -444,7 +444,7 @@ export default function PronosticarPage() {
         scorers: [],
       };
       const teamScorers = (current.scorers ?? []).filter((s) => s.team === team);
-      if (teamScorers.length >= 3) return prev;
+      if (teamScorers.length >= 5) return prev;
 
       return {
         ...prev,
@@ -1116,7 +1116,7 @@ export default function PronosticarPage() {
                         </div>
 
                         {/* Add Home Scorer Button */}
-                        {homeScorerEntries.length < 3 && !isMatchDisabled && (
+                        {homeScorerEntries.length < 5 && !isMatchDisabled && (
                           <button
                             type="button"
                             onClick={() => addScorerSlot(match.id, "home")}
@@ -1211,7 +1211,7 @@ export default function PronosticarPage() {
                         </div>
 
                         {/* Add Away Scorer Button */}
-                        {awayScorerEntries.length < 3 && !isMatchDisabled && (
+                        {awayScorerEntries.length < 5 && !isMatchDisabled && (
                           <button
                             type="button"
                             onClick={() => addScorerSlot(match.id, "away")}

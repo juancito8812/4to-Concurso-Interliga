@@ -117,7 +117,7 @@ src/
 - Mientras falte más de 1 minuto, los pronósticos pueden modificarse y guardarse tantas veces como se desee.
 
 ### 4. Goleadores en Doble Columna Simétrica
-- Panel integrado debajo de cada club con dropdown clasificado por posición (Delanteros y Centrocampistas primero) y selector de goles `⚽ [-] 1 [+]`.
+- Panel integrado debajo de cada club con dropdown clasificado por posición (Delanteros y Centrocampistas primero) y selector de goles `⚽ [-] 1 [+]` (máx. 5 goleadores por equipo).
 
 ### 5. Ranking General en Vivo Multiusuario
 - Sincronización en tiempo real de todos los usuarios registrados en Supabase con sus respectivos clubes y puntuaciones.

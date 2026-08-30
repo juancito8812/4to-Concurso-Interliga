@@ -80,7 +80,7 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 
 - **Ventana de 3 Partidos:** `/pronosticar` muestra siempre los 3 próximos partidos no finalizados del equipo (IDs canónicos de fixture).
 - **Cierre y Re-edición:** Cierre a **1 minuto antes del partido** (`diffMin <= 1`). Re-edición permitida libremente antes del cierre (`diffMin > 1`).
-- **Goleadores:** Divididos en 2 columnas directamente debajo de cada equipo con selector numérico `[-] N [+]` (máx 3 goleadores en total por partido).
+- **Goleadores:** Divididos en 2 columnas directamente debajo de cada equipo con selector numérico `[-] N [+]` (máx 5 goleadores por equipo).
 - **Ranking Multiusuario:** Podio de Honor dinámico (Oro 🥇, Plata 🥈, Bronce 🥉) con escudos oficiales, puntos reales y filtros (caché 60s).
 - **Superviviente en Copas Knockout (Champions, Europa, Conference, Copa Italia):** Estado independiente por copa (`ALIVE` / `ELIMINATED`). Si el participante pronostica la victoria del rival y acierta, hereda la camiseta del rival para las siguientes fases (`history` JSONB), mientras su club base en liga regular permanece 100% fijo. Evaluación automática en el cron (server-side) y refuerzo client-side en `/mis-pronosticos`.
 

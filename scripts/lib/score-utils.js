@@ -322,7 +322,7 @@ function calculateScore(prediction, real) {
   const realScorersList = real.scorers || [];
 
   if (prediction.scorers && prediction.scorers.length > 0) {
-    for (const predScorer of prediction.scorers.slice(0, 3)) {
+    for (const predScorer of prediction.scorers.slice(0, 5)) {
       const matchedRealScorer = realScorersList.find((rs) =>
         arePlayersMatching(predScorer.player_name, rs.player_name)
       );
