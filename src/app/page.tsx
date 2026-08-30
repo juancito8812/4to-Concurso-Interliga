@@ -317,61 +317,117 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-6 items-end mt-4">
-            {podiumPrizes.map((prize) => (
-              <div
-                key={prize.rank}
-                className={`relative flex flex-col bg-navy-mid/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:scale-[1.02] ${prize.cardBorder} ${prize.cardGlow} ${prize.orderClass}`}
-              >
-                {/* Crown/Trophy Top Ribbon for 1st Place */}
-                {prize.rank === 1 && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 via-gold to-amber-500 text-navy-black font-black text-[11px] uppercase tracking-widest px-4 py-1 rounded-full shadow-lg flex items-center gap-1.5 shrink-0 select-none">
-                    MÁXIMO GALARDÓN
-                  </div>
-                )}
-
-                {/* Header Badge */}
-                <div className="flex items-center justify-between gap-2 mb-4 pt-1">
-                  <div className="flex items-center gap-2.5">
-                    <div>
-                      <h3 className={`text-base sm:text-lg font-black uppercase tracking-wider ${prize.textColor}`}>
-                        {prize.placeTitle}
-                      </h3>
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-silver">
-                        {prize.badgeTitle}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <span className="text-xs font-bold text-silver/80 bg-navy-card/80 border border-border/60 px-2.5 py-1 rounded-lg">
-                      {prize.items.length} premios
-                    </span>
-                  </div>
-                </div>
-
-                {/* Prize Items Chips Grid */}
-                <div className="space-y-2 my-2 flex-1">
-                  {prize.items.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-3 px-3 py-2 rounded-xl bg-navy-card/50 border border-border/40 hover:bg-navy-card/90 transition-colors"
-                    >
-                      <span className="text-base select-none shrink-0">{item.icon}</span>
-                      <span className="text-xs sm:text-sm font-semibold text-white/90">
-                        {item.name}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Footer Tag */}
-                <div className="mt-4 pt-3 border-t border-border/40 text-center">
-                  <span className="text-[11px] font-semibold text-silver/60 uppercase tracking-wider">
-                    {prize.rank === 1 ? "Kit Completo de Campeón" : prize.rank === 2 ? "Kit de Subcampeón" : "Kit de Podio"}
+          {/* Podium Layout - Center 1st, Left 2nd, Right 3rd */}
+          <div className="flex flex-col md:flex-row items-end justify-center gap-4 md:gap-6 mt-4 pb-8">
+            {/* 2nd Place - Left */}
+            <div className="relative flex flex-col w-full md:w-[30%] bg-navy-mid/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-slate-400/30 hover:border-slate-300/50 shadow-[0_0_25px_rgba(203,213,225,0.08)] transition-all duration-300 hover:scale-[1.02] md:mt-12">
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-black uppercase tracking-wider text-slate-300">
+                    2° LUGAR
+                  </h3>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-silver/80">
+                    SUBCAMPEÓN
                   </span>
                 </div>
+                <span className="text-xs font-bold text-silver/70 bg-navy-card/80 border border-border/50 px-2.5 py-1 rounded-lg">
+                  7 premios
+                </span>
               </div>
-            ))}
+
+              <div className="space-y-2 my-2 flex-1">
+                {podiumPrizes[0].items.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-navy-card/40 border border-border/30 hover:bg-navy-card/70 transition-colors"
+                  >
+                    <span className="text-base select-none shrink-0">{item.icon}</span>
+                    <span className="text-sm font-semibold text-white/85">{item.name}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-border/30 text-center">
+                <span className="text-[11px] font-semibold text-silver/50 uppercase tracking-wider">
+                  Kit de Subcampeón
+                </span>
+              </div>
+            </div>
+
+            {/* 1st Place - Center (Elevated) */}
+            <div className="relative flex flex-col w-full md:w-[35%] bg-navy-mid/95 backdrop-blur-sm rounded-2xl p-6 sm:p-7 border-2 border-gold shadow-[0_0_50px_rgba(201,168,76,0.2),0_0_80px_rgba(201,168,76,0.1)] hover:border-gold-light transition-all duration-300 hover:scale-[1.02] z-10 md:-translate-y-6">
+              {/* Top Badge */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 via-gold to-amber-500 text-navy-black font-black text-[11px] uppercase tracking-widest px-5 py-1.5 rounded-full shadow-lg select-none">
+                MÁXIMO GALARDÓN
+              </div>
+
+              <div className="flex items-center justify-between gap-2 mb-4 pt-2">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-black uppercase tracking-wider text-gold">
+                    1° LUGAR
+                  </h3>
+                  <span className="text-xs font-bold uppercase tracking-wider text-gold/70">
+                    GRAN CAMPEÓN
+                  </span>
+                </div>
+                <span className="text-xs font-bold text-gold/80 bg-gold/10 border border-gold/30 px-2.5 py-1 rounded-lg">
+                  5 premios
+                </span>
+              </div>
+
+              <div className="space-y-2.5 my-2 flex-1">
+                {podiumPrizes[1].items.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gold/5 border border-gold/20 hover:bg-gold/10 transition-colors"
+                  >
+                    <span className="text-lg select-none shrink-0">{item.icon}</span>
+                    <span className="text-sm font-bold text-white/90">{item.name}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-gold/20 text-center">
+                <span className="text-[11px] font-bold text-gold/60 uppercase tracking-wider">
+                  Kit Completo de Campeón
+                </span>
+              </div>
+            </div>
+
+            {/* 3rd Place - Right */}
+            <div className="relative flex flex-col w-full md:w-[30%] bg-navy-mid/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-amber-700/30 hover:border-amber-600/50 shadow-[0_0_25px_rgba(180,83,9,0.08)] transition-all duration-300 hover:scale-[1.02] md:mt-16">
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-black uppercase tracking-wider text-amber-400">
+                    3° LUGAR
+                  </h3>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-silver/80">
+                    TERCER LUGAR
+                  </span>
+                </div>
+                <span className="text-xs font-bold text-silver/70 bg-navy-card/80 border border-border/50 px-2.5 py-1 rounded-lg">
+                  5 premios
+                </span>
+              </div>
+
+              <div className="space-y-2 my-2 flex-1">
+                {podiumPrizes[2].items.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-navy-card/40 border border-border/30 hover:bg-navy-card/70 transition-colors"
+                  >
+                    <span className="text-base select-none shrink-0">{item.icon}</span>
+                    <span className="text-sm font-semibold text-white/85">{item.name}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-border/30 text-center">
+                <span className="text-[11px] font-semibold text-silver/50 uppercase tracking-wider">
+                  Kit de Podio
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
