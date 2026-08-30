@@ -105,6 +105,11 @@
         "player_name": "Bukayo Saka",
         "goals": 1,
         "team": "away"
+      },
+      {
+        "player_name": "Martinelli",
+        "goals": 1,
+        "team": "away"
       }
     ]
   },
@@ -187,5 +192,14 @@
         "team": "home"
       }
     ]
+  },
+  {
+    "id": "c8f7875e-0a45-4e60-986e-66e16fbb3eac",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "bybit6118",
+    "match_id": "00000000-0000-4000-8000-000017f4be1f",
+    "home_score": 0,
+    "away_score": 3,
+    "scorers": []
   }
 ]
