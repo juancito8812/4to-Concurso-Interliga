@@ -25,15 +25,10 @@
     "user_id": "266b309a-4eb0-474a-85db-aca42e055913",
     "display_name": "JR_DT",
     "match_id": "00000000-0000-4000-8000-000000088db7",
-    "home_score": 2,
+    "home_score": 1,
     "away_score": 2,
     "points": null,
     "scorers": [
-      {
-        "player_name": "Beto",
-        "goals": 1,
-        "team": "home"
-      },
       {
         "player_name": "Tyler Dibling",
         "goals": 1,
@@ -152,7 +147,7 @@
     "away_score": 0,
     "scorers": [
       {
-        "player_name": "Amad Diallo",
+        "player_name": "Marcus Rashford",
         "goals": 1,
         "team": "home"
       },
@@ -162,7 +157,7 @@
         "team": "home"
       },
       {
-        "player_name": "Kobbie Mainoo",
+        "player_name": "Bruno Fernandes",
         "goals": 1,
         "team": "home"
       }
