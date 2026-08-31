@@ -20,7 +20,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **Tablas de posiciones:** `src/app/tabla/[league]/TablaLigaClient.tsx` — Clasificación, goleadores y partidos vía ESPN API con fallback.
 - **Pronósticos:** `src/app/pronosticar/page.tsx` — Ventana de 3 partidos estilo TV broadcast, panel de goleadores en 2 columnas y stepper de goles.
 - **Historial de Pronósticos:** `src/app/mis-pronosticos/page.tsx` — Historial con desglose de puntos (+3 resultado, +2 marcador exacto, +1/+2 goleador).
-- **Ranking General en Vivo:** `src/app/ranking/page.tsx` — Tabla global multiusuario conectada a Supabase, Podio de Honor y búsqueda.
+- **Ranking General en Vivo:** `src/app/ranking/page.tsx` — Tabla global multiusuario conectada a Supabase, Podio de Honor, tarjetas de métricas uniformes (Participantes, Líder, Reglas) y búsqueda.
 - **Autenticación y Perfil:** `src/contexts/AuthContext.tsx` y `src/app/perfil/page.tsx` — Registro con username, login, recuperación de clave, reinicio de club y eliminación de cuenta.
 - **Base de datos:** Supabase PostgreSQL — tablas `profiles`, `teams`, `players`, `matches`, `predictions`, `prediction_scorers`, `tournament_survivors`, `app_meta`.
 - **Calendario oficial 2026/27:** `src/data/officialFixtures.json` — 1.650 partidos REALES verificados (0 fabricados): 4 ligas domésticas (football-data API), UCL fase liga + Copa Italia + DFB-Pokal (ESPN). Regenerable con `scripts/sync-official-fixtures.js` (idempotente); validación cruzada contra las fuentes con `scripts/validate-fixtures.js` (0 errores). UEL/UECL (sorteo del 28/8), FA Cup y Copa del Rey se sincronizan cuando las fuentes las publiquen (requieren extender el script).
