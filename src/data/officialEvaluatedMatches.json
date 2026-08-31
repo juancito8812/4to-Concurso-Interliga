@@ -998,5 +998,83 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089db1",
+    "home_team": "Osasuna",
+    "away_team": "Getafe",
+    "match_date": "2026-08-31T17:30Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Ante Budimir",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089daa",
+    "home_team": "Barcelona",
+    "away_team": "Rayo Vallecano",
+    "match_date": "2026-08-31T19:30Z",
+    "league": "LaLiga",
+    "result_home": 5,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Sergio Camello",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dad",
+    "home_team": "Aston Villa",
+    "away_team": "Arsenal",
+    "match_date": "2026-08-31T19:00Z",
+    "league": "Premier League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Bukayo Saka",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088624",
+    "home_team": "Atalanta",
+    "away_team": "Bologna",
+    "match_date": "2026-08-31T18:45Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Lazar Samardzic",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]

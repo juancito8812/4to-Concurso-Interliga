@@ -110,6 +110,12 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Bukayo Saka (+1 pt)",
+      "Goles exactos de Bukayo Saka: 1 (+2 pts)"
     ]
   },
   {
@@ -240,6 +246,12 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Lamine Yamal (+1 pt)",
+      "Goleador acertado: Raphinha (+1 pt)"
     ]
   }
 ]
