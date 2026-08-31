@@ -55,13 +55,13 @@ src/
 │   ├── leagueConfig.ts             # Normalizador canónico de ligas, torneos y equipos (matchIdToUuid, isKnockoutMatch)
 │   ├── footballData.ts             # Cliente football-data.org + plantillas oficiales 2026/27
 │   ├── espnApi.ts                  # Cliente ESPN API para tablas de posiciones, goleadores y partidos
-│   ├── espnResultsFetcher.ts       # Partidos finalizados ESPN en vivo para el cliente (caché 30s)
+│   ├── espnResultsFetcher.ts       # Partidos finalizados ESPN en vivo para el cliente (caché 30s, rango últimos 3 días)
 │   └── scoring.ts                  # Motor de cálculo y auditoría de puntuación (+ matching fonético)
 ├── scripts/
-│   ├── auto-sync-espn-results.js   # Cron: ESPN → evaluación de puntos/survivors → Supabase (service key)
+│   ├── auto-sync-espn-results.js   # Cron: ESPN (rango YYYYMMDD-YYYYMMDD, fail-fast) → evaluación de puntos/survivors → Supabase (service key)
 │   ├── sync-official-fixtures.js   # Regenera el calendario SOLO desde fuentes reales (API + ESPN + Wikipedia)
 │   ├── validate-fixtures.js        # Validación cruzada del calendario contra las fuentes (0 errores)
-│   ├── sync-db.js                  # Sincroniza Supabase: matches, remapeo de predicciones, teams (219)
+│   ├── sync-db.js                  # Sincroniza Supabase: matches, remapeo de predicciones, teams (225)
 │   ├── sync-player-squads.js       # Completa plantillas con rosters ESPN reales (UCL + Copa Italia)
 │   ├── rebuild-eval-preds.js       # Reconstruye predicciones evaluadas desde Supabase
 │   ├── verify-logic.js             # 43 checks de lógica de negocio (scoring, normalización, KO, survivor)
@@ -129,7 +129,7 @@ src/
 
 ### 7. Superviviente y Herencia de Equipo en Copas Knockout (`src/lib/survivor.ts`)
 - **Competiciones Aplicables (7 Copas KO):** UEFA Champions League (`champions`), UEFA Europa League (`europa`), UEFA Conference League (`conference`), Copa Italia (`coppaitalia`), FA Cup (`facup`), Copa del Rey (`copadelrey`) y DFB-Pokal (`dfbpokal`).
-- **Suscripción Automática:** Al elegir su equipo en el landing, el usuario queda suscrito automáticamente a **todas las copas knockout** en las que su club compite según el mapeo oficial de la temporada 2026/27 (179 equipos reales, `teamCups` en `teamAliases.json`).
+- **Suscripción Automática:** Al elegir su equipo en el landing, el usuario queda suscrito automáticamente a **todas las copas knockout** en las que su club compite según el mapeo oficial de la temporada 2026/27 (225 equipos reales, `teamCups` en `teamAliases.json`).
 - **Estado de Supervivencia Independiente:** Cada usuario cuenta con un registro en la tabla `tournament_survivors` por copa con estado `ALIVE` (🟢 VIVO) o `ELIMINATED` (🔴 KO).
 - **Mecánica de Eliminación Directa:** Si el equipo activo del participante pierde en una ronda KO (incluyendo definición por penales), queda eliminado (`ELIMINATED`) de esa copa y se registra la ronda real (Octavos, Cuartos, Semi, Final) en `eliminated_at_round`.
 - **Mecánica de Herencia de Camiseta (`👑`):** Si un participante pronostica la victoria del rival frente a su equipo activo y el rival gana/avanza, el participante permanece `ALIVE` y **hereda la camiseta del rival** (`active_team_id`) para las siguientes fases, registrando la transferencia en el historial (`history` JSONB).

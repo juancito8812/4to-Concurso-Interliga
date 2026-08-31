@@ -5,8 +5,8 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 8 ligas/copas europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`, workflow `.github/workflows/deploy.yml`).
-- **Última sesión:** 2026-08-29 (PWA habilitada — instalable en móvil)
-- **Versión de memoria:** 2.2
+- **Última sesión:** 2026-08-31 (incidente ESPN 400 en fechas con coma → rango con guión + fail-fast)
+- **Versión de memoria:** 2.3
 
 ## Arquitectura
 
@@ -20,6 +20,12 @@
 
 ## Decisiones Clave
 
+- **2026-08-31** — **Incidente: resultados no sincronizados — ESPN cambió su API de scoreboard (resuelto con fix + fail-fast)**:
+  - **Síntoma:** la página no mostraba los resultados de la jornada del 29-30/08; los runs del cron figuraban `success` pero no commiteaban nada nuevo desde el 30/08 19:01 UTC.
+  - **Causa raíz:** ESPN dejó de aceptar listas de fechas separadas por coma (`?dates=20260831,20260830,...` → HTTP 400 `Failed to get events endpoint`); solo acepta fecha única o **rango con guión** (`?dates=20260828-20260831`). El cron (`datesParam()` con `join(",")`) y el fetcher cliente (sin `dates` → solo día actual) quedaron rotos en silencio: `if (!res.ok) continue;` saltaba todas las ligas.
+  - **Solución (`071c3db`):** (1) `datesParam()` en `scripts/auto-sync-espn-results.js` genera rango `YYYYMMDD-YYYYMMDD` con backfill de 3 días; (2) `src/lib/espnResultsFetcher.ts` pide los últimos 3 días para que el navegador muestre resultados de ayer; (3) **fail-fast nuevo**: si TODAS las ligas devuelven error (HTTP != ok o excepción), el script lanza error → el run de GitHub Actions queda marcado como FALLIDO (antes fallaba en silencio) y loguea el status + URL por liga; (4) backfill manual ejecutado: 37 partidos con goleadores reales en `officialEvaluatedMatches.json`, 34 resultados persistidos en Supabase vía MCP (service role implícito) y puntos actualizados (Zahilet 9, Raudel 8, Milanarg 5, JR_DT 4).
+  - **Verificación:** `verify-logic.js` 43/43, `validate-fixtures.js` 0 errores, `tsc --noEmit` OK, ranking en vivo mostrando los resultados nuevos desde Supabase antes del deploy.
+  - **Para el futuro (cualquier agente):** si el cron "tiene éxito" pero no commitea resultados, verificar el formato de `?dates=` contra ESPN (probar `curl ".../scoreboard?dates=YYYYMMDD-YYYYMMDD"`). Nunca usar listas separadas por coma.
 - **2026-08-29** — **Incidente: nadie podía logearse — Auth de Supabase caído (resuelto con restart)**:
   - **Síntoma:** todos los endpoints de auth (`/auth/v1/token`, `/health`, `/settings`) se colgaban (timeout 20-25s) mientras REST (base de datos) respondía 200. El proyecto figuraba `ACTIVE_HEALTHY` en la Management API.
   - **Causa raíz:** incidente del lado de Supabase (status.supabase.com): *"401 errors due to JWT rejections"* (14-28/08, rollout gradual) + *"Increased response times for requests"* (27-29/08). El servicio GoTrue (auth) de este proyecto quedó colgado; Supabase recomendó reiniciar el proyecto.
@@ -48,18 +54,24 @@
 
 ## Estado Actual
 
-- **Branch:** `main` (desplegado a GitHub Pages, último deploy `aa5164c` exitoso).
+- **Branch:** `main` (desplegado a GitHub Pages, último deploy `071c3db`).
 - **Build Status:** `npm run build` y `npx tsc --noEmit` pasando con 0 errores (23 rutas estáticas generadas).
 - **Deploy:** GitHub Actions activado con éxito en `main`.
-- **Automatización & Superviviente:** 100% desatendida en 7 copas knockout (Champions, Europa, Conference, Copa Italia, FA Cup, Copa del Rey, DFB-Pokal) con auto-suscripción, resolución de rondas reales y ganador por penales.
-- **Calendario:** 1.618 partidos reales (0 fabricados) — 4 ligas football-data API + UCL fase liga y Copa Italia ESPN. UEL/UECL (sorteo 28/8) y rondas KO pendientes de publicación por las fuentes.
+- **Automatización & Superviviente:** 100% desatendida en 7 copas knockout (Champions, Europa, Conference, Copa Italia, FA Cup, Copa del Rey, DFB-Pokal) con auto-suscripción, resolución de rondas reales y ganador por penales. Cron con **fail-fast** ante errores de ESPN.
+- **Calendario:** 1.650 partidos reales (0 fabricados) — 4 ligas football-data API + UCL fase liga y Copa Italia ESPN. UEL/UECL (sorteo 28/8) y rondas KO pendientes de publicación por las fuentes.
 - **Plantillas:** 4.749 jugadores (30/32 equipos completados con rosters ESPN; Shakhtar/SABAH sin fuente — 403).
-- **Base de datos:** `matches` 1.618, `teams` 179 reales, 11 usuarios (8 confirmados, 3 sin confirmar: Sergio, Leyver Estrada, g3610811).
-- **Puntos:** Milanarg 5 pts (verificado con el motor de scoring y el cron); JR_DT 3 predicciones Man Utd pendientes; bybit6118 predicción Aston Villa-Arsenal (1-2 + Saka) guardada.
-- **Incidentes gestionados:** rebotes de email (cuentas de testing eliminadas: `test.debug.*` y Perico) y auth caído (restart del proyecto, resuelto).
+- **Base de datos:** `matches` 1.650 (34 con resultados desde el backfill), `teams` 225 reales, 12 usuarios (9 confirmados, 3 sin confirmar: Sergio, Leyver Estrada, g3610811).
+- **Resultados evaluados:** 37 partidos con goleadores reales en `officialEvaluatedMatches.json` (jornadas 28-30/08).
+- **Puntos:** Zahilet 9 (RM 4-0 Málaga, marcador exacto + 2 goleadores), Raudel 8, Milanarg 5 (AC Milan 2-0 Venezia), JR_DT 4 (ManU 5-2 Ipswich + Bruno Fernandes).
+- **Incidentes gestionados:** rebotes de email (cuentas de testing eliminadas), auth caído (restart del proyecto), y ESPN 400 por fechas con coma (fix + fail-fast, `071c3db`).
 
 ## Cambios Recientes
 
+- **2026-08-31** — **Fix cron + fetcher ESPN por cambio de API (`071c3db`)**:
+  - `scripts/auto-sync-espn-results.js`: `datesParam()` pasa de lista separada por coma a rango `YYYYMMDD-YYYYMMDD` (ESPN devuelve HTTP 400 con comas); agregado `AbortSignal.timeout(15s)` y **fail-fast** que marca el run de Actions como fallido si todas las ligas fallan; loguea el HTTP status y URL por liga.
+  - `src/lib/espnResultsFetcher.ts`: el fetch del cliente ahora pide los últimos 3 días (`dates=YYYYMMDD-YYYYMMDD`) para mostrar resultados de ayer en el navegador.
+  - Backfill: 37 partidos finalizados con goleadores reales (jornadas 28-30/08) en `officialEvaluatedMatches.json`; 34 resultados + puntos persistidos en Supabase (Zahilet 9, Raudel 8, Milanarg 5, JR_DT 4).
+  - Documentación actualizada: `AGENTS.md`, `README.md`, `CLAUDE.md`, `DISASTER_RECOVERY_AND_SCHEMA.md`, `.agents/MEMORY.md`.
 - **2026-08-29** — **PWA habilitada — instalable en móvil (`4ecc799`)**:
   - `public/icon.svg` — Icono de la app (4° INTERLIGA en gold sobre navy)
   - `public/manifest.json` — Metadata PWA (nombre, colores, display standalone, scope)
@@ -97,7 +109,7 @@
   - **RPCs `SECURITY DEFINER` en producción** (5): `update_match_results`, `update_prediction_points`, `upsert_fixture_matches`, `update_survivors` (+ `schema.sql`).
   - **Tabla `tournament_survivors` creada en producción** (faltaba migrar el DDL de schema.sql).
   - **Survivor automatizado server-side**: el cron evalúa la progresión KO (solo emparejamientos oficiales, idempotente por match_id en history) y persiste vía RPC; refuerzo client-side en `/mis-pronosticos`.
-  - **Backfill de 3 días** en el cron (ESPN `?dates=YYYYMMDD,..`): no se pierden resultados si el job falla un día.
+  - **Backfill de 3 días** en el cron (ESPN `?dates=YYYYMMDD-YYYYMMDD`, rango con guión; antes se usaba lista separada por coma hasta que ESPN la rechazó con HTTP 400 — ver incidente 2026-08-31): no se pierden resultados si el job falla un día.
   - **Persistencia verificada end-to-end**: predicción de Milanarg (AC Milan 3-0 vs Venezia) = 5 PTS en JSON + Supabase (predictions, prediction_scorers, points vía RPC).
   - **Menores**: guard de nulos en merge Supabase, `AbortSignal.timeout` en fetcher ESPN, `goals ?? 0` en scoring, `npm ci` eliminado del workflow cron, loader JSON arreglado en `scripts/test-survivor.js` (7/7 tests OK).
 

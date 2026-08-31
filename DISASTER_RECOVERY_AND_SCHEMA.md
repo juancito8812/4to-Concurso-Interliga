@@ -57,7 +57,7 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
 > **Después de correr `schema.sql`** (y con la service role key disponible), ejecutar los scripts de sincronización para poblar los datos reales:
 > ```bash
 > node scripts/sync-official-fixtures.js   # Regenera officialFixtures.json desde fuentes reales
-> node scripts/sync-db.js                  # Puebla matches (1.650) y teams (219) reales en Supabase
+> node scripts/sync-db.js                  # Puebla matches (1.650) y teams (225) reales en Supabase
 > node scripts/validate-fixtures.js        # Verifica 0 errores contra las fuentes
 > ```
 
@@ -307,7 +307,7 @@ $$;
 ```
 
 ### Escrituras del Cron (service role key, NO RPCs públicos):
-El cron `scripts/auto-sync-espn-results.js` escribe vía REST directo con `SUPABASE_SERVICE_ROLE_KEY` (GitHub Secret):
+El cron `scripts/auto-sync-espn-results.js` escribe vía REST directo con `SUPABASE_SERVICE_ROLE_KEY` (GitHub Secret). Su fetch a ESPN usa el rango `dates=YYYYMMDD-YYYYMMDD` (ESPN rechaza listas separadas por coma con HTTP 400) y tiene **fail-fast**: si todas las ligas devuelven error, el run de GitHub Actions queda marcado como fallido en vez de fallar en silencio (incidente ago-2026: resultados no sincronizados por cambio de formato en la API de ESPN).
 
 | Operación | Endpoint REST |
 |---|---|
@@ -342,4 +342,4 @@ El cron `scripts/auto-sync-espn-results.js` escribe vía REST directo con `SUPAB
   SELECT count(*) as total_partidos FROM public.matches;
   SELECT count(*) as total_perfiles FROM public.profiles;
   ```
-  Debe retornar **219 equipos reales** (2026/27), **1.650 partidos** (igual al calendario oficial) y el total de perfiles activos. Si los conteos difieren, ejecutar `scripts/sync-db.js` con la service role key para repoblar.
+  Debe retornar **225 equipos reales** (2026/27), **1.650 partidos** (igual al calendario oficial) y el total de perfiles activos. Si los conteos difieren, ejecutar `scripts/sync-db.js` con la service role key para repoblar.

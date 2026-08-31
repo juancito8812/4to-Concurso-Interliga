@@ -41,7 +41,7 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - `src/data/officialPlayers.json` — 4.749 jugadores 2026/27 con posiciones y roles actualizados
 - `src/data/officialEvaluatedMatches.json` — Resultados oficiales de partidos jugados y goleadores reales
 - `src/data/officialEvaluatedPredictions.json` — Pronósticos evaluados y sincronizados (JSON + Supabase)
-- `scripts/auto-sync-espn-results.js` — Cron: sincroniza ESPN → evalúa puntos/survivors → persiste en Supabase
+- `scripts/auto-sync-espn-results.js` — Cron: sincroniza ESPN (rango `dates=YYYYMMDD-YYYYMMDD`, fail-fast si fallan todas las ligas) → evalúa puntos/survivors → persiste en Supabase
 - `scripts/sync-official-fixtures.js` — Regenera el calendario SOLO desde fuentes reales (football-data API + ESPN + Wikipedia); idempotente
 - `scripts/validate-fixtures.js` — Validación cruzada del calendario contra las fuentes (0 errores = 100% real)
 - `scripts/sync-db.js` — Sincroniza Supabase: matches (sin pisar resultados), remapeo de predicciones, teams reales
@@ -55,7 +55,7 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - `src/lib/survivor.ts` — Módulo de supervivencia multitorneo KO (7 copas: Champions, Europa, Conference, Copa Italia, FA Cup, Copa del Rey, DFB-Pokal), evaluación de partidos (`evaluateSurvivorProgression`), auto-suscripción (`getTeamCups`) y herencia de camisetas
 - `src/lib/leagueConfig.ts` — Colores, logos, normalizadores `normalizeMatchLeague`, `normalizeTeamName`, `matchIdToUuid`, `isKnockoutMatch`, `getKnockoutCupSlug`, `getKnockoutRound`
 - `src/lib/scoring.ts` — Motor de cálculo de puntos (+ matching fonético `arePlayersMatching`)
-- `src/lib/espnResultsFetcher.ts` — Fetcher cliente de partidos finalizados ESPN (caché 30s, timeout 10s)
+- `src/lib/espnResultsFetcher.ts` — Fetcher cliente de partidos finalizados ESPN (caché 30s, timeout 10s, rango de fechas últimos 3 días)
 - `src/lib/footballData.ts` — Plantillas oficiales + ventana de partidos (saltea API en vivo en GitHub Pages por CORS)
 - `src/contexts/AuthContext.tsx` — Context de autenticación, sync de perfiles y `deleteAccount`
 - `supabase/schema.sql` — Script DDL maestro (8 tablas, índices, RLS endurecido, triggers, app_meta)
@@ -86,7 +86,7 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 
 ## Automatización (100%)
 
-- **Cron cada 2h** (`.github/workflows/auto-evaluate-matches.yml`): ESPN (backfill 3 días) → actualiza `officialEvaluatedMatches.json` → evalúa puntos de JSON + Supabase → persiste resultados, puntos y survivors en Supabase con service role key.
+- **Cron cada 2h** (`.github/workflows/auto-evaluate-matches.yml`): ESPN (backfill 3 días con rango `dates=YYYYMMDD-YYYYMMDD` — ESPN rechaza listas separadas por coma con HTTP 400) → actualiza `officialEvaluatedMatches.json` → evalúa puntos de JSON + Supabase → persiste resultados, puntos y survivors en Supabase con service role key. **Fail-fast:** si todas las ligas devuelven error, el run de Actions queda marcado como fallido (no falla en silencio).
 - Sync de calendario solo cuando cambia `officialFixtures.json` (hash md5 en `app_meta`).
 - Cliente: evaluación en vivo con ESPN y fallback a los JSON oficiales.
 
