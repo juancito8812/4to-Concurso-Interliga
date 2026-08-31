@@ -464,9 +464,10 @@ export default function RankingPage() {
             </div>
             <button
               onClick={() => setShowRulesModal(!showRulesModal)}
-              className="bg-navy-card hover:bg-navy-card/80 border border-border/80 text-silver hover:text-white px-3 py-2 rounded-xl text-xs font-medium transition-colors flex items-center gap-1.5"
+              className="bg-navy-mid/90 border border-border px-3.5 py-2 rounded-xl text-center hover:bg-navy-mid transition-colors"
             >
-              Reglas de Puntos
+              <span className="text-[10px] text-silver block uppercase tracking-wider font-semibold">Info</span>
+              <strong className="text-white text-base sm:text-lg font-bold">Reglas</strong>
             </button>
           </div>
         </div>
@@ -830,7 +831,7 @@ export default function RankingPage() {
                                   : "text-silver/80"
                               }`}
                             >
-                              {displayRank === 1 ? "" : displayRank === 2 ? "" : displayRank === 3 ? "" : displayRank}
+                              {displayRank}
                             </span>
                           </td>
 
