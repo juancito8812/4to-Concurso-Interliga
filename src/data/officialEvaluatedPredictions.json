@@ -216,5 +216,30 @@
     "home_score": 0,
     "away_score": 3,
     "scorers": []
+  },
+  {
+    "id": "e9aba70d-9a5e-4717-8613-0c7cf100bd34",
+    "user_id": "2eb3fea4-d9bb-4fbf-97da-f600826b8a77",
+    "display_name": "Alecoco",
+    "match_id": "00000000-0000-4000-8000-000000089daa",
+    "home_score": 3,
+    "away_score": 0,
+    "scorers": [
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
   }
 ]

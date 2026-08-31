@@ -971,5 +971,32 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008861d",
+    "home_team": "Lecce",
+    "away_team": "Roma",
+    "match_date": "2026-08-31T16:30Z",
+    "league": "Serie A",
+    "result_home": 0,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Donyell Malen",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Matìas Soulè",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Rodrigo Mora",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
