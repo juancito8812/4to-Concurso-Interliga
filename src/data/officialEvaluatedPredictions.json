@@ -6,7 +6,7 @@
     "match_id": "00000000-0000-4000-8000-000000088da9",
     "home_score": 2,
     "away_score": 0,
-    "points": null,
+    "points": 4,
     "scorers": [
       {
         "player_name": "Matheus Cunha",
@@ -18,6 +18,10 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Bruno Fernandes (+1 pt)"
     ]
   },
   {
@@ -136,6 +140,14 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 8,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Goleador acertado: Jude Bellingham (+1 pt)",
+      "Goles exactos de Jude Bellingham: 1 (+2 pts)"
     ]
   },
   {
@@ -186,6 +198,14 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "points": 9,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Marcador exacto (+2 pts)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Goleador acertado: Jude Bellingham (+1 pt)",
+      "Goles exactos de Jude Bellingham: 1 (+2 pts)"
     ]
   },
   {

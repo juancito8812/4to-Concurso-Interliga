@@ -45,6 +45,17 @@ const LEAGUE_MAP: Record<string, string> = {
 let cachedResults: { timestamp: number; matches: EvaluatedMatchResult[] } | null = null;
 const CACHE_TTL_MS = 30000; // 30 seconds cache
 
+// ESPN scoreboard solo devuelve el día actual; pedimos un rango YYYYMMDD-YYYYMMDD
+// para incluir resultados de los últimos días (rechaza listas separadas por coma).
+const BACKFILL_DAYS = 3;
+
+function datesParam() {
+  const from = new Date(Date.now() - BACKFILL_DAYS * 86400000);
+  const to = new Date();
+  const fmt = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, "");
+  return `dates=${fmt(from)}-${fmt(to)}`;
+}
+
 interface EspnAthlete {
   displayName?: string;
   fullName?: string;
@@ -86,7 +97,7 @@ export async function fetchLiveFinishedMatches(): Promise<EvaluatedMatchResult[]
 
   const promises = LEAGUE_SLUGS.map(async (slug) => {
     try {
-      const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${slug}/scoreboard`;
+      const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${slug}/scoreboard?${datesParam()}`;
       const res = await fetch(url, { signal: AbortSignal.timeout(10000) });
       if (!res.ok) return;
 

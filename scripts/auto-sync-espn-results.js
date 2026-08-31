@@ -91,17 +91,17 @@ async function supabaseGetService(path) {
   return res.json();
 }
 
-// ESPN scoreboard solo devuelve el día actual; con ?dates=YYYYMMDD,.. retrocedemos
-// hasta BACKFILL_DAYS días para no perder resultados si el cron no corrió un día.
+// ESPN scoreboard solo devuelve el día actual; con ?dates=YYYYMMDD-YYYYMMDD
+// (rango) retrocedemos hasta BACKFILL_DAYS días para no perder resultados si el
+// cron no corrió un día. OJO: ESPN rechaza listas separadas por coma (HTTP 400),
+// solo acepta fecha única o rango con guión.
 const BACKFILL_DAYS = 3;
 
 function datesParam() {
-  const dates = [];
-  for (let i = 0; i <= BACKFILL_DAYS; i++) {
-    const d = new Date(Date.now() - i * 86400000);
-    dates.push(d.toISOString().slice(0, 10).replace(/-/g, ""));
-  }
-  return dates.join(",");
+  const from = new Date(Date.now() - BACKFILL_DAYS * 86400000);
+  const to = new Date();
+  const fmt = (d) => d.toISOString().slice(0, 10).replace(/-/g, "");
+  return `${fmt(from)}-${fmt(to)}`;
 }
 
 // Mantiene la tabla matches de Supabase alineada con el calendario oficial del repo.
@@ -461,12 +461,17 @@ async function autoSync() {
   console.log(`📝 Pronósticos a evaluar: ${officialPreds.length} (JSON + ${supabasePreds.length} de Supabase)`);
 
   let newResultsCount = 0;
+  let failedFetches = 0;
 
   for (const slug of LEAGUE_SLUGS) {
     try {
       const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${slug}/scoreboard?dates=${datesParam()}`;
-      const res = await fetch(url);
-      if (!res.ok) continue;
+      const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
+      if (!res.ok) {
+        failedFetches += 1;
+        console.warn(`⚠️  [${slug}] ESPN devolvió HTTP ${res.status} (url: ${url})`);
+        continue;
+      }
 
       const data = await res.json();
       const events = data.events || [];
@@ -548,8 +553,23 @@ async function autoSync() {
         console.log(`✓ [${LEAGUE_MAP[slug]}] ${homeName} ${scoreHome} - ${scoreAway} ${awayName} (Goleadores: ${scorers.map(s => `${s.player_name} (${s.goals})`).join(", ") || "Ninguno"})`);
       }
     } catch (e) {
+      failedFetches += 1;
       console.warn(`Error syncing slug ${slug}:`, e.message);
     }
+  }
+
+  // FAIL FAST: si ESPN rechazó TODAS las ligas, el cron no debe "tener éxito"
+  // en silencio (como pasó con el cambio a 400 de las fechas separadas por coma).
+  // Salir con código != 0 marca el run de GitHub Actions como fallido.
+  if (failedFetches >= LEAGUE_SLUGS.length) {
+    throw new Error(
+      `FALLO CRÍTICO: ESPN devolvió error en todas las ${LEAGUE_SLUGS.length} ligas ` +
+      `(${failedFetches} fallos). Verificar el formato de la URL/dates — probablemente ` +
+      `ESPN cambió su API de nuevo. Ejemplo: ${LEAGUE_SLUGS[0]} -> HTTP error.`
+    );
+  }
+  if (failedFetches > 0) {
+    console.warn(`⚠️  ${failedFetches}/${LEAGUE_SLUGS.length} ligas fallaron, pero continuamos con el resto.`);
   }
 
   // Save official evaluated matches
