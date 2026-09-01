@@ -14,7 +14,7 @@ Plataforma oficial de pronósticos de fútbol para la temporada 2026-27. Los par
   - `src/data/officialFixtures.json` (**1.650 partidos oficiales reales** de la temporada 2026/27 pre-sincronizados para las 9 competiciones, 0 fabricados — validación cruzada contra las fuentes en `scripts/validate-fixtures.js`).
   - `src/data/officialPlayers.json` (**4.749 jugadores oficiales** de la temporada 2026/27 de todos los clubes participantes clasificados por posición).
   - ESPN API pública (tablas de clasificación, máximos goleadores y resultados en vivo sin restricciones de CORS).
-- **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`).
+- **Deploy:** GitHub Pages con dominio personalizado `futbolcamisetapasion.com` (Cloudflare DNS).
 
 ---
 
@@ -214,5 +214,5 @@ El repositorio incluye el **script maestro DDL y semilla SQL** en [`supabase/sch
 El despliegue es completamente automático vía **GitHub Actions** al hacer push a la rama `main`.
 Consulte el flujo de trabajo en `.github/workflows/deploy.yml`.
 
-- **Sitio Web Oficial:** https://juancito8812.github.io/4to-Concurso-Interliga/
+- **Sitio Web Oficial:** https://futbolcamisetapasion.com
 

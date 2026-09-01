@@ -60,7 +60,8 @@ Este archivo contiene información para agentes de código. Ver AGENTS.md para r
 - `src/contexts/AuthContext.tsx` — Context de autenticación, sync de perfiles y `deleteAccount`
 - `supabase/schema.sql` — Script DDL maestro (8 tablas, índices, RLS endurecido, triggers, app_meta)
 - `DISASTER_RECOVERY_AND_SCHEMA.md` — Manual de restauración paso a paso ante pérdida total
-- `next.config.ts` — basePath para GitHub Pages
+- `next.config.ts` — Dominio personalizado `futbolcamisetapasion.com` (sin basePath)
+- `public/.nojekyll` — Evita que Jekyll ignore `_next/` en GitHub Pages
 - `public/manifest.json` + `public/sw.js` + `public/icon.svg` — PWA (instalable en móvil)
 - `src/app/RegisterSW.tsx` — Registro del service worker
 

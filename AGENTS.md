@@ -28,7 +28,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **Normalización de Ligas y Equipos:** `src/lib/leagueConfig.ts` — `normalizeMatchLeague` y `normalizeTeamName` mapean nombres canónicos y competencias exactas.
 - **Cliente Football API:** `src/lib/footballData.ts` — `getOfficialTeamMatches` y `getOfficialPlayersForTeams` con API en vivo + fallback de fixtures y plantillas oficiales pre-sincronizadas.
 - **Colores:** Definidos en `src/app/globals.css` con `@theme` de Tailwind v4.
-- **Configuración:** `next.config.ts` — `basePath: "/4to-Concurso-Interliga"` es OBLIGATORIO para GitHub Pages.
+- **Configuración:** `next.config.ts` — Dominio personalizado `futbolcamisetapasion.com` via Cloudflare DNS + GitHub Pages. Sin basePath (dominio propio). Archivo `public/.nojekyll` necesario para que GitHub Pages no ignore `_next/`.
 
 ### Páginas
 
@@ -132,7 +132,7 @@ Copa Italia: #024494 (azul)
 - **Detección de partidos KO (`isKnockoutMatch`):** copas domésticas siempre KO; competiciones europeas (Champions/Europa/Conference) fase liga de sep a ene y rondas KO de feb a ago (por fecha, funciona con cruces TBD).
 - **Rondas formato 2026/27 (`getKnockoutRound`):** feb = Dieciseisavos de Final (playoff R32), mar = Octavos, abr = Cuartos, abr-may = Semifinal, may = Final.
 - La ventana de pronósticos (`/pronosticar`) filtra partidos con equipos `TBD` (placeholders hasta que las fuentes publiquen los cruces reales).
-- `<Link>` agrega automáticamente `basePath`; `<img>` NO — requiere el prefijo manual `/4to-Concurso-Interliga/`.
+- `<Link>` genera rutas relativas automáticamente; `<img>` usa rutas absolutas desde la raíz (`/logos/...`).
 
 ### Variables de entorno
 
@@ -153,6 +153,7 @@ SUPABASE_SERVICE_ROLE_KEY=tu-service-key   # SOLO en GitHub Secrets y .env.local
 
 ### Deploy
 
+- Dominio: `futbolcamisetapasion.com` (Cloudflare DNS → GitHub Pages)
 - Push a `main` triggers GitHub Actions → build → deploy a GitHub Pages
 - `npm run build` genera `./out/` con archivos estáticos
 - `.env.local` NO se commitea (está en .gitignore)
