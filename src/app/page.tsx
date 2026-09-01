@@ -31,7 +31,7 @@ const scoring = [
   { points: "2pts", label: "Marcador exacto" },
   { points: "1pt", label: "Diferencia de 1 gol en el marcador" },
   { points: "1pt", label: "Goleador acertado (nombre)" },
-  { points: "2pts", label: "Cantidad de goles del goleador" },
+  { points: "2pts", label: "Cantidad exacta de goleadores del partido" },
 ];
 
 interface PrizeItem {

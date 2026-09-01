@@ -6,7 +6,7 @@
  * 2. Marcador exacto: 2 puntos
  * 3. Diferencia de 1 gol en el marcador: 1 punto (cuando no es exacto)
  * 4. Goleador acertado (nombre): 1 punto por cada goleador que anote
- * 5. Cantidad exacta de goles del goleador: 2 puntos por goleador acertado en cantidad
+ * 5. Cantidad exacta de goleadores del partido: 2 puntos si la cantidad de goleadores pronosticados coincide con los reales
  */
 
 export interface PredictedScorer {
@@ -164,34 +164,32 @@ export function calculateScore(
     }
   }
 
-  // 4 & 5. Scorers (Goleadores acertados y cantidad de goles)
+  // 4. Scorers (Goleadores acertados -> 1 pt c/u)
   let scorersNameHits = 0;
-  let scorersQuantityHits = 0;
 
   const realScorersList: RealScorer[] = real.scorers || [];
 
   if (prediction.scorers && prediction.scorers.length > 0) {
     for (const predScorer of prediction.scorers.slice(0, 5)) {
-      // Find matching real scorer using intelligent matching
       const matchedRealScorer = realScorersList.find((rs) =>
         arePlayersMatching(predScorer.player_name, rs.player_name)
       );
 
       if (matchedRealScorer && (matchedRealScorer.goals ?? 0) > 0) {
-        const actualGoals = matchedRealScorer.goals ?? 0;
-        // Goleador acertado (nombre) -> 1 pt
         scorersNameHits += 1;
         pointsScorersName += 1;
         details.push(`Goleador acertado: ${predScorer.player_name} (+1 pt)`);
-
-        // Cantidad exacta de goles del goleador -> 2 pts
-        if (predScorer.goals === actualGoals) {
-          scorersQuantityHits += 1;
-          pointsScorersQuantity += 2;
-          details.push(`Goles exactos de ${predScorer.player_name}: ${predScorer.goals} (+2 pts)`);
-        }
       }
     }
+  }
+
+  // 5. Cantidad exacta de goleadores del partido -> 2 pts
+  const predictedScorerCount = prediction.scorers?.filter(s => s.goals > 0).length ?? 0;
+  const realScorerCount = realScorersList.filter(s => (s.goals ?? 0) > 0).length;
+  const scorersQuantityHits = (predictedScorerCount > 0 && realScorerCount > 0 && predictedScorerCount === realScorerCount) ? 1 : 0;
+  if (scorersQuantityHits) {
+    pointsScorersQuantity = 2;
+    details.push(`Cantidad exacta de goleadores: ${realScorerCount} (+2 pts)`);
   }
 
   const totalPoints =
