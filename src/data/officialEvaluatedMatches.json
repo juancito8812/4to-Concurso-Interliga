@@ -1098,5 +1098,49 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4a7a0",
+    "home_team": "Torino",
+    "away_team": "Monza",
+    "match_date": "2026-09-01T19:00Z",
+    "league": "Copa Italia",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Dany Mota",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f42101",
+    "home_team": "HEBC Hamburg",
+    "away_team": "Borussia Dortmund",
+    "match_date": "2026-09-01T18:45Z",
+    "league": "DFB-Pokal",
+    "result_home": 0,
+    "result_away": 5,
+    "scorers": [
+      {
+        "player_name": "Daniel Svensson",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Samuele Inácio",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Fábio Silva",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
