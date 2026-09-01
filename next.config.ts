@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
-  basePath: "/4to-Concurso-Interliga",
 };
 
 export default nextConfig;

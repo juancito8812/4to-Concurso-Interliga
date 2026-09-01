@@ -6,26 +6,24 @@ import Footer from "./Footer";
 import TeamSelectorCard from "./TeamSelectorCard";
 import CompetitionStatusCard from "./CompetitionStatusCard";
 
-const basePath = "/4to-Concurso-Interliga";
-
 const domesticLeagues = [
-  { name: "LaLiga", logo: `${basePath}/logos/laliga.png`, slug: "laliga" },
-  { name: "Premier League", logo: `${basePath}/logos/premier.png`, slug: "premier" },
-  { name: "Serie A", logo: `${basePath}/logos/seriea.png`, slug: "seriea" },
-  { name: "Bundesliga", logo: `${basePath}/logos/bundesliga.png`, slug: "bundesliga" },
+  { name: "LaLiga", logo: "/logos/laliga.png", slug: "laliga" },
+  { name: "Premier League", logo: "/logos/premier.png", slug: "premier" },
+  { name: "Serie A", logo: "/logos/seriea.png", slug: "seriea" },
+  { name: "Bundesliga", logo: "/logos/bundesliga.png", slug: "bundesliga" },
 ];
 
 const domesticCups = [
-  { name: "Copa del Rey", logo: `${basePath}/logos/copadelrey.svg`, slug: "copadelrey" },
-  { name: "FA Cup", logo: `${basePath}/logos/facup.svg`, slug: "facup" },
-  { name: "Copa Italia", logo: `${basePath}/logos/coppaitalia.svg`, slug: "coppaitalia" },
-  { name: "DFB-Pokal", logo: `${basePath}/logos/dfbpokal.svg`, slug: "dfbpokal" },
+  { name: "Copa del Rey", logo: "/logos/copadelrey.svg", slug: "copadelrey" },
+  { name: "FA Cup", logo: "/logos/facup.svg", slug: "facup" },
+  { name: "Copa Italia", logo: "/logos/coppaitalia.svg", slug: "coppaitalia" },
+  { name: "DFB-Pokal", logo: "/logos/dfbpokal.svg", slug: "dfbpokal" },
 ];
 
 const europeanCups = [
-  { name: "Champions League", logo: `${basePath}/logos/champions.png`, slug: "champions" },
-  { name: "Europa League", logo: `${basePath}/logos/europa.svg`, slug: "europa" },
-  { name: "Conference League", logo: `${basePath}/logos/conference.svg`, slug: "conference" },
+  { name: "Champions League", logo: "/logos/champions.png", slug: "champions" },
+  { name: "Europa League", logo: "/logos/europa.svg", slug: "europa" },
+  { name: "Conference League", logo: "/logos/conference.svg", slug: "conference" },
 ];
 
 const scoring = [

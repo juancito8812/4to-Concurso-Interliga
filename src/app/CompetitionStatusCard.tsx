@@ -25,13 +25,13 @@ interface CupConfig {
 }
 
 const CUPS: CupConfig[] = [
-  { slug: "champions", name: "Champions League", shortName: "Champions", logoUrl: "/4to-Concurso-Interliga/logos/champions.png" },
-  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/4to-Concurso-Interliga/logos/europa.svg" },
-  { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/4to-Concurso-Interliga/logos/conference.svg" },
-  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/4to-Concurso-Interliga/logos/coppaitalia.svg" },
-  { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/4to-Concurso-Interliga/logos/facup.svg" },
-  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/4to-Concurso-Interliga/logos/copadelrey.svg" },
-  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/4to-Concurso-Interliga/logos/dfbpokal.svg" },
+  { slug: "champions", name: "Champions League", shortName: "Champions", logoUrl: "/logos/champions.png" },
+  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/logos/europa.svg" },
+  { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/logos/conference.svg" },
+  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/logos/coppaitalia.svg" },
+  { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/logos/facup.svg" },
+  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/logos/copadelrey.svg" },
+  { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/logos/dfbpokal.svg" },
 ];
 
 interface EffectiveStatus {

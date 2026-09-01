@@ -15,17 +15,17 @@ export const leagueColors: Record<string, string> = {
 
 // League logos (local files)
 export const leagueLogos: Record<string, string> = {
-  "Premier League": "/4to-Concurso-Interliga/logos/premier.png",
-  "LaLiga": "/4to-Concurso-Interliga/logos/laliga.png",
-  "Serie A": "/4to-Concurso-Interliga/logos/seriea.png",
-  "Bundesliga": "/4to-Concurso-Interliga/logos/bundesliga.png",
-  "Champions League": "/4to-Concurso-Interliga/logos/champions.png",
-  "Europa League": "/4to-Concurso-Interliga/logos/europa.svg",
-  "Conference League": "/4to-Concurso-Interliga/logos/conference.svg",
-  "Copa Italia": "/4to-Concurso-Interliga/logos/coppaitalia.svg",
-  "FA Cup": "/4to-Concurso-Interliga/logos/facup.svg",
-  "Copa del Rey": "/4to-Concurso-Interliga/logos/copadelrey.svg",
-  "DFB-Pokal": "/4to-Concurso-Interliga/logos/dfbpokal.svg",
+  "Premier League": "/logos/premier.png",
+  "LaLiga": "/logos/laliga.png",
+  "Serie A": "/logos/seriea.png",
+  "Bundesliga": "/logos/bundesliga.png",
+  "Champions League": "/logos/champions.png",
+  "Europa League": "/logos/europa.svg",
+  "Conference League": "/logos/conference.svg",
+  "Copa Italia": "/logos/coppaitalia.svg",
+  "FA Cup": "/logos/facup.svg",
+  "Copa del Rey": "/logos/copadelrey.svg",
+  "DFB-Pokal": "/logos/dfbpokal.svg",
 };
 
 // Map league name to slug

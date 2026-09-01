@@ -1,8 +1,8 @@
 const CACHE_NAME = "interliga-v1";
 const SHELL = [
-  "/4to-Concurso-Interliga/",
-  "/4to-Concurso-Interliga/icon.svg",
-  "/4to-Concurso-Interliga/manifest.json",
+  "/",
+  "/icon.svg",
+  "/manifest.json",
 ];
 
 self.addEventListener("install", (e) => {

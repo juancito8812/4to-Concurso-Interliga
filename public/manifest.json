@@ -2,15 +2,15 @@
   "name": "4° Concurso Interliga",
   "short_name": "Interliga",
   "description": "Fútbol + Camiseta + Pasión. Pronosticá y ganá en el 4° Concurso Interliga.",
-  "start_url": "/4to-Concurso-Interliga/",
-  "scope": "/4to-Concurso-Interliga/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#080e1c",
   "theme_color": "#c9a84c",
   "icons": [
     {
-      "src": "/4to-Concurso-Interliga/icon.svg",
+      "src": "/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
