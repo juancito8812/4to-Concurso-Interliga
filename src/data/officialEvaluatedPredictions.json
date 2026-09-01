@@ -95,7 +95,7 @@
   {
     "id": "c23d0a74-f9c4-4703-a2ba-fef62eb003a9",
     "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
-    "display_name": "bybit6118",
+    "display_name": "ARS",
     "match_id": "00000000-0000-4000-8000-000000088dad",
     "home_score": 1,
     "away_score": 2,
@@ -217,7 +217,7 @@
   {
     "id": "c8f7875e-0a45-4e60-986e-66e16fbb3eac",
     "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
-    "display_name": "bybit6118",
+    "display_name": "ARS",
     "match_id": "00000000-0000-4000-8000-000017f4be1f",
     "home_score": 0,
     "away_score": 3,
@@ -252,6 +252,31 @@
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Lamine Yamal (+1 pt)",
       "Goleador acertado: Raphinha (+1 pt)"
+    ]
+  },
+  {
+    "id": "2bc9e6d2-6374-4563-87ab-a729b81c5e9d",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "ARS",
+    "match_id": "00000000-0000-4000-8000-000000088dba",
+    "home_score": 3,
+    "away_score": 0,
+    "scorers": [
+      {
+        "player_name": "Bukayo Saka",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Bruno Guimarães",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Martin Ødegaard",
+        "goals": 1,
+        "team": "home"
+      }
     ]
   }
 ]
