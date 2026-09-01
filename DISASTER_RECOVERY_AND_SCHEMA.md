@@ -263,11 +263,11 @@ Para garantizar un rendimiento ultra-rápido y costo $0:
 En el panel de Supabase $\rightarrow$ **Authentication**:
 
 1. **URL Configuration:**
-   - **Site URL:** `https://juancito8812.github.io/4to-Concurso-Interliga/`
+   - **Site URL:** `https://futbolcamisetapasion.com/`
    - **Redirect URLs:**
      - `http://localhost:3000/**`
-     - `https://juancito8812.github.io/4to-Concurso-Interliga/**`
-     - `https://juancito8812.github.io/4to-Concurso-Interliga/actualizar-contrasena/`
+     - `https://futbolcamisetapasion.com/**`
+     - `https://futbolcamisetapasion.com/actualizar-contrasena/`
 
 2. **Email Templates (Opcional):**
    - Confirm signup & Reset Password: Asegurarse de que el enlace dirija a `{{ .SiteURL }}/actualizar-contrasena/`.

@@ -4,7 +4,7 @@
 
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 8 ligas/copas europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
-- **Deploy:** GitHub Pages (`basePath: "/4to-Concurso-Interliga"`, workflow `.github/workflows/deploy.yml`).
+- **Deploy:** GitHub Pages con dominio personalizado `futbolcamisetapasion.com` (Cloudflare DNS), sin basePath. Workflow `.github/workflows/deploy.yml`.
 - **Última sesión:** 2026-08-31 (incidente ESPN 400 en fechas con coma → rango con guión + fail-fast)
 - **Versión de memoria:** 2.3
 
@@ -120,7 +120,7 @@
   - **Fix CORS football-data en GitHub Pages** (`e065e2e`): `getOfficialTeamMatches` saltea la API en vivo fuera de localhost (la API solo permite localhost); se usa el bundle oficial. 0 errores en consola del teléfono.
   - **Fix recuperación de contraseña** (`22aed96`): creada la página `/actualizar-contrasena` (el redirect del email apuntaba a una ruta inexistente → 404).
   - **Fix reset de participación**: `handleResetData` en `/perfil` ahora borra también `tournament_survivors`.
-  - ⚠️ ~~Acción manual pendiente~~ **RESUELTO**: URL agregada a Supabase vía Management API — `site_url` corregido a `https://juancito8812.github.io/4to-Concurso-Interliga` (antes apuntaba a localhost:3000, rompiendo los links de confirmación de registro en producción) y `uri_allow_list` con localhost + sitio + `/actualizar-contrasena`.
+  - ⚠️ ~~Acción manual pendiente~~ **RESUELTO**: URL agregada a Supabase vía Management API — `site_url` corregido a `https://futbolcamisetapasion.com` (antes apuntaba a localhost:3000, rompiendo los links de confirmación de registro en producción) y `uri_allow_list` con localhost + sitio + `/actualizar-contrasena`.
 
 - **2026-08-29** — **Code review de seguridad (skill `security-review`) + documentación completa**:
   - **IDOR fix en `prediction_scorers`**: la política era `FOR ALL USING (true) WITH CHECK (true)` — cualquier usuario autenticado podía modificar goleadores de cualquier pronóstico. Ahora la escritura valida ownership (`EXISTS` sobre predictions) y la lectura sigue siendo pública (ranking/cron). Verificado: INSERT anon → 401.
