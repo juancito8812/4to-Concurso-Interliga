@@ -1076,5 +1076,27 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4b000",
+    "home_team": "Parma",
+    "away_team": "Cremonese",
+    "match_date": "2026-09-01T16:00Z",
+    "league": "Copa Italia",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Simone Lottici Tessadri",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Adin Licina",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]

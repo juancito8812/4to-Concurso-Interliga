@@ -111,11 +111,10 @@
         "team": "away"
       }
     ],
-    "points": 6,
+    "points": 4,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
-      "Goleador acertado: Bukayo Saka (+1 pt)",
-      "Goles exactos de Bukayo Saka: 1 (+2 pts)"
+      "Goleador acertado: Bukayo Saka (+1 pt)"
     ]
   },
   {
@@ -147,13 +146,12 @@
         "team": "away"
       }
     ],
-    "points": 8,
+    "points": 6,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Kylian Mbappé (+1 pt)",
-      "Goleador acertado: Jude Bellingham (+1 pt)",
-      "Goles exactos de Jude Bellingham: 1 (+2 pts)"
+      "Goleador acertado: Jude Bellingham (+1 pt)"
     ]
   },
   {
@@ -211,7 +209,7 @@
       "Marcador exacto (+2 pts)",
       "Goleador acertado: Kylian Mbappé (+1 pt)",
       "Goleador acertado: Jude Bellingham (+1 pt)",
-      "Goles exactos de Jude Bellingham: 1 (+2 pts)"
+      "Cantidad exacta de goleadores: 3 (+2 pts)"
     ]
   },
   {
@@ -247,11 +245,12 @@
         "team": "home"
       }
     ],
-    "points": 5,
+    "points": 7,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Lamine Yamal (+1 pt)",
-      "Goleador acertado: Raphinha (+1 pt)"
+      "Goleador acertado: Raphinha (+1 pt)",
+      "Cantidad exacta de goleadores: 3 (+2 pts)"
     ]
   },
   {
