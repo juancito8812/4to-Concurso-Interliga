@@ -11,7 +11,7 @@
 ## Arquitectura
 
 - `src/app/` — Páginas de Next.js (`/`, `/registro`, `/login`, `/olvide-contrasena`, `/perfil`, `/pronosticar`, `/mis-pronosticos`, `/ranking`, `/tabla/[league]`).
-- `src/lib/survivor.ts` — Módulo de supervivencia multitorneo KO (`evaluateSurvivorProgression`, `getUserCupSurvivors`, `setInitialCupSurvivor`, `updateCupSurvivor`).
+- `src/lib/survivor.ts` — Módulo de supervivencia multitorneo KO (`evaluateSurvivorProgression`, `getUserCupSurvivors`, `setInitialCupSurvivor`, `upsertCupSurvivor`).
 - `src/lib/espnApi.ts` — API client para estadísticas en vivo, clasificaciones y fixtures de las 8 competiciones sin restricciones de CORS ni límites de API key.
 - `src/lib/scoring.ts` — Motor oficial de cálculo de puntuación (`calculateScore`) para aciertos de signo, marcador exacto, diferencia de 1 gol y goleadores.
 - `src/lib/supabase.ts` — Cliente Supabase para profiles, teams, players, matches, predictions, prediction_scorers y tournament_survivors.

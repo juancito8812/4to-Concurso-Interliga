@@ -5,35 +5,16 @@ Este documento detalla el procedimiento completo paso a paso para **restaurar la
 ---
 
 ## 📋 Índice
-1. [Resumen de Componentes y Estado](#-resumen-de-componentes-y-estado)
-2. [Guía Rápida de Restauración en 5 Minutos](#-guía-rápida-de-restauración-en-5-minutos)
-3. [Esquema de Base de Datos y Semillas](#-esquema-de-base-de-datos-y-semillas)
-4. [Configuración de Seguridad y RLS](#-configuración-de-seguridad-y-rls)
-5. [Optimizaciones para el Plan Free de Supabase](#-optimizaciones-para-el-plan-free-de-supabase)
-6. [Configuración de Autenticación y Redirects](#-configuración-de-autenticación-y-redirects)
-7. [Variables de Entorno y GitHub Secrets](#-variables-de-entorno-y-github-secrets)
-8. [Preguntas Frecuentes y Diagnóstico](#-preguntas-frecuentes-y-diagnóstico)
+1. [Guía Rápida de Restauración en 5 Minutos](#-guía-rápida-de-restauración-en-5-minutos)
+2. [Esquema de Base de Datos y Semillas](#-esquema-de-base-de-datos-y-semillas)
+3. [Configuración de Seguridad y RLS](#-configuración-de-seguridad-y-rls)
+4. [Optimizaciones para el Plan Free de Supabase](#-optimizaciones-para-el-plan-free-de-supabase)
+5. [Configuración de Autenticación y Redirects](#-configuración-de-autenticación-y-redirects)
+6. [Funciones y Escrituras Automatizadas](#-funciones-y-escrituras-automatizadas)
 
 ---
 
-## 🧩 1. Resumen de Componentes y Estado
-
-La plataforma está diseñada con una arquitectura resiliente y desacoplada:
-
-| Componente | Fuente / Ubicación | Dependencia Externa | Estrategia de Respaldo |
-|---|---|---|---|
-| **Frontend Web** | Next.js 16 + React 19 + Tailwind v4 | GitHub Repository | Versionado en Git (`main`) |
-| **Base de Datos** | Supabase PostgreSQL | Proyecto Supabase | `supabase/schema.sql` |
-| **Autenticación** | Supabase Auth (Email/Pass) | Proyecto Supabase | `auth.users` + Trigger automático |
-| **Calendario Oficial** | 1.650 Partidos 2026/27 reales | `src/data/officialFixtures.json` | Pre-sincronizado + regenerable con `scripts/sync-official-fixtures.js` |
-| **Plantillas Oficiales** | 4.749 Jugadores 2026/27 | `src/data/officialPlayers.json` | Pre-sincronizado + completable con `scripts/sync-player-squads.js` |
-| **Partidos Evaluados** | Resultados y marcadores oficiales | `src/data/officialEvaluatedMatches.json` | Pre-sincronizado / Versionado |
-| **Tablas en Vivo** | ESPN API sin API Key | `src/lib/espnApi.ts` | En vivo / Fallback automático |
-| **Scripts de Evaluación** | Evaluador CLI de marcadores y puntos | `scripts/evaluate-matches.js` | Versionado en Git (`main`) |
-
----
-
-## ⚡ 2. Guía Rápida de Restauración en 5 Minutos
+## ⚡ 1. Guía Rápida de Restauración en 5 Minutos
 
 Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
 
@@ -48,7 +29,7 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
 3. Copiar todo el contenido, pegarlo en el editor y hacer clic en **Run**.
 4. ✅ Esto creará automáticamente:
    - Las 7 tablas (`teams`, `profiles`, `players`, `matches`, `predictions`, `prediction_scorers`, `tournament_survivors`).
-   - Los 15 índices de alta velocidad.
+   - Los 17 índices de alta velocidad (incluyendo composite, parciales y FK).
    - Las políticas RLS de lectura y escritura.
    - La función y trigger de registro automático (`handle_new_user`).
    - La función RPC de eliminación de cuenta (`delete_user_account`).
@@ -81,7 +62,7 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
 
 ---
 
-## 🗄️ 3. Esquema de Base de Datos y Semillas
+## 🗄️ 2. Esquema de Base de Datos y Semillas
 
 El esquema relacional completo se encuentra en [`supabase/schema.sql`](./supabase/schema.sql).
 
@@ -208,11 +189,11 @@ Módulo de evaluación pura y helpers en `src/lib/survivor.ts`:
 - `evaluateSurvivorProgression`: Función pura que computa si el participante se mantiene `ALIVE`, es eliminado a `ELIMINATED` o transfiere su camiseta (`transferred: true`).
 - `getUserCupSurvivors(userId)`: Obtiene los estados del participante en las 4 copas con JOIN a `teams(name, logo_url)`.
 - `setInitialCupSurvivor(userId, tournamentSlug, teamId)`: Inicializa el club representante.
-- `updateCupSurvivor(survivor)`: Guarda progresiones y transferencias.
+- `upsertCupSurvivor(survivor)`: Guarda progresiones y transferencias.
 
 ---
 
-## 🛡️ 4. Configuración de Seguridad y RLS
+## 🛡️ 3. Configuración de Seguridad y RLS
 
 Todas las tablas cuentan con **Row Level Security (RLS)** para proteger los datos mientras permiten la experiencia multiusuario en tiempo real:
 
@@ -237,15 +218,19 @@ Todas las tablas cuentan con **Row Level Security (RLS)** para proteger los dato
 
 ---
 
-## 🚀 5. Optimizaciones para el Plan Free de Supabase
+## 🚀 4. Optimizaciones para el Plan Free de Supabase
 
 Para garantizar un rendimiento ultra-rápido y costo $0:
 
-1. **Índices B-Tree Estratégicos:**
+1. **Índices B-Tree Estratégicos (17 total):**
    - `idx_profiles_user_id`, `idx_profiles_team_id`
-   - `idx_predictions_user_match` (Índice compuesto en `user_id, match_id`)
-   - `idx_matches_date`, `idx_matches_home`, `idx_matches_away`
-   - `idx_tournament_survivors_user`, `idx_tournament_survivors_slug`
+   - `idx_predictions_user_match` (compuesto: `user_id, match_id`)
+   - `idx_matches_league_date` (compuesto: `league, match_date`) — optimizado para el cron
+   - `idx_matches_unfinished` (parcial: `WHERE result_home IS NULL`) — partidos pendientes
+   - `idx_matches_home`, `idx_matches_away`
+   - `idx_tournament_survivors_user_slug` (compuesto: `user_id, tournament_slug`)
+   - `idx_tournament_survivors_active_team` (FK index)
+   - `idx_tournament_survivors_alive` (parcial: `WHERE status = 'ALIVE'`)
 2. **Caché en Cliente (60s TTL):**
    - El ranking utiliza caché en memoria para evitar saturar la base de datos con peticiones repetitivas.
 3. **Zero DB Reads en Plantillas:**
@@ -258,7 +243,7 @@ Para garantizar un rendimiento ultra-rápido y costo $0:
 
 ---
 
-## 📧 6. Configuración de Autenticación y Redirects
+## 📧 5. Configuración de Autenticación y Redirects
 
 En el panel de Supabase $\rightarrow$ **Authentication**:
 
@@ -274,7 +259,7 @@ En el panel de Supabase $\rightarrow$ **Authentication**:
 
 ---
 
-## 🛠️ 7. Funciones y Escrituras Automatizadas
+## 🛠️ 6. Funciones y Escrituras Automatizadas
 
 ### Eliminación Completa de Cuenta (`delete_user_account`):
 Ejecuta la purga en cascada de predicciones, goleadores, tournament_survivors, perfil y elimina la fila de `auth.users`, liberando el email de forma inmediata. Solo ejecutable por usuarios autenticados (`GRANT EXECUTE TO authenticated`):
@@ -320,26 +305,4 @@ El cron `scripts/auto-sync-espn-results.js` escribe vía REST directo con `SUPAB
 
 ---
 
-## ❓ 8. Preguntas Frecuentes y Diagnóstico
 
-### ¿Qué hacer si NADIE puede iniciar sesión (login colgado)?
-- **Síntoma:** `/auth/v1/token` y `/auth/v1/health` se cuelgan (timeout), pero `/rest/v1/*` responde 200 y el proyecto figura `ACTIVE_HEALTHY`.
-- **Diagnóstico:** el servicio de autenticación (GoTrue) del proyecto quedó colgado (incidente conocido de Supabase: *"401 errors due to JWT rejections"*, ago-2026).
-- **Solución:** reiniciar el proyecto con la Management API (equivalente a dashboard → Settings → General → Restart project):
-  ```bash
-  curl -X POST "https://api.supabase.com/v1/projects/ilkndkqcmxvlufxaugog/restart" \
-    -H "Authorization: Bearer <MANAGEMENT_API_TOKEN>"
-  ```
-- **Verificación:** esperar ~1 min y comprobar `GET /auth/v1/health` (debe responder 200 con `"version":"v2.x"`). Probar login con `POST /auth/v1/token?grant_type=password`.
-
-### ¿Qué hacer si en el Ranking los usuarios solo se ven a sí mismos?
-- Ejecutar la sección de políticas RLS del archivo `supabase/schema.sql` en el SQL Editor para garantizar que `profiles` tenga la política `Public profiles are viewable by everyone`.
-
-### ¿Cómo verificar que la base de datos está saludable?
-- Ejecutar en el SQL Editor:
-  ```sql
-  SELECT count(*) as total_equipos FROM public.teams;
-  SELECT count(*) as total_partidos FROM public.matches;
-  SELECT count(*) as total_perfiles FROM public.profiles;
-  ```
-  Debe retornar **225 equipos reales** (2026/27), **1.650 partidos** (igual al calendario oficial) y el total de perfiles activos. Si los conteos difieren, ejecutar `scripts/sync-db.js` con la service role key para repoblar.

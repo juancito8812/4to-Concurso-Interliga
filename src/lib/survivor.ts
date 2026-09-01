@@ -116,33 +116,22 @@ export async function getUserCupSurvivors(userId: string): Promise<Record<string
     }
 
     const result: Record<string, TournamentSurvivor> = {};
-    (data || []).forEach((row) => {
-      const rowData = row as unknown as {
-        id?: string;
-        user_id: string;
-        tournament_slug: string;
-        active_team_id: string;
-        teams?: { name?: string; logo_url?: string };
-        status: 'ALIVE' | 'ELIMINATED';
-        eliminated_at_round?: string | null;
-        history?: SurvivorTransferHistory[];
-        created_at?: string;
-        updated_at?: string;
+    for (const row of data ?? []) {
+      const r = row as Record<string, unknown> & { teams?: { name?: string; logo_url?: string } };
+      result[r.tournament_slug as string] = {
+        id: r.id as string | undefined,
+        user_id: r.user_id as string,
+        tournament_slug: r.tournament_slug as string,
+        active_team_id: r.active_team_id as string,
+        active_team_name: r.teams?.name ?? "",
+        active_team_logo: r.teams?.logo_url ?? "",
+        status: r.status as 'ALIVE' | 'ELIMINATED',
+        eliminated_at_round: r.eliminated_at_round as string | null | undefined,
+        history: Array.isArray(r.history) ? (r.history as SurvivorTransferHistory[]) : [],
+        created_at: r.created_at as string | undefined,
+        updated_at: r.updated_at as string | undefined,
       };
-      result[rowData.tournament_slug] = {
-        id: rowData.id,
-        user_id: rowData.user_id,
-        tournament_slug: rowData.tournament_slug,
-        active_team_id: rowData.active_team_id,
-        active_team_name: rowData.teams?.name || "",
-        active_team_logo: rowData.teams?.logo_url || "",
-        status: rowData.status,
-        eliminated_at_round: rowData.eliminated_at_round,
-        history: Array.isArray(rowData.history) ? rowData.history : [],
-        created_at: rowData.created_at,
-        updated_at: rowData.updated_at,
-      };
-    });
+    }
 
     return result;
   } catch (err) {
@@ -155,47 +144,17 @@ export async function getUserCupSurvivors(userId: string): Promise<Record<string
 export const getCupSurvivorStatus = getUserCupSurvivors;
 
 /**
- * Initialize or set initial representative club for a cup tournament.
+ * Upsert a tournament survivor record.
+ * Creates if not exists (status defaults to ALIVE, history to []).
+ * Updates existing records with provided fields.
  */
-export async function setInitialCupSurvivor(
-  userId: string,
-  tournamentSlug: string,
-  teamId: string
-): Promise<boolean> {
-  try {
-    const { error } = await supabase.from("tournament_survivors").upsert(
-      {
-        user_id: userId,
-        tournament_slug: tournamentSlug,
-        active_team_id: teamId,
-        status: "ALIVE",
-        history: [],
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "user_id,tournament_slug" }
-    );
-
-    if (error) {
-      console.error("Failed to set initial cup survivor:", error);
-      return false;
-    }
-    return true;
-  } catch (err) {
-    console.error("Exception in setInitialCupSurvivor:", err);
-    return false;
-  }
-}
-
-/**
- * Update an existing tournament survivor record.
- */
-export async function updateCupSurvivor(survivor: {
+export async function upsertCupSurvivor(survivor: {
   userId: string;
   tournamentSlug: string;
   activeTeamId: string;
-  status: 'ALIVE' | 'ELIMINATED';
+  status?: 'ALIVE' | 'ELIMINATED';
   eliminatedAtRound?: string | null;
-  history: SurvivorTransferHistory[];
+  history?: SurvivorTransferHistory[];
 }): Promise<boolean> {
   try {
     const { error } = await supabase.from("tournament_survivors").upsert(
@@ -203,21 +162,31 @@ export async function updateCupSurvivor(survivor: {
         user_id: survivor.userId,
         tournament_slug: survivor.tournamentSlug,
         active_team_id: survivor.activeTeamId,
-        status: survivor.status,
-        eliminated_at_round: survivor.eliminatedAtRound || null,
-        history: survivor.history,
+        status: survivor.status ?? "ALIVE",
+        eliminated_at_round: survivor.eliminatedAtRound ?? null,
+        history: survivor.history ?? [],
         updated_at: new Date().toISOString(),
       },
       { onConflict: "user_id,tournament_slug" }
     );
 
     if (error) {
-      console.error("Failed to update cup survivor:", error);
+      console.error("Failed to upsert cup survivor:", error);
       return false;
     }
     return true;
-  } catch (err) {
-    console.error("Exception in updateCupSurvivor:", err);
+  } catch (err) {      console.error("Exception in upsertCupSurvivor:", err);
     return false;
   }
+}
+
+/**
+ * Initialize a new tournament survivor record (convenience wrapper).
+ */
+export async function setInitialCupSurvivor(
+  userId: string,
+  tournamentSlug: string,
+  teamId: string
+): Promise<boolean> {
+  return upsertCupSurvivor({ userId, tournamentSlug, activeTeamId: teamId });
 }

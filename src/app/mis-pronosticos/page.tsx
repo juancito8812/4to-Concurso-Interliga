@@ -20,7 +20,7 @@ import { calculateScore } from "@/lib/scoring";
 import {
   getUserCupSurvivors,
   evaluateSurvivorProgression,
-  updateCupSurvivor,
+  upsertCupSurvivor,
   TournamentSurvivor,
   KnockoutCupSlug,
   getTeamCups,
@@ -462,7 +462,7 @@ export default function MisPronosticosPage() {
         }
 
         const eliminatedAtRound = outcome.newStatus === "ELIMINATED" ? roundName : null;
-        const ok = await updateCupSurvivor({
+        const ok = await upsertCupSurvivor({
           userId: user.id,
           tournamentSlug: cupSlug,
           activeTeamId,

@@ -138,7 +138,7 @@ export default function Home() {
         <div className="flex flex-col items-center gap-3 sm:gap-4 max-w-md sm:max-w-3xl w-full">
           {/* Fila 1: Ligas nacionales */}
           <div className="grid grid-cols-4 gap-2.5 sm:gap-4 w-full">
-            {domesticLeagues.map((league) => (
+            {domesticLeagues.map((league, idx) => (
               <Link
                 key={league.name}
                 href={`/tabla/${league.slug}`}
@@ -151,7 +151,8 @@ export default function Home() {
                     alt={league.name}
                     width={64}
                     height={64}
-                    loading="lazy"
+                    loading={idx === 0 ? "eager" : "lazy"}
+                    fetchPriority={idx === 0 ? "high" : undefined}
                     decoding="async"
                     className="w-full h-full object-contain transition-transform group-hover:scale-105"
                   />
@@ -253,7 +254,7 @@ export default function Home() {
       </section>
 
       {/* SISTEMA DE PUNTUACIÓN */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 content-visibility-auto">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gold flex items-center justify-center shrink-0">
@@ -294,7 +295,7 @@ export default function Home() {
       </section>
 
       {/* PREMIOS - PODIO ESTILO CHAMPIONS LEAGUE */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 relative overflow-hidden content-visibility-auto">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 sm:mb-14">
             <div className="flex items-center gap-3 sm:gap-4">

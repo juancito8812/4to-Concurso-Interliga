@@ -13,6 +13,7 @@
 -- 1. EXTENSIONES
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+CREATE EXTENSION IF NOT EXISTS "pg_stat_statements";
 
 -- 2. TABLAS
 
@@ -90,7 +91,7 @@ CREATE TABLE IF NOT EXISTS public.tournament_survivors (
   tournament_slug TEXT NOT NULL, -- 'champions', 'europa', 'conference', 'coppaitalia', 'facup', 'copadelrey', 'dfbpokal'
   active_team_id UUID REFERENCES public.teams(id) NOT NULL,
   status TEXT NOT NULL DEFAULT 'ALIVE' CHECK (status IN ('ALIVE', 'ELIMINATED')),
-  eliminated_at_round TEXT,
+  eliminated_at_round TEXT CHECK (eliminated_at_round IN ('Dieciseisavos de Final', 'Octavos de Final', 'Cuartos de Final', 'Semifinal', 'Final')),
   history JSONB NOT NULL DEFAULT '[]'::jsonb,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -107,18 +108,19 @@ CREATE INDEX IF NOT EXISTS idx_predictions_user_match ON public.predictions(user
 
 CREATE INDEX IF NOT EXISTS idx_prediction_scorers_pred_id ON public.prediction_scorers(prediction_id);
 
-CREATE INDEX IF NOT EXISTS idx_matches_date ON public.matches(match_date);
+CREATE INDEX IF NOT EXISTS idx_matches_league_date ON public.matches(league, match_date);
 CREATE INDEX IF NOT EXISTS idx_matches_home ON public.matches(home_team);
 CREATE INDEX IF NOT EXISTS idx_matches_away ON public.matches(away_team);
-CREATE INDEX IF NOT EXISTS idx_matches_league ON public.matches(league);
+CREATE INDEX IF NOT EXISTS idx_matches_unfinished ON public.matches(match_date) WHERE result_home IS NULL;
 
 CREATE INDEX IF NOT EXISTS idx_teams_league ON public.teams(league);
 CREATE INDEX IF NOT EXISTS idx_teams_name ON public.teams(name);
 CREATE INDEX IF NOT EXISTS idx_players_team ON public.players(team);
 CREATE INDEX IF NOT EXISTS idx_players_name ON public.players(name);
 
-CREATE INDEX IF NOT EXISTS idx_tournament_survivors_user ON public.tournament_survivors(user_id);
-CREATE INDEX IF NOT EXISTS idx_tournament_survivors_slug ON public.tournament_survivors(tournament_slug);
+CREATE INDEX IF NOT EXISTS idx_tournament_survivors_user_slug ON public.tournament_survivors(user_id, tournament_slug);
+CREATE INDEX IF NOT EXISTS idx_tournament_survivors_active_team ON public.tournament_survivors(active_team_id);
+CREATE INDEX IF NOT EXISTS idx_tournament_survivors_alive ON public.tournament_survivors(user_id, tournament_slug) WHERE status = 'ALIVE';
 
 -- 4. SEGURIDAD Y POLÍTICAS ROW LEVEL SECURITY (RLS)
 
@@ -131,11 +133,11 @@ ON public.profiles FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Users can insert their own profile" ON public.profiles;
 CREATE POLICY "Users can insert their own profile" 
-ON public.profiles FOR INSERT WITH CHECK (auth.uid() = user_id);
+ON public.profiles FOR INSERT WITH CHECK ((SELECT auth.uid()) = user_id);
 
 DROP POLICY IF EXISTS "Users can update their own profile" ON public.profiles;
 CREATE POLICY "Users can update their own profile" 
-ON public.profiles FOR UPDATE USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+ON public.profiles FOR UPDATE USING ((SELECT auth.uid()) = user_id) WITH CHECK ((SELECT auth.uid()) = user_id);
 
 -- B. Predictions RLS
 ALTER TABLE public.predictions ENABLE ROW LEVEL SECURITY;
@@ -145,11 +147,11 @@ ON public.predictions FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Users can insert own predictions" ON public.predictions;
 CREATE POLICY "Users can insert own predictions" 
-ON public.predictions FOR INSERT WITH CHECK (auth.uid() = user_id);
+ON public.predictions FOR INSERT WITH CHECK ((SELECT auth.uid()) = user_id);
 
 DROP POLICY IF EXISTS "Users can update own predictions" ON public.predictions;
 CREATE POLICY "Users can update own predictions" 
-ON public.predictions FOR UPDATE USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+ON public.predictions FOR UPDATE USING ((SELECT auth.uid()) = user_id) WITH CHECK ((SELECT auth.uid()) = user_id);
 
 -- C. Prediction Scorers RLS
 ALTER TABLE public.prediction_scorers ENABLE ROW LEVEL SECURITY;
@@ -163,22 +165,22 @@ DROP POLICY IF EXISTS "Users can manage prediction scorers" ON public.prediction
 CREATE POLICY "Users can insert own prediction scorers"
 ON public.prediction_scorers FOR INSERT
 WITH CHECK (
-  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = auth.uid())
+  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = (SELECT auth.uid()))
 );
 
 CREATE POLICY "Users can update own prediction scorers"
 ON public.prediction_scorers FOR UPDATE
 USING (
-  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = auth.uid())
+  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = (SELECT auth.uid()))
 )
 WITH CHECK (
-  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = auth.uid())
+  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = (SELECT auth.uid()))
 );
 
 CREATE POLICY "Users can delete own prediction scorers"
 ON public.prediction_scorers FOR DELETE
 USING (
-  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = auth.uid())
+  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = (SELECT auth.uid()))
 );
 
 -- D. Teams, Players, Matches RLS (Lectura Pública)
@@ -204,63 +206,15 @@ CREATE POLICY "Lectura pública de tournament_survivors"
 DROP POLICY IF EXISTS "Usuarios administran su estado de torneo" ON public.tournament_survivors;
 CREATE POLICY "Usuarios administran su estado de torneo"
   ON public.tournament_survivors FOR ALL
-  USING (auth.uid() = user_id)
-  WITH CHECK (auth.uid() = user_id);
+  USING ((SELECT auth.uid()) = user_id)
+  WITH CHECK ((SELECT auth.uid()) = user_id);
 
 -- 5. FUNCIONES Y TRIGGERS AUTOMÁTICOS
-
--- Trigger para crear/sincronizar perfil al registrarse un usuario en auth.users
-CREATE OR REPLACE FUNCTION public.handle_new_user()
-RETURNS trigger AS $$
-BEGIN
-  INSERT INTO public.profiles (user_id, display_name)
-  VALUES (
-    NEW.id,
-    COALESCE(NEW.raw_user_meta_data->>'display_name', split_part(NEW.email, '@', 1))
-  )
-  ON CONFLICT (user_id) DO UPDATE
-  SET display_name = EXCLUDED.display_name;
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
 
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
-
--- RPC para eliminar cuenta de usuario de forma total e irreversible (libera email)
-CREATE OR REPLACE FUNCTION public.delete_user_account()
-RETURNS void AS $$
-DECLARE
-  v_user_id uuid;
-BEGIN
-  v_user_id := auth.uid();
-  IF v_user_id IS NULL THEN
-    RAISE EXCEPTION 'Not authenticated';
-  END IF;
-
-  -- 1. Eliminar goleadores de sus pronósticos
-  DELETE FROM public.prediction_scorers 
-  WHERE prediction_id IN (
-    SELECT id FROM public.predictions WHERE user_id = v_user_id
-  );
-
-  -- 2. Eliminar pronósticos
-  DELETE FROM public.predictions WHERE user_id = v_user_id;
-
-  -- 3. Eliminar estado de supervivencia en torneos
-  DELETE FROM public.tournament_survivors WHERE user_id = v_user_id;
-
-  -- 4. Eliminar perfil
-  DELETE FROM public.profiles WHERE user_id = v_user_id;
-
-  -- 5. Eliminar cuenta de auth.users (libera el correo)
-  DELETE FROM auth.users WHERE id = v_user_id;
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
-
-GRANT EXECUTE ON FUNCTION public.delete_user_account() TO authenticated;
 
 -- 6. SEMILLA OFICIAL DE EQUIPOS (histórica — 89 clubes)
 -- NOTA: Los equipos REALES de la temporada 2026/27 (179) se sincronizan automáticamente
@@ -359,6 +313,8 @@ VALUES
   ('f8d30f38-d711-45ca-a65b-d573a7aa3c07', 'Verona', 'Serie A', 'https://r2.thesportsdb.com/images/media/team/badge/ti1upd1645219152.png')
 ON CONFLICT (name, league) DO UPDATE
 SET logo_url = EXCLUDED.logo_url;
+
+ANALYZE public.teams;
 
 -- ---------------------------------------------------------------------------
 -- F. SEGURIDAD: el cron escribe vía service role key (REST directo, bypass RLS).

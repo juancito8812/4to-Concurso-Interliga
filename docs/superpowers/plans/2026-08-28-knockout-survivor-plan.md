@@ -50,7 +50,7 @@ git commit -m "feat(db): anadir tabla y politicas RLS tournament_survivors"
   - `export function evaluateSurvivorProgression(params: { activeTeamName: string; predictedWinner: string; actualWinner: string; matchId: string; roundName: string; matchDate: string; currentHistory: any[]; }): { newStatus: 'ALIVE' | 'ELIMINATED'; newTeamName: string; updatedHistory: any[]; transferred: boolean; }`
   - `export async function getCupSurvivorStatus(userId: string): Promise<Record<string, TournamentSurvivor>>`
   - `export async function setInitialCupSurvivor(userId: string, tournamentSlug: string, teamId: string): Promise<boolean>`
-  - `export async function updateCupSurvivor(survivor: TournamentSurvivor): Promise<boolean>`
+  - `export async function upsertCupSurvivor(survivor: TournamentSurvivor): Promise<boolean>`
 
 - [ ] **Step 1: Write pure logic functions and interfaces in `src/lib/survivor.ts`**
 - [ ] **Step 2: Implement Supabase queries and fallback cache**

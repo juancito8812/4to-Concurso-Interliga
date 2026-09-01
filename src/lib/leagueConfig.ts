@@ -121,26 +121,17 @@ export function parseCompetitionName(compNameOrCode?: string): string | null {
   return null;
 }
 
+const KNOCKOUT_KEYWORDS = new Set([
+  "champions", "europa", "conference", "copa italia", "coppa",
+  "fa cup", "copa del rey", "dfb-pokal", "dfb pokal",
+  "cl", "el", "ecl", "ci", "facup", "copadelrey", "dfbpokal",
+]);
+
 export function isKnockoutCup(leagueOrSlug: string): boolean {
   const norm = leagueOrSlug.toLowerCase().trim();
-  return (
-    norm.includes("champions") ||
-    norm.includes("europa") ||
-    norm.includes("conference") ||
-    norm.includes("copa italia") ||
-    norm.includes("coppa") ||
-    norm.includes("fa cup") ||
-    norm.includes("copa del rey") ||
-    norm.includes("dfb-pokal") ||
-    norm.includes("dfb pokal") ||
-    norm === "cl" ||
-    norm === "el" ||
-    norm === "ecl" ||
-    norm === "ci" ||
-    norm === "facup" ||
-    norm === "copadelrey" ||
-    norm === "dfbpokal"
-  );
+  // Exact match for short keywords (cl, el, ecl, ci), substring for longer ones
+  return KNOCKOUT_KEYWORDS.has(norm) ||
+    [...KNOCKOUT_KEYWORDS].filter(k => k.length > 3).some(k => norm.includes(k));
 }
 
 export function getKnockoutCupSlug(league: string): string | null {

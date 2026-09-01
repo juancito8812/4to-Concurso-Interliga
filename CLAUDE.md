@@ -1,112 +1,52 @@
 # CLAUDE.md
 
-Este archivo contiene información para agentes de código. Ver AGENTS.md para reglas detalladas.
+Contexto para agentes de código. Para documentación completa ver [README.md](./README.md). Reglas detalladas en [AGENTS.md](./AGENTS.md).
 
 ## Proyecto
 
-4° Concurso Interliga — App de pronósticos de fútbol con autenticación, tablas de posiciones por liga, sistema de ranking en vivo y gestión de perfiles para la temporada 2026/27.
+4° Concurso Interliga — App de pronósticos de fútbol (temporada 2026/27) con autenticación, tablas de posiciones por liga, ranking en vivo y sistema de superviviente en copas knockout.
 
-## Stack clave
+## Stack
 
 - Next.js 16 + App Router + static export (`output: "export"`)
-- Tailwind CSS v4 (colores custom en `globals.css` con `@theme`)
-- TypeScript estricto
-- Supabase (Auth + PostgreSQL con RLS público y escrituras del cron vía **service role key**)
-- `src/data/officialFixtures.json` — 1.650 partidos oficiales 2026/27 reales para las 9 competiciones (IDs canónicos únicos, 0 fabricados — verificado contra fuentes)
-- `src/data/teamAliases.json` — Fuente única de normalización (404 aliases, 241 equipos canónicos, knockoutPairs, teamCups de 225 equipos)
-- `src/data/officialPlayers.json` — Base de datos oficial de 4.749 jugadores 2026/27 clasificados por posición
-- ESPN API pública para tablas de clasificación, goleadores y partidos en vivo (CORS habilitado)
-- Automatización: cron GitHub Actions cada 2h (`auto-evaluate-matches.yml` + `scripts/auto-sync-espn-results.js`)
+- Tailwind CSS v4 (`globals.css` con `@theme`)
+- TypeScript 5 estricto
+- Supabase (Auth + PostgreSQL con RLS)
+- ESPN API (tablas, goleadores, partidos en vivo)
+- Cron GitHub Actions cada 2h (`auto-evaluate-matches.yml`)
 
-## Archivos importantes
+## Archivos Más Importantes
 
-- `src/app/page.tsx` — Landing principal con selector de equipo, logos de ligas en 3 filas (nacionales, copas nacionales pareadas liga→copa, europeas centradas) y podio de premios
-- `src/app/globals.css` — Paleta de colores (navy + gold)
-- `src/app/Navbar.tsx` — Navbar con nombre de usuario dinámico y dropdown
-- `src/app/Footer.tsx` — Footer completo
-- `src/app/providers.tsx` — AuthProvider wrapper
-- `src/app/TeamSelectorCard.tsx` — Selección y confirmación de club
-- `src/app/CompetitionStatusCard.tsx` — Estado VIVO/KO
-- `src/app/registro/page.tsx` — Registro con nombre de usuario obligatorio
-- `src/app/login/page.tsx` — Inicio de sesión
-- `src/app/olvide-contrasena/page.tsx` — Solicitud de recuperación de contraseña
-- `src/app/actualizar-contrasena/page.tsx` — Página de destino del email de recuperación (nueva contraseña)
-- `src/app/perfil/page.tsx` — Edición de nombre de usuario, reinicio de club (limpia survivors) y eliminación de cuenta
-- `src/app/pronosticar/page.tsx` — Tarjetas estilo transmisión TV con ventana de 3 partidos y goleadores
-- `src/app/mis-pronosticos/page.tsx` — Historial con logos, desglose de puntos y evaluación automática del survivor
-- `src/app/ranking/page.tsx` — Ranking general en vivo con Podio de Honor y búsqueda
-- `src/app/tabla/[league]/TablaLigaClient.tsx` — Clasificación, goleadores y partidos por liga (ESPN API)
-- `src/data/officialFixtures.json` — 1.650 partidos oficiales 2026/27 reales pre-sincronizados
-- `src/data/teamAliases.json` — 404 aliases + 241 equipos canónicos + 225 teamCups + pares KO (consumido por TS y scripts)
-- `src/data/officialPlayers.json` — 4.749 jugadores 2026/27 con posiciones y roles actualizados
-- `src/data/officialEvaluatedMatches.json` — Resultados oficiales de partidos jugados y goleadores reales
-- `src/data/officialEvaluatedPredictions.json` — Pronósticos evaluados y sincronizados (JSON + Supabase)
-- `scripts/auto-sync-espn-results.js` — Cron: sincroniza ESPN (rango `dates=YYYYMMDD-YYYYMMDD`, fail-fast si fallan todas las ligas) → evalúa puntos/survivors → persiste en Supabase
-- `scripts/sync-official-fixtures.js` — Regenera el calendario SOLO desde fuentes reales (football-data API + ESPN + Wikipedia); idempotente
-- `scripts/validate-fixtures.js` — Validación cruzada del calendario contra las fuentes (0 errores = 100% real)
-- `scripts/sync-db.js` — Sincroniza Supabase: matches (sin pisar resultados), remapeo de predicciones, teams reales
-- `scripts/sync-player-squads.js` — Completa plantillas con rosters ESPN reales (UCL + Copa Italia)
-- `scripts/rebuild-eval-preds.js` — Reconstruye predicciones evaluadas desde Supabase
-- `scripts/verify-logic.js` — 43 checks de lógica de negocio (scoring, normalización, KO, survivor, IDs)
-- `scripts/evaluate-matches.js` — Evaluador CLI manual de partidos (usa `scripts/lib/score-utils.js`)
-- `scripts/lib/score-utils.js` — Módulo compartido CJS: normalizeTeamName, matchIdToUuid, calculateScore, isKnockoutMatch, evaluateSurvivorProgression
-- `scripts/test-survivor.js` — Suite de pruebas unitarias de supervivencia y copas (12/12 PASS)
-- `src/lib/supabase.ts` — Cliente Supabase
-- `src/lib/survivor.ts` — Módulo de supervivencia multitorneo KO (7 copas: Champions, Europa, Conference, Copa Italia, FA Cup, Copa del Rey, DFB-Pokal), evaluación de partidos (`evaluateSurvivorProgression`), auto-suscripción (`getTeamCups`) y herencia de camisetas
-- `src/lib/leagueConfig.ts` — Colores, logos, normalizadores `normalizeMatchLeague`, `normalizeTeamName`, `matchIdToUuid`, `isKnockoutMatch`, `getKnockoutCupSlug`, `getKnockoutRound`
-- `src/lib/scoring.ts` — Motor de cálculo de puntos (+ matching fonético `arePlayersMatching`)
-- `src/lib/espnResultsFetcher.ts` — Fetcher cliente de partidos finalizados ESPN (caché 30s, timeout 10s, rango de fechas últimos 3 días)
-- `src/lib/footballData.ts` — Plantillas oficiales + ventana de partidos (saltea API en vivo en GitHub Pages por CORS)
-- `src/contexts/AuthContext.tsx` — Context de autenticación, sync de perfiles y `deleteAccount`
-- `supabase/schema.sql` — Script DDL maestro (8 tablas, índices, RLS endurecido, triggers, app_meta)
-- `DISASTER_RECOVERY_AND_SCHEMA.md` — Manual de restauración paso a paso ante pérdida total
-- `next.config.ts` — Dominio personalizado `futbolcamisetapasion.com` (sin basePath)
-- `public/.nojekyll` — Evita que Jekyll ignore `_next/` en GitHub Pages
-- `public/manifest.json` + `public/sw.js` + `public/icon.svg` — PWA (instalable en móvil)
-- `src/app/RegisterSW.tsx` — Registro del service worker
+| Archivo | Propósito |
+|---------|-----------|
+| `src/app/page.tsx` | Landing con selector de equipo y podio de premios |
+| `src/app/pronosticar/page.tsx` | Pronósticos estilo TV (ventana de 3 partidos) |
+| `src/app/ranking/page.tsx` | Ranking multiusuario en vivo |
+| `src/lib/leagueConfig.ts` | Normalización canónica de ligas/equipos, `matchIdToUuid`, colores |
+| `src/lib/survivor.ts` | Motor de superviviente en 7 copas KO |
+| `src/lib/scoring.ts` | Cálculo de puntos + matching fonético `arePlayersMatching` |
+| `src/data/officialFixtures.json` | 1.650 partidos reales pre-sincronizados |
+| `src/data/teamAliases.json` | 404 aliases, 241 equipos, 225 teamCups |
+| `src/data/officialPlayers.json` | 4.749 jugadores clasificados por posición |
+| `scripts/auto-sync-espn-results.js` | Cron: ESPN → evaluación → Supabase (service role key) |
+| `scripts/verify-logic.js` | 43 checks de lógica de negocio |
+| `supabase/schema.sql` | DDL maestro: 8 tablas, RLS, triggers |
 
-## Autenticación y Base de Datos
+## Base de Datos
 
-- Registro con nombre de usuario, login y recuperación de contraseña vía Supabase Auth.
-- Política de contraseñas (plan Free): mínimo **8 caracteres** con mayúscula, número y símbolo (HIBP es solo Pro).
-- Perfil extendido en tabla `profiles` (`user_id`, `display_name`, `team_id`).
-- Trigger `handle_new_user` en Supabase crea automáticamente el perfil en el registro.
-- Políticas RLS: lectura pública para `profiles`, `predictions`, `prediction_scorers`, `tournament_survivors`, `teams`, `players`, `matches`; **escritura solo del dueño** (prediction_scorers con EXISTS sobre predictions — IDOR fix).
-- Tabla `app_meta` (clave-valor) solo accesible por service role (marca `fixtures_hash` del cron).
-- **NO hay RPCs públicos de escritura** (eliminados): el cron escribe con la **service role key** (`SUPABASE_SERVICE_ROLE_KEY` — secreto de GitHub Actions) vía REST directo.
-- RPC `delete_user_account` (solo `authenticated`) elimina cuenta, purga datos y libera el correo en `auth.users`.
-- Rutas protegidas: `/perfil`, `/pronosticar`, `/mis-pronosticos`.
+- **RLS en todas las tablas**: lectura pública, escritura solo del dueño.
+- **No existen RPCs públicos de escritura**: el cron usa service role key vía REST directo.
+- Tablas: `teams` (225), `profiles`, `players`, `matches` (1.650), `predictions`, `prediction_scorers`, `tournament_survivors` (7 copas KO), `app_meta`.
+- `delete_user_account` (SECURITY DEFINER): purga en cascada y libera email.
 
-## Funcionalidades y Reglas de Pronósticos
-
-- **Ventana de 3 Partidos:** `/pronosticar` muestra siempre los 3 próximos partidos no finalizados del equipo (IDs canónicos de fixture).
-- **Cierre y Re-edición:** Cierre a **1 minuto antes del partido** (`diffMin <= 1`). Re-edición permitida libremente antes del cierre (`diffMin > 1`).
-- **Goleadores:** Divididos en 2 columnas directamente debajo de cada equipo con selector numérico `[-] N [+]` (máx 5 goleadores por equipo).
-- **Ranking Multiusuario:** Podio de Honor dinámico (Oro 🥇, Plata 🥈, Bronce 🥉) con escudos oficiales, puntos reales y filtros (caché 60s).
-- **Superviviente en Copas Knockout (Champions, Europa, Conference, Copa Italia):** Estado independiente por copa (`ALIVE` / `ELIMINATED`). Si el participante pronostica la victoria del rival y acierta, hereda la camiseta del rival para las siguientes fases (`history` JSONB), mientras su club base en liga regular permanece 100% fijo. Evaluación automática en el cron (server-side) y refuerzo client-side en `/mis-pronosticos`.
-
-## Automatización (100%)
-
-- **Cron cada 2h** (`.github/workflows/auto-evaluate-matches.yml`): ESPN (backfill 3 días con rango `dates=YYYYMMDD-YYYYMMDD` — ESPN rechaza listas separadas por coma con HTTP 400) → actualiza `officialEvaluatedMatches.json` → evalúa puntos de JSON + Supabase → persiste resultados, puntos y survivors en Supabase con service role key. **Fail-fast:** si todas las ligas devuelven error, el run de Actions queda marcado como fallido (no falla en silencio).
-- Sync de calendario solo cuando cambia `officialFixtures.json` (hash md5 en `app_meta`).
-- Cliente: evaluación en vivo con ESPN y fallback a los JSON oficiales.
-
-## Comandos útiles
+## Comandos
 
 ```bash
-npm run build    # Verificar que compila sin errores
-npm run dev      # Desarrollo local
-npm run lint     # Verificar ESLint
-node scripts/test-survivor.js    # Tests del sistema de superviviente (12/12)
-node scripts/verify-logic.js     # 43 checks de lógica de negocio
-node scripts/validate-fixtures.js # Validación cruzada del calendario contra fuentes reales
-SUPABASE_SERVICE_ROLE_KEY=<key> node scripts/auto-sync-espn-results.js  # Cron local
+npm run build              # Build estático
+npm run dev                # Desarrollo local
+npm run lint               # ESLint
+npx tsc --noEmit           # Type-checking
+node scripts/verify-logic.js         # 43 checks de lógica
+node scripts/validate-fixtures.js    # Validación de calendario
+node scripts/test-survivor.js        # Tests superviviente (12/12)
 ```
-
-## Troubleshooting rápido
-
-- **Login caído / auth colgado** (endpoints `/auth/v1/*` sin responder pero REST OK): reiniciar el proyecto vía Management API:
-  `curl -X POST "https://api.supabase.com/v1/projects/ilkndkqcmxvlufxaugog/restart" -H "Authorization: Bearer <sbp_token_en_opencode.jsonc>"`
-  Ver detalles en `AGENTS.md` → Operaciones y Troubleshooting.
-- **Rebotes de email de Supabase:** son las cuentas sin confirmar (`auth.users.confirmed_at IS NULL`). Eliminar las de testing; NO registrar emails inventados.
-- **Verificación de salud:** `node scripts/verify-logic.js`, `node scripts/validate-fixtures.js`, `node scripts/test-survivor.js`, `npx tsc --noEmit`, `npm run build`.
