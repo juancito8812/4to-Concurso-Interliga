@@ -317,7 +317,6 @@ function calculateScore(prediction, real) {
   }
 
   let scorersNameHits = 0;
-  let scorersQuantityHits = 0;
 
   const realScorersList = real.scorers || [];
 
@@ -328,18 +327,20 @@ function calculateScore(prediction, real) {
       );
 
       if (matchedRealScorer && (matchedRealScorer.goals ?? 0) > 0) {
-        const actualGoals = matchedRealScorer.goals ?? 0;
         scorersNameHits += 1;
         pointsScorersName += 1;
         details.push(`Goleador acertado: ${predScorer.player_name} (+1 pt)`);
-
-        if (predScorer.goals === actualGoals) {
-          scorersQuantityHits += 1;
-          pointsScorersQuantity += 2;
-          details.push(`Goles exactos de ${predScorer.player_name}: ${predScorer.goals} (+2 pts)`);
-        }
       }
     }
+  }
+
+  // 5. Cantidad exacta de goleadores del partido -> 2 pts
+  const predictedScorerCount = (prediction.scorers || []).filter(s => s.goals > 0).length;
+  const realScorerCount = realScorersList.filter(s => (s.goals ?? 0) > 0).length;
+  const scorersQuantityHits = (predictedScorerCount > 0 && realScorerCount > 0 && predictedScorerCount === realScorerCount) ? 1 : 0;
+  if (scorersQuantityHits) {
+    pointsScorersQuantity = 2;
+    details.push(`Cantidad exacta de goleadores: ${realScorerCount} (+2 pts)`);
   }
 
   const totalPoints =
