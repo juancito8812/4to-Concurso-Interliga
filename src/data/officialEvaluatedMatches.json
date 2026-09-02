@@ -1142,5 +1142,84 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4affe",
+    "home_team": "Sassuolo",
+    "away_team": "Frosinone",
+    "match_date": "2026-09-02T13:00Z",
+    "league": "Copa Italia",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Benjamín Domínguez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Aleksa Terzic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Tomas Bobcek",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Domenico Berardi",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Omar Fayed",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sebastiano Esposito",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alessio Zerbin",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Kristian Thorstvedt",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Darryl Bakola",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4aeeb",
+    "home_team": "Udinese",
+    "away_team": "Venezia",
+    "match_date": "2026-09-02T16:00Z",
+    "league": "Copa Italia",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Richie Sagrado",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Bayo Youssouf",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
