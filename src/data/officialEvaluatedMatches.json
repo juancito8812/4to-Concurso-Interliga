@@ -1295,5 +1295,43 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dca",
+    "home_team": "Real Sociedad",
+    "away_team": "Celta Vigo",
+    "match_date": "2026-09-03T19:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4af67",
+    "home_team": "Cagliari",
+    "away_team": "Verona",
+    "match_date": "2026-09-03T19:00Z",
+    "league": "Copa Italia",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Abdou Harroui",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Paul Mendy",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Samuele Mulattieri",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
