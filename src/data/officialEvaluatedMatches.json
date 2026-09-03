@@ -1253,5 +1253,47 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4b001",
+    "home_team": "Palermo",
+    "away_team": "Mantova",
+    "match_date": "2026-09-03T16:00Z",
+    "league": "Copa Italia",
+    "result_home": 5,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Gabriel Strefezza",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Antonio Palumbo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Francesco Ruocco",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Rachid Kouda",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Joel Pohjanpalo",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Dennis Johnsen",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
