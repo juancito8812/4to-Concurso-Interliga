@@ -306,6 +306,12 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Harry Kane (+1 pt)",
+      "Cantidad exacta de goleadores: 4 (+2 pts)"
     ]
   },
   {
@@ -408,6 +414,46 @@
       },
       {
         "player_name": "Konrad Laimer",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "7ec99ac9-d82b-43cd-a868-387104dcaa08",
+    "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
+    "display_name": "Asere1995",
+    "match_id": "00000000-0000-4000-8000-000000089db3",
+    "home_score": 1,
+    "away_score": 5,
+    "scorers": [
+      {
+        "player_name": "Hugo Duro",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Raphinha",
         "goals": 1,
         "team": "away"
       }
