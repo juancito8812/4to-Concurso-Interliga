@@ -1333,5 +1333,108 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dbb",
+    "home_team": "Real Betis",
+    "away_team": "Real Madrid",
+    "match_date": "2026-09-04T19:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Troy Parrott",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088db6",
+    "home_team": "Ipswich Town",
+    "away_team": "Liverpool",
+    "match_date": "2026-09-04T19:00Z",
+    "league": "Premier League",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Alexander Isak",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088611",
+    "home_team": "Genoa",
+    "away_team": "Como",
+    "match_date": "2026-09-04T18:45Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Milutin Osmajic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Martin Baturina",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Assane Diao",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Nico Paz",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a21f",
+    "home_team": "Stuttgart",
+    "away_team": "Köln",
+    "match_date": "2026-09-04T18:30Z",
+    "league": "Bundesliga",
+    "result_home": 4,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Bilal El Khannouss",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Grischa Prömel",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ermedin Demirovic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Marius Bulter",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Josha Vagnoman",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]

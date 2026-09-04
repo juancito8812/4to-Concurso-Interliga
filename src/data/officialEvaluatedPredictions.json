@@ -482,7 +482,9 @@
         "goals": 1,
         "team": "home"
       }
-    ]
+    ],
+    "points": 0,
+    "pointsDetails": []
   },
   {
     "id": "72cbcbb1-cfca-458e-b726-90aedfee5d4d",
@@ -502,6 +504,8 @@
         "goals": 1,
         "team": "away"
       }
-    ]
+    ],
+    "points": 0,
+    "pointsDetails": []
   }
 ]
