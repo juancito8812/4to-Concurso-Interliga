@@ -483,5 +483,25 @@
         "team": "home"
       }
     ]
+  },
+  {
+    "id": "72cbcbb1-cfca-458e-b726-90aedfee5d4d",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000000089dbb",
+    "home_score": 2,
+    "away_score": 3,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
   }
 ]
