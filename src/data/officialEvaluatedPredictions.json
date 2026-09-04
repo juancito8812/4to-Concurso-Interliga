@@ -458,5 +458,30 @@
         "team": "away"
       }
     ]
+  },
+  {
+    "id": "7e9a37f5-2ec8-494f-a0aa-d615006b0dcb",
+    "user_id": "266e7258-c7f9-4159-9fa2-3281989af465",
+    "display_name": "Raudel",
+    "match_id": "00000000-0000-4000-8000-000000089dbb",
+    "home_score": 1,
+    "away_score": 3,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Vinicius Junior",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Isco",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
   }
 ]
