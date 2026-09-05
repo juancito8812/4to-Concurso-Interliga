@@ -347,7 +347,9 @@
         "goals": 2,
         "team": "away"
       }
-    ]
+    ],
+    "points": 0,
+    "pointsDetails": []
   },
   {
     "id": "ce83004a-ec7f-40e0-80f5-06203a820bac",
