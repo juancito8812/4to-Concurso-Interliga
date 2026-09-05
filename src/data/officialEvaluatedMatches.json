@@ -1436,5 +1436,340 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089db7",
+    "home_team": "Athletic Bilbao",
+    "away_team": "Atlético Madrid",
+    "match_date": "2026-09-05T14:15Z",
+    "league": "LaLiga",
+    "result_home": 3,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Nico Williams",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Robert Navarro",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Oihan Sancet",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dbb",
+    "home_team": "Newcastle",
+    "away_team": "Bournemouth",
+    "match_date": "2026-09-05T11:30Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Marcus Tavernier",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Harvey Barnes",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jacob Ramsey",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088db5",
+    "home_team": "Brentford",
+    "away_team": "Sunderland",
+    "match_date": "2026-09-05T14:00Z",
+    "league": "Premier League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Vitaly Janelt",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Enzo Le Fée",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088db4",
+    "home_team": "Brighton",
+    "away_team": "Leeds United",
+    "match_date": "2026-09-05T14:00Z",
+    "league": "Premier League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Jayden Bogle",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Luka Vuskovic",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088db8",
+    "home_team": "Fulham",
+    "away_team": "Crystal Palace",
+    "match_date": "2026-09-05T14:00Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Josh King",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Tyrick Mitchell",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "César Palacios",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ben Chilwell",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088db3",
+    "home_team": "Manchester City",
+    "away_team": "Coventry City",
+    "match_date": "2026-09-05T14:00Z",
+    "league": "Premier League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Erling Haaland",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088db2",
+    "home_team": "Nott. Forest",
+    "away_team": "Tottenham",
+    "match_date": "2026-09-05T14:00Z",
+    "league": "Premier League",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088618",
+    "home_team": "Fiorentina",
+    "away_team": "Torino",
+    "match_date": "2026-09-05T13:00Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Mateo Pellegrino",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Rolando Mandragora",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ché Adams",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a21e",
+    "home_team": "Bayer Leverkusen",
+    "away_team": "Union Berlin",
+    "match_date": "2026-09-05T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Ezequiel Fernández",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Facundo Medina",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Patrik Schick",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ibrahim Maza",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a220",
+    "home_team": "Borussia Mönchengladbach",
+    "away_team": "SV 07 Elversberg",
+    "match_date": "2026-09-05T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 3,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Hugo Bolin",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "David Mokwa",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Joe Scally",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Maurice Krattenmacher",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Felix Keidel",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a221",
+    "home_team": "SC Paderborn 07",
+    "away_team": "Freiburg",
+    "match_date": "2026-09-05T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Maximilian Eggestein",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a21b",
+    "home_team": "Hoffenheim",
+    "away_team": "Borussia Dortmund",
+    "match_date": "2026-09-05T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Leon Avdullahu",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Tim Lemperle",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Serhou Guirassy",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fábio Silva",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a219",
+    "home_team": "Werder Bremen",
+    "away_team": "RB Leipzig",
+    "match_date": "2026-09-05T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Eren Dinkci",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Niclas Füllkrug",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Marco Grüll",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ridle Baku",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
