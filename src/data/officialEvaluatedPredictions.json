@@ -29,15 +29,10 @@
     "user_id": "266b309a-4eb0-474a-85db-aca42e055913",
     "display_name": "JR_DT",
     "match_id": "00000000-0000-4000-8000-000000088db7",
-    "home_score": 1,
+    "home_score": 0,
     "away_score": 2,
     "points": null,
     "scorers": [
-      {
-        "player_name": "Tyler Dibling",
-        "goals": 1,
-        "team": "home"
-      },
       {
         "player_name": "Joshua Zirkzee",
         "goals": 1,
@@ -509,5 +504,30 @@
     ],
     "points": 0,
     "pointsDetails": []
+  },
+  {
+    "id": "cb27929f-507d-4609-b092-26575985a807",
+    "user_id": "31acfd09-439a-41ae-9552-489e3c69a7db",
+    "display_name": "Milanarg",
+    "match_id": "00000000-0000-4000-8000-00000008861a",
+    "home_score": 1,
+    "away_score": 2,
+    "scorers": [
+      {
+        "player_name": "Francisco Conceição",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Samuel Chukwueze",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Gonçalo Ramos",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
   }
 ]
