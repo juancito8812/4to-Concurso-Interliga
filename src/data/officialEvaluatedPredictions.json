@@ -31,7 +31,7 @@
     "match_id": "00000000-0000-4000-8000-000000088db7",
     "home_score": 0,
     "away_score": 2,
-    "points": null,
+    "points": 0,
     "scorers": [
       {
         "player_name": "Joshua Zirkzee",
@@ -43,7 +43,8 @@
         "goals": 1,
         "team": "away"
       }
-    ]
+    ],
+    "pointsDetails": []
   },
   {
     "id": "4a3c5284-ca9d-415b-aad7-c517aad134d8",
@@ -454,6 +455,14 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 7,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Raphinha (+1 pt)",
+      "Goleador acertado: Lamine Yamal (+1 pt)",
+      "Goleador acertado: Fermín López (+1 pt)"
     ]
   },
   {
