@@ -272,6 +272,12 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Martin Ødegaard (+1 pt)",
+      "Cantidad exacta de goleadores: 3 (+2 pts)"
     ]
   },
   {
@@ -523,12 +529,12 @@
     "away_score": 2,
     "scorers": [
       {
-        "player_name": "Francisco Conceição",
+        "player_name": "Randal Kolo Muani",
         "goals": 1,
         "team": "home"
       },
       {
-        "player_name": "Samuel Chukwueze",
+        "player_name": "Alexis Saelemaekers",
         "goals": 1,
         "team": "away"
       },
@@ -561,6 +567,41 @@
         "player_name": "Harry Kane",
         "goals": 1,
         "team": "home"
+      }
+    ]
+  },
+  {
+    "id": "0895c920-a5fa-432e-8dc9-bc47c838789b",
+    "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
+    "display_name": "Asere1995",
+    "match_id": "00000000-0000-4000-8000-000017f4be20",
+    "home_score": 4,
+    "away_score": 1,
+    "scorers": [
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Anis Hadj Moussa",
+        "goals": 1,
+        "team": "away"
       }
     ]
   }

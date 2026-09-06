@@ -2066,5 +2066,139 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089db8",
+    "home_team": "Alavés",
+    "away_team": "Osasuna",
+    "match_date": "2026-09-06T16:30Z",
+    "league": "LaLiga",
+    "result_home": 5,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Lucas Boyé",
+        "goals": 3,
+        "team": "home"
+      },
+      {
+        "player_name": "Mariano Díaz",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ante Budimir",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Pablo Ibáñez",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dba",
+    "home_team": "Málaga",
+    "away_team": "Levante",
+    "match_date": "2026-09-06T16:30Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dba",
+    "home_team": "Arsenal",
+    "away_team": "Chelsea",
+    "match_date": "2026-09-06T15:30Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Morgan Rogers",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Kai Havertz",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Martin Ødegaard",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088615",
+    "home_team": "Bologna",
+    "away_team": "Sassuolo",
+    "match_date": "2026-09-06T16:00Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Josh Doig",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Roberto Piccoli",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Vasilije Adzic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Artem Dovbyk",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a21a",
+    "home_team": "Eintracht Frankfurt",
+    "away_team": "Augsburg",
+    "match_date": "2026-09-06T15:30Z",
+    "league": "Bundesliga",
+    "result_home": 1,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Jonathan Burkardt",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Robin Fellhauer",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alexis Claude-Maurice",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fabian Rieder",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
