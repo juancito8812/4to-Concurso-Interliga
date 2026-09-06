@@ -20,11 +20,11 @@ export const leagueLogos: Record<string, string> = {
   "Serie A": "/logos/seriea.png",
   "Bundesliga": "/logos/bundesliga.png",
   "Champions League": "/logos/champions.png",
-  "Europa League": "/logos/europa.svg",
+  "Europa League": "/logos/europa.png",
   "Conference League": "/logos/conference.svg",
-  "Copa Italia": "/logos/coppaitalia.svg",
+  "Copa Italia": "/logos/coppaitalia.jpeg",
   "FA Cup": "/logos/facup.svg",
-  "Copa del Rey": "/logos/copadelrey.svg",
+  "Copa del Rey": "/logos/copadelrey.png",
   "DFB-Pokal": "/logos/dfbpokal.svg",
 };
 

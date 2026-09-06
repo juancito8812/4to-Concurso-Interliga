@@ -1,6 +1,8 @@
-import officialFixtures from "@/data/officialFixtures.json";
-import officialPlayers from "@/data/officialPlayers.json";
+import { loadData } from "@/lib/dataLoader";
 import { normalizeTeamName, cleanTeamName } from "@/lib/leagueConfig";
+
+const OFFICIAL_FIXTURES_PATH = "/data/officialFixtures.json";
+const OFFICIAL_PLAYERS_PATH = "/data/officialPlayers.json";
 
 const BASE_URL = "https://api.football-data.org/v4";
 
@@ -175,30 +177,40 @@ export async function getTeamMatches(
   return data?.matches || [];
 }
 
+// Lazy-loaded fixtures (avoids bundling 566KB into JS)
+type FixtureEntry = {
+  id: string;
+  home_team: string;
+  away_team: string;
+  match_date: string;
+  league: string;
+  competition_code?: string;
+  home_logo?: string;
+  away_logo?: string;
+  matchday?: number;
+};
+
+async function getOfficialFixtures(): Promise<FixtureEntry[]> {
+  return loadData<FixtureEntry[]>(OFFICIAL_FIXTURES_PATH);
+}
+
 // Get official matches for a team with automatic live API + bundled fallback
 export async function getOfficialTeamMatches(
   teamName: string,
   teamId?: number | null
 ): Promise<FDMatch[]> {
-  // football-data.org only allows CORS from localhost; on GitHub Pages it always
-  // fails, so skip the live call there and use the bundled official calendar.
   const isGitHubPages =
     typeof window !== "undefined" && window.location.hostname.endsWith("github.io");
 
-  // 1. Try live API first if teamId is available (only outside GitHub Pages)
   if (teamId && !isGitHubPages) {
     try {
       const liveMatches = await getTeamMatches(teamId, "SCHEDULED");
       if (liveMatches && liveMatches.length > 0) {
-        // Re-attach the canonical official fixture id so predictions join evaluated matches
+        const officialFixtures = await getOfficialFixtures();
         return liveMatches.map((m) => {
           const homeNorm = normalizeTeamName(m.homeTeam.name);
           const awayNorm = normalizeTeamName(m.awayTeam.name);
-          const fixture = (officialFixtures as Array<{
-            id: string;
-            home_team: string;
-            away_team: string;
-          }>).find((f) => {
+          const fixture = officialFixtures.find((f) => {
             const hF = normalizeTeamName(f.home_team).toLowerCase();
             const aF = normalizeTeamName(f.away_team).toLowerCase();
             return (
@@ -214,22 +226,12 @@ export async function getOfficialTeamMatches(
     }
   }
 
-  // 2. Fallback to pre-bundled official 2026/27 season fixtures
+  const officialFixtures = await getOfficialFixtures();
   const normTarget = normalizeTeamName(teamName);
   const cleanTarget = cleanTeamName(teamName);
   const nowIso = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
 
-  const filtered = (officialFixtures as Array<{
-    id: string;
-    home_team: string;
-    away_team: string;
-    match_date: string;
-    league: string;
-    competition_code?: string;
-    home_logo?: string;
-    away_logo?: string;
-    matchday?: number;
-  }>).filter((m) => {
+  const filtered = officialFixtures.filter((m) => {
     const normHome = normalizeTeamName(m.home_team);
     const normAway = normalizeTeamName(m.away_team);
     const isExact = normHome === normTarget || normAway === normTarget;
@@ -281,56 +283,52 @@ export async function getOfficialTeamMatches(
   }));
 }
 
-// Pre-indexed squad cache by cleaned team name for O(1) instant lookups
-const playerIndexMap = new Map<string, PlayerData[]>();
-for (const p of (officialPlayers as PlayerData[])) {
-  const normTeam = normalizeTeamName(p.team);
-  if (!playerIndexMap.has(normTeam)) {
-    playerIndexMap.set(normTeam, []);
-  }
-  playerIndexMap.get(normTeam)!.push(p);
+// Lazy-loaded player index (avoids bundling 809KB into JS)
+let playerIndexMap: Map<string, PlayerData[]> | null = null;
 
-  const cleanT = cleanTeamName(p.team);
-  if (!playerIndexMap.has(cleanT)) {
-    playerIndexMap.set(cleanT, []);
+async function getPlayerIndex(): Promise<Map<string, PlayerData[]>> {
+  if (playerIndexMap) return playerIndexMap;
+  const officialPlayers = await loadData<PlayerData[]>(OFFICIAL_PLAYERS_PATH);
+  playerIndexMap = new Map<string, PlayerData[]>();
+  for (const p of officialPlayers) {
+    const normTeam = normalizeTeamName(p.team);
+    if (!playerIndexMap.has(normTeam)) playerIndexMap.set(normTeam, []);
+    playerIndexMap.get(normTeam)!.push(p);
+
+    const cleanT = cleanTeamName(p.team);
+    if (!playerIndexMap.has(cleanT)) playerIndexMap.set(cleanT, []);
+    playerIndexMap.get(cleanT)!.push(p);
   }
-  playerIndexMap.get(cleanT)!.push(p);
+  return playerIndexMap;
 }
 
 // Get official updated squads for teams with fast Map lookup
-export function getOfficialPlayersForTeams(teamNames: string[]): PlayerData[] {
+export async function getOfficialPlayersForTeams(teamNames: string[]): Promise<PlayerData[]> {
+  const index = await getPlayerIndex();
   const result: PlayerData[] = [];
   const addedIds = new Set<string>();
 
   for (const teamName of teamNames) {
     const normTarget = normalizeTeamName(teamName);
     const cleanTarget = cleanTeamName(teamName);
-    
-    // Direct match with normalized name
-    const directMatches = playerIndexMap.get(normTarget) || playerIndexMap.get(cleanTarget);
+
+    const directMatches = index.get(normTarget) || index.get(cleanTarget);
     if (directMatches) {
       for (const p of directMatches) {
         if (!addedIds.has(p.id)) {
           addedIds.add(p.id);
-          result.push({
-            ...p,
-            team: normTarget,
-          });
+          result.push({ ...p, team: normTarget });
         }
       }
       continue;
     }
 
-    // Substring / fuzzy match across keys
-    for (const [cTeam, teamPlayers] of playerIndexMap.entries()) {
+    for (const [cTeam, teamPlayers] of index.entries()) {
       if (cTeam.includes(cleanTarget) || cleanTarget.includes(cTeam)) {
         for (const p of teamPlayers) {
           if (!addedIds.has(p.id)) {
             addedIds.add(p.id);
-            result.push({
-              ...p,
-              team: normTarget,
-            });
+            result.push({ ...p, team: normTarget });
           }
         }
       }

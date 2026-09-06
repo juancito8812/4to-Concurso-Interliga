@@ -1,6 +1,8 @@
 import { normalizeTeamName, matchIdToUuid } from "./leagueConfig";
+import { loadData } from "@/lib/dataLoader";
 import { RealScorer } from "./scoring";
-import officialFixtures from "@/data/officialFixtures.json";
+
+const OFFICIAL_FIXTURES_PATH = "/data/officialFixtures.json";
 
 export interface EvaluatedMatchResult {
   id: string;
@@ -93,6 +95,13 @@ export async function fetchLiveFinishedMatches(): Promise<EvaluatedMatchResult[]
     return cachedResults.matches;
   }
 
+  const officialFixtures = await loadData<Array<{
+    id: string;
+    home_team: string;
+    away_team: string;
+    match_date: string;
+    league: string;
+  }>>(OFFICIAL_FIXTURES_PATH);
   const results: EvaluatedMatchResult[] = [];
 
   const promises = LEAGUE_SLUGS.map(async (slug) => {

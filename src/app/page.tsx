@@ -14,15 +14,15 @@ const domesticLeagues = [
 ];
 
 const domesticCups = [
-  { name: "Copa del Rey", logo: "/logos/copadelrey.svg", slug: "copadelrey" },
+  { name: "Copa del Rey", logo: "/logos/copadelrey.png", slug: "copadelrey" },
   { name: "FA Cup", logo: "/logos/facup.svg", slug: "facup" },
-  { name: "Copa Italia", logo: "/logos/coppaitalia.svg", slug: "coppaitalia" },
+  { name: "Copa Italia", logo: "/logos/coppaitalia.jpeg", slug: "coppaitalia" },
   { name: "DFB-Pokal", logo: "/logos/dfbpokal.svg", slug: "dfbpokal" },
 ];
 
 const europeanCups = [
   { name: "Champions League", logo: "/logos/champions.png", slug: "champions" },
-  { name: "Europa League", logo: "/logos/europa.svg", slug: "europa" },
+  { name: "Europa League", logo: "/logos/europa.png", slug: "europa" },
   { name: "Conference League", logo: "/logos/conference.svg", slug: "conference" },
 ];
 

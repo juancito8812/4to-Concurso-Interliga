@@ -25,9 +25,9 @@ import {
   KnockoutCupSlug,
   getTeamCups,
 } from "@/lib/survivor";
-import officialFixtures from "@/data/officialFixtures.json";
 import officialEvaluatedMatches from "@/data/officialEvaluatedMatches.json";
 import officialEvaluatedPredictions from "@/data/officialEvaluatedPredictions.json";
+import { loadData } from "@/lib/dataLoader";
 import { fetchLiveFinishedMatches } from "@/lib/espnResultsFetcher";
 
 interface ScorerInfo {
@@ -70,11 +70,11 @@ interface KnockoutCupInfo {
 
 const KNOCKOUT_CUPS: KnockoutCupInfo[] = [
   { slug: "champions", name: "Champions League", shortName: "Champions", logoUrl: "/logos/champions.png", color: "#60a5fa" },
-  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/logos/europa.svg", color: "#fb923c" },
+  { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/logos/europa.png", color: "#fb923c" },
   { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/logos/conference.svg", color: "#4ade80" },
-  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/logos/coppaitalia.svg", color: "#38bdf8" },
+  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/logos/coppaitalia.jpeg", color: "#38bdf8" },
   { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/logos/facup.svg", color: "#f43f5e" },
-  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/logos/copadelrey.svg", color: "#eab308" },
+  { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/logos/copadelrey.png", color: "#eab308" },
   { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/logos/dfbpokal.svg", color: "#22c55e" },
 ];
 
@@ -99,6 +99,16 @@ export default function MisPronosticosPage() {
     let isMounted = true;
 
     const fetchData = async () => {
+      const officialFixtures = await loadData<Array<{
+        id: string;
+        home_team: string;
+        away_team: string;
+        match_date: string;
+        league: string;
+        home_logo?: string;
+        away_logo?: string;
+      }>>("/data/officialFixtures.json");
+
       // 1. Fetch user's primary team and survivor status
       let userSurvivors: Record<string, TournamentSurvivor> = {};
       try {

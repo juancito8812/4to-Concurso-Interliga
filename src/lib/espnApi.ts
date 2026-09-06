@@ -1,5 +1,7 @@
-import officialFixtures from "@/data/officialFixtures.json";
+import { loadData } from "@/lib/dataLoader";
 import { normalizeTeamName, leagueSlugToName } from "@/lib/leagueConfig";
+
+const OFFICIAL_FIXTURES_PATH = "/data/officialFixtures.json";
 
 export interface Standing {
   rank: number;
@@ -218,10 +220,9 @@ export async function getEspnScorers(leagueSlug: string): Promise<PlayerStat[]> 
  * Fetch matches/scoreboard for a tournament or league (e.g. Bundesliga, Champions, Coppa Italia)
  */
 export async function getEspnScoreboard(leagueSlug: string): Promise<CupMatch[]> {
-  // 1. Prioritize official verified 2026/27 calendar from bundle
   const leagueName = leagueSlugToName[leagueSlug] || leagueSlug;
   const nowIso = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
-  const localMatches = (officialFixtures as Array<{
+  const officialFixtures = await loadData<Array<{
     id: string;
     home_team: string;
     away_team: string;
@@ -230,7 +231,8 @@ export async function getEspnScoreboard(leagueSlug: string): Promise<CupMatch[]>
     home_logo?: string;
     away_logo?: string;
     matchday?: number;
-  }>).filter((m) => {
+  }>>(OFFICIAL_FIXTURES_PATH);
+  const localMatches = officialFixtures.filter((m) => {
     const lMatch = m.league.toLowerCase().trim() === leagueName.toLowerCase().trim();
     return lMatch && m.match_date >= nowIso;
   });

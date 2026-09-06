@@ -8,7 +8,7 @@ import { calculateScore, PredictedScorer, RealScorer } from "@/lib/scoring";
 import { normalizeTeamName, matchIdToUuid } from "@/lib/leagueConfig";
 import officialEvaluatedMatches from "@/data/officialEvaluatedMatches.json";
 import officialEvaluatedPredictions from "@/data/officialEvaluatedPredictions.json";
-import officialFixtures from "@/data/officialFixtures.json";
+import { loadData } from "@/lib/dataLoader";
 import { fetchLiveFinishedMatches } from "@/lib/espnResultsFetcher";
 
 interface RankingEntry {
@@ -86,6 +86,12 @@ export default function RankingPage() {
       }
 
       try {
+        const officialFixtures = await loadData<Array<{
+          id: string;
+          home_team: string;
+          away_team: string;
+        }>>("/data/officialFixtures.json");
+
         // 1. Fetch profiles from Supabase
         const { data: profilesData } = await supabase
           .from("profiles")

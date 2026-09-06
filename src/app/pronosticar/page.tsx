@@ -17,7 +17,7 @@ import {
   isKnockoutMatch,
 } from "@/lib/leagueConfig";
 import { getOfficialTeamMatches, getOfficialPlayersForTeams, FDMatch, findTeamId } from "@/lib/footballData";
-import officialFixtures from "@/data/officialFixtures.json";
+import { loadData } from "@/lib/dataLoader";
 import {
   getUserCupSurvivors,
   TournamentSurvivor,
@@ -133,7 +133,7 @@ export default function PronosticarPage() {
 
   const loadPlayersForMatches = async (teamNames: string[]) => {
     // 1. Get official updated 2026/27 squads (3,031 players instantly from memory bundle)
-    const officialList: Player[] = getOfficialPlayersForTeams(teamNames);
+    const officialList: Player[] = await getOfficialPlayersForTeams(teamNames);
 
     // 2. Only query Supabase database if any team is not found in the official bundle
     const teamsInBundle = new Set(officialList.map((p) => p.team));
@@ -188,6 +188,11 @@ export default function PronosticarPage() {
 
   const fetchFromSupabase = async (teamData: TeamInfo) => {
     const nowIso = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
+    const officialFixtures = await loadData<Array<{
+      id: string;
+      home_team: string;
+      away_team: string;
+    }>>("/data/officialFixtures.json");
     const { data: matchesData } = await supabase
       .from("matches")
       .select("id, home_team, away_team, match_date, league, result_home, result_away")
