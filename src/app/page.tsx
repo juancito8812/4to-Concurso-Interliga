@@ -16,7 +16,7 @@ const domesticLeagues = [
 const domesticCups = [
   { name: "Copa del Rey", logo: "/logos/copadelrey.png", slug: "copadelrey" },
   { name: "FA Cup", logo: "/logos/facup.svg", slug: "facup" },
-  { name: "Copa Italia", logo: "/logos/coppaitalia.jpeg", slug: "coppaitalia" },
+  { name: "Copa Italia", logo: "/logos/coppaitalia.svg", slug: "coppaitalia" },
   { name: "DFB-Pokal", logo: "/logos/dfbpokal.svg", slug: "dfbpokal" },
 ];
 

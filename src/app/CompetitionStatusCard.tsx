@@ -28,7 +28,7 @@ const CUPS: CupConfig[] = [
   { slug: "champions", name: "Champions League", shortName: "Champions", logoUrl: "/logos/champions.png" },
   { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/logos/europa.png" },
   { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/logos/conference.svg" },
-  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/logos/coppaitalia.jpeg" },
+  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/logos/coppaitalia.svg" },
   { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/logos/facup.svg" },
   { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/logos/copadelrey.png" },
   { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/logos/dfbpokal.svg" },

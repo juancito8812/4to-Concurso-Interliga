@@ -22,7 +22,7 @@ export const leagueLogos: Record<string, string> = {
   "Champions League": "/logos/champions.png",
   "Europa League": "/logos/europa.png",
   "Conference League": "/logos/conference.svg",
-  "Copa Italia": "/logos/coppaitalia.jpeg",
+  "Copa Italia": "/logos/coppaitalia.svg",
   "FA Cup": "/logos/facup.svg",
   "Copa del Rey": "/logos/copadelrey.png",
   "DFB-Pokal": "/logos/dfbpokal.svg",

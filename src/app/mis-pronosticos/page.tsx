@@ -72,7 +72,7 @@ const KNOCKOUT_CUPS: KnockoutCupInfo[] = [
   { slug: "champions", name: "Champions League", shortName: "Champions", logoUrl: "/logos/champions.png", color: "#60a5fa" },
   { slug: "europa", name: "Europa League", shortName: "Europa", logoUrl: "/logos/europa.png", color: "#fb923c" },
   { slug: "conference", name: "Conference League", shortName: "Conference", logoUrl: "/logos/conference.svg", color: "#4ade80" },
-  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/logos/coppaitalia.jpeg", color: "#38bdf8" },
+  { slug: "coppaitalia", name: "Copa Italia", shortName: "Copa Italia", logoUrl: "/logos/coppaitalia.svg", color: "#38bdf8" },
   { slug: "facup", name: "FA Cup", shortName: "FA Cup", logoUrl: "/logos/facup.svg", color: "#f43f5e" },
   { slug: "copadelrey", name: "Copa del Rey", shortName: "Copa del Rey", logoUrl: "/logos/copadelrey.png", color: "#eab308" },
   { slug: "dfbpokal", name: "DFB-Pokal", shortName: "DFB-Pokal", logoUrl: "/logos/dfbpokal.svg", color: "#22c55e" },
