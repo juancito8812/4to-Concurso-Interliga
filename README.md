@@ -37,8 +37,8 @@
 | **Lenguaje** | TypeScript 5 en modo estricto |
 | **Base de Datos & Auth** | [Supabase](https://supabase.com/) — Autenticación + PostgreSQL con RLS y service role |
 | **Datos de Fútbol** | ESPN API pública (tablas, goleadores, en vivo) + football-data.org (fixtures) |
-| **Calendario Oficial** | `src/data/officialFixtures.json` — **1.650 partidos reales** pre-sincronizados |
-| **Plantillas Oficiales** | `src/data/officialPlayers.json` — **4.749 jugadores** clasificados por posición |
+| **Calendario Oficial** | `public/data/officialFixtures.json` — **1.650 partidos reales** pre-sincronizados (fetch dinámico) |
+| **Plantillas Oficiales** | `public/data/officialPlayers.json` — **4.749 jugadores** clasificados por posición (fetch dinámico) |
 | **Deploy** | GitHub Actions → GitHub Pages, dominio personalizado (Cloudflare DNS) |
 | **PWA** | Service Worker offline-first, manifest, icon SVG |
 
@@ -141,19 +141,17 @@ src/
 ├── contexts/
 │   └── AuthContext.tsx             # Context de autenticación, perfil y gestión de cuenta
 ├── data/
-│   ├── officialFixtures.json       # Calendario oficial 2026/27 (1.650 partidos reales)
-│   ├── officialPlayers.json        # Plantillas oficiales 2026/27 (4.749 jugadores)
 │   ├── officialEvaluatedMatches.json  # Resultados oficiales finalizados y goleadores reales
-│   ├── officialEvaluatedPredictions.json  # Pronósticos evaluados y sincronizados
-│   └── teamAliases.json            # Fuente única de normalización (404 aliases, 241 equipos, 225 teamCups)
-└── lib/
-    ├── supabase.ts                 # Cliente Supabase
-    ├── survivor.ts                 # Motor de supervivencia y herencia de camisetas en copas KO
-    ├── leagueConfig.ts             # Normalizador canónico de ligas, torneos y equipos
-    ├── footballData.ts             # Cliente football-data.org + plantillas oficiales 2026/27
-    ├── espnApi.ts                  # Cliente ESPN API para tablas, goleadores y partidos
-    ├── espnResultsFetcher.ts       # Partidos finalizados ESPN en vivo (caché 30s, rango 3 días)
-    └── scoring.ts                  # Motor de cálculo y auditoría de puntuación
+│   └── officialEvaluatedPredictions.json  # Pronósticos evaluados y sincronizados
+├── lib/
+│   ├── supabase.ts                 # Cliente Supabase
+│   ├── dataLoader.ts               # Loader async genérico con cache en memoria para JSONs
+│   ├── survivor.ts                 # Motor de supervivencia y herencia de camisetas en copas KO
+│   ├── leagueConfig.ts             # Normalizador canónico de ligas, torneos y equipos
+│   ├── footballData.ts             # Cliente football-data.org + plantillas oficiales (loadData)
+│   ├── espnApi.ts                  # Cliente ESPN API para tablas, goleadores y partidos
+│   ├── espnResultsFetcher.ts       # Partidos finalizados ESPN en vivo (caché 30s, rango 3 días)
+│   └── scoring.ts                  # Motor de cálculo y auditoría de puntuación
 
 scripts/
 ├── auto-sync-espn-results.js       # Cron: ESPN → evaluación de puntos/survivors → Supabase
@@ -178,11 +176,16 @@ supabase/
 
 public/
 ├── manifest.json                   # PWA manifest
-├── sw.js                           # Service Worker offline-first
+├── sw.js                           # Service Worker v2 offline-first con precaching de datos
 ├── icon.svg                        # Icono de la aplicación
 ├── .nojekyll                       # Evita que GitHub Pages ignore _next/
 ├── CNAME                           # Dominio personalizado
-└── logos/                          # Escudos de las 9 competiciones (SVG/PNG)
+├── data/                           # JSONs de datos servidos como assets estáticos (CDN)
+│   ├── officialPlayers.json        # 4.749 jugadores (809KB, fetch dinámico)
+│   ├── officialFixtures.json       # 1.650 partidos (566KB, fetch dinámico)
+│   ├── officialEvaluatedMatches.json   # Resultados evaluados
+│   └── officialEvaluatedPredictions.json # Pronósticos evaluados
+└── logos/                          # Escudos de las 9 competiciones (PNG/JPEG, optimizados)
 ```
 
 ---
@@ -380,7 +383,7 @@ npx tsc --noEmit
 ### Verificaciones de Lógica y Calendario
 
 ```bash
-node scripts/verify-logic.js            # 43 checks de lógica de negocio
+node scripts/verify-logic.js            # 48 checks de lógica de negocio
 node scripts/validate-fixtures.js       # Validación cruzada del calendario contra fuentes reales
 node scripts/test-survivor.js           # Tests del sistema de superviviente (12/12)
 ```
@@ -417,7 +420,7 @@ El despliegue es completamente automático vía **GitHub Actions** al hacer push
 ## 📱 PWA (Progressive Web App)
 
 - **Manifest:** `public/manifest.json` — nombre, icono, color de tema (`#c9a84c`), orientación portrait.
-- **Service Worker:** `public/sw.js` — network-first con fallback a caché offline.
+- **Service Worker v2:** `public/sw.js` — cache-first para assets estáticos + precaching de datos JSON, network-first para HTML.
 - **Icono:** `public/icon.svg` — SVG escalable.
 - **Registro:** `src/app/RegisterSW.tsx` — se monta en el layout raíz.
 - **Meta tags:** `apple-mobile-web-app-capable`, `theme-color`, viewport sin zoom.

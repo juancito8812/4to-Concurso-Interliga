@@ -25,6 +25,13 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - El selector de goleadores muestra la plantilla oficial completa (4.749 jugadores) y despliega el contador `[-] 1 [+]` únicamente al elegir un jugador (máx. 5 goleadores por equipo).
 - `<Link>` genera rutas relativas automáticamente; `<img>` usa rutas absolutas desde la raíz (`/logos/...`).
 
+### Datos dinámicos (fetch desde public/data/)
+
+- `officialPlayers.json` (809KB) y `officialFixtures.json` (566KB) **NO** se importan estáticamente en JS.
+- Se cargan vía `loadData()` de `src/lib/dataLoader.ts` con cache en memoria (una sola petición HTTP por sesión).
+- Los 4 JSONs de datos están en `public/data/` como assets estáticos servidos por CDN.
+- Para agregar un nuevo archivo de datos: copiarlo a `public/data/`, importarlo con `loadData("/data/archivo.json")` en el componente que lo necesite.
+
 ### Política de Emojis (Jul 2025)
 
 - **NO** se usan emojis informativos (🏆👑🎯✅⚠️📊🔍 etc.) en la UI.
