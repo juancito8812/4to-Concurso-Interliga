@@ -122,6 +122,11 @@ export default function Footer() {
               </a>
             </div>
           </div>
+          <div className="text-center mt-4 pt-4 border-t border-border/50">
+            <p className="text-silver text-[10px] tracking-wider">
+              © {new Date().getFullYear()} QRCODER · Hecho en Venezuela 🇻🇪
+            </p>
+          </div>
         </div>
       </div>
     </footer>
