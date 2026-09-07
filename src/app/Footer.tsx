@@ -42,17 +42,9 @@ export default function Footer() {
             <p className="text-silver text-xs leading-relaxed mb-4">
               4° Concurso de pronósticos de fútbol. Elegí tu equipo, pronosticá resultados y ganá premios.
             </p>
-            <div className="flex gap-3">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-navy-mid border border-border flex items-center justify-center text-silver hover:text-gold hover:border-gold transition-colors">
-                <span className="text-xs">IG</span>
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-navy-mid border border-border flex items-center justify-center text-silver hover:text-gold hover:border-gold transition-colors">
-                <span className="text-xs">X</span>
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-navy-mid border border-border flex items-center justify-center text-silver hover:text-gold hover:border-gold transition-colors">
-                <span className="text-xs">FB</span>
-              </a>
-            </div>
+            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 w-8 h-8 rounded-full bg-navy-mid border border-border justify-center text-silver hover:text-green hover:border-green transition-colors">
+              <span className="text-xs">WA</span>
+            </a>
           </div>
 
           {/* Ligas */}
