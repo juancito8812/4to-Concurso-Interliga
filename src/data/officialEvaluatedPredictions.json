@@ -633,5 +633,30 @@
         "team": "home"
       }
     ]
+  },
+  {
+    "id": "901bd77a-0ca4-4f35-a463-539c16a30604",
+    "user_id": "266e7258-c7f9-4159-9fa2-3281989af465",
+    "display_name": "Raudel",
+    "match_id": "00000000-0000-4000-8000-000017f4be3b",
+    "home_score": 2,
+    "away_score": 1,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Carlos Espí",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Marcus Thuram-Ulien",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
   }
 ]

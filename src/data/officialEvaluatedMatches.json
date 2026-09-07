@@ -2244,5 +2244,44 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089db9",
+    "home_team": "Getafe",
+    "away_team": "Celta Vigo",
+    "match_date": "2026-09-07T17:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Martín Satriano",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Carl Starfelt",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088612",
+    "home_team": "Cagliari",
+    "away_team": "Lecce",
+    "match_date": "2026-09-07T16:30Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Daniel Maldini",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
