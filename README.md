@@ -21,6 +21,8 @@
 - [Desarrollo Local](#-desarrollo-local)
 - [Despliegue en Producción](#-despliegue-en-producción)
 - [PWA (Progressive Web App)](#-pwa-progressive-web-app)
+- [Calidad del Código](#-calidad-del-código)
+- [Panel de Administración](#-panel-de-administración)
 - [Recuperación ante Desastres](#-recuperación-ante-desastres)
 - [Troubleshooting](#-troubleshooting)
 - [Licencia](#-licencia)
@@ -439,6 +441,62 @@ El despliegue es completamente automático vía **GitHub Actions** al hacer push
 - **Meta tags:** `apple-mobile-web-app-capable`, `theme-color`, viewport sin zoom.
 - **Instalación en Android (Chrome):** ícono "⋮" → "Instalar app".
 - **Instalación en iOS (Safari):** ícono compartir □↑ → "Agregar a pantalla de inicio".
+
+---
+
+## 🔍 Calidad del Código
+
+### Code Review (Sep 2026)
+
+| Eje | Estado | Notas |
+|-----|--------|-------|
+| **Correctitud** | ✅ | 48/48 checks de lógica, 12/12 tests de survivor |
+| **Tipos** | ✅ | TypeScript estricto, 0 errores |
+| **Build** | ✅ | 23 páginas estáticas generadas |
+| **Seguridad** | ✅ | RLS activo, service role solo en cron, sin secrets en bundle |
+| **Performance** | ✅ | JS bundle -47.6%, lazy loading de datos |
+
+### Arquitectura
+
+- **Separación de capas:** `lib/` para lógica de negocio, `app/` para UI, `data/` para JSONs estáticos
+- **Data loading:** `loadData()` con cache en memoria para JSONs grandes (1.375KB total)
+- **Componentes:** Client components para interactividad, Server Components para layout
+- **Naming:** Convenciones consistentes (camelCase archivos, PascalCase componentes)
+
+### Dependencias
+
+| Paquete | Uso | Tamaño |
+|---------|-----|--------|
+| `next` | Framework | Core |
+| `react` | UI | Core |
+| `@supabase/supabase-js` | Auth + DB | ~45KB |
+| `@supabase/ssr` | Session management | ~5KB |
+
+**Total dependencias:** 3 (mínimo absoluto)
+
+### Scripts de Verificación
+
+```bash
+npx tsc --noEmit              # Type checking
+node scripts/verify-logic.js  # 48 checks de lógica
+node scripts/test-survivor.js # 12/12 tests survivor
+npm run build                 # Build completo
+```
+
+---
+
+## 🛠️ Panel de Administración
+
+El proyecto incluye documentación para implementar un panel de admin (`ADMIN_PANEL.md`) que permitirá al propietario gestionar:
+
+- Equipos y jugadores
+- Partidos y resultados
+- Usuarios y predicciones
+- Configuración del concurso
+
+**Estado:** Documentado para futuro (8-12 días de desarrollo estimados)
+
+👉 **[Ver documentación completa del Admin Panel](./ADMIN_PANEL.md)**
 
 ---
 
