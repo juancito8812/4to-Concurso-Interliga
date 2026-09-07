@@ -2283,5 +2283,69 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089db2",
+    "home_team": "Elche",
+    "away_team": "Real Sociedad",
+    "match_date": "2026-09-07T19:30Z",
+    "league": "LaLiga",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Job Ochieng",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yangel Herrera",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Thomas Lemar",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fernando Niño",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Luka Sucic",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088619",
+    "home_team": "Udinese",
+    "away_team": "Lazio",
+    "match_date": "2026-09-07T18:45Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Jesper Karlström",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Davide Frattesi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Albert Gudmundsson",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
