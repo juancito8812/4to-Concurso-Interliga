@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { DM_Sans } from "next/font/google";
 import { Providers } from "./providers";
 import RegisterSW from "./RegisterSW";
+import Footer from "./Footer";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-full flex flex-col">
         <RegisterSW />
         <Providers>{children}</Providers>
+        <Footer />
       </body>
     </html>
   );

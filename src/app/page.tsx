@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
 import TeamSelectorCard from "./TeamSelectorCard";
 import CompetitionStatusCard from "./CompetitionStatusCard";
 
@@ -430,9 +429,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* FOOTER */}
-      <Footer />
     </div>
   );
 }
