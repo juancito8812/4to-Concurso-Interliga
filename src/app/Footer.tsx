@@ -124,7 +124,7 @@ export default function Footer() {
           </div>
           <div className="text-center mt-4 pt-4 border-t border-border/50">
             <p className="text-silver text-[10px] tracking-wider">
-              © {new Date().getFullYear()} Interliga · Hecho en Venezuela 🇻🇪
+              © {new Date().getFullYear()} Interliga
             </p>
           </div>
         </div>
