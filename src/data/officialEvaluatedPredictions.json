@@ -608,5 +608,30 @@
         "team": "away"
       }
     ]
+  },
+  {
+    "id": "c82a0004-de7f-4287-873e-7b13e4775813",
+    "user_id": "16da3693-64d1-4616-9020-f93fc8d54cc9",
+    "display_name": "El Toro",
+    "match_id": "00000000-0000-4000-8000-000017f4be20",
+    "home_score": 3,
+    "away_score": 1,
+    "scorers": [
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
   }
 ]
