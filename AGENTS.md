@@ -32,6 +32,18 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Los 4 JSONs de datos están en `public/data/` como assets estáticos servidos por CDN.
 - Para agregar un nuevo archivo de datos: copiarlo a `public/data/`, importarlo con `loadData("/data/archivo.json")` en el componente que lo necesite.
 
+### Footer global
+
+- El `Footer.tsx` se renderiza en el layout raíz (`layout.tsx`) y aparece en **todas las páginas** automáticamente.
+- Contiene: logo INTERLIGA, columna de Ligas (11 competiciones), Navegación, Sistema de Puntos, ícono de WhatsApp (grupo), copyright con año automático (`new Date().getFullYear()`).
+- **NO** duplicar el Footer en páginas individuales.
+
+### Logos de competiciones
+
+- Europa League y Copa del Rey: PNGs extraídos de SVGs raster embebidos (`/logos/europa.png`, `/logos/copadelrey.png`).
+- Copa Italia: SVG vectorial puro (`/logos/coppaitalia.svg`) — NO convertir a PNG.
+- Las demás competiciones usan PNG o SVG según corresponda.
+
 ### Política de Emojis (Jul 2025)
 
 - **NO** se usan emojis informativos (🏆👑🎯✅⚠️📊🔍 etc.) en la UI.

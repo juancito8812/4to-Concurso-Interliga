@@ -40,7 +40,16 @@
 | **Calendario Oficial** | `public/data/officialFixtures.json` — **1.650 partidos reales** pre-sincronizados (fetch dinámico) |
 | **Plantillas Oficiales** | `public/data/officialPlayers.json` — **4.749 jugadores** clasificados por posición (fetch dinámico) |
 | **Deploy** | GitHub Actions → GitHub Pages, dominio personalizado (Cloudflare DNS) |
-| **PWA** | Service Worker offline-first, manifest, icon SVG |
+| **PWA** | Service Worker v2 offline-first con precaching de datos, manifest, icon SVG |
+
+### Métricas de Performance
+
+| Métrica | Valor |
+|---------|-------|
+| **JS total** | ~1.230 KB (antes 2.346 KB, -47.6%) |
+| **Chunk más grande** | 232 KB (antes 621 KB, -62.6%) |
+| **Páginas estáticas** | 23 rutas generadas |
+| **Build output** | ~4.5 MB |
 
 ---
 
@@ -115,7 +124,7 @@ src/
 │   ├── providers.tsx               # AuthProvider context wrapper
 │   ├── RegisterSW.tsx              # Registro del service worker PWA
 │   ├── Navbar.tsx                  # Barra de navegación con nombre de usuario y dropdown
-│   ├── Footer.tsx                  # Pie de página con accesos directos y créditos
+│   ├── Footer.tsx                  # Pie de página global (Ligas, Navegación, Puntuación, WhatsApp, copyright automático)
 │   ├── TeamSelectorCard.tsx        # Selección y bloqueo de club del participante
 │   ├── CompetitionStatusCard.tsx   # Estado de la competición (En Vivo / KO)
 │   ├── actualizar-contrasena/
@@ -185,7 +194,11 @@ public/
 │   ├── officialFixtures.json       # 1.650 partidos (566KB, fetch dinámico)
 │   ├── officialEvaluatedMatches.json   # Resultados evaluados
 │   └── officialEvaluatedPredictions.json # Pronósticos evaluados
-└── logos/                          # Escudos de las 9 competiciones (PNG/JPEG, optimizados)
+└── logos/                          # Escudos de las 9 competiciones
+    ├── laliga.png, premier.png, seriea.png, bundesliga.png  # Ligas domésticas
+    ├── champions.png, conference.svg                         # Copas europeas
+    ├── europa.png, copadelrey.png                            # Extraídos de SVGs raster
+    └── coppaitalia.svg, facup.svg, dfbpokal.svg              # SVGs vectoriales
 ```
 
 ---
