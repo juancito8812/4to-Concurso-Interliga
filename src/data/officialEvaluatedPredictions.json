@@ -658,5 +658,25 @@
         "team": "away"
       }
     ]
+  },
+  {
+    "id": "c3c3fdbe-4bf3-4b5d-b5e5-7336e1cfaf70",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000017f4be3b",
+    "home_score": 2,
+    "away_score": 1,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Vinicius Junior",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
   }
 ]
