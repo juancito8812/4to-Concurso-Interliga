@@ -657,6 +657,13 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 8,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Marcador exacto (+2 pts)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Cantidad exacta de goleadores: 3 (+2 pts)"
     ]
   },
   {
@@ -676,6 +683,32 @@
         "player_name": "Vinicius Junior",
         "goals": 1,
         "team": "home"
+      }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Marcador exacto (+2 pts)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)"
+    ]
+  },
+  {
+    "id": "9e9d2597-2049-4ec3-961e-5f6643b9b3b9",
+    "user_id": "266b309a-4eb0-474a-85db-aca42e055913",
+    "display_name": "JR_DT",
+    "match_id": "00000000-0000-4000-8000-000000088dc7",
+    "home_score": 0,
+    "away_score": 2,
+    "scorers": [
+      {
+        "player_name": "Bryan Mbeumo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Bruno Fernandes",
+        "goals": 1,
+        "team": "away"
       }
     ]
   }

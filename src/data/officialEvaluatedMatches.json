@@ -2401,5 +2401,103 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be39",
+    "home_team": "Borussia Dortmund",
+    "away_team": "Villarreal",
+    "match_date": "2026-09-08T19:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Santiago Mouriño",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Serhou Guirassy",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be21",
+    "home_team": "Porto",
+    "away_team": "Manchester City",
+    "match_date": "2026-09-08T19:00Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Erling Haaland",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be3a",
+    "home_team": "Lille",
+    "away_team": "Real Betis",
+    "match_date": "2026-09-08T19:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Ayase Ueda",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Marc Bartra",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Alexsandro",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Troy Parrott",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be3b",
+    "home_team": "Real Madrid",
+    "away_team": "Inter Milan",
+    "match_date": "2026-09-08T19:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Federico Valverde",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Carlos Augusto",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
