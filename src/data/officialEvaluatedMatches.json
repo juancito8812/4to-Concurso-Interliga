@@ -2499,5 +2499,64 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be20",
+    "home_team": "Barcelona",
+    "away_team": "Feyenoord",
+    "match_date": "2026-09-09T16:45Z",
+    "league": "Champions League",
+    "result_home": 5,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Raphinha",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Karim Adeyemi",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Sem Steijn",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Gabriel Jesus",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be38",
+    "home_team": "Stuttgart",
+    "away_team": "Viking FK",
+    "match_date": "2026-09-09T16:45Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Ermedin Demirovic",
+        "goals": 3,
+        "team": "home"
+      },
+      {
+        "player_name": "Zlatko Tripic",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]

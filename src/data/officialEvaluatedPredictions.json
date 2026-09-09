@@ -607,6 +607,15 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 9,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Raphinha (+1 pt)",
+      "Goleador acertado: Lamine Yamal (+1 pt)",
+      "Goleador acertado: Raphinha (+1 pt)",
+      "Cantidad exacta de goleadores: 5 (+2 pts)"
     ]
   },
   {
@@ -632,6 +641,11 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Raphinha (+1 pt)"
     ]
   },
   {
