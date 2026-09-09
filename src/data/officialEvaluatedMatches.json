@@ -2558,5 +2558,108 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be36",
+    "home_team": "Liverpool",
+    "away_team": "Atlético Madrid",
+    "match_date": "2026-09-09T19:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Marcos Llorente",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Dominik Szoboszlai",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alexis Mac Allister",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be1f",
+    "home_team": "Napoli",
+    "away_team": "Arsenal",
+    "match_date": "2026-09-09T19:00Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Martin Ødegaard",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be35",
+    "home_team": "Paris Saint-Germain",
+    "away_team": "Slovan Bratislava",
+    "match_date": "2026-09-09T19:00Z",
+    "league": "Champions League",
+    "result_home": 6,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Ousmane Dembélé",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Ferran Torres",
+        "goals": 3,
+        "team": "home"
+      },
+      {
+        "player_name": "Suleiman Camara",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fabián Ruiz",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be37",
+    "home_team": "Sporting Clube de Portugal",
+    "away_team": "Galatasaray SK",
+    "match_date": "2026-09-09T19:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Geny Catamo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Luis Suárez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Rodrigo Zalazar",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]

@@ -215,7 +215,11 @@
     "match_id": "00000000-0000-4000-8000-000017f4be1f",
     "home_score": 0,
     "away_score": 3,
-    "scorers": []
+    "scorers": [],
+    "points": 3,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)"
+    ]
   },
   {
     "id": "e9aba70d-9a5e-4717-8613-0c7cf100bd34",
