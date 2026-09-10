@@ -2705,5 +2705,138 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be33",
+    "home_team": "Bayern Munich",
+    "away_team": "FK Bodø/Glimt",
+    "match_date": "2026-09-10T19:00Z",
+    "league": "Champions League",
+    "result_home": 5,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Jamal Musiala",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Harry Kane",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alphonso Davies",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Michael Olise",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be31",
+    "home_team": "Como",
+    "away_team": "RB Leipzig",
+    "match_date": "2026-09-10T19:00Z",
+    "league": "Champions League",
+    "result_home": 4,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Martin Baturina",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Anastasios Douvikas",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Assane Diao",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Andrija Maksimovic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Máximo Perrone",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be32",
+    "home_team": "Manchester United",
+    "away_team": "SABAH FK",
+    "match_date": "2026-09-10T19:00Z",
+    "league": "Champions League",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Matheus Cunha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Bruno Fernandes",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Benjamin Sesko",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lisandro Martínez",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be30",
+    "home_team": "SK Slavia Praha",
+    "away_team": "Lens",
+    "match_date": "2026-09-10T19:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Danijel Sturm",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Abdallah Sima",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Florian Thauvin",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ruben Aguilar",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]

@@ -173,6 +173,13 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Matheus Cunha (+1 pt)",
+      "Goleador acertado: Bruno Fernandes (+1 pt)"
     ]
   },
   {
@@ -400,6 +407,11 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Harry Kane (+1 pt)"
     ]
   },
   {
