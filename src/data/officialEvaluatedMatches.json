@@ -2661,5 +2661,49 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be34",
+    "home_team": "Fenerbahçe",
+    "away_team": "Roma",
+    "match_date": "2026-09-10T16:45Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Bryan Cristante",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Archie Brown",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be1e",
+    "home_team": "PSV",
+    "away_team": "Shakhtar Donetsk",
+    "match_date": "2026-09-10T16:45Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Gleiker Mendoza",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sergiño Dest",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]

@@ -391,12 +391,12 @@
         "team": "home"
       },
       {
-        "player_name": "Kasper Högh",
+        "player_name": "Andreas Helmersen",
         "goals": 1,
         "team": "away"
       },
       {
-        "player_name": "Patrick Berg",
+        "player_name": "Fredrik Bjørkan",
         "goals": 1,
         "team": "away"
       }
@@ -729,5 +729,14 @@
         "team": "away"
       }
     ]
+  },
+  {
+    "id": "6f8a4f81-6e5d-4850-b571-a6dd94ec0fe1",
+    "user_id": "fd25cd1f-d2c2-47ce-a14c-dedcd1bab40b",
+    "display_name": "yormantapia37@gmail.com",
+    "match_id": "00000000-0000-4000-8000-000000088dc1",
+    "home_score": 0,
+    "away_score": 3,
+    "scorers": []
   }
 ]
