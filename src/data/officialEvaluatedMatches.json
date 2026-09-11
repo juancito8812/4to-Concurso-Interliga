@@ -2838,5 +2838,86 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dbd",
+    "home_team": "Sevilla",
+    "away_team": "Valencia",
+    "match_date": "2026-09-11T19:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Juan Iglesias",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008860e",
+    "home_team": "Venezia",
+    "away_team": "Fiorentina",
+    "match_date": "2026-09-11T18:45Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Akor Adams",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Franco Mastantuono",
+        "goals": 3,
+        "team": "away"
+      },
+      {
+        "player_name": "Mateo Pellegrino",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Antoine Hainaut",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a225",
+    "home_team": "Union Berlin",
+    "away_team": "Schalke 04",
+    "match_date": "2026-09-11T18:30Z",
+    "league": "Bundesliga",
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Robin Gosens",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Adil Aouchiche",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Tim Skarke",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Maximilian Wöber",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]

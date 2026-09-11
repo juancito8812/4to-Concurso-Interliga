@@ -750,5 +750,79 @@
     "home_score": 0,
     "away_score": 3,
     "scorers": []
+  },
+  {
+    "id": "8717f2db-ad27-4238-bf11-ef62a920f1ea",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "ARS",
+    "match_id": "00000000-0000-4000-8000-000000088dd1",
+    "home_score": 2,
+    "away_score": 0,
+    "scorers": []
+  },
+  {
+    "id": "095bc25d-a804-4720-97b3-1d442113ec65",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "ARS",
+    "match_id": "00000000-0000-4000-8000-000000088dc1",
+    "home_score": 0,
+    "away_score": 2,
+    "scorers": [
+      {
+        "player_name": "Bukayo Saka",
+        "goals": 2,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "fd038ac2-6d50-4042-bc9a-4a0a6495d858",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "ARS",
+    "match_id": "00000000-0000-4000-8000-000000088dca",
+    "home_score": 2,
+    "away_score": 4,
+    "scorers": [
+      {
+        "player_name": "Bukayo Saka",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Bruno Guimarães",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Kai Havertz",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "922d39ce-4ca3-480c-b5bd-17bd5dfc2c80",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000000089dc5",
+    "home_score": 3,
+    "away_score": 1,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Vinicius Junior",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
   }
 ]
