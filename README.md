@@ -65,6 +65,8 @@
 ### Ranking Multiusuario en Vivo
 - Tabla de clasificación global con datos en tiempo real desde Supabase.
 - **Podio de Honor** con medallas 🥇🥈🥉, puntos y escudos oficiales.
+- **Transparencia y Desglose de Puntos:** Al tocar cualquier participante o líder del podio, se despliega una ventana emergente (`UserPredictionsModal.tsx`) con sus pronósticos, marcadores predichos vs reales, goleadores y el desglose de puntos regla por regla.
+- **Regla Anti-Copia:** Los partidos que aún no han comenzado ocultan automáticamente el pronóstico (`🔒 ? - ?`) y se revelan 1 minuto antes del pitazo para proteger el juego limpio.
 - Búsqueda instantánea por nombre de usuario.
 
 ### Superviviente en Copas Knockout

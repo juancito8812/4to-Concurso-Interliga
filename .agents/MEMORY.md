@@ -68,11 +68,16 @@
 
 ## Cambios Recientes
 
-- **2026-09-12** — **Actualización de plantillas post-mercado + Cron mensual + Hardening de seguridad y linter**:
+- **2026-09-12** — **Modal interactivo de pronósticos por usuario + Regla Anti-Copia + Sync jornada 11-12 sept + Optimización `/ranking`**:
+  - **Feature de transparencia (`UserPredictionsModal.tsx`)**: Modal interactivo accesible al hacer clic en cualquier participante del ranking o del Podio de Honor. Muestra todos los pronósticos del usuario con el marcador predicho vs real, goleadores y el desglose de puntos regla por regla (+3 resultado, +2 exacto, +1 goleador, +2 cantidad).
+  - **Regla Anti-Copia**: Los partidos abiertos (`diffMin > 1`) muestran `🔒 ? - ?` y goleadores protegidos. Los partidos iniciados o finalizados se revelan automáticamente con su puntuación.
+  - **Resolución robusta de partidos**: El modal resuelve emparejamientos tanto por ID como por cruce de nombres de equipos (`home_team` vs `away_team`), garantizando que los partidos evaluados con puntos nunca se muestren como ocultos.
+  - **Sincronización de jornada 11-12 sept**: 131 partidos finalizados evaluados en `officialEvaluatedMatches.json` y `public/data/` (incluye Real Madrid 4-1 Rayo, Arsenal 2-0 Sunderland, Milan 2-2 Lazio). Puntos asignados a Zahilet (+7 pts en RM, total 22 pts), Raudel (+7 pts en RM, total 21 pts), ARS (+6 pts), Yorman (+4 pts).
+  - **Optimización de rendimiento en `/ranking`**: Consultas a Supabase y fixtures locales ejecutadas en paralelo (`Promise.all`), reduciendo el tiempo de carga de 10-15s a ~200ms. Timeout de ESPN reducido a 2.5s con fallback seguro y bloque `finally { setLoading(false) }` garantizado.
   - **Plantillas 2026/27 post-mercado**: `scripts/sync-player-squads.js` reescrito para explorar las 11 competiciones del concurso vía ESPN; sincronizados **7.097 jugadores oficiales** (antes 4.749) de **237 clubes** clasificados por posición (`Arquero`, `Defensor`, `Mediocampista`, `Delantero`) en `src/data/officialPlayers.json` y `public/data/officialPlayers.json`.
   - **Cron mensual de plantillas (`.github/workflows/auto-sync-squads.yml`)**: Automatización programada el día 1 de cada mes a las 04:00 UTC con `workflow_dispatch` manual para mantener plantillas al día.
   - **Hardening de seguridad**: API key de football-data.org eliminada del código fuente y movida a variables de entorno (`NEXT_PUBLIC_FOOTBALL_DATA_KEY` / `FOOTBALL_DATA_KEY`); fallbacks de Supabase anon key / URL hardcodeados eliminados de todos los scripts (`auto-sync-espn-results.js`, `evaluate-matches.js`, `assign-points.js`, `sync-db.js`, `rebuild-eval-preds.js`); secrets de GitHub Actions configurados.
-  - **Cron fail-closed**: `auto-sync-espn-results.js` lanza error explícito si fallan `syncFixturesToSupabase`, `persistToSupabase` o `evaluateSurvivors`.
+  - **Cron fail-closed**: `auto-sync-espn-results.js` lanza error explícito si fallan `syncFixturesToSupabase`, `persistToSupabase` o `evaluateSurvivors` cuando hay service key configurada, con soporte de ejecución local desacoplada.
   - **ESLint para scripts**: `eslint.config.mjs` configurado con flat-config específico para `scripts/**/*.js` (Node CommonJS), pasando limpio con 0 errores en todo el proyecto.
   - **Calendario 1.672 fixtures**: Re-sincronizado con fuentes reales; `validate-fixtures.js` ajustado para conteo real de Copa Italia (34 partidos) con **0 errores**.
   - **UI / Landing**: Ecualización de altura `h-full flex flex-col justify-between` y alineación simétrica en las 3 tarjetas de reglas y el podio de premios.
