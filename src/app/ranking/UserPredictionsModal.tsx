@@ -255,34 +255,73 @@ export default function UserPredictionsModal({
         const items: UserPredictionItem[] = userPreds.map((pred) => {
           let match = matchesMap[pred.match_id];
 
-          // Fallback fixture lookup
-          if (!match && Array.isArray(officialFixtures)) {
-            const fixture = officialFixtures.find(
-              (f) => matchIdToUuid(f.id) === pred.match_id || String(f.id) === pred.match_id
-            );
-            if (fixture) {
-              const fh = normalizeTeamName(fixture.home_team);
-              const fa = normalizeTeamName(fixture.away_team);
-              match = {
-                id: pred.match_id,
-                home_team: fh,
-                away_team: fa,
-                match_date: fixture.match_date,
-                league: normalizeMatchLeague(fh, fa, fixture.match_date, fixture.league),
-                home_logo: fixture.home_logo,
-                away_logo: fixture.away_logo,
-                result_home: null,
-                result_away: null,
-              };
+          if (!match) {
+            const uuid = matchIdToUuid(pred.match_id);
+            if (matchesMap[uuid]) {
+              match = matchesMap[uuid];
             }
           }
 
+          // Fallback: lookup in official fixtures and join with evaluated matches by team names
+          if (!match && Array.isArray(officialFixtures)) {
+            const fixture = officialFixtures.find(
+              (f) =>
+                matchIdToUuid(f.id) === pred.match_id ||
+                String(f.id) === pred.match_id ||
+                f.id === pred.match_id
+            );
+            if (fixture) {
+              const fh = normalizeTeamName(fixture.home_team).toLowerCase();
+              const fa = normalizeTeamName(fixture.away_team).toLowerCase();
+
+              // Check if this fixture matches an evaluated match in matchesMap by team names
+              const evalMatch = Object.values(matchesMap).find((m) => {
+                const mh = normalizeTeamName(m.home_team || "").toLowerCase();
+                const ma = normalizeTeamName(m.away_team || "").toLowerCase();
+                return (mh === fh && ma === fa) || (mh.includes(fh) && ma.includes(fa));
+              });
+
+              if (evalMatch) {
+                match = {
+                  ...evalMatch,
+                  home_logo: fixture.home_logo || evalMatch.home_logo,
+                  away_logo: fixture.away_logo || evalMatch.away_logo,
+                };
+              } else {
+                match = {
+                  id: pred.match_id,
+                  home_team: fixture.home_team,
+                  away_team: fixture.away_team,
+                  match_date: fixture.match_date,
+                  league: normalizeMatchLeague(fixture.home_team, fixture.away_team, fixture.match_date, fixture.league),
+                  home_logo: fixture.home_logo,
+                  away_logo: fixture.away_logo,
+                  result_home: null,
+                  result_away: null,
+                };
+              }
+            }
+          }
+
+          // Direct search across all matchesMap by fixture if still not found
+          if (!match) {
+            const byName = Object.values(matchesMap).find(
+              (m) => m.id === pred.match_id || matchIdToUuid(m.id) === pred.match_id
+            );
+            if (byName) match = byName;
+          }
+
           const matchDateMs = match?.match_date ? new Date(match.match_date).getTime() : 0;
-          const diffMin = matchDateMs ? (matchDateMs - nowTime) / (1000 * 60) : 0;
+          const diffMin = matchDateMs > 0 ? (matchDateMs - nowTime) / (1000 * 60) : 0;
           
-          // Regla Anti-Copia: Un partido se bloquea/revela si falta <= 1 min para el inicio o ya finalizó
-          const isFinished = match?.result_home !== null && match?.result_home !== undefined;
-          const isLocked = isFinished || (matchDateMs > 0 && diffMin <= 1);
+          // Un partido es finalizado si tiene resultado real cargado o si ya tiene puntos asignados
+          const hasScore = match?.result_home !== null && match?.result_home !== undefined;
+          const hasPoints = pred.points !== null && pred.points !== undefined;
+          const isFinished = hasScore || hasPoints;
+
+          // Regla Anti-Copia: Un partido se revela si ya finalizó, o si su hora de inicio ya pasó o falta <= 1 min
+          const isPastOrLocked = matchDateMs > 0 ? diffMin <= 1 : true;
+          const isLocked = isFinished || isPastOrLocked;
 
           const predScorers = scorersMap[pred.id] || [];
 
@@ -307,6 +346,8 @@ export default function UserPredictionsModal({
               earnedPoints = breakdown.totalPoints;
             }
             details = breakdown.details;
+          } else if (hasPoints && earnedPoints !== null && earnedPoints > 0 && details.length === 0) {
+            details = [`Puntos oficiales asignados (+${earnedPoints} pts)`];
           }
 
           return {
@@ -640,9 +681,9 @@ export default function UserPredictionsModal({
                             <span className="text-lg sm:text-xl font-black text-gold font-mono leading-none">
                               {item.home_score} - {item.away_score}
                             </span>
-                            {item.isFinished && (
+                            {item.isFinished && match?.result_home !== null && match?.result_home !== undefined && (
                               <div className="mt-1 pt-1 border-t border-border/50 text-[11px] text-silver font-mono">
-                                Real: <strong className="text-white font-bold">{match?.result_home} - {match?.result_away}</strong>
+                                Real: <strong className="text-white font-bold">{match.result_home} - {match.result_away}</strong>
                               </div>
                             )}
                           </>
