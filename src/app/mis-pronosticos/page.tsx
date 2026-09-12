@@ -99,30 +99,66 @@ export default function MisPronosticosPage() {
     let isMounted = true;
 
     const fetchData = async () => {
-      const officialFixtures = await loadData<Array<{
-        id: string;
-        home_team: string;
-        away_team: string;
-        match_date: string;
-        league: string;
-        home_logo?: string;
-        away_logo?: string;
-      }>>("/data/officialFixtures.json");
-
-      // 1. Fetch user's primary team and survivor status
-      let userSurvivors: Record<string, TournamentSurvivor> = {};
       try {
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("team_id")
-          .eq("user_id", user.id)
-          .single();
+        // Initial parallel load of all base data
+        const [
+          officialFixtures,
+          profileRes,
+          userSurvivors,
+          dbPredsRes,
+          liveFinished,
+          dynEvalMatches,
+          dynEvalPreds,
+        ] = await Promise.all([
+          loadData<Array<{
+            id: string;
+            home_team: string;
+            away_team: string;
+            match_date: string;
+            league: string;
+            home_logo?: string;
+            away_logo?: string;
+          }>>("/data/officialFixtures.json").catch(() => []),
+          supabase
+            .from("profiles")
+            .select("team_id")
+            .eq("user_id", user.id)
+            .single(),
+          getUserCupSurvivors(user.id).catch(() => ({} as Record<string, TournamentSurvivor>)),
+          supabase
+            .from("predictions")
+            .select("id, match_id, home_score, away_score, points")
+            .eq("user_id", user.id),
+          fetchLiveFinishedMatches().catch(() => []),
+          loadData<Array<{
+            id: string;
+            home_team: string;
+            away_team: string;
+            match_date: string;
+            league: string;
+            result_home: number;
+            result_away: number;
+            scorers?: Array<{ player_name: string; goals: number; team?: string }>;
+          }>>("/data/officialEvaluatedMatches.json").catch(() => []),
+          loadData<Array<{
+            id: string;
+            user_id: string;
+            match_id: string;
+            home_score: number;
+            away_score: number;
+            scorers?: ScorerInfo[];
+          }>>("/data/officialEvaluatedPredictions.json").catch(() => []),
+        ]);
 
-        if (profile?.team_id) {
+        if (isMounted && userSurvivors) {
+          setSurvivors(userSurvivors);
+        }
+
+        if (profileRes?.data?.team_id) {
           const { data: team } = await supabase
             .from("teams")
             .select("id, name, logo_url")
-            .eq("id", profile.team_id)
+            .eq("id", profileRes.data.team_id)
             .single();
 
           if (team && isMounted) {
@@ -130,126 +166,101 @@ export default function MisPronosticosPage() {
           }
         }
 
-        userSurvivors = (await getUserCupSurvivors(user.id)) || {};
-        if (isMounted) {
-          setSurvivors(userSurvivors);
+        // 2. Fetch predictions
+        const storageKey = `interliga_predictions_${user.id}`;
+        let localMap: Record<string, { id?: string; match_id: string; home_score: string | number; away_score: string | number; scorers?: ScorerInfo[]; points?: number }> = {};
+        try {
+          const raw = localStorage.getItem(storageKey);
+          if (raw) {
+            localMap = JSON.parse(raw);
+          }
+        } catch (e) {
+          console.warn("Error reading local predictions:", e);
         }
-      } catch (err) {
-        console.warn("Error fetching profile and survivor data:", err);
-      }
 
-      // 2. Fetch predictions
-      const storageKey = `interliga_predictions_${user.id}`;
-      let localMap: Record<string, { id?: string; match_id: string; home_score: string | number; away_score: string | number; scorers?: ScorerInfo[]; points?: number }> = {};
-      try {
-        const raw = localStorage.getItem(storageKey);
-        if (raw) {
-          localMap = JSON.parse(raw);
+        const predsData: Array<{ id: string; match_id: string; home_score: number; away_score: number; points: number | null }> = [];
+        if (dbPredsRes?.data) {
+          predsData.push(...dbPredsRes.data);
         }
-      } catch (e) {
-        console.warn("Error reading local predictions:", e);
-      }
 
-      let predsData: Array<{ id: string; match_id: string; home_score: number; away_score: number; points: number | null }> = [];
-      try {
-        const { data } = await supabase
-          .from("predictions")
-          .select("id, match_id, home_score, away_score, points")
-          .eq("user_id", user.id);
-        if (data) predsData = data;
-      } catch (e) {
-        console.warn("Error fetching Supabase predictions:", e);
-      }
+        // Merge official evaluated predictions for user if any
+        const allEvalPreds = [
+          ...(officialEvaluatedPredictions as Array<{ id: string; user_id: string; match_id: string; home_score: number; away_score: number; scorers?: ScorerInfo[] }>),
+          ...(Array.isArray(dynEvalPreds) ? dynEvalPreds : []),
+        ];
 
-      // Merge official evaluated predictions for user if any
-      (officialEvaluatedPredictions as Array<{ id: string; user_id: string; match_id: string; home_score: number; away_score: number; scorers?: ScorerInfo[] }>).forEach((op) => {
-        if (op.user_id === user.id && !predsData.some((p) => p.match_id === op.match_id)) {
-          predsData.push({
-            id: op.id,
-            match_id: op.match_id,
-            home_score: op.home_score,
-            away_score: op.away_score,
-            points: null,
-          });
-        }
-      });
-
-      // Merge local predictions into predsData
-      const seenMatchIds = new Set(predsData.map((p) => p.match_id));
-      for (const [matchId, localPred] of Object.entries(localMap)) {
-        if (!seenMatchIds.has(matchId) && (localPred.home_score !== "" || localPred.away_score !== "")) {
-          predsData.push({
-            id: localPred.id || `local-${matchId}`,
-            match_id: matchId,
-            home_score: typeof localPred.home_score === "string" ? parseInt(localPred.home_score) || 0 : localPred.home_score,
-            away_score: typeof localPred.away_score === "string" ? parseInt(localPred.away_score) || 0 : localPred.away_score,
-            points: null,
-          });
-        }
-      }
-
-      if (predsData.length === 0) {
-        if (isMounted) setLoading(false);
-        return;
-      }
-
-      const matchIds = predsData.map((p) => p.match_id);
-      const { data: matchesData } = await supabase
-        .from("matches")
-        .select("id, home_team, away_team, match_date, result_home, result_away, league")
-        .in("id", matchIds);
-
-      interface MatchData {
-        id: string;
-        home_team: string;
-        away_team: string;
-        match_date: string;
-        result_home: number | null;
-        result_away: number | null;
-        league: string;
-        scorers?: Array<{ player_name: string; goals: number; team?: string }>;
-      }
-
-      const matchesMap: Record<string, MatchData> = {};
-      
-      // 1. Populate from official evaluated matches first
-      (officialEvaluatedMatches as Array<{ id: string; home_team: string; away_team: string; match_date: string; league: string; result_home: number; result_away: number; scorers?: Array<{ player_name: string; goals: number; team?: string }> }>).forEach((m) => {
-        matchesMap[m.id] = {
-          id: m.id,
-          home_team: normalizeTeamName(m.home_team),
-          away_team: normalizeTeamName(m.away_team),
-          match_date: m.match_date,
-          result_home: m.result_home,
-          result_away: m.result_away,
-          league: m.league,
-          scorers: m.scorers,
-        };
-      });
-
-      // 2. Fetch live finished matches from ESPN API
-      try {
-        const liveFinished = await fetchLiveFinishedMatches();
-        liveFinished.forEach((lm) => {
-          matchesMap[lm.id] = {
-            id: lm.id,
-            home_team: normalizeTeamName(lm.home_team),
-            away_team: normalizeTeamName(lm.away_team),
-            match_date: lm.match_date,
-            result_home: lm.result_home,
-            result_away: lm.result_away,
-            league: lm.league,
-            scorers: lm.scorers,
-          };
+        allEvalPreds.forEach((op) => {
+          if (op.user_id === user.id && !predsData.some((p) => p.match_id === op.match_id)) {
+            predsData.push({
+              id: op.id,
+              match_id: op.match_id,
+              home_score: op.home_score,
+              away_score: op.away_score,
+              points: null,
+            });
+          }
         });
-      } catch (e) {
-        console.warn("Could not fetch live finished matches from ESPN:", e);
-      }
 
-      if (matchesData) {
-        (matchesData as MatchData[]).forEach((m) => {
-          if (m.result_home === null || m.result_away === null) return;
+        // Merge local predictions into predsData
+        const seenMatchIds = new Set(predsData.map((p) => p.match_id));
+        for (const [matchId, localPred] of Object.entries(localMap)) {
+          if (!seenMatchIds.has(matchId) && (localPred.home_score !== "" || localPred.away_score !== "")) {
+            predsData.push({
+              id: localPred.id || `local-${matchId}`,
+              match_id: matchId,
+              home_score: typeof localPred.home_score === "string" ? parseInt(localPred.home_score) || 0 : localPred.home_score,
+              away_score: typeof localPred.away_score === "string" ? parseInt(localPred.away_score) || 0 : localPred.away_score,
+              points: null,
+            });
+          }
+        }
+
+        if (predsData.length === 0) {
+          if (isMounted) setLoading(false);
+          return;
+        }
+
+        const matchIds = predsData.map((p) => p.match_id);
+        const predIds = predsData.map((p) => p.id).filter((id) => !id.startsWith("local-"));
+
+        // Fetch matches and prediction scorers concurrently
+        const [matchesRes, scorersRes] = await Promise.all([
+          supabase
+            .from("matches")
+            .select("id, home_team, away_team, match_date, result_home, result_away, league")
+            .in("id", matchIds),
+          predIds.length > 0
+            ? supabase
+                .from("prediction_scorers")
+                .select("prediction_id, player_name, goals, team")
+                .in("prediction_id", predIds)
+            : Promise.resolve({ data: [] }),
+        ]);
+
+        const matchesData = matchesRes?.data || [];
+        const scorersData = scorersRes?.data || [];
+
+        interface MatchData {
+          id: string;
+          home_team: string;
+          away_team: string;
+          match_date: string;
+          result_home: number | null;
+          result_away: number | null;
+          league: string;
+          scorers?: Array<{ player_name: string; goals: number; team?: string }>;
+        }
+
+        const matchesMap: Record<string, MatchData> = {};
+        
+        // 1. Populate from official evaluated matches first
+        const allEvalMatches = [
+          ...(officialEvaluatedMatches as Array<{ id: string; home_team: string; away_team: string; match_date: string; league: string; result_home: number; result_away: number; scorers?: Array<{ player_name: string; goals: number; team?: string }> }>),
+          ...(Array.isArray(dynEvalMatches) ? dynEvalMatches : []),
+        ];
+
+        allEvalMatches.forEach((m) => {
           matchesMap[m.id] = {
-            ...matchesMap[m.id],
             id: m.id,
             home_team: normalizeTeamName(m.home_team),
             away_team: normalizeTeamName(m.away_team),
@@ -257,103 +268,128 @@ export default function MisPronosticosPage() {
             result_home: m.result_home,
             result_away: m.result_away,
             league: m.league,
+            scorers: m.scorers,
           };
         });
-      }
 
-      const allTeamNames = new Set<string>();
-      if (matchesData) {
-        matchesData.forEach((m) => {
-          allTeamNames.add(m.home_team);
-          allTeamNames.add(m.away_team);
-        });
-      }
+        // 2. Fetch live finished matches from ESPN API
+        if (Array.isArray(liveFinished)) {
+          liveFinished.forEach((lm) => {
+            matchesMap[lm.id] = {
+              id: lm.id,
+              home_team: normalizeTeamName(lm.home_team),
+              away_team: normalizeTeamName(lm.away_team),
+              match_date: lm.match_date,
+              result_home: lm.result_home,
+              result_away: lm.result_away,
+              league: lm.league,
+              scorers: lm.scorers,
+            };
+          });
+        }
 
-      const { data: teamsData } = await supabase
-        .from("teams")
-        .select("name, logo_url")
-        .in("name", Array.from(allTeamNames));
+        if (matchesData) {
+          (matchesData as MatchData[]).forEach((m) => {
+            if (m.result_home === null || m.result_away === null) return;
+            matchesMap[m.id] = {
+              ...matchesMap[m.id],
+              id: m.id,
+              home_team: normalizeTeamName(m.home_team),
+              away_team: normalizeTeamName(m.away_team),
+              match_date: m.match_date,
+              result_home: m.result_home,
+              result_away: m.result_away,
+              league: m.league,
+            };
+          });
+        }
 
-      const teamsMap: Record<string, string> = {};
-      if (teamsData) {
-        teamsData.forEach((t) => {
-          teamsMap[t.name] = t.logo_url || "";
-        });
-      }
+        const allTeamNames = new Set<string>();
+        if (matchesData) {
+          matchesData.forEach((m) => {
+            allTeamNames.add(m.home_team);
+            allTeamNames.add(m.away_team);
+          });
+        }
 
-      // Also resolve official fixtures for any match_id not found in supabase matches table
-      for (const pred of predsData) {
-        if (!matchesMap[pred.match_id]) {
-          const found = officialFixtures.find(
-            (f) => matchIdToUuid(f.id) === pred.match_id || String(f.id) === pred.match_id
-          );
-          if (found) {
-            const homeNorm = normalizeTeamName(found.home_team);
-            const awayNorm = normalizeTeamName(found.away_team);
+        const teamsMap: Record<string, string> = {};
+        if (allTeamNames.size > 0) {
+          const { data: teamsData } = await supabase
+            .from("teams")
+            .select("name, logo_url")
+            .in("name", Array.from(allTeamNames));
 
-            // Fallback: join by team names against already-loaded results (ESPN live/evaluated)
-            const byName = Object.values(matchesMap).find(
-              (m) =>
-                normalizeTeamName(m.home_team) === homeNorm &&
-                normalizeTeamName(m.away_team) === awayNorm
-            );
-
-            if (byName) {
-              matchesMap[pred.match_id] = { ...byName, id: pred.match_id };
-            } else {
-              matchesMap[pred.match_id] = {
-                id: pred.match_id,
-                home_team: homeNorm,
-                away_team: awayNorm,
-                match_date: found.match_date,
-                result_home: null,
-                result_away: null,
-                league: normalizeMatchLeague(homeNorm, awayNorm, found.match_date, found.league),
-              };
-            }
-            if (found.home_logo) teamsMap[homeNorm] = found.home_logo;
-            if (found.away_logo) teamsMap[awayNorm] = found.away_logo;
+          if (teamsData) {
+            teamsData.forEach((t) => {
+              teamsMap[t.name] = t.logo_url || "";
+            });
           }
         }
-      }
 
-      const predIds = predsData.map((p) => p.id).filter((id) => !id.startsWith("local-"));
-      let scorersData: Array<{ prediction_id: string; player_name: string; goals: number; team: string }> = [];
-      if (predIds.length > 0) {
-        const { data: sData } = await supabase
-          .from("prediction_scorers")
-          .select("prediction_id, player_name, goals, team")
-          .in("prediction_id", predIds);
-        if (sData) scorersData = sData;
-      }
+        // Also resolve official fixtures for any match_id not found in supabase matches table
+        for (const pred of predsData) {
+          if (!matchesMap[pred.match_id]) {
+            const found = Array.isArray(officialFixtures)
+              ? officialFixtures.find(
+                  (f) => matchIdToUuid(f.id) === pred.match_id || String(f.id) === pred.match_id
+                )
+              : null;
+            if (found) {
+              const homeNorm = normalizeTeamName(found.home_team);
+              const awayNorm = normalizeTeamName(found.away_team);
 
-      const scorersMap: Record<string, ScorerInfo[]> = {};
-      
-      // Merge official evaluated prediction scorers
-      (officialEvaluatedPredictions as Array<{ id: string; scorers?: ScorerInfo[] }>).forEach((op) => {
-        if (op.scorers) {
-          scorersMap[op.id] = op.scorers;
+              // Fallback: join by team names against already-loaded results (ESPN live/evaluated)
+              const byName = Object.values(matchesMap).find(
+                (m) =>
+                  normalizeTeamName(m.home_team) === homeNorm &&
+                  normalizeTeamName(m.away_team) === awayNorm
+              );
+
+              if (byName) {
+                matchesMap[pred.match_id] = { ...byName, id: pred.match_id };
+              } else {
+                matchesMap[pred.match_id] = {
+                  id: pred.match_id,
+                  home_team: homeNorm,
+                  away_team: awayNorm,
+                  match_date: found.match_date,
+                  result_home: null,
+                  result_away: null,
+                  league: normalizeMatchLeague(homeNorm, awayNorm, found.match_date, found.league),
+                };
+              }
+              if (found.home_logo) teamsMap[homeNorm] = found.home_logo;
+              if (found.away_logo) teamsMap[awayNorm] = found.away_logo;
+            }
+          }
         }
-      });
 
-      if (scorersData) {
-        scorersData.forEach((s) => {
-          if (!scorersMap[s.prediction_id]) scorersMap[s.prediction_id] = [];
-          // Evita doble conteo cuando el mismo pronóstico existe en JSON y en Supabase
-          const exists = scorersMap[s.prediction_id].some(
-            (x) => x.player_name === s.player_name && x.goals === s.goals && (x.team || "") === (s.team || "")
-          );
-          if (!exists) scorersMap[s.prediction_id].push(s);
+        const scorersMap: Record<string, ScorerInfo[]> = {};
+        
+        // Merge official evaluated prediction scorers
+        allEvalPreds.forEach((op) => {
+          if (op.scorers) {
+            scorersMap[op.id] = op.scorers;
+          }
         });
-      }
 
-      // Merge local scorers
-      for (const [matchId, localPred] of Object.entries(localMap)) {
-        const pId = localPred.id || `local-${matchId}`;
-        if (!scorersMap[pId] && localPred.scorers && localPred.scorers.length > 0) {
-          scorersMap[pId] = localPred.scorers;
+        if (scorersData) {
+          scorersData.forEach((s) => {
+            if (!scorersMap[s.prediction_id]) scorersMap[s.prediction_id] = [];
+            const exists = scorersMap[s.prediction_id].some(
+              (x) => x.player_name === s.player_name && x.goals === s.goals && (x.team || "") === (s.team || "")
+            );
+            if (!exists) scorersMap[s.prediction_id].push(s);
+          });
         }
-      }
+
+        // Merge local scorers
+        for (const [matchId, localPred] of Object.entries(localMap)) {
+          const pId = localPred.id || `local-${matchId}`;
+          if (!scorersMap[pId] && localPred.scorers && localPred.scorers.length > 0) {
+            scorersMap[pId] = localPred.scorers;
+          }
+        }
 
       const result: PredictionWithMatch[] = predsData.map((pred) => {
         const match = matchesMap[pred.match_id];
@@ -500,9 +536,16 @@ export default function MisPronosticosPage() {
         setSurvivors(userSurvivors);
         setPendingPenalties(pendingMatchIds);
       }
-    };
+    } catch (err) {
+      console.error("Error in fetchData:", err);
+    } finally {
+      if (isMounted) {
+        setLoading(false);
+      }
+    }
+  };
 
-    fetchData();
+  fetchData();
 
     return () => {
       isMounted = false;

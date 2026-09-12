@@ -78,41 +78,49 @@ export default function TablaLigaClient() {
       try {
         setError("");
 
-        // 1. Fetch matches / scoreboard for all leagues/cups
-        const matches = await getEspnScoreboard(league);
-        if (isMounted) {
-          setCupMatches(matches);
-        }
-
         if (data.isCup) {
+          // Cup competitions only have matches / scoreboard
+          const matches = await getEspnScoreboard(league);
           if (isMounted) {
+            setCupMatches(matches);
             setActiveTab("matches");
           }
         } else {
-          // League / Group stage competitions
-          // 2. Fetch standings from ESPN API (CORS enabled & free)
-          let parsedStandings = await getEspnStandings(league);
+          // League / Group stage competitions: fetch matches, standings, and scorers in parallel
+          const [matches, rawStandings, rawScorers] = await Promise.all([
+            getEspnScoreboard(league).catch(() => []),
+            getEspnStandings(league).catch(() => []),
+            getEspnScorers(league).catch(() => []),
+          ]);
 
-          // Fallback to football-data.org if ESPN returns empty
+          if (isMounted) {
+            setCupMatches(matches);
+          }
+
+          let parsedStandings = rawStandings;
           if (parsedStandings.length === 0 && data.fdCode) {
-            const fdStandings = await getStandings(data.fdCode);
-            if (fdStandings.length > 0) {
-              const table = fdStandings[0]?.table || [];
-              parsedStandings = (table as FDTableEntry[]).map((entry) => ({
-                rank: entry.position,
-                team: {
-                  name: entry.team.shortName || entry.team.name,
-                  logo: entry.team.crest || "",
-                },
-                points: entry.points,
-                goalsDiff: entry.goalDifference,
-                played: entry.playedGames,
-                win: entry.won,
-                draw: entry.draw,
-                lose: entry.lost,
-                goalsFor: entry.goalsFor,
-                goalsAgainst: entry.goalsAgainst,
-              }));
+            try {
+              const fdStandings = await getStandings(data.fdCode);
+              if (fdStandings.length > 0) {
+                const table = fdStandings[0]?.table || [];
+                parsedStandings = (table as FDTableEntry[]).map((entry) => ({
+                  rank: entry.position,
+                  team: {
+                    name: entry.team.shortName || entry.team.name,
+                    logo: entry.team.crest || "",
+                  },
+                  points: entry.points,
+                  goalsDiff: entry.goalDifference,
+                  played: entry.playedGames,
+                  win: entry.won,
+                  draw: entry.draw,
+                  lose: entry.lost,
+                  goalsFor: entry.goalsFor,
+                  goalsAgainst: entry.goalsAgainst,
+                }));
+              }
+            } catch (e) {
+              console.warn("FD standings fallback error:", e);
             }
           }
 
@@ -124,17 +132,20 @@ export default function TablaLigaClient() {
             }
           }
 
-          // 3. Fetch top scorers
-          let parsedScorers = await getEspnScorers(league);
+          let parsedScorers = rawScorers;
           if (parsedScorers.length === 0 && data.fdCode) {
-            const fdScorers = await getScorers(data.fdCode);
-            if (fdScorers.length > 0) {
-              parsedScorers = fdScorers.slice(0, 20).map((s: FDScorer, i: number) => ({
-                rank: i + 1,
-                name: s.player.name,
-                team: s.team.shortName || s.team.name,
-                value: s.goals,
-              }));
+            try {
+              const fdScorers = await getScorers(data.fdCode);
+              if (fdScorers.length > 0) {
+                parsedScorers = fdScorers.slice(0, 20).map((s: FDScorer, i: number) => ({
+                  rank: i + 1,
+                  name: s.player.name,
+                  team: s.team.shortName || s.team.name,
+                  value: s.goals,
+                }));
+              }
+            } catch (e) {
+              console.warn("FD scorers fallback error:", e);
             }
           }
 

@@ -371,17 +371,30 @@ export default function PronosticarPage() {
           .eq("user_id", user.id);
 
         if (predsData && predsData.length > 0) {
-          for (const pred of predsData) {
-            const { data: scorersData } = await supabase
-              .from("prediction_scorers")
-              .select("player_name, goals, team")
-              .eq("prediction_id", pred.id);
+          const predIds = predsData.map((p) => p.id);
+          const { data: scorersData } = await supabase
+            .from("prediction_scorers")
+            .select("prediction_id, player_name, goals, team")
+            .in("prediction_id", predIds);
 
+          const scorersByPred: Record<string, Scorer[]> = {};
+          if (scorersData) {
+            scorersData.forEach((s) => {
+              if (!scorersByPred[s.prediction_id]) scorersByPred[s.prediction_id] = [];
+              scorersByPred[s.prediction_id].push({
+                player_name: s.player_name,
+                goals: s.goals,
+                team: s.team === "away" ? "away" : "home",
+              });
+            });
+          }
+
+          for (const pred of predsData) {
             loadedPredsMap[pred.match_id] = {
               match_id: pred.match_id,
               home_score: pred.home_score !== null && pred.home_score !== undefined ? String(pred.home_score) : "",
               away_score: pred.away_score !== null && pred.away_score !== undefined ? String(pred.away_score) : "",
-              scorers: scorersData || loadedPredsMap[pred.match_id]?.scorers || [],
+              scorers: scorersByPred[pred.id] || loadedPredsMap[pred.match_id]?.scorers || [],
               prediction_id: pred.id,
             };
           }
