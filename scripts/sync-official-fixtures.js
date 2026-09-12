@@ -17,7 +17,7 @@ const DATA_DIR = path.join(__dirname, "..", "src", "data");
 const ALIASES_PATH = path.join(DATA_DIR, "teamAliases.json");
 const FIXTURES_PATH = path.join(DATA_DIR, "officialFixtures.json");
 
-const FOOTBALL_DATA_KEY = process.env.FOOTBALL_DATA_KEY || "733c2feed2bf441292e9779c91af2e09";
+const FOOTBALL_DATA_KEY = process.env.FOOTBALL_DATA_KEY || "";
 
 const { normalizeTeamName, matchIdToUuid } = require("./lib/score-utils.js");
 

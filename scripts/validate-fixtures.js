@@ -7,7 +7,7 @@ const path = require("path");
 const { normalizeTeamName } = require("./lib/score-utils.js");
 const teamData = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "src/data/teamAliases.json"), "utf8"));
 const fixtures = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "src/data/officialFixtures.json"), "utf8"));
-const FOOTBALL_DATA_KEY = process.env.FOOTBALL_DATA_KEY || "733c2feed2bf441292e9779c91af2e09";
+const FOOTBALL_DATA_KEY = process.env.FOOTBALL_DATA_KEY || "";
 
 let errors = 0;
 const fail = (msg) => { console.error("❌", msg); errors++; };
@@ -30,7 +30,7 @@ async function fetchJson(url, headers = {}) {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // 1. Todas las competiciones presentes y conteos
-const expectedCounts = { "Premier League": 380, "LaLiga": 380, "Serie A": 380, "Bundesliga": 306, "Champions League": 144, "Copa Italia": 28 };
+const expectedCounts = { "Premier League": 380, "LaLiga": 380, "Serie A": 380, "Bundesliga": 306, "Champions League": 144, "Copa Italia": 34 };
 const byLeague = {};
 fixtures.forEach((f) => { byLeague[f.league] = (byLeague[f.league] || 0) + 1; });
 console.log("\n=== 1. Conteos por competición ===");

@@ -581,7 +581,6 @@ export default function PronosticarPage() {
           if (!predError && predData) {
             updatedPreds[matchId].prediction_id = predData.id;
 
-            // Atomic-ish scorer update: delete old, then insert new with rollback on failure
             const scorersToInsert = pred.scorers
               ? pred.scorers
                   .filter((s) => s.player_name.trim() !== "")
@@ -593,20 +592,31 @@ export default function PronosticarPage() {
                   }))
               : [];
 
-            // Only delete if we have replacements, or if there are existing scorers to clean
+            // El API de Supabase no expone transacciones multi-tabla en el cliente.
+            // Mitigación: (1) si el delete de los scorers previos falla, abortamos
+            // este pronóstico (no dejamos la DB inconsistente); (2) si el insert
+            // falla, lo reintentamos una vez; (3) si sigue fallando, el estado
+            // se conserva en localStorage y se reintenta en el próximo guardado.
             if (scorersToInsert.length > 0) {
-              await supabase
+              const del = await supabase
                 .from("prediction_scorers")
                 .delete()
                 .eq("prediction_id", predData.id);
-
+              if (del.error) {
+                console.warn("Scorer delete failed:", del.error.message);
+                continue;
+              }
               const { error: insertErr } = await supabase
                 .from("prediction_scorers")
                 .insert(scorersToInsert);
-
-              // If insert failed, log but don't crash — data is in localStorage
               if (insertErr) {
-                console.warn("Scorer insert failed (localStorage fallback):", insertErr.message);
+                // Reintento único
+                const retry = await supabase
+                  .from("prediction_scorers")
+                  .insert(scorersToInsert);
+                if (retry.error) {
+                  console.warn("Scorer insert failed (localStorage fallback):", retry.error.message);
+                }
               }
             } else if (!pred.scorers || pred.scorers.length === 0) {
               // No scorers at all — clean up any existing ones

@@ -6,11 +6,9 @@ const OFFICIAL_PLAYERS_PATH = "/data/officialPlayers.json";
 
 const BASE_URL = "https://api.football-data.org/v4";
 
-const API_KEY = process.env.NEXT_PUBLIC_FOOTBALL_DATA_KEY || "733c2feed2bf441292e9779c91af2e09";
+const API_KEY = process.env.NEXT_PUBLIC_FOOTBALL_DATA_KEY || "";
 
-const headers = {
-  "X-Auth-Token": API_KEY,
-};
+const headers: Record<string, string> = API_KEY ? { "X-Auth-Token": API_KEY } : {};
 
 export interface PlayerData {
   id: string;

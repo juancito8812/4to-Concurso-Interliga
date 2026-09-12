@@ -8,7 +8,8 @@
 const fs = require("fs");
 const path = require("path");
 const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const URL = "https://ilkndkqcmxvlufxaugog.supabase.co/rest/v1";
+// URL de Supabase: preferimos el env (NEXT_PUBLIC_SUPABASE_URL) para no hardcodear.
+const URL = (process.env.NEXT_PUBLIC_SUPABASE_URL || "https://ilkndkqcmxvlufxaugog.supabase.co").replace(/\/$/, "") + "/rest/v1";
 const DATA_DIR = path.join(__dirname, "..", "src", "data");
 
 const fixtures = JSON.parse(fs.readFileSync(path.join(DATA_DIR, "officialFixtures.json"), "utf8"));

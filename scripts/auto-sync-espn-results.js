@@ -40,9 +40,14 @@ const LEAGUE_MAP = {
   "ger.dfb_pokal": "DFB-Pokal",
 };
 
-// Lecturas con la anon key (solo SELECT públicos por RLS).
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://ilkndkqcmxvlufxaugog.supabase.co";
-const ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlsa25ka3FjbXh2bHVmeGF1Z29nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc2OTI5MTksImV4cCI6MjEwMzI2ODkxOX0.2AAajeD5mX0RxUXe1Fi5b_SefDBH5MClGKRXdIEZZcY";
+// Lecturas con la anon key (solo SELECT públicos por RLS). Keys obligatorias:
+// si no están configuradas, se falla rápido en lugar de usar fallbacks hardcodeados.
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+
+if (!SUPABASE_URL || !ANON_KEY) {
+  throw new Error("Faltan NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY (requeridas)");
+}
 
 // Escrituras con la service role key (bypass RLS). Se inyecta como secreto de
 // GitHub Actions (SUPABASE_SERVICE_ROLE_KEY) o variable de entorno local.
@@ -136,7 +141,9 @@ async function syncFixturesToSupabase(officialFixtures) {
     );
     console.log(`💾 Calendario sincronizado en Supabase matches: ${officialFixtures.length} fixtures`);
   } catch (e) {
-    console.warn("Could not sync fixtures to Supabase:", e.message);
+    // fail-closed: si no se puede sincronizar el calendario, el run debe marcarse
+    // como fallido (no terminar en silencio con datos desincronizados).
+    throw new Error(`syncFixturesToSupabase falló: ${e.message}`);
   }
 }
 
@@ -185,7 +192,9 @@ async function persistToSupabase(officialMatches, officialPreds) {
       console.log(`💾 Puntos persistidos en Supabase predictions: ${pointsPersisted}`);
     }
   } catch (e) {
-    console.warn("Could not persist to Supabase:", e.message);
+    // fail-closed: la persistencia de resultados/puntos es el corazón del cron;
+    // si falla, el run debe marcarse como fallido.
+    throw new Error(`persistToSupabase falló: ${e.message}`);
   }
 }
 
@@ -344,7 +353,9 @@ async function evaluateSurvivors(finishedMatches) {
       console.log(`💾 Survivors actualizados en Supabase: ${updates.length}`);
     }
   } catch (e) {
-    console.warn("Could not evaluate survivors:", e.message);
+    // fail-closed: la actualización de survivors escribe estado del torneo; si
+    // falla, el run debe marcarse como fallido.
+    throw new Error(`evaluateSurvivors falló: ${e.message}`);
   }
 }
 
