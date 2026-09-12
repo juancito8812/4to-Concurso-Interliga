@@ -54,18 +54,29 @@
 
 ## Estado Actual
 
-- **Branch:** `main` (desplegado a GitHub Pages, último deploy `071c3db`).
+- **Branch:** `main` (desplegado a GitHub Pages).
 - **Build Status:** `npm run build` y `npx tsc --noEmit` pasando con 0 errores (23 rutas estáticas generadas).
-- **Deploy:** GitHub Actions activado con éxito en `main`.
-- **Automatización & Superviviente:** 100% desatendida en 7 copas knockout (Champions, Europa, Conference, Copa Italia, FA Cup, Copa del Rey, DFB-Pokal) con auto-suscripción, resolución de rondas reales y ganador por penales. Cron con **fail-fast** ante errores de ESPN.
-- **Calendario:** 1.650 partidos reales (0 fabricados) — 4 ligas football-data API + UCL fase liga y Copa Italia ESPN. UEL/UECL (sorteo 28/8) y rondas KO pendientes de publicación por las fuentes.
-- **Plantillas:** 4.749 jugadores (30/32 equipos completados con rosters ESPN; Shakhtar/SABAH sin fuente — 403).
-- **Base de datos:** `matches` 1.650 (34 con resultados desde el backfill), `teams` 225 reales, 12 usuarios (9 confirmados, 3 sin confirmar: Sergio, Leyver Estrada, g3610811).
-- **Resultados evaluados:** 37 partidos con goleadores reales en `officialEvaluatedMatches.json` (jornadas 28-30/08).
-- **Puntos:** Zahilet 9 (RM 4-0 Málaga, marcador exacto + 2 goleadores), Raudel 8, Milanarg 5 (AC Milan 2-0 Venezia), JR_DT 4 (ManU 5-2 Ipswich + Bruno Fernandes).
-- **Incidentes gestionados:** rebotes de email (cuentas de testing eliminadas), auth caído (restart del proyecto), y ESPN 400 por fechas con coma (fix + fail-fast, `071c3db`).
+- **Deploy:** GitHub Actions activado con éxito en `main` (`deploy.yml`).
+- **Automatización & Superviviente:**
+  - Cron de resultados y puntos cada 2h (`auto-evaluate-matches.yml`) con fail-closed en persistencia Supabase.
+  - Cron mensual de plantillas el 1ro de cada mes (`auto-sync-squads.yml`) para actualizar traspasos.
+  - 100% desatendida en 7 copas knockout (Champions, Europa, Conference, Copa Italia, FA Cup, Copa del Rey, DFB-Pokal).
+- **Calendario:** 1.672 partidos reales (0 fabricados) — 4 ligas football-data API + UCL fase liga y Copa Italia ESPN (34 partidos).
+- **Plantillas:** 7.097 jugadores oficiales clasificados por posición cubriendo 237 clubes tras el cierre del mercado de pases.
+- **Base de datos:** `matches` 1.672, `teams` 241, 12 usuarios.
+- **Verificación:** `verify-logic.js` (48/48 checks OK), `validate-fixtures.js` (0 errores), `test-survivor.js` (12/12 PASS), ESLint (0 errores).
 
 ## Cambios Recientes
+
+- **2026-09-12** — **Actualización de plantillas post-mercado + Cron mensual + Hardening de seguridad y linter**:
+  - **Plantillas 2026/27 post-mercado**: `scripts/sync-player-squads.js` reescrito para explorar las 11 competiciones del concurso vía ESPN; sincronizados **7.097 jugadores oficiales** (antes 4.749) de **237 clubes** clasificados por posición (`Arquero`, `Defensor`, `Mediocampista`, `Delantero`) en `src/data/officialPlayers.json` y `public/data/officialPlayers.json`.
+  - **Cron mensual de plantillas (`.github/workflows/auto-sync-squads.yml`)**: Automatización programada el día 1 de cada mes a las 04:00 UTC con `workflow_dispatch` manual para mantener plantillas al día.
+  - **Hardening de seguridad**: API key de football-data.org eliminada del código fuente y movida a variables de entorno (`NEXT_PUBLIC_FOOTBALL_DATA_KEY` / `FOOTBALL_DATA_KEY`); fallbacks de Supabase anon key / URL hardcodeados eliminados de todos los scripts (`auto-sync-espn-results.js`, `evaluate-matches.js`, `assign-points.js`, `sync-db.js`, `rebuild-eval-preds.js`); secrets de GitHub Actions configurados.
+  - **Cron fail-closed**: `auto-sync-espn-results.js` lanza error explícito si fallan `syncFixturesToSupabase`, `persistToSupabase` o `evaluateSurvivors`.
+  - **ESLint para scripts**: `eslint.config.mjs` configurado con flat-config específico para `scripts/**/*.js` (Node CommonJS), pasando limpio con 0 errores en todo el proyecto.
+  - **Calendario 1.672 fixtures**: Re-sincronizado con fuentes reales; `validate-fixtures.js` ajustado para conteo real de Copa Italia (34 partidos) con **0 errores**.
+  - **UI / Landing**: Ecualización de altura `h-full flex flex-col justify-between` y alineación simétrica en las 3 tarjetas de reglas y el podio de premios.
+  - **Atomicidad de scorers**: Mitigación en `/pronosticar` con retry único y control de abort para evitar estados inconsistentes.
 
 - **2026-08-31** — **Fix cron + fetcher ESPN por cambio de API (`071c3db`)**:
   - `scripts/auto-sync-espn-results.js`: `datesParam()` pasa de lista separada por coma a rango `YYYYMMDD-YYYYMMDD` (ESPN devuelve HTTP 400 con comas); agregado `AbortSignal.timeout(15s)` y **fail-fast** que marca el run de Actions como fallido si todas las ligas fallan; loguea el HTTP status y URL por liga.

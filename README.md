@@ -39,7 +39,7 @@
 | **Lenguaje** | TypeScript 5 en modo estricto |
 | **Base de Datos & Auth** | [Supabase](https://supabase.com/) — Autenticación + PostgreSQL con RLS y service role |
 | **Datos de Fútbol** | ESPN API pública (tablas, goleadores, en vivo) + football-data.org (fixtures) |
-| **Calendario Oficial** | `public/data/officialFixtures.json` — **1.650 partidos reales** pre-sincronizados (fetch dinámico) |
+| **Calendario Oficial** | `public/data/officialFixtures.json` — **1.672 partidos reales** pre-sincronizados (fetch dinámico) |
 | **Plantillas Oficiales** | `public/data/officialPlayers.json` — **7.097 jugadores** clasificados por posición (fetch dinámico) |
 | **Deploy** | GitHub Actions → GitHub Pages, dominio personalizado (Cloudflare DNS) |
 | **PWA** | Service Worker v2 offline-first con precaching de datos, manifest, icon SVG |
@@ -183,7 +183,8 @@ supabase/
 
 .github/workflows/
 ├── deploy.yml                      # Build y deploy a GitHub Pages (push a main)
-└── auto-evaluate-matches.yml       # Cron cada 2h: sync ESPN + evaluar + persistir
+├── auto-evaluate-matches.yml       # Cron cada 2h: sync ESPN + evaluar + persistir
+└── auto-sync-squads.yml            # Cron mensual (1ro de cada mes): sync plantillas oficiales
 
 public/
 ├── manifest.json                   # PWA manifest
@@ -192,8 +193,8 @@ public/
 ├── .nojekyll                       # Evita que GitHub Pages ignore _next/
 ├── CNAME                           # Dominio personalizado
 ├── data/                           # JSONs de datos servidos como assets estáticos (CDN)
-│   ├── officialPlayers.json        # 4.749 jugadores (809KB, fetch dinámico)
-│   ├── officialFixtures.json       # 1.650 partidos (566KB, fetch dinámico)
+│   ├── officialPlayers.json        # 7.097 jugadores (fetch dinámico)
+│   ├── officialFixtures.json       # 1.672 partidos (fetch dinámico)
 │   ├── officialEvaluatedMatches.json   # Resultados evaluados
 │   └── officialEvaluatedPredictions.json # Pronósticos evaluados
 └── logos/                          # Escudos de las 9 competiciones
@@ -364,7 +365,9 @@ SUPABASE_SERVICE_ROLE_KEY=tu-service-key   # SOLO local y GitHub Secrets (nunca 
 | Secret | Uso |
 |--------|-----|
 | `NEXT_PUBLIC_SUPABASE_URL` | URL del proyecto Supabase (build estático) |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anon key (build estático) |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anon key de Supabase (build estático) |
+| `NEXT_PUBLIC_FOOTBALL_DATA_KEY` | Key de football-data.org inyectada al build de GitHub Pages |
+| `FOOTBALL_DATA_KEY` | Key de football-data.org para scripts de validación / sincronización |
 | `SUPABASE_SERVICE_ROLE_KEY` | Service role key para el cron (escritura bypass RLS) |
 
 ---
@@ -551,7 +554,7 @@ curl "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?date
 ### Verificación rápida de salud del proyecto
 
 ```bash
-node scripts/verify-logic.js              # 43 checks
+node scripts/verify-logic.js              # 48 checks
 node scripts/validate-fixtures.js         # 0 errores
 node scripts/test-survivor.js             # 12/12 PASS
 npx tsc --noEmit                          # Type-checking

@@ -38,7 +38,7 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
 > **Después de correr `schema.sql`** (y con la service role key disponible), ejecutar los scripts de sincronización para poblar los datos reales:
 > ```bash
 > node scripts/sync-official-fixtures.js   # Regenera officialFixtures.json desde fuentes reales
-> node scripts/sync-db.js                  # Puebla matches (1.650) y teams (225) reales en Supabase
+> node scripts/sync-db.js                  # Puebla matches (1.672) y teams (241) reales en Supabase
 > node scripts/validate-fixtures.js        # Verifica 0 errores contra las fuentes
 > ```
 
