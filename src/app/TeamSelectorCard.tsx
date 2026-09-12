@@ -124,88 +124,98 @@ export default function TeamSelectorCard() {
   }, {});
 
   return (
-    <div className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border">
-      <span className="block text-4xl sm:text-5xl font-black text-gold/20 mb-2 sm:mb-3 leading-none">
-        1
-      </span>
+    <div className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border h-full flex flex-col justify-between">
+      <div>
+        <span className="block text-4xl sm:text-5xl font-black text-gold/20 mb-2 sm:mb-3 leading-none">
+          1
+        </span>
 
-      {user ? (
-        <>
-          {selectedTeam ? (
-            <div className="flex items-center gap-3 mb-3">
-              <img
-                src={selectedTeam.logo_url}
-                alt={selectedTeam.name}
-                className="w-10 h-10 rounded-full object-contain bg-white p-0.5"
-                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
-              />
-              <div>
-                <p className="text-sm font-bold text-white">{selectedTeam.name}</p>
-                <p className="text-[10px] text-silver">{selectedTeam.league}</p>
+        {user ? (
+          <>
+            {selectedTeam ? (
+              <div className="flex items-center gap-3 mb-3">
+                <img
+                  src={selectedTeam.logo_url}
+                  alt={selectedTeam.name}
+                  className="w-10 h-10 rounded-full object-contain bg-white p-0.5 shadow-sm"
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                />
+                <div>
+                  <p className="text-sm font-bold text-white">{selectedTeam.name}</p>
+                  <p className="text-[10px] text-silver">{selectedTeam.league}</p>
+                </div>
               </div>
+            ) : (
+              <p className="text-sm text-silver mb-3">
+                Elegí tu equipo para participar del concurso
+              </p>
+            )}
+
+            {teamLocked ? (
+              <div className="w-full bg-navy-card border border-border rounded-lg px-3 py-2.5 text-silver text-xs flex items-center gap-2 mb-2">
+                <span className="text-gold font-bold text-[10px]">BLOQUEADO</span>
+                <span className="truncate">Equipo confirmado — no se puede cambiar</span>
+              </div>
+            ) : (
+              <select
+                value={selectedTeam?.id || ""}
+                onChange={(e) => handleSelect(e.target.value)}
+                disabled={loading}
+                className="w-full bg-navy-card border border-border rounded-lg px-3 py-2.5 text-white text-xs focus:outline-none focus:border-gold transition-colors mb-2"
+              >
+                <option value="">Elegí tu equipo</option>
+                {Object.entries(teamsByLeague).map(([league, leagueTeams]) => (
+                  <optgroup key={league} label={league}>
+                    {leagueTeams.map((team) => (
+                      <option key={team.id} value={team.id}>
+                        {team.name}
+                      </option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            )}
+
+            <div className="flex items-center gap-1.5 text-xs text-gold-light bg-gold/10 border border-gold/20 rounded-lg px-2.5 py-2 mb-2 font-medium">
+              <span>No podés cambiar de equipo hasta la próxima temporada</span>
             </div>
-          ) : (
-            <p className="text-sm text-silver mb-3">
-              Elegí tu equipo para participar del concurso
+
+            {error && (
+              <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-2.5 py-1.5 rounded-lg font-medium">{error}</p>
+            )}
+            {success && (
+              <p className="text-xs text-green bg-green/10 border border-green/20 px-2.5 py-1.5 rounded-lg font-medium">¡Equipo confirmado con éxito!</p>
+            )}
+          </>
+        ) : (
+          <>
+            <p className="text-sm leading-relaxed text-silver mb-3">
+              Elegí tu <span className="text-gold font-semibold">equipo oficial</span> para representarte durante toda la temporada del concurso.
             </p>
-          )}
+            <ul className="text-[11px] text-silver/80 space-y-1 mb-4">
+              <li>• Seleccioná tu club favorito de Europa</li>
+              <li>• Disputá todas las ligas y copas clasificadas</li>
+              <li>• Tu equipo queda asignado para la temporada</li>
+            </ul>
+          </>
+        )}
+      </div>
 
-          {teamLocked ? (
-            <div className="w-full bg-navy-card border border-border rounded-lg px-3 py-2.5 text-silver text-xs flex items-center gap-2">
-              <span className="text-gold font-bold text-[10px]">BLOQUEADO</span>
-              <span>Equipo confirmado — no se puede cambiar</span>
-            </div>
-          ) : (
-            <select
-              value={selectedTeam?.id || ""}
-              onChange={(e) => handleSelect(e.target.value)}
-              disabled={loading}
-              className="w-full bg-navy-card border border-border rounded-lg px-3 py-2.5 text-white text-xs focus:outline-none focus:border-gold transition-colors mb-2"
-            >
-              <option value="">Elegí tu equipo</option>
-              {Object.entries(teamsByLeague).map(([league, leagueTeams]) => (
-                <optgroup key={league} label={league}>
-                  {leagueTeams.map((team) => (
-                    <option key={team.id} value={team.id}>
-                      {team.name}
-                    </option>
-                  ))}
-                </optgroup>
-              ))}
-            </select>
-          )}
-
-          <div className="flex items-center gap-1.5 text-xs text-gold-light bg-gold/10 border border-gold/20 rounded-lg px-2.5 py-2 mb-2 font-medium">
-            <span>No podés cambiar de equipo hasta la próxima temporada</span>
-          </div>
-
-          {error && (
-            <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-2.5 py-1.5 rounded-lg font-medium">{error}</p>
-          )}
-          {success && (
-            <p className="text-xs text-green bg-green/10 border border-green/20 px-2.5 py-1.5 rounded-lg font-medium">¡Equipo confirmado con éxito!</p>
-          )}
-        </>
-      ) : (
-        <>
-          <p className="text-sm text-silver mb-4">
-            Elegí tu equipo favorito para participar del concurso
-          </p>
-          <div className="flex gap-2">
-            <Link
-              href="/registro/"
-              className="flex-1 bg-gold text-navy-black font-bold py-2.5 rounded-full text-xs text-center hover:bg-gold-light transition-colors"
-            >
-              Registrarse
-            </Link>
-            <Link
-              href="/login/"
-              className="flex-1 border border-gold text-gold font-bold py-2.5 rounded-full text-xs text-center hover:bg-gold/10 transition-colors"
-            >
-              Iniciar Sesión
-            </Link>
-          </div>
-        </>
+      {!user && (
+        <div className="flex gap-2 mt-auto pt-2">
+          <Link
+            href="/registro/"
+            className="flex-1 bg-gold text-navy-black font-bold py-2.5 rounded-full text-xs text-center hover:bg-gold-light transition-colors"
+          >
+            Registrarse
+          </Link>
+          <Link
+            href="/login/"
+            className="flex-1 border border-gold text-gold font-bold py-2.5 rounded-full text-xs text-center hover:bg-gold/10 transition-colors"
+          >
+            Iniciar Sesión
+          </Link>
+        </div>
       )}
     </div>
   );

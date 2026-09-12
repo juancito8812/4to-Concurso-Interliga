@@ -226,24 +226,28 @@ export default function Home() {
             <TeamSelectorCard />
 
             {/* Tarjeta 2: Cómo pronosticar */}
-            <div className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border flex flex-col">
-              <span className="block text-4xl sm:text-5xl font-black text-gold/20 mb-2 sm:mb-3 leading-none">
-                2
-              </span>
-              <p className="text-sm leading-relaxed text-silver mb-3">
-                Pronosticá los <span className="text-gold font-semibold">partidos de tu equipo</span> en cada jornada, indicando el marcador exacto y goleadores.
-              </p>
-              <ul className="text-[11px] text-silver/80 space-y-1 mb-4 flex-1">
-                <li>• Seleccioná el marcador exacto de cada encuentro</li>
-                <li>• Elegí hasta <span className="text-gold">5 goleadores</span> por partido</li>
-                <li>• Sumá puntos y competí por los primeros puestos</li>
-              </ul>
-              <Link
-                href="/pronosticar/"
-                className="block text-center bg-gold/10 border border-gold/30 text-gold font-bold py-2.5 rounded-full text-xs hover:bg-gold/20 transition-colors"
-              >
-                Ir a Pronosticar →
-              </Link>
+            <div className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border h-full flex flex-col justify-between">
+              <div>
+                <span className="block text-4xl sm:text-5xl font-black text-gold/20 mb-2 sm:mb-3 leading-none">
+                  2
+                </span>
+                <p className="text-sm leading-relaxed text-silver mb-3">
+                  Pronosticá los <span className="text-gold font-semibold">partidos de tu equipo</span> en cada jornada, indicando el marcador exacto y goleadores.
+                </p>
+                <ul className="text-[11px] text-silver/80 space-y-1 mb-4">
+                  <li>• Seleccioná el marcador exacto de cada encuentro</li>
+                  <li>• Elegí hasta <span className="text-gold">5 goleadores</span> por partido</li>
+                  <li>• Sumá puntos y competí por los primeros puestos</li>
+                </ul>
+              </div>
+              <div className="mt-auto pt-2">
+                <Link
+                  href="/pronosticar/"
+                  className="block text-center bg-gold/10 border border-gold/30 text-gold font-bold py-2.5 rounded-full text-xs hover:bg-gold/20 transition-colors"
+                >
+                  Ir a Pronosticar →
+                </Link>
+              </div>
             </div>
 
             {/* Tarjeta 3 */}
@@ -316,9 +320,9 @@ export default function Home() {
           </div>
 
           {/* Podium Layout - Center 1st, Left 2nd, Right 3rd */}
-          <div className="flex flex-col md:flex-row items-end justify-center gap-4 md:gap-6 mt-4 pb-8">
+          <div className="flex flex-col md:flex-row items-stretch md:items-end justify-center gap-4 md:gap-6 mt-4 pb-8">
             {/* 2nd Place - Left */}
-            <div className="relative flex flex-col w-full md:w-[30%] bg-navy-mid/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-slate-400/30 hover:border-slate-300/50 shadow-[0_0_25px_rgba(203,213,225,0.08)] transition-all duration-300 hover:scale-[1.02] md:mt-12">
+            <div className="relative flex flex-col w-full md:w-1/3 bg-navy-mid/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-slate-400/30 hover:border-slate-300/50 shadow-[0_0_25px_rgba(203,213,225,0.08)] transition-all duration-300 hover:scale-[1.02] md:mt-8">
               <div className="flex items-center justify-between gap-2 mb-4">
                 <div>
                   <h3 className="text-lg sm:text-xl font-black uppercase tracking-wider text-slate-300">
@@ -353,7 +357,7 @@ export default function Home() {
             </div>
 
             {/* 1st Place - Center (Elevated) */}
-            <div className="relative flex flex-col w-full md:w-[35%] bg-navy-mid/95 backdrop-blur-sm rounded-2xl p-6 sm:p-7 border-2 border-gold shadow-[0_0_50px_rgba(201,168,76,0.2),0_0_80px_rgba(201,168,76,0.1)] hover:border-gold-light transition-all duration-300 hover:scale-[1.02] z-10 md:-translate-y-6">
+            <div className="relative flex flex-col w-full md:w-1/3 bg-navy-mid/95 backdrop-blur-sm rounded-2xl p-6 sm:p-7 border-2 border-gold shadow-[0_0_50px_rgba(201,168,76,0.2),0_0_80px_rgba(201,168,76,0.1)] hover:border-gold-light transition-all duration-300 hover:scale-[1.02] z-10 md:-translate-y-6">
               {/* Top Badge */}
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 via-gold to-amber-500 text-navy-black font-black text-[11px] uppercase tracking-widest px-5 py-1.5 rounded-full shadow-lg select-none">
                 MÁXIMO GALARDÓN
@@ -393,7 +397,7 @@ export default function Home() {
             </div>
 
             {/* 3rd Place - Right */}
-            <div className="relative flex flex-col w-full md:w-[30%] bg-navy-mid/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-amber-700/30 hover:border-amber-600/50 shadow-[0_0_25px_rgba(180,83,9,0.08)] transition-all duration-300 hover:scale-[1.02] md:mt-16">
+            <div className="relative flex flex-col w-full md:w-1/3 bg-navy-mid/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-amber-700/30 hover:border-amber-600/50 shadow-[0_0_25px_rgba(180,83,9,0.08)] transition-all duration-300 hover:scale-[1.02] md:mt-8">
               <div className="flex items-center justify-between gap-2 mb-4">
                 <div>
                   <h3 className="text-lg sm:text-xl font-black uppercase tracking-wider text-amber-400">
