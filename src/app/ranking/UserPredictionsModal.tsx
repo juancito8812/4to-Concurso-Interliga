@@ -77,7 +77,6 @@ export default function UserPredictionsModal({
     if (!isOpen || !userId) return;
 
     let isMounted = true;
-    setLoading(true);
 
     const loadUserPredictions = async () => {
       try {
