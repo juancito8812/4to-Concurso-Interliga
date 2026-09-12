@@ -234,7 +234,7 @@ Para garantizar un rendimiento ultra-rápido y costo $0:
 2. **Caché en Cliente (60s TTL):**
    - El ranking utiliza caché en memoria para evitar saturar la base de datos con peticiones repetitivas.
 3. **Zero DB Reads en Plantillas:**
-   - 4.749 jugadores pre-cargados en bundle en memoria (`officialPlayers.json`).
+   - 7.097 jugadores pre-cargados en bundle en memoria (`officialPlayers.json`).
 4. **Cron liviano (~2MB/mes de egress):**
    - El sync del calendario (1.650 fixtures) solo corre cuando cambia `officialFixtures.json` (hash md5 en `app_meta`).
    - La persistencia de resultados usa los IDs canónicos directos (sin descargar la tabla `matches` completa en cada corrida).

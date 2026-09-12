@@ -22,7 +22,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - El cierre de pronósticos es a **1 minuto antes del inicio** (`diffMin <= 1`).
 - Se permite **re-editar** pronósticos guardados mientras el partido esté abierto (`diffMin > 1`).
 - Siempre usar `normalizeMatchLeague` y `normalizeTeamName` para asegurar correspondencia con plantillas y torneos.
-- El selector de goleadores muestra la plantilla oficial completa (4.749 jugadores) y despliega el contador `[-] 1 [+]` únicamente al elegir un jugador (máx. 5 goleadores por equipo).
+- El selector de goleadores muestra la plantilla oficial completa (7.097 jugadores) y despliega el contador `[-] 1 [+]` únicamente al elegir un jugador (máx. 5 goleadores por equipo).
 - `<Link>` genera rutas relativas automáticamente; `<img>` usa rutas absolutas desde la raíz (`/logos/...`).
 
 ### Datos dinámicos (fetch desde public/data/)

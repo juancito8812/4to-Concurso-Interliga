@@ -27,7 +27,7 @@ Contexto para agentes de código. Para documentación completa ver [README.md](.
 | `src/lib/scoring.ts` | Cálculo de puntos + matching fonético `arePlayersMatching` |
 | `src/data/officialFixtures.json` | 1.650 partidos reales pre-sincronizados |
 | `src/data/teamAliases.json` | 404 aliases, 241 equipos, 225 teamCups |
-| `src/data/officialPlayers.json` | 4.749 jugadores clasificados por posición |
+| `src/data/officialPlayers.json` | 7.097 jugadores clasificados por posición |
 | `scripts/auto-sync-espn-results.js` | Cron: ESPN → evaluación → Supabase (service role key) |
 | `scripts/verify-logic.js` | 43 checks de lógica de negocio |
 | `supabase/schema.sql` | DDL maestro: 8 tablas, RLS, triggers |

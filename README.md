@@ -40,7 +40,7 @@
 | **Base de Datos & Auth** | [Supabase](https://supabase.com/) — Autenticación + PostgreSQL con RLS y service role |
 | **Datos de Fútbol** | ESPN API pública (tablas, goleadores, en vivo) + football-data.org (fixtures) |
 | **Calendario Oficial** | `public/data/officialFixtures.json` — **1.650 partidos reales** pre-sincronizados (fetch dinámico) |
-| **Plantillas Oficiales** | `public/data/officialPlayers.json` — **4.749 jugadores** clasificados por posición (fetch dinámico) |
+| **Plantillas Oficiales** | `public/data/officialPlayers.json` — **7.097 jugadores** clasificados por posición (fetch dinámico) |
 | **Deploy** | GitHub Actions → GitHub Pages, dominio personalizado (Cloudflare DNS) |
 | **PWA** | Service Worker v2 offline-first con precaching de datos, manifest, icon SVG |
 

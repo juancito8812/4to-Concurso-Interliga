@@ -25,7 +25,7 @@ El panel de administración permitirá al propietario del sitio gestionar todos 
 ├── /page.tsx                    # Dashboard principal con métricas
 ├── /equipos/page.tsx            # Gestión de equipos (225)
 ├── /equipos/[id]/page.tsx       # Edición de equipo
-├── /jugadores/page.tsx          # Gestión de jugadores (4.749)
+├── /jugadores/page.tsx          # Gestión de jugadores (7.097)
 ├── /jugadores/[id]/page.tsx     # Edición de jugador
 ├── /partidos/page.tsx           # Gestión de fixtures (1.650)
 ├── /partidos/[id]/page.tsx      # Edición de partido + resultado
