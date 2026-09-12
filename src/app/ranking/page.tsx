@@ -10,6 +10,7 @@ import officialEvaluatedMatches from "@/data/officialEvaluatedMatches.json";
 import officialEvaluatedPredictions from "@/data/officialEvaluatedPredictions.json";
 import { loadData } from "@/lib/dataLoader";
 import { fetchLiveFinishedMatches } from "@/lib/espnResultsFetcher";
+import UserPredictionsModal from "./UserPredictionsModal";
 
 interface RankingEntry {
   user_id: string;
@@ -71,6 +72,7 @@ export default function RankingPage() {
   const [activeTab, setActiveTab] = useState<"general" | "plenos" | "efectividad">("general");
   const [searchTerm, setSearchTerm] = useState("");
   const [showRulesModal, setShowRulesModal] = useState(false);
+  const [selectedUserForModal, setSelectedUserForModal] = useState<RankingEntry | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -86,21 +88,34 @@ export default function RankingPage() {
       }
 
       try {
-        const officialFixtures = await loadData<Array<{
-          id: string;
-          home_team: string;
-          away_team: string;
-        }>>("/data/officialFixtures.json");
+        // Parallel fetching across all sources to avoid slow waterfalls
+        const [
+          officialFixtures,
+          profilesRes,
+          teamsRes,
+          matchesRes,
+          predsRes,
+          scorersRes,
+          liveFinished,
+        ] = await Promise.all([
+          loadData<Array<{
+            id: string;
+            home_team: string;
+            away_team: string;
+          }>>("/data/officialFixtures.json").catch(() => []),
+          supabase.from("profiles").select("user_id, display_name, team_id"),
+          supabase.from("teams").select("id, name, logo_url"),
+          supabase.from("matches").select("id, result_home, result_away").not("result_home", "is", null),
+          supabase.from("predictions").select("id, user_id, match_id, home_score, away_score, points"),
+          supabase.from("prediction_scorers").select("prediction_id, player_name, goals, team"),
+          fetchLiveFinishedMatches().catch(() => []),
+        ]);
 
-        // 1. Fetch profiles from Supabase
-        const { data: profilesData } = await supabase
-          .from("profiles")
-          .select("user_id, display_name, team_id");
-
-        // 2. Fetch teams
-        const { data: teamsData } = await supabase
-          .from("teams")
-          .select("id, name, logo_url");
+        const profilesData = profilesRes?.data || null;
+        const teamsData = teamsRes?.data || null;
+        const matchesData = matchesRes?.data || null;
+        const predsData = predsRes?.data || null;
+        const scorersData = scorersRes?.data || null;
 
         const teamsMap: Record<string, { name: string; logo_url: string }> = {};
         if (teamsData) {
@@ -121,7 +136,7 @@ export default function RankingPage() {
           });
         }
 
-        // 3. Fetch evaluated matches (from bundle and Supabase)
+        // Load matches map
         const matchesMap: Record<string, MatchRow> = {};
         
         // 1. Load official evaluated fixtures first
@@ -136,9 +151,8 @@ export default function RankingPage() {
           };
         });
 
-        // 2. Fetch live finished matches from ESPN API
-        try {
-          const liveFinished = await fetchLiveFinishedMatches();
+        // 2. Add live finished matches from ESPN API
+        if (Array.isArray(liveFinished)) {
           liveFinished.forEach((lm) => {
             matchesMap[lm.id] = {
               id: lm.id,
@@ -149,14 +163,7 @@ export default function RankingPage() {
               scorers: lm.scorers,
             };
           });
-        } catch (e) {
-          console.warn("Could not fetch live finished matches from ESPN:", e);
         }
-
-        const { data: matchesData } = await supabase
-          .from("matches")
-          .select("id, result_home, result_away")
-          .not("result_home", "is", null);
 
         if (matchesData) {
           (matchesData as MatchRow[]).forEach((m) => {
@@ -185,10 +192,6 @@ export default function RankingPage() {
           });
         });
 
-        const { data: predsData } = await supabase
-          .from("predictions")
-          .select("id, user_id, match_id, home_score, away_score, points");
-
         if (predsData) {
           (predsData as PredictionRow[]).forEach((p) => {
             if (!allPredictions.some((ap) => ap.user_id === p.user_id && ap.match_id === p.match_id)) {
@@ -206,10 +209,6 @@ export default function RankingPage() {
             scorersMap[p.id] = p.scorers;
           }
         });
-
-        const { data: scorersData } = await supabase
-          .from("prediction_scorers")
-          .select("prediction_id, player_name, goals, team");
 
         if (scorersData) {
           (scorersData as ScorerRow[]).forEach((s) => {
@@ -270,7 +269,7 @@ export default function RankingPage() {
             let match = matchesMap[p.match_id];
 
             // Fallback: join by fixture team names when the prediction id is orphaned
-            if (!match) {
+            if (!match && Array.isArray(officialFixtures)) {
               const fixture = officialFixtures.find(
                 (f) => matchIdToUuid(f.id) === p.match_id || String(f.id) === p.match_id
               );
@@ -381,6 +380,10 @@ export default function RankingPage() {
           setRankings([]);
           setLoading(false);
         }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
@@ -389,7 +392,7 @@ export default function RankingPage() {
     return () => {
       isMounted = false;
     };
-  }, [user]);
+  }, [user, displayName]);
 
   // Filtered rankings according to search and active tab
   const displayedRankings = useMemo(() => {
@@ -470,7 +473,7 @@ export default function RankingPage() {
             </div>
             <button
               onClick={() => setShowRulesModal(!showRulesModal)}
-              className="bg-navy-mid/90 border border-border px-3.5 py-2 rounded-xl text-center hover:bg-navy-mid transition-colors"
+              className="bg-navy-mid/90 border border-border px-3.5 py-2 rounded-xl text-center hover:bg-navy-mid transition-colors cursor-pointer"
             >
               <span className="text-[10px] text-silver block uppercase tracking-wider font-semibold">Info</span>
               <strong className="text-white text-base sm:text-lg font-bold">Reglas</strong>
@@ -487,7 +490,7 @@ export default function RankingPage() {
               </h3>
               <button
                 onClick={() => setShowRulesModal(false)}
-                className="text-silver hover:text-white text-sm font-bold p-1"
+                className="text-silver hover:text-white text-sm font-bold p-1 cursor-pointer"
               >
                 ✕
               </button>
@@ -515,8 +518,8 @@ export default function RankingPage() {
               </div>
               <div className="bg-navy-dark/70 border border-border/60 p-3 rounded-xl">
                 <span className="text-gold font-bold block text-sm mb-1">+2 PUNTOS</span>
-                <p className="text-white font-semibold mb-0.5">Goles Exactos</p>
-                <p className="text-silver text-[11px]">Acertar la cantidad de goles del autor</p>
+                <p className="text-white font-semibold mb-0.5">Cantidad Exacta</p>
+                <p className="text-silver text-[11px]">Acertar el total de goleadores del partido</p>
               </div>
             </div>
           </div>
@@ -558,7 +561,11 @@ export default function RankingPage() {
                   
                   {/* 2nd Place (Silver) */}
                   {top2 && (
-                    <div className="order-2 md:order-1 bg-gradient-to-b from-navy-mid to-navy-dark border border-slate-400/40 rounded-2xl p-5 text-center shadow-lg relative flex flex-col items-center group hover:border-slate-300 transition-all">
+                    <div
+                      onClick={() => setSelectedUserForModal(top2)}
+                      className="order-2 md:order-1 bg-gradient-to-b from-navy-mid to-navy-dark border border-slate-400/40 rounded-2xl p-5 text-center shadow-lg relative flex flex-col items-center group hover:border-slate-300 transition-all cursor-pointer hover:scale-[1.02]"
+                      title="Ver pronósticos de este participante"
+                    >
                       <div className="absolute -top-3.5 bg-slate-300 text-navy-black font-extrabold text-[11px] px-3 py-0.5 rounded-full shadow">
                         2° PUESTO
                       </div>
@@ -574,15 +581,15 @@ export default function RankingPage() {
                             className="w-12 h-12 sm:w-14 sm:h-14 object-contain"
                           />
                         ) : (
-                          <span className="text-2xl"></span>
+                          <span className="text-2xl">⚽</span>
                         )}
                       </div>
-                      <h4 className="text-white font-bold text-base sm:text-lg truncate max-w-full mb-0.5">
+                      <h4 className="text-white font-bold text-base sm:text-lg truncate max-w-full mb-0.5 group-hover:text-gold transition-colors">
                         {top2.display_name}
                       </h4>
                       <p className="text-silver text-xs truncate max-w-full mb-3">{top2.team_name || "Interliga FC"}</p>
                       
-                      <div className="w-full bg-navy-card/80 border border-border/60 rounded-xl p-2.5 flex items-center justify-around text-xs">
+                      <div className="w-full bg-navy-card/80 border border-border/60 rounded-xl p-2.5 flex items-center justify-around text-xs mb-2">
                         <div>
                           <span className="text-silver block text-[10px]">Puntos</span>
                           <strong className="text-white font-bold font-mono text-sm sm:text-base">{top2.total_points}</strong>
@@ -593,11 +600,19 @@ export default function RankingPage() {
                           <span className="text-gold font-bold font-mono text-sm sm:text-base">{top2.exact_scores}</span>
                         </div>
                       </div>
+
+                      <span className="text-[11px] text-silver/70 group-hover:text-gold font-semibold transition-colors">
+                        Ver pronósticos y puntos →
+                      </span>
                     </div>
                   )}
 
                   {/* 1st Place (Gold Champion - Elevated Center) */}
-                  <div className="order-1 md:order-2 bg-gradient-to-b from-navy-card via-navy-mid to-navy-dark border-2 border-gold rounded-3xl p-6 text-center shadow-[0_0_40px_rgba(201,168,76,0.25)] relative flex flex-col items-center transform md:-translate-y-2">
+                  <div
+                    onClick={() => setSelectedUserForModal(top1)}
+                    className="order-1 md:order-2 bg-gradient-to-b from-navy-card via-navy-mid to-navy-dark border-2 border-gold rounded-3xl p-6 text-center shadow-[0_0_40px_rgba(201,168,76,0.25)] relative flex flex-col items-center transform md:-translate-y-2 cursor-pointer hover:scale-[1.03] transition-all group"
+                    title="Ver pronósticos de este participante"
+                  >
                     <div className="absolute -top-5 bg-gradient-to-r from-gold via-amber-300 to-gold text-navy-black font-black text-xs sm:text-sm px-4 py-1 rounded-full shadow-lg flex items-center gap-1.5 tracking-wide">
                       1° GRAN LÍDER
                     </div>
@@ -616,14 +631,14 @@ export default function RankingPage() {
                         <span className="text-3xl">🏆</span>
                       )}
                     </div>
-                    <h3 className="text-white font-black text-lg sm:text-xl truncate max-w-full mb-0.5">
+                    <h3 className="text-white font-black text-lg sm:text-xl truncate max-w-full mb-0.5 group-hover:text-gold transition-colors">
                       {top1.display_name}
                     </h3>
                     <p className="text-gold-light text-xs sm:text-sm font-semibold truncate max-w-full mb-3.5">
                       {top1.team_name || "Interliga FC"}
                     </p>
 
-                    <div className="w-full bg-navy-dark/90 border border-gold/40 rounded-2xl p-3 flex items-center justify-around text-xs shadow-inner">
+                    <div className="w-full bg-navy-dark/90 border border-gold/40 rounded-2xl p-3 flex items-center justify-around text-xs shadow-inner mb-2.5">
                       <div>
                         <span className="text-silver block text-[10px] uppercase font-bold">Puntos Totales</span>
                         <strong className="text-gold font-black font-mono text-xl sm:text-2xl">{top1.total_points}</strong>
@@ -634,11 +649,19 @@ export default function RankingPage() {
                         <strong className="text-amber-300 font-black font-mono text-xl sm:text-2xl">{top1.exact_scores}</strong>
                       </div>
                     </div>
+
+                    <span className="text-xs text-gold font-bold group-hover:text-gold-light transition-colors">
+                      Ver pronósticos y puntos →
+                    </span>
                   </div>
 
                   {/* 3rd Place (Bronze) */}
                   {top3 && (
-                    <div className="order-3 bg-gradient-to-b from-navy-mid to-navy-dark border border-amber-700/50 rounded-2xl p-5 text-center shadow-lg relative flex flex-col items-center group hover:border-amber-600 transition-all">
+                    <div
+                      onClick={() => setSelectedUserForModal(top3)}
+                      className="order-3 bg-gradient-to-b from-navy-mid to-navy-dark border border-amber-700/50 rounded-2xl p-5 text-center shadow-lg relative flex flex-col items-center group hover:border-amber-600 transition-all cursor-pointer hover:scale-[1.02]"
+                      title="Ver pronósticos de este participante"
+                    >
                       <div className="absolute -top-3.5 bg-amber-700 text-white font-extrabold text-[11px] px-3 py-0.5 rounded-full shadow">
                         3° PUESTO
                       </div>
@@ -654,15 +677,15 @@ export default function RankingPage() {
                             className="w-12 h-12 sm:w-14 sm:h-14 object-contain"
                           />
                         ) : (
-                          <span className="text-2xl"></span>
+                          <span className="text-2xl">⚽</span>
                         )}
                       </div>
-                      <h4 className="text-white font-bold text-base sm:text-lg truncate max-w-full mb-0.5">
+                      <h4 className="text-white font-bold text-base sm:text-lg truncate max-w-full mb-0.5 group-hover:text-gold transition-colors">
                         {top3.display_name}
                       </h4>
                       <p className="text-silver text-xs truncate max-w-full mb-3">{top3.team_name || "Interliga FC"}</p>
 
-                      <div className="w-full bg-navy-card/80 border border-border/60 rounded-xl p-2.5 flex items-center justify-around text-xs">
+                      <div className="w-full bg-navy-card/80 border border-border/60 rounded-xl p-2.5 flex items-center justify-around text-xs mb-2">
                         <div>
                           <span className="text-silver block text-[10px]">Puntos</span>
                           <strong className="text-white font-bold font-mono text-sm sm:text-base">{top3.total_points}</strong>
@@ -670,9 +693,13 @@ export default function RankingPage() {
                         <div className="w-px h-6 bg-border/60" />
                         <div>
                           <span className="text-silver block text-[10px]">Plenos</span>
-                          <strong className="text-gold font-bold font-mono text-sm sm:text-base">{top3.exact_scores}</strong>
+                          <span className="text-gold font-bold font-mono text-sm sm:text-base">{top3.exact_scores}</span>
                         </div>
                       </div>
+
+                      <span className="text-[11px] text-silver/70 group-hover:text-gold font-semibold transition-colors">
+                        Ver pronósticos y puntos →
+                      </span>
                     </div>
                   )}
 
@@ -682,7 +709,11 @@ export default function RankingPage() {
 
             {/* Current User Status Banner (Personal Position Card) */}
             {currentUserEntry && (
-              <div className="bg-gradient-to-r from-navy-card via-navy-mid to-navy-card border-2 border-gold/50 rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div
+                onClick={() => setSelectedUserForModal(currentUserEntry)}
+                className="bg-gradient-to-r from-navy-card via-navy-mid to-navy-card border-2 border-gold/50 hover:border-gold rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 cursor-pointer group transition-all"
+                title="Toca para ver tus pronósticos y desglose de puntos"
+              >
                 <div className="flex items-center gap-3.5 w-full sm:w-auto">
                   <div className="w-12 h-12 rounded-full bg-white border-2 border-gold p-1 flex items-center justify-center shrink-0 shadow">
                     {currentUserEntry.team_logo ? (
@@ -696,12 +727,12 @@ export default function RankingPage() {
                         className="w-9 h-9 object-contain"
                       />
                     ) : (
-                      <span className="text-xl"></span>
+                      <span className="text-xl">⚽</span>
                     )}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-white font-bold text-base">{currentUserEntry.display_name}</span>
+                      <span className="text-white font-bold text-base group-hover:text-gold transition-colors">{currentUserEntry.display_name}</span>
                       <span className="bg-gold text-navy-black font-extrabold text-[10px] px-2 py-0.5 rounded-full">
                         TU PERFIL
                       </span>
@@ -725,12 +756,9 @@ export default function RankingPage() {
                     <span className="text-silver text-[10px] uppercase font-bold block">Plenos</span>
                     <strong className="text-amber-300 text-lg sm:text-xl font-black font-mono">{currentUserEntry.exact_scores}</strong>
                   </div>
-                  <Link
-                    href="/pronosticar/"
-                    className="bg-gold hover:bg-gold-light text-navy-black font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-md shrink-0"
-                  >
-                    Pronosticar →
-                  </Link>
+                  <span className="bg-gold/15 border border-gold/30 group-hover:bg-gold group-hover:text-navy-black text-gold font-bold text-xs px-3.5 py-2 rounded-xl transition-all shadow-md shrink-0 flex items-center gap-1.5">
+                    Ver Pronósticos 👁️
+                  </span>
                 </div>
               </div>
             )}
@@ -742,7 +770,7 @@ export default function RankingPage() {
               <div className="flex items-center gap-1 w-full sm:w-auto bg-navy-dark p-1 rounded-xl border border-border/50">
                 <button
                   onClick={() => setActiveTab("general")}
-                  className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     activeTab === "general"
                       ? "bg-gold text-navy-black shadow"
                       : "text-silver hover:text-white"
@@ -752,7 +780,7 @@ export default function RankingPage() {
                 </button>
                 <button
                   onClick={() => setActiveTab("plenos")}
-                  className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     activeTab === "plenos"
                       ? "bg-gold text-navy-black shadow"
                       : "text-silver hover:text-white"
@@ -762,7 +790,7 @@ export default function RankingPage() {
                 </button>
                 <button
                   onClick={() => setActiveTab("efectividad")}
-                  className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     activeTab === "efectividad"
                       ? "bg-gold text-navy-black shadow"
                       : "text-silver hover:text-white"
@@ -781,11 +809,11 @@ export default function RankingPage() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full bg-navy-dark border border-border/70 rounded-xl px-3.5 py-1.5 text-xs text-white placeholder-silver/60 focus:outline-none focus:border-gold transition-colors pl-8"
                 />
-                <span className="absolute left-2.5 top-2 text-xs text-silver"></span>
+                <span className="absolute left-2.5 top-2 text-xs text-silver">🔍</span>
                 {searchTerm && (
                   <button
                     onClick={() => setSearchTerm("")}
-                    className="absolute right-2.5 top-1.5 text-xs text-silver hover:text-white"
+                    className="absolute right-2.5 top-1.5 text-xs text-silver hover:text-white cursor-pointer"
                   >
                     ✕
                   </button>
@@ -816,13 +844,15 @@ export default function RankingPage() {
                       return (
                         <tr
                           key={r.user_id}
-                          className={`transition-colors ${
+                          onClick={() => setSelectedUserForModal(r)}
+                          className={`transition-colors cursor-pointer group ${
                             isCurrentUser
                               ? "bg-gold/10 hover:bg-gold/15 border-l-4 border-l-gold"
                               : displayRank <= 3
-                              ? "hover:bg-navy-card/70 bg-navy-mid/40"
-                              : "hover:bg-navy-card/50"
+                              ? "hover:bg-navy-card/90 bg-navy-mid/40"
+                              : "hover:bg-navy-card/80"
                           }`}
+                          title="Haz clic para ver los pronósticos y la repartición de puntos"
                         >
                           {/* Puesto */}
                           <td className="px-2 sm:px-4 py-3 sm:py-3.5 text-center">
@@ -856,12 +886,12 @@ export default function RankingPage() {
                                 />
                               ) : (
                                 <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-navy-card border border-border flex items-center justify-center text-xs text-silver shrink-0">
-                                  
+                                  ⚽
                                 </div>
                               )}
                               <div className="min-w-0 flex-1">
                                 <div className="flex items-center gap-1.5">
-                                  <span className="text-white text-xs sm:text-sm font-bold truncate block">
+                                  <span className="text-white text-xs sm:text-sm font-bold truncate block group-hover:text-gold transition-colors">
                                     {r.display_name}
                                   </span>
                                   {isCurrentUser && (
@@ -870,7 +900,7 @@ export default function RankingPage() {
                                     </span>
                                   )}
                                   {displayRank === 1 && (
-                                    <span className="text-[10px] text-gold shrink-0"></span>
+                                    <span className="text-[10px] text-gold shrink-0">👑</span>
                                   )}
                                 </div>
                                 {r.team_name && (
@@ -882,7 +912,7 @@ export default function RankingPage() {
                                 <div className="flex sm:hidden items-center gap-2 mt-0.5 text-[10px] text-silver/70 font-mono">
                                   <span>{r.predictions_count} PJ</span>
                                   {r.exact_scores > 0 && (
-                                    <span className="text-gold font-semibold">{r.exact_scores}</span>
+                                    <span className="text-gold font-semibold">{r.exact_scores} 🎯</span>
                                   )}
                                 </div>
                               </div>
@@ -907,12 +937,12 @@ export default function RankingPage() {
 
                           {/* Signos */}
                           <td className="hidden sm:table-cell px-3 sm:px-4 py-3.5 text-center text-silver text-xs font-mono">
-                            {r.correct_signs > 0 ? `${r.correct_signs} ` : "—"}
+                            {r.correct_signs > 0 ? `${r.correct_signs}` : "—"}
                           </td>
 
                           {/* Goleadores */}
                           <td className="hidden md:table-cell px-3 sm:px-4 py-3.5 text-center text-silver text-xs font-mono">
-                            {r.scorer_hits > 0 ? `${r.scorer_hits} ` : "—"}
+                            {r.scorer_hits > 0 ? `${r.scorer_hits}` : "—"}
                           </td>
 
                           {/* Puntos Totales */}
@@ -946,7 +976,7 @@ export default function RankingPage() {
                   href="/pronosticar/"
                   className="bg-gold hover:bg-gold-light text-navy-black font-extrabold px-6 py-3 rounded-full text-xs sm:text-sm transition-all shadow-lg hover:scale-105 flex items-center gap-2"
                 >
-                  <span></span> Pronosticar Ahora
+                  <span>⚽</span> Pronosticar Ahora
                 </Link>
               </div>
             </div>
@@ -954,6 +984,19 @@ export default function RankingPage() {
         )}
 
       </div>
+
+      {/* User Predictions & Points Breakdown Modal */}
+      <UserPredictionsModal
+        isOpen={!!selectedUserForModal}
+        onClose={() => setSelectedUserForModal(null)}
+        userId={selectedUserForModal?.user_id || null}
+        displayName={selectedUserForModal?.display_name}
+        teamName={selectedUserForModal?.team_name}
+        teamLogo={selectedUserForModal?.team_logo}
+        rank={selectedUserForModal?.rank}
+        totalPoints={selectedUserForModal?.total_points}
+        exactScores={selectedUserForModal?.exact_scores}
+      />
     </div>
   );
 }
