@@ -113,6 +113,10 @@ function datesParam() {
 // Solo sincroniza cuando el calendario cambió (hash en app_meta) para no re-escribir
 // 1.842 filas en cada corrida del cron (~250KB x 12 corridas/día en el plan Free).
 async function syncFixturesToSupabase(officialFixtures) {
+  if (!SERVICE_KEY) {
+    console.log("ℹ️  syncFixturesToSupabase saltado (no hay SUPABASE_SERVICE_ROLE_KEY)");
+    return;
+  }
   try {
     const crypto = require("crypto");
     const hash = crypto.createHash("md5").update(JSON.stringify(officialFixtures)).digest("hex");
@@ -151,6 +155,10 @@ async function syncFixturesToSupabase(officialFixtures) {
 // Las filas de matches ya usan los ids canónicos de los fixtures: se actualizan por
 // id sin descargar la tabla completa (ahorra ~280KB por corrida).
 async function persistToSupabase(officialMatches, officialPreds) {
+  if (!SERVICE_KEY) {
+    console.log("ℹ️  persistToSupabase saltado (no hay SUPABASE_SERVICE_ROLE_KEY)");
+    return;
+  }
   try {
     // 1. Resultados de partidos: solo filas que aún no tienen resultado (PATCH por fila)
     const withResults = (officialMatches || []).filter(

@@ -173,6 +173,13 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Matheus Cunha (+1 pt)",
+      "Goleador acertado: Bruno Fernandes (+1 pt)"
     ]
   },
   {
@@ -215,7 +222,11 @@
     "match_id": "00000000-0000-4000-8000-000017f4be1f",
     "home_score": 0,
     "away_score": 3,
-    "scorers": []
+    "scorers": [],
+    "points": 3,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)"
+    ]
   },
   {
     "id": "e9aba70d-9a5e-4717-8613-0c7cf100bd34",
@@ -272,6 +283,12 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Martin Ødegaard (+1 pt)",
+      "Cantidad exacta de goleadores: 3 (+2 pts)"
     ]
   },
   {
@@ -381,15 +398,20 @@
         "team": "home"
       },
       {
-        "player_name": "Kasper Högh",
+        "player_name": "Andreas Helmersen",
         "goals": 1,
         "team": "away"
       },
       {
-        "player_name": "Patrick Berg",
+        "player_name": "Fredrik Bjørkan",
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Harry Kane (+1 pt)"
     ]
   },
   {
@@ -523,12 +545,12 @@
     "away_score": 2,
     "scorers": [
       {
-        "player_name": "Francisco Conceição",
+        "player_name": "Randal Kolo Muani",
         "goals": 1,
         "team": "home"
       },
       {
-        "player_name": "Samuel Chukwueze",
+        "player_name": "Alexis Saelemaekers",
         "goals": 1,
         "team": "away"
       },
@@ -537,6 +559,10 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 1,
+    "pointsDetails": [
+      "Diferencia de 1 gol (+1 pt)"
     ]
   },
   {
@@ -561,6 +587,343 @@
         "player_name": "Harry Kane",
         "goals": 1,
         "team": "home"
+      }
+    ]
+  },
+  {
+    "id": "0895c920-a5fa-432e-8dc9-bc47c838789b",
+    "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
+    "display_name": "Asere1995",
+    "match_id": "00000000-0000-4000-8000-000017f4be20",
+    "home_score": 4,
+    "away_score": 1,
+    "scorers": [
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Anis Hadj Moussa",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 9,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Raphinha (+1 pt)",
+      "Goleador acertado: Lamine Yamal (+1 pt)",
+      "Goleador acertado: Raphinha (+1 pt)",
+      "Cantidad exacta de goleadores: 5 (+2 pts)"
+    ]
+  },
+  {
+    "id": "c82a0004-de7f-4287-873e-7b13e4775813",
+    "user_id": "16da3693-64d1-4616-9020-f93fc8d54cc9",
+    "display_name": "El Toro",
+    "match_id": "00000000-0000-4000-8000-000017f4be20",
+    "home_score": 3,
+    "away_score": 1,
+    "scorers": [
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Raphinha (+1 pt)"
+    ]
+  },
+  {
+    "id": "901bd77a-0ca4-4f35-a463-539c16a30604",
+    "user_id": "266e7258-c7f9-4159-9fa2-3281989af465",
+    "display_name": "Raudel",
+    "match_id": "00000000-0000-4000-8000-000017f4be3b",
+    "home_score": 2,
+    "away_score": 1,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Carlos Espí",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Marcus Thuram-Ulien",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 8,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Marcador exacto (+2 pts)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Cantidad exacta de goleadores: 3 (+2 pts)"
+    ]
+  },
+  {
+    "id": "c3c3fdbe-4bf3-4b5d-b5e5-7336e1cfaf70",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000017f4be3b",
+    "home_score": 2,
+    "away_score": 1,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Vinicius Junior",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Marcador exacto (+2 pts)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)"
+    ]
+  },
+  {
+    "id": "9e9d2597-2049-4ec3-961e-5f6643b9b3b9",
+    "user_id": "266b309a-4eb0-474a-85db-aca42e055913",
+    "display_name": "JR_DT",
+    "match_id": "00000000-0000-4000-8000-000000088dc7",
+    "home_score": 0,
+    "away_score": 2,
+    "scorers": [
+      {
+        "player_name": "Bryan Mbeumo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Bruno Fernandes",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "6f8a4f81-6e5d-4850-b571-a6dd94ec0fe1",
+    "user_id": "fd25cd1f-d2c2-47ce-a14c-dedcd1bab40b",
+    "display_name": "yormantapia37@gmail.com",
+    "match_id": "00000000-0000-4000-8000-000000088dc1",
+    "home_score": 0,
+    "away_score": 3,
+    "scorers": [],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)"
+    ]
+  },
+  {
+    "id": "8717f2db-ad27-4238-bf11-ef62a920f1ea",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "ARS",
+    "match_id": "00000000-0000-4000-8000-000000088dd1",
+    "home_score": 2,
+    "away_score": 0,
+    "scorers": []
+  },
+  {
+    "id": "095bc25d-a804-4720-97b3-1d442113ec65",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "ARS",
+    "match_id": "00000000-0000-4000-8000-000000088dc1",
+    "home_score": 0,
+    "away_score": 2,
+    "scorers": [
+      {
+        "player_name": "Bukayo Saka",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Marcador exacto (+2 pts)",
+      "Goleador acertado: Bukayo Saka (+1 pt)"
+    ]
+  },
+  {
+    "id": "fd038ac2-6d50-4042-bc9a-4a0a6495d858",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "ARS",
+    "match_id": "00000000-0000-4000-8000-000000088dca",
+    "home_score": 2,
+    "away_score": 4,
+    "scorers": [
+      {
+        "player_name": "Bukayo Saka",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Bruno Guimarães",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Kai Havertz",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "922d39ce-4ca3-480c-b5bd-17bd5dfc2c80",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000000089dc5",
+    "home_score": 4,
+    "away_score": 1,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Vinicius Junior",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "points": 7,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Marcador exacto (+2 pts)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Goleador acertado: Jude Bellingham (+1 pt)"
+    ]
+  },
+  {
+    "id": "6f49fc0c-65e1-4591-8071-41f201a9fd59",
+    "user_id": "31acfd09-439a-41ae-9552-489e3c69a7db",
+    "display_name": "Milanarg",
+    "match_id": "00000000-0000-4000-8000-000000088608",
+    "home_score": 0,
+    "away_score": 2,
+    "scorers": [
+      {
+        "player_name": "Alphadjo Cisse",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Gonçalo Ramos",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 0,
+    "pointsDetails": []
+  },
+  {
+    "id": "d9521152-18cc-4cd3-8584-7bb63a1cb572",
+    "user_id": "266e7258-c7f9-4159-9fa2-3281989af465",
+    "display_name": "Raudel",
+    "match_id": "00000000-0000-4000-8000-000000089dc5",
+    "home_score": 4,
+    "away_score": 1,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 3,
+        "team": "home"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Álvaro García",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 7,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Marcador exacto (+2 pts)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Goleador acertado: Jude Bellingham (+1 pt)"
+    ]
+  },
+  {
+    "id": "59660154-313f-4153-9034-c912306d9f23",
+    "user_id": "a595517a-1160-493a-b24e-e14bba1956d4",
+    "display_name": "Noel Cordero Velázquez",
+    "match_id": "00000000-0000-4000-8000-000000089dc3",
+    "home_score": 0,
+    "away_score": 4,
+    "scorers": [
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "away"
       }
     ]
   }
