@@ -81,13 +81,15 @@ export default function UserPredictionsModal({
 
     const loadUserPredictions = async () => {
       try {
-        // Parallel data fetch to avoid waterfalls
+        // Parallel data fetch across all available sources
         const [
           officialFixtures,
           liveFinished,
           dbMatchesRes,
           userSurvivors,
           dbPredsRes,
+          dynEvalMatches,
+          dynEvalPreds,
         ] = await Promise.all([
           loadData<Array<{
             id: string;
@@ -107,26 +109,50 @@ export default function UserPredictionsModal({
             .from("predictions")
             .select("id, user_id, match_id, home_score, away_score, points")
             .eq("user_id", userId),
+          loadData<Array<{
+            id: string;
+            home_team?: string;
+            away_team?: string;
+            match_date?: string;
+            league?: string;
+            result_home: number;
+            result_away: number;
+            scorers?: RealScorer[];
+          }>>("/data/officialEvaluatedMatches.json").catch(() => []),
+          loadData<Array<{
+            id: string;
+            user_id: string;
+            match_id: string;
+            home_score: number;
+            away_score: number;
+            points?: number | null;
+            pointsDetails?: string[];
+            scorers?: PredictedScorer[];
+          }>>("/data/officialEvaluatedPredictions.json").catch(() => []),
         ]);
 
         if (isMounted && userSurvivors) {
           setSurvivors(userSurvivors);
         }
 
-        // 1. Build matches map
+        // 1. Build matches map combining bundled + dynamic JSON + live ESPN + Supabase
         const matchesMap: Record<string, MatchItem> = {};
 
-        // Official evaluated matches
-        (officialEvaluatedMatches as Array<{
-          id: string;
-          home_team?: string;
-          away_team?: string;
-          match_date?: string;
-          league?: string;
-          result_home: number;
-          result_away: number;
-          scorers?: RealScorer[];
-        }>).forEach((m) => {
+        const allEvalMatches = [
+          ...(officialEvaluatedMatches as Array<{
+            id: string;
+            home_team?: string;
+            away_team?: string;
+            match_date?: string;
+            league?: string;
+            result_home: number;
+            result_away: number;
+            scorers?: RealScorer[];
+          }>),
+          ...(Array.isArray(dynEvalMatches) ? dynEvalMatches : []),
+        ];
+
+        allEvalMatches.forEach((m) => {
           matchesMap[m.id] = {
             id: m.id,
             home_team: m.home_team ? normalizeTeamName(m.home_team) : "",
@@ -139,7 +165,7 @@ export default function UserPredictionsModal({
           };
         });
 
-        // Add live finished matches
+        // Add live finished matches from ESPN
         if (Array.isArray(liveFinished)) {
           liveFinished.forEach((lm) => {
             matchesMap[lm.id] = {
@@ -181,30 +207,62 @@ export default function UserPredictionsModal({
           home_score: number;
           away_score: number;
           points?: number | null;
+          pointsDetails?: string[];
         }> = [];
 
-        // Official evaluated predictions for this user
-        (officialEvaluatedPredictions as Array<{
-          id: string;
-          user_id: string;
-          match_id: string;
-          home_score: number;
-          away_score: number;
-          points?: number | null;
-        }>).forEach((op) => {
+        const allEvalPreds = [
+          ...(officialEvaluatedPredictions as Array<{
+            id: string;
+            user_id: string;
+            match_id: string;
+            home_score: number;
+            away_score: number;
+            points?: number | null;
+            pointsDetails?: string[];
+            scorers?: PredictedScorer[];
+          }>),
+          ...(Array.isArray(dynEvalPreds) ? dynEvalPreds : []),
+        ];
+
+        allEvalPreds.forEach((op) => {
           if (op.user_id === userId) {
-            userPreds.push(op);
+            const exists = userPreds.some(
+              (up) => up.match_id === op.match_id || up.id === op.id
+            );
+            if (!exists) {
+              userPreds.push({
+                id: op.id,
+                user_id: op.user_id,
+                match_id: op.match_id,
+                home_score: op.home_score,
+                away_score: op.away_score,
+                points: op.points ?? null,
+                pointsDetails: op.pointsDetails || [],
+              });
+            }
           }
         });
 
         // Supabase predictions for this user
         if (dbPredsRes?.data) {
           dbPredsRes.data.forEach((p) => {
-            const exists = userPreds.some(
+            const existingIdx = userPreds.findIndex(
               (up) => up.match_id === p.match_id || up.id === p.id
             );
-            if (!exists) {
-              userPreds.push(p);
+            if (existingIdx >= 0) {
+              if (p.points !== null && p.points !== undefined) {
+                userPreds[existingIdx].points = p.points;
+              }
+            } else {
+              userPreds.push({
+                id: p.id,
+                user_id: p.user_id,
+                match_id: p.match_id,
+                home_score: p.home_score,
+                away_score: p.away_score,
+                points: p.points ?? null,
+                pointsDetails: [],
+              });
             }
           });
         }
@@ -213,10 +271,7 @@ export default function UserPredictionsModal({
         const predIds = userPreds.map((p) => p.id);
         const scorersMap: Record<string, PredictedScorer[]> = {};
 
-        (officialEvaluatedPredictions as Array<{
-          id: string;
-          scorers?: PredictedScorer[];
-        }>).forEach((op) => {
+        allEvalPreds.forEach((op) => {
           if (op.scorers && predIds.includes(op.id)) {
             scorersMap[op.id] = op.scorers;
           }
@@ -262,7 +317,7 @@ export default function UserPredictionsModal({
             }
           }
 
-          // Fallback: lookup in official fixtures and join with evaluated matches by team names
+          // Fallback 1: lookup in official fixtures
           if (!match && Array.isArray(officialFixtures)) {
             const fixture = officialFixtures.find(
               (f) =>
@@ -271,44 +326,62 @@ export default function UserPredictionsModal({
                 f.id === pred.match_id
             );
             if (fixture) {
-              const fh = normalizeTeamName(fixture.home_team).toLowerCase();
-              const fa = normalizeTeamName(fixture.away_team).toLowerCase();
-
-              // Check if this fixture matches an evaluated match in matchesMap by team names
-              const evalMatch = Object.values(matchesMap).find((m) => {
-                const mh = normalizeTeamName(m.home_team || "").toLowerCase();
-                const ma = normalizeTeamName(m.away_team || "").toLowerCase();
-                return (mh === fh && ma === fa) || (mh.includes(fh) && ma.includes(fa));
-              });
-
-              if (evalMatch) {
-                match = {
-                  ...evalMatch,
-                  home_logo: fixture.home_logo || evalMatch.home_logo,
-                  away_logo: fixture.away_logo || evalMatch.away_logo,
-                };
-              } else {
-                match = {
-                  id: pred.match_id,
-                  home_team: fixture.home_team,
-                  away_team: fixture.away_team,
-                  match_date: fixture.match_date,
-                  league: normalizeMatchLeague(fixture.home_team, fixture.away_team, fixture.match_date, fixture.league),
-                  home_logo: fixture.home_logo,
-                  away_logo: fixture.away_logo,
-                  result_home: null,
-                  result_away: null,
-                };
-              }
+              match = {
+                id: pred.match_id,
+                home_team: fixture.home_team,
+                away_team: fixture.away_team,
+                match_date: fixture.match_date,
+                league: normalizeMatchLeague(fixture.home_team, fixture.away_team, fixture.match_date, fixture.league),
+                home_logo: fixture.home_logo,
+                away_logo: fixture.away_logo,
+                result_home: null,
+                result_away: null,
+              };
             }
           }
 
-          // Direct search across all matchesMap by fixture if still not found
-          if (!match) {
-            const byName = Object.values(matchesMap).find(
-              (m) => m.id === pred.match_id || matchIdToUuid(m.id) === pred.match_id
-            );
-            if (byName) match = byName;
+          // Fallback 2: Robust match resolution by team names against evaluated matches
+          if (!match || match.result_home === null || match.result_home === undefined) {
+            let hName = match?.home_team || "";
+            let aName = match?.away_team || "";
+
+            if (!hName || !aName) {
+              const fix = Array.isArray(officialFixtures)
+                ? officialFixtures.find(
+                    (f) =>
+                      f.id === pred.match_id ||
+                      matchIdToUuid(f.id) === pred.match_id ||
+                      String(f.id) === pred.match_id
+                  )
+                : null;
+              if (fix) {
+                hName = fix.home_team;
+                aName = fix.away_team;
+              }
+            }
+
+            if (hName && aName) {
+              const fh = normalizeTeamName(hName).toLowerCase();
+              const fa = normalizeTeamName(aName).toLowerCase();
+
+              const evalMatch = Object.values(matchesMap).find((m) => {
+                const mh = normalizeTeamName(m.home_team || "").toLowerCase();
+                const ma = normalizeTeamName(m.away_team || "").toLowerCase();
+                return (
+                  (mh === fh && ma === fa) ||
+                  (mh.includes(fh) && ma.includes(fa)) ||
+                  (fh.includes(mh) && fa.includes(ma))
+                );
+              });
+
+              if (evalMatch && evalMatch.result_home !== null && evalMatch.result_home !== undefined) {
+                match = {
+                  ...evalMatch,
+                  home_logo: match?.home_logo || evalMatch.home_logo,
+                  away_logo: match?.away_logo || evalMatch.away_logo,
+                };
+              }
+            }
           }
 
           const matchDateMs = match?.match_date ? new Date(match.match_date).getTime() : 0;
@@ -319,14 +392,14 @@ export default function UserPredictionsModal({
           const hasPoints = pred.points !== null && pred.points !== undefined;
           const isFinished = hasScore || hasPoints;
 
-          // Regla Anti-Copia: Un partido se revela si ya finalizó, o si su hora de inicio ya pasó o falta <= 1 min
+          // Regla Anti-Copia: Un partido se revela si ya finalizó, o si su hora de inicio ya pasó (diffMin <= 1)
           const isPastOrLocked = matchDateMs > 0 ? diffMin <= 1 : true;
           const isLocked = isFinished || isPastOrLocked;
 
           const predScorers = scorersMap[pred.id] || [];
 
           let earnedPoints: number | null = pred.points ?? null;
-          let details: string[] = [];
+          let details: string[] = pred.pointsDetails && pred.pointsDetails.length > 0 ? [...pred.pointsDetails] : [];
 
           if (match && match.result_home !== null && match.result_away !== null) {
             const breakdown = calculateScore(
@@ -345,7 +418,9 @@ export default function UserPredictionsModal({
             if (earnedPoints === null) {
               earnedPoints = breakdown.totalPoints;
             }
-            details = breakdown.details;
+            if (breakdown.details.length > 0) {
+              details = breakdown.details;
+            }
           } else if (hasPoints && earnedPoints !== null && earnedPoints > 0 && details.length === 0) {
             details = [`Puntos oficiales asignados (+${earnedPoints} pts)`];
           }
@@ -364,7 +439,7 @@ export default function UserPredictionsModal({
           };
         });
 
-        // Sort: Finalizados con puntos primero, luego cronológicamente por fecha de partido
+        // Sort: Finalizados primero, luego por fecha cronológica descendente
         items.sort((a, b) => {
           if (a.isFinished && !b.isFinished) return -1;
           if (!a.isFinished && b.isFinished) return 1;
