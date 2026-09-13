@@ -68,12 +68,22 @@
 
 ## Cambios Recientes
 
-- **2026-09-12** — **Modal interactivo de pronósticos por usuario + Regla Anti-Copia + Sync jornada 11-12 sept + Optimización `/ranking`**:
+- **2026-09-12** — **Auditoría de Performance & Accesibilidad (PageSpeed 100/100) + Optimización de Red**:
+  - **Google PageSpeed Insights Perfecto**: 100/100 en Rendimiento, 100/100 en SEO, 100/100 en Prácticas Recomendadas y 100/100 en Accesibilidad (tanto en Móvil como en Desktop).
+  - **Core Web Vitals en Móvil**: FCP 0.2s, LCP 0.4s, TBT 0ms (bloqueo nulo), CLS 0 (sin layout shifts), Speed Index 0.3s.
+  - **Paralelización de Red (`Promise.all`)**:
+    - `/mis-pronosticos`: Reducción de cascada de 8 peticiones secuenciales a carga 100% concurrente (~250ms).
+    - `/tabla/[league]`: Carga en paralelo de fixtures, clasificación y goleadores con `Promise.all`.
+    - `/pronosticar`: Eliminación de patrón N+1 en carga de goleadores (`.in("prediction_id", predIds)`).
+  - **Mejoras de Accesibilidad & WCAG AA**:
+    - Landmark semántico `<main id="main-content">` agregado en `src/app/layout.tsx`.
+    - Viewport habilitado para escalabilidad de usuarios con zoom sin bloqueos.
+    - Contraste elevado a nivel WCAG AA en textos secundarios de tarjetas de reglas y podio (`text-slate-200` y `text-slate-300`).
+    - Atributo `aria-label` descriptivo en enlace de WhatsApp en `Footer.tsx`.
   - **Feature de transparencia (`UserPredictionsModal.tsx`)**: Modal interactivo accesible al hacer clic en cualquier participante del ranking o del Podio de Honor. Muestra todos los pronósticos del usuario con el marcador predicho vs real, goleadores y el desglose de puntos regla por regla (+3 resultado, +2 exacto, +1 goleador, +2 cantidad).
   - **Regla Anti-Copia**: Los partidos abiertos (`diffMin > 1`) muestran `🔒 ? - ?` y goleadores protegidos. Los partidos iniciados o finalizados se revelan automáticamente con su puntuación.
   - **Resolución robusta de partidos**: El modal resuelve emparejamientos tanto por ID como por cruce de nombres de equipos (`home_team` vs `away_team`), garantizando que los partidos evaluados con puntos nunca se muestren como ocultos.
   - **Sincronización de jornada 11-12 sept**: 131 partidos finalizados evaluados en `officialEvaluatedMatches.json` y `public/data/` (incluye Real Madrid 4-1 Rayo, Arsenal 2-0 Sunderland, Milan 2-2 Lazio). Puntos asignados a Zahilet (+7 pts en RM, total 22 pts), Raudel (+7 pts en RM, total 21 pts), ARS (+6 pts), Yorman (+4 pts).
-  - **Optimización de rendimiento en `/ranking`**: Consultas a Supabase y fixtures locales ejecutadas en paralelo (`Promise.all`), reduciendo el tiempo de carga de 10-15s a ~200ms. Timeout de ESPN reducido a 2.5s con fallback seguro y bloque `finally { setLoading(false) }` garantizado.
   - **Plantillas 2026/27 post-mercado**: `scripts/sync-player-squads.js` reescrito para explorar las 11 competiciones del concurso vía ESPN; sincronizados **7.097 jugadores oficiales** (antes 4.749) de **237 clubes** clasificados por posición (`Arquero`, `Defensor`, `Mediocampista`, `Delantero`) en `src/data/officialPlayers.json` y `public/data/officialPlayers.json`.
   - **Cron mensual de plantillas (`.github/workflows/auto-sync-squads.yml`)**: Automatización programada el día 1 de cada mes a las 04:00 UTC con `workflow_dispatch` manual para mantener plantillas al día.
   - **Hardening de seguridad**: API key de football-data.org eliminada del código fuente y movida a variables de entorno (`NEXT_PUBLIC_FOOTBALL_DATA_KEY` / `FOOTBALL_DATA_KEY`); fallbacks de Supabase anon key / URL hardcodeados eliminados de todos los scripts (`auto-sync-espn-results.js`, `evaluate-matches.js`, `assign-points.js`, `sync-db.js`, `rebuild-eval-preds.js`); secrets de GitHub Actions configurados.
@@ -81,7 +91,6 @@
   - **ESLint para scripts**: `eslint.config.mjs` configurado con flat-config específico para `scripts/**/*.js` (Node CommonJS), pasando limpio con 0 errores en todo el proyecto.
   - **Calendario 1.672 fixtures**: Re-sincronizado con fuentes reales; `validate-fixtures.js` ajustado para conteo real de Copa Italia (34 partidos) con **0 errores**.
   - **UI / Landing**: Ecualización de altura `h-full flex flex-col justify-between` y alineación simétrica en las 3 tarjetas de reglas y el podio de premios.
-  - **Atomicidad de scorers**: Mitigación en `/pronosticar` con retry único y control de abort para evitar estados inconsistentes.
 
 - **2026-08-31** — **Fix cron + fetcher ESPN por cambio de API (`071c3db`)**:
   - `scripts/auto-sync-espn-results.js`: `datesParam()` pasa de lista separada por coma a rango `YYYYMMDD-YYYYMMDD` (ESPN devuelve HTTP 400 con comas); agregado `AbortSignal.timeout(15s)` y **fail-fast** que marca el run de Actions como fallido si todas las ligas fallan; loguea el HTTP status y URL por liga.

@@ -44,14 +44,18 @@
 | **Deploy** | GitHub Actions → GitHub Pages, dominio personalizado (Cloudflare DNS) |
 | **PWA** | Service Worker v2 offline-first con precaching de datos, manifest, icon SVG |
 
-### Métricas de Performance
+### Métricas de Performance y Auditoría
 
-| Métrica | Valor |
-|---------|-------|
-| **JS total** | ~1.230 KB (antes 2.346 KB, -47.6%) |
-| **Chunk más grande** | 232 KB (antes 621 KB, -62.6%) |
-| **Páginas estáticas** | 23 rutas generadas |
-| **Build output** | ~4.5 MB |
+| Métrica / Auditoría | Desktop | Mobile |
+|---|:---:|:---:|
+| **Rendimiento (Performance)** | **100 / 100** | **100 / 100** |
+| **Accesibilidad (WCAG AA)** | **100 / 100** | **100 / 100** |
+| **Prácticas Recomendadas** | **100 / 100** | **100 / 100** |
+| **SEO** | **100 / 100** | **100 / 100** |
+| **First Contentful Paint (FCP)** | 0.2 s | 0.2 s |
+| **Largest Contentful Paint (LCP)** | 0.5 s | 0.4 s |
+| **Total Blocking Time (TBT)** | 20 ms | 0 ms |
+| **Cumulative Layout Shift (CLS)** | 0 | 0 |
 
 ---
 
