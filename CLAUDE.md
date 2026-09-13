@@ -22,6 +22,8 @@ Contexto para agentes de código. Para documentación completa ver [README.md](.
 | `src/app/page.tsx` | Landing con selector de equipo y podio de premios |
 | `src/app/pronosticar/page.tsx` | Pronósticos estilo TV (ventana de 3 partidos) |
 | `src/app/ranking/page.tsx` | Ranking multiusuario en vivo |
+| `src/app/ranking/UserPredictionsModal.tsx` | Modal interactivo de pronósticos y desglose de puntos por usuario con regla anti-copia |
+| `src/app/mis-pronosticos/page.tsx` | Mis pronósticos, estado survivor y cálculo de puntos |
 | `src/lib/leagueConfig.ts` | Normalización canónica de ligas/equipos, `matchIdToUuid`, colores |
 | `src/lib/survivor.ts` | Motor de superviviente en 7 copas KO |
 | `src/lib/scoring.ts` | Cálculo de puntos + matching fonético `arePlayersMatching` |
