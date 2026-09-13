@@ -234,9 +234,9 @@ export default function Home() {
                 <p className="text-sm leading-relaxed text-silver mb-3">
                   Pronosticá los <span className="text-gold font-semibold">partidos de tu equipo</span> en cada jornada, indicando el marcador exacto y goleadores.
                 </p>
-                <ul className="text-[11px] text-silver/80 space-y-1 mb-4">
+                <ul className="text-[11px] text-slate-200 space-y-1 mb-4 font-medium">
                   <li>• Seleccioná el marcador exacto de cada encuentro</li>
-                  <li>• Elegí hasta <span className="text-gold">5 goleadores</span> por partido</li>
+                  <li>• Elegí hasta <span className="text-gold font-bold">5 goleadores</span> por partido</li>
                   <li>• Sumá puntos y competí por los primeros puestos</li>
                 </ul>
               </div>
@@ -325,14 +325,14 @@ export default function Home() {
             <div className="relative flex flex-col w-full md:w-1/3 bg-navy-mid/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-slate-400/30 hover:border-slate-300/50 shadow-[0_0_25px_rgba(203,213,225,0.08)] transition-all duration-300 hover:scale-[1.02] md:mt-8">
               <div className="flex items-center justify-between gap-2 mb-4">
                 <div>
-                  <h3 className="text-lg sm:text-xl font-black uppercase tracking-wider text-slate-300">
+                  <h3 className="text-lg sm:text-xl font-black uppercase tracking-wider text-slate-200">
                     2° LUGAR
                   </h3>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-silver/80">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300">
                     SUBCAMPEÓN
                   </span>
                 </div>
-                <span className="text-xs font-bold text-silver/70 bg-navy-card/80 border border-border/50 px-2.5 py-1 rounded-lg">
+                <span className="text-xs font-bold text-slate-200 bg-navy-card border border-border px-2.5 py-1 rounded-lg">
                   5 premios
                 </span>
               </div>
@@ -344,13 +344,13 @@ export default function Home() {
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-navy-card/40 border border-border/30 hover:bg-navy-card/70 transition-colors"
                   >
                     <span className="text-base select-none shrink-0">{item.icon}</span>
-                    <span className="text-sm font-semibold text-white/85">{item.name}</span>
+                    <span className="text-sm font-semibold text-white/90">{item.name}</span>
                   </div>
                 ))}
               </div>
 
               <div className="mt-4 pt-3 border-t border-border/30 text-center">
-                <span className="text-[11px] font-semibold text-silver/50 uppercase tracking-wider">
+                <span className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
                   Kit de Subcampeón
                 </span>
               </div>
@@ -368,11 +368,11 @@ export default function Home() {
                   <h3 className="text-xl sm:text-2xl font-black uppercase tracking-wider text-gold">
                     1° LUGAR
                   </h3>
-                  <span className="text-xs font-bold uppercase tracking-wider text-gold/70">
+                  <span className="text-xs font-bold uppercase tracking-wider text-gold">
                     GRAN CAMPEÓN
                   </span>
                 </div>
-                <span className="text-xs font-bold text-gold/80 bg-gold/10 border border-gold/30 px-2.5 py-1 rounded-lg">
+                <span className="text-xs font-bold text-navy-black bg-gold border border-gold-light px-2.5 py-1 rounded-lg">
                   7 premios
                 </span>
               </div>
@@ -384,13 +384,13 @@ export default function Home() {
                     className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gold/5 border border-gold/20 hover:bg-gold/10 transition-colors"
                   >
                     <span className="text-lg select-none shrink-0">{item.icon}</span>
-                    <span className="text-sm font-bold text-white/90">{item.name}</span>
+                    <span className="text-sm font-bold text-white">{item.name}</span>
                   </div>
                 ))}
               </div>
 
               <div className="mt-4 pt-3 border-t border-gold/20 text-center">
-                <span className="text-[11px] font-bold text-gold/60 uppercase tracking-wider">
+                <span className="text-[11px] font-bold text-gold-light uppercase tracking-wider">
                   Kit Completo de Campeón
                 </span>
               </div>
@@ -400,14 +400,14 @@ export default function Home() {
             <div className="relative flex flex-col w-full md:w-1/3 bg-navy-mid/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-amber-700/30 hover:border-amber-600/50 shadow-[0_0_25px_rgba(180,83,9,0.08)] transition-all duration-300 hover:scale-[1.02] md:mt-8">
               <div className="flex items-center justify-between gap-2 mb-4">
                 <div>
-                  <h3 className="text-lg sm:text-xl font-black uppercase tracking-wider text-amber-400">
+                  <h3 className="text-lg sm:text-xl font-black uppercase tracking-wider text-amber-300">
                     3° LUGAR
                   </h3>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-silver/80">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300">
                     TERCER LUGAR
                   </span>
                 </div>
-                <span className="text-xs font-bold text-silver/70 bg-navy-card/80 border border-border/50 px-2.5 py-1 rounded-lg">
+                <span className="text-xs font-bold text-slate-200 bg-navy-card border border-border px-2.5 py-1 rounded-lg">
                   5 premios
                 </span>
               </div>
@@ -419,13 +419,13 @@ export default function Home() {
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-navy-card/40 border border-border/30 hover:bg-navy-card/70 transition-colors"
                   >
                     <span className="text-base select-none shrink-0">{item.icon}</span>
-                    <span className="text-sm font-semibold text-white/85">{item.name}</span>
+                    <span className="text-sm font-semibold text-white/90">{item.name}</span>
                   </div>
                 ))}
               </div>
 
               <div className="mt-4 pt-3 border-t border-border/30 text-center">
-                <span className="text-[11px] font-semibold text-silver/50 uppercase tracking-wider">
+                <span className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
                   Kit de Podio
                 </span>
               </div>

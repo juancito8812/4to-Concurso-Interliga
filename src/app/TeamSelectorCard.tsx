@@ -192,7 +192,7 @@ export default function TeamSelectorCard() {
             <p className="text-sm leading-relaxed text-silver mb-3">
               Elegí tu <span className="text-gold font-semibold">equipo oficial</span> para representarte durante toda la temporada del concurso.
             </p>
-            <ul className="text-[11px] text-silver/80 space-y-1 mb-4">
+            <ul className="text-[11px] text-slate-200 space-y-1 mb-4 font-medium">
               <li>• Seleccioná tu club favorito de Europa</li>
               <li>• Disputá todas las ligas y copas clasificadas</li>
               <li>• Tu equipo queda asignado para la temporada</li>
