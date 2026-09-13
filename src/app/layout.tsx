@@ -27,8 +27,6 @@ export const viewport: Viewport = {
   themeColor: "#c9a84c",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -50,7 +48,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-full flex flex-col">
         <RegisterSW />
-        <Providers>{children}</Providers>
+        <Providers>
+          <main id="main-content" className="flex-1 flex flex-col">
+            {children}
+          </main>
+        </Providers>
         <Footer />
       </body>
     </html>
