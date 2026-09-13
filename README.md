@@ -247,7 +247,7 @@ public/
 | **+2** | Marcador exacto acertado (ej. 2-1) |
 | **+1** | Diferencia de 1 gol total en el marcador (cuando no es exacto, ej. predije 2-1 y fue 2-0) |
 | **+1** | Por cada autor de gol acertado (nombre) |
-| **+2** | Cantidad exacta de goleadores del partido (si predijiste N goleadores y hubo N reales) |
+| **+2** | Cantidad exacta de goles del líder goleador del partido (si la cantidad de goles del líder goleador predicho coincide exactamente con la del líder goleador real) |
 
 > **Matching inteligente de goleadores:** El motor de scoring usa matching fonético (`arePlayersMatching`) que acepta variantes de escritura — iniciales (`N. Williams` = `Nico Williams`), acentos (`Gonçalo Ramos` = `Gonzalo Ramos`), y variaciones ortográficas (ç/z/s → s, b/v → b). Los nombres se normalizan antes de comparar.
 

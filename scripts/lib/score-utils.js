@@ -334,13 +334,21 @@ function calculateScore(prediction, real) {
     }
   }
 
-  // 5. Cantidad exacta de goleadores del partido -> 2 pts
-  const predictedScorerCount = (prediction.scorers || []).filter(s => s.goals > 0).length;
-  const realScorerCount = realScorersList.filter(s => (s.goals ?? 0) > 0).length;
-  const scorersQuantityHits = (predictedScorerCount > 0 && realScorerCount > 0 && predictedScorerCount === realScorerCount) ? 1 : 0;
+  // 5. Cantidad exacta de goles del líder goleador del partido -> 2 pts
+  const maxPredGoals = (prediction.scorers && prediction.scorers.length > 0)
+    ? Math.max(...prediction.scorers.map((s) => s.goals ?? 0), 0)
+    : 0;
+
+  const maxRealGoals = (realScorersList && realScorersList.length > 0)
+    ? Math.max(...realScorersList.map((s) => s.goals ?? 0), 0)
+    : 0;
+
+  const scorersQuantityHits =
+    maxPredGoals > 0 && maxRealGoals > 0 && maxPredGoals === maxRealGoals ? 1 : 0;
+
   if (scorersQuantityHits) {
     pointsScorersQuantity = 2;
-    details.push(`Cantidad exacta de goleadores: ${realScorerCount} (+2 pts)`);
+    details.push(`Goles del líder goleador: ${maxRealGoals} (+2 pts)`);
   }
 
   const totalPoints =

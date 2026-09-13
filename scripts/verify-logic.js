@@ -40,27 +40,27 @@ test("Goleador con acentos/tildes (Messi vs Mésí)", () => {
   );
   assert.equal(r.pointsScorersName, 1);
 });
-test("Cantidad exacta de goleadores: 1 predicho = 1 real -> +2", () => {
+test("Cantidad exacta de goles del líder goleador: máx 3 predicho = máx 3 real -> +2", () => {
   const r = calculateScore(
     { home_score: 1, away_score: 0, scorers: [{ player_name: "Erling Haaland", team: "home", goals: 3 }] },
     { result_home: 1, result_away: 0, scorers: [{ player_name: "Erling Haaland", team: "home", goals: 3 }] }
   );
   assert.equal(r.pointsScorersQuantity, 2);
 });
-test("Cantidad exacta de goleadores: 2 predichos = 2 reales -> +2", () => {
+test("Cantidad exacta de goles del líder goleador: máx 2 predicho = máx 2 real -> +2", () => {
   const r = calculateScore(
     { home_score: 3, away_score: 0, scorers: [
       { player_name: "Mbappé", team: "home", goals: 2 },
       { player_name: "Bellingham", team: "home", goals: 1 }
     ] },
     { result_home: 3, result_away: 0, scorers: [
-      { player_name: "Mbappé", team: "home", goals: 1 },
+      { player_name: "Mbappé", team: "home", goals: 2 },
       { player_name: "Bellingham", team: "home", goals: 1 }
     ] }
   );
   assert.equal(r.pointsScorersQuantity, 2);
 });
-test("Cantidad NO exacta: 2 predichos vs 1 real -> 0", () => {
+test("Cantidad NO exacta de goles del líder goleador: máx 2 predicho vs máx 1 real -> 0", () => {
   const r = calculateScore(
     { home_score: 3, away_score: 0, scorers: [
       { player_name: "Mbappé", team: "home", goals: 2 },
@@ -72,7 +72,7 @@ test("Cantidad NO exacta: 2 predichos vs 1 real -> 0", () => {
   );
   assert.equal(r.pointsScorersQuantity, 0);
 });
-test("Cantidad NO exacta: 1 predicho vs 3 reales -> 0", () => {
+test("Cantidad NO exacta de goles del líder goleador: máx 5 predicho vs máx 2 real -> 0", () => {
   const r = calculateScore(
     { home_score: 5, away_score: 0, scorers: [
       { player_name: "Mbappé", team: "home", goals: 5 }
@@ -99,13 +99,13 @@ test("Sin goleadores reales -> 0 (no aplica regla #5)", () => {
   );
   assert.equal(r.pointsScorersQuantity, 0);
 });
-test("Caso real Milanarg: predijo 2 goleadores, real 1 -> 5 pts (sin regla #5)", () => {
+test("Caso real Milanarg: predijo máx 2 goles, real máx 1 gol -> 5 pts (sin regla #5)", () => {
   const r = calculateScore(
     { home_score: 3, away_score: 0, scorers: [{ player_name: "Gonçalo Ramos", team: "home", goals: 2 }, { player_name: "Adrien Rabiot", team: "home", goals: 1 }] },
     { result_home: 2, result_away: 0, scorers: [{ player_name: "Gonçalo Ramos", team: "home", goals: 1 }] }
   );
   // Resultado correcto +3, diff 1 gol +1, goleador Ramos +1 = 5
-  // Regla #5 NO aplica (2 predichos ≠ 1 real)
+  // Regla #5 NO aplica (máx 2 predicho ≠ máx 1 real)
   assert.equal(r.totalPoints, 5);
 });
 test("Fallo total = 0 pts", () => {

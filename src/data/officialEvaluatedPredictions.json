@@ -31,7 +31,7 @@
     "match_id": "00000000-0000-4000-8000-000000088db7",
     "home_score": 0,
     "away_score": 2,
-    "points": 0,
+    "points": 2,
     "scorers": [
       {
         "player_name": "Joshua Zirkzee",
@@ -44,7 +44,9 @@
         "team": "away"
       }
     ],
-    "pointsDetails": []
+    "pointsDetails": [
+      "Goles del líder goleador: 1 (+2 pts)"
+    ]
   },
   {
     "id": "4a3c5284-ca9d-415b-aad7-c517aad134d8",
@@ -53,13 +55,18 @@
     "match_id": "00000000-0000-4000-8000-000000088dc4",
     "home_score": 0,
     "away_score": 2,
-    "points": null,
+    "points": 5,
     "scorers": [
       {
         "player_name": "Erling Haaland",
         "goals": 2,
         "team": "away"
       }
+    ],
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Erling Haaland (+1 pt)"
     ]
   },
   {
@@ -107,10 +114,11 @@
         "team": "away"
       }
     ],
-    "points": 4,
+    "points": 6,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
-      "Goleador acertado: Bukayo Saka (+1 pt)"
+      "Goleador acertado: Bukayo Saka (+1 pt)",
+      "Goles del líder goleador: 1 (+2 pts)"
     ]
   },
   {
@@ -174,12 +182,13 @@
         "team": "home"
       }
     ],
-    "points": 6,
+    "points": 8,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Matheus Cunha (+1 pt)",
-      "Goleador acertado: Bruno Fernandes (+1 pt)"
+      "Goleador acertado: Bruno Fernandes (+1 pt)",
+      "Goles del líder goleador: 1 (+2 pts)"
     ]
   },
   {
@@ -206,13 +215,12 @@
         "team": "home"
       }
     ],
-    "points": 9,
+    "points": 7,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Marcador exacto (+2 pts)",
       "Goleador acertado: Kylian Mbappé (+1 pt)",
-      "Goleador acertado: Jude Bellingham (+1 pt)",
-      "Cantidad exacta de goleadores: 3 (+2 pts)"
+      "Goleador acertado: Jude Bellingham (+1 pt)"
     ]
   },
   {
@@ -252,12 +260,11 @@
         "team": "home"
       }
     ],
-    "points": 7,
+    "points": 5,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Lamine Yamal (+1 pt)",
-      "Goleador acertado: Raphinha (+1 pt)",
-      "Cantidad exacta de goleadores: 3 (+2 pts)"
+      "Goleador acertado: Raphinha (+1 pt)"
     ]
   },
   {
@@ -288,7 +295,7 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Martin Ødegaard (+1 pt)",
-      "Cantidad exacta de goleadores: 3 (+2 pts)"
+      "Goles del líder goleador: 1 (+2 pts)"
     ]
   },
   {
@@ -324,7 +331,7 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Harry Kane (+1 pt)",
-      "Cantidad exacta de goleadores: 4 (+2 pts)"
+      "Goles del líder goleador: 2 (+2 pts)"
     ]
   },
   {
@@ -437,6 +444,11 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Harry Kane (+1 pt)"
     ]
   },
   {
@@ -560,9 +572,10 @@
         "team": "away"
       }
     ],
-    "points": 1,
+    "points": 3,
     "pointsDetails": [
-      "Diferencia de 1 gol (+1 pt)"
+      "Diferencia de 1 gol (+1 pt)",
+      "Goles del líder goleador: 1 (+2 pts)"
     ]
   },
   {
@@ -587,6 +600,11 @@
         "player_name": "Harry Kane",
         "goals": 1,
         "team": "home"
+      },
+      {
+        "player_name": "Linus Güther",
+        "goals": 1,
+        "team": "away"
       }
     ]
   },
@@ -624,14 +642,13 @@
         "team": "away"
       }
     ],
-    "points": 9,
+    "points": 7,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Raphinha (+1 pt)",
       "Goleador acertado: Lamine Yamal (+1 pt)",
-      "Goleador acertado: Raphinha (+1 pt)",
-      "Cantidad exacta de goleadores: 5 (+2 pts)"
+      "Goleador acertado: Raphinha (+1 pt)"
     ]
   },
   {
@@ -693,7 +710,7 @@
       "Resultado correcto (+3 pts)",
       "Marcador exacto (+2 pts)",
       "Goleador acertado: Kylian Mbappé (+1 pt)",
-      "Cantidad exacta de goleadores: 3 (+2 pts)"
+      "Goles del líder goleador: 1 (+2 pts)"
     ]
   },
   {
@@ -715,11 +732,12 @@
         "team": "home"
       }
     ],
-    "points": 6,
+    "points": 8,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Marcador exacto (+2 pts)",
-      "Goleador acertado: Kylian Mbappé (+1 pt)"
+      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Goles del líder goleador: 1 (+2 pts)"
     ]
   },
   {
@@ -835,12 +853,13 @@
         "team": "home"
       }
     ],
-    "points": 7,
+    "points": 9,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Marcador exacto (+2 pts)",
       "Goleador acertado: Kylian Mbappé (+1 pt)",
-      "Goleador acertado: Jude Bellingham (+1 pt)"
+      "Goleador acertado: Jude Bellingham (+1 pt)",
+      "Goles del líder goleador: 2 (+2 pts)"
     ]
   },
   {
@@ -922,6 +941,61 @@
       },
       {
         "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Lamine Yamal (+1 pt)"
+    ]
+  },
+  {
+    "id": "c56672d0-4e20-4b9f-bba9-9623586d4de7",
+    "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
+    "display_name": "Asere1995",
+    "match_id": "00000000-0000-4000-8000-000000089dcf",
+    "home_score": 5,
+    "away_score": 0,
+    "scorers": [
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
+  },
+  {
+    "id": "9186a918-a533-41b0-8937-1d07df835737",
+    "user_id": "836a17f7-37f6-427f-a0fe-eedcf66a082d",
+    "display_name": "JOKENON93",
+    "match_id": "00000000-0000-4000-8000-00000008a23b",
+    "home_score": 1,
+    "away_score": 3,
+    "scorers": [
+      {
+        "player_name": "Nathanael Mbuku",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Michael Olise",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Harry Kane",
         "goals": 1,
         "team": "away"
       }

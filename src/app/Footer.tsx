@@ -28,7 +28,7 @@ const reglas = [
   "Marcador exacto: 2 puntos",
   "Diferencia de 1 gol: 1 punto",
   "Goleador acertado: 1 punto",
-  "Goles del goleador: 2 puntos",
+  "Goles del líder goleador: 2 puntos",
 ];
 
 export default function Footer() {
