@@ -3704,5 +3704,165 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dbf",
+    "home_team": "Villarreal",
+    "away_team": "Real Betis",
+    "match_date": "2026-09-14T19:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Gerard Moreno",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Cucho Hernández",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Natan",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dc3",
+    "home_team": "Leeds United",
+    "away_team": "Newcastle",
+    "match_date": "2026-09-14T19:00Z",
+    "league": "Premier League",
+    "result_home": 4,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Jayden Bogle",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Dominic Calvert-Lewin",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Noah Okafor",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Bazoumana Touré",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008860a",
+    "home_team": "Como",
+    "away_team": "Parma",
+    "match_date": "2026-09-14T16:30Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Jacobo Ramón",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kaiki",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "José Romero",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008860b",
+    "home_team": "Torino",
+    "away_team": "Roma",
+    "match_date": "2026-09-14T16:30Z",
+    "league": "Serie A",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Donyell Malen",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Niccolò Pisilli",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088609",
+    "home_team": "Inter Milan",
+    "away_team": "Udinese",
+    "match_date": "2026-09-14T18:45Z",
+    "league": "Serie A",
+    "result_home": 5,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "James Abankwah",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jurgen Ekkelenkamp",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Carlos Augusto",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Nicolò Barella",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Marcus Thuram",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Pio Esposito",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ange-Yoan Bonny",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Idrissa Gueye",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
