@@ -40,18 +40,18 @@ const LEAGUE_MAP = {
   "ger.dfb_pokal": "DFB-Pokal",
 };
 
-// Lecturas con la anon key (solo SELECT públicos por RLS). Keys obligatorias:
-// si no están configuradas, se falla rápido en lugar de usar fallbacks hardcodeados.
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-
-if (!SUPABASE_URL || !ANON_KEY) {
-  throw new Error("Faltan NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY (requeridas)");
-}
+// Lecturas con la anon key (solo SELECT públicos por RLS).
+// Si solo está disponible SERVICE_KEY, se usa como fallback para lecturas también.
+const SUPABASE_URL = (process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || "https://ilkndkqcmxvlufxaugog.supabase.co").replace(/\/$/, "");
+const ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || "";
 
 // Escrituras con la service role key (bypass RLS). Se inyecta como secreto de
 // GitHub Actions (SUPABASE_SERVICE_ROLE_KEY) o variable de entorno local.
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+
+if (!SUPABASE_URL || (!ANON_KEY && !SERVICE_KEY)) {
+  throw new Error("Faltan credenciales de Supabase (NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY o SUPABASE_SERVICE_ROLE_KEY)");
+}
 
 function authHeaders(key) {
   return {
