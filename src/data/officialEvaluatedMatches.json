@@ -3623,5 +3623,86 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dbc",
+    "home_team": "Getafe",
+    "away_team": "Deportivo La Coruña",
+    "match_date": "2026-09-13T16:30Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Ramón Terrats",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Pierre-Emerick Aubameyang",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dc2",
+    "home_team": "Real Sociedad",
+    "away_team": "Atlético Madrid",
+    "match_date": "2026-09-13T19:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Alejandro Grimaldo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jonathan David",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Giuliano Simeone",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088610",
+    "home_team": "Sassuolo",
+    "away_team": "Juventus",
+    "match_date": "2026-09-13T18:45Z",
+    "league": "Serie A",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Sebastiano Esposito",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Edon Zhegrova",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Kieron Bowie",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Vasilije Adzic",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
