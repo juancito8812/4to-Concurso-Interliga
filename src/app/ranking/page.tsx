@@ -97,6 +97,8 @@ export default function RankingPage() {
           predsRes,
           scorersRes,
           liveFinished,
+          dynEvalMatches,
+          dynEvalPreds,
         ] = await Promise.all([
           loadData<Array<{
             id: string;
@@ -109,6 +111,23 @@ export default function RankingPage() {
           supabase.from("predictions").select("id, user_id, match_id, home_score, away_score, points"),
           supabase.from("prediction_scorers").select("prediction_id, player_name, goals, team"),
           fetchLiveFinishedMatches().catch(() => []),
+          loadData<Array<{
+            id: string;
+            home_team?: string;
+            away_team?: string;
+            result_home: number;
+            result_away: number;
+            scorers?: RealScorer[];
+          }>>("/data/officialEvaluatedMatches.json").catch(() => []),
+          loadData<Array<{
+            id: string;
+            user_id: string;
+            match_id: string;
+            home_score: number;
+            away_score: number;
+            points?: number | null;
+            scorers?: PredictedScorer[];
+          }>>("/data/officialEvaluatedPredictions.json").catch(() => []),
         ]);
 
         const profilesData = profilesRes?.data || null;
@@ -136,11 +155,15 @@ export default function RankingPage() {
           });
         }
 
-        // Load matches map
+        // Load matches map combining bundled + dynamic evaluated + live ESPN + Supabase
         const matchesMap: Record<string, MatchRow> = {};
         
-        // 1. Load official evaluated fixtures first
-        (officialEvaluatedMatches as Array<{ id: string; home_team?: string; away_team?: string; result_home: number; result_away: number; scorers?: RealScorer[] }>).forEach((m) => {
+        const allEvalMatches = [
+          ...(officialEvaluatedMatches as Array<{ id: string; home_team?: string; away_team?: string; result_home: number; result_away: number; scorers?: RealScorer[] }>),
+          ...(Array.isArray(dynEvalMatches) ? dynEvalMatches : []),
+        ];
+
+        allEvalMatches.forEach((m) => {
           matchesMap[m.id] = {
             id: m.id,
             home_team: m.home_team ? normalizeTeamName(m.home_team) : undefined,
@@ -151,7 +174,7 @@ export default function RankingPage() {
           };
         });
 
-        // 2. Add live finished matches from ESPN API
+        // Add live finished matches from ESPN API
         if (Array.isArray(liveFinished)) {
           liveFinished.forEach((lm) => {
             matchesMap[lm.id] = {
@@ -179,22 +202,37 @@ export default function RankingPage() {
 
         // 4. Fetch predictions (combine Supabase + official evaluated predictions)
         const allPredictions: PredictionRow[] = [];
-        
-        // Include official evaluated predictions
-        (officialEvaluatedPredictions as Array<{ id: string; user_id: string; match_id: string; home_score: number; away_score: number }>).forEach((p) => {
-          allPredictions.push({
-            id: p.id,
-            user_id: p.user_id,
-            match_id: p.match_id,
-            home_score: p.home_score,
-            away_score: p.away_score,
-            points: null,
-          });
+        const allEvalPreds = [
+          ...(officialEvaluatedPredictions as Array<{ id: string; user_id: string; match_id: string; home_score: number; away_score: number; points?: number | null; scorers?: PredictedScorer[] }>),
+          ...(Array.isArray(dynEvalPreds) ? dynEvalPreds : []),
+        ];
+
+        allEvalPreds.forEach((p) => {
+          const exists = allPredictions.some(
+            (ap) => ap.user_id === p.user_id && (ap.match_id === p.match_id || ap.id === p.id)
+          );
+          if (!exists) {
+            allPredictions.push({
+              id: p.id,
+              user_id: p.user_id,
+              match_id: p.match_id,
+              home_score: p.home_score,
+              away_score: p.away_score,
+              points: p.points ?? null,
+            });
+          }
         });
 
         if (predsData) {
           (predsData as PredictionRow[]).forEach((p) => {
-            if (!allPredictions.some((ap) => ap.user_id === p.user_id && ap.match_id === p.match_id)) {
+            const existingIdx = allPredictions.findIndex(
+              (ap) => ap.user_id === p.user_id && (ap.match_id === p.match_id || ap.id === p.id)
+            );
+            if (existingIdx >= 0) {
+              if (p.points !== null && p.points !== undefined) {
+                allPredictions[existingIdx].points = p.points;
+              }
+            } else {
               allPredictions.push(p);
             }
           });
@@ -203,8 +241,7 @@ export default function RankingPage() {
         // 5. Fetch prediction scorers
         const scorersMap: Record<string, PredictedScorer[]> = {};
         
-        // Include official evaluated scorers
-        (officialEvaluatedPredictions as Array<{ id: string; scorers?: PredictedScorer[] }>).forEach((p) => {
+        allEvalPreds.forEach((p) => {
           if (p.scorers) {
             scorersMap[p.id] = p.scorers;
           }
@@ -268,24 +305,65 @@ export default function RankingPage() {
 
             let match = matchesMap[p.match_id];
 
-            // Fallback: join by fixture team names when the prediction id is orphaned
+            if (!match) {
+              const uuid = matchIdToUuid(p.match_id);
+              if (matchesMap[uuid]) {
+                match = matchesMap[uuid];
+              }
+            }
+
+            // Fallback 1: join by fixture team names when the prediction id is orphaned
             if (!match && Array.isArray(officialFixtures)) {
               const fixture = officialFixtures.find(
-                (f) => matchIdToUuid(f.id) === p.match_id || String(f.id) === p.match_id
+                (f) =>
+                  matchIdToUuid(f.id) === p.match_id ||
+                  String(f.id) === p.match_id ||
+                  f.id === p.match_id
               );
               if (fixture) {
                 const fh = normalizeTeamName(fixture.home_team).toLowerCase();
                 const fa = normalizeTeamName(fixture.away_team).toLowerCase();
-                const byName = Object.values(matchesMap).find((m) => {
+
+                const evalMatch = Object.values(matchesMap).find((m) => {
                   const mh = normalizeTeamName(m.home_team || "").toLowerCase();
                   const ma = normalizeTeamName(m.away_team || "").toLowerCase();
-                  return (mh === fh && ma === fa) || (mh.includes(fh) && ma.includes(fa));
+                  return (
+                    (mh === fh && ma === fa) ||
+                    (mh.includes(fh) && ma.includes(fa)) ||
+                    (fh.includes(mh) && fa.includes(ma))
+                  );
                 });
-                if (byName) match = byName;
+                if (evalMatch) match = evalMatch;
               }
             }
 
-            let pts = p.points;
+            // Fallback 2: search directly by matching against evaluated matches if match has no score
+            if (!match || match.result_home === null || match.result_home === undefined) {
+              const fix = Array.isArray(officialFixtures)
+                ? officialFixtures.find(
+                    (f) =>
+                      f.id === p.match_id ||
+                      matchIdToUuid(f.id) === p.match_id ||
+                      String(f.id) === p.match_id
+                  )
+                : null;
+              if (fix) {
+                const fh = normalizeTeamName(fix.home_team).toLowerCase();
+                const fa = normalizeTeamName(fix.away_team).toLowerCase();
+                const evalMatch = Object.values(matchesMap).find((m) => {
+                  const mh = normalizeTeamName(m.home_team || "").toLowerCase();
+                  const ma = normalizeTeamName(m.away_team || "").toLowerCase();
+                  return (
+                    (mh === fh && ma === fa) ||
+                    (mh.includes(fh) && ma.includes(fa)) ||
+                    (fh.includes(mh) && fa.includes(ma))
+                  );
+                });
+                if (evalMatch) match = evalMatch;
+              }
+            }
+
+            let pts = p.points ?? null;
 
             if (match && match.result_home !== null && match.result_away !== null) {
               const breakdown = calculateScore(
