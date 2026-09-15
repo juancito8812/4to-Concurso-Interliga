@@ -96,17 +96,17 @@ async function supabaseGetService(path) {
   return res.json();
 }
 
-// ESPN scoreboard solo devuelve el día actual; con ?dates=YYYYMMDD-YYYYMMDD
-// (rango) retrocedemos hasta BACKFILL_DAYS días para no perder resultados si el
-// cron no corrió un día. OJO: ESPN rechaza listas separadas por coma (HTTP 400),
-// solo acepta fecha única o rango con guión.
+// ESPN scoreboard solo devuelve un día por petición (?dates=YYYYMMDD);
+// iteramos por los últimos BACKFILL_DAYS días para no perder resultados si el cron no corrió.
 const BACKFILL_DAYS = 3;
 
-function datesParam() {
-  const from = new Date(Date.now() - BACKFILL_DAYS * 86400000);
-  const to = new Date();
-  const fmt = (d) => d.toISOString().slice(0, 10).replace(/-/g, "");
-  return `${fmt(from)}-${fmt(to)}`;
+function getDateList(days = BACKFILL_DAYS) {
+  const dates = [];
+  for (let i = 0; i <= days; i++) {
+    const d = new Date(Date.now() - i * 86400000);
+    dates.push(d.toISOString().slice(0, 10).replace(/-/g, ""));
+  }
+  return dates;
 }
 
 // Mantiene la tabla matches de Supabase alineada con el calendario oficial del repo.
@@ -482,98 +482,102 @@ async function autoSync() {
   let newResultsCount = 0;
   let failedFetches = 0;
 
+  const dateList = getDateList(BACKFILL_DAYS);
+
   for (const slug of LEAGUE_SLUGS) {
-    try {
-      const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${slug}/scoreboard?dates=${datesParam()}`;
-      const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
-      if (!res.ok) {
-        failedFetches += 1;
-        console.warn(`⚠️  [${slug}] ESPN devolvió HTTP ${res.status} (url: ${url})`);
-        continue;
-      }
+    for (const dateStr of dateList) {
+      try {
+        const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${slug}/scoreboard?dates=${dateStr}`;
+        const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
+        if (!res.ok) {
+          failedFetches += 1;
+          console.warn(`⚠️  [${slug}] ESPN devolvió HTTP ${res.status} (url: ${url})`);
+          continue;
+        }
 
-      const data = await res.json();
-      const events = data.events || [];
+        const data = await res.json();
+        const events = data.events || [];
 
-      for (const ev of events) {
-        const isCompleted = ev.status?.type?.completed === true || ev.status?.type?.state === "post";
-        const comp = ev.competitions?.[0];
-        if (!comp || !isCompleted) continue;
+        for (const ev of events) {
+          const isCompleted = ev.status?.type?.completed === true || ev.status?.type?.state === "post";
+          const comp = ev.competitions?.[0];
+          if (!comp || !isCompleted) continue;
 
-        const homeComp = comp.competitors?.find((c) => c.homeAway === "home");
-        const awayComp = comp.competitors?.find((c) => c.homeAway === "away");
+          const homeComp = comp.competitors?.find((c) => c.homeAway === "home");
+          const awayComp = comp.competitors?.find((c) => c.homeAway === "away");
 
-        if (!homeComp || !awayComp) continue;
+          if (!homeComp || !awayComp) continue;
 
-        const homeName = normalizeTeamName(homeComp.team?.displayName || homeComp.team?.name || "");
-        const awayName = normalizeTeamName(awayComp.team?.displayName || awayComp.team?.name || "");
+          const homeName = normalizeTeamName(homeComp.team?.displayName || homeComp.team?.name || "");
+          const awayName = normalizeTeamName(awayComp.team?.displayName || awayComp.team?.name || "");
 
-        const scoreHome = parseInt(homeComp.score || "0", 10);
-        const scoreAway = parseInt(awayComp.score || "0", 10);
+          const scoreHome = parseInt(homeComp.score || "0", 10);
+          const scoreAway = parseInt(awayComp.score || "0", 10);
 
-        if (isNaN(scoreHome) || isNaN(scoreAway)) continue;
+          if (isNaN(scoreHome) || isNaN(scoreAway)) continue;
 
-        // Parse scorers
-        const scorersMap = {};
-        if (comp.details && Array.isArray(comp.details)) {
-          comp.details.forEach((d) => {
-            if (d.scoringPlay && !d.ownGoal && d.athletesInvolved && Array.isArray(d.athletesInvolved)) {
-              d.athletesInvolved.forEach((ath) => {
-                const playerName = ath.displayName || ath.fullName || ath.shortName;
-                if (playerName) {
-                  const isHome = ath.team?.id === homeComp.team?.id;
-                  const key = playerName.trim();
-                  if (!scorersMap[key]) {
-                    scorersMap[key] = { goals: 0, team: isHome ? "home" : "away" };
+          // Parse scorers
+          const scorersMap = {};
+          if (comp.details && Array.isArray(comp.details)) {
+            comp.details.forEach((d) => {
+              if (d.scoringPlay && !d.ownGoal && d.athletesInvolved && Array.isArray(d.athletesInvolved)) {
+                d.athletesInvolved.forEach((ath) => {
+                  const playerName = ath.displayName || ath.fullName || ath.shortName;
+                  if (playerName) {
+                    const isHome = ath.team?.id === homeComp.team?.id;
+                    const key = playerName.trim();
+                    if (!scorersMap[key]) {
+                      scorersMap[key] = { goals: 0, team: isHome ? "home" : "away" };
+                    }
+                    scorersMap[key].goals += 1;
                   }
-                  scorersMap[key].goals += 1;
-                }
-              });
-            }
-          });
+                });
+              }
+            });
+          }
+
+          const scorers = Object.entries(scorersMap).map(([player_name, val]) => ({
+            player_name,
+            goals: val.goals,
+            team: val.team,
+          }));
+
+          // Find match in official fixtures
+          const fixture = findFixture(officialFixtures, homeName, awayName);
+          const matchId = resolveMatchId(ev.id, fixture);
+          if (!matchId) continue;
+
+          const matchObj = {
+            id: matchId,
+            home_team: homeName,
+            away_team: awayName,
+            match_date: ev.date || comp.date || new Date().toISOString(),
+            league: LEAGUE_MAP[slug] || "Fútbol",
+            result_home: scoreHome,
+            result_away: scoreAway,
+            scorers,
+            completed: true,
+          };
+
+          const existingIdx = officialMatches.findIndex(
+            (m) =>
+              (normalizeTeamName(m.home_team) === homeName && normalizeTeamName(m.away_team) === awayName) ||
+              m.id === matchId
+          );
+
+          if (existingIdx >= 0) {
+            officialMatches[existingIdx] = matchObj;
+          } else {
+            officialMatches.push(matchObj);
+            newResultsCount += 1;
+          }
+
+          console.log(`✓ [${LEAGUE_MAP[slug]}] ${homeName} ${scoreHome} - ${scoreAway} ${awayName} (Goleadores: ${scorers.map(s => `${s.player_name} (${s.goals})`).join(", ") || "Ninguno"})`);
         }
-
-        const scorers = Object.entries(scorersMap).map(([player_name, val]) => ({
-          player_name,
-          goals: val.goals,
-          team: val.team,
-        }));
-
-        // Find match in official fixtures
-        const fixture = findFixture(officialFixtures, homeName, awayName);
-        const matchId = resolveMatchId(ev.id, fixture);
-        if (!matchId) continue;
-
-        const matchObj = {
-          id: matchId,
-          home_team: homeName,
-          away_team: awayName,
-          match_date: ev.date || comp.date || new Date().toISOString(),
-          league: LEAGUE_MAP[slug] || "Fútbol",
-          result_home: scoreHome,
-          result_away: scoreAway,
-          scorers,
-          completed: true,
-        };
-
-        const existingIdx = officialMatches.findIndex(
-          (m) =>
-            (normalizeTeamName(m.home_team) === homeName && normalizeTeamName(m.away_team) === awayName) ||
-            m.id === matchId
-        );
-
-        if (existingIdx >= 0) {
-          officialMatches[existingIdx] = matchObj;
-        } else {
-          officialMatches.push(matchObj);
-          newResultsCount += 1;
-        }
-
-        console.log(`✓ [${LEAGUE_MAP[slug]}] ${homeName} ${scoreHome} - ${scoreAway} ${awayName} (Goleadores: ${scorers.map(s => `${s.player_name} (${s.goals})`).join(", ") || "Ninguno"})`);
+      } catch (e) {
+        failedFetches += 1;
+        console.warn(`Error syncing slug ${slug} (${dateStr}):`, e.message);
       }
-    } catch (e) {
-      failedFetches += 1;
-      console.warn(`Error syncing slug ${slug}:`, e.message);
     }
   }
 
