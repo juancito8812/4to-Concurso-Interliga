@@ -1030,5 +1030,30 @@
         "team": "away"
       }
     ]
+  },
+  {
+    "id": "98e93051-9365-4bee-bada-e5fc6de03664",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000000089dc9",
+    "home_score": 1,
+    "away_score": 4,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Federico Valverde",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
   }
 ]

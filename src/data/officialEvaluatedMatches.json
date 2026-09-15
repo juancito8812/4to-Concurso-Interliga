@@ -3864,5 +3864,22 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4af66",
+    "home_team": "Genoa",
+    "away_team": "Sudtirol",
+    "match_date": "2026-09-15T16:00Z",
+    "league": "Copa Italia",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Johan Vásquez",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
