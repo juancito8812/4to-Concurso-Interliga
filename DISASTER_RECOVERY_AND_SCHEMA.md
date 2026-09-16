@@ -52,9 +52,13 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
    NEXT_PUBLIC_FOOTBALL_DATA_KEY=733c2feed2bf441292e9779c91af2e09
    ```
 
-### Paso 4: Configurar los Secrets de GitHub Actions para el Deploy
+### Paso 4: Configurar los Secrets de GitHub Actions
 1. En tu repositorio de GitHub, ir a **Settings** $\rightarrow$ **Secrets and variables** $\rightarrow$ **Actions**.
-2. Actualizar las variables si están configuradas en los Secrets de despliegue.
+2. Configurar los siguientes Repository Secrets indispensables para el deploy y la evaluación automática:
+   - `NEXT_PUBLIC_SUPABASE_URL`: URL del proyecto Supabase.
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Llave pública anónima.
+   - `SUPABASE_SERVICE_ROLE_KEY`: Llave secreta con permisos de escritura para el cron automático de puntuación (`auto-evaluate-matches.yml`).
+   - `FOOTBALL_DATA_KEY` / `NEXT_PUBLIC_FOOTBALL_DATA_KEY`: Token de football-data.org.
 3. Hacer push a `main` para que GitHub Actions construya y despliegue el sitio en GitHub Pages:
    ```bash
    git push origin main
