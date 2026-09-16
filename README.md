@@ -173,11 +173,12 @@ src/
 scripts/
 ├── auto-sync-espn-results.js       # Cron: ESPN → evaluación de puntos/survivors → Supabase
 ├── sync-official-fixtures.js       # Regenera calendario SOLO desde fuentes reales
-├── validate-fixtures.js            # Validación cruzada del calendario (0 errores)
+├── validate-fixtures.js            # Validación cruzada del calendario (1.926 fixtures, 0 errores)
 ├── sync-db.js                      # Sincroniza Supabase: matches, remapeo de predicciones, teams
 ├── sync-player-squads.js           # Completa plantillas con rosters ESPN reales
+├── enrich_official_squads.py       # Enriquecimiento y auditoría de plantillas 2026/27 (7.249 jugadores)
 ├── rebuild-eval-preds.js           # Reconstruye predicciones evaluadas desde Supabase
-├── verify-logic.js                 # 43 checks de lógica de negocio
+├── verify-logic.js                 # 48 checks de lógica de negocio y scoring
 ├── evaluate-matches.js             # Evaluador CLI de partidos y puntos
 ├── assign-points.js                # Asignación directa de pronósticos y puntos
 ├── test-survivor.js                # Suite de pruebas del sistema de superviviente (12/12)
@@ -199,11 +200,11 @@ public/
 ├── .nojekyll                       # Evita que GitHub Pages ignore _next/
 ├── CNAME                           # Dominio personalizado
 ├── data/                           # JSONs de datos servidos como assets estáticos (CDN)
-│   ├── officialPlayers.json        # 7.097 jugadores (fetch dinámico)
-│   ├── officialFixtures.json       # 1.672 partidos (fetch dinámico)
+│   ├── officialPlayers.json        # 7.249 jugadores (fetch dinámico)
+│   ├── officialFixtures.json       # 1.926 partidos (fetch dinámico)
 │   ├── officialEvaluatedMatches.json   # Resultados evaluados
 │   └── officialEvaluatedPredictions.json # Pronósticos evaluados
-└── logos/                          # Escudos de las 9 competiciones
+└── logos/                          # Escudos de las 11 competiciones
     ├── laliga.png, premier.png, seriea.png, bundesliga.png  # Ligas domésticas
     ├── champions.png, conference.svg                         # Copas europeas
     ├── europa.png, copadelrey.png                            # Extraídos de SVGs raster
@@ -224,7 +225,7 @@ public/
 | `/perfil` | Edición de nombre de usuario, reinicio de club y eliminación de cuenta | **Sí** |
 | `/pronosticar` | Envío y re-edición de pronósticos en tarjetas estilo TV | **Sí** |
 | `/mis-pronosticos` | Historial de pronósticos enviados y desglose de puntos | **Sí** |
-| `/ranking` | Tabla de clasificación general en vivo y Podio de Honor | No |
+| `/ranking` | Tabla de clasificación general en vivo, Podio de Honor y búsqueda | No |
 | `/tabla/laliga` | Tabla de posiciones oficial de LaLiga | No |
 | `/tabla/premier` | Tabla de posiciones oficial de Premier League | No |
 | `/tabla/seriea` | Tabla de posiciones oficial de Serie A | No |
@@ -233,6 +234,8 @@ public/
 | `/tabla/europa` | Tabla de posiciones oficial de UEFA Europa League | No |
 | `/tabla/conference` | Tabla de posiciones oficial de UEFA Conference League | No |
 | `/tabla/coppaitalia` | Tabla de posiciones oficial de Copa Italia | No |
+| `/tabla/facup` | Tabla de posiciones oficial de FA Cup | No |
+| `/tabla/copadelrey` | Tabla de posiciones oficial de Copa del Rey | No |
 | `/tabla/dfbpokal` | Tabla de posiciones oficial de DFB-Pokal | No |
 
 ---
@@ -261,12 +264,15 @@ public/
 
 - Cada encuentro se bloquea para edición **1 minuto antes de su pitazo inicial** (`diffMin <= 1`).
 - Mientras falte más de 1 minuto, los pronósticos pueden modificarse y guardarse tantas veces como se desee.
+- **Manejo Internacional de Zonas Horarias**: La base de datos opera exclusivamente en **UTC**. El navegador de cada participante convierte de forma nativa a la hora local exacta de su país (ej. España UTC+2, Venezuela UTC-4, Argentina UTC-3, México UTC-6) y el cierre de pronósticos se ejecuta de manera **simultánea y atómica a nivel mundial**.
+- **Blindaje de Horarios por Confirmar (`getEffectiveMatchTime`)**: Partidos que no tienen horario televisivo definitivo o marcados a medianoche (`00:00:00Z`) asumen por defecto horario vespertino (`20:00 UTC`), manteniéndose abiertos durante toda la jornada.
 
 ### 4. Goleadores en Doble Columna Simétrica
 
 - Panel integrado debajo de cada club con dropdown clasificado por posición (Delanteros y Centrocampistas primero).
 - Selector de goles `[-] N [+]` con un máximo de **5 goleadores por equipo**.
-- Base de datos de **7.097 jugadores oficiales** clasificados por posición y equipo (237 clubes).
+- Base de datos de **7.249 jugadores oficiales** clasificados por posición y equipo (240 clubes).
+- Sincronización automática en segundo plano: los pronósticos guardados localmente se respaldan en Supabase tan pronto como el dispositivo se conecta.
 
 ### 5. Ranking General en Vivo Multiusuario
 
