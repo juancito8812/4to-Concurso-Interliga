@@ -1065,5 +1065,53 @@
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Kylian Mbappé (+1 pt)"
     ]
+  },
+  {
+    "id": "c266e4f8-01d5-46bd-b244-a1c37259b2e3",
+    "user_id": "5fd9323f-6442-4e7a-adc7-2bc017c33c00",
+    "display_name": "Gio",
+    "match_id": "00000000-0000-4000-8000-000017f4bec2",
+    "home_score": 4,
+    "away_score": 2,
+    "scorers": [
+      {
+        "player_name": "Gonçalo Ramos",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Christian Pulisic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ardon Jasari",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Vangelis Pavlidis",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Gianluca Prestianni",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "3a219154-fd81-4804-8955-b782d5226a9e",
+    "user_id": "5fd9323f-6442-4e7a-adc7-2bc017c33c00",
+    "display_name": "Gio",
+    "match_id": "00000000-0000-4000-8000-00000008861a",
+    "home_score": 1,
+    "away_score": 2,
+    "scorers": [],
+    "points": 1,
+    "pointsDetails": [
+      "Diferencia de 1 gol (+1 pt)"
+    ]
   }
 ]
