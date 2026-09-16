@@ -456,6 +456,278 @@
     "nationality": "USA"
   },
   {
+    "id": "fd-366929",
+    "name": "Andreas Christou",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Cyprus"
+  },
+  {
+    "id": "fd-305500",
+    "name": "Andronikos Kakoulis",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "Cyprus"
+  },
+  {
+    "id": "fd-365315",
+    "name": "Angelos Neophytou",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "Cyprus"
+  },
+  {
+    "id": "fd-222608",
+    "name": "Babajide David",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "Nigeria"
+  },
+  {
+    "id": "fd-238920",
+    "name": "Carel Eiting",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Netherlands"
+  },
+  {
+    "id": "fd-408050",
+    "name": "Christos Konstantinidis",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Cyprus"
+  },
+  {
+    "id": "fd-408525",
+    "name": "Chrysis Evangelou",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "Cyprus"
+  },
+  {
+    "id": "fd-3095868",
+    "name": "Evripidis Pepis",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-199675",
+    "name": "Ewandro",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Brazil"
+  },
+  {
+    "id": "fd-165085",
+    "name": "Fabiano",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Arquero",
+    "nationality": "Cyprus"
+  },
+  {
+    "id": "fd-205279",
+    "name": "Florin Tanase",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-310834",
+    "name": "Fotios Kitsos",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Greece"
+  },
+  {
+    "id": "fd-366131",
+    "name": "Jaden Montnor",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "Suriname"
+  },
+  {
+    "id": "fd-241032",
+    "name": "Jean-Kévin Duverne",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Haiti"
+  },
+  {
+    "id": "fd-188962",
+    "name": "Jure Balkovec",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Slovenia"
+  },
+  {
+    "id": "fd-173114",
+    "name": "Konstantinos Panagi",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "Cyprus"
+  },
+  {
+    "id": "fd-138564",
+    "name": "Loïc Négo",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Hungary"
+  },
+  {
+    "id": "fd-181007",
+    "name": "Loïs Diony",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "France"
+  },
+  {
+    "id": "fd-204701",
+    "name": "Lubomir Satka",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Slovakia"
+  },
+  {
+    "id": "fd-218528",
+    "name": "Luuk Brouwers",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Netherlands"
+  },
+  {
+    "id": "fd-275269",
+    "name": "Mateo Maric",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
+    "id": "fd-326231",
+    "name": "Mateusz Musialowski",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Poland"
+  },
+  {
+    "id": "fd-3141428",
+    "name": "Michalis Antoniou",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-235500",
+    "name": "Mihlali Mayambela",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "South Africa"
+  },
+  {
+    "id": "fd-152474",
+    "name": "Moses Odubajo",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "England"
+  },
+  {
+    "id": "fd-162424",
+    "name": "Muamer Tankovic",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "Sweden"
+  },
+  {
+    "id": "fd-366462",
+    "name": "Panagiotis Andreou",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Cyprus"
+  },
+  {
+    "id": "fd-3095852",
+    "name": "Panagiotis Christoforou",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
+    "id": "fd-388489",
+    "name": "Pantelis Michael",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Arquero",
+    "nationality": "Cyprus"
+  },
+  {
+    "id": "fd-274954",
+    "name": "Senou Coulibaly",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Mali"
+  },
+  {
+    "id": "fd-192453",
+    "name": "Stefan Simic",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Czechia"
+  },
+  {
+    "id": "fd-3122675",
+    "name": "Theos Ignatios Kazakeos",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
+    "id": "fd-134909",
+    "name": "Thomas Kaminski",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Arquero",
+    "nationality": "Belgium"
+  },
+  {
+    "id": "fd-409757",
+    "name": "Vladimiros Savva",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "Cyprus"
+  },
+  {
     "id": "fd-260026",
     "name": "Aboubakary Koita",
     "team": "AEK Athens",
@@ -744,6 +1016,14 @@
     "nationality": "Brazil"
   },
   {
+    "id": "fd-317284",
+    "name": "Charlie Setford",
+    "team": "AFC Ajax",
+    "league": "Conference League",
+    "position": "Arquero",
+    "nationality": "England"
+  },
+  {
     "id": "fd-126489",
     "name": "Daley Blind",
     "team": "AFC Ajax",
@@ -942,6 +1222,14 @@
     "league": "Conference League",
     "position": "Defensor",
     "nationality": "Netherlands"
+  },
+  {
+    "id": "fd-232810",
+    "name": "Yves Bissouma",
+    "team": "AFC Ajax",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Mali"
   },
   {
     "id": "fd-228279",
@@ -1640,6 +1928,14 @@
     "nationality": "Belgium"
   },
   {
+    "id": "fd-420945",
+    "name": "Alexander De Ridder",
+    "team": "Anderlecht",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Belgium"
+  },
+  {
     "id": "fd-395942",
     "name": "Ali Maamar",
     "team": "Anderlecht",
@@ -1969,11 +2265,11 @@
   },
   {
     "id": "fd-241696",
-    "name": "Bernardo Oliveira",
+    "name": "Bernardo Dias",
     "team": "Ararat-Armenia",
     "league": "Europa League",
-    "position": "Delantero",
-    "nationality": "Australia"
+    "position": "Mediocampista",
+    "nationality": "Portugal"
   },
   {
     "id": "fd-351442",
@@ -2012,7 +2308,7 @@
     "name": "Edgar Grigoryan",
     "team": "Ararat-Armenia",
     "league": "Europa League",
-    "position": "Delantero",
+    "position": "Defensor",
     "nationality": "Armenia"
   },
   {
@@ -2712,6 +3008,14 @@
     "nationality": "Brazil"
   },
   {
+    "id": "fd-399894",
+    "name": "Ife Ibrahim",
+    "team": "Arsenal",
+    "league": "Premier League",
+    "position": "Mediocampista",
+    "nationality": "England"
+  },
+  {
     "id": "fd-265921",
     "name": "Illan Meslier",
     "team": "Arsenal",
@@ -2816,6 +3120,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-393424",
+    "name": "Theo Julienne",
+    "team": "Arsenal",
+    "league": "Premier League",
+    "position": "Mediocampista",
+    "nationality": "England"
+  },
+  {
     "id": "fd-258906",
     "name": "Viktor Gyökeres",
     "team": "Arsenal",
@@ -2853,7 +3165,7 @@
     "team": "AS Monaco FC",
     "league": "Conference League",
     "position": "Delantero",
-    "nationality": "Spain"
+    "nationality": "Guinea-Bissau"
   },
   {
     "id": "fd-3124793",
@@ -4128,6 +4440,14 @@
     "nationality": "Slovenia"
   },
   {
+    "id": "fd-395579",
+    "name": "Javier Gil",
+    "team": "Atlético Madrid",
+    "league": "LaLiga",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
     "id": "fd-290802",
     "name": "Johnny Cardoso",
     "team": "Atlético Madrid",
@@ -4573,6 +4893,14 @@
     "team": "AZ Alkmaar",
     "league": "Europa League",
     "position": "Arquero",
+    "nationality": "Netherlands"
+  },
+  {
+    "id": "fd-388592",
+    "name": "Jerolldino Bergraaf",
+    "team": "AZ Alkmaar",
+    "league": "Europa League",
+    "position": "Delantero",
     "nationality": "Netherlands"
   },
   {
@@ -5377,10 +5705,10 @@
   },
   {
     "id": "fd-359370",
-    "name": "Aleksandar Pavlovic",
+    "name": "Aleksandar Pavlović",
     "team": "Bayern Munich",
     "league": "Bundesliga",
-    "position": "Mediocampista",
+    "position": "Defensor",
     "nationality": "Germany"
   },
   {
@@ -5580,7 +5908,7 @@
     "name": "Alioune Sylla",
     "team": "Benevento",
     "league": "Copa Italia",
-    "position": "Delantero",
+    "position": "Arquero",
     "nationality": "Senegal"
   },
   {
@@ -5896,14 +6224,6 @@
     "nationality": "Portugal"
   },
   {
-    "id": "fd-183640",
-    "name": "Bruma",
-    "team": "Benfica",
-    "league": "Europa League",
-    "position": "Delantero",
-    "nationality": "Portugal"
-  },
-  {
     "id": "fd-361355",
     "name": "Claudio Echeverri",
     "team": "Benfica",
@@ -5996,7 +6316,7 @@
     "name": "Jakub Kaminski",
     "team": "Benfica",
     "league": "Europa League",
-    "position": "Mediocampista",
+    "position": "Delantero",
     "nationality": "Poland"
   },
   {
@@ -6682,6 +7002,14 @@
   {
     "id": "fd-388880",
     "name": "Massimo Pessina",
+    "team": "Bologna",
+    "league": "Serie A",
+    "position": "Arquero",
+    "nationality": "Italy"
+  },
+  {
+    "id": "fd-415168",
+    "name": "Matteo Franceschelli",
     "team": "Bologna",
     "league": "Serie A",
     "position": "Arquero",
@@ -7620,7 +7948,7 @@
     "name": "Djordje Petrovic",
     "team": "Bournemouth",
     "league": "Premier League",
-    "position": "Defensor",
+    "position": "Arquero",
     "nationality": "Serbia"
   },
   {
@@ -8508,8 +8836,8 @@
     "name": "Evan Ferguson",
     "team": "Brighton",
     "league": "Premier League",
-    "position": "Delantero",
-    "nationality": "Republic of Ireland"
+    "position": "Mediocampista",
+    "nationality": "Scotland"
   },
   {
     "id": "fd-308402",
@@ -8710,6 +9038,14 @@
     "league": "Premier League",
     "position": "Mediocampista",
     "nationality": "Sweden"
+  },
+  {
+    "id": "fd-413274",
+    "name": "Younes Ibrahim",
+    "team": "Brighton",
+    "league": "Premier League",
+    "position": "Mediocampista",
+    "nationality": "Australia"
   },
   {
     "id": "fd-407059",
@@ -9872,14 +10208,6 @@
     "nationality": "Slovenia"
   },
   {
-    "id": "fd-281339",
-    "name": "Matej Poplatnik",
-    "team": "Celje",
-    "league": "Europa League",
-    "position": "Delantero",
-    "nationality": "Slovenia"
-  },
-  {
     "id": "fd-385608",
     "name": "Matic Ivansek",
     "team": "Celje",
@@ -10092,7 +10420,7 @@
     "name": "Hugo Gonzalez",
     "team": "Celta Vigo",
     "league": "LaLiga",
-    "position": "Mediocampista",
+    "position": "Delantero",
     "nationality": "Spain"
   },
   {
@@ -10196,7 +10524,7 @@
     "name": "Williot Swedberg",
     "team": "Celta Vigo",
     "league": "LaLiga",
-    "position": "Mediocampista",
+    "position": "Delantero",
     "nationality": "Sweden"
   },
   {
@@ -11428,8 +11756,8 @@
     "name": "Ben Wilson",
     "team": "Coventry City",
     "league": "Premier League",
-    "position": "Mediocampista",
-    "nationality": "Northern Ireland"
+    "position": "Arquero",
+    "nationality": "England"
   },
   {
     "id": "fd-303931",
@@ -12516,7 +12844,7 @@
     "name": "Milan Smit",
     "team": "Darmstadt",
     "league": "DFB-Pokal",
-    "position": "Delantero",
+    "position": "Defensor",
     "nationality": "Netherlands"
   },
   {
@@ -13044,7 +13372,7 @@
     "name": "Noah Nsoki",
     "team": "Dinamo Zagreb",
     "league": "Europa League",
-    "position": "Mediocampista",
+    "position": "Delantero",
     "nationality": "France"
   },
   {
@@ -15936,6 +16264,14 @@
     "nationality": "Norway"
   },
   {
+    "id": "fd-379259",
+    "name": "Noah Madsen",
+    "team": "FC København",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Denmark"
+  },
+  {
     "id": "fd-363213",
     "name": "Robert",
     "team": "FC København",
@@ -15958,6 +16294,14 @@
     "league": "Conference League",
     "position": "Arquero",
     "nationality": "Iceland"
+  },
+  {
+    "id": "fd-3141461",
+    "name": "Sean Fetterlein",
+    "team": "FC København",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": ""
   },
   {
     "id": "fd-335450",
@@ -16648,14 +16992,6 @@
     "nationality": "Türkiye"
   },
   {
-    "id": "fd-3140425",
-    "name": "Rıdvan Harman",
-    "team": "Fenerbahçe",
-    "league": "Champions League",
-    "position": "Defensor",
-    "nationality": ""
-  },
-  {
     "id": "fd-139437",
     "name": "Romelu Lukaku",
     "team": "Fenerbahçe",
@@ -16833,11 +17169,11 @@
   },
   {
     "id": "fd-206847",
-    "name": "Jonathan Levin",
+    "name": "Jonathan Levi",
     "team": "Ferencváros",
     "league": "Europa League",
-    "position": "Defensor",
-    "nationality": "Mexico"
+    "position": "Delantero",
+    "nationality": "Sweden"
   },
   {
     "id": "fd-253991",
@@ -17712,323 +18048,219 @@
     "nationality": "Denmark"
   },
   {
-    "id": "fd-294396",
-    "name": "Abylay Toleukhan",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Delantero",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-184282",
+    "id": "fd-322548",
     "name": "Adilet Sadybekov",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Defensor",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-294391",
-    "name": "Adlan Nurgaliyev",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Defensor",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-294399",
-    "name": "Akezhan Kalikulov",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Defensor",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-294390",
-    "name": "Alamgir Smakov",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Mediocampista",
     "nationality": "Kazakhstan"
   },
   {
-    "id": "fd-180976",
-    "name": "Aleksandr Martinovich",
+    "id": "fd-422059",
+    "name": "Adlan Nurgaliev",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Kazakhstan"
+  },
+  {
+    "id": "fd-326288",
+    "name": "Aleksandr Mrynskiy",
+    "team": "FK Kairat",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Kazakhstan"
+  },
+  {
+    "id": "fd-306131",
+    "name": "Aleksandr Shirobokov",
+    "team": "FK Kairat",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Kazakhstan"
+  },
+  {
+    "id": "fd-140152",
+    "name": "Alyaksandr Martynovich",
+    "team": "FK Kairat",
+    "league": "Conference League",
     "position": "Defensor",
     "nationality": "Belarus"
   },
   {
-    "id": "fd-253997",
-    "name": "Aleksandr Mrynskiy",
+    "id": "fd-406968",
+    "name": "Azamat Tuyakbayev",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Mediocampista",
     "nationality": "Kazakhstan"
   },
   {
-    "id": "fd-171024",
-    "name": "Aleksandr Shirobokov",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Defensor",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-290969",
-    "name": "Amirbek Bazarbaev",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Defensor",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-279208",
-    "name": "Azamat Tuyakbaev",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Delantero",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-286436",
-    "name": "Bakhtiyar Aldashev",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Arquero",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-184299",
+    "id": "fd-336780",
     "name": "Damir Kasabulat",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Defensor",
     "nationality": "Kazakhstan"
   },
   {
-    "id": "fd-40782",
-    "name": "Dan Glazer",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Mediocampista",
-    "nationality": "Israel"
-  },
-  {
-    "id": "fd-289894",
+    "id": "fd-415473",
     "name": "Danila Buch",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Arquero",
     "nationality": "Kazakhstan"
   },
   {
-    "id": "fd-279301",
+    "id": "fd-405644",
     "name": "Daniyar Tashpulatov",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Defensor",
     "nationality": "Kazakhstan"
   },
   {
-    "id": "fd-277157",
-    "name": "Dastan Satpayev",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Delantero",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-212406",
+    "id": "fd-352291",
     "name": "Edmilson",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Delantero",
     "nationality": "Brazil"
   },
   {
-    "id": "fd-184284",
+    "id": "fd-287874",
     "name": "Erkin Tapalov",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Defensor",
     "nationality": "Kazakhstan"
   },
   {
-    "id": "fd-294397",
-    "name": "Ermukhammad Kerimkhan",
+    "id": "fd-352200",
+    "name": "Gustavo Mendonça",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Delantero",
-    "nationality": "Kazakhstan"
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Portugal"
   },
   {
-    "id": "fd-279240",
+    "id": "fd-405661",
     "name": "Ismail Bekbolat",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Delantero",
     "nationality": "Kazakhstan"
   },
   {
-    "id": "fd-25775",
+    "id": "fd-275994",
     "name": "Jaakko Oksanen",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Mediocampista",
     "nationality": "Finland"
   },
   {
-    "id": "fd-216468",
+    "id": "fd-215728",
     "name": "Jorginho",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Delantero",
     "nationality": "Portugal"
   },
   {
-    "id": "fd-294393",
+    "id": "fd-422055",
     "name": "Karim Makhametzhan",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Mediocampista",
     "nationality": "Kazakhstan"
   },
   {
-    "id": "fd-184280",
+    "id": "fd-343368",
     "name": "Lev Kurgin",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Defensor",
     "nationality": "Kazakhstan"
   },
   {
-    "id": "fd-61075",
+    "id": "fd-276119",
     "name": "Lucas Áfrico",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Defensor",
     "nationality": "Brazil"
   },
   {
-    "id": "fd-15921",
-    "name": "Luís Mata",
+    "id": "fd-227259",
+    "name": "Luis Mata",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Delantero",
+    "league": "Conference League",
+    "position": "Defensor",
     "nationality": "Portugal"
   },
   {
-    "id": "fd-290967",
+    "id": "fd-418000",
+    "name": "Mansur Birkurmanov",
+    "team": "FK Kairat",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Kazakhstan"
+  },
+  {
+    "id": "fd-250068",
+    "name": "Marc Gual",
+    "team": "FK Kairat",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-418001",
     "name": "Mukhamedali Abish",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Mediocampista",
     "nationality": "Kazakhstan"
   },
   {
-    "id": "fd-294392",
-    "name": "Mustafa Shen",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Defensor",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-181698",
+    "id": "fd-385789",
     "name": "Oiva Jukkola",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Mediocampista",
     "nationality": "Finland"
   },
   {
-    "id": "fd-279249",
+    "id": "fd-345109",
     "name": "Olzhas Baybek",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Mediocampista",
     "nationality": "Kazakhstan"
   },
   {
-    "id": "fd-279252",
-    "name": "Ramazan Bagdat",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Delantero",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-294395",
-    "name": "Rayimbek Kenesbekov",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Defensor",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-168985",
-    "name": "Ricardinho",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Delantero",
-    "nationality": "Brazil"
-  },
-  {
-    "id": "fd-294389",
-    "name": "Sanat Nurbolat",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Defensor",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-250513",
-    "name": "Sebastián Zeballos",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Delantero",
-    "nationality": "Argentina"
-  },
-  {
-    "id": "fd-280076",
+    "id": "fd-406973",
     "name": "Sherkhan Kalmurza",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Arquero",
     "nationality": "Kazakhstan"
   },
   {
-    "id": "fd-293796",
+    "id": "fd-422053",
     "name": "Shyngys Duysenbek",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Mediocampista",
     "nationality": "Kazakhstan"
   },
   {
-    "id": "fd-272825",
+    "id": "fd-306134",
     "name": "Temirlan Anarbekov",
     "team": "FK Kairat",
-    "league": "UEFA Champions League",
+    "league": "Conference League",
     "position": "Arquero",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-294394",
-    "name": "Tore Ismagulov",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Mediocampista",
-    "nationality": "Kazakhstan"
-  },
-  {
-    "id": "fd-294398",
-    "name": "Yevgeniy Petrik",
-    "team": "FK Kairat",
-    "league": "UEFA Champions League",
-    "position": "Mediocampista",
     "nationality": "Kazakhstan"
   },
   {
@@ -19958,6 +20190,14 @@
     "league": "LaLiga",
     "position": "Delantero",
     "nationality": "Uruguay"
+  },
+  {
+    "id": "fd-3139281",
+    "name": "Moha Achraf",
+    "team": "Getafe",
+    "league": "LaLiga",
+    "position": "Delantero",
+    "nationality": ""
   },
   {
     "id": "fd-375400",
@@ -23920,6 +24160,238 @@
     "nationality": ""
   },
   {
+    "id": "fd-326533",
+    "name": "Adri da Cunha",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Andorra"
+  },
+  {
+    "id": "fd-3099332",
+    "name": "Alex Prelado Leitao",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-112048",
+    "name": "Álex Sánchez",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-343289",
+    "name": "Ángel Pérez",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-411685",
+    "name": "Anwar Hernández",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Mexico"
+  },
+  {
+    "id": "fd-3099342",
+    "name": "Borja Arellano Monedero",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-354456",
+    "name": "David López",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-363935",
+    "name": "Domi Berlanga",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Morocco"
+  },
+  {
+    "id": "fd-344576",
+    "name": "Faysal Choaib",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-405665",
+    "name": "Hugo de Miguel",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Andorra"
+  },
+  {
+    "id": "fd-300342",
+    "name": "Jaouad Erraji",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Morocco"
+  },
+  {
+    "id": "fd-96595",
+    "name": "Javier Díaz",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Arquero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-196982",
+    "name": "Jilmar Torres",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Colombia"
+  },
+  {
+    "id": "fd-174200",
+    "name": "Juan Cámara",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-3102142",
+    "name": "Juan David Terrádez Becerra",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Arquero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-413048",
+    "name": "Mamadou Diaby",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-3103781",
+    "name": "Marc Jurado López",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-360927",
+    "name": "Marc Rodríguez",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Andorra"
+  },
+  {
+    "id": "fd-78763",
+    "name": "Marc Vargas",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-296885",
+    "name": "Maurizio Pochettino",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Argentina"
+  },
+  {
+    "id": "fd-219166",
+    "name": "Otegui",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-385442",
+    "name": "Pablo Molina",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-166785",
+    "name": "Pol",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Arquero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-387041",
+    "name": "Rafinha",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-210415",
+    "name": "Robin Lafarge",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "France"
+  },
+  {
+    "id": "fd-3102253",
+    "name": "Rodrigo Rosária Fernandes",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Arquero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-331929",
+    "name": "Soule",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Mali"
+  },
+  {
+    "id": "fd-75689",
+    "name": "Victor Alonso",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-413657",
+    "name": "Yerai Dávila",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
     "id": "fd-240109",
     "name": "Aleksandar Stankovic",
     "team": "Inter Milan",
@@ -24425,10 +24897,10 @@
   },
   {
     "id": "fd-167559",
-    "name": "Filip Novak",
+    "name": "Filip Novák",
     "team": "Jablonec",
     "league": "Conference League",
-    "position": "Defensor",
+    "position": "Mediocampista",
     "nationality": "Czechia"
   },
   {
@@ -24844,7 +25316,7 @@
     "name": "Sergio Lozano",
     "team": "Jagiellonia",
     "league": "Europa League",
-    "position": "Mediocampista",
+    "position": "Defensor",
     "nationality": "Spain"
   },
   {
@@ -25270,6 +25742,14 @@
     "league": "Serie A",
     "position": "Defensor",
     "nationality": "Colombia"
+  },
+  {
+    "id": "fd-349101",
+    "name": "Justin Oboavwoduo",
+    "team": "Juventus",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": "England"
   },
   {
     "id": "fd-259474",
@@ -26804,8 +27284,8 @@
     "name": "Andrés Andrade",
     "team": "LASK Linz",
     "league": "Champions League",
-    "position": "Mediocampista",
-    "nationality": "Colombia"
+    "position": "Defensor",
+    "nationality": "Panama"
   },
   {
     "id": "fd-341760",
@@ -27280,6 +27760,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-308318",
+    "name": "Alexandru Borbei",
+    "team": "Lecce",
+    "league": "Serie A",
+    "position": "Arquero",
+    "nationality": "Romania"
+  },
+  {
     "id": "fd-356576",
     "name": "Ali Dembélé",
     "team": "Lecce",
@@ -27444,7 +27932,7 @@
     "name": "Mohamed Kaba",
     "team": "Lecce",
     "league": "Serie A",
-    "position": "Delantero",
+    "position": "Mediocampista",
     "nationality": "France"
   },
   {
@@ -28917,7 +29405,7 @@
     "team": "Levante",
     "league": "LaLiga",
     "position": "Delantero",
-    "nationality": "Argentina"
+    "nationality": "Uruguay"
   },
   {
     "id": "fd-203680",
@@ -29120,6 +29608,14 @@
     "nationality": "Bulgaria"
   },
   {
+    "id": "fd-237652",
+    "name": "Petko Hristov",
+    "team": "Levski Sofia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Bulgaria"
+  },
+  {
     "id": "fd-149692",
     "name": "Radoslav Kirilov",
     "team": "Levski Sofia",
@@ -29174,14 +29670,6 @@
     "league": "Champions League",
     "position": "Defensor",
     "nationality": "Brazil"
-  },
-  {
-    "id": "fd-255780",
-    "name": "Arnaud Bodart",
-    "team": "Lille",
-    "league": "Champions League",
-    "position": "Arquero",
-    "nationality": "Belgium"
   },
   {
     "id": "fd-274277",
@@ -29464,14 +29952,6 @@
     "nationality": "Norway"
   },
   {
-    "id": "fd-397252",
-    "name": "Harald Woxen",
-    "team": "Lillestrøm",
-    "league": "Europa League",
-    "position": "Mediocampista",
-    "nationality": "Norway"
-  },
-  {
     "id": "fd-333776",
     "name": "Henrik Melland",
     "team": "Lillestrøm",
@@ -29485,14 +29965,6 @@
     "team": "Lillestrøm",
     "league": "Europa League",
     "position": "Mediocampista",
-    "nationality": "Norway"
-  },
-  {
-    "id": "fd-416574",
-    "name": "Ivar Winje",
-    "team": "Lillestrøm",
-    "league": "Europa League",
-    "position": "Delantero",
     "nationality": "Norway"
   },
   {
@@ -29924,7 +30396,7 @@
     "name": "Giovanni Leoni",
     "team": "Liverpool",
     "league": "Premier League",
-    "position": "Arquero",
+    "position": "Defensor",
     "nationality": "Italy"
   },
   {
@@ -30920,19 +31392,19 @@
     "nationality": "Spain"
   },
   {
-    "id": "fd-262061",
-    "name": "Juan Berrocal",
+    "id": "fd-145565",
+    "name": "Juan Antonio Cruz",
     "team": "Málaga",
     "league": "LaLiga",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "fd-145565",
-    "name": "Juan Cruz",
+    "id": "fd-262061",
+    "name": "Juan Berrocal",
     "team": "Málaga",
     "league": "LaLiga",
-    "position": "Mediocampista",
+    "position": "Defensor",
     "nationality": "Spain"
   },
   {
@@ -31318,14 +31790,6 @@
     "league": "Premier League",
     "position": "Delantero",
     "nationality": "Belgium"
-  },
-  {
-    "id": "fd-307117",
-    "name": "Josh Wilson-Esbrand",
-    "team": "Manchester City",
-    "league": "Premier League",
-    "position": "Defensor",
-    "nationality": "England"
   },
   {
     "id": "fd-299910",
@@ -32422,14 +32886,6 @@
     "league": "Copa Italia",
     "position": "Arquero",
     "nationality": "Switzerland"
-  },
-  {
-    "id": "fd-251776",
-    "name": "Alessandro Bianco",
-    "team": "Modena",
-    "league": "Copa Italia",
-    "position": "Mediocampista",
-    "nationality": "Italy"
   },
   {
     "id": "fd-356268",
@@ -33720,6 +34176,14 @@
     "nationality": "England"
   },
   {
+    "id": "fd-416448",
+    "name": "Mason Miley",
+    "team": "Newcastle",
+    "league": "Premier League",
+    "position": "Mediocampista",
+    "nationality": "England"
+  },
+  {
     "id": "fd-359651",
     "name": "Matias Fernandez-Pardo",
     "team": "Newcastle",
@@ -34085,7 +34549,7 @@
     "team": "Nott. Forest",
     "league": "Premier League",
     "position": "Defensor",
-    "nationality": "Colombia"
+    "nationality": "Spain"
   },
   {
     "id": "fd-213718",
@@ -34528,6 +34992,14 @@
     "nationality": "Greece"
   },
   {
+    "id": "fd-389351",
+    "name": "Alexi Koum",
+    "team": "Olympique de Marseille",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "France"
+  },
+  {
     "id": "fd-259743",
     "name": "Amine Gouiri",
     "team": "Olympique de Marseille",
@@ -34550,6 +35022,14 @@
     "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "England"
+  },
+  {
+    "id": "fd-418016",
+    "name": "Anis Doubal",
+    "team": "Olympique de Marseille",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Tunisia"
   },
   {
     "id": "fd-324960",
@@ -34600,6 +35080,14 @@
     "nationality": "Central African Republic"
   },
   {
+    "id": "fd-421852",
+    "name": "Hilan Slimani",
+    "team": "Olympique de Marseille",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "France"
+  },
+  {
     "id": "fd-277525",
     "name": "Himad Abdelli",
     "team": "Olympique de Marseille",
@@ -34648,6 +35136,14 @@
     "nationality": "France"
   },
   {
+    "id": "fd-414465",
+    "name": "Mathis Clement",
+    "team": "Olympique de Marseille",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "France"
+  },
+  {
     "id": "fd-245243",
     "name": "Nayef Aguerd",
     "team": "Olympique de Marseille",
@@ -34680,6 +35176,14 @@
     "nationality": "Denmark"
   },
   {
+    "id": "fd-414467",
+    "name": "Rayan Bang Na",
+    "team": "Olympique de Marseille",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "France"
+  },
+  {
     "id": "fd-411418",
     "name": "Tadjidine Mmadi",
     "team": "Olympique de Marseille",
@@ -34710,6 +35214,14 @@
     "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "Nigeria"
+  },
+  {
+    "id": "fd-421853",
+    "name": "Ugo El Kadmiri",
+    "team": "Olympique de Marseille",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "Sweden"
   },
   {
     "id": "fd-220718",
@@ -35356,7 +35868,7 @@
     "name": "Luca Moro",
     "team": "Padova",
     "league": "Copa Italia",
-    "position": "Arquero",
+    "position": "Delantero",
     "nationality": "Italy"
   },
   {
@@ -35614,6 +36126,14 @@
     "league": "Europa League",
     "position": "Defensor",
     "nationality": "Norway"
+  },
+  {
+    "id": "fd-276831",
+    "name": "Marius Mouandilmadji",
+    "team": "PAE Olympiakos SFP",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "Chad"
   },
   {
     "id": "fd-266070",
@@ -36206,6 +36726,14 @@
     "league": "Conference League",
     "position": "Mediocampista",
     "nationality": "Albania"
+  },
+  {
+    "id": "fd-297296",
+    "name": "Anass Salah-Eddine",
+    "team": "Panathinaikos",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Morocco"
   },
   {
     "id": "fd-365703",
@@ -39096,6 +39624,14 @@
     "nationality": ""
   },
   {
+    "id": "fd-251776",
+    "name": "Alessandro Bianconi",
+    "team": "Ravenna",
+    "league": "Copa Italia",
+    "position": "Defensor",
+    "nationality": "Italy"
+  },
+  {
     "id": "fd-139186",
     "name": "Carlo Ilari",
     "team": "Ravenna",
@@ -39133,6 +39669,14 @@
     "team": "Ravenna",
     "league": "Copa Italia",
     "position": "Mediocampista",
+    "nationality": "Italy"
+  },
+  {
+    "id": "fd-227769",
+    "name": "Edoardo Soleri",
+    "team": "Ravenna",
+    "league": "Copa Italia",
+    "position": "Delantero",
     "nationality": "Italy"
   },
   {
@@ -39564,7 +40108,7 @@
     "name": "Sergio Lozano",
     "team": "Rayo Vallecano",
     "league": "LaLiga",
-    "position": "Mediocampista",
+    "position": "Defensor",
     "nationality": "Spain"
   },
   {
@@ -41464,14 +42008,6 @@
     "nationality": "France"
   },
   {
-    "id": "fd-3124608",
-    "name": "Firmin Thétiot",
-    "team": "Rennes",
-    "league": "Europa League",
-    "position": "Defensor",
-    "nationality": ""
-  },
-  {
     "id": "fd-401410",
     "name": "Gonçalo Oliveira",
     "team": "Rennes",
@@ -41912,14 +42448,6 @@
     "nationality": ""
   },
   {
-    "id": "fd-297296",
-    "name": "Anass Salah-Eddine",
-    "team": "Roma",
-    "league": "Serie A",
-    "position": "Defensor",
-    "nationality": "Morocco"
-  },
-  {
     "id": "fd-404546",
     "name": "Antonio Arena",
     "team": "Roma",
@@ -42312,274 +42840,226 @@
     "nationality": "Germany"
   },
   {
-    "id": "fd-130454",
+    "id": "fd-298901",
     "name": "Adem Zorgane",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "Algeria"
   },
   {
-    "id": "fd-280888",
-    "name": "Adriaan Van Etten",
-    "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Arquero",
-    "nationality": "Belgium"
-  },
-  {
-    "id": "fd-213425",
-    "name": "Anan Khalaili",
-    "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Defensor",
-    "nationality": "Israel"
-  },
-  {
-    "id": "fd-123292",
+    "id": "fd-290809",
     "name": "Anouar Ait El Hadj",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "Belgium"
   },
   {
-    "id": "fd-180627",
+    "id": "fd-334024",
     "name": "Besfort Zeneli",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "Sweden"
   },
   {
-    "id": "fd-4910",
-    "name": "Christian Burgess",
+    "id": "fd-239870",
+    "name": "Darius Olaru",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Defensor",
-    "nationality": "England"
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Romania"
   },
   {
-    "id": "fd-128331",
-    "name": "Fedde Leysen",
+    "id": "fd-363067",
+    "name": "Denzel De Roeve",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Defensor",
     "nationality": "Belgium"
   },
   {
-    "id": "fd-254081",
+    "id": "fd-363516",
+    "name": "Dylan Aquino",
+    "team": "Royale Union Saint-Gilloise",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "Argentina"
+  },
+  {
+    "id": "fd-401048",
     "name": "Giorgi Kavlashvili",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Arquero",
     "nationality": "Georgia"
   },
   {
-    "id": "fd-218790",
-    "name": "Guilherme Carvalho",
+    "id": "fd-330077",
+    "name": "Guilherme Smith",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Delantero",
+    "league": "Europa League",
+    "position": "Mediocampista",
     "nationality": "Brazil"
   },
   {
-    "id": "fd-16816",
-    "name": "Guillaume François",
+    "id": "fd-247940",
+    "name": "Hervé Koffi",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Defensor",
-    "nationality": "Belgium"
+    "league": "Europa League",
+    "position": "Arquero",
+    "nationality": "Burkina Faso"
   },
   {
-    "id": "fd-160850",
+    "id": "fd-3098602",
+    "name": "Ilan Henri Hurtevent",
+    "team": "Royale Union Saint-Gilloise",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-314183",
     "name": "Ivan Pavlic",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "Belgium"
   },
   {
-    "id": "fd-9155",
-    "name": "Jens Teunckens",
+    "id": "fd-385284",
+    "name": "Kamiel Van De Perre",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Belgium"
+  },
+  {
+    "id": "fd-333328",
+    "name": "Keo Boets",
+    "team": "Royale Union Saint-Gilloise",
+    "league": "Europa League",
     "position": "Arquero",
     "nationality": "Belgium"
   },
   {
-    "id": "fd-260723",
-    "name": "Kamiel Van De Perre",
-    "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Mediocampista",
-    "nationality": "Belgium"
-  },
-  {
-    "id": "fd-45677",
+    "id": "fd-234337",
     "name": "Kevin Mac Allister",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Defensor",
     "nationality": "Argentina"
   },
   {
-    "id": "fd-189975",
+    "id": "fd-281316",
     "name": "Kevin Rodríguez",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Delantero",
     "nationality": "Ecuador"
   },
   {
-    "id": "fd-9814",
-    "name": "Kjell Scherpen",
-    "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Arquero",
-    "nationality": "Netherlands"
-  },
-  {
-    "id": "fd-147875",
+    "id": "fd-306031",
     "name": "Louis Patris",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Defensor",
     "nationality": "Belgium"
   },
   {
-    "id": "fd-250970",
-    "name": "Mamadou Barry",
-    "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Defensor",
-    "nationality": "Senegal"
-  },
-  {
-    "id": "fd-255451",
-    "name": "Marc Giger",
-    "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Delantero",
-    "nationality": "Switzerland"
-  },
-  {
-    "id": "fd-290738",
+    "id": "fd-389282",
     "name": "Massiré Sylla",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Defensor",
     "nationality": "Senegal"
   },
   {
-    "id": "fd-184623",
+    "id": "fd-345526",
     "name": "Mateo Biondic",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Delantero",
     "nationality": "Germany"
   },
   {
-    "id": "fd-187456",
-    "name": "Mohammed Fuseini",
+    "id": "fd-275833",
+    "name": "Nikki Havenaar",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Delantero",
-    "nationality": "Ghana"
-  },
-  {
-    "id": "fd-185608",
-    "name": "Nathan Huygevelde",
-    "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Mediocampista",
-    "nationality": "Belgium"
-  },
-  {
-    "id": "fd-291274",
-    "name": "Noah Stassin",
-    "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Defensor",
-    "nationality": "Belgium"
+    "nationality": "Japan"
   },
   {
-    "id": "fd-126432",
-    "name": "Ousseynou Niang",
+    "id": "fd-356478",
+    "name": "Nohim Chibani",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Mediocampista",
-    "nationality": "Senegal"
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "France"
   },
   {
-    "id": "fd-260992",
-    "name": "Promise Akinpelu",
+    "id": "fd-347386",
+    "name": "Ondrej Kricfalusi",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Delantero",
-    "nationality": "Canada"
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Czechia"
   },
   {
-    "id": "fd-212465",
+    "id": "fd-344857",
     "name": "Raul Florucz",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Delantero",
     "nationality": "Austria"
   },
   {
-    "id": "fd-9329",
+    "id": "fd-361211",
+    "name": "Relebohile Mofokeng",
+    "team": "Royale Union Saint-Gilloise",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "South Africa"
+  },
+  {
+    "id": "fd-157133",
     "name": "Rob Schoofs",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "Belgium"
   },
   {
-    "id": "fd-6222",
+    "id": "fd-241066",
     "name": "Ross Sykes",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Defensor",
     "nationality": "England"
   },
   {
-    "id": "fd-282722",
+    "id": "fd-214312",
     "name": "Sekou Keita",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Delantero",
     "nationality": "Belgium"
   },
   {
-    "id": "fd-177221",
-    "name": "Soulaimane Berradi",
-    "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Delantero",
-    "nationality": "Belgium"
-  },
-  {
-    "id": "fd-165236",
+    "id": "fd-316278",
     "name": "Vic Chambaere",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Arquero",
     "nationality": "Belgium"
   },
   {
-    "id": "fd-147894",
-    "name": "Yari Stevens",
-    "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
-    "position": "Defensor",
-    "nationality": "Belgium"
-  },
-  {
-    "id": "fd-291748",
+    "id": "fd-406909",
     "name": "Youssef Hamoutahar",
     "team": "Royale Union Saint-Gilloise",
-    "league": "UEFA Champions League",
+    "league": "Europa League",
     "position": "Delantero",
     "nationality": "Belgium"
   },
@@ -43200,14 +43680,6 @@
     "nationality": "Italy"
   },
   {
-    "id": "fd-297230",
-    "name": "Alessandro Pio Riccio",
-    "team": "Sampdoria",
-    "league": "Copa Italia",
-    "position": "Defensor",
-    "nationality": "Italy"
-  },
-  {
     "id": "fd-186302",
     "name": "Alex Ferrari",
     "team": "Sampdoria",
@@ -43446,6 +43918,14 @@
     "league": "Copa Italia",
     "position": "Delantero",
     "nationality": "Norway"
+  },
+  {
+    "id": "fd-225555",
+    "name": "Yann Karamoh",
+    "team": "Sampdoria",
+    "league": "Copa Italia",
+    "position": "Delantero",
+    "nationality": "France"
   },
   {
     "id": "fd-283658",
@@ -45800,6 +46280,14 @@
     "nationality": "Belgium"
   },
   {
+    "id": "fd-414121",
+    "name": "Adam Rajnoha",
+    "team": "SK Slavia Praha",
+    "league": "Champions League",
+    "position": "Mediocampista",
+    "nationality": "Slovakia"
+  },
+  {
     "id": "fd-411696",
     "name": "Adam Rezek",
     "team": "SK Slavia Praha",
@@ -45896,6 +46384,14 @@
     "nationality": "Slovakia"
   },
   {
+    "id": "fd-419800",
+    "name": "Izuchukwu Okonkwo",
+    "team": "SK Slavia Praha",
+    "league": "Champions League",
+    "position": "Mediocampista",
+    "nationality": "Nigeria"
+  },
+  {
     "id": "fd-395008",
     "name": "Jakub Kolísek",
     "team": "SK Slavia Praha",
@@ -45934,6 +46430,14 @@
     "league": "Champions League",
     "position": "Mediocampista",
     "nationality": "Czechia"
+  },
+  {
+    "id": "fd-413840",
+    "name": "Miguel Solarte",
+    "team": "SK Slavia Praha",
+    "league": "Champions League",
+    "position": "Defensor",
+    "nationality": "Colombia"
   },
   {
     "id": "fd-352303",
@@ -45978,6 +46482,14 @@
   {
     "id": "fd-3099524",
     "name": "Oskar Kubiak",
+    "team": "SK Slavia Praha",
+    "league": "Champions League",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-3101991",
+    "name": "Pavel Behenský",
     "team": "SK Slavia Praha",
     "league": "Champions League",
     "position": "Defensor",
@@ -46772,7 +47284,7 @@
     "name": "Magnus Andersen",
     "team": "Sparta Prague",
     "league": "Europa League",
-    "position": "Defensor",
+    "position": "Mediocampista",
     "nationality": "Denmark"
   },
   {
@@ -47741,7 +48253,7 @@
     "team": "St. Pauli",
     "league": "DFB-Pokal",
     "position": "Mediocampista",
-    "nationality": "Norway"
+    "nationality": "Denmark"
   },
   {
     "id": "fd-409375",
@@ -48017,10 +48529,10 @@
   },
   {
     "id": "fd-187877",
-    "name": "Petar Petrovic",
+    "name": "Petar Petrović",
     "team": "Sturm Graz",
     "league": "Europa League",
-    "position": "Mediocampista",
+    "position": "Defensor",
     "nationality": "Sweden"
   },
   {
@@ -48660,8 +49172,8 @@
     "name": "Malick Fofana",
     "team": "Sunderland",
     "league": "Premier League",
-    "position": "Delantero",
-    "nationality": "Belgium"
+    "position": "Defensor",
+    "nationality": "Japan"
   },
   {
     "id": "fd-307800",
@@ -50254,14 +50766,6 @@
     "league": "Europa League",
     "position": "Defensor",
     "nationality": "Cape Verde Islands"
-  },
-  {
-    "id": "fd-374607",
-    "name": "Unai Pérez",
-    "team": "Torreense",
-    "league": "Europa League",
-    "position": "Arquero",
-    "nationality": "Spain"
   },
   {
     "id": "fd-324487",
@@ -51960,14 +52464,6 @@
     "nationality": "Italy"
   },
   {
-    "id": "fd-3104208",
-    "name": "Enrico Lovato",
-    "team": "Union Brescia",
-    "league": "Copa Italia",
-    "position": "Arquero",
-    "nationality": ""
-  },
-  {
     "id": "fd-3125076",
     "name": "Filippo Armanini",
     "team": "Union Brescia",
@@ -52056,6 +52552,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-3099533",
+    "name": "Nicola Grazioli",
+    "team": "Union Brescia",
+    "league": "Copa Italia",
+    "position": "Arquero",
+    "nationality": ""
+  },
+  {
     "id": "fd-126496",
     "name": "Nicola Pasini",
     "team": "Union Brescia",
@@ -52110,6 +52614,246 @@
     "league": "Copa Italia",
     "position": "Defensor",
     "nationality": ""
+  },
+  {
+    "id": "fd-264705",
+    "name": "Adrian Rus",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-345232",
+    "name": "Aimé Nsimba",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "France"
+  },
+  {
+    "id": "fd-239724",
+    "name": "Alexandru Cicaldau",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-218120",
+    "name": "Alexandru Cretu",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-407229",
+    "name": "Alexandru Glodean",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Arquero",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-418889",
+    "name": "Alexandru Iamandache",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-173816",
+    "name": "Alexandru Maxim",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-301369",
+    "name": "Assad Al-Hamlawi",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Palestine"
+  },
+  {
+    "id": "fd-306537",
+    "name": "Baptiste Roux",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "France"
+  },
+  {
+    "id": "fd-310002",
+    "name": "Carlos Mora",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Costa Rica"
+  },
+  {
+    "id": "fd-405527",
+    "name": "David Matei",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-415028",
+    "name": "Denys Muntean",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-276672",
+    "name": "Heriberto Tavares",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Portugal"
+  },
+  {
+    "id": "fd-364416",
+    "name": "João Lameira",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Portugal"
+  },
+  {
+    "id": "fd-239895",
+    "name": "Laurentiu Popescu",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Arquero",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-379326",
+    "name": "Luca Basceanu",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-342795",
+    "name": "Mihnea Radulescu",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-255892",
+    "name": "Monday Etim",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Nigeria"
+  },
+  {
+    "id": "fd-239813",
+    "name": "Nicusor Bancu",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-275362",
+    "name": "Nikola Stevanović",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Serbia"
+  },
+  {
+    "id": "fd-364179",
+    "name": "Oleksandr Romanchuk",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Ukraine"
+  },
+  {
+    "id": "fd-322537",
+    "name": "Pavlo Isenko",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Arquero",
+    "nationality": "Ukraine"
+  },
+  {
+    "id": "fd-302721",
+    "name": "Razvan Sava",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Arquero",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-348273",
+    "name": "Ronaldo Webster",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Jamaica"
+  },
+  {
+    "id": "fd-410615",
+    "name": "Sebastian &#536;Erban",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-306034",
+    "name": "Simon Elisor",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "France"
+  },
+  {
+    "id": "fd-289724",
+    "name": "Stefan Baiaram",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-364979",
+    "name": "Teles",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Portugal"
+  },
+  {
+    "id": "fd-239721",
+    "name": "Tudor Baluta",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Romania"
+  },
+  {
+    "id": "fd-239807",
+    "name": "Vladimir Screciu",
+    "team": "Universitatea Craiova",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Romania"
   },
   {
     "id": "fd-3101737",
@@ -52489,11 +53233,11 @@
   },
   {
     "id": "fd-16340",
-    "name": "Javier Guerra",
+    "name": "Javi Guerra",
     "team": "Valencia",
     "league": "LaLiga",
-    "position": "Defensor",
-    "nationality": "Bolivia"
+    "position": "Mediocampista",
+    "nationality": "Spain"
   },
   {
     "id": "fd-189804",
@@ -54072,14 +54816,6 @@
     "nationality": "Norway"
   },
   {
-    "id": "fd-361738",
-    "name": "Ola Visted",
-    "team": "Viking FK",
-    "league": "Champions League",
-    "position": "Mediocampista",
-    "nationality": "Norway"
-  },
-  {
     "id": "fd-9167",
     "name": "Peter Christiansen",
     "team": "Viking FK",
@@ -54985,10 +55721,10 @@
   },
   {
     "id": "fd-265782",
-    "name": "Nicolás Previtali",
+    "name": "Nicolas Previtali",
     "team": "Virtus Entella",
     "league": "Copa Italia",
-    "position": "Mediocampista",
+    "position": "Defensor",
     "nationality": "Argentina"
   },
   {
@@ -56108,7 +56844,7 @@
     "name": "Muhammed Damar",
     "team": "Wolfsburg",
     "league": "DFB-Pokal",
-    "position": "Mediocampista",
+    "position": "Arquero",
     "nationality": "Germany"
   },
   {
