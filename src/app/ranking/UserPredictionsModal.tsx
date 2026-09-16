@@ -383,7 +383,15 @@ export default function UserPredictionsModal({
             }
           }
 
-          const matchDateMs = match?.match_date ? new Date(match.match_date).getTime() : 0;
+          const getEffectiveDateMs = (dStr?: string) => {
+            if (!dStr) return 0;
+            if (dStr.includes("T00:00:00") || dStr.length === 10) {
+              return new Date(`${dStr.slice(0, 10)}T20:00:00Z`).getTime();
+            }
+            return new Date(dStr).getTime();
+          };
+
+          const matchDateMs = getEffectiveDateMs(match?.match_date);
           const diffMin = matchDateMs > 0 ? (matchDateMs - nowTime) / (1000 * 60) : 0;
           
           // Un partido es finalizado si tiene resultado real cargado o si ya tiene puntos asignados
@@ -392,7 +400,7 @@ export default function UserPredictionsModal({
           const isFinished = hasScore || hasPoints;
 
           // Regla Anti-Copia: Un partido se revela si ya finalizó, o si su hora de inicio ya pasó (diffMin <= 1)
-          const isPastOrLocked = matchDateMs > 0 ? diffMin <= 1 : true;
+          const isPastOrLocked = matchDateMs > 0 ? diffMin <= 1 : false;
           const isLocked = isFinished || isPastOrLocked;
 
           const predScorers = scorersMap[pred.id] || [];

@@ -71,9 +71,20 @@ const positionRank = (pos: string) => {
   return 2;
 };
 
+function getEffectiveMatchTime(matchDate: string): number {
+  if (!matchDate) return 0;
+  // Si la fecha viene a medianoche (placeholder 00:00:00 sin hora asignada por la liga),
+  // se asume hora de partido vespertino (20:00 UTC) para no bloquear pronósticos en la madrugada.
+  if (matchDate.includes("T00:00:00") || matchDate.length === 10) {
+    const dayStr = matchDate.slice(0, 10);
+    return new Date(`${dayStr}T20:00:00Z`).getTime();
+  }
+  return new Date(matchDate).getTime();
+}
+
 function checkIsMatchLocked(matchDate: string, timeRef: number): boolean {
   if (!timeRef) return false;
-  const matchTime = new Date(matchDate).getTime();
+  const matchTime = getEffectiveMatchTime(matchDate);
   const diffMin = (matchTime - timeRef) / (1000 * 60);
   if (isNaN(diffMin)) return true;
   return diffMin <= 1;
@@ -84,7 +95,7 @@ function calculateTimeRemaining(
   timeRef: number
 ): { label: string; isUrgent: boolean; isClosed: boolean } {
   if (!timeRef) return { label: "...", isUrgent: false, isClosed: false };
-  const matchTime = new Date(matchDate).getTime();
+  const matchTime = getEffectiveMatchTime(matchDate);
   const diffMin = (matchTime - timeRef) / (1000 * 60);
 
   if (isNaN(diffMin) || diffMin <= 1) {

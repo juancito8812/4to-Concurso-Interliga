@@ -6,9 +6,9 @@
     "match_date": "2026-08-08T18:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/120.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3258.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f43a59",
@@ -17,9 +17,9 @@
     "match_date": "2026-08-08T18:30Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3346.png",
     "away_logo": "",
-    "matchday": null
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f43a5a",
@@ -28,9 +28,9 @@
     "match_date": "2026-08-09T17:45Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3345.png",
     "away_logo": "",
-    "matchday": null
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f43a57",
@@ -39,9 +39,9 @@
     "match_date": "2026-08-09T19:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4059.png",
     "away_logo": "",
-    "matchday": null
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f49c3a",
@@ -50,9 +50,9 @@
     "match_date": "2026-08-14T16:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/115.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3258.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000017f49e47",
@@ -61,9 +61,9 @@
     "match_date": "2026-08-14T16:30Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2925.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3345.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000017f43a56",
@@ -72,9 +72,9 @@
     "match_date": "2026-08-14T18:45Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4007.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4055.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000017f49e48",
@@ -83,9 +83,9 @@
     "match_date": "2026-08-14T19:15Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4059.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000017f43a55",
@@ -94,9 +94,9 @@
     "match_date": "2026-08-15T16:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3257.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11139.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000017f43a54",
@@ -105,9 +105,9 @@
     "match_date": "2026-08-15T16:30Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/118.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3952.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000000089d9a",
@@ -127,9 +127,9 @@
     "match_date": "2026-08-15T18:45Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17530.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2573.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000017f43a52",
@@ -138,9 +138,9 @@
     "match_date": "2026-08-15T19:15Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/239.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3988.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000000089d99",
@@ -171,9 +171,9 @@
     "match_date": "2026-08-16T16:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4057.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3975.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000017f49c2e",
@@ -182,9 +182,9 @@
     "match_date": "2026-08-16T16:30Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3263.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3346.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000000089d98",
@@ -204,9 +204,9 @@
     "match_date": "2026-08-16T18:45Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/119.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11137.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000017f43a4f",
@@ -215,9 +215,9 @@
     "match_date": "2026-08-16T19:15Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/112.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3991.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000017f43a4e",
@@ -226,9 +226,9 @@
     "match_date": "2026-08-17T16:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3956.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2574.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000017f43a4d",
@@ -237,9 +237,9 @@
     "match_date": "2026-08-17T16:30Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3997.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3337.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000017f43a4c",
@@ -248,9 +248,9 @@
     "match_date": "2026-08-17T18:45Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4050.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2734.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000000089d9b",
@@ -270,9 +270,9 @@
     "match_date": "2026-08-17T19:15Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2923.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/113.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000000089d94",
@@ -303,9 +303,9 @@
     "match_date": "2026-08-21T16:00Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9867.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4471.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f420f5",
@@ -315,8 +315,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/125.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f420eb",
@@ -326,8 +326,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/130.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f420f3",
@@ -336,9 +336,9 @@
     "match_date": "2026-08-21T18:45Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/128.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000000089da7",
@@ -369,9 +369,9 @@
     "match_date": "2026-08-22T11:00Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/123.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3841.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f41fcb",
@@ -380,9 +380,9 @@
     "match_date": "2026-08-22T11:00Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3769.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000000088d9f",
@@ -402,9 +402,9 @@
     "match_date": "2026-08-22T13:30Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3849.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f41fd3",
@@ -414,8 +414,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2428.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f420e8",
@@ -425,8 +425,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/137.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f420ea",
@@ -435,9 +435,9 @@
     "match_date": "2026-08-22T13:30Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3308.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10388.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f420ed",
@@ -446,9 +446,9 @@
     "match_date": "2026-08-22T13:30Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/18741.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/129.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f420ec",
@@ -458,8 +458,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/269.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000000088da0",
@@ -513,8 +513,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f420f2",
@@ -524,8 +524,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2506.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f41fcc",
@@ -534,9 +534,9 @@
     "match_date": "2026-08-22T16:00Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/135.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7884.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000000088da3",
@@ -622,9 +622,9 @@
     "match_date": "2026-08-23T11:00Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3070.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/121.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f420ee",
@@ -634,8 +634,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6418.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000000088da4",
@@ -667,8 +667,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10382.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f420f1",
@@ -677,9 +677,9 @@
     "match_date": "2026-08-23T13:30Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9865.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3812.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f41fc9",
@@ -689,8 +689,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/268.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f42112",
@@ -699,9 +699,9 @@
     "match_date": "2026-08-23T13:30Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3067.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/598.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f420f6",
@@ -711,8 +711,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2950.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f420e7",
@@ -722,8 +722,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7017.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000000089da6",
@@ -755,8 +755,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3307.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f41fd5",
@@ -765,9 +765,9 @@
     "match_date": "2026-08-23T16:00Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9707.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f420f4",
@@ -777,8 +777,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/270.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-00000008862b",
@@ -854,8 +854,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/127.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f41fd1",
@@ -865,8 +865,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/138.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000017f41fd0",
@@ -875,9 +875,9 @@
     "match_date": "2026-08-24T16:00Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17491.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/122.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000000088626",
@@ -909,8 +909,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/133.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-00000008862e",
@@ -1425,9 +1425,9 @@
     "match_date": "2026-09-01T16:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/115.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4050.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f42101",
@@ -1437,8 +1437,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000017f4a7a0",
@@ -1447,9 +1447,9 @@
     "match_date": "2026-09-01T19:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/239.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4007.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4affe",
@@ -1458,9 +1458,9 @@
     "match_date": "2026-09-02T13:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3997.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4057.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4aeeb",
@@ -1469,9 +1469,9 @@
     "match_date": "2026-09-02T16:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/118.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17530.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f420e6",
@@ -1480,9 +1480,9 @@
     "match_date": "2026-09-02T18:45Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7013.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
+    "matchday": 2
   },
   {
     "id": "00000000-0000-4000-8000-000017f4b001",
@@ -1491,9 +1491,9 @@
     "match_date": "2026-09-03T16:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2923.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3991.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4af67",
@@ -1502,9 +1502,9 @@
     "match_date": "2026-09-03T19:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2925.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/119.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000000089dca",
@@ -1953,8 +1953,8 @@
     "match_date": "2026-09-08T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/887.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4411.png",
     "matchday": 1
   },
   {
@@ -1964,8 +1964,8 @@
     "match_date": "2026-09-08T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/570.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
     "matchday": 1
   },
   {
@@ -1975,8 +1975,8 @@
     "match_date": "2026-09-08T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
     "matchday": 1
   },
   {
@@ -1986,8 +1986,8 @@
     "match_date": "2026-09-08T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/437.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
     "matchday": 1
   },
   {
@@ -1997,8 +1997,8 @@
     "match_date": "2026-09-08T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/166.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
     "matchday": 1
   },
   {
@@ -2008,8 +2008,8 @@
     "match_date": "2026-09-08T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
     "matchday": 1
   },
   {
@@ -2019,8 +2019,8 @@
     "match_date": "2026-09-09T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/142.png",
     "matchday": 1
   },
   {
@@ -2030,8 +2030,8 @@
     "match_date": "2026-09-09T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/510.png",
     "matchday": 1
   },
   {
@@ -2041,8 +2041,8 @@
     "match_date": "2026-09-09T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
     "matchday": 1
   },
   {
@@ -2052,8 +2052,8 @@
     "match_date": "2026-09-09T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/114.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
     "matchday": 1
   },
   {
@@ -2063,8 +2063,8 @@
     "match_date": "2026-09-09T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/521.png",
     "matchday": 1
   },
   {
@@ -2074,8 +2074,8 @@
     "match_date": "2026-09-09T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2250.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png",
     "matchday": 1
   },
   {
@@ -2085,8 +2085,8 @@
     "match_date": "2026-09-10T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/436.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
     "matchday": 1
   },
   {
@@ -2096,8 +2096,8 @@
     "match_date": "2026-09-10T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/148.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/493.png",
     "matchday": 1
   },
   {
@@ -2107,8 +2107,8 @@
     "match_date": "2026-09-10T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2980.png",
     "matchday": 1
   },
   {
@@ -2118,8 +2118,8 @@
     "match_date": "2026-09-10T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
     "matchday": 1
   },
   {
@@ -2129,8 +2129,8 @@
     "match_date": "2026-09-10T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21922.png",
     "matchday": 1
   },
   {
@@ -2140,8 +2140,8 @@
     "match_date": "2026-09-10T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/494.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/175.png",
     "matchday": 1
   },
   {
@@ -2580,9 +2580,9 @@
     "match_date": "2026-09-15T16:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3263.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11139.png",
+    "matchday": 4
   },
   {
     "id": "00000000-0000-4000-8000-000000089dc6",
@@ -2613,9 +2613,9 @@
     "match_date": "2026-09-15T19:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3956.png",
+    "matchday": 4
   },
   {
     "id": "00000000-0000-4000-8000-000000089dc9",
@@ -2627,6 +2627,28 @@
     "home_logo": "https://crests.football-data.org/285.png",
     "away_logo": "https://crests.football-data.org/86.png",
     "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beca",
+    "home_team": "Ararat-Armenia",
+    "away_team": "Sparta Prague",
+    "match_date": "2026-09-16T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20024.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/433.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bedb",
+    "home_team": "AC Omonia",
+    "away_team": "Celta Vigo",
+    "match_date": "2026-09-16T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/617.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000000089dc7",
@@ -2651,6 +2673,83 @@
     "matchday": 6
   },
   {
+    "id": "00000000-0000-4000-8000-000017f4bec2",
+    "home_team": "AC Milan",
+    "away_team": "Benfica",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1929.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec6",
+    "home_team": "Anderlecht",
+    "away_team": "Olympique Lyon",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/441.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/167.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec3",
+    "home_team": "Bayer Leverkusen",
+    "away_team": "Celje",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3362.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec5",
+    "home_team": "Hapoel Be'er Sheva",
+    "away_team": "Dinamo Zagreb",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/13083.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/597.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec4",
+    "home_team": "PAE Olympiakos SFP",
+    "away_team": "Jagiellonia",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/435.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11505.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec9",
+    "home_team": "Sturm Graz",
+    "away_team": "Rennes",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3746.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/169.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec8",
+    "home_team": "Sunderland",
+    "away_team": "AZ Alkmaar",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/140.png",
+    "matchday": 1
+  },
+  {
     "id": "00000000-0000-4000-8000-000000089dcd",
     "home_team": "Levante",
     "away_team": "Athletic Bilbao",
@@ -2673,6 +2772,28 @@
     "matchday": 6
   },
   {
+    "id": "00000000-0000-4000-8000-000017f4bec0",
+    "home_team": "Levski Sofia",
+    "away_team": "Red Bull Salzburg",
+    "match_date": "2026-09-17T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/490.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2790.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec1",
+    "home_team": "OFI",
+    "away_team": "Hoffenheim",
+    "match_date": "2026-09-17T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1010.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
+    "matchday": 1
+  },
+  {
     "id": "00000000-0000-4000-8000-000000089dce",
     "home_team": "Real Betis",
     "away_team": "Getafe",
@@ -2682,6 +2803,83 @@
     "home_logo": "https://crests.football-data.org/90.png",
     "away_logo": "https://crests.football-data.org/82.png",
     "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec7",
+    "home_team": "Beşiktaş",
+    "away_team": "Olympique de Marseille",
+    "match_date": "2026-09-17T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1895.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bebd",
+    "home_team": "Celtic",
+    "away_team": "Ferencváros",
+    "match_date": "2026-09-17T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/256.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/622.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb1",
+    "home_team": "Crystal Palace",
+    "away_team": "Lech Poznań",
+    "match_date": "2026-09-17T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2990.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bebe",
+    "home_team": "Juventus",
+    "away_team": "NEC",
+    "match_date": "2026-09-17T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/147.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb2",
+    "home_team": "Lillestrøm",
+    "away_team": "Torreense",
+    "match_date": "2026-09-17T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/987.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21615.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bebf",
+    "home_team": "Real Sociedad",
+    "away_team": "Bournemouth",
+    "match_date": "2026-09-17T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bebc",
+    "home_team": "Viktoria Plzeň",
+    "away_team": "Royale Union Saint-Gilloise",
+    "match_date": "2026-09-17T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11706.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5807.png",
+    "matchday": 1
   },
   {
     "id": "00000000-0000-4000-8000-000000089dcb",
@@ -3559,8 +3757,8 @@
     "match_date": "2026-10-13T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/175.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2250.png",
     "matchday": 2
   },
   {
@@ -3570,8 +3768,8 @@
     "match_date": "2026-10-13T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21922.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/494.png",
     "matchday": 2
   },
   {
@@ -3581,8 +3779,8 @@
     "match_date": "2026-10-13T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/166.png",
     "matchday": 2
   },
   {
@@ -3592,8 +3790,8 @@
     "match_date": "2026-10-13T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
     "matchday": 2
   },
   {
@@ -3603,8 +3801,8 @@
     "match_date": "2026-10-13T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
     "matchday": 2
   },
   {
@@ -3614,8 +3812,8 @@
     "match_date": "2026-10-13T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/570.png",
     "matchday": 2
   },
   {
@@ -3625,8 +3823,8 @@
     "match_date": "2026-10-13T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/148.png",
     "matchday": 2
   },
   {
@@ -3636,8 +3834,8 @@
     "match_date": "2026-10-13T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/510.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
     "matchday": 2
   },
   {
@@ -3647,8 +3845,8 @@
     "match_date": "2026-10-13T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/114.png",
     "matchday": 2
   },
   {
@@ -3658,8 +3856,8 @@
     "match_date": "2026-10-14T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/142.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
     "matchday": 2
   },
   {
@@ -3669,8 +3867,8 @@
     "match_date": "2026-10-14T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4411.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
     "matchday": 2
   },
   {
@@ -3680,8 +3878,8 @@
     "match_date": "2026-10-14T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
     "matchday": 2
   },
   {
@@ -3691,8 +3889,8 @@
     "match_date": "2026-10-14T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/436.png",
     "matchday": 2
   },
   {
@@ -3702,8 +3900,8 @@
     "match_date": "2026-10-14T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2980.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
     "matchday": 2
   },
   {
@@ -3713,8 +3911,8 @@
     "match_date": "2026-10-14T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
     "matchday": 2
   },
   {
@@ -3724,8 +3922,8 @@
     "match_date": "2026-10-14T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/437.png",
     "matchday": 2
   },
   {
@@ -3735,8 +3933,8 @@
     "match_date": "2026-10-14T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/493.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/887.png",
     "matchday": 2
   },
   {
@@ -3746,8 +3944,404 @@
     "match_date": "2026-10-14T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/521.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfcf",
+    "home_team": "CSKA Sofia",
+    "away_team": "AS Monaco FC",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10834.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/174.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfce",
+    "home_team": "Universitatea Craiova",
+    "away_team": "Getafe",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8089.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfd3",
+    "home_team": "Egnatia",
+    "away_team": "Midtjylland",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21943.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/572.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf64",
+    "home_team": "Lugano",
+    "away_team": "Red Star Belgrade",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7672.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2290.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfd5",
+    "home_team": "Hajduk Split",
+    "away_team": "AFC Ajax",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/489.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/139.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfd4",
+    "home_team": "Gent",
+    "away_team": "AGF",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3611.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7853.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfd2",
+    "home_team": "KuPS",
+    "away_team": "Trabzonspor",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8169.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/997.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfd1",
+    "home_team": "Mjällby",
+    "away_team": "Inter Club d'Escaldes",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20301.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20703.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfd0",
+    "home_team": "Panathinaikos",
+    "away_team": "Borac Banja Luka",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/443.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20710.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf63",
+    "home_team": "Riga",
+    "away_team": "FK Kairat",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/19246.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2528.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb5",
+    "home_team": "AZ Alkmaar",
+    "away_team": "Hapoel Be'er Sheva",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/140.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/13083.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb8",
+    "home_team": "Lech Poznań",
+    "away_team": "Bayer Leverkusen",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2990.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beae",
+    "home_team": "Olympique Lyon",
+    "away_team": "Crystal Palace",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/167.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb9",
+    "home_team": "Celje",
+    "away_team": "AC Omonia",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3362.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/617.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb0",
+    "home_team": "Red Bull Salzburg",
+    "away_team": "AC Milan",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2790.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beaf",
+    "home_team": "Sparta Prague",
+    "away_team": "Lillestrøm",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/433.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/987.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb7",
+    "home_team": "Torreense",
+    "away_team": "Sunderland",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21615.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb6",
+    "home_team": "Royale Union Saint-Gilloise",
+    "away_team": "Real Sociedad",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5807.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf62",
+    "home_team": "Atalanta",
+    "away_team": "Pafos FC",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/22281.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfcd",
+    "home_team": "Brighton",
+    "away_team": "Kauno Žalgiris",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20028.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfcc",
+    "home_team": "FC København",
+    "away_team": "Braga",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/909.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2994.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfcb",
+    "home_team": "Twente",
+    "away_team": "Thun",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/152.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3024.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfca",
+    "home_team": "Hearts",
+    "away_team": "Nordsjælland",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/262.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3101.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfc8",
+    "home_team": "Freiburg",
+    "away_team": "Jablonec",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7922.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfc9",
+    "home_team": "Sint-Truiden",
+    "away_team": "Iberia 1999",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/936.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20025.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfc7",
+    "home_team": "Brann",
+    "away_team": "Lincoln Red Imps",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/620.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17856.png",
+    "matchday": 1
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb3",
+    "home_team": "Bournemouth",
+    "away_team": "Sturm Graz",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3746.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beaa",
+    "home_team": "Benfica",
+    "away_team": "Celtic",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1929.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/256.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bea8",
+    "home_team": "Celta Vigo",
+    "away_team": "Juventus",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be9d",
+    "home_team": "Dinamo Zagreb",
+    "away_team": "Anderlecht",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/597.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/441.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beac",
+    "home_team": "Ferencváros",
+    "away_team": "Viktoria Plzeň",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/622.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11706.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bea9",
+    "home_team": "Jagiellonia",
+    "away_team": "Ararat-Armenia",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11505.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20024.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be9e",
+    "home_team": "Olympique de Marseille",
+    "away_team": "PAE Olympiakos SFP",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/435.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bead",
+    "home_team": "NEC",
+    "away_team": "Levski Sofia",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/147.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/490.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb4",
+    "home_team": "Rennes",
+    "away_team": "OFI",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/169.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1010.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beab",
+    "home_team": "Hoffenheim",
+    "away_team": "Beşiktaş",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1895.png",
     "matchday": 2
   },
   {
@@ -3773,6 +4367,17 @@
     "matchday": 7
   },
   {
+    "id": "00000000-0000-4000-8000-000000089dec",
+    "home_team": "Deportivo La Coruña",
+    "away_team": "Levante",
+    "match_date": "2026-10-16T19:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/560.png",
+    "away_logo": "https://crests.football-data.org/88.png",
+    "matchday": 9
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088ddb",
     "home_team": "Everton",
     "away_team": "Chelsea",
@@ -3782,6 +4387,17 @@
     "home_logo": "https://crests.football-data.org/62.png",
     "away_logo": "https://crests.football-data.org/61.png",
     "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de6",
+    "home_team": "Espanyol",
+    "away_team": "Atlético Madrid",
+    "match_date": "2026-10-17T12:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/80.png",
+    "away_logo": "https://crests.football-data.org/78.png",
+    "matchday": 9
   },
   {
     "id": "00000000-0000-4000-8000-0000000885ef",
@@ -3883,6 +4499,17 @@
     "matchday": 7
   },
   {
+    "id": "00000000-0000-4000-8000-000000089de4",
+    "home_team": "Villarreal",
+    "away_team": "Elche",
+    "match_date": "2026-10-17T14:15:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/94.png",
+    "away_logo": "https://crests.football-data.org/285.png",
+    "matchday": 9
+  },
+  {
     "id": "00000000-0000-4000-8000-0000000885eb",
     "home_team": "Bologna",
     "away_team": "Inter Milan",
@@ -3903,6 +4530,17 @@
     "home_logo": "https://crests.football-data.org/5.png",
     "away_logo": "https://crests.football-data.org/721.png",
     "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de9",
+    "home_team": "Real Betis",
+    "away_team": "Barcelona",
+    "match_date": "2026-10-17T16:30:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/90.png",
+    "away_logo": "https://crests.football-data.org/81.png",
+    "matchday": 9
   },
   {
     "id": "00000000-0000-4000-8000-000000088ddf",
@@ -3927,113 +4565,14 @@
     "matchday": 7
   },
   {
-    "id": "00000000-0000-4000-8000-000000089de4",
-    "home_team": "Villarreal",
-    "away_team": "Elche",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/94.png",
-    "away_logo": "https://crests.football-data.org/285.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089de5",
-    "home_team": "Real Madrid",
-    "away_team": "Sevilla",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/86.png",
-    "away_logo": "https://crests.football-data.org/559.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089de6",
-    "home_team": "Espanyol",
-    "away_team": "Atlético Madrid",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/80.png",
-    "away_logo": "https://crests.football-data.org/78.png",
-    "matchday": 9
-  },
-  {
     "id": "00000000-0000-4000-8000-000000089de7",
     "home_team": "Valencia",
     "away_team": "Athletic Bilbao",
-    "match_date": "2026-10-18T00:00:00Z",
+    "match_date": "2026-10-17T19:00:00Z",
     "league": "LaLiga",
     "competition_code": "PD",
     "home_logo": "https://crests.football-data.org/95.png",
     "away_logo": "https://crests.football-data.org/77.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089de8",
-    "home_team": "Celta Vigo",
-    "away_team": "Alavés",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/558.png",
-    "away_logo": "https://crests.football-data.org/263.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089de9",
-    "home_team": "Real Betis",
-    "away_team": "Barcelona",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/90.png",
-    "away_logo": "https://crests.football-data.org/81.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dea",
-    "home_team": "Málaga",
-    "away_team": "Real Sociedad",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/84.png",
-    "away_logo": "https://crests.football-data.org/92.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089deb",
-    "home_team": "Osasuna",
-    "away_team": "Racing Santander",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/79.png",
-    "away_logo": "https://crests.football-data.org/5335.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dec",
-    "home_team": "Deportivo La Coruña",
-    "away_team": "Levante",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/560.png",
-    "away_logo": "https://crests.football-data.org/88.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089ded",
-    "home_team": "Getafe",
-    "away_team": "Rayo Vallecano",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/82.png",
-    "away_logo": "https://crests.football-data.org/87.png",
     "matchday": 9
   },
   {
@@ -4046,6 +4585,17 @@
     "home_logo": "https://crests.football-data.org/115.png",
     "away_logo": "https://crests.football-data.org/5890.png",
     "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089deb",
+    "home_team": "Osasuna",
+    "away_team": "Racing Santander",
+    "match_date": "2026-10-18T12:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/79.png",
+    "away_logo": "https://crests.football-data.org/5335.png",
+    "matchday": 9
   },
   {
     "id": "00000000-0000-4000-8000-000000088ddc",
@@ -4103,6 +4653,17 @@
     "matchday": 6
   },
   {
+    "id": "00000000-0000-4000-8000-000000089de8",
+    "home_team": "Celta Vigo",
+    "away_team": "Alavés",
+    "match_date": "2026-10-18T14:15:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/558.png",
+    "away_logo": "https://crests.football-data.org/263.png",
+    "matchday": 9
+  },
+  {
     "id": "00000000-0000-4000-8000-00000008a242",
     "home_team": "Borussia Mönchengladbach",
     "away_team": "Hoffenheim",
@@ -4136,6 +4697,17 @@
     "matchday": 7
   },
   {
+    "id": "00000000-0000-4000-8000-000000089dea",
+    "home_team": "Málaga",
+    "away_team": "Real Sociedad",
+    "match_date": "2026-10-18T16:30:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/84.png",
+    "away_logo": "https://crests.football-data.org/92.png",
+    "matchday": 9
+  },
+  {
     "id": "00000000-0000-4000-8000-0000000885ea",
     "home_team": "Juventus",
     "away_team": "Lazio",
@@ -4145,6 +4717,17 @@
     "home_logo": "https://crests.football-data.org/109.png",
     "away_logo": "https://crests.football-data.org/110.png",
     "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de5",
+    "home_team": "Real Madrid",
+    "away_team": "Sevilla",
+    "match_date": "2026-10-18T19:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/86.png",
+    "away_logo": "https://crests.football-data.org/559.png",
+    "matchday": 9
   },
   {
     "id": "00000000-0000-4000-8000-0000000885f0",
@@ -4169,6 +4752,17 @@
     "matchday": 7
   },
   {
+    "id": "00000000-0000-4000-8000-000000089ded",
+    "home_team": "Getafe",
+    "away_team": "Rayo Vallecano",
+    "match_date": "2026-10-19T19:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/82.png",
+    "away_logo": "https://crests.football-data.org/87.png",
+    "matchday": 9
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088dde",
     "home_team": "Tottenham",
     "away_team": "Coventry City",
@@ -4186,8 +4780,8 @@
     "match_date": "2026-10-20T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/436.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/494.png",
     "matchday": 3
   },
   {
@@ -4197,8 +4791,8 @@
     "match_date": "2026-10-20T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21922.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
     "matchday": 3
   },
   {
@@ -4208,8 +4802,8 @@
     "match_date": "2026-10-20T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/521.png",
     "matchday": 3
   },
   {
@@ -4219,8 +4813,8 @@
     "match_date": "2026-10-20T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/437.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/148.png",
     "matchday": 3
   },
   {
@@ -4230,8 +4824,8 @@
     "match_date": "2026-10-20T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
     "matchday": 3
   },
   {
@@ -4241,8 +4835,8 @@
     "match_date": "2026-10-20T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/887.png",
     "matchday": 3
   },
   {
@@ -4252,8 +4846,8 @@
     "match_date": "2026-10-20T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/114.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2980.png",
     "matchday": 3
   },
   {
@@ -4263,8 +4857,8 @@
     "match_date": "2026-10-20T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
     "matchday": 3
   },
   {
@@ -4274,8 +4868,8 @@
     "match_date": "2026-10-20T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
     "matchday": 3
   },
   {
@@ -4285,8 +4879,8 @@
     "match_date": "2026-10-21T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
     "matchday": 3
   },
   {
@@ -4296,8 +4890,8 @@
     "match_date": "2026-10-21T16:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/166.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png",
     "matchday": 3
   },
   {
@@ -4307,8 +4901,8 @@
     "match_date": "2026-10-21T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/510.png",
     "matchday": 3
   },
   {
@@ -4318,8 +4912,8 @@
     "match_date": "2026-10-21T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
     "matchday": 3
   },
   {
@@ -4329,8 +4923,8 @@
     "match_date": "2026-10-21T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/570.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/175.png",
     "matchday": 3
   },
   {
@@ -4340,8 +4934,8 @@
     "match_date": "2026-10-21T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/493.png",
     "matchday": 3
   },
   {
@@ -4351,8 +4945,8 @@
     "match_date": "2026-10-21T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/142.png",
     "matchday": 3
   },
   {
@@ -4362,8 +4956,8 @@
     "match_date": "2026-10-21T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
     "matchday": 3
   },
   {
@@ -4373,8 +4967,404 @@
     "match_date": "2026-10-21T19:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2250.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4411.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfc6",
+    "home_team": "FK Kairat",
+    "away_team": "Panathinaikos",
+    "match_date": "2026-10-22T14:30Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2528.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/443.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfc4",
+    "home_team": "Nordsjælland",
+    "away_team": "CSKA Sofia",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3101.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10834.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfc0",
+    "home_team": "Getafe",
+    "away_team": "Lugano",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7672.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfc5",
+    "home_team": "Iberia 1999",
+    "away_team": "Mjällby",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20025.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20301.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfbf",
+    "home_team": "Inter Club d'Escaldes",
+    "away_team": "Universitatea Craiova",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20703.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8089.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfc2",
+    "home_team": "Jablonec",
+    "away_team": "Brighton",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7922.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfc1",
+    "home_team": "Kauno Žalgiris",
+    "away_team": "Brann",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20028.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/620.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfbe",
+    "home_team": "Pafos FC",
+    "away_team": "Riga",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/22281.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/19246.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfc3",
+    "home_team": "Red Star Belgrade",
+    "away_team": "FC København",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2290.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/909.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf61",
+    "home_team": "Trabzonspor",
+    "away_team": "Hearts",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/997.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/262.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be9c",
+    "home_team": "Ararat-Armenia",
+    "away_team": "AZ Alkmaar",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20024.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/140.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bea4",
+    "home_team": "Dinamo Zagreb",
+    "away_team": "NEC",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/597.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/147.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bea6",
+    "home_team": "Ferencváros",
+    "away_team": "Torreense",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/622.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21615.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be9b",
+    "home_team": "Juventus",
+    "away_team": "Rennes",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/169.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be9a",
+    "home_team": "Lech Poznań",
+    "away_team": "Sunderland",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2990.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bea7",
+    "home_team": "OFI",
+    "away_team": "Bayer Leverkusen",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1010.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bea5",
+    "home_team": "Sturm Graz",
+    "away_team": "Olympique de Marseille",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3746.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be99",
+    "home_team": "Royale Union Saint-Gilloise",
+    "away_team": "Hapoel Be'er Sheva",
+    "match_date": "2026-10-22T16:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5807.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/13083.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf60",
+    "home_team": "AGF",
+    "away_team": "Egnatia",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7853.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21943.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfbd",
+    "home_team": "AFC Ajax",
+    "away_team": "Atalanta",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/139.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfbc",
+    "home_team": "AS Monaco FC",
+    "away_team": "Freiburg",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/174.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf5f",
+    "home_team": "Borac Banja Luka",
+    "away_team": "KuPS",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20710.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8169.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfb8",
+    "home_team": "Braga",
+    "away_team": "Gent",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2994.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3611.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfbb",
+    "home_team": "Midtjylland",
+    "away_team": "Sint-Truiden",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/572.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/936.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfba",
+    "home_team": "Thun",
+    "away_team": "Hajduk Split",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3024.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/489.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfb9",
+    "home_team": "Lincoln Red Imps",
+    "away_team": "Twente",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17856.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/152.png",
+    "matchday": 2
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bea0",
+    "home_team": "Bournemouth",
+    "away_team": "AC Milan",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bea1",
+    "home_team": "Beşiktaş",
+    "away_team": "Crystal Palace",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1895.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bea3",
+    "home_team": "Celtic",
+    "away_team": "Celta Vigo",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/256.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be96",
+    "home_team": "Jagiellonia",
+    "away_team": "Anderlecht",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11505.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/441.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be94",
+    "home_team": "Lillestrøm",
+    "away_team": "Real Sociedad",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/987.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be95",
+    "home_team": "Celje",
+    "away_team": "Red Bull Salzburg",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3362.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2790.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bea2",
+    "home_team": "PAE Olympiakos SFP",
+    "away_team": "Sparta Prague",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/435.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/433.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be98",
+    "home_team": "AC Omonia",
+    "away_team": "Benfica",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/617.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1929.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be97",
+    "home_team": "Hoffenheim",
+    "away_team": "Olympique Lyon",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/167.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be93",
+    "home_team": "Viktoria Plzeň",
+    "away_team": "Levski Sofia",
+    "match_date": "2026-10-22T19:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11706.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/490.png",
     "matchday": 3
   },
   {
@@ -4813,9 +5803,9 @@
     "match_date": "2026-10-27T17:00Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/127.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/125.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4c463",
@@ -4825,8 +5815,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4c464",
@@ -4836,8 +5826,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3841.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4c465",
@@ -4846,9 +5836,9 @@
     "match_date": "2026-10-27T17:00Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/121.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2950.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-0000000885dc",
@@ -4868,9 +5858,9 @@
     "match_date": "2026-10-27T19:45Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/137.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4c467",
@@ -4879,9 +5869,9 @@
     "match_date": "2026-10-27T19:45Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/268.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4471.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4c462",
@@ -4890,9 +5880,9 @@
     "match_date": "2026-10-27T19:45Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/122.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/598.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4c3fb",
@@ -4901,9 +5891,9 @@
     "match_date": "2026-10-27T19:45Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10388.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3812.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-0000000885db",
@@ -4934,9 +5924,9 @@
     "match_date": "2026-10-28T17:00Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7017.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/133.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4c46c",
@@ -4945,9 +5935,9 @@
     "match_date": "2026-10-28T17:00Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/138.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4c468",
@@ -4956,9 +5946,9 @@
     "match_date": "2026-10-28T17:00Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3307.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4c3f7",
@@ -4968,8 +5958,8 @@
     "league": "DFB-Pokal",
     "competition_code": "DFB",
     "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/129.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-0000000885d5",
@@ -5011,9 +6001,9 @@
     "match_date": "2026-10-28T19:45Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/269.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4c46b",
@@ -5022,9 +6012,9 @@
     "match_date": "2026-10-28T19:45Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10382.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4c3fa",
@@ -5033,9 +6023,9 @@
     "match_date": "2026-10-28T19:45Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2428.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/130.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-000017f4c46a",
@@ -5044,9 +6034,9 @@
     "match_date": "2026-10-28T19:45Z",
     "league": "DFB-Pokal",
     "competition_code": "DFB",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7884.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
+    "matchday": 3
   },
   {
     "id": "00000000-0000-4000-8000-0000000885d8",
@@ -5528,8 +6518,8 @@
     "match_date": "2026-11-03T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
     "matchday": 4
   },
   {
@@ -5539,8 +6529,8 @@
     "match_date": "2026-11-03T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/493.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2250.png",
     "matchday": 4
   },
   {
@@ -5550,8 +6540,8 @@
     "match_date": "2026-11-03T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
     "matchday": 4
   },
   {
@@ -5561,8 +6551,8 @@
     "match_date": "2026-11-03T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
     "matchday": 4
   },
   {
@@ -5572,8 +6562,8 @@
     "match_date": "2026-11-03T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2980.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/166.png",
     "matchday": 4
   },
   {
@@ -5583,8 +6573,8 @@
     "match_date": "2026-11-03T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/142.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
     "matchday": 4
   },
   {
@@ -5594,8 +6584,8 @@
     "match_date": "2026-11-03T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4411.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/521.png",
     "matchday": 4
   },
   {
@@ -5605,8 +6595,8 @@
     "match_date": "2026-11-03T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
     "matchday": 4
   },
   {
@@ -5616,8 +6606,8 @@
     "match_date": "2026-11-03T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
     "matchday": 4
   },
   {
@@ -5627,8 +6617,8 @@
     "match_date": "2026-11-04T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/887.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
     "matchday": 4
   },
   {
@@ -5638,8 +6628,8 @@
     "match_date": "2026-11-04T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/436.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
     "matchday": 4
   },
   {
@@ -5649,8 +6639,8 @@
     "match_date": "2026-11-04T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
     "matchday": 4
   },
   {
@@ -5660,8 +6650,8 @@
     "match_date": "2026-11-04T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/437.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/114.png",
     "matchday": 4
   },
   {
@@ -5671,8 +6661,8 @@
     "match_date": "2026-11-04T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/175.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
     "matchday": 4
   },
   {
@@ -5682,8 +6672,8 @@
     "match_date": "2026-11-04T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/148.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/570.png",
     "matchday": 4
   },
   {
@@ -5693,8 +6683,8 @@
     "match_date": "2026-11-04T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
     "matchday": 4
   },
   {
@@ -5704,8 +6694,8 @@
     "match_date": "2026-11-04T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/494.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
     "matchday": 4
   },
   {
@@ -5715,8 +6705,404 @@
     "match_date": "2026-11-04T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/510.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21922.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfb7",
+    "home_team": "AGF",
+    "away_team": "Braga",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7853.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2994.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfb6",
+    "home_team": "Atalanta",
+    "away_team": "FK Kairat",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2528.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfb5",
+    "home_team": "Midtjylland",
+    "away_team": "AFC Ajax",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/572.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/139.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfb4",
+    "home_team": "Thun",
+    "away_team": "Hearts",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3024.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/262.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfb2",
+    "home_team": "KuPS",
+    "away_team": "Gent",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8169.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3611.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf5e",
+    "home_team": "Lincoln Red Imps",
+    "away_team": "Hajduk Split",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17856.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/489.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf5d",
+    "home_team": "Mjällby",
+    "away_team": "Borac Banja Luka",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20301.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20710.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfb3",
+    "home_team": "Red Star Belgrade",
+    "away_team": "Inter Club d'Escaldes",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2290.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20703.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfb1",
+    "home_team": "Trabzonspor",
+    "away_team": "Freiburg",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/997.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be8e",
+    "home_team": "AC Milan",
+    "away_team": "Ferencváros",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/622.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be92",
+    "home_team": "Anderlecht",
+    "away_team": "Red Bull Salzburg",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/441.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2790.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be86",
+    "home_team": "Crystal Palace",
+    "away_team": "Hoffenheim",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be90",
+    "home_team": "Levski Sofia",
+    "away_team": "Jagiellonia",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/490.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11505.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be87",
+    "home_team": "Lillestrøm",
+    "away_team": "Viktoria Plzeň",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/987.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11706.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be8f",
+    "home_team": "NEC",
+    "away_team": "AC Omonia",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/147.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/617.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be91",
+    "home_team": "Real Sociedad",
+    "away_team": "Olympique Lyon",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/167.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be88",
+    "home_team": "Sparta Prague",
+    "away_team": "Bournemouth",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/433.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be9f",
+    "home_team": "Rennes",
+    "away_team": "PAE Olympiakos SFP",
+    "match_date": "2026-11-05T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/169.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/435.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfb0",
+    "home_team": "AS Monaco FC",
+    "away_team": "Nordsjælland",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/174.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3101.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa9",
+    "home_team": "Universitatea Craiova",
+    "away_team": "Egnatia",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8089.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21943.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf5c",
+    "home_team": "FC København",
+    "away_team": "Iberia 1999",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/909.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20025.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfaf",
+    "home_team": "Lugano",
+    "away_team": "Kauno Žalgiris",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7672.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20028.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfae",
+    "home_team": "Twente",
+    "away_team": "Pafos FC",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/152.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/22281.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfad",
+    "home_team": "Getafe",
+    "away_team": "Brighton",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfab",
+    "home_team": "Panathinaikos",
+    "away_team": "CSKA Sofia",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/443.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10834.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfaa",
+    "home_team": "Riga",
+    "away_team": "Jablonec",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/19246.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7922.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfac",
+    "home_team": "Sint-Truiden",
+    "away_team": "Brann",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/936.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/620.png",
+    "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be89",
+    "home_team": "AZ Alkmaar",
+    "away_team": "Juventus",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/140.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be8d",
+    "home_team": "Bayer Leverkusen",
+    "away_team": "Olympique de Marseille",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be85",
+    "home_team": "Benfica",
+    "away_team": "Lech Poznań",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1929.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2990.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be8b",
+    "home_team": "Celta Vigo",
+    "away_team": "Royale Union Saint-Gilloise",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5807.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be82",
+    "home_team": "Celtic",
+    "away_team": "Beşiktaş",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/256.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1895.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be8c",
+    "home_team": "Hapoel Be'er Sheva",
+    "away_team": "OFI",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/13083.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1010.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be84",
+    "home_team": "Sturm Graz",
+    "away_team": "Celje",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3746.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3362.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be83",
+    "home_team": "Sunderland",
+    "away_team": "Dinamo Zagreb",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/597.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be8a",
+    "home_team": "Torreense",
+    "away_team": "Ararat-Armenia",
+    "match_date": "2026-11-05T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21615.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20024.png",
     "matchday": 4
   },
   {
@@ -6584,8 +7970,8 @@
     "match_date": "2026-11-24T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2980.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4411.png",
     "matchday": 5
   },
   {
@@ -6595,8 +7981,8 @@
     "match_date": "2026-11-24T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
     "matchday": 5
   },
   {
@@ -6606,8 +7992,8 @@
     "match_date": "2026-11-24T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
     "matchday": 5
   },
   {
@@ -6617,8 +8003,8 @@
     "match_date": "2026-11-24T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/887.png",
     "matchday": 5
   },
   {
@@ -6628,8 +8014,8 @@
     "match_date": "2026-11-24T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/142.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/437.png",
     "matchday": 5
   },
   {
@@ -6639,8 +8025,8 @@
     "match_date": "2026-11-24T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/114.png",
     "matchday": 5
   },
   {
@@ -6650,8 +8036,8 @@
     "match_date": "2026-11-24T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/175.png",
     "matchday": 5
   },
   {
@@ -6661,8 +8047,8 @@
     "match_date": "2026-11-24T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/148.png",
     "matchday": 5
   },
   {
@@ -6672,8 +8058,8 @@
     "match_date": "2026-11-24T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/521.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
     "matchday": 5
   },
   {
@@ -6683,8 +8069,8 @@
     "match_date": "2026-11-25T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21922.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
     "matchday": 5
   },
   {
@@ -6694,8 +8080,8 @@
     "match_date": "2026-11-25T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/494.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
     "matchday": 5
   },
   {
@@ -6705,8 +8091,8 @@
     "match_date": "2026-11-25T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/510.png",
     "matchday": 5
   },
   {
@@ -6716,8 +8102,8 @@
     "match_date": "2026-11-25T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/570.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
     "matchday": 5
   },
   {
@@ -6727,8 +8113,8 @@
     "match_date": "2026-11-25T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
     "matchday": 5
   },
   {
@@ -6738,8 +8124,8 @@
     "match_date": "2026-11-25T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/166.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
     "matchday": 5
   },
   {
@@ -6749,8 +8135,8 @@
     "match_date": "2026-11-25T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
     "matchday": 5
   },
   {
@@ -6760,8 +8146,8 @@
     "match_date": "2026-11-25T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/493.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/436.png",
     "matchday": 5
   },
   {
@@ -6771,8 +8157,404 @@
     "match_date": "2026-11-25T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2250.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa8",
+    "home_team": "FK Kairat",
+    "away_team": "Mjällby",
+    "match_date": "2026-11-26T15:30Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2528.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20301.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa7",
+    "home_team": "AFC Ajax",
+    "away_team": "Thun",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/139.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3024.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa6",
+    "home_team": "Brighton",
+    "away_team": "Universitatea Craiova",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8089.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa2",
+    "home_team": "Egnatia",
+    "away_team": "Lincoln Red Imps",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21943.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17856.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa3",
+    "home_team": "Hearts",
+    "away_team": "AS Monaco FC",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/262.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/174.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa5",
+    "home_team": "Iberia 1999",
+    "away_team": "Getafe",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20025.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa4",
+    "home_team": "Jablonec",
+    "away_team": "Lugano",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7922.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7672.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf5b",
+    "home_team": "Kauno Žalgiris",
+    "away_team": "Riga",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20028.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/19246.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa1",
+    "home_team": "Pafos FC",
+    "away_team": "Midtjylland",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/22281.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/572.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa0",
+    "home_team": "Brann",
+    "away_team": "AGF",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/620.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7853.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be72",
+    "home_team": "Beşiktaş",
+    "away_team": "Hapoel Be'er Sheva",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1895.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/13083.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be7f",
+    "home_team": "Celta Vigo",
+    "away_team": "Bournemouth",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be7d",
+    "home_team": "Dinamo Zagreb",
+    "away_team": "Bayer Leverkusen",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/597.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be73",
+    "home_team": "Olympique de Marseille",
+    "away_team": "Levski Sofia",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/490.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be81",
+    "home_team": "PAE Olympiakos SFP",
+    "away_team": "AC Milan",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/435.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be80",
+    "home_team": "Red Bull Salzburg",
+    "away_team": "Ararat-Armenia",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2790.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20024.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be74",
+    "home_team": "Royale Union Saint-Gilloise",
+    "away_team": "Lech Poznań",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5807.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2990.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be7e",
+    "home_team": "Viktoria Plzeň",
+    "away_team": "Benfica",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11706.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1929.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf9e",
+    "home_team": "Borac Banja Luka",
+    "away_team": "Atalanta",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20710.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf9a",
+    "home_team": "Braga",
+    "away_team": "KuPS",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2994.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8169.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf9b",
+    "home_team": "CSKA Sofia",
+    "away_team": "Trabzonspor",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10834.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/997.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf9f",
+    "home_team": "Nordsjælland",
+    "away_team": "Panathinaikos",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3101.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/443.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf9d",
+    "home_team": "Hajduk Split",
+    "away_team": "Sint-Truiden",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/489.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/936.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf5a",
+    "home_team": "Inter Club d'Escaldes",
+    "away_team": "FC København",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20703.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/909.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf9c",
+    "home_team": "Gent",
+    "away_team": "Red Star Belgrade",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3611.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2290.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf99",
+    "home_team": "Freiburg",
+    "away_team": "Twente",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/152.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be70",
+    "home_team": "Crystal Palace",
+    "away_team": "Real Sociedad",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be7c",
+    "home_team": "Ferencváros",
+    "away_team": "Celje",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/622.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3362.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be6e",
+    "home_team": "Juventus",
+    "away_team": "AC Omonia",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/617.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be6d",
+    "home_team": "Olympique Lyon",
+    "away_team": "Lillestrøm",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/167.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/987.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be71",
+    "home_team": "NEC",
+    "away_team": "Rennes",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/147.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/169.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be6f",
+    "home_team": "OFI",
+    "away_team": "Anderlecht",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1010.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/441.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be7a",
+    "home_team": "Sparta Prague",
+    "away_team": "AZ Alkmaar",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/433.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/140.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be79",
+    "home_team": "Sunderland",
+    "away_team": "Jagiellonia",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11505.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be78",
+    "home_team": "Torreense",
+    "away_team": "Celtic",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21615.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/256.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be7b",
+    "home_team": "Hoffenheim",
+    "away_team": "Sturm Graz",
+    "match_date": "2026-11-26T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3746.png",
     "matchday": 5
   },
   {
@@ -7211,9 +8993,9 @@
     "match_date": "2026-12-02T20:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4007.png",
+    "matchday": 5
   },
   {
     "id": "00000000-0000-4000-8000-000017f4b2b0",
@@ -7222,9 +9004,9 @@
     "match_date": "2026-12-02T20:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/119.png",
+    "matchday": 5
   },
   {
     "id": "00000000-0000-4000-8000-000017f4b1af",
@@ -7233,9 +9015,9 @@
     "match_date": "2026-12-02T20:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/118.png",
+    "matchday": 5
   },
   {
     "id": "00000000-0000-4000-8000-000017f4b1c2",
@@ -7244,9 +9026,9 @@
     "match_date": "2026-12-02T20:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/107.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2923.png",
+    "matchday": 5
   },
   {
     "id": "00000000-0000-4000-8000-000017f4b2af",
@@ -7255,9 +9037,20 @@
     "match_date": "2026-12-02T20:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4050.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4b1c1",
+    "home_team": "Inter Milan",
+    "away_team": "Genoa",
+    "match_date": "2026-12-02T20:00Z",
+    "league": "Copa Italia",
+    "competition_code": "CI",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3263.png",
+    "matchday": 5
   },
   {
     "id": "00000000-0000-4000-8000-000017f4b1c5",
@@ -7266,9 +9059,20 @@
     "match_date": "2026-12-02T20:00Z",
     "league": "Copa Italia",
     "competition_code": "CI",
-    "home_logo": "",
-    "away_logo": "",
-    "matchday": null
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3997.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4b1bb",
+    "home_team": "Napoli",
+    "away_team": "Fiorentina",
+    "match_date": "2026-12-02T20:00Z",
+    "league": "Copa Italia",
+    "competition_code": "CI",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/114.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/109.png",
+    "matchday": 5
   },
   {
     "id": "00000000-0000-4000-8000-000000088e16",
@@ -7816,8 +9620,8 @@
     "match_date": "2026-12-08T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/510.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/142.png",
     "matchday": 6
   },
   {
@@ -7827,8 +9631,8 @@
     "match_date": "2026-12-08T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21922.png",
     "matchday": 6
   },
   {
@@ -7838,8 +9642,8 @@
     "match_date": "2026-12-08T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/887.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png",
     "matchday": 6
   },
   {
@@ -7849,8 +9653,8 @@
     "match_date": "2026-12-08T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2250.png",
     "matchday": 6
   },
   {
@@ -7860,8 +9664,8 @@
     "match_date": "2026-12-08T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
     "matchday": 6
   },
   {
@@ -7871,8 +9675,8 @@
     "match_date": "2026-12-08T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
     "matchday": 6
   },
   {
@@ -7882,8 +9686,8 @@
     "match_date": "2026-12-08T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/494.png",
     "matchday": 6
   },
   {
@@ -7893,8 +9697,8 @@
     "match_date": "2026-12-08T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
     "matchday": 6
   },
   {
@@ -7904,8 +9708,8 @@
     "match_date": "2026-12-08T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/114.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/570.png",
     "matchday": 6
   },
   {
@@ -7915,8 +9719,8 @@
     "match_date": "2026-12-09T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
     "matchday": 6
   },
   {
@@ -7926,8 +9730,8 @@
     "match_date": "2026-12-09T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/521.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/493.png",
     "matchday": 6
   },
   {
@@ -7937,8 +9741,8 @@
     "match_date": "2026-12-09T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
     "matchday": 6
   },
   {
@@ -7948,8 +9752,8 @@
     "match_date": "2026-12-09T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
     "matchday": 6
   },
   {
@@ -7959,8 +9763,8 @@
     "match_date": "2026-12-09T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4411.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/436.png",
     "matchday": 6
   },
   {
@@ -7970,8 +9774,8 @@
     "match_date": "2026-12-09T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/175.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2980.png",
     "matchday": 6
   },
   {
@@ -7981,8 +9785,8 @@
     "match_date": "2026-12-09T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/437.png",
     "matchday": 6
   },
   {
@@ -7992,8 +9796,8 @@
     "match_date": "2026-12-09T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/148.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
     "matchday": 6
   },
   {
@@ -8003,8 +9807,404 @@
     "match_date": "2026-12-09T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/166.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf59",
+    "home_team": "FK Kairat",
+    "away_team": "Universitatea Craiova",
+    "match_date": "2026-12-10T15:30Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2528.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8089.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf98",
+    "home_team": "FC København",
+    "away_team": "Lugano",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/909.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7672.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf58",
+    "home_team": "Getafe",
+    "away_team": "Inter Club d'Escaldes",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20703.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf97",
+    "home_team": "Iberia 1999",
+    "away_team": "Red Star Belgrade",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20025.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2290.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf57",
+    "home_team": "KuPS",
+    "away_team": "CSKA Sofia",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8169.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10834.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf96",
+    "home_team": "Lincoln Red Imps",
+    "away_team": "Midtjylland",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17856.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/572.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf56",
+    "home_team": "Riga",
+    "away_team": "Atalanta",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/19246.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf55",
+    "home_team": "Freiburg",
+    "away_team": "Panathinaikos",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/443.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf95",
+    "home_team": "Brann",
+    "away_team": "Braga",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/620.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2994.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf94",
+    "home_team": "Trabzonspor",
+    "away_team": "Jablonec",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/997.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7922.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be77",
+    "home_team": "Anderlecht",
+    "away_team": "Hoffenheim",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/441.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be6c",
+    "home_team": "Ararat-Armenia",
+    "away_team": "NEC",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20024.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/147.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be66",
+    "home_team": "AZ Alkmaar",
+    "away_team": "Sturm Graz",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/140.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3746.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be6b",
+    "home_team": "Hapoel Be'er Sheva",
+    "away_team": "Juventus",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/13083.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be68",
+    "home_team": "Jagiellonia",
+    "away_team": "Crystal Palace",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11505.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be67",
+    "home_team": "Olympique de Marseille",
+    "away_team": "Celta Vigo",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be6a",
+    "home_team": "AC Omonia",
+    "away_team": "Celtic",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/617.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/256.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be69",
+    "home_team": "Rennes",
+    "away_team": "Dinamo Zagreb",
+    "match_date": "2026-12-10T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/169.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/597.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf93",
+    "home_team": "AGF",
+    "away_team": "Twente",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7853.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/152.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf54",
+    "home_team": "Brighton",
+    "away_team": "AS Monaco FC",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/174.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beed",
+    "home_team": "Egnatia",
+    "away_team": "Kauno Žalgiris",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21943.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20028.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf92",
+    "home_team": "Thun",
+    "away_team": "Gent",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3024.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3611.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf90",
+    "home_team": "Hajduk Split",
+    "away_team": "Nordsjælland",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/489.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3101.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf91",
+    "home_team": "Hearts",
+    "away_team": "Borac Banja Luka",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/262.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20710.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beec",
+    "home_team": "Mjällby",
+    "away_team": "Pafos FC",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20301.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/22281.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beee",
+    "home_team": "Sint-Truiden",
+    "away_team": "AFC Ajax",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/936.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/139.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be65",
+    "home_team": "AC Milan",
+    "away_team": "Sunderland",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be60",
+    "home_team": "Bournemouth",
+    "away_team": "Viktoria Plzeň",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11706.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be64",
+    "home_team": "Bayer Leverkusen",
+    "away_team": "Beşiktaş",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1895.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be63",
+    "home_team": "Benfica",
+    "away_team": "OFI",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1929.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1010.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be5e",
+    "home_team": "Lech Poznań",
+    "away_team": "Ferencváros",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2990.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/622.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be76",
+    "home_team": "Levski Sofia",
+    "away_team": "Lillestrøm",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/490.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/987.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be5d",
+    "home_team": "Olympique Lyon",
+    "away_team": "Royale Union Saint-Gilloise",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/167.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5807.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be5f",
+    "home_team": "Celje",
+    "away_team": "PAE Olympiakos SFP",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3362.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/435.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be61",
+    "home_team": "Red Bull Salzburg",
+    "away_team": "Sparta Prague",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2790.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/433.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be62",
+    "home_team": "Real Sociedad",
+    "away_team": "Torreense",
+    "match_date": "2026-12-10T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21615.png",
     "matchday": 6
   },
   {
@@ -8435,6 +10635,204 @@
     "home_logo": "https://crests.football-data.org/110.png",
     "away_logo": "https://crests.football-data.org/100.png",
     "matchday": 15
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf53",
+    "home_team": "AFC Ajax",
+    "away_team": "Getafe",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/139.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2922.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beeb",
+    "home_team": "AS Monaco FC",
+    "away_team": "Lincoln Red Imps",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/174.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/17856.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beea",
+    "home_team": "Atalanta",
+    "away_team": "Mjällby",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/105.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20301.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bee7",
+    "home_team": "Borac Banja Luka",
+    "away_team": "Riga",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20710.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/19246.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bede",
+    "home_team": "Braga",
+    "away_team": "Egnatia",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2994.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21943.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bedf",
+    "home_team": "CSKA Sofia",
+    "away_team": "Thun",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/10834.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3024.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bedd",
+    "home_team": "Universitatea Craiova",
+    "away_team": "FC København",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8089.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/909.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bee9",
+    "home_team": "Lugano",
+    "away_team": "Sint-Truiden",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7672.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/936.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf52",
+    "home_team": "Midtjylland",
+    "away_team": "Hajduk Split",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/572.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/489.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf51",
+    "home_team": "Nordsjælland",
+    "away_team": "KuPS",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3101.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/8169.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bee8",
+    "home_team": "Twente",
+    "away_team": "FK Kairat",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/152.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2528.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bee3",
+    "home_team": "Inter Club d'Escaldes",
+    "away_team": "AGF",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20703.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7853.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bee5",
+    "home_team": "Jablonec",
+    "away_team": "Iberia 1999",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7922.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20025.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bee2",
+    "home_team": "Gent",
+    "away_team": "Brann",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3611.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/620.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bee4",
+    "home_team": "Kauno Žalgiris",
+    "away_team": "Freiburg",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20028.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/126.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bee1",
+    "home_team": "Pafos FC",
+    "away_team": "Hearts",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/22281.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/262.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bee0",
+    "home_team": "Panathinaikos",
+    "away_team": "Brighton",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/443.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/331.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bee6",
+    "home_team": "Red Star Belgrade",
+    "away_team": "Trabzonspor",
+    "match_date": "2026-12-17T20:00Z",
+    "league": "Conference League",
+    "competition_code": "ECL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2290.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/997.png",
+    "matchday": 6
   },
   {
     "id": "00000000-0000-4000-8000-00000008a285",
@@ -10489,8 +12887,8 @@
     "match_date": "2027-01-19T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2980.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
     "matchday": 7
   },
   {
@@ -10500,8 +12898,8 @@
     "match_date": "2027-01-19T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/142.png",
     "matchday": 7
   },
   {
@@ -10511,8 +12909,8 @@
     "match_date": "2027-01-19T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/887.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
     "matchday": 7
   },
   {
@@ -10522,8 +12920,8 @@
     "match_date": "2027-01-19T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
     "matchday": 7
   },
   {
@@ -10533,8 +12931,8 @@
     "match_date": "2027-01-19T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/437.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/494.png",
     "matchday": 7
   },
   {
@@ -10544,8 +12942,8 @@
     "match_date": "2027-01-19T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
     "matchday": 7
   },
   {
@@ -10555,8 +12953,8 @@
     "match_date": "2027-01-19T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/166.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/521.png",
     "matchday": 7
   },
   {
@@ -10566,8 +12964,8 @@
     "match_date": "2027-01-19T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4411.png",
     "matchday": 7
   },
   {
@@ -10577,8 +12975,8 @@
     "match_date": "2027-01-19T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/570.png",
     "matchday": 7
   },
   {
@@ -10588,8 +12986,8 @@
     "match_date": "2027-01-20T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/436.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
     "matchday": 7
   },
   {
@@ -10599,8 +12997,8 @@
     "match_date": "2027-01-20T17:45Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21922.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/114.png",
     "matchday": 7
   },
   {
@@ -10610,8 +13008,8 @@
     "match_date": "2027-01-20T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
     "matchday": 7
   },
   {
@@ -10621,8 +13019,8 @@
     "match_date": "2027-01-20T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/175.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
     "matchday": 7
   },
   {
@@ -10632,8 +13030,8 @@
     "match_date": "2027-01-20T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
     "matchday": 7
   },
   {
@@ -10643,8 +13041,8 @@
     "match_date": "2027-01-20T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/493.png",
     "matchday": 7
   },
   {
@@ -10654,8 +13052,8 @@
     "match_date": "2027-01-20T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
     "matchday": 7
   },
   {
@@ -10665,8 +13063,8 @@
     "match_date": "2027-01-20T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2250.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
     "matchday": 7
   },
   {
@@ -10676,8 +13074,206 @@
     "match_date": "2027-01-20T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/510.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/148.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be5b",
+    "home_team": "Ararat-Armenia",
+    "away_team": "Celje",
+    "match_date": "2027-01-21T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20024.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3362.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be75",
+    "home_team": "Beşiktaş",
+    "away_team": "Royale Union Saint-Gilloise",
+    "match_date": "2027-01-21T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1895.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5807.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be5c",
+    "home_team": "Ferencváros",
+    "away_team": "Juventus",
+    "match_date": "2027-01-21T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/622.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be58",
+    "home_team": "Jagiellonia",
+    "away_team": "Olympique Lyon",
+    "match_date": "2027-01-21T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11505.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/167.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be56",
+    "home_team": "Lillestrøm",
+    "away_team": "Bournemouth",
+    "match_date": "2027-01-21T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/987.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be29",
+    "home_team": "NEC",
+    "away_team": "Benfica",
+    "match_date": "2027-01-21T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/147.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1929.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be5a",
+    "home_team": "PAE Olympiakos SFP",
+    "away_team": "Hoffenheim",
+    "match_date": "2027-01-21T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/435.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be59",
+    "home_team": "Real Sociedad",
+    "away_team": "Viktoria Plzeň",
+    "match_date": "2027-01-21T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11706.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be57",
+    "home_team": "Sturm Graz",
+    "away_team": "OFI",
+    "match_date": "2027-01-21T17:45Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3746.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1010.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be28",
+    "home_team": "Anderlecht",
+    "away_team": "Sunderland",
+    "match_date": "2027-01-21T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/441.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be4f",
+    "home_team": "AZ Alkmaar",
+    "away_team": "Dinamo Zagreb",
+    "match_date": "2027-01-21T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/140.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/597.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be55",
+    "home_team": "Bayer Leverkusen",
+    "away_team": "Red Bull Salzburg",
+    "match_date": "2027-01-21T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2790.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be53",
+    "home_team": "Celtic",
+    "away_team": "Olympique de Marseille",
+    "match_date": "2027-01-21T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/256.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be50",
+    "home_team": "Crystal Palace",
+    "away_team": "Sparta Prague",
+    "match_date": "2027-01-21T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/433.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be27",
+    "home_team": "Hapoel Be'er Sheva",
+    "away_team": "Celta Vigo",
+    "match_date": "2027-01-21T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/13083.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be52",
+    "home_team": "Lech Poznań",
+    "away_team": "Torreense",
+    "match_date": "2027-01-21T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2990.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21615.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be51",
+    "home_team": "Levski Sofia",
+    "away_team": "AC Milan",
+    "match_date": "2027-01-21T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/490.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be54",
+    "home_team": "Rennes",
+    "away_team": "AC Omonia",
+    "match_date": "2027-01-21T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/169.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/617.png",
     "matchday": 7
   },
   {
@@ -11116,8 +13712,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/359.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21922.png",
     "matchday": 8
   },
   {
@@ -11127,8 +13723,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/166.png",
     "matchday": 8
   },
   {
@@ -11138,8 +13734,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/436.png",
     "matchday": 8
   },
   {
@@ -11149,8 +13745,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png",
     "matchday": 8
   },
   {
@@ -11160,8 +13756,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/132.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/244.png",
     "matchday": 8
   },
   {
@@ -11171,8 +13767,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/887.png",
     "matchday": 8
   },
   {
@@ -11182,8 +13778,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/570.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2980.png",
     "matchday": 8
   },
   {
@@ -11193,8 +13789,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/142.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
     "matchday": 8
   },
   {
@@ -11204,8 +13800,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/4411.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/437.png",
     "matchday": 8
   },
   {
@@ -11215,8 +13811,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/364.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/175.png",
     "matchday": 8
   },
   {
@@ -11226,8 +13822,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2250.png",
     "matchday": 8
   },
   {
@@ -11237,8 +13833,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/114.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/510.png",
     "matchday": 8
   },
   {
@@ -11248,8 +13844,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png",
     "matchday": 8
   },
   {
@@ -11259,8 +13855,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/148.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/134.png",
     "matchday": 8
   },
   {
@@ -11270,8 +13866,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/493.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
     "matchday": 8
   },
   {
@@ -11281,8 +13877,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/494.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
     "matchday": 8
   },
   {
@@ -11292,8 +13888,8 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/521.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/110.png",
     "matchday": 8
   },
   {
@@ -11303,8 +13899,206 @@
     "match_date": "2027-01-27T20:00Z",
     "league": "Champions League",
     "competition_code": "CL",
-    "home_logo": "",
-    "away_logo": "",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be40",
+    "home_team": "AC Milan",
+    "away_team": "Ararat-Armenia",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/103.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/20024.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be49",
+    "home_team": "Bournemouth",
+    "away_team": "Hapoel Be'er Sheva",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/13083.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be4c",
+    "home_team": "Benfica",
+    "away_team": "AZ Alkmaar",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1929.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/140.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be47",
+    "home_team": "Celta Vigo",
+    "away_team": "Lillestrøm",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/987.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be42",
+    "home_team": "Dinamo Zagreb",
+    "away_team": "Sturm Graz",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/597.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3746.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be46",
+    "home_team": "Juventus",
+    "away_team": "Real Sociedad",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/111.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/89.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be43",
+    "home_team": "Olympique Lyon",
+    "away_team": "Bayer Leverkusen",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/167.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be25",
+    "home_team": "Olympique de Marseille",
+    "away_team": "Anderlecht",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/441.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be24",
+    "home_team": "Celje",
+    "away_team": "NEC",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/3362.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/147.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be4e",
+    "home_team": "OFI",
+    "away_team": "Lech Poznań",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1010.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2990.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be4d",
+    "home_team": "AC Omonia",
+    "away_team": "Beşiktaş",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/617.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/1895.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be4a",
+    "home_team": "Red Bull Salzburg",
+    "away_team": "Crystal Palace",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2790.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/384.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be48",
+    "home_team": "Sparta Prague",
+    "away_team": "Rennes",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/433.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/169.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be45",
+    "home_team": "Sunderland",
+    "away_team": "Levski Sofia",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/366.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/490.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be44",
+    "home_team": "Torreense",
+    "away_team": "PAE Olympiakos SFP",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/21615.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/435.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be4b",
+    "home_team": "Hoffenheim",
+    "away_team": "Ferencváros",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/7911.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/622.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be26",
+    "home_team": "Royale Union Saint-Gilloise",
+    "away_team": "Celtic",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/5807.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/256.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be41",
+    "home_team": "Viktoria Plzeň",
+    "away_team": "Jagiellonia",
+    "match_date": "2027-01-28T20:00Z",
+    "league": "Europa League",
+    "competition_code": "EL",
+    "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11706.png",
+    "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11505.png",
     "matchday": 8
   },
   {

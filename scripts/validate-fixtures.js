@@ -27,10 +27,58 @@ async function fetchJson(url, headers = {}) {
   }
 }
 
+async function fetchEspnEvents(espnSlug, from, to) {
+  const dates = [];
+  let curr = new Date(`${from.slice(0, 4)}-${from.slice(4, 6)}-${from.slice(6, 8)}T00:00:00Z`);
+  const end = new Date(`${to.slice(0, 4)}-${to.slice(4, 6)}-${to.slice(6, 8)}T00:00:00Z`);
+  while (curr <= end) {
+    dates.push(curr.toISOString().slice(0, 10).replace(/-/g, ""));
+    curr = new Date(curr.getTime() + 86400000);
+  }
+
+  const events = [];
+  const seenIds = new Set();
+  for (let i = 0; i < dates.length; i += 15) {
+    const slice = dates.slice(i, i + 15);
+    const results = await Promise.all(
+      slice.map(async (d) => {
+        try {
+          const url = `https://site.web.api.espn.com/apis/site/v2/sports/soccer/${espnSlug}/scoreboard?dates=${d}`;
+          const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" } });
+          if (!res.ok) return [];
+          const data = await res.json();
+          return data.events || [];
+        } catch {
+          return [];
+        }
+      })
+    );
+    for (const evs of results) {
+      for (const e of evs) {
+        if (!seenIds.has(e.id)) {
+          seenIds.add(e.id);
+          events.push(e);
+        }
+      }
+    }
+  }
+  return events;
+}
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // 1. Todas las competiciones presentes y conteos
-const expectedCounts = { "Premier League": 380, "LaLiga": 380, "Serie A": 380, "Bundesliga": 306, "Champions League": 144, "Copa Italia": 34 };
+const expectedCounts = {
+  "Premier League": 380,
+  "LaLiga": 380,
+  "Serie A": 380,
+  "Bundesliga": 306,
+  "Champions League": 144,
+  "Europa League": 144,
+  "Conference League": 108,
+  "Copa Italia": 36,
+  "DFB-Pokal": 48,
+};
 const byLeague = {};
 fixtures.forEach((f) => { byLeague[f.league] = (byLeague[f.league] || 0) + 1; });
 console.log("\n=== 1. Conteos por competición ===");
@@ -114,10 +162,9 @@ async function main() {
   await sleep(6000);
   await checkLeague("Bundesliga", "2002");
 
-  console.log("\n=== 6. Cruce con ESPN (UCL + Copa Italia) ===");
+  console.log("\n=== 6. Cruce con ESPN (UCL + Copa Italia + UEL + UECL) ===");
   // UCL
-  const uclData = await fetchJson("https://site.web.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard?dates=20260901-20270131&limit=500");
-  const uclApi = uclData.events || [];
+  const uclApi = await fetchEspnEvents("uefa.champions", "20260901", "20270131");
   const uclFile = fixtures.filter((f) => f.league === "Champions League");
   let uclMatched = 0;
   const uclFilePairs = new Set(uclFile.map((f) => `${f.match_date.slice(0, 10)}|${f.home_team}|${f.away_team}`));
@@ -132,8 +179,8 @@ async function main() {
   else ok(`UCL: ${uclMatched}/${uclApi.length} partidos idénticos a ESPN (fecha+equipos)`);
 
   // Copa Italia
-  const coppaData = await fetchJson("https://site.web.api.espn.com/apis/site/v2/sports/soccer/ita.coppa_italia/scoreboard?dates=20260801-20270531&limit=500");
-  const coppaApi = (coppaData.events || []).filter((e) => {
+  const coppaEvents = await fetchEspnEvents("ita.coppa_italia", "20260801", "20270531");
+  const coppaApi = coppaEvents.filter((e) => {
     const comp = e.competitions[0];
     const teams = comp.competitors.map((c) => c.team.displayName);
     return !teams.some((t) => t.includes("TBD"));
@@ -150,6 +197,36 @@ async function main() {
   }
   if (coppaMatched !== coppaApi.length) fail(`Copa Italia: ${coppaMatched}/${coppaApi.length} coinciden con ESPN`);
   else ok(`Copa Italia: ${coppaMatched}/${coppaApi.length} partidos idénticos a ESPN`);
+
+  // UEL
+  const uelApi = await fetchEspnEvents("uefa.europa", "20260901", "20270131");
+  const uelFile = fixtures.filter((f) => f.league === "Europa League");
+  let uelMatched = 0;
+  const uelFilePairs = new Set(uelFile.map((f) => `${f.match_date.slice(0, 10)}|${f.home_team}|${f.away_team}`));
+  for (const e of uelApi) {
+    const comp = e.competitions[0];
+    const h = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "home").team.displayName);
+    const a = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "away").team.displayName);
+    const key = `${e.date.slice(0, 10)}|${h}|${a}`;
+    if (uelFilePairs.has(key)) uelMatched++;
+  }
+  if (uelMatched !== uelApi.length) fail(`UEL: ${uelMatched}/${uelApi.length} coinciden con ESPN`);
+  else ok(`UEL: ${uelMatched}/${uelApi.length} partidos idénticos a ESPN`);
+
+  // UECL
+  const ueclApi = await fetchEspnEvents("uefa.europa.conf", "20260901", "20270131");
+  const ueclFile = fixtures.filter((f) => f.league === "Conference League");
+  let ueclMatched = 0;
+  const ueclFilePairs = new Set(ueclFile.map((f) => `${f.match_date.slice(0, 10)}|${f.home_team}|${f.away_team}`));
+  for (const e of ueclApi) {
+    const comp = e.competitions[0];
+    const h = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "home").team.displayName);
+    const a = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "away").team.displayName);
+    const key = `${e.date.slice(0, 10)}|${h}|${a}`;
+    if (ueclFilePairs.has(key)) ueclMatched++;
+  }
+  if (ueclMatched !== ueclApi.length) fail(`UECL: ${ueclMatched}/${ueclApi.length} coinciden con ESPN`);
+  else ok(`UECL: ${ueclMatched}/${ueclApi.length} partidos idénticos a ESPN`);
 
   console.log("\n=== 7. UCL: cada equipo juega 8 partidos (4 como local) ===");
   const uclPerTeam = {};

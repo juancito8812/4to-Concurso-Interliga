@@ -278,6 +278,16 @@ const NAME_ALIASES = {
   "southamptonfc": "Southampton",
   "westhamunitedfc": "West Ham",
   "westham": "West Ham",
+  "omonianicosia": "AC Omonia",
+  "omonia": "AC Omonia",
+  "unionstgilloise": "Royale Union Saint-Gilloise",
+  "unionsaintgilloise": "Royale Union Saint-Gilloise",
+  "csucraiova": "Universitatea Craiova",
+  "craiova": "Universitatea Craiova",
+  "interdescaldes": "Inter Club d'Escaldes",
+  "interclubdescaldes": "Inter Club d'Escaldes",
+  "kairatalmaty": "FK Kairat",
+  "fkkairat": "FK Kairat",
 };
 
 // ---------------------------------------------------------------------------
@@ -323,31 +333,77 @@ async function fetchLeagueFixtures(leagueName, code, apiCode) {
 }
 
 async function fetchEspnFixtures(espnSlug, leagueName, code, from, to) {
-  const data = await fetchJson(
-    `https://site.web.api.espn.com/apis/site/v2/sports/soccer/${espnSlug}/scoreboard?dates=${from}-${to}&limit=500`
-  );
-  const fixtures = [];
-  for (const e of data.events || []) {
-    const comp = e.competitions?.[0];
-    if (!comp) continue;
-    const homeC = comp.competitors.find((c) => c.homeAway === "home");
-    const awayC = comp.competitors.find((c) => c.homeAway === "away");
-    if (!homeC || !awayC) continue;
-    const home = normalizeTeamName(homeC.team.displayName);
-    const away = normalizeTeamName(awayC.team.displayName);
-    if (!home || !away || home.includes("TBD") || away.includes("TBD")) continue;
-    fixtures.push({
-      id: matchIdToUuid(e.id),
-      home_team: home,
-      away_team: away,
-      match_date: e.date,
-      league: leagueName,
-      competition_code: code,
-      home_logo: homeC.team.logos?.[0]?.href || "",
-      away_logo: awayC.team.logos?.[0]?.href || "",
-      matchday: null,
-    });
+  const dates = [];
+  let curr = new Date(`${from.slice(0, 4)}-${from.slice(4, 6)}-${from.slice(6, 8)}T00:00:00Z`);
+  const end = new Date(`${to.slice(0, 4)}-${to.slice(4, 6)}-${to.slice(6, 8)}T00:00:00Z`);
+  while (curr <= end) {
+    dates.push(curr.toISOString().slice(0, 10).replace(/-/g, ""));
+    curr = new Date(curr.getTime() + 86400000);
   }
+
+  const fixtures = [];
+  const seenIds = new Set();
+
+  for (let i = 0; i < dates.length; i += 15) {
+    const slice = dates.slice(i, i + 15);
+    const results = await Promise.all(
+      slice.map(async (d) => {
+        try {
+          const url = `https://site.web.api.espn.com/apis/site/v2/sports/soccer/${espnSlug}/scoreboard?dates=${d}`;
+          const res = await fetch(url, {
+            headers: { "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/120" },
+          });
+          if (!res.ok) return [];
+          const data = await res.json();
+          return data.events || [];
+        } catch {
+          return [];
+        }
+      })
+    );
+
+    for (const evs of results) {
+      for (const e of evs) {
+        if (seenIds.has(e.id)) continue;
+        seenIds.add(e.id);
+
+        const comp = e.competitions?.[0];
+        if (!comp) continue;
+        const homeC = comp.competitors?.find((c) => c.homeAway === "home");
+        const awayC = comp.competitors?.find((c) => c.homeAway === "away");
+        if (!homeC || !awayC) continue;
+        const home = normalizeTeamName(homeC.team?.displayName || homeC.team?.name || "");
+        const away = normalizeTeamName(awayC.team?.displayName || awayC.team?.name || "");
+        if (!home || !away || home.includes("TBD") || away.includes("TBD")) continue;
+        fixtures.push({
+          id: matchIdToUuid(e.id),
+          home_team: home,
+          away_team: away,
+          match_date: e.date,
+          league: leagueName,
+          competition_code: code,
+          home_logo: homeC.team?.logos?.[0]?.href || homeC.team?.logo || "",
+          away_logo: awayC.team?.logos?.[0]?.href || awayC.team?.logo || "",
+          matchday: null,
+        });
+      }
+    }
+  }
+
+  // Calculate matchdays by clustering dates (> 3 days apart)
+  const sortedDates = [...new Set(fixtures.map((f) => f.match_date.slice(0, 10)))].sort();
+  const mdByDate = {};
+  let md = 1;
+  let prev = null;
+  sortedDates.forEach((d) => {
+    if (prev && (new Date(d) - new Date(prev)) > 3 * 86400000) md++;
+    mdByDate[d] = md;
+    prev = d;
+  });
+  fixtures.forEach((f) => {
+    f.matchday = mdByDate[f.match_date.slice(0, 10)] || null;
+  });
+
   return fixtures;
 }
 
@@ -444,24 +500,19 @@ async function main() {
   all.push(...dfb);
   dfb.forEach((f) => (sourceOf[f.id] = "ESPN:DFBPokal"));
 
-  // 3.6 FA Cup: sin fixtures 2026/27 aún (la competición no ha empezado).
-  //     Cuando ESPN publique datos, descomentar:
-  // const facup = await fetchEspnFixtures("eng.fa", "FA Cup", "FAC", "20260801", "20270601");
-  // console.log(`✅ FA Cup: ${facup.length} partidos (ESPN)`);
-  // all.push(...facup);
-  // facup.forEach((f) => (sourceOf[f.id] = "ESPN:FACup"));
+  // 3.6 Europa League (ESPN, 144)
+  const uel = await fetchEspnFixtures("uefa.europa", "Europa League", "EL", "20260901", "20270131");
+  console.log(`✅ Europa League: ${uel.length} partidos (ESPN)`);
+  all.push(...uel);
+  uel.forEach((f) => (sourceOf[f.id] = "ESPN:UEL"));
 
-  // 3.7 Copa del Rey: sin fixtures 2026/27 aún (la competición no ha empezado).
-  //     Cuando ESPN publique datos, descomentar:
-  // const cdr = await fetchEspnFixtures("esp.copa_del_rey", "Copa del Rey", "CDR", "20260801", "20270601");
-  // console.log(`✅ Copa del Rey: ${cdr.length} partidos (ESPN)`);
-  // all.push(...cdr);
-  // cdr.forEach((f) => (sourceOf[f.id] = "ESPN:CopaDelRey"));
+  // 3.7 Conference League (ESPN, 108)
+  const uecl = await fetchEspnFixtures("uefa.europa.conf", "Conference League", "ECL", "20260901", "20270131");
+  console.log(`✅ Conference League: ${uecl.length} partidos (ESPN)`);
+  all.push(...uecl);
+  uecl.forEach((f) => (sourceOf[f.id] = "ESPN:UECL"));
 
-  // 3.8 UEL/UECL: sin partidos aún (sorteo 28/8 sin publicar en fuentes machine-readable).
-  //     Solo se registran los equipos reales para teamCups (auto-suscripción survivor).
-
-  // 3.9 Regenerar teamCups con los equipos reales (derivados de las fuentes)
+  // 3.8 Regenerar teamCups con los equipos reales (derivados de las fuentes)
   {
     const teamCups = {};
     const addCup = (team, cup) => {
@@ -491,26 +542,17 @@ async function main() {
     // UCL: equipos reales de ESPN
     const uclTeams = [...new Set(ucl.flatMap((f) => [f.home_team, f.away_team]))];
     uclTeams.forEach((t) => addCup(t, "champions"));
-    // UEL/UECL: equipos reales de Wikipedia
-    let uelTeams = [], ueclTeams = [];
-    try {
-      uelTeams = await fetchWikipediaCupTeams("2026–27 UEFA Europa League league phase");
-      ueclTeams = await fetchWikipediaCupTeams("2026–27 UEFA Conference League league phase");
-      const resolve = (list) => [...new Set(list.map((t) => normalizeTeamName(t)).filter(Boolean))];
-      uelTeams = resolve(uelTeams);
-      ueclTeams = resolve(ueclTeams);
-      console.log(`✅ UEL: ${uelTeams.length} equipos reales (Wikipedia)`);
-      console.log(`✅ UECL: ${ueclTeams.length} equipos reales (Wikipedia)`);
-      uelTeams.forEach((t) => addCup(t, "europa"));
-      ueclTeams.forEach((t) => addCup(t, "conference"));
-    } catch (e) {
-      console.warn(`⚠️  Wikipedia: ${e.message}`);
-    }
+    // UEL: equipos reales de ESPN
+    const uelTeams = [...new Set(uel.flatMap((f) => [f.home_team, f.away_team]))];
+    uelTeams.forEach((t) => addCup(t, "europa"));
+    // UECL: equipos reales de ESPN
+    const ueclTeams = [...new Set(uecl.flatMap((f) => [f.home_team, f.away_team]))];
+    ueclTeams.forEach((t) => addCup(t, "conference"));
 
     aliasesData.teamCups = Object.fromEntries(Object.entries(teamCups).sort((a, b) => a[0].localeCompare(b[0], "es")));
     aliasesData.knockoutPairs = { champions: [], europa: [], conference: [] };
     fs.writeFileSync(ALIASES_PATH, JSON.stringify(aliasesData, null, 2) + "\n");
-    console.log(`✅ teamCups regenerado: ${Object.keys(aliasesData.teamCups).length} equipos (derivados de fuentes reales)`);
+    console.log(`✅ teamCups regenerado: ${Object.keys(aliasesData.teamCups).length} equipos (${uclTeams.length} UCL, ${uelTeams.length} UEL, ${ueclTeams.length} UECL)`);
   }
 
   // 3.10 Ordenar y escribir
