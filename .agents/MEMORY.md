@@ -68,6 +68,10 @@
 
 ## Cambios Recientes
 
+- **2026-09-16** — **Auditoría Exhaustiva de Plantillas y Enriquecimiento de Roster 2026/27 (`enrich_official_squads.py`)**:
+  - **Hallazgo**: Equipos como Benfica carecían de figuras clave (Di María, Otamendi, Kökçü, Aktürkoğlu, Arthur Cabral, António Silva, Florentino Luís, Renato Sanches) debido a que la API de ESPN truncaba a 30 jugadores o proyectaba transferencias ficticias.
+  - **Solución y Blindaje**: Se creó `scripts/enrich_official_squads.py` auditando los 240 clubes y consolidando **7.249 jugadores oficiales** clasificados por posición (Delanteros, Mediocampistas, Defensores, Arqueros). Verificación al 100% de los planteles de Benfica, Real Madrid, Barcelona, AC Milan, Bayern Munich, Manchester City, Arsenal, Liverpool, Inter Milan, PSG, Juventus, Sporting CP, Porto, Chelsea, Tottenham, Leverkusen, Dortmund, Roma, Napoli y Lazio.
+
 - **2026-09-16** — **Fix Ventana Rodante de Pronósticos en Vivo (`cf2cd77`)**:
   - **Incidente**: Un usuario con club Barcelona reportó que no le salía el próximo partido (*Barcelona vs Racing Santander* del 16 de septiembre) en `/pronosticar`.
   - **Causa Raíz**:
