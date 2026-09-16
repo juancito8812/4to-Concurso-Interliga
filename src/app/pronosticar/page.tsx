@@ -409,6 +409,55 @@ export default function PronosticarPage() {
               prediction_id: pred.id,
             };
           }
+
+          // Auto-sync any local-only prediction to Supabase in background
+          const unsyncedMatchIds = Object.keys(loadedPredsMap).filter((mid) => {
+            const p = loadedPredsMap[mid];
+            return (
+              p &&
+              (p.home_score !== "" || p.away_score !== "") &&
+              (!p.prediction_id || p.prediction_id.startsWith("pred-") || p.prediction_id.startsWith("local-"))
+            );
+          });
+
+          if (unsyncedMatchIds.length > 0 && user) {
+            for (const mid of unsyncedMatchIds) {
+              const p = loadedPredsMap[mid];
+              if (!p) continue;
+              const h = p.home_score === "" ? 0 : parseInt(p.home_score);
+              const a = p.away_score === "" ? 0 : parseInt(p.away_score);
+              (async () => {
+                try {
+                  const { data: upData } = await supabase
+                    .from("predictions")
+                    .upsert(
+                      { user_id: user.id, match_id: mid, home_score: h, away_score: a },
+                      { onConflict: "user_id,match_id" }
+                    )
+                    .select("id")
+                    .single();
+
+                  if (upData) {
+                    p.prediction_id = upData.id;
+                    if (p.scorers && p.scorers.length > 0) {
+                      await supabase.from("prediction_scorers").insert(
+                        p.scorers
+                          .filter((s) => s.player_name.trim() !== "")
+                          .map((s) => ({
+                            prediction_id: upData.id,
+                            player_name: s.player_name,
+                            goals: s.goals,
+                            team: s.team,
+                          }))
+                      );
+                    }
+                  }
+                } catch {
+                  // Ignore background sync error
+                }
+              })();
+            }
+          }
         }
       } catch (e) {
         console.warn("Supabase predictions load error:", e);
