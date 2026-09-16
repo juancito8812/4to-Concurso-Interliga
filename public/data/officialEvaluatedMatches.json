@@ -3984,5 +3984,246 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dcc",
+    "home_team": "Atlético Madrid",
+    "away_team": "Osasuna",
+    "match_date": "2026-09-16T17:00Z",
+    "league": "LaLiga",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Jonathan David",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lee Kang-In",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Robin Le Normand",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Álex Baena",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dc7",
+    "home_team": "Deportivo La Coruña",
+    "away_team": "Sevilla",
+    "match_date": "2026-09-16T17:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Miguel Sierra",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beca",
+    "home_team": "Ararat-Armenia",
+    "away_team": "Sparta Prague",
+    "match_date": "2026-09-16T16:45Z",
+    "league": "Europa League",
+    "result_home": 1,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Tobias Guddal",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "John Mercado",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Bruno Wilson",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Patrik Vydra",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bedb",
+    "home_team": "AC Omonia",
+    "away_team": "Celta Vigo",
+    "match_date": "2026-09-16T16:45Z",
+    "league": "Europa League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Jure Balkovec",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dcd",
+    "home_team": "Levante",
+    "away_team": "Athletic Bilbao",
+    "match_date": "2026-09-16T19:30Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec2",
+    "home_team": "AC Milan",
+    "away_team": "Benfica",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Dodi Lukébakio",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jakub Kaminski",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec6",
+    "home_team": "Anderlecht",
+    "away_team": "Olympique Lyon",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Noah Nartey",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Keito Nakamura",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mihajlo Cvetkovic",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec3",
+    "home_team": "Bayer Leverkusen",
+    "away_team": "Celje",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Facundo Medina",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec5",
+    "home_team": "Hapoel Be'er Sheva",
+    "away_team": "Dinamo Zagreb",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec4",
+    "home_team": "PAE Olympiakos SFP",
+    "away_team": "Jagiellonia",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Kajetan Szmyt",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Armando González",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Roman Yaremchuk",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec9",
+    "home_team": "Sturm Graz",
+    "away_team": "Rennes",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bec8",
+    "home_team": "Sunderland",
+    "away_team": "AZ Alkmaar",
+    "match_date": "2026-09-16T19:00Z",
+    "league": "Europa League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Enzo Le Fée",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
