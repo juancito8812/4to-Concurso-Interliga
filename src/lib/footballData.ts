@@ -197,10 +197,11 @@ export async function getOfficialTeamMatches(
   teamName: string,
   teamId?: number | null
 ): Promise<FDMatch[]> {
-  const isGitHubPages =
-    typeof window !== "undefined" && window.location.hostname.endsWith("github.io");
+  const isLocalhost =
+    typeof window !== "undefined" &&
+    (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1");
 
-  if (teamId && !isGitHubPages) {
+  if (teamId && isLocalhost) {
     try {
       const liveMatches = await getTeamMatches(teamId, "SCHEDULED");
       if (liveMatches && liveMatches.length > 0) {
@@ -227,18 +228,28 @@ export async function getOfficialTeamMatches(
   const officialFixtures = await getOfficialFixtures();
   const normTarget = normalizeTeamName(teamName);
   const cleanTarget = cleanTeamName(teamName);
-  const nowIso = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
+  const nowMs = Date.now();
+  const todayStr = new Date(nowMs).toISOString().slice(0, 10);
+  const nowIso = new Date(nowMs - 2 * 60 * 60 * 1000).toISOString();
+
+  const isMatchDateValid = (dateStr: string) => {
+    if (!dateStr) return false;
+    if (dateStr.includes("T00:00:00") || dateStr.length === 10) {
+      return dateStr.slice(0, 10) >= todayStr;
+    }
+    return dateStr >= nowIso;
+  };
 
   const filtered = officialFixtures.filter((m) => {
     const normHome = normalizeTeamName(m.home_team);
     const normAway = normalizeTeamName(m.away_team);
     const isExact = normHome === normTarget || normAway === normTarget;
-    if (isExact) return m.match_date >= nowIso;
+    if (isExact) return isMatchDateValid(m.match_date);
 
     const cHome = cleanTeamName(m.home_team);
     const cAway = cleanTeamName(m.away_team);
     const isTeam = cHome.includes(cleanTarget) || cAway.includes(cleanTarget) || cleanTarget.includes(cHome) || cleanTarget.includes(cAway);
-    return isTeam && m.match_date >= nowIso;
+    return isTeam && isMatchDateValid(m.match_date);
   });
 
   filtered.sort((a, b) => new Date(a.match_date).getTime() - new Date(b.match_date).getTime());

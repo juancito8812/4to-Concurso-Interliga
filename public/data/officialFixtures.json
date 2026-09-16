@@ -1906,7 +1906,7 @@
     "id": "00000000-0000-4000-8000-000000088612",
     "home_team": "Cagliari",
     "away_team": "Lecce",
-    "match_date": "2026-09-07T16:00:00Z",
+    "match_date": "2026-09-07T16:30:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/104.png",
@@ -2167,6 +2167,28 @@
     "matchday": 4
   },
   {
+    "id": "00000000-0000-4000-8000-000000089dbd",
+    "home_team": "Sevilla",
+    "away_team": "Valencia",
+    "match_date": "2026-09-11T19:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/559.png",
+    "away_logo": "https://crests.football-data.org/95.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dbe",
+    "home_team": "Racing Santander",
+    "away_team": "Alavés",
+    "match_date": "2026-09-12T12:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/5335.png",
+    "away_logo": "https://crests.football-data.org/263.png",
+    "matchday": 5
+  },
+  {
     "id": "00000000-0000-4000-8000-00000008860c",
     "home_team": "Genoa",
     "away_team": "Frosinone",
@@ -2288,14 +2310,25 @@
     "matchday": 4
   },
   {
-    "id": "00000000-0000-4000-8000-000000088610",
-    "home_team": "Sassuolo",
-    "away_team": "Juventus",
+    "id": "00000000-0000-4000-8000-000000089dc1",
+    "home_team": "Osasuna",
+    "away_team": "Espanyol",
+    "match_date": "2026-09-12T14:15:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/79.png",
+    "away_logo": "https://crests.football-data.org/80.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088608",
+    "home_team": "Lazio",
+    "away_team": "AC Milan",
     "match_date": "2026-09-12T16:00:00Z",
     "league": "Serie A",
     "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/471.png",
-    "away_logo": "https://crests.football-data.org/109.png",
+    "home_logo": "https://crests.football-data.org/110.png",
+    "away_logo": "https://crests.football-data.org/98.png",
     "matchday": 4
   },
   {
@@ -2308,6 +2341,17 @@
     "home_logo": "https://crests.football-data.org/1.png",
     "away_logo": "https://crests.football-data.org/12.png",
     "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dc4",
+    "home_team": "Athletic Bilbao",
+    "away_team": "Elche",
+    "match_date": "2026-09-12T16:30:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/77.png",
+    "away_logo": "https://crests.football-data.org/285.png",
+    "matchday": 5
   },
   {
     "id": "00000000-0000-4000-8000-000000088dbf",
@@ -2332,6 +2376,17 @@
     "matchday": 4
   },
   {
+    "id": "00000000-0000-4000-8000-000000089dc5",
+    "home_team": "Real Madrid",
+    "away_team": "Rayo Vallecano",
+    "match_date": "2026-09-12T19:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/86.png",
+    "away_logo": "https://crests.football-data.org/87.png",
+    "matchday": 5
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088dc1",
     "home_team": "Sunderland",
     "away_team": "Arsenal",
@@ -2343,125 +2398,15 @@
     "matchday": 4
   },
   {
-    "id": "00000000-0000-4000-8000-000000089dbc",
-    "home_team": "Getafe",
-    "away_team": "Deportivo La Coruña",
-    "match_date": "2026-09-13T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/82.png",
-    "away_logo": "https://crests.football-data.org/560.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dbd",
-    "home_team": "Sevilla",
-    "away_team": "Valencia",
-    "match_date": "2026-09-13T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/559.png",
-    "away_logo": "https://crests.football-data.org/95.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dbe",
-    "home_team": "Racing Santander",
-    "away_team": "Alavés",
-    "match_date": "2026-09-13T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/5335.png",
-    "away_logo": "https://crests.football-data.org/263.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dbf",
-    "home_team": "Villarreal",
-    "away_team": "Real Betis",
-    "match_date": "2026-09-13T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/94.png",
-    "away_logo": "https://crests.football-data.org/90.png",
-    "matchday": 5
-  },
-  {
     "id": "00000000-0000-4000-8000-000000089dc0",
     "home_team": "Celta Vigo",
     "away_team": "Málaga",
-    "match_date": "2026-09-13T00:00:00Z",
+    "match_date": "2026-09-13T12:00:00Z",
     "league": "LaLiga",
     "competition_code": "PD",
     "home_logo": "https://crests.football-data.org/558.png",
     "away_logo": "https://crests.football-data.org/84.png",
     "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dc1",
-    "home_team": "Osasuna",
-    "away_team": "Espanyol",
-    "match_date": "2026-09-13T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/79.png",
-    "away_logo": "https://crests.football-data.org/80.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dc2",
-    "home_team": "Real Sociedad",
-    "away_team": "Atlético Madrid",
-    "match_date": "2026-09-13T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/92.png",
-    "away_logo": "https://crests.football-data.org/78.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dc3",
-    "home_team": "Levante",
-    "away_team": "Barcelona",
-    "match_date": "2026-09-13T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/88.png",
-    "away_logo": "https://crests.football-data.org/81.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dc4",
-    "home_team": "Athletic Bilbao",
-    "away_team": "Elche",
-    "match_date": "2026-09-13T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/77.png",
-    "away_logo": "https://crests.football-data.org/285.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dc5",
-    "home_team": "Real Madrid",
-    "away_team": "Rayo Vallecano",
-    "match_date": "2026-09-13T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/86.png",
-    "away_logo": "https://crests.football-data.org/87.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008860b",
-    "home_team": "Torino",
-    "away_team": "Roma",
-    "match_date": "2026-09-13T10:30:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/586.png",
-    "away_logo": "https://crests.football-data.org/100.png",
-    "matchday": 4
   },
   {
     "id": "00000000-0000-4000-8000-000000088dc2",
@@ -2472,17 +2417,6 @@
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/1076.png",
     "away_logo": "https://crests.football-data.org/397.png",
-    "matchday": 4
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008860a",
-    "home_team": "Como",
-    "away_team": "Parma",
-    "match_date": "2026-09-13T13:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/7397.png",
-    "away_logo": "https://crests.football-data.org/112.png",
     "matchday": 4
   },
   {
@@ -2506,6 +2440,17 @@
     "home_logo": "https://crests.football-data.org/721.png",
     "away_logo": "https://crests.football-data.org/7.png",
     "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dc3",
+    "home_team": "Levante",
+    "away_team": "Barcelona",
+    "match_date": "2026-09-13T14:15:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/88.png",
+    "away_logo": "https://crests.football-data.org/81.png",
+    "matchday": 5
   },
   {
     "id": "00000000-0000-4000-8000-00000008a228",
@@ -2541,14 +2486,58 @@
     "matchday": 4
   },
   {
-    "id": "00000000-0000-4000-8000-000000088608",
-    "home_team": "Lazio",
-    "away_team": "AC Milan",
+    "id": "00000000-0000-4000-8000-000000089dbc",
+    "home_team": "Getafe",
+    "away_team": "Deportivo La Coruña",
+    "match_date": "2026-09-13T16:30:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/82.png",
+    "away_logo": "https://crests.football-data.org/560.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088610",
+    "home_team": "Sassuolo",
+    "away_team": "Juventus",
     "match_date": "2026-09-13T18:45:00Z",
     "league": "Serie A",
     "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/110.png",
-    "away_logo": "https://crests.football-data.org/98.png",
+    "home_logo": "https://crests.football-data.org/471.png",
+    "away_logo": "https://crests.football-data.org/109.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dc2",
+    "home_team": "Real Sociedad",
+    "away_team": "Atlético Madrid",
+    "match_date": "2026-09-13T19:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/92.png",
+    "away_logo": "https://crests.football-data.org/78.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008860a",
+    "home_team": "Como",
+    "away_team": "Parma",
+    "match_date": "2026-09-14T16:30:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/7397.png",
+    "away_logo": "https://crests.football-data.org/112.png",
+    "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008860b",
+    "home_team": "Torino",
+    "away_team": "Roma",
+    "match_date": "2026-09-14T16:30:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/586.png",
+    "away_logo": "https://crests.football-data.org/100.png",
     "matchday": 4
   },
   {
@@ -2561,6 +2550,17 @@
     "home_logo": "https://crests.football-data.org/108.png",
     "away_logo": "https://crests.football-data.org/115.png",
     "matchday": 4
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dbf",
+    "home_team": "Villarreal",
+    "away_team": "Real Betis",
+    "match_date": "2026-09-14T19:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/94.png",
+    "away_logo": "https://crests.football-data.org/90.png",
+    "matchday": 5
   },
   {
     "id": "00000000-0000-4000-8000-000000088dc3",
@@ -2585,6 +2585,28 @@
     "matchday": null
   },
   {
+    "id": "00000000-0000-4000-8000-000000089dc6",
+    "home_team": "Rayo Vallecano",
+    "away_team": "Espanyol",
+    "match_date": "2026-09-15T17:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/87.png",
+    "away_logo": "https://crests.football-data.org/80.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dc8",
+    "home_team": "Alavés",
+    "away_team": "Valencia",
+    "match_date": "2026-09-15T18:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/263.png",
+    "away_logo": "https://crests.football-data.org/95.png",
+    "matchday": 6
+  },
+  {
     "id": "00000000-0000-4000-8000-000017f4afe9",
     "home_team": "Fiorentina",
     "away_team": "Pisa",
@@ -2596,43 +2618,10 @@
     "matchday": null
   },
   {
-    "id": "00000000-0000-4000-8000-000000089dc6",
-    "home_team": "Rayo Vallecano",
-    "away_team": "Espanyol",
-    "match_date": "2026-09-16T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/87.png",
-    "away_logo": "https://crests.football-data.org/80.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dc7",
-    "home_team": "Deportivo La Coruña",
-    "away_team": "Sevilla",
-    "match_date": "2026-09-16T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/560.png",
-    "away_logo": "https://crests.football-data.org/559.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dc8",
-    "home_team": "Alavés",
-    "away_team": "Valencia",
-    "match_date": "2026-09-16T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/263.png",
-    "away_logo": "https://crests.football-data.org/95.png",
-    "matchday": 6
-  },
-  {
     "id": "00000000-0000-4000-8000-000000089dc9",
     "home_team": "Elche",
     "away_team": "Real Madrid",
-    "match_date": "2026-09-16T00:00:00Z",
+    "match_date": "2026-09-15T19:30:00Z",
     "league": "LaLiga",
     "competition_code": "PD",
     "home_logo": "https://crests.football-data.org/285.png",
@@ -2640,21 +2629,21 @@
     "matchday": 6
   },
   {
-    "id": "00000000-0000-4000-8000-000000089dcb",
-    "home_team": "Málaga",
-    "away_team": "Villarreal",
-    "match_date": "2026-09-16T00:00:00Z",
+    "id": "00000000-0000-4000-8000-000000089dc7",
+    "home_team": "Deportivo La Coruña",
+    "away_team": "Sevilla",
+    "match_date": "2026-09-16T17:00:00Z",
     "league": "LaLiga",
     "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/84.png",
-    "away_logo": "https://crests.football-data.org/94.png",
+    "home_logo": "https://crests.football-data.org/560.png",
+    "away_logo": "https://crests.football-data.org/559.png",
     "matchday": 6
   },
   {
     "id": "00000000-0000-4000-8000-000000089dcc",
     "home_team": "Atlético Madrid",
     "away_team": "Osasuna",
-    "match_date": "2026-09-16T00:00:00Z",
+    "match_date": "2026-09-16T17:00:00Z",
     "league": "LaLiga",
     "competition_code": "PD",
     "home_logo": "https://crests.football-data.org/78.png",
@@ -2665,7 +2654,7 @@
     "id": "00000000-0000-4000-8000-000000089dcd",
     "home_team": "Levante",
     "away_team": "Athletic Bilbao",
-    "match_date": "2026-09-16T00:00:00Z",
+    "match_date": "2026-09-16T19:30:00Z",
     "league": "LaLiga",
     "competition_code": "PD",
     "home_logo": "https://crests.football-data.org/88.png",
@@ -2673,10 +2662,21 @@
     "matchday": 6
   },
   {
+    "id": "00000000-0000-4000-8000-000000089dcf",
+    "home_team": "Barcelona",
+    "away_team": "Racing Santander",
+    "match_date": "2026-09-16T19:30:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/81.png",
+    "away_logo": "https://crests.football-data.org/5335.png",
+    "matchday": 6
+  },
+  {
     "id": "00000000-0000-4000-8000-000000089dce",
     "home_team": "Real Betis",
     "away_team": "Getafe",
-    "match_date": "2026-09-16T00:00:00Z",
+    "match_date": "2026-09-17T17:00:00Z",
     "league": "LaLiga",
     "competition_code": "PD",
     "home_logo": "https://crests.football-data.org/90.png",
@@ -2684,14 +2684,14 @@
     "matchday": 6
   },
   {
-    "id": "00000000-0000-4000-8000-000000089dcf",
-    "home_team": "Barcelona",
-    "away_team": "Racing Santander",
-    "match_date": "2026-09-16T00:00:00Z",
+    "id": "00000000-0000-4000-8000-000000089dcb",
+    "home_team": "Málaga",
+    "away_team": "Villarreal",
+    "match_date": "2026-09-17T19:30:00Z",
     "league": "LaLiga",
     "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/81.png",
-    "away_logo": "https://crests.football-data.org/5335.png",
+    "home_logo": "https://crests.football-data.org/84.png",
+    "away_logo": "https://crests.football-data.org/94.png",
     "matchday": 6
   },
   {
@@ -2717,6 +2717,17 @@
     "matchday": 5
   },
   {
+    "id": "00000000-0000-4000-8000-000000089dd4",
+    "home_team": "Espanyol",
+    "away_team": "Elche",
+    "match_date": "2026-09-18T19:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/80.png",
+    "away_logo": "https://crests.football-data.org/285.png",
+    "matchday": 7
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088dcf",
     "home_team": "Brentford",
     "away_team": "Chelsea",
@@ -2737,6 +2748,17 @@
     "home_logo": "https://crests.football-data.org/73.png",
     "away_logo": "https://crests.football-data.org/58.png",
     "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dd5",
+    "home_team": "Osasuna",
+    "away_team": "Rayo Vallecano",
+    "match_date": "2026-09-19T12:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/79.png",
+    "away_logo": "https://crests.football-data.org/87.png",
+    "matchday": 7
   },
   {
     "id": "00000000-0000-4000-8000-000000088606",
@@ -2816,17 +2838,6 @@
     "matchday": 5
   },
   {
-    "id": "00000000-0000-4000-8000-000000088dc9",
-    "home_team": "Leeds United",
-    "away_team": "Crystal Palace",
-    "match_date": "2026-09-19T14:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/341.png",
-    "away_logo": "https://crests.football-data.org/354.png",
-    "matchday": 5
-  },
-  {
     "id": "00000000-0000-4000-8000-000000088dca",
     "home_team": "Brighton",
     "away_team": "Arsenal",
@@ -2847,6 +2858,17 @@
     "home_logo": "https://crests.football-data.org/67.png",
     "away_logo": "https://crests.football-data.org/322.png",
     "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dd3",
+    "home_team": "Athletic Bilbao",
+    "away_team": "Alavés",
+    "match_date": "2026-09-19T14:15:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/77.png",
+    "away_logo": "https://crests.football-data.org/263.png",
+    "matchday": 7
   },
   {
     "id": "00000000-0000-4000-8000-000000088601",
@@ -2871,6 +2893,17 @@
     "matchday": 4
   },
   {
+    "id": "00000000-0000-4000-8000-000000089dd6",
+    "home_team": "Celta Vigo",
+    "away_team": "Racing Santander",
+    "match_date": "2026-09-19T16:30:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/558.png",
+    "away_logo": "https://crests.football-data.org/5335.png",
+    "matchday": 7
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088dcd",
     "home_team": "Nott. Forest",
     "away_team": "Coventry City",
@@ -2893,113 +2926,14 @@
     "matchday": 5
   },
   {
-    "id": "00000000-0000-4000-8000-000000089dd0",
-    "home_team": "Atlético Madrid",
-    "away_team": "Real Madrid",
-    "match_date": "2026-09-20T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/78.png",
-    "away_logo": "https://crests.football-data.org/86.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dd1",
-    "home_team": "Valencia",
-    "away_team": "Real Sociedad",
-    "match_date": "2026-09-20T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/95.png",
-    "away_logo": "https://crests.football-data.org/92.png",
-    "matchday": 7
-  },
-  {
     "id": "00000000-0000-4000-8000-000000089dd2",
     "home_team": "Sevilla",
     "away_team": "Barcelona",
-    "match_date": "2026-09-20T00:00:00Z",
+    "match_date": "2026-09-19T19:00:00Z",
     "league": "LaLiga",
     "competition_code": "PD",
     "home_logo": "https://crests.football-data.org/559.png",
     "away_logo": "https://crests.football-data.org/81.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dd3",
-    "home_team": "Athletic Bilbao",
-    "away_team": "Alavés",
-    "match_date": "2026-09-20T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/77.png",
-    "away_logo": "https://crests.football-data.org/263.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dd4",
-    "home_team": "Espanyol",
-    "away_team": "Elche",
-    "match_date": "2026-09-20T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/80.png",
-    "away_logo": "https://crests.football-data.org/285.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dd5",
-    "home_team": "Osasuna",
-    "away_team": "Rayo Vallecano",
-    "match_date": "2026-09-20T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/79.png",
-    "away_logo": "https://crests.football-data.org/87.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dd6",
-    "home_team": "Celta Vigo",
-    "away_team": "Racing Santander",
-    "match_date": "2026-09-20T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/558.png",
-    "away_logo": "https://crests.football-data.org/5335.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dd7",
-    "home_team": "Deportivo La Coruña",
-    "away_team": "Real Betis",
-    "match_date": "2026-09-20T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/560.png",
-    "away_logo": "https://crests.football-data.org/90.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dd8",
-    "home_team": "Villarreal",
-    "away_team": "Levante",
-    "match_date": "2026-09-20T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/94.png",
-    "away_logo": "https://crests.football-data.org/88.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dd9",
-    "home_team": "Getafe",
-    "away_team": "Málaga",
-    "match_date": "2026-09-20T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/82.png",
-    "away_logo": "https://crests.football-data.org/84.png",
     "matchday": 7
   },
   {
@@ -3014,6 +2948,17 @@
     "matchday": 5
   },
   {
+    "id": "00000000-0000-4000-8000-000000089dd9",
+    "home_team": "Getafe",
+    "away_team": "Málaga",
+    "match_date": "2026-09-20T12:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/82.png",
+    "away_logo": "https://crests.football-data.org/84.png",
+    "matchday": 7
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088dc6",
     "home_team": "Bournemouth",
     "away_team": "Liverpool",
@@ -3022,6 +2967,17 @@
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/bournemouth.png",
     "away_logo": "https://crests.football-data.org/64.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dc9",
+    "home_team": "Leeds United",
+    "away_team": "Crystal Palace",
+    "match_date": "2026-09-20T13:00:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/341.png",
+    "away_logo": "https://crests.football-data.org/354.png",
     "matchday": 5
   },
   {
@@ -3069,6 +3025,17 @@
     "matchday": 4
   },
   {
+    "id": "00000000-0000-4000-8000-000000089dd0",
+    "home_team": "Atlético Madrid",
+    "away_team": "Real Madrid",
+    "match_date": "2026-09-20T14:15:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/78.png",
+    "away_logo": "https://crests.football-data.org/86.png",
+    "matchday": 7
+  },
+  {
     "id": "00000000-0000-4000-8000-00000008a22d",
     "home_team": "Schalke 04",
     "away_team": "SV 07 Elversberg",
@@ -3102,6 +3069,28 @@
     "matchday": 5
   },
   {
+    "id": "00000000-0000-4000-8000-000000089dd7",
+    "home_team": "Deportivo La Coruña",
+    "away_team": "Real Betis",
+    "match_date": "2026-09-20T16:30:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/560.png",
+    "away_logo": "https://crests.football-data.org/90.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dd8",
+    "home_team": "Villarreal",
+    "away_team": "Levante",
+    "match_date": "2026-09-20T16:30:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/94.png",
+    "away_logo": "https://crests.football-data.org/88.png",
+    "matchday": 7
+  },
+  {
     "id": "00000000-0000-4000-8000-00000008a22b",
     "home_team": "SC Paderborn 07",
     "away_team": "Hoffenheim",
@@ -3124,103 +3113,37 @@
     "matchday": 5
   },
   {
-    "id": "00000000-0000-4000-8000-00000008a234",
-    "home_team": "Mainz",
-    "away_team": "Bayer Leverkusen",
-    "match_date": "2026-10-10T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/15.png",
-    "away_logo": "https://crests.football-data.org/3.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a235",
-    "home_team": "SC Paderborn 07",
-    "away_team": "Stuttgart",
-    "match_date": "2026-10-10T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/29.png",
-    "away_logo": "https://crests.football-data.org/10.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a236",
-    "home_team": "Köln",
-    "away_team": "Borussia Mönchengladbach",
-    "match_date": "2026-10-10T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/1.png",
-    "away_logo": "https://crests.football-data.org/18.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a237",
-    "home_team": "RB Leipzig",
-    "away_team": "Eintracht Frankfurt",
-    "match_date": "2026-10-10T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/721.png",
-    "away_logo": "https://crests.football-data.org/19.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a238",
-    "home_team": "Freiburg",
-    "away_team": "Schalke 04",
-    "match_date": "2026-10-10T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/17.png",
-    "away_logo": "https://crests.football-data.org/6.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a239",
-    "home_team": "Union Berlin",
-    "away_team": "SV 07 Elversberg",
-    "match_date": "2026-10-10T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/28.png",
-    "away_logo": "https://crests.football-data.org/719.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a23a",
-    "home_team": "Hoffenheim",
-    "away_team": "Hamburger SV",
-    "match_date": "2026-10-10T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/2.png",
-    "away_logo": "https://crests.football-data.org/7.png",
-    "matchday": 5
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a23b",
-    "home_team": "Augsburg",
-    "away_team": "Bayern Munich",
-    "match_date": "2026-10-10T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/16.png",
-    "away_logo": "https://crests.football-data.org/5.png",
-    "matchday": 5
+    "id": "00000000-0000-4000-8000-000000089dd1",
+    "home_team": "Valencia",
+    "away_team": "Real Sociedad",
+    "match_date": "2026-09-20T19:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/95.png",
+    "away_logo": "https://crests.football-data.org/92.png",
+    "matchday": 7
   },
   {
     "id": "00000000-0000-4000-8000-00000008a23c",
     "home_team": "Borussia Dortmund",
     "away_team": "Werder Bremen",
-    "match_date": "2026-10-10T00:00:00Z",
+    "match_date": "2026-10-09T18:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/4.png",
     "away_logo": "https://crests.football-data.org/12.png",
     "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de2",
+    "home_team": "Málaga",
+    "away_team": "Espanyol",
+    "match_date": "2026-10-09T19:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/84.png",
+    "away_logo": "https://crests.football-data.org/80.png",
+    "matchday": 8
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd1",
@@ -3232,6 +3155,83 @@
     "home_logo": "https://crests.football-data.org/57.png",
     "away_logo": "https://crests.football-data.org/341.png",
     "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dda",
+    "home_team": "Rayo Vallecano",
+    "away_team": "Athletic Bilbao",
+    "match_date": "2026-10-10T12:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/87.png",
+    "away_logo": "https://crests.football-data.org/77.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885fc",
+    "home_team": "Genoa",
+    "away_team": "Fiorentina",
+    "match_date": "2026-10-10T13:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/107.png",
+    "away_logo": "https://crests.football-data.org/99.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a234",
+    "home_team": "Mainz",
+    "away_team": "Bayer Leverkusen",
+    "match_date": "2026-10-10T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/15.png",
+    "away_logo": "https://crests.football-data.org/3.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a235",
+    "home_team": "SC Paderborn 07",
+    "away_team": "Stuttgart",
+    "match_date": "2026-10-10T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/29.png",
+    "away_logo": "https://crests.football-data.org/10.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a239",
+    "home_team": "Union Berlin",
+    "away_team": "SV 07 Elversberg",
+    "match_date": "2026-10-10T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/28.png",
+    "away_logo": "https://crests.football-data.org/719.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a23a",
+    "home_team": "Hoffenheim",
+    "away_team": "Hamburger SV",
+    "match_date": "2026-10-10T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/2.png",
+    "away_logo": "https://crests.football-data.org/7.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a23b",
+    "home_team": "Augsburg",
+    "away_team": "Bayern Munich",
+    "match_date": "2026-10-10T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/16.png",
+    "away_logo": "https://crests.football-data.org/5.png",
+    "matchday": 5
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd0",
@@ -3278,6 +3278,50 @@
     "matchday": 6
   },
   {
+    "id": "00000000-0000-4000-8000-000000089ddb",
+    "home_team": "Alavés",
+    "away_team": "Atlético Madrid",
+    "match_date": "2026-10-10T14:15:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/263.png",
+    "away_logo": "https://crests.football-data.org/78.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f6",
+    "home_team": "Inter Milan",
+    "away_team": "Parma",
+    "match_date": "2026-10-10T16:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/108.png",
+    "away_logo": "https://crests.football-data.org/112.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a237",
+    "home_team": "RB Leipzig",
+    "away_team": "Eintracht Frankfurt",
+    "match_date": "2026-10-10T16:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/721.png",
+    "away_logo": "https://crests.football-data.org/19.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089ddc",
+    "home_team": "Barcelona",
+    "away_team": "Getafe",
+    "match_date": "2026-10-10T16:30:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/81.png",
+    "away_logo": "https://crests.football-data.org/82.png",
+    "matchday": 8
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088dd8",
     "home_team": "Manchester United",
     "away_team": "Tottenham",
@@ -3289,197 +3333,10 @@
     "matchday": 6
   },
   {
-    "id": "00000000-0000-4000-8000-000000089dda",
-    "home_team": "Rayo Vallecano",
-    "away_team": "Athletic Bilbao",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/87.png",
-    "away_logo": "https://crests.football-data.org/77.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089ddb",
-    "home_team": "Alavés",
-    "away_team": "Atlético Madrid",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/263.png",
-    "away_logo": "https://crests.football-data.org/78.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089ddc",
-    "home_team": "Barcelona",
-    "away_team": "Getafe",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/81.png",
-    "away_logo": "https://crests.football-data.org/82.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089ddd",
-    "home_team": "Real Betis",
-    "away_team": "Osasuna",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/90.png",
-    "away_logo": "https://crests.football-data.org/79.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089dde",
-    "home_team": "Real Madrid",
-    "away_team": "Villarreal",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/86.png",
-    "away_logo": "https://crests.football-data.org/94.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089ddf",
-    "home_team": "Elche",
-    "away_team": "Celta Vigo",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/285.png",
-    "away_logo": "https://crests.football-data.org/558.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089de0",
-    "home_team": "Levante",
-    "away_team": "Sevilla",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/88.png",
-    "away_logo": "https://crests.football-data.org/559.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089de1",
-    "home_team": "Racing Santander",
-    "away_team": "Valencia",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/5335.png",
-    "away_logo": "https://crests.football-data.org/95.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089de2",
-    "home_team": "Málaga",
-    "away_team": "Espanyol",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/84.png",
-    "away_logo": "https://crests.football-data.org/80.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000089de3",
-    "home_team": "Real Sociedad",
-    "away_team": "Deportivo La Coruña",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/92.png",
-    "away_logo": "https://crests.football-data.org/560.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885f3",
-    "home_team": "Atalanta",
-    "away_team": "Venezia",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/102.png",
-    "away_logo": "https://crests.football-data.org/454.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885f4",
-    "home_team": "Sassuolo",
-    "away_team": "AC Milan",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/471.png",
-    "away_logo": "https://crests.football-data.org/98.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885f5",
-    "home_team": "Lecce",
-    "away_team": "Bologna",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/5890.png",
-    "away_logo": "https://crests.football-data.org/103.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885f6",
-    "home_team": "Inter Milan",
-    "away_team": "Parma",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/108.png",
-    "away_logo": "https://crests.football-data.org/112.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885f7",
-    "home_team": "Lazio",
-    "away_team": "Monza",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/110.png",
-    "away_logo": "https://crests.football-data.org/5911.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885f8",
-    "home_team": "Cagliari",
-    "away_team": "Juventus",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/104.png",
-    "away_logo": "https://crests.football-data.org/109.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885f9",
-    "home_team": "Como",
-    "away_team": "Roma",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/7397.png",
-    "away_logo": "https://crests.football-data.org/100.png",
-    "matchday": 6
-  },
-  {
     "id": "00000000-0000-4000-8000-0000000885fa",
     "home_team": "Napoli",
     "away_team": "Frosinone",
-    "match_date": "2026-10-11T00:00:00Z",
+    "match_date": "2026-10-10T18:45:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/113.png",
@@ -3487,26 +3344,37 @@
     "matchday": 6
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885fb",
-    "home_team": "Torino",
-    "away_team": "Udinese",
-    "match_date": "2026-10-11T00:00:00Z",
+    "id": "00000000-0000-4000-8000-000000089dde",
+    "home_team": "Real Madrid",
+    "away_team": "Villarreal",
+    "match_date": "2026-10-10T19:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/86.png",
+    "away_logo": "https://crests.football-data.org/94.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f9",
+    "home_team": "Como",
+    "away_team": "Roma",
+    "match_date": "2026-10-11T10:30:00Z",
     "league": "Serie A",
     "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/586.png",
-    "away_logo": "https://crests.football-data.org/115.png",
+    "home_logo": "https://crests.football-data.org/7397.png",
+    "away_logo": "https://crests.football-data.org/100.png",
     "matchday": 6
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885fc",
-    "home_team": "Genoa",
-    "away_team": "Fiorentina",
-    "match_date": "2026-10-11T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/107.png",
-    "away_logo": "https://crests.football-data.org/99.png",
-    "matchday": 6
+    "id": "00000000-0000-4000-8000-000000089ddf",
+    "home_team": "Elche",
+    "away_team": "Celta Vigo",
+    "match_date": "2026-10-11T12:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/285.png",
+    "away_logo": "https://crests.football-data.org/558.png",
+    "matchday": 8
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd2",
@@ -3531,6 +3399,61 @@
     "matchday": 6
   },
   {
+    "id": "00000000-0000-4000-8000-0000000885f5",
+    "home_team": "Lecce",
+    "away_team": "Bologna",
+    "match_date": "2026-10-11T13:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/5890.png",
+    "away_logo": "https://crests.football-data.org/103.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f7",
+    "home_team": "Lazio",
+    "away_team": "Monza",
+    "match_date": "2026-10-11T13:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/110.png",
+    "away_logo": "https://crests.football-data.org/5911.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a236",
+    "home_team": "Köln",
+    "away_team": "Borussia Mönchengladbach",
+    "match_date": "2026-10-11T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/1.png",
+    "away_logo": "https://crests.football-data.org/18.png",
+    "matchday": 5
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de3",
+    "home_team": "Real Sociedad",
+    "away_team": "Deportivo La Coruña",
+    "match_date": "2026-10-11T14:15:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/92.png",
+    "away_logo": "https://crests.football-data.org/560.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a238",
+    "home_team": "Freiburg",
+    "away_team": "Schalke 04",
+    "match_date": "2026-10-11T15:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/17.png",
+    "away_logo": "https://crests.football-data.org/6.png",
+    "matchday": 5
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088dd6",
     "home_team": "Liverpool",
     "away_team": "Manchester City",
@@ -3540,6 +3463,83 @@
     "home_logo": "https://crests.football-data.org/64.png",
     "away_logo": "https://crests.football-data.org/65.png",
     "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f4",
+    "home_team": "Sassuolo",
+    "away_team": "AC Milan",
+    "match_date": "2026-10-11T16:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/471.png",
+    "away_logo": "https://crests.football-data.org/98.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089ddd",
+    "home_team": "Real Betis",
+    "away_team": "Osasuna",
+    "match_date": "2026-10-11T16:30:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/90.png",
+    "away_logo": "https://crests.football-data.org/79.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f8",
+    "home_team": "Cagliari",
+    "away_team": "Juventus",
+    "match_date": "2026-10-11T18:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/104.png",
+    "away_logo": "https://crests.football-data.org/109.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de1",
+    "home_team": "Racing Santander",
+    "away_team": "Valencia",
+    "match_date": "2026-10-11T19:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/5335.png",
+    "away_logo": "https://crests.football-data.org/95.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f3",
+    "home_team": "Atalanta",
+    "away_team": "Venezia",
+    "match_date": "2026-10-12T16:30:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/102.png",
+    "away_logo": "https://crests.football-data.org/454.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885fb",
+    "home_team": "Torino",
+    "away_team": "Udinese",
+    "match_date": "2026-10-12T18:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/586.png",
+    "away_logo": "https://crests.football-data.org/115.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de0",
+    "home_team": "Levante",
+    "away_team": "Sevilla",
+    "match_date": "2026-10-12T19:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/88.png",
+    "away_logo": "https://crests.football-data.org/559.png",
+    "matchday": 8
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd5",
@@ -3751,87 +3751,10 @@
     "matchday": 2
   },
   {
-    "id": "00000000-0000-4000-8000-00000008a23d",
-    "home_team": "Union Berlin",
-    "away_team": "Borussia Dortmund",
-    "match_date": "2026-10-17T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/28.png",
-    "away_logo": "https://crests.football-data.org/4.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a23e",
-    "home_team": "Hamburger SV",
-    "away_team": "Stuttgart",
-    "match_date": "2026-10-17T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/7.png",
-    "away_logo": "https://crests.football-data.org/10.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a23f",
-    "home_team": "Werder Bremen",
-    "away_team": "SC Paderborn 07",
-    "match_date": "2026-10-17T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/12.png",
-    "away_logo": "https://crests.football-data.org/29.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a240",
-    "home_team": "SV 07 Elversberg",
-    "away_team": "Augsburg",
-    "match_date": "2026-10-17T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/719.png",
-    "away_logo": "https://crests.football-data.org/16.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a241",
-    "home_team": "Bayern Munich",
-    "away_team": "RB Leipzig",
-    "match_date": "2026-10-17T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/5.png",
-    "away_logo": "https://crests.football-data.org/721.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a242",
-    "home_team": "Borussia Mönchengladbach",
-    "away_team": "Hoffenheim",
-    "match_date": "2026-10-17T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/18.png",
-    "away_logo": "https://crests.football-data.org/2.png",
-    "matchday": 6
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a243",
-    "home_team": "Bayer Leverkusen",
-    "away_team": "Freiburg",
-    "match_date": "2026-10-17T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/3.png",
-    "away_logo": "https://crests.football-data.org/17.png",
-    "matchday": 6
-  },
-  {
     "id": "00000000-0000-4000-8000-00000008a244",
     "home_team": "Eintracht Frankfurt",
     "away_team": "Köln",
-    "match_date": "2026-10-17T00:00:00Z",
+    "match_date": "2026-10-16T18:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/19.png",
@@ -3839,15 +3762,15 @@
     "matchday": 6
   },
   {
-    "id": "00000000-0000-4000-8000-00000008a245",
-    "home_team": "Schalke 04",
-    "away_team": "Mainz",
-    "match_date": "2026-10-17T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/6.png",
-    "away_logo": "https://crests.football-data.org/15.png",
-    "matchday": 6
+    "id": "00000000-0000-4000-8000-0000000885ed",
+    "home_team": "Frosinone",
+    "away_team": "Sassuolo",
+    "match_date": "2026-10-16T18:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/470.png",
+    "away_logo": "https://crests.football-data.org/471.png",
+    "matchday": 7
   },
   {
     "id": "00000000-0000-4000-8000-000000088ddb",
@@ -3859,6 +3782,72 @@
     "home_logo": "https://crests.football-data.org/62.png",
     "away_logo": "https://crests.football-data.org/61.png",
     "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885ef",
+    "home_team": "Venezia",
+    "away_team": "Napoli",
+    "match_date": "2026-10-17T13:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/454.png",
+    "away_logo": "https://crests.football-data.org/113.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a23d",
+    "home_team": "Union Berlin",
+    "away_team": "Borussia Dortmund",
+    "match_date": "2026-10-17T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/28.png",
+    "away_logo": "https://crests.football-data.org/4.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a23e",
+    "home_team": "Hamburger SV",
+    "away_team": "Stuttgart",
+    "match_date": "2026-10-17T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/7.png",
+    "away_logo": "https://crests.football-data.org/10.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a23f",
+    "home_team": "Werder Bremen",
+    "away_team": "SC Paderborn 07",
+    "match_date": "2026-10-17T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/12.png",
+    "away_logo": "https://crests.football-data.org/29.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a240",
+    "home_team": "SV 07 Elversberg",
+    "away_team": "Augsburg",
+    "match_date": "2026-10-17T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/719.png",
+    "away_logo": "https://crests.football-data.org/16.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a245",
+    "home_team": "Schalke 04",
+    "away_team": "Mainz",
+    "match_date": "2026-10-17T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/6.png",
+    "away_logo": "https://crests.football-data.org/15.png",
+    "matchday": 6
   },
   {
     "id": "00000000-0000-4000-8000-000000088dda",
@@ -3894,6 +3883,28 @@
     "matchday": 7
   },
   {
+    "id": "00000000-0000-4000-8000-0000000885eb",
+    "home_team": "Bologna",
+    "away_team": "Inter Milan",
+    "match_date": "2026-10-17T16:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/103.png",
+    "away_logo": "https://crests.football-data.org/108.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a241",
+    "home_team": "Bayern Munich",
+    "away_team": "RB Leipzig",
+    "match_date": "2026-10-17T16:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/5.png",
+    "away_logo": "https://crests.football-data.org/721.png",
+    "matchday": 6
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088ddf",
     "home_team": "Newcastle",
     "away_team": "Aston Villa",
@@ -3902,6 +3913,17 @@
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/67.png",
     "away_logo": "https://crests.football-data.org/58.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885ec",
+    "home_team": "Roma",
+    "away_team": "Genoa",
+    "match_date": "2026-10-17T18:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/100.png",
+    "away_logo": "https://crests.football-data.org/107.png",
     "matchday": 7
   },
   {
@@ -4015,113 +4037,14 @@
     "matchday": 9
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885e9",
-    "home_team": "AC Milan",
-    "away_team": "Atalanta",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/98.png",
-    "away_logo": "https://crests.football-data.org/102.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885ea",
-    "home_team": "Juventus",
-    "away_team": "Lazio",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/109.png",
-    "away_logo": "https://crests.football-data.org/110.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885eb",
-    "home_team": "Bologna",
-    "away_team": "Inter Milan",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/103.png",
-    "away_logo": "https://crests.football-data.org/108.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885ec",
-    "home_team": "Roma",
-    "away_team": "Genoa",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/100.png",
-    "away_logo": "https://crests.football-data.org/107.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885ed",
-    "home_team": "Frosinone",
-    "away_team": "Sassuolo",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/470.png",
-    "away_logo": "https://crests.football-data.org/471.png",
-    "matchday": 7
-  },
-  {
     "id": "00000000-0000-4000-8000-0000000885ee",
     "home_team": "Udinese",
     "away_team": "Lecce",
-    "match_date": "2026-10-18T00:00:00Z",
+    "match_date": "2026-10-18T10:30:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/115.png",
     "away_logo": "https://crests.football-data.org/5890.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885ef",
-    "home_team": "Venezia",
-    "away_team": "Napoli",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/454.png",
-    "away_logo": "https://crests.football-data.org/113.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885f0",
-    "home_team": "Monza",
-    "away_team": "Cagliari",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/5911.png",
-    "away_logo": "https://crests.football-data.org/104.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885f1",
-    "home_team": "Fiorentina",
-    "away_team": "Como",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/99.png",
-    "away_logo": "https://crests.football-data.org/7397.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885f2",
-    "home_team": "Parma",
-    "away_team": "Torino",
-    "match_date": "2026-10-18T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/112.png",
-    "away_logo": "https://crests.football-data.org/586.png",
     "matchday": 7
   },
   {
@@ -4158,6 +4081,39 @@
     "matchday": 7
   },
   {
+    "id": "00000000-0000-4000-8000-0000000885f1",
+    "home_team": "Fiorentina",
+    "away_team": "Como",
+    "match_date": "2026-10-18T13:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/99.png",
+    "away_logo": "https://crests.football-data.org/7397.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a243",
+    "home_team": "Bayer Leverkusen",
+    "away_team": "Freiburg",
+    "match_date": "2026-10-18T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/3.png",
+    "away_logo": "https://crests.football-data.org/17.png",
+    "matchday": 6
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a242",
+    "home_team": "Borussia Mönchengladbach",
+    "away_team": "Hoffenheim",
+    "match_date": "2026-10-18T15:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/18.png",
+    "away_logo": "https://crests.football-data.org/2.png",
+    "matchday": 6
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088de0",
     "home_team": "Nott. Forest",
     "away_team": "Arsenal",
@@ -4166,6 +4122,50 @@
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/351.png",
     "away_logo": "https://crests.football-data.org/57.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885e9",
+    "home_team": "AC Milan",
+    "away_team": "Atalanta",
+    "match_date": "2026-10-18T16:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/98.png",
+    "away_logo": "https://crests.football-data.org/102.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885ea",
+    "home_team": "Juventus",
+    "away_team": "Lazio",
+    "match_date": "2026-10-18T18:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/109.png",
+    "away_logo": "https://crests.football-data.org/110.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f0",
+    "home_team": "Monza",
+    "away_team": "Cagliari",
+    "match_date": "2026-10-19T16:30:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/5911.png",
+    "away_logo": "https://crests.football-data.org/104.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f2",
+    "home_team": "Parma",
+    "away_team": "Torino",
+    "match_date": "2026-10-19T18:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/112.png",
+    "away_logo": "https://crests.football-data.org/586.png",
     "matchday": 7
   },
   {
@@ -4378,6 +4378,28 @@
     "matchday": 3
   },
   {
+    "id": "00000000-0000-4000-8000-00000008a249",
+    "home_team": "Stuttgart",
+    "away_team": "Borussia Mönchengladbach",
+    "match_date": "2026-10-23T18:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/10.png",
+    "away_logo": "https://crests.football-data.org/18.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885e7",
+    "home_team": "Torino",
+    "away_team": "Monza",
+    "match_date": "2026-10-23T18:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/586.png",
+    "away_logo": "https://crests.football-data.org/5911.png",
+    "matchday": 8
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088dec",
     "home_team": "Ipswich Town",
     "away_team": "Nott. Forest",
@@ -4387,105 +4409,6 @@
     "home_logo": "https://crests.football-data.org/349.png",
     "away_logo": "https://crests.football-data.org/351.png",
     "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a246",
-    "home_team": "Mainz",
-    "away_team": "Werder Bremen",
-    "match_date": "2026-10-24T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/15.png",
-    "away_logo": "https://crests.football-data.org/12.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a247",
-    "home_team": "Köln",
-    "away_team": "Schalke 04",
-    "match_date": "2026-10-24T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/1.png",
-    "away_logo": "https://crests.football-data.org/6.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a248",
-    "home_team": "RB Leipzig",
-    "away_team": "SV 07 Elversberg",
-    "match_date": "2026-10-24T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/721.png",
-    "away_logo": "https://crests.football-data.org/719.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a249",
-    "home_team": "Stuttgart",
-    "away_team": "Borussia Mönchengladbach",
-    "match_date": "2026-10-24T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/10.png",
-    "away_logo": "https://crests.football-data.org/18.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a24a",
-    "home_team": "SC Paderborn 07",
-    "away_team": "Hamburger SV",
-    "match_date": "2026-10-24T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/29.png",
-    "away_logo": "https://crests.football-data.org/7.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a24b",
-    "home_team": "Hoffenheim",
-    "away_team": "Bayer Leverkusen",
-    "match_date": "2026-10-24T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/2.png",
-    "away_logo": "https://crests.football-data.org/3.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a24c",
-    "home_team": "Freiburg",
-    "away_team": "Bayern Munich",
-    "match_date": "2026-10-24T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/17.png",
-    "away_logo": "https://crests.football-data.org/5.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a24d",
-    "home_team": "Borussia Dortmund",
-    "away_team": "Eintracht Frankfurt",
-    "match_date": "2026-10-24T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/4.png",
-    "away_logo": "https://crests.football-data.org/19.png",
-    "matchday": 7
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a24e",
-    "home_team": "Augsburg",
-    "away_team": "Union Berlin",
-    "match_date": "2026-10-24T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/16.png",
-    "away_logo": "https://crests.football-data.org/28.png",
-    "matchday": 7
   },
   {
     "id": "00000000-0000-4000-8000-000000088de6",
@@ -4499,15 +4422,81 @@
     "matchday": 8
   },
   {
-    "id": "00000000-0000-4000-8000-000000088de4",
-    "home_team": "Liverpool",
-    "away_team": "Brighton",
-    "match_date": "2026-10-24T14:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/64.png",
-    "away_logo": "https://crests.football-data.org/397.png",
+    "id": "00000000-0000-4000-8000-0000000885e0",
+    "home_team": "Cagliari",
+    "away_team": "Bologna",
+    "match_date": "2026-10-24T13:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/104.png",
+    "away_logo": "https://crests.football-data.org/103.png",
     "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885e1",
+    "home_team": "Como",
+    "away_team": "Sassuolo",
+    "match_date": "2026-10-24T13:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/7397.png",
+    "away_logo": "https://crests.football-data.org/471.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a246",
+    "home_team": "Mainz",
+    "away_team": "Werder Bremen",
+    "match_date": "2026-10-24T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/15.png",
+    "away_logo": "https://crests.football-data.org/12.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a247",
+    "home_team": "Köln",
+    "away_team": "Schalke 04",
+    "match_date": "2026-10-24T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/1.png",
+    "away_logo": "https://crests.football-data.org/6.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a248",
+    "home_team": "RB Leipzig",
+    "away_team": "SV 07 Elversberg",
+    "match_date": "2026-10-24T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/721.png",
+    "away_logo": "https://crests.football-data.org/719.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a24a",
+    "home_team": "SC Paderborn 07",
+    "away_team": "Hamburger SV",
+    "match_date": "2026-10-24T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/29.png",
+    "away_logo": "https://crests.football-data.org/7.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a24e",
+    "home_team": "Augsburg",
+    "away_team": "Union Berlin",
+    "match_date": "2026-10-24T13:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/16.png",
+    "away_logo": "https://crests.football-data.org/28.png",
+    "matchday": 7
   },
   {
     "id": "00000000-0000-4000-8000-000000088de8",
@@ -4532,6 +4521,28 @@
     "matchday": 8
   },
   {
+    "id": "00000000-0000-4000-8000-0000000885e4",
+    "home_team": "Napoli",
+    "away_team": "Roma",
+    "match_date": "2026-10-24T16:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/113.png",
+    "away_logo": "https://crests.football-data.org/100.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a24d",
+    "home_team": "Borussia Dortmund",
+    "away_team": "Eintracht Frankfurt",
+    "match_date": "2026-10-24T16:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/4.png",
+    "away_logo": "https://crests.football-data.org/19.png",
+    "matchday": 7
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088de9",
     "home_team": "Chelsea",
     "away_team": "Tottenham",
@@ -4540,6 +4551,17 @@
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/61.png",
     "away_logo": "https://crests.football-data.org/73.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885e5",
+    "home_team": "Lazio",
+    "away_team": "Parma",
+    "match_date": "2026-10-24T18:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/110.png",
+    "away_logo": "https://crests.football-data.org/112.png",
     "matchday": 8
   },
   {
@@ -4653,54 +4675,10 @@
     "matchday": 10
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885df",
-    "home_team": "Udinese",
-    "away_team": "AC Milan",
-    "match_date": "2026-10-25T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/115.png",
-    "away_logo": "https://crests.football-data.org/98.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885e0",
-    "home_team": "Cagliari",
-    "away_team": "Bologna",
-    "match_date": "2026-10-25T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/104.png",
-    "away_logo": "https://crests.football-data.org/103.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885e1",
-    "home_team": "Como",
-    "away_team": "Sassuolo",
-    "match_date": "2026-10-25T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/7397.png",
-    "away_logo": "https://crests.football-data.org/471.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885e2",
-    "home_team": "Atalanta",
-    "away_team": "Frosinone",
-    "match_date": "2026-10-25T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/102.png",
-    "away_logo": "https://crests.football-data.org/470.png",
-    "matchday": 8
-  },
-  {
     "id": "00000000-0000-4000-8000-0000000885e3",
     "home_team": "Inter Milan",
     "away_team": "Fiorentina",
-    "match_date": "2026-10-25T00:00:00Z",
+    "match_date": "2026-10-25T11:30:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/108.png",
@@ -4708,58 +4686,14 @@
     "matchday": 8
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885e4",
-    "home_team": "Napoli",
-    "away_team": "Roma",
-    "match_date": "2026-10-25T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/113.png",
-    "away_logo": "https://crests.football-data.org/100.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885e5",
-    "home_team": "Lazio",
-    "away_team": "Parma",
-    "match_date": "2026-10-25T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/110.png",
-    "away_logo": "https://crests.football-data.org/112.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885e6",
-    "home_team": "Lecce",
-    "away_team": "Juventus",
-    "match_date": "2026-10-25T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/5890.png",
-    "away_logo": "https://crests.football-data.org/109.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885e7",
-    "home_team": "Torino",
-    "away_team": "Monza",
-    "match_date": "2026-10-25T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/586.png",
-    "away_logo": "https://crests.football-data.org/5911.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885e8",
-    "home_team": "Genoa",
-    "away_team": "Venezia",
-    "match_date": "2026-10-25T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/107.png",
-    "away_logo": "https://crests.football-data.org/454.png",
+    "id": "00000000-0000-4000-8000-000000088de4",
+    "home_team": "Liverpool",
+    "away_team": "Brighton",
+    "match_date": "2026-10-25T14:00:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/64.png",
+    "away_logo": "https://crests.football-data.org/397.png",
     "matchday": 8
   },
   {
@@ -4796,6 +4730,50 @@
     "matchday": 8
   },
   {
+    "id": "00000000-0000-4000-8000-0000000885e2",
+    "home_team": "Atalanta",
+    "away_team": "Frosinone",
+    "match_date": "2026-10-25T14:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/102.png",
+    "away_logo": "https://crests.football-data.org/470.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885e8",
+    "home_team": "Genoa",
+    "away_team": "Venezia",
+    "match_date": "2026-10-25T14:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/107.png",
+    "away_logo": "https://crests.football-data.org/454.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a24b",
+    "home_team": "Hoffenheim",
+    "away_team": "Bayer Leverkusen",
+    "match_date": "2026-10-25T14:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/2.png",
+    "away_logo": "https://crests.football-data.org/3.png",
+    "matchday": 7
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a24c",
+    "home_team": "Freiburg",
+    "away_team": "Bayern Munich",
+    "match_date": "2026-10-25T16:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/17.png",
+    "away_logo": "https://crests.football-data.org/5.png",
+    "matchday": 7
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088ded",
     "home_team": "Sunderland",
     "away_team": "Leeds United",
@@ -4807,10 +4785,197 @@
     "matchday": 8
   },
   {
+    "id": "00000000-0000-4000-8000-0000000885e6",
+    "home_team": "Lecce",
+    "away_team": "Juventus",
+    "match_date": "2026-10-25T17:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/5890.png",
+    "away_logo": "https://crests.football-data.org/109.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885df",
+    "home_team": "Udinese",
+    "away_team": "AC Milan",
+    "match_date": "2026-10-25T19:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/115.png",
+    "away_logo": "https://crests.football-data.org/98.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c3f8",
+    "home_team": "Hamburger SV",
+    "away_team": "Eintracht Frankfurt",
+    "match_date": "2026-10-27T17:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c463",
+    "home_team": "Rot-Weiss Essen",
+    "away_team": "RB Leipzig",
+    "match_date": "2026-10-27T17:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c464",
+    "home_team": "SG Sonnenhof Großaspach",
+    "away_team": "Augsburg",
+    "match_date": "2026-10-27T17:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c465",
+    "home_team": "Bochum",
+    "away_team": "Mainz",
+    "match_date": "2026-10-27T17:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885dc",
+    "home_team": "Sassuolo",
+    "away_team": "Lazio",
+    "match_date": "2026-10-27T17:30:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/471.png",
+    "away_logo": "https://crests.football-data.org/110.png",
+    "matchday": 9
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c466",
+    "home_team": "Borussia Dortmund",
+    "away_team": "Werder Bremen",
+    "match_date": "2026-10-27T19:45Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c467",
+    "home_team": "Borussia Mönchengladbach",
+    "away_team": "Karlsruher SC",
+    "match_date": "2026-10-27T19:45Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c462",
+    "home_team": "Köln",
+    "away_team": "Union Berlin",
+    "match_date": "2026-10-27T19:45Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c3fb",
+    "home_team": "SV 07 Elversberg",
+    "away_team": "Darmstadt",
+    "match_date": "2026-10-27T19:45Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885db",
+    "home_team": "Roma",
+    "away_team": "Cagliari",
+    "match_date": "2026-10-27T19:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/100.png",
+    "away_logo": "https://crests.football-data.org/104.png",
+    "matchday": 9
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885dd",
+    "home_team": "Torino",
+    "away_team": "Como",
+    "match_date": "2026-10-27T19:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/586.png",
+    "away_logo": "https://crests.football-data.org/7397.png",
+    "matchday": 9
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c3f9",
+    "home_team": "Dynamo Dresden",
+    "away_team": "Schalke 04",
+    "match_date": "2026-10-28T17:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c46c",
+    "home_team": "Freiburg",
+    "away_team": "Wolfsburg",
+    "match_date": "2026-10-28T17:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c468",
+    "home_team": "SC Paderborn 07",
+    "away_team": "Stuttgart",
+    "match_date": "2026-10-28T17:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c3f7",
+    "home_team": "SSV Jeddeloh II",
+    "away_team": "Hertha Berlin",
+    "match_date": "2026-10-28T17:00Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
     "id": "00000000-0000-4000-8000-0000000885d5",
     "home_team": "AC Milan",
     "away_team": "Bologna",
-    "match_date": "2026-10-28T00:00:00Z",
+    "match_date": "2026-10-28T17:30:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/98.png",
@@ -4821,7 +4986,7 @@
     "id": "00000000-0000-4000-8000-0000000885d6",
     "home_team": "Venezia",
     "away_team": "Inter Milan",
-    "match_date": "2026-10-28T00:00:00Z",
+    "match_date": "2026-10-28T17:30:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/454.png",
@@ -4829,32 +4994,10 @@
     "matchday": 9
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885d7",
-    "home_team": "Fiorentina",
-    "away_team": "Atalanta",
-    "match_date": "2026-10-28T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/99.png",
-    "away_logo": "https://crests.football-data.org/102.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885d8",
-    "home_team": "Genoa",
-    "away_team": "Juventus",
-    "match_date": "2026-10-28T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/107.png",
-    "away_logo": "https://crests.football-data.org/109.png",
-    "matchday": 9
-  },
-  {
     "id": "00000000-0000-4000-8000-0000000885d9",
     "home_team": "Parma",
     "away_team": "Udinese",
-    "match_date": "2026-10-28T00:00:00Z",
+    "match_date": "2026-10-28T17:30:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/112.png",
@@ -4862,10 +5005,65 @@
     "matchday": 9
   },
   {
+    "id": "00000000-0000-4000-8000-000017f4c469",
+    "home_team": "Bayer Leverkusen",
+    "away_team": "FC Nürnberg",
+    "match_date": "2026-10-28T19:45Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c46b",
+    "home_team": "Bayern Munich",
+    "away_team": "1. FC Magdeburg",
+    "match_date": "2026-10-28T19:45Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c3fa",
+    "home_team": "Hannover 96",
+    "away_team": "Kaiserslautern",
+    "match_date": "2026-10-28T19:45Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c46a",
+    "home_team": "Holstein Kiel",
+    "away_team": "Hoffenheim",
+    "match_date": "2026-10-28T19:45Z",
+    "league": "DFB-Pokal",
+    "competition_code": "DFB",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885d8",
+    "home_team": "Genoa",
+    "away_team": "Juventus",
+    "match_date": "2026-10-28T19:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/107.png",
+    "away_logo": "https://crests.football-data.org/109.png",
+    "matchday": 9
+  },
+  {
     "id": "00000000-0000-4000-8000-0000000885da",
     "home_team": "Monza",
     "away_team": "Napoli",
-    "match_date": "2026-10-28T00:00:00Z",
+    "match_date": "2026-10-28T19:45:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/5911.png",
@@ -4873,43 +5071,10 @@
     "matchday": 9
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885db",
-    "home_team": "Roma",
-    "away_team": "Cagliari",
-    "match_date": "2026-10-28T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/100.png",
-    "away_logo": "https://crests.football-data.org/104.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885dc",
-    "home_team": "Sassuolo",
-    "away_team": "Lazio",
-    "match_date": "2026-10-28T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/471.png",
-    "away_logo": "https://crests.football-data.org/110.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885dd",
-    "home_team": "Torino",
-    "away_team": "Como",
-    "match_date": "2026-10-28T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/586.png",
-    "away_logo": "https://crests.football-data.org/7397.png",
-    "matchday": 9
-  },
-  {
     "id": "00000000-0000-4000-8000-0000000885de",
     "home_team": "Frosinone",
     "away_team": "Lecce",
-    "match_date": "2026-10-28T00:00:00Z",
+    "match_date": "2026-10-29T17:30:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/470.png",
@@ -4917,102 +5082,25 @@
     "matchday": 9
   },
   {
-    "id": "00000000-0000-4000-8000-00000008a24f",
-    "home_team": "Borussia Mönchengladbach",
-    "away_team": "SC Paderborn 07",
-    "match_date": "2026-10-31T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/18.png",
-    "away_logo": "https://crests.football-data.org/29.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a250",
-    "home_team": "Schalke 04",
-    "away_team": "RB Leipzig",
-    "match_date": "2026-10-31T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/6.png",
-    "away_logo": "https://crests.football-data.org/721.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a251",
-    "home_team": "Union Berlin",
-    "away_team": "Köln",
-    "match_date": "2026-10-31T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/28.png",
-    "away_logo": "https://crests.football-data.org/1.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a252",
-    "home_team": "Augsburg",
-    "away_team": "Freiburg",
-    "match_date": "2026-10-31T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/16.png",
-    "away_logo": "https://crests.football-data.org/17.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a253",
-    "home_team": "Werder Bremen",
-    "away_team": "Hoffenheim",
-    "match_date": "2026-10-31T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/12.png",
-    "away_logo": "https://crests.football-data.org/2.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a254",
-    "home_team": "Eintracht Frankfurt",
-    "away_team": "Hamburger SV",
-    "match_date": "2026-10-31T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/19.png",
-    "away_logo": "https://crests.football-data.org/7.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a255",
-    "home_team": "Bayern Munich",
-    "away_team": "Borussia Dortmund",
-    "match_date": "2026-10-31T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/5.png",
-    "away_logo": "https://crests.football-data.org/4.png",
-    "matchday": 8
+    "id": "00000000-0000-4000-8000-0000000885d7",
+    "home_team": "Fiorentina",
+    "away_team": "Atalanta",
+    "match_date": "2026-10-29T19:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/99.png",
+    "away_logo": "https://crests.football-data.org/102.png",
+    "matchday": 9
   },
   {
     "id": "00000000-0000-4000-8000-00000008a256",
     "home_team": "SV 07 Elversberg",
     "away_team": "Mainz",
-    "match_date": "2026-10-31T00:00:00Z",
+    "match_date": "2026-10-30T19:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/719.png",
     "away_logo": "https://crests.football-data.org/15.png",
-    "matchday": 8
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a257",
-    "home_team": "Bayer Leverkusen",
-    "away_team": "Stuttgart",
-    "match_date": "2026-10-31T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/3.png",
-    "away_logo": "https://crests.football-data.org/10.png",
     "matchday": 8
   },
   {
@@ -5025,6 +5113,72 @@
     "home_logo": "https://crests.football-data.org/61.png",
     "away_logo": "https://crests.football-data.org/66.png",
     "matchday": 9
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885cb",
+    "home_team": "Bologna",
+    "away_team": "Monza",
+    "match_date": "2026-10-31T14:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/103.png",
+    "away_logo": "https://crests.football-data.org/5911.png",
+    "matchday": 10
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a24f",
+    "home_team": "Borussia Mönchengladbach",
+    "away_team": "SC Paderborn 07",
+    "match_date": "2026-10-31T14:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/18.png",
+    "away_logo": "https://crests.football-data.org/29.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a250",
+    "home_team": "Schalke 04",
+    "away_team": "RB Leipzig",
+    "match_date": "2026-10-31T14:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/6.png",
+    "away_logo": "https://crests.football-data.org/721.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a252",
+    "home_team": "Augsburg",
+    "away_team": "Freiburg",
+    "match_date": "2026-10-31T14:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/16.png",
+    "away_logo": "https://crests.football-data.org/17.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a253",
+    "home_team": "Werder Bremen",
+    "away_team": "Hoffenheim",
+    "match_date": "2026-10-31T14:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/12.png",
+    "away_logo": "https://crests.football-data.org/2.png",
+    "matchday": 8
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a257",
+    "home_team": "Bayer Leverkusen",
+    "away_team": "Stuttgart",
+    "match_date": "2026-10-31T14:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/3.png",
+    "away_logo": "https://crests.football-data.org/10.png",
+    "matchday": 8
   },
   {
     "id": "00000000-0000-4000-8000-000000088def",
@@ -5082,6 +5236,28 @@
     "matchday": 9
   },
   {
+    "id": "00000000-0000-4000-8000-0000000885ce",
+    "home_team": "Udinese",
+    "away_team": "Roma",
+    "match_date": "2026-10-31T17:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/115.png",
+    "away_logo": "https://crests.football-data.org/100.png",
+    "matchday": 10
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a255",
+    "home_team": "Bayern Munich",
+    "away_team": "Borussia Dortmund",
+    "match_date": "2026-10-31T17:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/5.png",
+    "away_logo": "https://crests.football-data.org/4.png",
+    "matchday": 8
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088df3",
     "home_team": "Tottenham",
     "away_team": "Crystal Palace",
@@ -5090,6 +5266,28 @@
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/73.png",
     "away_logo": "https://crests.football-data.org/354.png",
+    "matchday": 9
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885d4",
+    "home_team": "AC Milan",
+    "away_team": "Inter Milan",
+    "match_date": "2026-10-31T19:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/98.png",
+    "away_logo": "https://crests.football-data.org/108.png",
+    "matchday": 10
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088df4",
+    "home_team": "Aston Villa",
+    "away_team": "Fulham",
+    "match_date": "2026-10-31T20:00:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/58.png",
+    "away_logo": "https://crests.football-data.org/63.png",
     "matchday": 9
   },
   {
@@ -5203,54 +5401,10 @@
     "matchday": 11
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885cb",
-    "home_team": "Bologna",
-    "away_team": "Monza",
-    "match_date": "2026-11-01T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/103.png",
-    "away_logo": "https://crests.football-data.org/5911.png",
-    "matchday": 10
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885cc",
-    "home_team": "Lecce",
-    "away_team": "Genoa",
-    "match_date": "2026-11-01T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/5890.png",
-    "away_logo": "https://crests.football-data.org/107.png",
-    "matchday": 10
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885cd",
-    "home_team": "Sassuolo",
-    "away_team": "Fiorentina",
-    "match_date": "2026-11-01T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/471.png",
-    "away_logo": "https://crests.football-data.org/99.png",
-    "matchday": 10
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885ce",
-    "home_team": "Udinese",
-    "away_team": "Roma",
-    "match_date": "2026-11-01T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/115.png",
-    "away_logo": "https://crests.football-data.org/100.png",
-    "matchday": 10
-  },
-  {
     "id": "00000000-0000-4000-8000-0000000885cf",
     "home_team": "Como",
     "away_team": "Venezia",
-    "match_date": "2026-11-01T00:00:00Z",
+    "match_date": "2026-11-01T11:30:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/7397.png",
@@ -5261,7 +5415,7 @@
     "id": "00000000-0000-4000-8000-0000000885d0",
     "home_team": "Frosinone",
     "away_team": "Torino",
-    "match_date": "2026-11-01T00:00:00Z",
+    "match_date": "2026-11-01T14:00:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/470.png",
@@ -5269,21 +5423,10 @@
     "matchday": 10
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885d1",
-    "home_team": "Atalanta",
-    "away_team": "Parma",
-    "match_date": "2026-11-01T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/102.png",
-    "away_logo": "https://crests.football-data.org/112.png",
-    "matchday": 10
-  },
-  {
     "id": "00000000-0000-4000-8000-0000000885d2",
     "home_team": "Lazio",
     "away_team": "Cagliari",
-    "match_date": "2026-11-01T00:00:00Z",
+    "match_date": "2026-11-01T14:00:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/110.png",
@@ -5291,37 +5434,26 @@
     "matchday": 10
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885d3",
-    "home_team": "Juventus",
-    "away_team": "Napoli",
-    "match_date": "2026-11-01T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/109.png",
-    "away_logo": "https://crests.football-data.org/113.png",
-    "matchday": 10
+    "id": "00000000-0000-4000-8000-00000008a251",
+    "home_team": "Union Berlin",
+    "away_team": "Köln",
+    "match_date": "2026-11-01T14:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/28.png",
+    "away_logo": "https://crests.football-data.org/1.png",
+    "matchday": 8
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885d4",
-    "home_team": "AC Milan",
-    "away_team": "Inter Milan",
-    "match_date": "2026-11-01T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/98.png",
-    "away_logo": "https://crests.football-data.org/108.png",
-    "matchday": 10
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088df4",
-    "home_team": "Aston Villa",
-    "away_team": "Fulham",
-    "match_date": "2026-11-01T14:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/58.png",
-    "away_logo": "https://crests.football-data.org/63.png",
-    "matchday": 9
+    "id": "00000000-0000-4000-8000-00000008a254",
+    "home_team": "Eintracht Frankfurt",
+    "away_team": "Hamburger SV",
+    "match_date": "2026-11-01T16:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/19.png",
+    "away_logo": "https://crests.football-data.org/7.png",
+    "matchday": 8
   },
   {
     "id": "00000000-0000-4000-8000-000000088df7",
@@ -5333,6 +5465,50 @@
     "home_logo": "https://crests.football-data.org/64.png",
     "away_logo": "https://crests.football-data.org/57.png",
     "matchday": 9
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885cc",
+    "home_team": "Lecce",
+    "away_team": "Genoa",
+    "match_date": "2026-11-01T17:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/5890.png",
+    "away_logo": "https://crests.football-data.org/107.png",
+    "matchday": 10
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885d3",
+    "home_team": "Juventus",
+    "away_team": "Napoli",
+    "match_date": "2026-11-01T19:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/109.png",
+    "away_logo": "https://crests.football-data.org/113.png",
+    "matchday": 10
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885cd",
+    "home_team": "Sassuolo",
+    "away_team": "Fiorentina",
+    "match_date": "2026-11-02T17:30:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/471.png",
+    "away_logo": "https://crests.football-data.org/99.png",
+    "matchday": 10
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885d1",
+    "home_team": "Atalanta",
+    "away_team": "Parma",
+    "match_date": "2026-11-02T19:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/102.png",
+    "away_logo": "https://crests.football-data.org/112.png",
+    "matchday": 10
   },
   {
     "id": "00000000-0000-4000-8000-000000088dee",
@@ -5544,10 +5720,54 @@
     "matchday": 4
   },
   {
+    "id": "00000000-0000-4000-8000-00000008a25c",
+    "home_team": "Hamburger SV",
+    "away_team": "Borussia Mönchengladbach",
+    "match_date": "2026-11-06T19:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/7.png",
+    "away_logo": "https://crests.football-data.org/18.png",
+    "matchday": 9
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c9",
+    "home_team": "Venezia",
+    "away_team": "Udinese",
+    "match_date": "2026-11-06T19:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/454.png",
+    "away_logo": "https://crests.football-data.org/115.png",
+    "matchday": 11
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c4",
+    "home_team": "Torino",
+    "away_team": "Lecce",
+    "match_date": "2026-11-07T14:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/586.png",
+    "away_logo": "https://crests.football-data.org/5890.png",
+    "matchday": 11
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c6",
+    "home_team": "Cagliari",
+    "away_team": "Frosinone",
+    "match_date": "2026-11-07T14:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/104.png",
+    "away_logo": "https://crests.football-data.org/470.png",
+    "matchday": 11
+  },
+  {
     "id": "00000000-0000-4000-8000-00000008a258",
     "home_team": "RB Leipzig",
     "away_team": "Augsburg",
-    "match_date": "2026-11-07T00:00:00Z",
+    "match_date": "2026-11-07T14:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/721.png",
@@ -5555,21 +5775,10 @@
     "matchday": 9
   },
   {
-    "id": "00000000-0000-4000-8000-00000008a259",
-    "home_team": "Stuttgart",
-    "away_team": "Werder Bremen",
-    "match_date": "2026-11-07T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/10.png",
-    "away_logo": "https://crests.football-data.org/12.png",
-    "matchday": 9
-  },
-  {
     "id": "00000000-0000-4000-8000-00000008a25a",
     "home_team": "Borussia Dortmund",
     "away_team": "SV 07 Elversberg",
-    "match_date": "2026-11-07T00:00:00Z",
+    "match_date": "2026-11-07T14:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/4.png",
@@ -5580,7 +5789,7 @@
     "id": "00000000-0000-4000-8000-00000008a25b",
     "home_team": "Mainz",
     "away_team": "Bayern Munich",
-    "match_date": "2026-11-07T00:00:00Z",
+    "match_date": "2026-11-07T14:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/15.png",
@@ -5588,58 +5797,14 @@
     "matchday": 9
   },
   {
-    "id": "00000000-0000-4000-8000-00000008a25c",
-    "home_team": "Hamburger SV",
-    "away_team": "Borussia Mönchengladbach",
-    "match_date": "2026-11-07T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/7.png",
-    "away_logo": "https://crests.football-data.org/18.png",
-    "matchday": 9
-  },
-  {
     "id": "00000000-0000-4000-8000-00000008a25d",
     "home_team": "SC Paderborn 07",
     "away_team": "Eintracht Frankfurt",
-    "match_date": "2026-11-07T00:00:00Z",
+    "match_date": "2026-11-07T14:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/29.png",
     "away_logo": "https://crests.football-data.org/19.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a25e",
-    "home_team": "Freiburg",
-    "away_team": "Union Berlin",
-    "match_date": "2026-11-07T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/17.png",
-    "away_logo": "https://crests.football-data.org/28.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a25f",
-    "home_team": "Köln",
-    "away_team": "Bayer Leverkusen",
-    "match_date": "2026-11-07T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/1.png",
-    "away_logo": "https://crests.football-data.org/3.png",
-    "matchday": 9
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a260",
-    "home_team": "Hoffenheim",
-    "away_team": "Schalke 04",
-    "match_date": "2026-11-07T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/2.png",
-    "away_logo": "https://crests.football-data.org/6.png",
     "matchday": 9
   },
   {
@@ -5753,6 +5918,39 @@
     "matchday": 10
   },
   {
+    "id": "00000000-0000-4000-8000-0000000885c7",
+    "home_team": "Parma",
+    "away_team": "Bologna",
+    "match_date": "2026-11-07T17:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/112.png",
+    "away_logo": "https://crests.football-data.org/103.png",
+    "matchday": 11
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a259",
+    "home_team": "Stuttgart",
+    "away_team": "Werder Bremen",
+    "match_date": "2026-11-07T17:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/10.png",
+    "away_logo": "https://crests.football-data.org/12.png",
+    "matchday": 9
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c3",
+    "home_team": "Roma",
+    "away_team": "Sassuolo",
+    "match_date": "2026-11-07T19:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/100.png",
+    "away_logo": "https://crests.football-data.org/471.png",
+    "matchday": 11
+  },
+  {
     "id": "00000000-0000-4000-8000-000000089e02",
     "home_team": "Elche",
     "away_team": "Real Betis",
@@ -5863,54 +6061,10 @@
     "matchday": 12
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885c1",
-    "home_team": "Fiorentina",
-    "away_team": "Juventus",
-    "match_date": "2026-11-08T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/99.png",
-    "away_logo": "https://crests.football-data.org/109.png",
-    "matchday": 11
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885c2",
-    "home_team": "Inter Milan",
-    "away_team": "Como",
-    "match_date": "2026-11-08T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/108.png",
-    "away_logo": "https://crests.football-data.org/7397.png",
-    "matchday": 11
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885c3",
-    "home_team": "Roma",
-    "away_team": "Sassuolo",
-    "match_date": "2026-11-08T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/100.png",
-    "away_logo": "https://crests.football-data.org/471.png",
-    "matchday": 11
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885c4",
-    "home_team": "Torino",
-    "away_team": "Lecce",
-    "match_date": "2026-11-08T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/586.png",
-    "away_logo": "https://crests.football-data.org/5890.png",
-    "matchday": 11
-  },
-  {
     "id": "00000000-0000-4000-8000-0000000885c5",
     "home_team": "Napoli",
     "away_team": "Lazio",
-    "match_date": "2026-11-08T00:00:00Z",
+    "match_date": "2026-11-08T11:30:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/113.png",
@@ -5918,32 +6072,10 @@
     "matchday": 11
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885c6",
-    "home_team": "Cagliari",
-    "away_team": "Frosinone",
-    "match_date": "2026-11-08T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/104.png",
-    "away_logo": "https://crests.football-data.org/470.png",
-    "matchday": 11
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885c7",
-    "home_team": "Parma",
-    "away_team": "Bologna",
-    "match_date": "2026-11-08T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/112.png",
-    "away_logo": "https://crests.football-data.org/103.png",
-    "matchday": 11
-  },
-  {
     "id": "00000000-0000-4000-8000-0000000885c8",
     "home_team": "Genoa",
     "away_team": "AC Milan",
-    "match_date": "2026-11-08T00:00:00Z",
+    "match_date": "2026-11-08T14:00:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/107.png",
@@ -5951,21 +6083,10 @@
     "matchday": 11
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885c9",
-    "home_team": "Venezia",
-    "away_team": "Udinese",
-    "match_date": "2026-11-08T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/454.png",
-    "away_logo": "https://crests.football-data.org/115.png",
-    "matchday": 11
-  },
-  {
     "id": "00000000-0000-4000-8000-0000000885ca",
     "home_team": "Monza",
     "away_team": "Atalanta",
-    "match_date": "2026-11-08T00:00:00Z",
+    "match_date": "2026-11-08T14:00:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/5911.png",
@@ -5973,10 +6094,98 @@
     "matchday": 11
   },
   {
+    "id": "00000000-0000-4000-8000-00000008a25f",
+    "home_team": "Köln",
+    "away_team": "Bayer Leverkusen",
+    "match_date": "2026-11-08T14:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/1.png",
+    "away_logo": "https://crests.football-data.org/3.png",
+    "matchday": 9
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a25e",
+    "home_team": "Freiburg",
+    "away_team": "Union Berlin",
+    "match_date": "2026-11-08T16:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/17.png",
+    "away_logo": "https://crests.football-data.org/28.png",
+    "matchday": 9
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c2",
+    "home_team": "Inter Milan",
+    "away_team": "Como",
+    "match_date": "2026-11-08T17:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/108.png",
+    "away_logo": "https://crests.football-data.org/7397.png",
+    "matchday": 11
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a260",
+    "home_team": "Hoffenheim",
+    "away_team": "Schalke 04",
+    "match_date": "2026-11-08T18:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/2.png",
+    "away_logo": "https://crests.football-data.org/6.png",
+    "matchday": 9
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c1",
+    "home_team": "Fiorentina",
+    "away_team": "Juventus",
+    "match_date": "2026-11-08T19:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/99.png",
+    "away_logo": "https://crests.football-data.org/109.png",
+    "matchday": 11
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a263",
+    "home_team": "Bayern Munich",
+    "away_team": "Köln",
+    "match_date": "2026-11-20T19:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/5.png",
+    "away_logo": "https://crests.football-data.org/1.png",
+    "matchday": 10
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885bd",
+    "home_team": "Como",
+    "away_team": "Cagliari",
+    "match_date": "2026-11-21T14:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/7397.png",
+    "away_logo": "https://crests.football-data.org/104.png",
+    "matchday": 12
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c0",
+    "home_team": "Lazio",
+    "away_team": "Lecce",
+    "match_date": "2026-11-21T14:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/110.png",
+    "away_logo": "https://crests.football-data.org/5890.png",
+    "matchday": 12
+  },
+  {
     "id": "00000000-0000-4000-8000-00000008a261",
     "home_team": "Bayer Leverkusen",
     "away_team": "SC Paderborn 07",
-    "match_date": "2026-11-21T00:00:00Z",
+    "match_date": "2026-11-21T14:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/3.png",
@@ -5987,7 +6196,7 @@
     "id": "00000000-0000-4000-8000-00000008a262",
     "home_team": "Union Berlin",
     "away_team": "RB Leipzig",
-    "match_date": "2026-11-21T00:00:00Z",
+    "match_date": "2026-11-21T14:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/28.png",
@@ -5995,21 +6204,10 @@
     "matchday": 10
   },
   {
-    "id": "00000000-0000-4000-8000-00000008a263",
-    "home_team": "Bayern Munich",
-    "away_team": "Köln",
-    "match_date": "2026-11-21T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/5.png",
-    "away_logo": "https://crests.football-data.org/1.png",
-    "matchday": 10
-  },
-  {
     "id": "00000000-0000-4000-8000-00000008a264",
     "home_team": "SV 07 Elversberg",
     "away_team": "Freiburg",
-    "match_date": "2026-11-21T00:00:00Z",
+    "match_date": "2026-11-21T14:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/719.png",
@@ -6017,21 +6215,10 @@
     "matchday": 10
   },
   {
-    "id": "00000000-0000-4000-8000-00000008a265",
-    "home_team": "Schalke 04",
-    "away_team": "Stuttgart",
-    "match_date": "2026-11-21T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/6.png",
-    "away_logo": "https://crests.football-data.org/10.png",
-    "matchday": 10
-  },
-  {
     "id": "00000000-0000-4000-8000-00000008a266",
     "home_team": "Borussia Mönchengladbach",
     "away_team": "Borussia Dortmund",
-    "match_date": "2026-11-21T00:00:00Z",
+    "match_date": "2026-11-21T14:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/18.png",
@@ -6039,32 +6226,10 @@
     "matchday": 10
   },
   {
-    "id": "00000000-0000-4000-8000-00000008a267",
-    "home_team": "Werder Bremen",
-    "away_team": "Hamburger SV",
-    "match_date": "2026-11-21T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/12.png",
-    "away_logo": "https://crests.football-data.org/7.png",
-    "matchday": 10
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a268",
-    "home_team": "Augsburg",
-    "away_team": "Mainz",
-    "match_date": "2026-11-21T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/16.png",
-    "away_logo": "https://crests.football-data.org/15.png",
-    "matchday": 10
-  },
-  {
     "id": "00000000-0000-4000-8000-00000008a269",
     "home_team": "Eintracht Frankfurt",
     "away_team": "Hoffenheim",
-    "match_date": "2026-11-21T00:00:00Z",
+    "match_date": "2026-11-21T14:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/19.png",
@@ -6182,6 +6347,39 @@
     "matchday": 11
   },
   {
+    "id": "00000000-0000-4000-8000-0000000885be",
+    "home_team": "Parma",
+    "away_team": "Roma",
+    "match_date": "2026-11-21T17:00:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/112.png",
+    "away_logo": "https://crests.football-data.org/100.png",
+    "matchday": 12
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a265",
+    "home_team": "Schalke 04",
+    "away_team": "Stuttgart",
+    "match_date": "2026-11-21T17:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/6.png",
+    "away_logo": "https://crests.football-data.org/10.png",
+    "matchday": 10
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885bf",
+    "home_team": "Napoli",
+    "away_team": "Torino",
+    "match_date": "2026-11-21T19:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/113.png",
+    "away_logo": "https://crests.football-data.org/586.png",
+    "matchday": 12
+  },
+  {
     "id": "00000000-0000-4000-8000-000000089e0c",
     "home_team": "Athletic Bilbao",
     "away_team": "Espanyol",
@@ -6292,65 +6490,10 @@
     "matchday": 13
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885b7",
-    "home_team": "Monza",
-    "away_team": "Fiorentina",
-    "match_date": "2026-11-22T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/5911.png",
-    "away_logo": "https://crests.football-data.org/99.png",
-    "matchday": 12
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885b8",
-    "home_team": "Atalanta",
-    "away_team": "Inter Milan",
-    "match_date": "2026-11-22T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/102.png",
-    "away_logo": "https://crests.football-data.org/108.png",
-    "matchday": 12
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885b9",
-    "home_team": "Juventus",
-    "away_team": "Venezia",
-    "match_date": "2026-11-22T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/109.png",
-    "away_logo": "https://crests.football-data.org/454.png",
-    "matchday": 12
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885ba",
-    "home_team": "Bologna",
-    "away_team": "Udinese",
-    "match_date": "2026-11-22T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/103.png",
-    "away_logo": "https://crests.football-data.org/115.png",
-    "matchday": 12
-  },
-  {
-    "id": "00000000-0000-4000-8000-0000000885bb",
-    "home_team": "AC Milan",
-    "away_team": "Frosinone",
-    "match_date": "2026-11-22T00:00:00Z",
-    "league": "Serie A",
-    "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/98.png",
-    "away_logo": "https://crests.football-data.org/470.png",
-    "matchday": 12
-  },
-  {
     "id": "00000000-0000-4000-8000-0000000885bc",
     "home_team": "Sassuolo",
     "away_team": "Genoa",
-    "match_date": "2026-11-22T00:00:00Z",
+    "match_date": "2026-11-22T11:30:00Z",
     "league": "Serie A",
     "competition_code": "SA",
     "home_logo": "https://crests.football-data.org/471.png",
@@ -6358,47 +6501,80 @@
     "matchday": 12
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885bd",
-    "home_team": "Como",
-    "away_team": "Cagliari",
-    "match_date": "2026-11-22T00:00:00Z",
+    "id": "00000000-0000-4000-8000-0000000885bb",
+    "home_team": "AC Milan",
+    "away_team": "Frosinone",
+    "match_date": "2026-11-22T14:00:00Z",
     "league": "Serie A",
     "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/7397.png",
-    "away_logo": "https://crests.football-data.org/104.png",
+    "home_logo": "https://crests.football-data.org/98.png",
+    "away_logo": "https://crests.football-data.org/470.png",
     "matchday": 12
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885be",
-    "home_team": "Parma",
-    "away_team": "Roma",
-    "match_date": "2026-11-22T00:00:00Z",
+    "id": "00000000-0000-4000-8000-00000008a268",
+    "home_team": "Augsburg",
+    "away_team": "Mainz",
+    "match_date": "2026-11-22T14:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/16.png",
+    "away_logo": "https://crests.football-data.org/15.png",
+    "matchday": 10
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a267",
+    "home_team": "Werder Bremen",
+    "away_team": "Hamburger SV",
+    "match_date": "2026-11-22T16:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/12.png",
+    "away_logo": "https://crests.football-data.org/7.png",
+    "matchday": 10
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885ba",
+    "home_team": "Bologna",
+    "away_team": "Udinese",
+    "match_date": "2026-11-22T17:00:00Z",
     "league": "Serie A",
     "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/112.png",
-    "away_logo": "https://crests.football-data.org/100.png",
+    "home_logo": "https://crests.football-data.org/103.png",
+    "away_logo": "https://crests.football-data.org/115.png",
     "matchday": 12
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885bf",
-    "home_team": "Napoli",
-    "away_team": "Torino",
-    "match_date": "2026-11-22T00:00:00Z",
+    "id": "00000000-0000-4000-8000-0000000885b8",
+    "home_team": "Atalanta",
+    "away_team": "Inter Milan",
+    "match_date": "2026-11-22T19:45:00Z",
     "league": "Serie A",
     "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/113.png",
-    "away_logo": "https://crests.football-data.org/586.png",
+    "home_logo": "https://crests.football-data.org/102.png",
+    "away_logo": "https://crests.football-data.org/108.png",
     "matchday": 12
   },
   {
-    "id": "00000000-0000-4000-8000-0000000885c0",
-    "home_team": "Lazio",
-    "away_team": "Lecce",
-    "match_date": "2026-11-22T00:00:00Z",
+    "id": "00000000-0000-4000-8000-0000000885b7",
+    "home_team": "Monza",
+    "away_team": "Fiorentina",
+    "match_date": "2026-11-23T17:30:00Z",
     "league": "Serie A",
     "competition_code": "SA",
-    "home_logo": "https://crests.football-data.org/110.png",
-    "away_logo": "https://crests.football-data.org/5890.png",
+    "home_logo": "https://crests.football-data.org/5911.png",
+    "away_logo": "https://crests.football-data.org/99.png",
+    "matchday": 12
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885b9",
+    "home_team": "Juventus",
+    "away_team": "Venezia",
+    "match_date": "2026-11-23T19:45:00Z",
+    "league": "Serie A",
+    "competition_code": "SA",
+    "home_logo": "https://crests.football-data.org/109.png",
+    "away_logo": "https://crests.football-data.org/454.png",
     "matchday": 12
   },
   {
@@ -6600,10 +6776,21 @@
     "matchday": 5
   },
   {
+    "id": "00000000-0000-4000-8000-00000008a26d",
+    "home_team": "Werder Bremen",
+    "away_team": "Borussia Mönchengladbach",
+    "match_date": "2026-11-27T19:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/12.png",
+    "away_logo": "https://crests.football-data.org/18.png",
+    "matchday": 11
+  },
+  {
     "id": "00000000-0000-4000-8000-00000008a26a",
     "home_team": "Köln",
     "away_team": "SV 07 Elversberg",
-    "match_date": "2026-11-28T00:00:00Z",
+    "match_date": "2026-11-28T14:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/1.png",
@@ -6614,7 +6801,7 @@
     "id": "00000000-0000-4000-8000-00000008a26b",
     "home_team": "Mainz",
     "away_team": "Union Berlin",
-    "match_date": "2026-11-28T00:00:00Z",
+    "match_date": "2026-11-28T14:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/15.png",
@@ -6625,7 +6812,7 @@
     "id": "00000000-0000-4000-8000-00000008a26c",
     "home_team": "SC Paderborn 07",
     "away_team": "Schalke 04",
-    "match_date": "2026-11-28T00:00:00Z",
+    "match_date": "2026-11-28T14:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/29.png",
@@ -6633,65 +6820,10 @@
     "matchday": 11
   },
   {
-    "id": "00000000-0000-4000-8000-00000008a26d",
-    "home_team": "Werder Bremen",
-    "away_team": "Borussia Mönchengladbach",
-    "match_date": "2026-11-28T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/12.png",
-    "away_logo": "https://crests.football-data.org/18.png",
-    "matchday": 11
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a26e",
-    "home_team": "Stuttgart",
-    "away_team": "Eintracht Frankfurt",
-    "match_date": "2026-11-28T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/10.png",
-    "away_logo": "https://crests.football-data.org/19.png",
-    "matchday": 11
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a26f",
-    "home_team": "Hoffenheim",
-    "away_team": "Augsburg",
-    "match_date": "2026-11-28T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/2.png",
-    "away_logo": "https://crests.football-data.org/16.png",
-    "matchday": 11
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a270",
-    "home_team": "Borussia Dortmund",
-    "away_team": "Bayer Leverkusen",
-    "match_date": "2026-11-28T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/4.png",
-    "away_logo": "https://crests.football-data.org/3.png",
-    "matchday": 11
-  },
-  {
-    "id": "00000000-0000-4000-8000-00000008a271",
-    "home_team": "Freiburg",
-    "away_team": "RB Leipzig",
-    "match_date": "2026-11-28T00:00:00Z",
-    "league": "Bundesliga",
-    "competition_code": "BL1",
-    "home_logo": "https://crests.football-data.org/17.png",
-    "away_logo": "https://crests.football-data.org/721.png",
-    "matchday": 11
-  },
-  {
     "id": "00000000-0000-4000-8000-00000008a272",
     "home_team": "Hamburger SV",
     "away_team": "Bayern Munich",
-    "match_date": "2026-11-28T00:00:00Z",
+    "match_date": "2026-11-28T14:30:00Z",
     "league": "Bundesliga",
     "competition_code": "BL1",
     "home_logo": "https://crests.football-data.org/7.png",
@@ -6807,6 +6939,17 @@
     "home_logo": "https://crests.football-data.org/354.png",
     "away_logo": "https://crests.football-data.org/322.png",
     "matchday": 12
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a26e",
+    "home_team": "Stuttgart",
+    "away_team": "Eintracht Frankfurt",
+    "match_date": "2026-11-28T17:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/10.png",
+    "away_logo": "https://crests.football-data.org/19.png",
+    "matchday": 11
   },
   {
     "id": "00000000-0000-4000-8000-000000089e16",
@@ -7027,6 +7170,105 @@
     "home_logo": "https://crests.football-data.org/108.png",
     "away_logo": "https://crests.football-data.org/107.png",
     "matchday": 13
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a271",
+    "home_team": "Freiburg",
+    "away_team": "RB Leipzig",
+    "match_date": "2026-11-29T14:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/17.png",
+    "away_logo": "https://crests.football-data.org/721.png",
+    "matchday": 11
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a26f",
+    "home_team": "Hoffenheim",
+    "away_team": "Augsburg",
+    "match_date": "2026-11-29T16:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/2.png",
+    "away_logo": "https://crests.football-data.org/16.png",
+    "matchday": 11
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a270",
+    "home_team": "Borussia Dortmund",
+    "away_team": "Bayer Leverkusen",
+    "match_date": "2026-11-29T18:30:00Z",
+    "league": "Bundesliga",
+    "competition_code": "BL1",
+    "home_logo": "https://crests.football-data.org/4.png",
+    "away_logo": "https://crests.football-data.org/3.png",
+    "matchday": 11
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4b1bc",
+    "home_team": "AC Milan",
+    "away_team": "Monza",
+    "match_date": "2026-12-02T20:00Z",
+    "league": "Copa Italia",
+    "competition_code": "CI",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4b2b0",
+    "home_team": "Roma",
+    "away_team": "Verona",
+    "match_date": "2026-12-02T20:00Z",
+    "league": "Copa Italia",
+    "competition_code": "CI",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4b1af",
+    "home_team": "Atalanta",
+    "away_team": "Udinese",
+    "match_date": "2026-12-02T20:00Z",
+    "league": "Copa Italia",
+    "competition_code": "CI",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4b1c2",
+    "home_team": "Bologna",
+    "away_team": "Palermo",
+    "match_date": "2026-12-02T20:00Z",
+    "league": "Copa Italia",
+    "competition_code": "CI",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4b2af",
+    "home_team": "Como",
+    "away_team": "Cremonese",
+    "match_date": "2026-12-02T20:00Z",
+    "league": "Copa Italia",
+    "competition_code": "CI",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4b1c5",
+    "home_team": "Juventus",
+    "away_team": "Sassuolo",
+    "match_date": "2026-12-02T20:00Z",
+    "league": "Copa Italia",
+    "competition_code": "CI",
+    "home_logo": "",
+    "away_logo": "",
+    "matchday": null
   },
   {
     "id": "00000000-0000-4000-8000-000000088e16",
@@ -8627,33 +8869,11 @@
     "id": "00000000-0000-4000-8000-000000088e3e",
     "home_team": "Aston Villa",
     "away_team": "Leeds United",
-    "match_date": "2026-12-26T15:00:00Z",
+    "match_date": "2026-12-26T12:30:00Z",
     "league": "Premier League",
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/58.png",
     "away_logo": "https://crests.football-data.org/341.png",
-    "matchday": 17
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e3f",
-    "home_team": "Manchester United",
-    "away_team": "Nott. Forest",
-    "match_date": "2026-12-26T15:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/66.png",
-    "away_logo": "https://crests.football-data.org/351.png",
-    "matchday": 17
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e40",
-    "home_team": "Crystal Palace",
-    "away_team": "Arsenal",
-    "match_date": "2026-12-26T15:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/354.png",
-    "away_logo": "https://crests.football-data.org/57.png",
     "matchday": 17
   },
   {
@@ -8665,28 +8885,6 @@
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/62.png",
     "away_logo": "https://crests.football-data.org/71.png",
-    "matchday": 17
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e42",
-    "home_team": "Coventry City",
-    "away_team": "Chelsea",
-    "match_date": "2026-12-26T15:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/1076.png",
-    "away_logo": "https://crests.football-data.org/61.png",
-    "matchday": 17
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e43",
-    "home_team": "Newcastle",
-    "away_team": "Manchester City",
-    "match_date": "2026-12-26T15:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/67.png",
-    "away_logo": "https://crests.football-data.org/65.png",
     "matchday": 17
   },
   {
@@ -8712,17 +8910,6 @@
     "matchday": 17
   },
   {
-    "id": "00000000-0000-4000-8000-000000088e46",
-    "home_team": "Hull City",
-    "away_team": "Liverpool",
-    "match_date": "2026-12-26T15:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/322.png",
-    "away_logo": "https://crests.football-data.org/64.png",
-    "matchday": 17
-  },
-  {
     "id": "00000000-0000-4000-8000-000000088e47",
     "home_team": "Ipswich Town",
     "away_team": "Brentford",
@@ -8734,54 +8921,65 @@
     "matchday": 17
   },
   {
-    "id": "00000000-0000-4000-8000-000000088e48",
-    "home_team": "Fulham",
-    "away_team": "Arsenal",
-    "match_date": "2026-12-30T20:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/63.png",
-    "away_logo": "https://crests.football-data.org/57.png",
-    "matchday": 18
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e49",
-    "home_team": "Coventry City",
-    "away_team": "Brentford",
-    "match_date": "2026-12-30T20:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/1076.png",
-    "away_logo": "https://crests.football-data.org/402.png",
-    "matchday": 18
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e4a",
-    "home_team": "Aston Villa",
+    "id": "00000000-0000-4000-8000-000000088e46",
+    "home_team": "Hull City",
     "away_team": "Liverpool",
-    "match_date": "2026-12-30T20:00:00Z",
+    "match_date": "2026-12-26T17:30:00Z",
     "league": "Premier League",
     "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/58.png",
+    "home_logo": "https://crests.football-data.org/322.png",
     "away_logo": "https://crests.football-data.org/64.png",
-    "matchday": 18
+    "matchday": 17
   },
   {
-    "id": "00000000-0000-4000-8000-000000088e4b",
+    "id": "00000000-0000-4000-8000-000000088e43",
     "home_team": "Newcastle",
-    "away_team": "Nott. Forest",
-    "match_date": "2026-12-30T20:00:00Z",
+    "away_team": "Manchester City",
+    "match_date": "2026-12-26T20:00:00Z",
     "league": "Premier League",
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/67.png",
+    "away_logo": "https://crests.football-data.org/65.png",
+    "matchday": 17
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e42",
+    "home_team": "Coventry City",
+    "away_team": "Chelsea",
+    "match_date": "2026-12-27T14:00:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/1076.png",
+    "away_logo": "https://crests.football-data.org/61.png",
+    "matchday": 17
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e3f",
+    "home_team": "Manchester United",
+    "away_team": "Nott. Forest",
+    "match_date": "2026-12-27T16:30:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/66.png",
     "away_logo": "https://crests.football-data.org/351.png",
-    "matchday": 18
+    "matchday": 17
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e40",
+    "home_team": "Crystal Palace",
+    "away_team": "Arsenal",
+    "match_date": "2026-12-27T19:00:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/354.png",
+    "away_logo": "https://crests.football-data.org/57.png",
+    "matchday": 17
   },
   {
     "id": "00000000-0000-4000-8000-000000088e4c",
     "home_team": "Hull City",
     "away_team": "Leeds United",
-    "match_date": "2026-12-30T20:00:00Z",
+    "match_date": "2026-12-29T19:30:00Z",
     "league": "Premier League",
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/322.png",
@@ -8789,32 +8987,10 @@
     "matchday": 18
   },
   {
-    "id": "00000000-0000-4000-8000-000000088e4d",
-    "home_team": "Manchester United",
-    "away_team": "Sunderland",
-    "match_date": "2026-12-30T20:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/66.png",
-    "away_logo": "https://crests.football-data.org/71.png",
-    "matchday": 18
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e4e",
-    "home_team": "Ipswich Town",
-    "away_team": "Chelsea",
-    "match_date": "2026-12-30T20:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/349.png",
-    "away_logo": "https://crests.football-data.org/61.png",
-    "matchday": 18
-  },
-  {
     "id": "00000000-0000-4000-8000-000000088e4f",
     "home_team": "Tottenham",
     "away_team": "Brighton",
-    "match_date": "2026-12-30T20:00:00Z",
+    "match_date": "2026-12-29T19:30:00Z",
     "league": "Premier League",
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/73.png",
@@ -8825,7 +9001,7 @@
     "id": "00000000-0000-4000-8000-000000088e50",
     "home_team": "Everton",
     "away_team": "Manchester City",
-    "match_date": "2026-12-30T20:00:00Z",
+    "match_date": "2026-12-29T20:15:00Z",
     "league": "Premier League",
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/62.png",
@@ -8833,10 +9009,54 @@
     "matchday": 18
   },
   {
+    "id": "00000000-0000-4000-8000-000000088e48",
+    "home_team": "Fulham",
+    "away_team": "Arsenal",
+    "match_date": "2026-12-30T19:30:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/63.png",
+    "away_logo": "https://crests.football-data.org/57.png",
+    "matchday": 18
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e49",
+    "home_team": "Coventry City",
+    "away_team": "Brentford",
+    "match_date": "2026-12-30T19:30:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/1076.png",
+    "away_logo": "https://crests.football-data.org/402.png",
+    "matchday": 18
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e4b",
+    "home_team": "Newcastle",
+    "away_team": "Nott. Forest",
+    "match_date": "2026-12-30T19:30:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/67.png",
+    "away_logo": "https://crests.football-data.org/351.png",
+    "matchday": 18
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e4d",
+    "home_team": "Manchester United",
+    "away_team": "Sunderland",
+    "match_date": "2026-12-30T19:30:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/66.png",
+    "away_logo": "https://crests.football-data.org/71.png",
+    "matchday": 18
+  },
+  {
     "id": "00000000-0000-4000-8000-000000088e51",
     "home_team": "Crystal Palace",
     "away_team": "Bournemouth",
-    "match_date": "2026-12-30T20:00:00Z",
+    "match_date": "2026-12-30T19:30:00Z",
     "league": "Premier League",
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/354.png",
@@ -8844,14 +9064,47 @@
     "matchday": 18
   },
   {
-    "id": "00000000-0000-4000-8000-000000088e52",
-    "home_team": "Bournemouth",
-    "away_team": "Aston Villa",
-    "match_date": "2027-01-02T15:00:00Z",
+    "id": "00000000-0000-4000-8000-000000088e4a",
+    "home_team": "Aston Villa",
+    "away_team": "Liverpool",
+    "match_date": "2026-12-30T20:15:00Z",
     "league": "Premier League",
     "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/bournemouth.png",
-    "away_logo": "https://crests.football-data.org/58.png",
+    "home_logo": "https://crests.football-data.org/58.png",
+    "away_logo": "https://crests.football-data.org/64.png",
+    "matchday": 18
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e4e",
+    "home_team": "Ipswich Town",
+    "away_team": "Chelsea",
+    "match_date": "2026-12-30T20:15:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/349.png",
+    "away_logo": "https://crests.football-data.org/61.png",
+    "matchday": 18
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e54",
+    "home_team": "Leeds United",
+    "away_team": "Everton",
+    "match_date": "2027-01-01T20:00:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/341.png",
+    "away_logo": "https://crests.football-data.org/62.png",
+    "matchday": 19
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e5a",
+    "home_team": "Brighton",
+    "away_team": "Manchester United",
+    "match_date": "2027-01-02T12:30:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/397.png",
+    "away_logo": "https://crests.football-data.org/66.png",
     "matchday": 19
   },
   {
@@ -8863,17 +9116,6 @@
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/402.png",
     "away_logo": "https://crests.football-data.org/354.png",
-    "matchday": 19
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e54",
-    "home_team": "Leeds United",
-    "away_team": "Everton",
-    "match_date": "2027-01-02T15:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/341.png",
-    "away_logo": "https://crests.football-data.org/62.png",
     "matchday": 19
   },
   {
@@ -8910,17 +9152,6 @@
     "matchday": 19
   },
   {
-    "id": "00000000-0000-4000-8000-000000088e58",
-    "home_team": "Chelsea",
-    "away_team": "Newcastle",
-    "match_date": "2027-01-02T15:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/61.png",
-    "away_logo": "https://crests.football-data.org/67.png",
-    "matchday": 19
-  },
-  {
     "id": "00000000-0000-4000-8000-000000088e59",
     "home_team": "Nott. Forest",
     "away_team": "Fulham",
@@ -8932,25 +9163,14 @@
     "matchday": 19
   },
   {
-    "id": "00000000-0000-4000-8000-000000088e5a",
-    "home_team": "Brighton",
-    "away_team": "Manchester United",
-    "match_date": "2027-01-02T15:00:00Z",
+    "id": "00000000-0000-4000-8000-000000088e52",
+    "home_team": "Bournemouth",
+    "away_team": "Aston Villa",
+    "match_date": "2027-01-02T17:30:00Z",
     "league": "Premier League",
     "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/397.png",
-    "away_logo": "https://crests.football-data.org/66.png",
-    "matchday": 19
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e5b",
-    "home_team": "Manchester City",
-    "away_team": "Tottenham",
-    "match_date": "2027-01-02T15:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/65.png",
-    "away_logo": "https://crests.football-data.org/73.png",
+    "home_logo": "https://crests.football-data.org/bournemouth.png",
+    "away_logo": "https://crests.football-data.org/58.png",
     "matchday": 19
   },
   {
@@ -9174,6 +9394,83 @@
     "matchday": 17
   },
   {
+    "id": "00000000-0000-4000-8000-000000088e58",
+    "home_team": "Chelsea",
+    "away_team": "Newcastle",
+    "match_date": "2027-01-03T14:00:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/61.png",
+    "away_logo": "https://crests.football-data.org/67.png",
+    "matchday": 19
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e5b",
+    "home_team": "Manchester City",
+    "away_team": "Tottenham",
+    "match_date": "2027-01-03T16:30:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/65.png",
+    "away_logo": "https://crests.football-data.org/73.png",
+    "matchday": 19
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e5c",
+    "home_team": "Arsenal",
+    "away_team": "Brentford",
+    "match_date": "2027-01-05T19:30:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/57.png",
+    "away_logo": "https://crests.football-data.org/402.png",
+    "matchday": 20
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e5f",
+    "home_team": "Brighton",
+    "away_team": "Bournemouth",
+    "match_date": "2027-01-05T19:30:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/397.png",
+    "away_logo": "https://crests.football-data.org/bournemouth.png",
+    "matchday": 20
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e60",
+    "home_team": "Nott. Forest",
+    "away_team": "Hull City",
+    "match_date": "2027-01-05T19:30:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/351.png",
+    "away_logo": "https://crests.football-data.org/322.png",
+    "matchday": 20
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e62",
+    "home_team": "Everton",
+    "away_team": "Aston Villa",
+    "match_date": "2027-01-05T19:30:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/62.png",
+    "away_logo": "https://crests.football-data.org/58.png",
+    "matchday": 20
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e63",
+    "home_team": "Sunderland",
+    "away_team": "Liverpool",
+    "match_date": "2027-01-05T20:15:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/71.png",
+    "away_logo": "https://crests.football-data.org/64.png",
+    "matchday": 20
+  },
+  {
     "id": "00000000-0000-4000-8000-00000008857b",
     "home_team": "Frosinone",
     "away_team": "Bologna",
@@ -9284,65 +9581,10 @@
     "matchday": 18
   },
   {
-    "id": "00000000-0000-4000-8000-000000088e5c",
-    "home_team": "Arsenal",
-    "away_team": "Brentford",
-    "match_date": "2027-01-06T20:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/57.png",
-    "away_logo": "https://crests.football-data.org/402.png",
-    "matchday": 20
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e5d",
-    "home_team": "Leeds United",
-    "away_team": "Manchester City",
-    "match_date": "2027-01-06T20:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/341.png",
-    "away_logo": "https://crests.football-data.org/65.png",
-    "matchday": 20
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e5e",
-    "home_team": "Manchester United",
-    "away_team": "Newcastle",
-    "match_date": "2027-01-06T20:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/66.png",
-    "away_logo": "https://crests.football-data.org/67.png",
-    "matchday": 20
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e5f",
-    "home_team": "Brighton",
-    "away_team": "Bournemouth",
-    "match_date": "2027-01-06T20:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/397.png",
-    "away_logo": "https://crests.football-data.org/bournemouth.png",
-    "matchday": 20
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e60",
-    "home_team": "Nott. Forest",
-    "away_team": "Hull City",
-    "match_date": "2027-01-06T20:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/351.png",
-    "away_logo": "https://crests.football-data.org/322.png",
-    "matchday": 20
-  },
-  {
     "id": "00000000-0000-4000-8000-000000088e61",
     "home_team": "Fulham",
     "away_team": "Tottenham",
-    "match_date": "2027-01-06T20:00:00Z",
+    "match_date": "2027-01-06T19:30:00Z",
     "league": "Premier League",
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/63.png",
@@ -9350,32 +9592,10 @@
     "matchday": 20
   },
   {
-    "id": "00000000-0000-4000-8000-000000088e62",
-    "home_team": "Everton",
-    "away_team": "Aston Villa",
-    "match_date": "2027-01-06T20:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/62.png",
-    "away_logo": "https://crests.football-data.org/58.png",
-    "matchday": 20
-  },
-  {
-    "id": "00000000-0000-4000-8000-000000088e63",
-    "home_team": "Sunderland",
-    "away_team": "Liverpool",
-    "match_date": "2027-01-06T20:00:00Z",
-    "league": "Premier League",
-    "competition_code": "PL",
-    "home_logo": "https://crests.football-data.org/71.png",
-    "away_logo": "https://crests.football-data.org/64.png",
-    "matchday": 20
-  },
-  {
     "id": "00000000-0000-4000-8000-000000088e64",
     "home_team": "Crystal Palace",
     "away_team": "Chelsea",
-    "match_date": "2027-01-06T20:00:00Z",
+    "match_date": "2027-01-06T19:30:00Z",
     "league": "Premier League",
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/354.png",
@@ -9386,11 +9606,33 @@
     "id": "00000000-0000-4000-8000-000000088e65",
     "home_team": "Ipswich Town",
     "away_team": "Coventry City",
-    "match_date": "2027-01-06T20:00:00Z",
+    "match_date": "2027-01-06T19:30:00Z",
     "league": "Premier League",
     "competition_code": "PL",
     "home_logo": "https://crests.football-data.org/349.png",
     "away_logo": "https://crests.football-data.org/1076.png",
+    "matchday": 20
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e5d",
+    "home_team": "Leeds United",
+    "away_team": "Manchester City",
+    "match_date": "2027-01-06T20:15:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/341.png",
+    "away_logo": "https://crests.football-data.org/65.png",
+    "matchday": 20
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e5e",
+    "home_team": "Manchester United",
+    "away_team": "Newcastle",
+    "match_date": "2027-01-07T20:00:00Z",
+    "league": "Premier League",
+    "competition_code": "PL",
+    "home_logo": "https://crests.football-data.org/66.png",
+    "away_logo": "https://crests.football-data.org/67.png",
     "matchday": 20
   },
   {
