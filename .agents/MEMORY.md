@@ -68,6 +68,13 @@
 
 ## Cambios Recientes
 
+- **2026-09-14** — **Regla #5 de Goleadores (Recálculo Retroactivo) y Resolución de Sincronismo ESPN**:
+  - **Motor de Scoring**: Se actualizó la Regla #5 para otorgar +2 puntos si la cantidad máxima de goles predichos para un goleador coincide exactamente con los goles que marcó el líder goleador del partido real (antes exigía coincidir el número exacto de goleadores del equipo). Re-evaluados todos los partidos (ej. _Zahilet_ +4 pts en RM vs Elche, ascendiendo a 28 pts consolidados).
+  - **Incidente ESPN Range Dates API**: GitHub Actions cron y client fallaron (`HTTP 400`) porque ESPN deshabilitó las consultas de rango de fechas (`?dates=YYYYMMDD-YYYYMMDD`).
+  - **Solución (`23a44e1`)**: Nuevo script con consultas paralelizables de fechas individuales (`?dates=YYYYMMDD`) y un iterador de Backfill robusto.
+  - **Sincronización End-to-End (`248798a`)**: Inyección correcta de `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` a los GitHub Secrets del runner del CI, resolviendo fallos fantasma en workflow_dispatch por bypass erróneo del RLS. El cron persitió automáticamente 146 puntos repartidos a la DB de producción.
+  - **Redirección cruzada en memoria (`a5f1a45`)**: `/ranking` carga los puntos validados desde Supabase directamente preservando el field original para evitar inicializaciones en `null` que rompían la UI si el ID del fixture divergía del JSON compilado.
+
 - **2026-09-12** — **Auditoría de Performance & Accesibilidad (PageSpeed 100/100) + Optimización de Red**:
   - **Google PageSpeed Insights Perfecto**: 100/100 en Rendimiento, 100/100 en SEO, 100/100 en Prácticas Recomendadas y 100/100 en Accesibilidad (tanto en Móvil como en Desktop).
   - **Core Web Vitals en Móvil**: FCP 0.2s, LCP 0.4s, TBT 0ms (bloqueo nulo), CLS 0 (sin layout shifts), Speed Index 0.3s.
