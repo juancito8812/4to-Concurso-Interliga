@@ -266,7 +266,7 @@ public/
 
 - Panel integrado debajo de cada club con dropdown clasificado por posición (Delanteros y Centrocampistas primero).
 - Selector de goles `[-] N [+]` con un máximo de **5 goleadores por equipo**.
-- Base de datos de **4.749 jugadores oficiales** clasificados por posición y equipo.
+- Base de datos de **7.097 jugadores oficiales** clasificados por posición y equipo (237 clubes).
 
 ### 5. Ranking General en Vivo Multiusuario
 

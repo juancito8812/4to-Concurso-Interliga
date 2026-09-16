@@ -68,6 +68,17 @@
 
 ## Cambios Recientes
 
+- **2026-09-16** — **Fix Ventana Rodante de Pronósticos en Vivo (`cf2cd77`)**:
+  - **Incidente**: Un usuario con club Barcelona reportó que no le salía el próximo partido (*Barcelona vs Racing Santander* del 16 de septiembre) en `/pronosticar`.
+  - **Causa Raíz**:
+    1. `public/data/officialFixtures.json` en la CDN tenía una versión antigua (1.650 partidos vs 1.672 en `src/data/`) con la fecha de dicho encuentro configurada a medianoche (`2026-09-16T00:00:00Z`).
+    2. El filtro de partidos por fecha (`match_date >= nowIso`) evaluaba falso al transcurrir la madrugada, omitiendo los partidos del día actual.
+    3. `src/lib/footballData.ts` intentaba llamadas directas a `api.football-data.org` fuera de localhost, fallando por CORS en el dominio de producción `futbolcamisetapasion.com`.
+  - **Solución y Blindaje**:
+    1. Se sincronizó `public/data/officialFixtures.json` con los 1.672 fixtures oficiales completos y horarios reales (`19:30:00Z`).
+    2. Se implementó `isMatchDateValid` en `src/lib/footballData.ts` para que cualquier partido del día actual (`YYYY-MM-DDT00:00:00Z` o con fecha hoy) permanezca visible y pronosticable durante toda la jornada.
+    3. Se restringieron las llamadas directas de `football-data.org` exclusivamente a `localhost` y `127.0.0.1`, cargando siempre de forma ultrarrápida desde los JSONs cacheados en CDN en producción.
+
 - **2026-09-14** — **Regla #5 de Goleadores (Recálculo Retroactivo) y Resolución de Sincronismo ESPN**:
   - **Motor de Scoring**: Se actualizó la Regla #5 para otorgar +2 puntos si la cantidad máxima de goles predichos para un goleador coincide exactamente con los goles que marcó el líder goleador del partido real (antes exigía coincidir el número exacto de goleadores del equipo). Re-evaluados todos los partidos (ej. _Zahilet_ +4 pts en RM vs Elche, ascendiendo a 28 pts consolidados).
   - **Incidente ESPN Range Dates API**: GitHub Actions cron y client fallaron (`HTTP 400`) porque ESPN deshabilitó las consultas de rango de fechas (`?dates=YYYYMMDD-YYYYMMDD`).

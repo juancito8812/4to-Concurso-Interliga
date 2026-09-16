@@ -32,6 +32,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - `officialPlayers.json` (809KB) y `officialFixtures.json` (566KB) **NO** se importan estáticamente en JS.
 - Se cargan vía `loadData()` de `src/lib/dataLoader.ts` con cache en memoria (una sola petición HTTP por sesión).
 - Los 4 JSONs de datos están en `public/data/` como assets estáticos servidos por CDN.
+- **Sincronización Dual Obligatoria**: Al modificar `src/data/officialFixtures.json` o `officialEvaluatedMatches.json`, **SIEMPRE** copiar la copia exacta a `public/data/` para que la CDN sirva los 1.672 partidos con sus horarios oficiales.
+- **Validación de Fechas en Ventana Rodante**: Usar `isMatchDateValid` para que partidos con horarios no configurados o medianoche (`00:00:00Z`) permanezcan activos durante toda su fecha.
 - Para agregar un nuevo archivo de datos: copiarlo a `public/data/`, importarlo con `loadData("/data/archivo.json")` en el componente que lo necesite.
 
 ### Footer global
