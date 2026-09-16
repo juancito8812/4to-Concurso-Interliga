@@ -4225,5 +4225,47 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dcf",
+    "home_team": "Barcelona",
+    "away_team": "Racing Santander",
+    "match_date": "2026-09-16T19:30Z",
+    "league": "LaLiga",
+    "result_home": 7,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "João Cancelo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 3,
+        "team": "home"
+      },
+      {
+        "player_name": "Maguette Gueye",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yassir Zabiri",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Gabriel Jesus",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
