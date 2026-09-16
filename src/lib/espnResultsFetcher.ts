@@ -115,7 +115,7 @@ export async function fetchLiveFinishedMatches(): Promise<EvaluatedMatchResult[]
       fetchTasks.push(
         (async () => {
           try {
-            const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${slug}/scoreboard?dates=${dateStr}`;
+            const url = `https://site.web.api.espn.com/apis/site/v2/sports/soccer/${slug}/scoreboard?dates=${dateStr}`;
             const res = await fetch(url, { signal: AbortSignal.timeout(2500) });
             if (!res.ok) return;
 

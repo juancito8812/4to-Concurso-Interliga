@@ -125,7 +125,7 @@ export async function getEspnStandings(leagueSlug: string): Promise<Standing[]> 
   const espnCode = leagueEspnCodes[leagueSlug];
   if (!espnCode || leagueSlug === "coppaitalia") return [];
 
-  const url = `https://site.api.espn.com/apis/v2/sports/soccer/${espnCode}/standings`;
+  const url = `https://site.web.api.espn.com/apis/v2/sports/soccer/${espnCode}/standings`;
 
   try {
     const res = await fetch(url);
@@ -299,7 +299,7 @@ export async function getEspnScoreboard(leagueSlug: string): Promise<CupMatch[]>
   const espnCode = leagueEspnCodes[leagueSlug];
   if (!espnCode) return [];
 
-  const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${espnCode}/scoreboard`;
+  const url = `https://site.web.api.espn.com/apis/site/v2/sports/soccer/${espnCode}/scoreboard`;
 
   try {
     const res = await fetch(url);

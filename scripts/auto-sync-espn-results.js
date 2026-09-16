@@ -209,7 +209,7 @@ async function persistToSupabase(officialMatches, officialPreds) {
 async function resolvePenaltyWinner(gameId, espnSlug) {
   if (!espnSlug) return null;
   try {
-    const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${espnSlug}/summary?event=${gameId}`;
+    const url = `https://site.web.api.espn.com/apis/site/v2/sports/soccer/${espnSlug}/summary?event=${gameId}`;
     const resp = await fetch(url, {
       signal: AbortSignal.timeout(10000),
       headers: { "User-Agent": "Mozilla/5.0" },
@@ -487,7 +487,7 @@ async function autoSync() {
   for (const slug of LEAGUE_SLUGS) {
     for (const dateStr of dateList) {
       try {
-        const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${slug}/scoreboard?dates=${dateStr}`;
+        const url = `https://site.web.api.espn.com/apis/site/v2/sports/soccer/${slug}/scoreboard?dates=${dateStr}`;
         const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
         if (!res.ok) {
           failedFetches += 1;
