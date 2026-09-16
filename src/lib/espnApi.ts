@@ -221,35 +221,76 @@ export async function getEspnScorers(leagueSlug: string): Promise<PlayerStat[]> 
  */
 export async function getEspnScoreboard(leagueSlug: string): Promise<CupMatch[]> {
   const leagueName = leagueSlugToName[leagueSlug] || leagueSlug;
-  const nowIso = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
-  const officialFixtures = await loadData<Array<{
-    id: string;
-    home_team: string;
-    away_team: string;
-    match_date: string;
-    league: string;
-    home_logo?: string;
-    away_logo?: string;
-    matchday?: number;
-  }>>(OFFICIAL_FIXTURES_PATH);
-  const localMatches = officialFixtures.filter((m) => {
-    const lMatch = m.league.toLowerCase().trim() === leagueName.toLowerCase().trim();
-    return lMatch && m.match_date >= nowIso;
-  });
+  const nowMs = Date.now();
+  const todayStr = new Date(nowMs).toISOString().slice(0, 10);
+  const nowIso = new Date(nowMs - 2 * 60 * 60 * 1000).toISOString();
+
+  const isMatchDateValid = (dateStr: string) => {
+    if (!dateStr) return false;
+    if (dateStr.includes("T00:00:00") || dateStr.length === 10) {
+      return dateStr.slice(0, 10) >= todayStr;
+    }
+    return dateStr >= nowIso;
+  };
+
+  const [officialFixtures, evalMatches] = await Promise.all([
+    loadData<Array<{
+      id: string;
+      home_team: string;
+      away_team: string;
+      match_date: string;
+      league: string;
+      home_logo?: string;
+      away_logo?: string;
+      matchday?: number;
+    }>>(OFFICIAL_FIXTURES_PATH).catch(() => []),
+    loadData<Array<{
+      id: string;
+      home_team?: string;
+      away_team?: string;
+      result_home: number;
+      result_away: number;
+    }>>("/data/officialEvaluatedMatches.json").catch(() => []),
+  ]);
+
+  const evalMap: Record<string, { result_home: number; result_away: number }> = {};
+  if (Array.isArray(evalMatches)) {
+    evalMatches.forEach((em) => {
+      if (em.id) evalMap[em.id] = { result_home: em.result_home, result_away: em.result_away };
+      if (em.home_team && em.away_team) {
+        const key = `${normalizeTeamName(em.home_team).toLowerCase()}__${normalizeTeamName(em.away_team).toLowerCase()}`;
+        evalMap[key] = { result_home: em.result_home, result_away: em.result_away };
+      }
+    });
+  }
+
+  const localMatches = Array.isArray(officialFixtures)
+    ? officialFixtures.filter((m) => {
+        const lMatch = m.league.toLowerCase().trim() === leagueName.toLowerCase().trim();
+        return lMatch && isMatchDateValid(m.match_date);
+      })
+    : [];
 
   if (localMatches.length > 0) {
-    return localMatches.slice(0, 20).map((m) => {
+    localMatches.sort((a, b) => new Date(a.match_date).getTime() - new Date(b.match_date).getTime());
+    return localMatches.slice(0, 30).map((m) => {
       const homeNorm = normalizeTeamName(m.home_team);
       const awayNorm = normalizeTeamName(m.away_team);
+      const key = `${homeNorm.toLowerCase()}__${awayNorm.toLowerCase()}`;
+      const evaluated = evalMap[m.id] || evalMap[key];
+      const isCompleted = evaluated !== undefined && evaluated.result_home !== null;
+
       return {
         id: m.id,
         name: `${homeNorm} vs ${awayNorm}`,
         date: m.match_date,
-        status: "Programado",
+        status: isCompleted ? "Finalizado" : "Programado",
         homeTeam: homeNorm,
         homeLogo: m.home_logo || "",
+        homeScore: isCompleted ? evaluated.result_home : undefined,
         awayTeam: awayNorm,
         awayLogo: m.away_logo || "",
+        awayScore: isCompleted ? evaluated.result_away : undefined,
       };
     });
   }
@@ -258,7 +299,7 @@ export async function getEspnScoreboard(leagueSlug: string): Promise<CupMatch[]>
   const espnCode = leagueEspnCodes[leagueSlug];
   if (!espnCode) return [];
 
-  const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${espnCode}/scoreboard?dates=20260801-20270601&limit=500`;
+  const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${espnCode}/scoreboard`;
 
   try {
     const res = await fetch(url);
