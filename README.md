@@ -80,8 +80,8 @@
 - Visualización del estado VIVO/KO y equipo activo en landing, pronósticos e historial.
 
 ### Tablas de Posiciones por Liga
-- Clasificación, máximos goleadores y calendario de partidos vía ESPN API.
-- 9 competiciones disponibles en rutas estáticas generadas con `generateStaticParams`.
+- Clasificación, máximos goleadores y calendario de partidos vía ESPN API pública (`site.web.api.espn.com`).
+- 11 competiciones disponibles en rutas estáticas generadas con `generateStaticParams`.
 
 ### Gestión de Cuenta
 - Registro con nombre de usuario obligatorio, login y recuperación de contraseña.
