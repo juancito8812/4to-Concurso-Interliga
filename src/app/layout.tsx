@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "4° Concurso Interliga | Temporada 2026-27",
   description: "Fútbol + Camiseta + Pasión. Elige tu equipo, pronostica y gana en el 4° Concurso Interliga.",
   manifest: "/manifest.json",
+  alternates: {
+    canonical: "https://futbolcamisetapasion.com",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
