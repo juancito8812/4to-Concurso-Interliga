@@ -232,308 +232,332 @@
     "nationality": "Germany"
   },
   {
-    "id": "fd-340678",
+    "id": "fd-7701604",
+    "name": "Alexis Saelemaekers",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-6833317",
+    "name": "Chaka Traorè",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-6491869",
+    "name": "Christian Pulisic",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-3056769",
     "name": "Diego Moreira",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Delantero",
-    "nationality": "Belgium"
+    "nationality": ""
   },
   {
-    "id": "fd-377563",
+    "id": "fd-2914553",
     "name": "Francesco Camarda",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Delantero",
-    "nationality": "Italy"
+    "nationality": ""
   },
   {
-    "id": "fd-221332",
-    "name": "Luka Jovic",
-    "team": "AC Milan",
-    "league": "Champions League",
-    "position": "Delantero",
-    "nationality": "Serbia"
-  },
-  {
-    "id": "fd-270641",
-    "name": "Noah Okafor",
-    "team": "AC Milan",
-    "league": "Premier League",
-    "position": "Delantero",
-    "nationality": "Switzerland"
-  },
-  {
-    "id": "fd-322771",
-    "name": "Omari Hutchinson",
+    "id": "fd-7415150",
+    "name": "Luka Jović",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Delantero",
-    "nationality": "England"
+    "nationality": ""
   },
   {
-    "id": "fd-258917",
+    "id": "fd-2741721",
+    "name": "Mattia Liberali",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-1328168",
+    "name": "Noah Okafor",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-5555813",
     "name": "Rafael Leão",
     "team": "AC Milan",
-    "league": "Champions League",
+    "league": "Serie A",
     "position": "Delantero",
-    "nationality": "Portugal"
+    "nationality": ""
   },
   {
-    "id": "fd-228298",
+    "id": "fd-8565608",
     "name": "Samuel Chukwueze",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Delantero",
-    "nationality": "Nigeria"
+    "nationality": ""
   },
   {
-    "id": "fd-236209",
+    "id": "fd-7213251",
     "name": "Tammy Abraham",
     "team": "AC Milan",
-    "league": "Premier League",
-    "position": "Delantero",
-    "nationality": "England"
-  },
-  {
-    "id": "fd-8638719",
-    "name": "Álvaro Morata",
-    "team": "AC Milan",
-    "league": "Fútbol",
+    "league": "Serie A",
     "position": "Delantero",
     "nationality": ""
   },
   {
-    "id": "fd-176203",
+    "id": "fd-1339754",
+    "name": "Álvaro Morata",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-8836207",
     "name": "Adrien Rabiot",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Mediocampista",
-    "nationality": "France"
+    "nationality": ""
   },
   {
-    "id": "fd-359754",
+    "id": "fd-8177858",
     "name": "Alphadjo Cissè",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Mediocampista",
-    "nationality": "Italy"
+    "nationality": ""
   },
   {
-    "id": "fd-303973",
+    "id": "fd-5863499",
     "name": "Ardon Jashari",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Mediocampista",
-    "nationality": "Switzerland"
+    "nationality": ""
   },
   {
-    "id": "fd-403807",
+    "id": "fd-820427",
     "name": "Christian Comotto",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Mediocampista",
-    "nationality": "Italy"
+    "nationality": ""
   },
   {
-    "id": "fd-225607",
-    "name": "Christian Pulisic",
-    "team": "AC Milan",
-    "league": "Serie A",
-    "position": "Mediocampista",
-    "nationality": "USA"
-  },
-  {
-    "id": "fd-4479418",
+    "id": "fd-9339018",
     "name": "Ismaël Bennacer",
     "team": "AC Milan",
-    "league": "Fútbol",
+    "league": "Serie A",
     "position": "Mediocampista",
     "nationality": ""
   },
   {
-    "id": "fd-186505",
+    "id": "fd-5941188",
+    "name": "Kevin Zeroli",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
+    "id": "fd-2335839",
     "name": "Ruben Loftus-Cheek",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Mediocampista",
-    "nationality": "England"
+    "nationality": ""
   },
   {
-    "id": "fd-6352860",
-    "name": "Tijjani Reijnders",
+    "id": "fd-7188502",
+    "name": "Silvano Vos",
     "team": "AC Milan",
-    "league": "Fútbol",
+    "league": "Serie A",
     "position": "Mediocampista",
     "nationality": ""
   },
   {
-    "id": "fd-277307",
-    "name": "Youssouf Fofana",
+    "id": "fd-7701262",
+    "name": "Tijjani Reijnders",
     "team": "AC Milan",
-    "league": "LaLiga",
+    "league": "Serie A",
     "position": "Mediocampista",
-    "nationality": "France"
+    "nationality": ""
   },
   {
-    "id": "fd-307527",
+    "id": "fd-320033",
+    "name": "Youssouf Fofana",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
+    "id": "fd-3758550",
     "name": "Yunus Musah",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Mediocampista",
-    "nationality": "USA"
+    "nationality": ""
   },
   {
-    "id": "fd-1604638",
+    "id": "fd-3424204",
     "name": "Alessandro Florenzi",
     "team": "AC Milan",
-    "league": "Fútbol",
+    "league": "Serie A",
     "position": "Defensor",
     "nationality": ""
   },
   {
-    "id": "fd-345637",
+    "id": "fd-7606798",
     "name": "Davide Bartesaghi",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Defensor",
-    "nationality": "Italy"
+    "nationality": ""
   },
   {
-    "id": "fd-194747",
+    "id": "fd-2736601",
     "name": "Davide Calabria",
     "team": "AC Milan",
-    "league": "Conference League",
-    "position": "Defensor",
-    "nationality": "Italy"
-  },
-  {
-    "id": "fd-5365831",
-    "name": "Emerson Royal",
-    "team": "AC Milan",
-    "league": "Fútbol",
+    "league": "Serie A",
     "position": "Defensor",
     "nationality": ""
   },
   {
-    "id": "fd-236210",
+    "id": "fd-1696135",
+    "name": "Emerson Royal",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-962420",
     "name": "Fikayo Tomori",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Defensor",
-    "nationality": "England"
+    "nationality": ""
   },
   {
-    "id": "fd-303919",
+    "id": "fd-6610744",
     "name": "Filippo Terracciano",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Defensor",
-    "nationality": "Italy"
+    "nationality": ""
   },
   {
-    "id": "fd-309570",
+    "id": "fd-1805270",
     "name": "Koni De Winter",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Defensor",
-    "nationality": "Belgium"
+    "nationality": ""
   },
   {
-    "id": "fd-303444",
+    "id": "fd-8578535",
     "name": "Malick Thiaw",
     "team": "AC Milan",
-    "league": "Premier League",
-    "position": "Defensor",
-    "nationality": "Germany"
-  },
-  {
-    "id": "fd-255922",
-    "name": "Matteo Gabbia",
-    "team": "AC Milan",
     "league": "Serie A",
-    "position": "Defensor",
-    "nationality": "Italy"
-  },
-  {
-    "id": "fd-214689",
-    "name": "Pervis Estupiñán",
-    "team": "AC Milan",
-    "league": "Serie A",
-    "position": "Defensor",
-    "nationality": "Ecuador"
-  },
-  {
-    "id": "fd-388239",
-    "name": "Sankhoun Diawara",
-    "team": "AC Milan",
-    "league": "Serie A",
-    "position": "Defensor",
-    "nationality": "France"
-  },
-  {
-    "id": "fd-290375",
-    "name": "Strahinja Pavlovic",
-    "team": "AC Milan",
-    "league": "Serie A",
-    "position": "Defensor",
-    "nationality": "Serbia"
-  },
-  {
-    "id": "fd-9386625",
-    "name": "Theo Hernández",
-    "team": "AC Milan",
-    "league": "Fútbol",
     "position": "Defensor",
     "nationality": ""
   },
   {
-    "id": "fd-409491",
-    "name": "Valeri Vladimirov",
+    "id": "fd-8304831",
+    "name": "Matteo Gabbia",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Defensor",
-    "nationality": "Bulgaria"
+    "nationality": ""
   },
   {
-    "id": "fd-384305",
+    "id": "fd-1252553",
+    "name": "Pervis Estupiñán",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-9357486",
+    "name": "Strahinja Pavlović",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-2845772",
+    "name": "Theo Hernández",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-4378899",
+    "name": "Álex Jiménez",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-9681468",
+    "name": "Lapo Nava",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Arquero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-4634847",
     "name": "Lorenzo Torriani",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Arquero",
-    "nationality": "Italy"
+    "nationality": ""
   },
   {
-    "id": "fd-403839",
-    "name": "Léo-Paul Bouyer",
-    "team": "AC Milan",
-    "league": "Serie A",
-    "position": "Arquero",
-    "nationality": "France"
-  },
-  {
-    "id": "fd-174915",
+    "id": "fd-4427919",
     "name": "Marco Sportiello",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Arquero",
-    "nationality": "Italy"
+    "nationality": ""
   },
   {
-    "id": "fd-189026",
+    "id": "fd-5234773",
     "name": "Mike Maignan",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Arquero",
-    "nationality": "France"
+    "nationality": ""
   },
   {
-    "id": "fd-143100",
+    "id": "fd-7787897",
     "name": "Pietro Terracciano",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Arquero",
-    "nationality": "Italy"
+    "nationality": ""
   },
   {
     "id": "fd-305500",
