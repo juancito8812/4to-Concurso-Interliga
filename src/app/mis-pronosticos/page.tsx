@@ -20,7 +20,6 @@ import { calculateScore } from "@/lib/scoring";
 import {
   getUserCupSurvivors,
   evaluateSurvivorProgression,
-  upsertCupSurvivor,
   TournamentSurvivor,
   KnockoutCupSlug,
   getTeamCups,
@@ -508,28 +507,23 @@ export default function MisPronosticosPage() {
         }
 
         const eliminatedAtRound = outcome.newStatus === "ELIMINATED" ? roundName : null;
-        const ok = await upsertCupSurvivor({
-          userId: user.id,
-          tournamentSlug: cupSlug,
-          activeTeamId,
-          status: outcome.newStatus,
-          eliminatedAtRound,
-          history: outcome.updatedHistory,
-        });
 
-        if (ok) {
-          userSurvivors[cupSlug] = {
-            ...sur,
-            active_team_id: activeTeamId,
-            active_team_name: outcome.newTeamName,
-            status: outcome.newStatus,
-            eliminated_at_round: eliminatedAtRound || sur.eliminated_at_round,
-            history: outcome.updatedHistory,
-          };
-          console.log(
-            ` Survivor ${cupSlug}: ${outcome.newStatus}${outcome.transferred ? `, camiseta heredada: ${outcome.newTeamName}` : ""}`
-          );
-        }
+        // El estado del superviviente lo persiste el CRON con la service role key a
+        // partir de los resultados oficiales (scripts/auto-sync-espn-results.js).
+        // El cliente calcula solo para mostrar en pantalla y NO escribe: si el
+        // navegador pudiera reescribir status/history/active_team_id, un participante
+        // eliminado podría revivir o transferir la camiseta por REST.
+        userSurvivors[cupSlug] = {
+          ...sur,
+          active_team_id: activeTeamId,
+          active_team_name: outcome.newTeamName,
+          status: outcome.newStatus,
+          eliminated_at_round: eliminatedAtRound || sur.eliminated_at_round,
+          history: outcome.updatedHistory,
+        };
+        console.log(
+          `Survivor ${cupSlug}: ${outcome.newStatus}${outcome.transferred ? `, camiseta heredada: ${outcome.newTeamName}` : ""} (persistencia a cargo del cron)`
+        );
       }
 
       if (isMounted) {

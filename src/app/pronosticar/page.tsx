@@ -554,6 +554,19 @@ export default function PronosticarPage() {
         if (isNaN(g) || g < 1 || g > 10) return prev;
         scorers[index] = { ...scorers[index], goals: g };
       } else {
+        // Un mismo jugador no puede ocupar dos slots del mismo equipo: repetirlo
+        // inflaba los puntos por goleador (Regla #4).
+        if (field === "player_name") {
+          const name = String(value);
+          if (
+            name !== "" &&
+            scorers.some(
+              (s, i) => i !== index && s.team === scorers[index].team && s.player_name === name
+            )
+          ) {
+            return prev;
+          }
+        }
         scorers[index] = { ...scorers[index], [field]: String(value).slice(0, 60) };
       }
 
@@ -1150,11 +1163,20 @@ export default function PronosticarPage() {
                                     className="flex-1 min-w-0 bg-navy-card border border-border rounded-lg px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-gold truncate disabled:opacity-60 disabled:cursor-not-allowed"
                                   >
                                     <option value="">Seleccionar jugador</option>
-                                    {homePlayers.map((player) => (
-                                      <option key={player.id} value={player.name}>
-                                        {player.name} {player.position ? `(${player.position})` : ""}
-                                      </option>
-                                    ))}
+                                    {homePlayers
+                                      // No se ofrece un jugador ya elegido en otro slot de este equipo
+                                      .filter(
+                                        (player) =>
+                                          player.name === scorer.player_name ||
+                                          !homeScorerEntries.some(
+                                            (e) => e.index !== index && e.scorer.player_name === player.name
+                                          )
+                                      )
+                                      .map((player) => (
+                                        <option key={player.id} value={player.name}>
+                                          {player.name} {player.position ? `(${player.position})` : ""}
+                                        </option>
+                                      ))}
                                   </select>
 
                                   {/* Goals Stepper (only shown when a player is selected) */}
@@ -1245,11 +1267,20 @@ export default function PronosticarPage() {
                                     className="flex-1 min-w-0 bg-navy-card border border-border rounded-lg px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-gold truncate disabled:opacity-60 disabled:cursor-not-allowed"
                                   >
                                     <option value="">Seleccionar jugador</option>
-                                    {awayPlayers.map((player) => (
-                                      <option key={player.id} value={player.name}>
-                                        {player.name} {player.position ? `(${player.position})` : ""}
-                                      </option>
-                                    ))}
+                                    {awayPlayers
+                                      // No se ofrece un jugador ya elegido en otro slot de este equipo
+                                      .filter(
+                                        (player) =>
+                                          player.name === scorer.player_name ||
+                                          !awayScorerEntries.some(
+                                            (e) => e.index !== index && e.scorer.player_name === player.name
+                                          )
+                                      )
+                                      .map((player) => (
+                                        <option key={player.id} value={player.name}>
+                                          {player.name} {player.position ? `(${player.position})` : ""}
+                                        </option>
+                                      ))}
                                   </select>
 
                                   {/* Goals Stepper (only shown when a player is selected) */}

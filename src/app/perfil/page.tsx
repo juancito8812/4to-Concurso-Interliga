@@ -72,25 +72,34 @@ export default function PerfilPage() {
     setError("");
 
     try {
-      // 1. Delete user predictions from Supabase
-      const { data: userPreds } = await supabase
-        .from("predictions")
-        .select("id")
-        .eq("user_id", user.id);
+      // 1. Reinicio en el servidor (RPC SECURITY DEFINER): borra pronósticos,
+      //    goleadores y supervivientes, libera el club y marca la revocación para que
+      //    el cron deje los puntos en 0. Es el ÚNICO camino permitido para cambiar de
+      //    club: un PATCH directo a profiles.team_id queda bloqueado por el trigger
+      //    enforce_team_lock (ver supabase/migrations/2026-09-16_security_hardening.sql).
+      const { error: rpcError } = await supabase.rpc("reset_participation");
 
-      if (userPreds && userPreds.length > 0) {
-        const predIds = userPreds.map((p) => p.id);
-        await supabase.from("prediction_scorers").delete().in("prediction_id", predIds);
-        await supabase.from("predictions").delete().eq("user_id", user.id);
+      if (rpcError) {
+        // Compatibilidad con bases que todavía no tienen aplicada la migración de seguridad.
+        console.warn("reset_participation no disponible, usando el camino legado:", rpcError.message);
+
+        const { data: userPreds } = await supabase
+          .from("predictions")
+          .select("id")
+          .eq("user_id", user.id);
+
+        if (userPreds && userPreds.length > 0) {
+          const predIds = userPreds.map((p) => p.id);
+          await supabase.from("prediction_scorers").delete().in("prediction_id", predIds);
+          await supabase.from("predictions").delete().eq("user_id", user.id);
+        }
+
+        await supabase.from("tournament_survivors").delete().eq("user_id", user.id);
+
+        await supabase
+          .from("profiles")
+          .upsert({ user_id: user.id, team_id: null, display_name: null }, { onConflict: "user_id" });
       }
-
-      // 1b. Reset cup survivor records (active teams, history and status)
-      await supabase.from("tournament_survivors").delete().eq("user_id", user.id);
-
-      // 2. Clear team and display name in profiles
-      await supabase
-        .from("profiles")
-        .upsert({ user_id: user.id, team_id: null, display_name: null }, { onConflict: "user_id" });
 
       // 3. Clear localStorage on device
       try {

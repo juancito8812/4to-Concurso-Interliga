@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS public.matches (
 CREATE TABLE IF NOT EXISTS public.predictions (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  match_id UUID NOT NULL,
+  match_id UUID NOT NULL REFERENCES public.matches(id),
   home_score INTEGER NOT NULL,
   away_score INTEGER NOT NULL,
   points INTEGER DEFAULT NULL,
@@ -81,8 +81,14 @@ CREATE TABLE IF NOT EXISTS public.prediction_scorers (
   player_name TEXT NOT NULL,
   goals INTEGER DEFAULT 1,
   team TEXT NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT now()
+  created_at TIMESTAMPTZ DEFAULT now(),
+  -- Regla #4 blindada: rango de goles válido y un jugador una sola vez por pronóstico.
+  -- El tope de 5 por equipo lo aplica el trigger trg_enforce_max_scorers.
+  CONSTRAINT prediction_scorers_goals_range CHECK (goals >= 1 AND goals <= 10)
 );
+
+CREATE UNIQUE INDEX IF NOT EXISTS prediction_scorers_unique_player
+  ON public.prediction_scorers (prediction_id, player_name);
 
 -- G. TOURNAMENT_SURVIVORS (Estado de supervivencia y herencia de equipo en torneos de eliminación directa)
 CREATE TABLE IF NOT EXISTS public.tournament_survivors (
@@ -124,6 +130,43 @@ CREATE INDEX IF NOT EXISTS idx_tournament_survivors_alive ON public.tournament_s
 
 -- 4. SEGURIDAD Y POLÍTICAS ROW LEVEL SECURITY (RLS)
 
+-- 4.0 Helpers del cierre de pronósticos (se definen ANTES de las políticas que los usan).
+-- Hora efectiva de inicio: los partidos sin horario confirmado llegan a medianoche UTC
+-- y se tratan como jornada vespertina (20:00 UTC), igual que getEffectiveMatchTime()
+-- en src/app/pronosticar/page.tsx.
+CREATE OR REPLACE FUNCTION public.effective_kickoff(p_match_date timestamptz)
+RETURNS timestamptz
+LANGUAGE sql
+IMMUTABLE
+SET search_path = public, pg_temp
+AS $$
+  SELECT CASE
+    WHEN p_match_date IS NULL THEN NULL
+    WHEN (p_match_date AT TIME ZONE 'UTC')::time = time '00:00:00'
+      THEN (((p_match_date AT TIME ZONE 'UTC')::date + time '20:00') AT TIME ZONE 'UTC')
+    ELSE p_match_date
+  END;
+$$;
+
+-- ¿Está abierto el partido para pronosticar? false si ya empezó (cierre 1 min antes)
+-- o si el partido no existe (fail-closed).
+CREATE OR REPLACE FUNCTION public.is_match_open_for_prediction(p_match_id uuid)
+RETURNS boolean
+LANGUAGE sql
+STABLE
+SET search_path = public, pg_temp
+AS $$
+  SELECT COALESCE(
+    (SELECT now() <= public.effective_kickoff(m.match_date) - interval '1 minute'
+       FROM public.matches m
+      WHERE m.id = p_match_id),
+    false
+  );
+$$;
+
+GRANT EXECUTE ON FUNCTION public.effective_kickoff(timestamptz) TO anon, authenticated;
+GRANT EXECUTE ON FUNCTION public.is_match_open_for_prediction(uuid) TO anon, authenticated;
+
 -- A. Profiles RLS
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Public profiles are viewable by everyone" ON public.profiles;
@@ -145,13 +188,22 @@ DROP POLICY IF EXISTS "Predictions are viewable by everyone" ON public.predictio
 CREATE POLICY "Predictions are viewable by everyone" 
 ON public.predictions FOR SELECT USING (true);
 
+-- Cierre de pronósticos en la base (no solo en el cliente): el partido debe seguir
+-- abierto (más de 1 minuto para el inicio efectivo). Sin esto, cualquier usuario
+-- autenticado podía insertar por REST un pronóstico de un partido ya finalizado y
+-- cobrar los puntos en la siguiente corrida del cron.
 DROP POLICY IF EXISTS "Users can insert own predictions" ON public.predictions;
 CREATE POLICY "Users can insert own predictions" 
-ON public.predictions FOR INSERT WITH CHECK ((SELECT auth.uid()) = user_id);
+ON public.predictions FOR INSERT WITH CHECK (
+  (SELECT auth.uid()) = user_id
+  AND public.is_match_open_for_prediction(match_id)
+);
 
 DROP POLICY IF EXISTS "Users can update own predictions" ON public.predictions;
 CREATE POLICY "Users can update own predictions" 
-ON public.predictions FOR UPDATE USING ((SELECT auth.uid()) = user_id) WITH CHECK ((SELECT auth.uid()) = user_id);
+ON public.predictions FOR UPDATE 
+USING ((SELECT auth.uid()) = user_id AND public.is_match_open_for_prediction(match_id))
+WITH CHECK ((SELECT auth.uid()) = user_id AND public.is_match_open_for_prediction(match_id));
 
 -- C. Prediction Scorers RLS
 ALTER TABLE public.prediction_scorers ENABLE ROW LEVEL SECURITY;
@@ -165,16 +217,31 @@ DROP POLICY IF EXISTS "Users can manage prediction scorers" ON public.prediction
 CREATE POLICY "Users can insert own prediction scorers"
 ON public.prediction_scorers FOR INSERT
 WITH CHECK (
-  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = (SELECT auth.uid()))
+  EXISTS (
+    SELECT 1 FROM public.predictions p
+     WHERE p.id = prediction_id
+       AND p.user_id = (SELECT auth.uid())
+       AND public.is_match_open_for_prediction(p.match_id)
+  )
 );
 
 CREATE POLICY "Users can update own prediction scorers"
 ON public.prediction_scorers FOR UPDATE
 USING (
-  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = (SELECT auth.uid()))
+  EXISTS (
+    SELECT 1 FROM public.predictions p
+     WHERE p.id = prediction_id
+       AND p.user_id = (SELECT auth.uid())
+       AND public.is_match_open_for_prediction(p.match_id)
+  )
 )
 WITH CHECK (
-  EXISTS (SELECT 1 FROM public.predictions p WHERE p.id = prediction_id AND p.user_id = (SELECT auth.uid()))
+  EXISTS (
+    SELECT 1 FROM public.predictions p
+     WHERE p.id = prediction_id
+       AND p.user_id = (SELECT auth.uid())
+       AND public.is_match_open_for_prediction(p.match_id)
+  )
 );
 
 CREATE POLICY "Users can delete own prediction scorers"
@@ -203,13 +270,74 @@ CREATE POLICY "Lectura pública de tournament_survivors"
   ON public.tournament_survivors FOR SELECT
   USING (true);
 
+-- El cliente NO puede reescribir su estado de superviviente: solo puede crear su
+-- fila inicial (su propio club, vivo y sin historial) y borrarla. La progresión, las
+-- transferencias de camiseta y la eliminación las escribe el cron con la service
+-- role key (bypass RLS). Antes, un PATCH del propio dueño permitía revivir a un
+-- eliminado o heredar la camiseta del favorito.
 DROP POLICY IF EXISTS "Usuarios administran su estado de torneo" ON public.tournament_survivors;
-CREATE POLICY "Usuarios administran su estado de torneo"
-  ON public.tournament_survivors FOR ALL
-  USING ((SELECT auth.uid()) = user_id)
-  WITH CHECK ((SELECT auth.uid()) = user_id);
+
+DROP POLICY IF EXISTS "Alta inicial de superviviente" ON public.tournament_survivors;
+CREATE POLICY "Alta inicial de superviviente"
+  ON public.tournament_survivors FOR INSERT
+  WITH CHECK (
+    (SELECT auth.uid()) = user_id
+    AND status = 'ALIVE'
+    AND eliminated_at_round IS NULL
+    AND history = '[]'::jsonb
+    AND active_team_id = (
+      SELECT p.team_id FROM public.profiles p WHERE p.user_id = (SELECT auth.uid())
+    )
+  );
+
+DROP POLICY IF EXISTS "Mantenimiento limitado del propio superviviente" ON public.tournament_survivors;
+CREATE POLICY "Mantenimiento limitado del propio superviviente"
+  ON public.tournament_survivors FOR UPDATE
+  USING (
+    (SELECT auth.uid()) = user_id
+    AND status = 'ALIVE'
+    AND history = '[]'::jsonb
+    AND active_team_id = (
+      SELECT p.team_id FROM public.profiles p WHERE p.user_id = (SELECT auth.uid())
+    )
+  )
+  WITH CHECK (
+    (SELECT auth.uid()) = user_id
+    AND status = 'ALIVE'
+    AND eliminated_at_round IS NULL
+    AND history = '[]'::jsonb
+    AND active_team_id = (
+      SELECT p.team_id FROM public.profiles p WHERE p.user_id = (SELECT auth.uid())
+    )
+  );
+
+DROP POLICY IF EXISTS "Borrar el propio superviviente" ON public.tournament_survivors;
+CREATE POLICY "Borrar el propio superviviente"
+  ON public.tournament_survivors FOR DELETE
+  USING ((SELECT auth.uid()) = user_id);
 
 -- 5. FUNCIONES Y TRIGGERS AUTOMÁTICOS
+
+-- IMPORTANTE: la función debe existir ANTES del trigger que la invoca (si no, un
+-- CREATE TRIGGER falla con «function public.handle_new_user() does not exist» y la
+-- restauración completa desde este archivo se corta en la sección 5).
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+BEGIN
+  INSERT INTO public.profiles (user_id, display_name)
+  VALUES (
+    NEW.id,
+    COALESCE(NEW.raw_user_meta_data->>'display_name', split_part(NEW.email, '@', 1))
+  )
+  ON CONFLICT (user_id) DO UPDATE
+  SET display_name = EXCLUDED.display_name;
+  RETURN NEW;
+END;
+$$;
 
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
@@ -322,23 +450,7 @@ ANALYZE public.teams;
 --    puntos/resultados con la anon key). delete_user_account queda para usuarios
 --    autenticados y handle_new_user como trigger interno.
 
-CREATE OR REPLACE FUNCTION public.handle_new_user()
-RETURNS trigger
-LANGUAGE plpgsql
-SECURITY DEFINER
-SET search_path = public, pg_temp
-AS $$
-BEGIN
-  INSERT INTO public.profiles (user_id, display_name)
-  VALUES (
-    NEW.id,
-    COALESCE(NEW.raw_user_meta_data->>'display_name', split_part(NEW.email, '@', 1))
-  )
-  ON CONFLICT (user_id) DO UPDATE
-  SET display_name = EXCLUDED.display_name;
-  RETURN NEW;
-END;
-$$;
+-- handle_new_user se define en la sección 5 (antes del trigger que la invoca).
 
 CREATE OR REPLACE FUNCTION public.delete_user_account()
 RETURNS void
@@ -371,8 +483,9 @@ GRANT EXECUTE ON FUNCTION public.delete_user_account() TO authenticated;
 
 REVOKE ALL ON FUNCTION public.handle_new_user() FROM PUBLIC, anon, authenticated;
 
--- G. app_meta (clave-valor) para marcas del cron (hash de calendario, etc.)
--- Solo accesible por service role (bypass RLS): sin grants directos para anon/authenticated.
+-- G. app_meta (clave-valor) para marcas del cron (hash de calendario, revocaciones de
+-- participación, etc.). Solo accesible por service role (bypass RLS): sin grants
+-- directos para anon/authenticated.
 
 CREATE TABLE IF NOT EXISTS public.app_meta (
   key TEXT PRIMARY KEY,
@@ -383,3 +496,103 @@ CREATE TABLE IF NOT EXISTS public.app_meta (
 ALTER TABLE public.app_meta ENABLE ROW LEVEL SECURITY;
 
 REVOKE ALL ON TABLE public.app_meta FROM anon, authenticated;
+
+-- H. ENDURECIMIENTO DE SEGURIDAD (2026-09-16)
+-- Ver supabase/migrations/2026-09-16_security_hardening.sql para la migración
+-- equivalente sobre una base ya existente (idempotente).
+
+-- H.1 Tope de 5 goleadores por equipo y pronóstico (antes solo en la UI).
+CREATE OR REPLACE FUNCTION public.enforce_max_scorers_per_team()
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+DECLARE
+  v_count integer;
+BEGIN
+  SELECT count(*) INTO v_count
+    FROM public.prediction_scorers ps
+   WHERE ps.prediction_id = NEW.prediction_id
+     AND ps.team = NEW.team
+     AND ps.id <> COALESCE(NEW.id, '00000000-0000-0000-0000-000000000000'::uuid);
+
+  IF v_count >= 5 THEN
+    RAISE EXCEPTION 'Máximo 5 goleadores por equipo y pronóstico';
+  END IF;
+
+  RETURN NEW;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.enforce_max_scorers_per_team() FROM PUBLIC, anon, authenticated;
+
+DROP TRIGGER IF EXISTS trg_enforce_max_scorers ON public.prediction_scorers;
+CREATE TRIGGER trg_enforce_max_scorers
+BEFORE INSERT OR UPDATE ON public.prediction_scorers
+FOR EACH ROW EXECUTE FUNCTION public.enforce_max_scorers_per_team();
+
+-- H.2 El club queda bloqueado: cambiarlo requiere pasar por reset_participation().
+CREATE OR REPLACE FUNCTION public.enforce_team_lock()
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+BEGIN
+  -- Elegir club por primera vez (NULL → valor) siempre está permitido.
+  IF OLD.team_id IS NOT NULL
+     AND NEW.team_id IS DISTINCT FROM OLD.team_id
+     AND COALESCE(current_setting('app.reset_participation', true), 'off') <> 'on'
+  THEN
+    RAISE EXCEPTION 'El club ya está confirmado: usá "Reiniciar participación" para cambiarlo (pone tus puntos en 0)';
+  END IF;
+
+  RETURN NEW;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.enforce_team_lock() FROM PUBLIC, anon, authenticated;
+
+DROP TRIGGER IF EXISTS trg_enforce_team_lock ON public.profiles;
+CREATE TRIGGER trg_enforce_team_lock
+BEFORE UPDATE ON public.profiles
+FOR EACH ROW EXECUTE FUNCTION public.enforce_team_lock();
+
+-- H.3 Reinicio de participación: borra pronósticos, goleadores y supervivientes,
+-- libera el club y marca la revocación para que el cron purgue los puntos del
+-- archivo oficial (si no, seguirían contando en el ranking).
+CREATE OR REPLACE FUNCTION public.reset_participation()
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+DECLARE
+  v_user_id uuid;
+BEGIN
+  v_user_id := auth.uid();
+  IF v_user_id IS NULL THEN
+    RAISE EXCEPTION 'Not authenticated';
+  END IF;
+
+  INSERT INTO public.app_meta (key, value)
+  VALUES ('revoked:' || v_user_id::text, now()::text)
+  ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;
+
+  DELETE FROM public.prediction_scorers
+   WHERE prediction_id IN (
+     SELECT id FROM public.predictions WHERE user_id = v_user_id
+   );
+
+  DELETE FROM public.predictions WHERE user_id = v_user_id;
+  DELETE FROM public.tournament_survivors WHERE user_id = v_user_id;
+
+  PERFORM set_config('app.reset_participation', 'on', true);
+
+  UPDATE public.profiles SET team_id = NULL WHERE user_id = v_user_id;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.reset_participation() FROM PUBLIC, anon;
+GRANT EXECUTE ON FUNCTION public.reset_participation() TO authenticated;

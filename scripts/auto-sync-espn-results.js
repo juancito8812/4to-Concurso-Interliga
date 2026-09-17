@@ -10,6 +10,7 @@ const {
   getEspnSlug,
   getKnockoutRound,
   evaluateSurvivorProgression,
+  isPredictionOnTime,
 } = require("./lib/score-utils");
 
 const LEAGUE_SLUGS = [
@@ -49,6 +50,11 @@ const ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABA
 // GitHub Actions (SUPABASE_SERVICE_ROLE_KEY) o variable de entorno local.
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 
+// --dry-run: hace todas las lecturas (ESPN + Supabase) y reporta exactamente lo que
+// haría, sin escribir nada (ni en la base ni en los JSON). Sirve para validar cambios
+// de reglas contra datos reales sin riesgo.
+const DRY_RUN = process.argv.includes("--dry-run");
+
 if (!SUPABASE_URL || (!ANON_KEY && !SERVICE_KEY)) {
   throw new Error("Faltan credenciales de Supabase (NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY o SUPABASE_SERVICE_ROLE_KEY)");
 }
@@ -69,9 +75,29 @@ async function supabaseGet(path) {
   return res.json();
 }
 
+// PostgREST corta las respuestas en 1000 filas (max-rows del servidor): sin paginar,
+// una tabla que crezca más allá de ese límite devolvería una vista truncada en
+// silencio. No pasar rutas que ya incluyan limit/offset.
+const PAGE_SIZE = 1000;
+async function supabaseGetAll(path) {
+  const rows = [];
+  for (let offset = 0; ; offset += PAGE_SIZE) {
+    const sep = path.includes("?") ? "&" : "?";
+    const page = await supabaseGet(`${path}${sep}limit=${PAGE_SIZE}&offset=${offset}`);
+    if (!Array.isArray(page) || page.length === 0) break;
+    rows.push(...page);
+    if (page.length < PAGE_SIZE) break;
+  }
+  return rows;
+}
+
 async function supabaseWrite(method, path, body, prefer) {
   if (!SERVICE_KEY) {
     throw new Error("SUPABASE_SERVICE_ROLE_KEY no configurada (se requiere para escribir)");
+  }
+  if (DRY_RUN) {
+    console.log(`🧪 [dry-run] ${method} ${path}`);
+    return { ok: true, status: 204 };
   }
   const headers = authHeaders(SERVICE_KEY);
   if (prefer) headers["Prefer"] = prefer;
@@ -82,6 +108,56 @@ async function supabaseWrite(method, path, body, prefer) {
   });
   if (!res.ok) throw new Error(`supabase ${method} ${path} -> ${res.status}: ${await res.text()}`);
   return res;
+}
+
+// Participaciones reiniciadas: el archivo oficial conserva los puntos de los pronósticos
+// borrados (es el registro histórico y el respaldo de recuperación), así que un reinicio
+// explícito — RPC reset_participation() o cambio de club — deja una marca en app_meta
+// para que esas entradas se eliminen y el usuario quede realmente en 0 puntos.
+// NO se purga nada por "fila ausente en la DB": un borrado accidental de la tabla debe
+// poder recuperarse desde el archivo (ver DISASTER_RECOVERY_AND_SCHEMA.md).
+async function purgeRevokedParticipations(officialPreds) {
+  if (!SERVICE_KEY) return officialPreds;
+
+  let markers = [];
+  try {
+    markers = await supabaseGetService("app_meta?select=key,value&key=like.revoked:*");
+  } catch (e) {
+    console.warn("⚠️  No se pudieron leer las marcas de revocación:", e.message);
+    return officialPreds;
+  }
+  if (!Array.isArray(markers) || markers.length === 0) return officialPreds;
+
+  const revokedAt = new Map();
+  markers.forEach((m) => {
+    const uid = String(m.key || "").replace("revoked:", "");
+    const ts = new Date(m.value || 0).getTime();
+    if (uid && ts) revokedAt.set(uid, ts);
+  });
+  if (revokedAt.size === 0) return officialPreds;
+
+  const before = officialPreds.length;
+  const kept = officialPreds.filter((p) => {
+    const ts = revokedAt.get(p.user_id);
+    if (!ts) return true;
+    // Se purgan solo las entradas anteriores al reinicio; las posteriores son nuevas.
+    const created = new Date(p.created_at || 0).getTime();
+    return created > ts;
+  });
+
+  if (before !== kept.length) {
+    console.log(`🧹 Participaciones reiniciadas: ${before - kept.length} entradas de puntos removidas del archivo oficial`);
+  }
+
+  for (const m of markers) {
+    try {
+      await supabaseWrite("DELETE", `app_meta?key=eq.${encodeURIComponent(m.key)}`);
+    } catch (e) {
+      console.warn(`No se pudo limpiar la marca ${m.key}:`, e.message);
+    }
+  }
+
+  return kept;
 }
 
 // Lecturas internas con la service role key (tablas sin acceso anon como app_meta)
@@ -167,7 +243,7 @@ async function persistToSupabase(officialMatches, officialPreds) {
     const ids = withResults.map((m) => m.id);
     let persisted = 0;
     if (ids.length > 0) {
-      const existing = await supabaseGet(`matches?select=id&result_home=is.null&id=in.(${ids.join(",")})`);
+      const existing = await supabaseGetAll(`matches?select=id&result_home=is.null&id=in.(${ids.join(",")})`);
       const pendingIds = new Set((existing || []).map((r) => r.id));
       for (const m of withResults) {
         if (!pendingIds.has(m.id)) continue;
@@ -184,7 +260,7 @@ async function persistToSupabase(officialMatches, officialPreds) {
     }
 
     // 2. Puntos de pronósticos: solo filas reales de la DB (PATCH por fila)
-    const dbPreds = await supabaseGet("predictions?select=id,user_id,match_id");
+    const dbPreds = await supabaseGetAll("predictions?select=id,user_id,match_id");
     const dbByKey = new Map();
     (dbPreds || []).forEach((p) => dbByKey.set(`${p.user_id}|${p.match_id}`, p.id));
 
@@ -247,9 +323,9 @@ async function evaluateSurvivors(finishedMatches) {
 
   try {
     const [survivors, preds, teams] = await Promise.all([
-      supabaseGet("tournament_survivors?select=id,user_id,tournament_slug,active_team_id,status,history,teams(name)"),
-      supabaseGet("predictions?select=user_id,match_id,home_score,away_score"),
-      supabaseGet("teams?select=id,name"),
+      supabaseGetAll("tournament_survivors?select=id,user_id,tournament_slug,active_team_id,status,history,teams(name)"),
+      supabaseGetAll("predictions?select=user_id,match_id,home_score,away_score"),
+      supabaseGetAll("teams?select=id,name"),
     ]);
 
     const teamsByName = {};
@@ -370,9 +446,9 @@ async function evaluateSurvivors(finishedMatches) {
 async function fetchSupabasePredictions() {
   try {
     const [preds, scorers, profiles] = await Promise.all([
-      supabaseGet("predictions?select=id,user_id,match_id,home_score,away_score"),
-      supabaseGet("prediction_scorers?select=prediction_id,player_name,goals,team"),
-      supabaseGet("profiles?select=user_id,display_name"),
+      supabaseGetAll("predictions?select=id,user_id,match_id,home_score,away_score,created_at"),
+      supabaseGetAll("prediction_scorers?select=prediction_id,player_name,goals,team"),
+      supabaseGetAll("profiles?select=user_id,display_name"),
     ]);
 
     const scorersMap = {};
@@ -396,6 +472,7 @@ async function fetchSupabasePredictions() {
       match_id: p.match_id,
       home_score: p.home_score,
       away_score: p.away_score,
+      created_at: p.created_at,
       scorers: scorersMap[p.id] || [],
     }));
   } catch (e) {
@@ -465,9 +542,66 @@ async function autoSync() {
     console.warn("Could not read officialEvaluatedPredictions.json:", e.message);
   }
 
+  // Puntos de participantes que reiniciaron su participación (quedan en 0).
+  officialPreds = await purgeRevokedParticipations(officialPreds);
+
+  // ── Cierre de pronósticos (anti-farmeo de puntos) ────────────────────────────
+  // La ventana de pronóstico (1 minuto antes del inicio) se aplicaba solo en el
+  // cliente. Ahora el cron la valida con datos oficiales: un registro posterior
+  // al cierre NUNCA puntúa, aunque se inserte por REST con la anon key.
+  //
+  // Excepción (grandfathering): los pronósticos ya archivados CON puntos son el
+  // registro histórico oficial del concurso (backfills administrativos) y se
+  // preservan tal cual. Solo se descartan registros nuevos fuera de plazo.
+  const matchDateById = new Map();
+  officialFixtures.forEach((f) => {
+    // Se indexan ambas formas del id (UUID canónico y id crudo del fixture) porque
+    // el archivo histórico puede contener cualquiera de las dos.
+    matchDateById.set(matchIdToUuid(f.id), f.match_date);
+    matchDateById.set(String(f.id), f.match_date);
+  });
+  officialMatches.forEach((m) => {
+    if (!matchDateById.get(m.id) && m.match_date) matchDateById.set(m.id, m.match_date);
+  });
+
+  const keyOf = (p) => `${p.user_id}|${p.match_id}`;
+  const archivedWithPoints = new Set(
+    officialPreds.filter((p) => p.points !== null && p.points !== undefined).map(keyOf)
+  );
+
   // Merge Supabase predictions (new predictions made in the app) into the evaluated record
   const supabasePreds = await fetchSupabasePredictions();
+  const acceptedPreds = [];
+  const rejectedLate = [];
+  const rejectedKeys = new Set();
+
   for (const sp of supabasePreds) {
+    const key = keyOf(sp);
+    if (archivedWithPoints.has(key)) {
+      acceptedPreds.push(sp);
+      continue;
+    }
+    if (!isPredictionOnTime(sp.created_at, matchDateById.get(sp.match_id))) {
+      rejectedKeys.add(key);
+      rejectedLate.push(
+        `${sp.display_name || sp.user_id} | ${sp.match_id} | registrado ${sp.created_at} | inicio ${matchDateById.get(sp.match_id) || "desconocido"}`
+      );
+      continue;
+    }
+    acceptedPreds.push(sp);
+  }
+
+  if (rejectedLate.length > 0) {
+    console.warn(`\n🚫 Pronósticos fuera de plazo descartados (no puntúan): ${rejectedLate.length}`);
+    rejectedLate.slice(0, 20).forEach((r) => console.warn(`   - ${r}`));
+    const before = officialPreds.length;
+    officialPreds = officialPreds.filter((p) => !rejectedKeys.has(keyOf(p)));
+    if (before !== officialPreds.length) {
+      console.warn(`🧹 Fuera de plazo removidos del archivo: ${before - officialPreds.length}`);
+    }
+  }
+
+  for (const sp of acceptedPreds) {
     const idx = officialPreds.findIndex(
       (p) => p.user_id === sp.user_id && p.match_id === sp.match_id
     );
@@ -477,7 +611,7 @@ async function autoSync() {
       officialPreds.push(sp);
     }
   }
-  console.log(`📝 Pronósticos a evaluar: ${officialPreds.length} (JSON + ${supabasePreds.length} de Supabase)`);
+  console.log(`📝 Pronósticos a evaluar: ${officialPreds.length} (JSON + ${supabasePreds.length} de Supabase, ${rejectedLate.length} fuera de plazo)`);
 
   let newResultsCount = 0;
   let failedFetches = 0;
@@ -596,8 +730,12 @@ async function autoSync() {
   }
 
   // Save official evaluated matches
-  fs.writeFileSync(evalMatchesPath, JSON.stringify(officialMatches, null, 2), "utf8");
-  console.log(`\n💾 Total de partidos finalizados guardados: ${officialMatches.length}`);
+  if (DRY_RUN) {
+    console.log(`\n🧪 [dry-run] No se escribió ${path.basename(evalMatchesPath)} (${officialMatches.length} partidos finalizados)`);
+  } else {
+    fs.writeFileSync(evalMatchesPath, JSON.stringify(officialMatches, null, 2), "utf8");
+    console.log(`\n💾 Total de partidos finalizados guardados: ${officialMatches.length}`);
+  }
 
   // Re-evaluate predictions
   console.log("\n📊 CALCULANDO PUNTOS DE PARTICIPANTES AUTOMÁTICAMENTE:");
@@ -623,6 +761,16 @@ async function autoSync() {
     }
 
     if (match && match.result_home !== null && match.result_away !== null) {
+      // Blindaje final: nunca puntuar un pronóstico registrado después del cierre
+      // (el archivo oficial con puntos ya concedidos queda grandfathereado).
+      if (
+        !archivedWithPoints.has(keyOf(pred)) &&
+        !isPredictionOnTime(pred.created_at, matchDateById.get(pred.match_id))
+      ) {
+        console.warn(`🚫 Sin puntaje (fuera de plazo): ${pred.display_name || pred.user_id} en ${match.home_team} vs ${match.away_team}`);
+        return;
+      }
+
       const score = calculateScore(
         {
           home_score: pred.home_score,
@@ -644,8 +792,14 @@ async function autoSync() {
     }
   });
 
-  fs.writeFileSync(evalPredsPath, JSON.stringify(officialPreds, null, 2), "utf8");
-  console.log(`\n🎉 ¡SINCRONIZACIÓN AUTOMÁTICA COMPLETADA EXITOSAMENTE! (Puntos distribuidos: ${totalPointsDistributed} pts)`);
+  if (DRY_RUN) {
+    console.log(`\n🧪 [dry-run] No se escribió ${path.basename(evalPredsPath)} (${officialPreds.length} pronósticos)`);
+  } else {
+    fs.writeFileSync(evalPredsPath, JSON.stringify(officialPreds, null, 2), "utf8");
+  }
+  console.log(
+    `\n🎉 SINCRONIZACIÓN ${DRY_RUN ? "SIMULADA (dry-run)" : "AUTOMÁTICA COMPLETADA"} EXITOSAMENTE! (Puntos distribuidos: ${totalPointsDistributed} pts)`
+  );
 
   await syncFixturesToSupabase(officialFixtures);
   await persistToSupabase(officialMatches, officialPreds);

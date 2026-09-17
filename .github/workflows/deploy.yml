@@ -32,10 +32,12 @@ jobs:
 
       - name: Build with Next.js
         run: npm run build
+        # NEXT_PUBLIC_* se inlinea en el bundle público. La key de football-data.org
+        # NO se inyecta acá: sus llamadas en vivo están limitadas a localhost y el
+        # sitio publicado sirve siempre el calendario oficial desde /data.
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-          NEXT_PUBLIC_FOOTBALL_DATA_KEY: ${{ secrets.NEXT_PUBLIC_FOOTBALL_DATA_KEY }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

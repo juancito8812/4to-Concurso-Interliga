@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // verify-logic.js — Verificación integral de la lógica de negocio del concurso
 const assert = require("assert");
-const { normalizeTeamName, matchIdToUuid, calculateScore, isKnockoutMatch, isKnockoutCup, getKnockoutCupSlug, getKnockoutRound, getTeamCups, evaluateSurvivorProgression, arePlayersMatching } = require("./lib/score-utils.js");
+const { normalizeTeamName, matchIdToUuid, calculateScore, isKnockoutMatch, isKnockoutCup, getKnockoutCupSlug, getKnockoutRound, getTeamCups, evaluateSurvivorProgression, arePlayersMatching, isPredictionOnTime, getEffectiveMatchTime } = require("./lib/score-utils.js");
 
 let passed = 0, failed = 0;
 const test = (name, fn) => {
@@ -223,6 +223,67 @@ test("arePlayersMatching: acentos", () => {
 });
 test("arePlayersMatching: distintos", () => {
   assert.equal(arePlayersMatching("Erling Haaland", "Lionel Messi"), false);
+});
+
+// ============ 6. CIERRE DE PRONÓSTICOS (VULN-001) ============
+console.log("\n=== 6. Cierre de pronósticos (anti-farmeo de puntos) ===");
+test("Pronóstico 1 hora antes del inicio: válido", () => {
+  assert.equal(isPredictionOnTime("2026-09-16T18:00:00Z", "2026-09-16T19:00:00Z"), true);
+});
+test("Pronóstico dentro del último minuto: inválido (misma regla que el cliente)", () => {
+  assert.equal(isPredictionOnTime("2026-09-16T18:59:30Z", "2026-09-16T19:00:00Z"), false);
+});
+test("Pronóstico en el pitazo inicial: inválido", () => {
+  assert.equal(isPredictionOnTime("2026-09-16T19:00:00Z", "2026-09-16T19:00:00Z"), false);
+});
+test("Pronóstico retroactivo (partido terminado): inválido", () => {
+  assert.equal(isPredictionOnTime("2026-09-16T18:22:14Z", "2026-09-06T18:45:00Z"), false);
+});
+test("Partido sin horario confirmado (medianoche UTC) = jornada vespertina 20:00", () => {
+  assert.equal(getEffectiveMatchTime("2026-09-16T00:00:00Z"), new Date("2026-09-16T20:00:00Z").getTime());
+  assert.equal(isPredictionOnTime("2026-09-16T10:00:00Z", "2026-09-16T00:00:00Z"), true);
+});
+test("Sin fecha de partido o sin created_at: fail-closed", () => {
+  assert.equal(isPredictionOnTime("2026-09-16T10:00:00Z", undefined), false);
+  assert.equal(isPredictionOnTime(undefined, "2026-09-16T20:00:00Z"), false);
+});
+
+// ============ 7. ANTI-INFLACIÓN DE GOLEADORES (VULN-003) ============
+console.log("\n=== 7. Anti-inflación de goleadores ===");
+test("El mismo goleador repetido en 4 slots suma 1 solo punto", () => {
+  const r = calculateScore(
+    { home_score: 2, away_score: 0, scorers: [
+      { player_name: "Kane", goals: 1, team: "home" },
+      { player_name: "Harry Kane", goals: 1, team: "home" },
+      { player_name: "H. Kane", goals: 1, team: "home" },
+      { player_name: "Kane", goals: 1, team: "home" },
+    ] },
+    { result_home: 2, result_away: 0, scorers: [{ player_name: "Harry Kane", goals: 2, team: "home" }] }
+  );
+  assert.equal(r.pointsScorersName, 1);
+});
+test("Dos goleadores distintos siguen sumando 1 punto cada uno", () => {
+  const r = calculateScore(
+    { home_score: 2, away_score: 1, scorers: [
+      { player_name: "Kane", goals: 2, team: "home" },
+      { player_name: "Son", goals: 1, team: "away" },
+    ] },
+    { result_home: 2, result_away: 1, scorers: [
+      { player_name: "Harry Kane", goals: 2, team: "home" },
+      { player_name: "Son Heung-min", goals: 1, team: "away" },
+    ] }
+  );
+  assert.equal(r.pointsScorersName, 2);
+});
+test("Un goleador real no se acredita dos veces con dos nombres distintos", () => {
+  const r = calculateScore(
+    { home_score: 1, away_score: 0, scorers: [
+      { player_name: "Raphinha", goals: 1, team: "home" },
+      { player_name: "Rapinha", goals: 1, team: "home" },
+    ] },
+    { result_home: 1, result_away: 0, scorers: [{ player_name: "Raphinha", goals: 1, team: "home" }] }
+  );
+  assert.equal(r.pointsScorersName, 1);
 });
 
 console.log(`\n${failed === 0 ? "🎉 TODA LA LÓGICA VERIFICADA" : `🔴 ${failed} fallos`} (${passed} checks)`);

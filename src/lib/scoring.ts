@@ -165,17 +165,31 @@ export function calculateScore(
   }
 
   // 4. Scorers (Goleadores acertados -> 1 pt c/u)
+  // Anti-inflación: cada goleador REAL se acredita una sola vez y cada nombre
+  // pronosticado se evalúa una sola vez. Sin esto, repetir el mismo jugador en
+  // varios slots del partido sumaba +1 por cada repetición.
   let scorersNameHits = 0;
 
   const realScorersList: RealScorer[] = real.scorers || [];
 
   if (prediction.scorers && prediction.scorers.length > 0) {
+    const creditedRealScorers = new Set<number>();
+    const creditedPredNames = new Set<string>();
+
     for (const predScorer of prediction.scorers.slice(0, 5)) {
-      const matchedRealScorer = realScorersList.find((rs) =>
-        arePlayersMatching(predScorer.player_name, rs.player_name)
+      const predName = normalizePlayerName(predScorer.player_name);
+      if (!predName || creditedPredNames.has(predName)) continue;
+      creditedPredNames.add(predName);
+
+      const matchedIdx = realScorersList.findIndex(
+        (rs, idx) =>
+          !creditedRealScorers.has(idx) &&
+          (rs.goals ?? 0) > 0 &&
+          arePlayersMatching(predScorer.player_name, rs.player_name)
       );
 
-      if (matchedRealScorer && (matchedRealScorer.goals ?? 0) > 0) {
+      if (matchedIdx >= 0) {
+        creditedRealScorers.add(matchedIdx);
         scorersNameHits += 1;
         pointsScorersName += 1;
         details.push(`Goleador acertado: ${predScorer.player_name} (+1 pt)`);

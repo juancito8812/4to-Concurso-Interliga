@@ -210,6 +210,33 @@ function evaluateSurvivorProgression(params) {
   };
 }
 
+// Hora efectiva de inicio del partido. Los partidos sin horario asignado por la
+// liga llegan a medianoche (00:00:00Z) y se tratan como vespertinos (20:00 UTC),
+// igual que getEffectiveMatchTime en src/app/pronosticar/page.tsx. Si se cambia
+// uno de los dos, cambiar el otro.
+function getEffectiveMatchTime(matchDate) {
+  if (!matchDate) return 0;
+  const str = String(matchDate);
+  if (str.includes("T00:00:00") || str.length === 10) {
+    return new Date(`${str.slice(0, 10)}T20:00:00Z`).getTime();
+  }
+  return new Date(str).getTime();
+}
+
+// Margen del cierre: un pronóstico es válido hasta 1 minuto antes del inicio
+// (misma regla que el cliente). Después de eso no puede puntuar nunca más.
+const PREDICTION_CUTOFF_GRACE_MS = 60 * 1000;
+
+// true si el pronóstico fue registrado antes del cierre del partido.
+// Si falta la fecha del partido no se puede validar: se rechaza (fail-closed),
+// salvo que el registro ya esté archivado con puntos (ver grandfathering en el cron).
+function isPredictionOnTime(createdAt, matchDate) {
+  const created = new Date(createdAt || 0).getTime();
+  const kickoff = getEffectiveMatchTime(matchDate);
+  if (!created || !kickoff) return false;
+  return created <= kickoff - PREDICTION_CUTOFF_GRACE_MS;
+}
+
 function matchIdToUuid(id) {
   const str = String(id).trim();
   if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str)) {
@@ -320,13 +347,26 @@ function calculateScore(prediction, real) {
 
   const realScorersList = real.scorers || [];
 
+  // Anti-inflación: cada goleador REAL se acredita una sola vez y cada nombre
+  // pronosticado se evalúa una sola vez (ver src/lib/scoring.ts).
   if (prediction.scorers && prediction.scorers.length > 0) {
+    const creditedRealScorers = new Set();
+    const creditedPredNames = new Set();
+
     for (const predScorer of prediction.scorers.slice(0, 5)) {
-      const matchedRealScorer = realScorersList.find((rs) =>
-        arePlayersMatching(predScorer.player_name, rs.player_name)
+      const predName = normalizePlayerName(predScorer.player_name);
+      if (!predName || creditedPredNames.has(predName)) continue;
+      creditedPredNames.add(predName);
+
+      const matchedIdx = realScorersList.findIndex(
+        (rs, idx) =>
+          !creditedRealScorers.has(idx) &&
+          (rs.goals ?? 0) > 0 &&
+          arePlayersMatching(predScorer.player_name, rs.player_name)
       );
 
-      if (matchedRealScorer && (matchedRealScorer.goals ?? 0) > 0) {
+      if (matchedIdx >= 0) {
+        creditedRealScorers.add(matchedIdx);
         scorersNameHits += 1;
         pointsScorersName += 1;
         details.push(`Goleador acertado: ${predScorer.player_name} (+1 pt)`);
@@ -378,6 +418,9 @@ module.exports = {
   cleanTeamName,
   normalizeTeamName,
   normalizePlayerName,
+  getEffectiveMatchTime,
+  isPredictionOnTime,
+  PREDICTION_CUTOFF_GRACE_MS,
   matchIdToUuid,
   cleanPhonetic,
   arePlayersMatching,

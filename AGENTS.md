@@ -36,6 +36,20 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **Validación de Fechas en Ventana Rodante**: Usar `isMatchDateValid` para que partidos con horarios no configurados o medianoche (`00:00:00Z`) permanezcan activos durante toda su fecha.
 - Para agregar un nuevo archivo de datos: copiarlo a `public/data/`, importarlo con `loadData("/data/archivo.json")` en el componente que lo necesite.
 
+### Reglas del concurso — doble capa (cliente + BASE)
+
+Desde la migración `supabase/migrations/2026-09-16_security_hardening.sql`, **toda regla
+de negocio debe existir también en la base**: el cliente se evade con la anon key pública
+(que es pública por diseño) + una sesión propia (el registro es abierto).
+
+- **Cierre de pronósticos**: `diffMin <= 1` en el cliente **y** `public.is_match_open_for_prediction(match_id)` en las políticas RLS de `predictions`/`prediction_scorers`. Fuera de ventana: INSERT bloqueado, UPDATE 0 filas.
+- **Sin puntaje retroactivo**: el cron descarta todo pronóstico con `created_at` posterior al cierre efectivo (`isPredictionOnTime` de `scripts/lib/score-utils.js`). Los registros ya archivados con puntos quedan grandfathereados (son el registro histórico y respaldo de recuperación).
+- **Goleadores**: un jugador una sola vez por pronóstico (`prediction_scorers_unique_player`), máximo 5 por equipo (`trg_enforce_max_scorers`), `goals` entre 1 y 10, y el motor de scoring acredita cada goleador real una sola vez.
+- **Superviviente KO**: el cliente solo crea su fila inicial (club propio, `ALIVE`, historial vacío) o la borra. La progresión, las transferencias y la eliminación las persiste **solo el cron** con service role key — `upsertCupSurvivor` no se usa desde el cliente.
+- **Club bloqueado**: cambiar `profiles.team_id` fuera de `public.reset_participation()` lanza excepción (`trg_enforce_team_lock`). El "Reiniciar participación" del perfil llama a ese RPC (borra todo y deja los puntos en 0).
+- **Horarios a medianoche (`00:00:00Z`)**: se evalúan como jornada vespertina (20:00 UTC) en el cliente, en la base (`effective_kickoff`) y en el cron. Si cambiás uno, cambiá los tres.
+- **Cron `--dry-run`**: `node scripts/auto-sync-espn-results.js --dry-run` hace todas las lecturas y reporta lo que haría sin escribir nada (ni en Supabase ni en los JSON).
+
 ### Footer global
 
 - El `Footer.tsx` se renderiza en el layout raíz (`layout.tsx`) y aparece en **todas las páginas** automáticamente.

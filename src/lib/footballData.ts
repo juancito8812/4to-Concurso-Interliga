@@ -6,6 +6,11 @@ const OFFICIAL_PLAYERS_PATH = "/data/officialPlayers.json";
 
 const BASE_URL = "https://api.football-data.org/v4";
 
+// AVISO DE SEGURIDAD: NEXT_PUBLIC_* se inlinea en el bundle público, así que esta
+// key solo debe existir en el entorno de desarrollo local (.env.local). Las llamadas
+// en vivo a football-data.org están limitadas a localhost (ver isLocalhost en
+// getOfficialTeamMatches), por lo que el build de producción NO necesita la key y el
+// workflow de deploy no la inyecta: en producción siempre se sirve el bundle oficial.
 const API_KEY = process.env.NEXT_PUBLIC_FOOTBALL_DATA_KEY || "";
 
 const headers: Record<string, string> = API_KEY ? { "X-Auth-Token": API_KEY } : {};

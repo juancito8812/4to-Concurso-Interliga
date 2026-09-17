@@ -357,6 +357,22 @@ Todas las tablas usan **Row Level Security**: lectura pública para ranking/cron
 | `delete_user_account` | RPC `SECURITY DEFINER` (solo `authenticated`) que purga en cascada y libera el email |
 | **Contraseñas** | Mínimo 8 caracteres + mayúscula + número + símbolo |
 
+### Reglas del concurso aplicadas en la BASE (migración 2026-09-16)
+
+Las reglas del juego ya no viven solo en el cliente (evadibles llamando directo a la API
+de Supabase con la anon key pública + una sesión propia). Migración:
+[`supabase/migrations/2026-09-16_security_hardening.sql`](./supabase/migrations/2026-09-16_security_hardening.sql).
+
+| Regla | Implementación |
+|-------|----------------|
+| Cierre de pronósticos 1 min antes del inicio | `is_match_open_for_prediction()` en las políticas de `predictions` y `prediction_scorers` (UPDATE fuera de ventana = 0 filas / error) |
+| Sin puntaje retroactivo | El cron descarta pronósticos con `created_at` posterior al cierre efectivo (`isPredictionOnTime`); los ya archivados con puntos quedan grandfathereados |
+| Un jugador una sola vez por pronóstico y lado | Índice único `(prediction_id, player_name)` + trigger `trg_enforce_max_scorers` (máx. 5 por equipo) + dedupe en el motor de scoring |
+| Goles pronosticados coherentes | `CHECK (goals BETWEEN 1 AND 10)` |
+| Superviviente KO de solo lectura para el cliente | Políticas de `tournament_survivors` limitadas a alta inicial (club propio, vivo, sin historial) y borrado; la progresión la escribe solo el cron |
+| Club bloqueado | Trigger `trg_enforce_team_lock`: cambiar `team_id` fuera de `reset_participation()` lanza excepción |
+| Reinicio de participación real (0 pts) | RPC `reset_participation()` (solo `authenticated`): borra pronósticos/goleadores/survivors, libera el club y marca `revoked:<uid>` en `app_meta` para que el cron purgue los puntos del archivo oficial |
+
 > **No commitear** `SUPABASE_SERVICE_ROLE_KEY` ni `.env.local` (están en `.gitignore`). Ver [DISASTER_RECOVERY_AND_SCHEMA.md](./DISASTER_RECOVERY_AND_SCHEMA.md) para la configuración completa de RLS.
 
 ---
@@ -368,7 +384,7 @@ Crear el archivo `.env.local` en la raíz del proyecto:
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://ilkndkqcmxvlufxaugog.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu-anon-key
-NEXT_PUBLIC_FOOTBALL_DATA_KEY=733c2feed2bf441292e9779c91af2e09
+NEXT_PUBLIC_FOOTBALL_DATA_KEY=tu-key-de-football-data   # solo dev local (ver aviso abajo)
 SUPABASE_SERVICE_ROLE_KEY=tu-service-key   # SOLO local y GitHub Secrets (nunca en el bundle)
 ```
 
@@ -378,7 +394,7 @@ SUPABASE_SERVICE_ROLE_KEY=tu-service-key   # SOLO local y GitHub Secrets (nunca 
 |--------|-----|
 | `NEXT_PUBLIC_SUPABASE_URL` | URL del proyecto Supabase (build estático) |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anon key de Supabase (build estático) |
-| `NEXT_PUBLIC_FOOTBALL_DATA_KEY` | Key de football-data.org inyectada al build de GitHub Pages |
+| `NEXT_PUBLIC_FOOTBALL_DATA_KEY` | **Ya NO se inyecta en el build.** `NEXT_PUBLIC_*` queda inlineado en el bundle público, y las llamadas en vivo a football-data.org solo se hacen en localhost |
 | `FOOTBALL_DATA_KEY` | Key de football-data.org para scripts de validación / sincronización |
 | `SUPABASE_SERVICE_ROLE_KEY` | Service role key para el cron (escritura bypass RLS) |
 

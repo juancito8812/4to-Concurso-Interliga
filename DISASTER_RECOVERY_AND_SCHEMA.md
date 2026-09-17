@@ -49,7 +49,7 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
    ```env
    NEXT_PUBLIC_SUPABASE_URL=https://tu-nuevo-id.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6...
-   NEXT_PUBLIC_FOOTBALL_DATA_KEY=733c2feed2bf441292e9779c91af2e09
+   NEXT_PUBLIC_FOOTBALL_DATA_KEY=tu-key-de-football-data   # solo dev local
    ```
 
 ### Paso 4: Configurar los Secrets de GitHub Actions
