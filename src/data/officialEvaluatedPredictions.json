@@ -22,7 +22,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Bruno Fernandes (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-08-29T16:46:12.7575+00:00"
   },
   {
     "id": "e6bd555b-466f-4d24-abf5-e2589c5bbfd4",
@@ -46,7 +47,8 @@
     ],
     "pointsDetails": [
       "Goles del líder goleador: 1 (+2 pts)"
-    ]
+    ],
+    "created_at": "2026-08-29T16:46:13.793213+00:00"
   },
   {
     "id": "4a3c5284-ca9d-415b-aad7-c517aad134d8",
@@ -67,7 +69,8 @@
       "Resultado correcto (+3 pts)",
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Erling Haaland (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-08-29T16:46:14.819646+00:00"
   },
   {
     "id": "8408fa39-5b46-4925-bae2-4e6ace765463",
@@ -93,7 +96,8 @@
       "Resultado correcto (+3 pts)",
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Gonçalo Ramos (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-08-29T16:46:15.633382+00:00"
   },
   {
     "id": "c23d0a74-f9c4-4703-a2ba-fef62eb003a9",
@@ -119,7 +123,8 @@
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Bukayo Saka (+1 pt)",
       "Goles del líder goleador: 1 (+2 pts)"
-    ]
+    ],
+    "created_at": "2026-08-29T17:08:49.172677+00:00"
   },
   {
     "id": "1cc97d19-b436-458d-b844-e82967b344fb",
@@ -156,7 +161,8 @@
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Kylian Mbappé (+1 pt)",
       "Goleador acertado: Jude Bellingham (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-08-29T18:11:18.294345+00:00"
   },
   {
     "id": "0f02f08f-9de9-49ba-b1b1-349a32bbb769",
@@ -189,7 +195,8 @@
       "Goleador acertado: Matheus Cunha (+1 pt)",
       "Goleador acertado: Bruno Fernandes (+1 pt)",
       "Goles del líder goleador: 1 (+2 pts)"
-    ]
+    ],
+    "created_at": "2026-08-29T22:03:18.428148+00:00"
   },
   {
     "id": "95da6cba-c0e0-4833-9a14-7d1bd84d6967",
@@ -221,7 +228,8 @@
       "Marcador exacto (+2 pts)",
       "Goleador acertado: Kylian Mbappé (+1 pt)",
       "Goleador acertado: Jude Bellingham (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-08-30T00:47:26.275282+00:00"
   },
   {
     "id": "c8f7875e-0a45-4e60-986e-66e16fbb3eac",
@@ -234,7 +242,8 @@
     "points": 3,
     "pointsDetails": [
       "Resultado correcto (+3 pts)"
-    ]
+    ],
+    "created_at": "2026-08-30T18:41:51.395876+00:00"
   },
   {
     "id": "e9aba70d-9a5e-4717-8613-0c7cf100bd34",
@@ -265,7 +274,8 @@
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Lamine Yamal (+1 pt)",
       "Goleador acertado: Raphinha (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-08-31T17:40:04.730397+00:00"
   },
   {
     "id": "2bc9e6d2-6374-4563-87ab-a729b81c5e9d",
@@ -296,7 +306,8 @@
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Martin Ødegaard (+1 pt)",
       "Goles del líder goleador: 1 (+2 pts)"
-    ]
+    ],
+    "created_at": "2026-09-01T02:11:04.33418+00:00"
   },
   {
     "id": "788162ee-073a-48d7-ac8e-0a6aa960901c",
@@ -332,7 +343,8 @@
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Harry Kane (+1 pt)",
       "Goles del líder goleador: 2 (+2 pts)"
-    ]
+    ],
+    "created_at": "2026-09-02T18:04:05.816393+00:00"
   },
   {
     "id": "78ae369f-caf5-465f-9e44-35ec0bbf7cb3",
@@ -369,7 +381,8 @@
       }
     ],
     "points": 0,
-    "pointsDetails": []
+    "pointsDetails": [],
+    "created_at": "2026-09-02T18:06:19.146391+00:00"
   },
   {
     "id": "ce83004a-ec7f-40e0-80f5-06203a820bac",
@@ -419,7 +432,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Harry Kane (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-02T18:06:20.256686+00:00"
   },
   {
     "id": "25d375a4-144a-4091-a4d7-65d94f7ff897",
@@ -449,7 +463,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Harry Kane (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-02T20:57:20.265323+00:00"
   },
   {
     "id": "7ec99ac9-d82b-43cd-a868-387104dcaa08",
@@ -497,7 +512,8 @@
       "Goleador acertado: Raphinha (+1 pt)",
       "Goleador acertado: Lamine Yamal (+1 pt)",
       "Goleador acertado: Fermín López (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-03T02:14:28.64115+00:00"
   },
   {
     "id": "7e9a37f5-2ec8-494f-a0aa-d615006b0dcb",
@@ -524,7 +540,8 @@
       }
     ],
     "points": 0,
-    "pointsDetails": []
+    "pointsDetails": [],
+    "created_at": "2026-09-03T23:47:00.203279+00:00"
   },
   {
     "id": "72cbcbb1-cfca-458e-b726-90aedfee5d4d",
@@ -546,7 +563,8 @@
       }
     ],
     "points": 0,
-    "pointsDetails": []
+    "pointsDetails": [],
+    "created_at": "2026-09-04T15:04:49.169798+00:00"
   },
   {
     "id": "cb27929f-507d-4609-b092-26575985a807",
@@ -576,7 +594,8 @@
     "pointsDetails": [
       "Diferencia de 1 gol (+1 pt)",
       "Goles del líder goleador: 1 (+2 pts)"
-    ]
+    ],
+    "created_at": "2026-09-06T01:58:13.821077+00:00"
   },
   {
     "id": "a688b8d3-a692-4484-b040-423dd0533b80",
@@ -606,7 +625,8 @@
         "goals": 1,
         "team": "away"
       }
-    ]
+    ],
+    "created_at": "2026-09-06T12:23:41.030312+00:00"
   },
   {
     "id": "0895c920-a5fa-432e-8dc9-bc47c838789b",
@@ -642,14 +662,14 @@
         "team": "away"
       }
     ],
-    "points": 7,
+    "points": 6,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Raphinha (+1 pt)",
-      "Goleador acertado: Lamine Yamal (+1 pt)",
-      "Goleador acertado: Raphinha (+1 pt)"
-    ]
+      "Goleador acertado: Lamine Yamal (+1 pt)"
+    ],
+    "created_at": "2026-09-06T19:21:40.20217+00:00"
   },
   {
     "id": "c82a0004-de7f-4287-873e-7b13e4775813",
@@ -679,7 +699,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Raphinha (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-07T15:03:39.513258+00:00"
   },
   {
     "id": "901bd77a-0ca4-4f35-a463-539c16a30604",
@@ -711,7 +732,8 @@
       "Marcador exacto (+2 pts)",
       "Goleador acertado: Kylian Mbappé (+1 pt)",
       "Goles del líder goleador: 1 (+2 pts)"
-    ]
+    ],
+    "created_at": "2026-09-07T17:25:10.574841+00:00"
   },
   {
     "id": "c3c3fdbe-4bf3-4b5d-b5e5-7336e1cfaf70",
@@ -738,7 +760,8 @@
       "Marcador exacto (+2 pts)",
       "Goleador acertado: Kylian Mbappé (+1 pt)",
       "Goles del líder goleador: 1 (+2 pts)"
-    ]
+    ],
+    "created_at": "2026-09-08T13:29:39.631679+00:00"
   },
   {
     "id": "9e9d2597-2049-4ec3-961e-5f6643b9b3b9",
@@ -758,7 +781,8 @@
         "goals": 1,
         "team": "away"
       }
-    ]
+    ],
+    "created_at": "2026-09-08T19:38:25.935664+00:00"
   },
   {
     "id": "6f8a4f81-6e5d-4850-b571-a6dd94ec0fe1",
@@ -772,7 +796,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Diferencia de 1 gol (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-10T17:37:55.027948+00:00"
   },
   {
     "id": "8717f2db-ad27-4238-bf11-ef62a920f1ea",
@@ -781,7 +806,8 @@
     "match_id": "00000000-0000-4000-8000-000000088dd1",
     "home_score": 2,
     "away_score": 0,
-    "scorers": []
+    "scorers": [],
+    "created_at": "2026-09-11T20:32:26.117416+00:00"
   },
   {
     "id": "095bc25d-a804-4720-97b3-1d442113ec65",
@@ -802,7 +828,8 @@
       "Resultado correcto (+3 pts)",
       "Marcador exacto (+2 pts)",
       "Goleador acertado: Bukayo Saka (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-11T20:32:50.40827+00:00"
   },
   {
     "id": "fd038ac2-6d50-4042-bc9a-4a0a6495d858",
@@ -827,7 +854,8 @@
         "goals": 1,
         "team": "away"
       }
-    ]
+    ],
+    "created_at": "2026-09-11T20:33:19.069514+00:00"
   },
   {
     "id": "922d39ce-4ca3-480c-b5bd-17bd5dfc2c80",
@@ -860,7 +888,8 @@
       "Goleador acertado: Kylian Mbappé (+1 pt)",
       "Goleador acertado: Jude Bellingham (+1 pt)",
       "Goles del líder goleador: 2 (+2 pts)"
-    ]
+    ],
+    "created_at": "2026-09-11T20:46:45.900945+00:00"
   },
   {
     "id": "6f49fc0c-65e1-4591-8071-41f201a9fd59",
@@ -882,7 +911,8 @@
       }
     ],
     "points": 0,
-    "pointsDetails": []
+    "pointsDetails": [],
+    "created_at": "2026-09-12T15:53:19.181893+00:00"
   },
   {
     "id": "d9521152-18cc-4cd3-8584-7bb63a1cb572",
@@ -914,7 +944,8 @@
       "Marcador exacto (+2 pts)",
       "Goleador acertado: Kylian Mbappé (+1 pt)",
       "Goleador acertado: Jude Bellingham (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-12T16:40:25.067867+00:00"
   },
   {
     "id": "59660154-313f-4153-9034-c912306d9f23",
@@ -949,7 +980,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Lamine Yamal (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-12T18:31:17.896908+00:00"
   },
   {
     "id": "c56672d0-4e20-4b9f-bba9-9623586d4de7",
@@ -980,7 +1012,8 @@
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Lamine Yamal (+1 pt)",
       "Goleador acertado: Raphinha (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-13T02:42:13.779201+00:00"
   },
   {
     "id": "9186a918-a533-41b0-8937-1d07df835737",
@@ -1005,7 +1038,8 @@
         "goals": 1,
         "team": "away"
       }
-    ]
+    ],
+    "created_at": "2026-09-13T17:30:37.08187+00:00"
   },
   {
     "id": "9e97acec-a165-4241-95e0-0d27146c33ed",
@@ -1040,7 +1074,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Kylian Mbappé (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-15T11:29:54.01535+00:00"
   },
   {
     "id": "98e93051-9365-4bee-bada-e5fc6de03664",
@@ -1070,7 +1105,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Kylian Mbappé (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-15T14:40:16.13173+00:00"
   },
   {
     "id": "c266e4f8-01d5-46bd-b244-a1c37259b2e3",
@@ -1107,7 +1143,8 @@
       }
     ],
     "points": 0,
-    "pointsDetails": []
+    "pointsDetails": [],
+    "created_at": "2026-09-16T18:08:32.382204+00:00"
   },
   {
     "id": "3a219154-fd81-4804-8955-b782d5226a9e",
@@ -1120,6 +1157,23 @@
     "points": 1,
     "pointsDetails": [
       "Diferencia de 1 gol (+1 pt)"
+    ],
+    "created_at": "2026-09-16T18:22:14.370623+00:00"
+  },
+  {
+    "id": "53569a9e-4fb7-4c13-b974-d7959ac5db36",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "ARS",
+    "match_id": "00000000-0000-4000-8000-000017f4be19",
+    "home_score": 1,
+    "away_score": 0,
+    "created_at": "2026-09-17T02:10:22.584817+00:00",
+    "scorers": [
+      {
+        "player_name": "Bukayo Saka",
+        "goals": 1,
+        "team": "home"
+      }
     ]
   }
 ]
