@@ -176,9 +176,9 @@ scripts/
 ├── validate-fixtures.js            # Validación cruzada del calendario (1.926 fixtures, 0 errores)
 ├── sync-db.js                      # Sincroniza Supabase: matches, remapeo de predicciones, teams
 ├── sync-player-squads.js           # Completa plantillas con rosters ESPN reales
-├── enrich_official_squads.py       # Enriquecimiento y auditoría de plantillas 2026/27 (7.249 jugadores)
+├── enrich_official_squads.py       # Enriquecimiento y auditoría de plantillas 2026/27 (7.252 jugadores)
 ├── rebuild-eval-preds.js           # Reconstruye predicciones evaluadas desde Supabase
-├── verify-logic.js                 # 48 checks de lógica de negocio y scoring
+├── verify-logic.js                 # 57 checks de lógica de negocio, scoring y seguridad RLS
 ├── evaluate-matches.js             # Evaluador CLI de partidos y puntos
 ├── assign-points.js                # Asignación directa de pronósticos y puntos
 ├── test-survivor.js                # Suite de pruebas del sistema de superviviente (12/12)
@@ -199,8 +199,10 @@ public/
 ├── icon.svg                        # Icono de la aplicación
 ├── .nojekyll                       # Evita que GitHub Pages ignore _next/
 ├── CNAME                           # Dominio personalizado
+├── robots.txt                      # Directivas de indexación y sitemap para Google Search Console
+├── sitemap.xml                     # Mapa de sitio con 17 URLs estáticas e indexables
 ├── data/                           # JSONs de datos servidos como assets estáticos (CDN)
-│   ├── officialPlayers.json        # 7.249 jugadores (fetch dinámico)
+│   ├── officialPlayers.json        # 7.252 jugadores (fetch dinámico)
 │   ├── officialFixtures.json       # 1.926 partidos (fetch dinámico)
 │   ├── officialEvaluatedMatches.json   # Resultados evaluados
 │   └── officialEvaluatedPredictions.json # Pronósticos evaluados
@@ -271,7 +273,7 @@ public/
 
 - Panel integrado debajo de cada club con dropdown clasificado por posición (Delanteros y Centrocampistas primero).
 - Selector de goles `[-] N [+]` con un máximo de **5 goleadores por equipo**.
-- Base de datos de **7.249 jugadores oficiales** clasificados por posición y equipo (240 clubes).
+- Base de datos de **7.252 jugadores oficiales** clasificados por posición y equipo (240 clubes).
 - Sincronización automática en segundo plano: los pronósticos guardados localmente se respaldan en Supabase tan pronto como el dispositivo se conecta.
 
 ### 5. Ranking General en Vivo Multiusuario
