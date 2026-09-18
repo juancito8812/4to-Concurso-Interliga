@@ -626,7 +626,13 @@
         "team": "away"
       }
     ],
-    "created_at": "2026-09-06T12:23:41.030312+00:00"
+    "created_at": "2026-09-06T12:23:41.030312+00:00",
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Michael Olise (+1 pt)",
+      "Goleador acertado: Harry Kane (+1 pt)"
+    ]
   },
   {
     "id": "0895c920-a5fa-432e-8dc9-bc47c838789b",
@@ -1020,21 +1026,26 @@
     "user_id": "836a17f7-37f6-427f-a0fe-eedcf66a082d",
     "display_name": "JOKENON93",
     "match_id": "00000000-0000-4000-8000-00000008a23b",
-    "home_score": 1,
-    "away_score": 3,
+    "home_score": 0,
+    "away_score": 5,
     "scorers": [
       {
-        "player_name": "Nathanael Mbuku",
-        "goals": 1,
-        "team": "home"
-      },
-      {
         "player_name": "Michael Olise",
-        "goals": 2,
+        "goals": 1,
         "team": "away"
       },
       {
         "player_name": "Harry Kane",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Ismael Saibari",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jamal Musiala",
         "goals": 1,
         "team": "away"
       }
@@ -1173,6 +1184,109 @@
         "player_name": "Bukayo Saka",
         "goals": 1,
         "team": "home"
+      }
+    ]
+  },
+  {
+    "id": "c0fe06b9-43e5-48fe-b2e8-4d50042be0fb",
+    "user_id": "836a17f7-37f6-427f-a0fe-eedcf66a082d",
+    "display_name": "JOKENON93",
+    "match_id": "00000000-0000-4000-8000-000017f4be13",
+    "home_score": 0,
+    "away_score": 10,
+    "created_at": "2026-09-18T20:17:55.703383+00:00",
+    "scorers": [
+      {
+        "player_name": "Harry Kane",
+        "goals": 3,
+        "team": "away"
+      },
+      {
+        "player_name": "Michael Olise",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jamal Musiala",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Luis Díaz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ismael Saibari",
+        "goals": 2,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "2b437ca3-78fc-4c6d-a77c-fe8c65c3abd1",
+    "user_id": "a595517a-1160-493a-b24e-e14bba1956d4",
+    "display_name": "Noel Cordero Velázquez",
+    "match_id": "00000000-0000-4000-8000-000000089dd2",
+    "home_score": 0,
+    "away_score": 4,
+    "created_at": "2026-09-18T19:27:33.026832+00:00",
+    "scorers": [
+      {
+        "player_name": "Karim Adeyemi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "e73acdd1-47cc-4ab7-8571-887e1f1e9bc5",
+    "user_id": "266e7258-c7f9-4159-9fa2-3281989af465",
+    "display_name": "Raudel",
+    "match_id": "00000000-0000-4000-8000-000000089dd0",
+    "home_score": 2,
+    "away_score": 3,
+    "created_at": "2026-09-18T19:46:26.274499+00:00",
+    "scorers": [
+      {
+        "player_name": "Ademola Lookman",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alexander Sørloth",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yan Diomandé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "away"
       }
     ]
   }

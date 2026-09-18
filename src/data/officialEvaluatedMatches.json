@@ -4569,5 +4569,108 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dd4",
+    "home_team": "Espanyol",
+    "away_team": "Elche",
+    "match_date": "2026-09-18T19:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Fer Niño",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Germán Valera",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dcf",
+    "home_team": "Brentford",
+    "away_team": "Chelsea",
+    "match_date": "2026-09-18T19:00Z",
+    "league": "Premier League",
+    "result_home": 3,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Jaidon Anthony",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Igor Thiago",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fábio Carvalho",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088604",
+    "home_team": "Monza",
+    "away_team": "Sassuolo",
+    "match_date": "2026-09-18T18:45Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Gustavo Varela",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Vasilije Adzic",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a22c",
+    "home_team": "Bayern Munich",
+    "away_team": "Union Berlin",
+    "match_date": "2026-09-18T18:30Z",
+    "league": "Bundesliga",
+    "result_home": 7,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Jamal Musiala",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Harry Kane",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Michael Olise",
+        "goals": 3,
+        "team": "home"
+      },
+      {
+        "player_name": "Ismael Saibari",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
