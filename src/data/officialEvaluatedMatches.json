@@ -4995,5 +4995,93 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dd6",
+    "home_team": "Celta Vigo",
+    "away_team": "Racing Santander",
+    "match_date": "2026-09-19T16:30Z",
+    "league": "LaLiga",
+    "result_home": 5,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Hugo Gonzalez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ilaix Moriba",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Miguel Román",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Pablo Durán",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dcd",
+    "home_team": "Nott. Forest",
+    "away_team": "Coventry City",
+    "match_date": "2026-09-19T16:30Z",
+    "league": "Premier League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Jay Da Silva",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088601",
+    "home_team": "Roma",
+    "away_team": "Inter Milan",
+    "match_date": "2026-09-19T16:00Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Manu Koné",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Lautaro Martínez",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a22e",
+    "home_team": "Stuttgart",
+    "away_team": "Borussia Dortmund",
+    "match_date": "2026-09-19T16:30Z",
+    "league": "Bundesliga",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Maximilian Beier",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
