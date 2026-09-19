@@ -1256,6 +1256,11 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Raphinha (+1 pt)"
     ]
   },
   {
@@ -1335,6 +1340,33 @@
       },
       {
         "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Raphinha (+1 pt)"
+    ]
+  },
+  {
+    "id": "21911f94-4d15-4b96-9725-af80e3601519",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000000089dd0",
+    "home_score": 1,
+    "away_score": 2,
+    "created_at": "2026-09-19T23:44:28.197829+00:00",
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jude Bellingham",
         "goals": 1,
         "team": "away"
       }

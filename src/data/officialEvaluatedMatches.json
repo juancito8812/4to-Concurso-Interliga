@@ -5083,5 +5083,49 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dd2",
+    "home_team": "Sevilla",
+    "away_team": "Barcelona",
+    "match_date": "2026-09-19T19:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Youssouf Fofana",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 3,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088602",
+    "home_team": "Venezia",
+    "away_team": "Lazio",
+    "match_date": "2026-09-19T18:45Z",
+    "league": "Serie A",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Mattia Zaccagni",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Tijjani Noslin",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
