@@ -4672,5 +4672,42 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dcb",
+    "home_team": "Tottenham",
+    "away_team": "Aston Villa",
+    "match_date": "2026-09-19T11:30Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Johan Manzambi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Nicolas Jackson",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Emiliano Buendía",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Conor Gallagher",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jan Paul van Hecke",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]

@@ -1299,5 +1299,41 @@
     "away_score": 2,
     "created_at": "2026-09-18T23:22:26.57139+00:00",
     "scorers": []
+  },
+  {
+    "id": "c701ef49-e28b-4920-bb70-f6d1a423da88",
+    "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
+    "display_name": "Asere1995",
+    "match_id": "00000000-0000-4000-8000-000000089dd2",
+    "home_score": 1,
+    "away_score": 4,
+    "created_at": "2026-09-19T10:56:19.26033+00:00",
+    "scorers": [
+      {
+        "player_name": "Ruben Vargas",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
   }
 ]
