@@ -861,7 +861,11 @@
         "team": "away"
       }
     ],
-    "created_at": "2026-09-11T20:33:19.069514+00:00"
+    "created_at": "2026-09-11T20:33:19.069514+00:00",
+    "points": 2,
+    "pointsDetails": [
+      "Goles del líder goleador: 1 (+2 pts)"
+    ]
   },
   {
     "id": "922d39ce-4ca3-480c-b5bd-17bd5dfc2c80",

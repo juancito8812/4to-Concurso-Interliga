@@ -4709,5 +4709,291 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dd5",
+    "home_team": "Osasuna",
+    "away_team": "Rayo Vallecano",
+    "match_date": "2026-09-19T12:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Ante Budimir",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Sergio Camello",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dd3",
+    "home_team": "Athletic Bilbao",
+    "away_team": "Alavés",
+    "match_date": "2026-09-19T14:15Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dca",
+    "home_team": "Brighton",
+    "away_team": "Arsenal",
+    "match_date": "2026-09-19T14:00Z",
+    "league": "Premier League",
+    "result_home": 3,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Pascal Gross",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Charalambos Kostoulas",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Chema Andrés",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dc8",
+    "home_team": "Everton",
+    "away_team": "Ipswich Town",
+    "match_date": "2026-09-19T14:00Z",
+    "league": "Premier League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Thierno Barry",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dcc",
+    "home_team": "Newcastle",
+    "away_team": "Hull City",
+    "match_date": "2026-09-19T14:00Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Joe Willock",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lewis Hall",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Mohamed-Ali Cho",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088606",
+    "home_team": "Bologna",
+    "away_team": "Torino",
+    "match_date": "2026-09-19T13:00Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Federico Bernardeschi",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Sandro Kulenovic",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885fd",
+    "home_team": "Udinese",
+    "away_team": "Cagliari",
+    "match_date": "2026-09-19T13:00Z",
+    "league": "Serie A",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Daniel Maldini",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a231",
+    "home_team": "Borussia Mönchengladbach",
+    "away_team": "Mainz",
+    "match_date": "2026-09-19T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 3,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Florian Neuhaus",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Phillip Tietz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sheraldo Becker",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Isac Lidberg",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Eric Martel",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Danny da Costa",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Shuto Machino",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a233",
+    "home_team": "Eintracht Frankfurt",
+    "away_team": "Freiburg",
+    "match_date": "2026-09-19T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Younes Ebnoutalib",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Derry Scherhant",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jonathan Burkardt",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Yuito Suzuki",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a230",
+    "home_team": "Hamburger SV",
+    "away_team": "Köln",
+    "match_date": "2026-09-19T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Nicolás Capaldo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Yussuf Poulsen",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ragnar Ache",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a232",
+    "home_team": "Werder Bremen",
+    "away_team": "Augsburg",
+    "match_date": "2026-09-19T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Robin Fellhauer",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Calvin Brackelmann",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Marco Grüll",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Niclas Füllkrug",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Mitchell Weiser",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
