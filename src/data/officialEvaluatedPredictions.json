@@ -1408,6 +1408,12 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Christian Pulisic (+1 pt)",
+      "Goles del líder goleador: 1 (+2 pts)"
     ]
   }
 ]
