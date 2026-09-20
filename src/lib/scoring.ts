@@ -1,12 +1,16 @@
 /**
  * Interliga Football Prediction Contest Scoring System
  *
- * Scoring Rules:
+ * Scoring Rules (4 rules — Regla #5 eliminada el 16/09/2026):
  * 1. Resultado correcto (Signo 1X2): 3 puntos
  * 2. Marcador exacto: 2 puntos
  * 3. Diferencia de 1 gol en el marcador: 1 punto (cuando no es exacto)
  * 4. Goleador acertado (nombre): 1 punto por cada goleador que anote
- * 5. Cantidad exacta de goleadores del partido: 2 puntos si la cantidad de goleadores pronosticados coincide con los reales
+ *
+ * Maximum achievable per prediction: 3 + 2 + 5 = 10 puntos
+ *
+ * NOTA: pointsScorersQuantity preservado como 0 para compatibilidad con
+ * registros históricos — la Regla #5 fue eliminada y no otorga puntos.
  */
 
 export interface PredictedScorer {
@@ -43,8 +47,8 @@ export interface ScoringBreakdown {
   pointsGoalDiff: number;
   scorersNameHits: number;
   pointsScorersName: number;
-  scorersQuantityHits: number;
-  pointsScorersQuantity: number;
+  /** 0 — Regla #5 eliminada; preservado para compatibilidad con registros históricos. */
+  pointsScorersQuantity: 0;
   details: string[];
 }
 
@@ -130,7 +134,7 @@ export function calculateScore(
   let pointsExactScore = 0;
   let pointsGoalDiff = 0;
   let pointsScorersName = 0;
-  let pointsScorersQuantity = 0;
+  const pointsScorersQuantity = 0; // Regla #5 eliminada — preservado como 0 para compat
   const details: string[] = [];
 
   const predSign = Math.sign(prediction.home_score - prediction.away_score);
@@ -166,8 +170,7 @@ export function calculateScore(
 
   // 4. Scorers (Goleadores acertados -> 1 pt c/u)
   // Anti-inflación: cada goleador REAL se acredita una sola vez y cada nombre
-  // pronosticado se evalúa una sola vez. Sin esto, repetir el mismo jugador en
-  // varios slots del partido sumaba +1 por cada repetición.
+  // pronosticado se evalúa una sola vez.
   let scorersNameHits = 0;
 
   const realScorersList: RealScorer[] = real.scorers || [];
@@ -197,27 +200,6 @@ export function calculateScore(
     }
   }
 
-  // 5. Cantidad exacta de goles del líder goleador del partido -> 2 pts
-  // Se otorga si la cantidad de goles del líder goleador pronosticado concuerda
-  // exactamente con el número de goles que marcó el líder goleador del partido real.
-  const maxPredGoals =
-    prediction.scorers && prediction.scorers.length > 0
-      ? Math.max(...prediction.scorers.map((s) => s.goals ?? 0), 0)
-      : 0;
-
-  const maxRealGoals =
-    realScorersList && realScorersList.length > 0
-      ? Math.max(...realScorersList.map((s) => s.goals ?? 0), 0)
-      : 0;
-
-  const scorersQuantityHits =
-    maxPredGoals > 0 && maxRealGoals > 0 && maxPredGoals === maxRealGoals ? 1 : 0;
-
-  if (scorersQuantityHits) {
-    pointsScorersQuantity = 2;
-    details.push(`Goles del líder goleador: ${maxRealGoals} (+2 pts)`);
-  }
-
   const totalPoints =
     pointsSign +
     pointsExactScore +
@@ -235,7 +217,6 @@ export function calculateScore(
     pointsGoalDiff,
     scorersNameHits,
     pointsScorersName,
-    scorersQuantityHits,
     pointsScorersQuantity,
     details,
   };

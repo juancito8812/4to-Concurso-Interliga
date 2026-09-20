@@ -48,14 +48,16 @@
 
 | Métrica / Auditoría | Desktop | Mobile |
 |---|:---:|:---:|
-| **Rendimiento (Performance)** | **100 / 100** | **100 / 100** |
-| **Accesibilidad (WCAG AA)** | **100 / 100** | **100 / 100** |
-| **Prácticas Recomendadas** | **100 / 100** | **100 / 100** |
-| **SEO** | **100 / 100** | **100 / 100** |
-| **First Contentful Paint (FCP)** | 0.2 s | 0.2 s |
-| **Largest Contentful Paint (LCP)** | 0.5 s | 0.4 s |
-| **Total Blocking Time (TBT)** | 20 ms | 0 ms |
-| **Cumulative Layout Shift (CLS)** | 0 | 0 |
+|| **Rendimiento (Performance)** | **100 / 100** | **100 / 100** |
+|| **Accesibilidad (WCAG AA)** | **100 / 100** | **100 / 100** |
+|| **Prácticas Recomendadas** | **100 / 100** | **100 / 100** |
+|| **SEO** | **100 / 100** | **100 / 100** |
+|| **First Contentful Paint (FCP)** | 0.2 s | 0.2 s |
+|| **Largest Contentful Paint (LCP)** | 0.5 s | 0.4 s |
+|| **Total Blocking Time (TBT)** | 20 ms | 0 ms |
+|| **Cumulative Layout Shift (CLS)** | 0 | 0 |
+
+> **Última verificación de calidad:** 57/57 checks de lógica. Build: 24 rutas estáticas OK. TypeScript estricto 0 errores. ESLint 0 errores.
 
 ---
 
@@ -250,9 +252,11 @@ public/
 |--------|----------|
 | **+3** | Resultado general correcto (acertar si gana local, empate o gana visitante) |
 | **+2** | Marcador exacto acertado (ej. 2-1) |
-| **+1** | Diferencia de 1 gol total en el marcador (cuando no es exacto, ej. predije 2-1 y fue 2-0) |
+| **+1** | Diferencia de 1 gol total en el marcador (ej. predije 2-1 y fue 2-0) |
 | **+1** | Por cada autor de gol acertado (nombre) |
-| **+2** | Cantidad exacta de goles del líder goleador del partido (si la cantidad de goles del líder goleador predicho coincide exactamente con la del líder goleador real) |
+| **---** | *Regla 5 eliminada el 16/09/2026* (cantidad exacta de goles del líder goleador) |
+
+> **Máximo posible por partido:** +3 (signo) + 2 (exacto) + 2 (goleadores) = **7 puntos**.
 
 > **Matching inteligente de goleadores:** El motor de scoring usa matching fonético (`arePlayersMatching`) que acepta variantes de escritura — iniciales (`N. Williams` = `Nico Williams`), acentos (`Gonçalo Ramos` = `Gonzalo Ramos`), y variaciones ortográficas (ç/z/s → s, b/v → b). Los nombres se normalizan antes de comparar.
 
@@ -483,11 +487,12 @@ El despliegue es completamente automático vía **GitHub Actions** al hacer push
 
 | Eje | Estado | Notas |
 |-----|--------|-------|
-| **Correctitud** | ✅ | 48/48 checks de lógica, 12/12 tests de survivor |
-| **Tipos** | ✅ | TypeScript estricto, 0 errores |
-| **Build** | ✅ | 23 páginas estáticas generadas |
-| **Seguridad** | ✅ | RLS activo, service role solo en cron, sin secrets en bundle |
-| **Performance** | ✅ | JS bundle -47.6%, lazy loading de datos |
+|| **Verify logic** | ✅ | 57/57 checks, 13 pronósticos recalibrados (-26 pts Regla #5) |
+|| **Type checking** | ✅ | TypeScript estricto, 0 errores |
+|| **Build** | ✅ | 24 páginas estáticas generadas |
+|| **Lint** | ✅ | ESLint 0 errores |
+|| **Security** | ✅ | RLS activo, service role solo en cron, sin secrets en bundle |
+|| **Performance** | ✅ | JS bundle -47.6%, lazy loading de datos |
 
 ### Arquitectura
 
@@ -511,9 +516,9 @@ El despliegue es completamente automático vía **GitHub Actions** al hacer push
 
 ```bash
 npx tsc --noEmit              # Type checking
-node scripts/verify-logic.js  # 48 checks de lógica
+node scripts/verify-logic.js  # 57 checks de lógica (incluye scoring, survivor, anti-farmeo)
 node scripts/test-survivor.js # 12/12 tests survivor
-npm run build                 # Build completo
+npm run build                 # Build completo (24 rutas estáticas)
 ```
 
 ---

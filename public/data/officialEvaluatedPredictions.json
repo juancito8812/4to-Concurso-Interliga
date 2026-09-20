@@ -22,7 +22,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Bruno Fernandes (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-08-29T16:46:12.7575+00:00"
   },
   {
     "id": "e6bd555b-466f-4d24-abf5-e2589c5bbfd4",
@@ -31,7 +32,7 @@
     "match_id": "00000000-0000-4000-8000-000000088db7",
     "home_score": 0,
     "away_score": 2,
-    "points": 2,
+    "points": -2,
     "scorers": [
       {
         "player_name": "Joshua Zirkzee",
@@ -44,9 +45,9 @@
         "team": "away"
       }
     ],
-    "pointsDetails": [
-      "Goles del líder goleador: 1 (+2 pts)"
-    ]
+    "pointsDetails": [],
+    "created_at": "2026-08-29T16:46:13.793213+00:00",
+    "total_points": 0
   },
   {
     "id": "4a3c5284-ca9d-415b-aad7-c517aad134d8",
@@ -67,7 +68,8 @@
       "Resultado correcto (+3 pts)",
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Erling Haaland (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-08-29T16:46:14.819646+00:00"
   },
   {
     "id": "8408fa39-5b46-4925-bae2-4e6ace765463",
@@ -79,7 +81,7 @@
     "points": 5,
     "scorers": [
       {
-        "player_name": "Gonçalo Ramos",
+        "player_name": "Gon\u00e7alo Ramos",
         "goals": 2,
         "team": "home"
       },
@@ -92,8 +94,9 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Diferencia de 1 gol (+1 pt)",
-      "Goleador acertado: Gonçalo Ramos (+1 pt)"
-    ]
+      "Goleador acertado: Gon\u00e7alo Ramos (+1 pt)"
+    ],
+    "created_at": "2026-08-29T16:46:15.633382+00:00"
   },
   {
     "id": "c23d0a74-f9c4-4703-a2ba-fef62eb003a9",
@@ -114,12 +117,13 @@
         "team": "away"
       }
     ],
-    "points": 6,
+    "points": 2,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
-      "Goleador acertado: Bukayo Saka (+1 pt)",
-      "Goles del líder goleador: 1 (+2 pts)"
-    ]
+      "Goleador acertado: Bukayo Saka (+1 pt)"
+    ],
+    "created_at": "2026-08-29T17:08:49.172677+00:00",
+    "total_points": 4
   },
   {
     "id": "1cc97d19-b436-458d-b844-e82967b344fb",
@@ -130,7 +134,7 @@
     "away_score": 1,
     "scorers": [
       {
-        "player_name": "Kylian Mbappé",
+        "player_name": "Kylian Mbapp\u00e9",
         "goals": 2,
         "team": "home"
       },
@@ -154,9 +158,10 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Diferencia de 1 gol (+1 pt)",
-      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Goleador acertado: Kylian Mbapp\u00e9 (+1 pt)",
       "Goleador acertado: Jude Bellingham (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-08-29T18:11:18.294345+00:00"
   },
   {
     "id": "0f02f08f-9de9-49ba-b1b1-349a32bbb769",
@@ -182,14 +187,15 @@
         "team": "home"
       }
     ],
-    "points": 8,
+    "points": 4,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Matheus Cunha (+1 pt)",
-      "Goleador acertado: Bruno Fernandes (+1 pt)",
-      "Goles del líder goleador: 1 (+2 pts)"
-    ]
+      "Goleador acertado: Bruno Fernandes (+1 pt)"
+    ],
+    "created_at": "2026-08-29T22:03:18.428148+00:00",
+    "total_points": 6
   },
   {
     "id": "95da6cba-c0e0-4833-9a14-7d1bd84d6967",
@@ -200,7 +206,7 @@
     "away_score": 0,
     "scorers": [
       {
-        "player_name": "Kylian Mbappé",
+        "player_name": "Kylian Mbapp\u00e9",
         "goals": 2,
         "team": "home"
       },
@@ -219,9 +225,10 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Marcador exacto (+2 pts)",
-      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Goleador acertado: Kylian Mbapp\u00e9 (+1 pt)",
       "Goleador acertado: Jude Bellingham (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-08-30T00:47:26.275282+00:00"
   },
   {
     "id": "c8f7875e-0a45-4e60-986e-66e16fbb3eac",
@@ -234,7 +241,8 @@
     "points": 3,
     "pointsDetails": [
       "Resultado correcto (+3 pts)"
-    ]
+    ],
+    "created_at": "2026-08-30T18:41:51.395876+00:00"
   },
   {
     "id": "e9aba70d-9a5e-4717-8613-0c7cf100bd34",
@@ -255,7 +263,7 @@
         "team": "home"
       },
       {
-        "player_name": "Fermín López",
+        "player_name": "Ferm\u00edn L\u00f3pez",
         "goals": 1,
         "team": "home"
       }
@@ -265,7 +273,8 @@
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Lamine Yamal (+1 pt)",
       "Goleador acertado: Raphinha (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-08-31T17:40:04.730397+00:00"
   },
   {
     "id": "2bc9e6d2-6374-4563-87ab-a729b81c5e9d",
@@ -281,22 +290,23 @@
         "team": "home"
       },
       {
-        "player_name": "Bruno Guimarães",
+        "player_name": "Bruno Guimar\u00e3es",
         "goals": 1,
         "team": "home"
       },
       {
-        "player_name": "Martin Ødegaard",
+        "player_name": "Martin \u00d8degaard",
         "goals": 1,
         "team": "home"
       }
     ],
-    "points": 6,
+    "points": 2,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
-      "Goleador acertado: Martin Ødegaard (+1 pt)",
-      "Goles del líder goleador: 1 (+2 pts)"
-    ]
+      "Goleador acertado: Martin \u00d8degaard (+1 pt)"
+    ],
+    "created_at": "2026-09-01T02:11:04.33418+00:00",
+    "total_points": 4
   },
   {
     "id": "788162ee-073a-48d7-ac8e-0a6aa960901c",
@@ -307,7 +317,7 @@
     "away_score": 6,
     "scorers": [
       {
-        "player_name": "Luis Díaz",
+        "player_name": "Luis D\u00edaz",
         "goals": 1,
         "team": "away"
       },
@@ -327,12 +337,13 @@
         "team": "away"
       }
     ],
-    "points": 6,
+    "points": 2,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
-      "Goleador acertado: Harry Kane (+1 pt)",
-      "Goles del líder goleador: 2 (+2 pts)"
-    ]
+      "Goleador acertado: Harry Kane (+1 pt)"
+    ],
+    "created_at": "2026-09-02T18:04:05.816393+00:00",
+    "total_points": 4
   },
   {
     "id": "78ae369f-caf5-465f-9e44-35ec0bbf7cb3",
@@ -343,12 +354,12 @@
     "away_score": 7,
     "scorers": [
       {
-        "player_name": "Aleksandar Pavlović",
+        "player_name": "Aleksandar Pavlovi\u0107",
         "goals": 1,
         "team": "away"
       },
       {
-        "player_name": "Luis Díaz",
+        "player_name": "Luis D\u00edaz",
         "goals": 2,
         "team": "away"
       },
@@ -369,7 +380,8 @@
       }
     ],
     "points": 0,
-    "pointsDetails": []
+    "pointsDetails": [],
+    "created_at": "2026-09-02T18:06:19.146391+00:00"
   },
   {
     "id": "ce83004a-ec7f-40e0-80f5-06203a820bac",
@@ -380,12 +392,12 @@
     "away_score": 2,
     "scorers": [
       {
-        "player_name": "Luis Díaz",
+        "player_name": "Luis D\u00edaz",
         "goals": 1,
         "team": "home"
       },
       {
-        "player_name": "Aleksandar Pavlović",
+        "player_name": "Aleksandar Pavlovi\u0107",
         "goals": 1,
         "team": "home"
       },
@@ -410,7 +422,7 @@
         "team": "away"
       },
       {
-        "player_name": "Fredrik Bjørkan",
+        "player_name": "Fredrik Bj\u00f8rkan",
         "goals": 1,
         "team": "away"
       }
@@ -419,7 +431,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Harry Kane (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-02T18:06:20.256686+00:00"
   },
   {
     "id": "25d375a4-144a-4091-a4d7-65d94f7ff897",
@@ -449,7 +462,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Harry Kane (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-02T20:57:20.265323+00:00"
   },
   {
     "id": "7ec99ac9-d82b-43cd-a868-387104dcaa08",
@@ -480,7 +494,7 @@
         "team": "away"
       },
       {
-        "player_name": "Fermín López",
+        "player_name": "Ferm\u00edn L\u00f3pez",
         "goals": 1,
         "team": "away"
       },
@@ -496,8 +510,9 @@
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Raphinha (+1 pt)",
       "Goleador acertado: Lamine Yamal (+1 pt)",
-      "Goleador acertado: Fermín López (+1 pt)"
-    ]
+      "Goleador acertado: Ferm\u00edn L\u00f3pez (+1 pt)"
+    ],
+    "created_at": "2026-09-03T02:14:28.64115+00:00"
   },
   {
     "id": "7e9a37f5-2ec8-494f-a0aa-d615006b0dcb",
@@ -508,7 +523,7 @@
     "away_score": 3,
     "scorers": [
       {
-        "player_name": "Kylian Mbappé",
+        "player_name": "Kylian Mbapp\u00e9",
         "goals": 2,
         "team": "away"
       },
@@ -524,7 +539,8 @@
       }
     ],
     "points": 0,
-    "pointsDetails": []
+    "pointsDetails": [],
+    "created_at": "2026-09-03T23:47:00.203279+00:00"
   },
   {
     "id": "72cbcbb1-cfca-458e-b726-90aedfee5d4d",
@@ -535,7 +551,7 @@
     "away_score": 3,
     "scorers": [
       {
-        "player_name": "Kylian Mbappé",
+        "player_name": "Kylian Mbapp\u00e9",
         "goals": 2,
         "team": "away"
       },
@@ -546,7 +562,8 @@
       }
     ],
     "points": 0,
-    "pointsDetails": []
+    "pointsDetails": [],
+    "created_at": "2026-09-04T15:04:49.169798+00:00"
   },
   {
     "id": "cb27929f-507d-4609-b092-26575985a807",
@@ -567,16 +584,17 @@
         "team": "away"
       },
       {
-        "player_name": "Gonçalo Ramos",
+        "player_name": "Gon\u00e7alo Ramos",
         "goals": 1,
         "team": "away"
       }
     ],
-    "points": 3,
+    "points": -1,
     "pointsDetails": [
-      "Diferencia de 1 gol (+1 pt)",
-      "Goles del líder goleador: 1 (+2 pts)"
-    ]
+      "Diferencia de 1 gol (+1 pt)"
+    ],
+    "created_at": "2026-09-06T01:58:13.821077+00:00",
+    "total_points": 1
   },
   {
     "id": "a688b8d3-a692-4484-b040-423dd0533b80",
@@ -587,7 +605,7 @@
     "away_score": 1,
     "scorers": [
       {
-        "player_name": "Luis Díaz",
+        "player_name": "Luis D\u00edaz",
         "goals": 1,
         "team": "home"
       },
@@ -602,10 +620,17 @@
         "team": "home"
       },
       {
-        "player_name": "Linus Güther",
+        "player_name": "Linus G\u00fcther",
         "goals": 1,
         "team": "away"
       }
+    ],
+    "created_at": "2026-09-06T12:23:41.030312+00:00",
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Michael Olise (+1 pt)",
+      "Goleador acertado: Harry Kane (+1 pt)"
     ]
   },
   {
@@ -627,7 +652,7 @@
         "team": "home"
       },
       {
-        "player_name": "Fermín López",
+        "player_name": "Ferm\u00edn L\u00f3pez",
         "goals": 1,
         "team": "home"
       },
@@ -642,14 +667,14 @@
         "team": "away"
       }
     ],
-    "points": 7,
+    "points": 6,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Raphinha (+1 pt)",
-      "Goleador acertado: Lamine Yamal (+1 pt)",
-      "Goleador acertado: Raphinha (+1 pt)"
-    ]
+      "Goleador acertado: Lamine Yamal (+1 pt)"
+    ],
+    "created_at": "2026-09-06T19:21:40.20217+00:00"
   },
   {
     "id": "c82a0004-de7f-4287-873e-7b13e4775813",
@@ -665,7 +690,7 @@
         "team": "home"
       },
       {
-        "player_name": "Fermín López",
+        "player_name": "Ferm\u00edn L\u00f3pez",
         "goals": 1,
         "team": "home"
       },
@@ -679,7 +704,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Raphinha (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-07T15:03:39.513258+00:00"
   },
   {
     "id": "901bd77a-0ca4-4f35-a463-539c16a30604",
@@ -690,12 +716,12 @@
     "away_score": 1,
     "scorers": [
       {
-        "player_name": "Kylian Mbappé",
+        "player_name": "Kylian Mbapp\u00e9",
         "goals": 1,
         "team": "home"
       },
       {
-        "player_name": "Carlos Espí",
+        "player_name": "Carlos Esp\u00ed",
         "goals": 1,
         "team": "home"
       },
@@ -705,13 +731,14 @@
         "team": "away"
       }
     ],
-    "points": 8,
+    "points": 4,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Marcador exacto (+2 pts)",
-      "Goleador acertado: Kylian Mbappé (+1 pt)",
-      "Goles del líder goleador: 1 (+2 pts)"
-    ]
+      "Goleador acertado: Kylian Mbapp\u00e9 (+1 pt)"
+    ],
+    "created_at": "2026-09-07T17:25:10.574841+00:00",
+    "total_points": 6
   },
   {
     "id": "c3c3fdbe-4bf3-4b5d-b5e5-7336e1cfaf70",
@@ -722,7 +749,7 @@
     "away_score": 1,
     "scorers": [
       {
-        "player_name": "Kylian Mbappé",
+        "player_name": "Kylian Mbapp\u00e9",
         "goals": 1,
         "team": "home"
       },
@@ -732,13 +759,14 @@
         "team": "home"
       }
     ],
-    "points": 8,
+    "points": 4,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Marcador exacto (+2 pts)",
-      "Goleador acertado: Kylian Mbappé (+1 pt)",
-      "Goles del líder goleador: 1 (+2 pts)"
-    ]
+      "Goleador acertado: Kylian Mbapp\u00e9 (+1 pt)"
+    ],
+    "created_at": "2026-09-08T13:29:39.631679+00:00",
+    "total_points": 6
   },
   {
     "id": "9e9d2597-2049-4ec3-961e-5f6643b9b3b9",
@@ -758,7 +786,11 @@
         "goals": 1,
         "team": "away"
       }
-    ]
+    ],
+    "created_at": "2026-09-08T19:38:25.935664+00:00",
+    "points": -2,
+    "pointsDetails": [],
+    "total_points": 0
   },
   {
     "id": "6f8a4f81-6e5d-4850-b571-a6dd94ec0fe1",
@@ -772,7 +804,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Diferencia de 1 gol (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-10T17:37:55.027948+00:00"
   },
   {
     "id": "8717f2db-ad27-4238-bf11-ef62a920f1ea",
@@ -781,7 +814,8 @@
     "match_id": "00000000-0000-4000-8000-000000088dd1",
     "home_score": 2,
     "away_score": 0,
-    "scorers": []
+    "scorers": [],
+    "created_at": "2026-09-11T20:32:26.117416+00:00"
   },
   {
     "id": "095bc25d-a804-4720-97b3-1d442113ec65",
@@ -802,15 +836,16 @@
       "Resultado correcto (+3 pts)",
       "Marcador exacto (+2 pts)",
       "Goleador acertado: Bukayo Saka (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-11T20:32:50.40827+00:00"
   },
   {
     "id": "fd038ac2-6d50-4042-bc9a-4a0a6495d858",
     "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
     "display_name": "ARS",
     "match_id": "00000000-0000-4000-8000-000000088dca",
-    "home_score": 2,
-    "away_score": 4,
+    "home_score": 1,
+    "away_score": 3,
     "scorers": [
       {
         "player_name": "Bukayo Saka",
@@ -818,7 +853,7 @@
         "team": "away"
       },
       {
-        "player_name": "Bruno Guimarães",
+        "player_name": "Bruno Guimar\u00e3es",
         "goals": 1,
         "team": "away"
       },
@@ -827,7 +862,11 @@
         "goals": 1,
         "team": "away"
       }
-    ]
+    ],
+    "created_at": "2026-09-11T20:33:19.069514+00:00",
+    "points": -2,
+    "pointsDetails": [],
+    "total_points": 0
   },
   {
     "id": "922d39ce-4ca3-480c-b5bd-17bd5dfc2c80",
@@ -838,7 +877,7 @@
     "away_score": 1,
     "scorers": [
       {
-        "player_name": "Kylian Mbappé",
+        "player_name": "Kylian Mbapp\u00e9",
         "goals": 2,
         "team": "home"
       },
@@ -853,14 +892,15 @@
         "team": "home"
       }
     ],
-    "points": 9,
+    "points": 5,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Marcador exacto (+2 pts)",
-      "Goleador acertado: Kylian Mbappé (+1 pt)",
-      "Goleador acertado: Jude Bellingham (+1 pt)",
-      "Goles del líder goleador: 2 (+2 pts)"
-    ]
+      "Goleador acertado: Kylian Mbapp\u00e9 (+1 pt)",
+      "Goleador acertado: Jude Bellingham (+1 pt)"
+    ],
+    "created_at": "2026-09-11T20:46:45.900945+00:00",
+    "total_points": 7
   },
   {
     "id": "6f49fc0c-65e1-4591-8071-41f201a9fd59",
@@ -876,13 +916,14 @@
         "team": "away"
       },
       {
-        "player_name": "Gonçalo Ramos",
+        "player_name": "Gon\u00e7alo Ramos",
         "goals": 1,
         "team": "away"
       }
     ],
     "points": 0,
-    "pointsDetails": []
+    "pointsDetails": [],
+    "created_at": "2026-09-12T15:53:19.181893+00:00"
   },
   {
     "id": "d9521152-18cc-4cd3-8584-7bb63a1cb572",
@@ -893,7 +934,7 @@
     "away_score": 1,
     "scorers": [
       {
-        "player_name": "Kylian Mbappé",
+        "player_name": "Kylian Mbapp\u00e9",
         "goals": 3,
         "team": "home"
       },
@@ -903,7 +944,7 @@
         "team": "home"
       },
       {
-        "player_name": "Álvaro García",
+        "player_name": "\u00c1lvaro Garc\u00eda",
         "goals": 1,
         "team": "away"
       }
@@ -912,14 +953,15 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Marcador exacto (+2 pts)",
-      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Goleador acertado: Kylian Mbapp\u00e9 (+1 pt)",
       "Goleador acertado: Jude Bellingham (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-12T16:40:25.067867+00:00"
   },
   {
     "id": "59660154-313f-4153-9034-c912306d9f23",
     "user_id": "a595517a-1160-493a-b24e-e14bba1956d4",
-    "display_name": "Noel Cordero Velázquez",
+    "display_name": "Noel Cordero Vel\u00e1zquez",
     "match_id": "00000000-0000-4000-8000-000000089dc3",
     "home_score": 0,
     "away_score": 4,
@@ -935,7 +977,7 @@
         "team": "away"
       },
       {
-        "player_name": "Fermín López",
+        "player_name": "Ferm\u00edn L\u00f3pez",
         "goals": 1,
         "team": "away"
       },
@@ -949,7 +991,8 @@
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Lamine Yamal (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-12T18:31:17.896908+00:00"
   },
   {
     "id": "c56672d0-4e20-4b9f-bba9-9623586d4de7",
@@ -970,7 +1013,7 @@
         "team": "home"
       },
       {
-        "player_name": "Fermín López",
+        "player_name": "Ferm\u00edn L\u00f3pez",
         "goals": 1,
         "team": "home"
       }
@@ -980,32 +1023,39 @@
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Lamine Yamal (+1 pt)",
       "Goleador acertado: Raphinha (+1 pt)"
-    ]
+    ],
+    "created_at": "2026-09-13T02:42:13.779201+00:00"
   },
   {
     "id": "9186a918-a533-41b0-8937-1d07df835737",
     "user_id": "836a17f7-37f6-427f-a0fe-eedcf66a082d",
     "display_name": "JOKENON93",
     "match_id": "00000000-0000-4000-8000-00000008a23b",
-    "home_score": 1,
-    "away_score": 3,
+    "home_score": 0,
+    "away_score": 5,
     "scorers": [
       {
-        "player_name": "Nathanael Mbuku",
-        "goals": 1,
-        "team": "home"
-      },
-      {
         "player_name": "Michael Olise",
-        "goals": 2,
+        "goals": 1,
         "team": "away"
       },
       {
         "player_name": "Harry Kane",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Ismael Saibari",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jamal Musiala",
         "goals": 1,
         "team": "away"
       }
-    ]
+    ],
+    "created_at": "2026-09-13T17:30:37.08187+00:00"
   },
   {
     "id": "9e97acec-a165-4241-95e0-0d27146c33ed",
@@ -1021,7 +1071,7 @@
         "team": "home"
       },
       {
-        "player_name": "Kylian Mbappé",
+        "player_name": "Kylian Mbapp\u00e9",
         "goals": 2,
         "team": "away"
       },
@@ -1039,8 +1089,9 @@
     "points": 4,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
-      "Goleador acertado: Kylian Mbappé (+1 pt)"
-    ]
+      "Goleador acertado: Kylian Mbapp\u00e9 (+1 pt)"
+    ],
+    "created_at": "2026-09-15T11:29:54.01535+00:00"
   },
   {
     "id": "98e93051-9365-4bee-bada-e5fc6de03664",
@@ -1051,7 +1102,7 @@
     "away_score": 4,
     "scorers": [
       {
-        "player_name": "Kylian Mbappé",
+        "player_name": "Kylian Mbapp\u00e9",
         "goals": 2,
         "team": "away"
       },
@@ -1069,8 +1120,9 @@
     "points": 4,
     "pointsDetails": [
       "Resultado correcto (+3 pts)",
-      "Goleador acertado: Kylian Mbappé (+1 pt)"
-    ]
+      "Goleador acertado: Kylian Mbapp\u00e9 (+1 pt)"
+    ],
+    "created_at": "2026-09-15T14:40:16.13173+00:00"
   },
   {
     "id": "c266e4f8-01d5-46bd-b244-a1c37259b2e3",
@@ -1081,7 +1133,7 @@
     "away_score": 2,
     "scorers": [
       {
-        "player_name": "Gonçalo Ramos",
+        "player_name": "Gon\u00e7alo Ramos",
         "goals": 2,
         "team": "home"
       },
@@ -1107,7 +1159,8 @@
       }
     ],
     "points": 0,
-    "pointsDetails": []
+    "pointsDetails": [],
+    "created_at": "2026-09-16T18:08:32.382204+00:00"
   },
   {
     "id": "3a219154-fd81-4804-8955-b782d5226a9e",
@@ -1120,6 +1173,236 @@
     "points": 1,
     "pointsDetails": [
       "Diferencia de 1 gol (+1 pt)"
+    ],
+    "created_at": "2026-09-16T18:22:14.370623+00:00"
+  },
+  {
+    "id": "53569a9e-4fb7-4c13-b974-d7959ac5db36",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "ARS",
+    "match_id": "00000000-0000-4000-8000-000017f4be19",
+    "home_score": 1,
+    "away_score": 0,
+    "created_at": "2026-09-17T02:10:22.584817+00:00",
+    "scorers": [
+      {
+        "player_name": "Bukayo Saka",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
+  },
+  {
+    "id": "c0fe06b9-43e5-48fe-b2e8-4d50042be0fb",
+    "user_id": "836a17f7-37f6-427f-a0fe-eedcf66a082d",
+    "display_name": "JOKENON93",
+    "match_id": "00000000-0000-4000-8000-000017f4be13",
+    "home_score": 0,
+    "away_score": 10,
+    "created_at": "2026-09-18T20:17:55.703383+00:00",
+    "scorers": [
+      {
+        "player_name": "Harry Kane",
+        "goals": 3,
+        "team": "away"
+      },
+      {
+        "player_name": "Michael Olise",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jamal Musiala",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Luis D\u00edaz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ismael Saibari",
+        "goals": 2,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "2b437ca3-78fc-4c6d-a77c-fe8c65c3abd1",
+    "user_id": "a595517a-1160-493a-b24e-e14bba1956d4",
+    "display_name": "Noel Cordero Vel\u00e1zquez",
+    "match_id": "00000000-0000-4000-8000-000000089dd2",
+    "home_score": 0,
+    "away_score": 4,
+    "created_at": "2026-09-18T19:27:33.026832+00:00",
+    "scorers": [
+      {
+        "player_name": "Karim Adeyemi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Raphinha (+1 pt)"
+    ]
+  },
+  {
+    "id": "e73acdd1-47cc-4ab7-8571-887e1f1e9bc5",
+    "user_id": "266e7258-c7f9-4159-9fa2-3281989af465",
+    "display_name": "Raudel",
+    "match_id": "00000000-0000-4000-8000-000000089dd0",
+    "home_score": 2,
+    "away_score": 3,
+    "created_at": "2026-09-18T19:46:26.274499+00:00",
+    "scorers": [
+      {
+        "player_name": "Ademola Lookman",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alexander S\u00f8rloth",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kylian Mbapp\u00e9",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yan Diomand\u00e9",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": -2,
+    "pointsDetails": [],
+    "total_points": 0
+  },
+  {
+    "id": "8f04411a-1912-4dad-9d62-9508b8a2a2a6",
+    "user_id": "836a17f7-37f6-427f-a0fe-eedcf66a082d",
+    "display_name": "JOKENON93",
+    "match_id": "00000000-0000-4000-8000-00000008a241",
+    "home_score": 5,
+    "away_score": 2,
+    "created_at": "2026-09-18T23:22:26.57139+00:00",
+    "scorers": []
+  },
+  {
+    "id": "c701ef49-e28b-4920-bb70-f6d1a423da88",
+    "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
+    "display_name": "Asere1995",
+    "match_id": "00000000-0000-4000-8000-000000089dd2",
+    "home_score": 1,
+    "away_score": 4,
+    "created_at": "2026-09-19T10:56:19.26033+00:00",
+    "scorers": [
+      {
+        "player_name": "Ruben Vargas",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ferm\u00edn L\u00f3pez",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Raphinha (+1 pt)"
+    ]
+  },
+  {
+    "id": "21911f94-4d15-4b96-9725-af80e3601519",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000000089dd0",
+    "home_score": 1,
+    "away_score": 2,
+    "created_at": "2026-09-19T23:44:28.197829+00:00",
+    "scorers": [
+      {
+        "player_name": "Kylian Mbapp\u00e9",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": -2,
+    "pointsDetails": [],
+    "total_points": 0
+  },
+  {
+    "id": "0ca9a91e-24d6-4e90-aff5-bfc0bbd5f517",
+    "user_id": "31acfd09-439a-41ae-9552-489e3c69a7db",
+    "display_name": "Milanarg",
+    "match_id": "00000000-0000-4000-8000-000000088605",
+    "home_score": 2,
+    "away_score": 1,
+    "created_at": "2026-09-20T18:31:00.966487+00:00",
+    "scorers": [
+      {
+        "player_name": "Christian Pulisic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gon\u00e7alo Ramos",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Milo\u0161 Jovi\u0107",
+        "goals": 1,
+        "team": "away"
+      }
     ]
   }
 ]
