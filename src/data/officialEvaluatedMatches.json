@@ -5149,5 +5149,185 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dd9",
+    "home_team": "Getafe",
+    "away_team": "Málaga",
+    "match_date": "2026-09-20T12:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Ivan Azón",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dd0",
+    "home_team": "Atlético Madrid",
+    "away_team": "Real Madrid",
+    "match_date": "2026-09-20T14:15Z",
+    "league": "LaLiga",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Alejandro Grimaldo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jonathan David",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Antonio Rüdiger",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dc6",
+    "home_team": "Bournemouth",
+    "away_team": "Liverpool",
+    "match_date": "2026-09-20T13:00Z",
+    "league": "Premier League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Alexander Isak",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dc9",
+    "home_team": "Leeds United",
+    "away_team": "Crystal Palace",
+    "match_date": "2026-09-20T13:00Z",
+    "league": "Premier League",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dce",
+    "home_team": "Manchester City",
+    "away_team": "Sunderland",
+    "match_date": "2026-09-20T13:00Z",
+    "league": "Premier League",
+    "result_home": 5,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Enzo Fernández",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Brian Brobbey",
+        "goals": 3,
+        "team": "away"
+      },
+      {
+        "player_name": "Rayan Cherki",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Antoine Semenyo",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Erling Haaland",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088600",
+    "home_team": "Frosinone",
+    "away_team": "Como",
+    "match_date": "2026-09-20T13:00Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Giacomo Calo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Giorgi Kvernadze",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885fe",
+    "home_team": "Parma",
+    "away_team": "Genoa",
+    "match_date": "2026-09-20T13:00Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "José Romero",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Milutin Osmajic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Pontus Almqvist",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a22f",
+    "home_team": "Bayer Leverkusen",
+    "away_team": "RB Leipzig",
+    "match_date": "2026-09-20T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Patrik Schick",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Miguel Gutiérrez",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]

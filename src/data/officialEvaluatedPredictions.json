@@ -1297,6 +1297,10 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 2,
+    "pointsDetails": [
+      "Goles del líder goleador: 1 (+2 pts)"
     ]
   },
   {
@@ -1370,6 +1374,10 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 2,
+    "pointsDetails": [
+      "Goles del líder goleador: 1 (+2 pts)"
     ]
   }
 ]
