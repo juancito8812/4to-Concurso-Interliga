@@ -5329,5 +5329,141 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dd7",
+    "home_team": "Deportivo La Coruña",
+    "away_team": "Real Betis",
+    "match_date": "2026-09-20T16:30Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Cucho Hernández",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Diego Villares",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dd8",
+    "home_team": "Villarreal",
+    "away_team": "Levante",
+    "match_date": "2026-09-20T16:30Z",
+    "league": "LaLiga",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Ayoze Pérez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Iván Romero",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alberto Moleiro",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Georges Mikautadze",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dc7",
+    "home_team": "Fulham",
+    "away_team": "Manchester United",
+    "match_date": "2026-09-20T15:30Z",
+    "league": "Premier League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Matheus Cunha",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088603",
+    "home_team": "Juventus",
+    "away_team": "Atalanta",
+    "match_date": "2026-09-20T16:00Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Francisco Conceição",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Bremer",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a22d",
+    "home_team": "Schalke 04",
+    "away_team": "SV 07 Elversberg",
+    "match_date": "2026-09-20T15:30Z",
+    "league": "Bundesliga",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a22b",
+    "home_team": "SC Paderborn 07",
+    "away_team": "Hoffenheim",
+    "match_date": "2026-09-20T17:30Z",
+    "league": "Bundesliga",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Santiago Castaneda",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Stefano Marino",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Adam Daghim",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Steffen Tigges",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]

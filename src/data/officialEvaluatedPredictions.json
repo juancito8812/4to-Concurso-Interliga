@@ -788,7 +788,11 @@
         "team": "away"
       }
     ],
-    "created_at": "2026-09-08T19:38:25.935664+00:00"
+    "created_at": "2026-09-08T19:38:25.935664+00:00",
+    "points": 2,
+    "pointsDetails": [
+      "Goles del líder goleador: 1 (+2 pts)"
+    ]
   },
   {
     "id": "6f8a4f81-6e5d-4850-b571-a6dd94ec0fe1",
@@ -1378,6 +1382,32 @@
     "points": 2,
     "pointsDetails": [
       "Goles del líder goleador: 1 (+2 pts)"
+    ]
+  },
+  {
+    "id": "0ca9a91e-24d6-4e90-aff5-bfc0bbd5f517",
+    "user_id": "31acfd09-439a-41ae-9552-489e3c69a7db",
+    "display_name": "Milanarg",
+    "match_id": "00000000-0000-4000-8000-000000088605",
+    "home_score": 2,
+    "away_score": 1,
+    "created_at": "2026-09-20T18:31:00.966487+00:00",
+    "scorers": [
+      {
+        "player_name": "Christian Pulisic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gonçalo Ramos",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Miloš Jović",
+        "goals": 1,
+        "team": "away"
+      }
     ]
   }
 ]
