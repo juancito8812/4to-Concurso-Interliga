@@ -50,6 +50,9 @@ next-env.d.ts
 # tooling
 .playwright-mcp/
 
+# freebuff (agente local)
+.freebuff/
+
 # agent skills locales (no son código del proyecto)
 .agents/skills/
 skills-lock.json
