@@ -394,7 +394,7 @@ export default function MisPronosticosPage() {
         const match = matchesMap[pred.match_id];
         const matchScorers = scorersMap[pred.id] || [];
 
-        let earnedPoints = pred.points;
+        let earnedPoints: number | null = null;
         let details: string[] = [];
 
         if (match && match.result_home !== null && match.result_away !== null) {
@@ -410,9 +410,8 @@ export default function MisPronosticosPage() {
               scorers: match.scorers,
             }
           );
-          if (earnedPoints === null) {
-            earnedPoints = breakdown.totalPoints;
-          }
+          // Siempre recalcular con el motor corregido (Regla #5 eliminada)
+          earnedPoints = breakdown.totalPoints;
           details = breakdown.details;
         }
 

@@ -405,8 +405,8 @@ export default function UserPredictionsModal({
 
           const predScorers = scorersMap[pred.id] || [];
 
-          let earnedPoints: number | null = pred.points ?? null;
-          let details: string[] = pred.pointsDetails && pred.pointsDetails.length > 0 ? [...pred.pointsDetails] : [];
+          let earnedPoints: number | null = null;
+          let details: string[] = [];
 
           if (match && match.result_home !== null && match.result_away !== null) {
             const breakdown = calculateScore(
@@ -421,15 +421,13 @@ export default function UserPredictionsModal({
                 scorers: match.scorers || [],
               }
             );
-
-            if (earnedPoints === null) {
-              earnedPoints = breakdown.totalPoints;
-            }
+            // Siempre recalcula con motor corregido (Regla #5 eliminada)
+            earnedPoints = breakdown.totalPoints;
             if (breakdown.details.length > 0) {
               details = breakdown.details;
             }
-          } else if (hasPoints && earnedPoints !== null && earnedPoints > 0 && details.length === 0) {
-            details = [`Puntos oficiales asignados (+${earnedPoints} pts)`];
+          } else if (pred.points !== null && pred.points !== undefined && pred.points > 0 && details.length === 0) {
+            details = [`Puntos oficiales asignados (+${pred.points} pts)`];
           }
 
           return {
