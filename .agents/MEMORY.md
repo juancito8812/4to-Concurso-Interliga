@@ -5,8 +5,8 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 8 ligas/copas europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages con dominio personalizado `futbolcamisetapasion.com` (Cloudflare DNS), sin basePath. Workflow `.github/workflows/deploy.yml`.
-- **Última sesión:** 2026-08-31 (incidente ESPN 400 en fechas con coma → rango con guión + fail-fast)
-- **Versión de memoria:** 2.3
+- **Última sesión:** 2026-09-20 (bug de evaluación Levante-Athletic cerrado + performance: −117 KB JS en ranking + dedup de JSONs embebidos)
+- **Versión de memoria:** 2.4
 
 ## Arquitectura
 
@@ -19,6 +19,19 @@
 - `src/contexts/AuthContext.tsx` — Context de autenticación, perfil en vivo, traducción inteligente de errores de auth (rate limits / spam protection) y eliminación de cuenta (`deleteAccount`).
 
 ## Decisiones Clave
+
+- **2026-09-20** — **Bug de evaluación cerrado: resultado fabricado Levante-Athletic (0-0 del 16/09)**:
+  - **Causa raíz (2 bugs encadenados en `scripts/auto-sync-espn-results.js`)**: (1) `findFixture` emparejaba evento ESPN → fixture por nombre SIN comprobar fecha ni liga, así que cuando football-data reprogramó el partido (ID FD `564685` → UUID `...89dcd`, status `TIMED`, nueva fecha 21/10), un evento ESPN de otra fecha se le atribuyó; (2) `parseInt(homeComp.score || "0")` fabricaba un 0-0 válido cuando el evento no traía marcador. Resultado: entrada `completed: true, result 0-0` para un partido **no jugado**, commiteada por el cron (`26b1590`).
+  - **Auditoría completa**: cruce de los 215 evaluados vs 1.926 fixtures — **1 solo caso** (eliminado; quedan 214), 0 huérfanos. 0 predicciones evaluadas sobre ese ID (impacto en puntos: nulo).
+  - **Fixes**: score estricto (`score ?? ""` → skip si falta) y `findFixture(officialFixtures, home, away, eventDate)` con ventana de ±3 días. Validado: sintaxis, `validate-fixtures.js` 0 errores, `verify-logic.js` 57/57.
+  - **Lección**: al emparejar entidades entre fuentes por nombre, siempre incluir una restricción temporal; nunca defaultear marcadores ausentes a 0.
+
+- **2026-09-20** — **Pase de performance (auditoría Lighthouse-style sobre out/)**:
+  - `/ranking` carga **−117 KB de JS** (982→865 KB raw): `UserPredictionsModal` (861 líneas) ahora es `dynamic()` con `ssr:false` (se descarga solo al abrir), y los 3 archivos (ranking, mis-pronosticos, modal) dejaron de importar estáticamente `officialEvaluatedMatches/Predictions.json` (128 KB embebidos y parseados 2× en hidratación): la fuente única es la carga dinámica con cache de `dataLoader`.
+  - **Drift detectado y corregido**: `public/data` servido por CDN estaba 4 días atrás (165 vs 215 evaluados). Sincronizado + **check md5 src↔public en `validate-fixtures.js` (sección 10)** para que no vuelva a pasar.
+  - **fix(tabla)**: fallback ESPN con `?dates=<año>&limit=500` (el host `site.web.api.espn.com` ya no acepta rangos `YYYYMMDD-YYYYMMDD`; el límite por defecto de 100 truncaba la fase liga de Champions: 189 partidos) y tope de locales 30→500 (Champions: 126 por jugar).
+  - **feat(tabla)**: partidos agrupados por jornada con headers sticky (`groupMatchesByDay` en espnApi.ts, smoke test 9/9 en `scripts/test-group-matches.js`).
+  - Pendiente de futuro: SW precachea 2 MB de JSON en primera visita (mover `officialPlayers.json` a cache-on-demand), code-splitting por ruta de los 4 chunks compartidos (~730 KB raw).
 
 - **2026-08-31** — **Incidente: resultados no sincronizados — ESPN cambió su API de scoreboard (resuelto con fix + fail-fast)**:
   - **Síntoma:** la página no mostraba los resultados de la jornada del 29-30/08; los runs del cron figuraban `success` pero no commiteaban nada nuevo desde el 30/08 19:01 UTC.

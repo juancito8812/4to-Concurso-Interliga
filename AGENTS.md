@@ -29,10 +29,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ### Datos dinámicos (fetch desde public/data/)
 
-- `officialPlayers.json` (809KB) y `officialFixtures.json` (566KB) **NO** se importan estáticamente en JS.
-- Se cargan vía `loadData()` de `src/lib/dataLoader.ts` con cache en memoria (una sola petición HTTP por sesión).
+- **NINGÚN** JSON de datos se importa estáticamente en JS (`officialPlayers`, `officialFixtures`, `officialEvaluatedMatches`, `officialEvaluatedPredictions`): todo se carga vía `loadData()` de `src/lib/dataLoader.ts` con cache en memoria (una sola petición HTTP por sesión). Importarlos estáticamente embebe cientos de KB en los bundles y duplica los datos en memoria (los rankings ya fetcheaban lo mismo).
 - Los 4 JSONs de datos están en `public/data/` como assets estáticos servidos por CDN.
-- **Sincronización Dual Obligatoria**: Al modificar `src/data/officialFixtures.json` o `officialEvaluatedMatches.json`, **SIEMPRE** copiar la copia exacta a `public/data/` para que la CDN sirva los 1.672 partidos con sus horarios oficiales.
+- **Sincronización Dual Obligatoria**: Al modificar cualquier JSON en `src/data/`, **SIEMPRE** copiarlo a `public/data/` (el validador lo verifica por md5, sección 10).
 - **Validación de Fechas en Ventana Rodante**: Usar `isMatchDateValid` para que partidos con horarios no configurados o medianoche (`00:00:00Z`) permanezcan activos durante toda su fecha.
 - Para agregar un nuevo archivo de datos: copiarlo a `public/data/`, importarlo con `loadData("/data/archivo.json")` en el componente que lo necesite.
 
@@ -49,6 +48,7 @@ de negocio debe existir también en la base**: el cliente se evade con la anon k
 - **Club bloqueado**: cambiar `profiles.team_id` fuera de `public.reset_participation()` lanza excepción (`trg_enforce_team_lock`). El "Reiniciar participación" del perfil llama a ese RPC (borra todo y deja los puntos en 0).
 - **Horarios a medianoche (`00:00:00Z`)**: se evalúan como jornada vespertina (20:00 UTC) en el cliente, en la base (`effective_kickoff`) y en el cron. Si cambiás uno, cambiá los tres.
 - **Cron `--dry-run`**: `node scripts/auto-sync-espn-results.js --dry-run` hace todas las lecturas y reporta lo que haría sin escribir nada (ni en Supabase ni en los JSON).
+- **Ingesta de resultados del cron (bugs cerrados 2026-09-20)**: el emparejamiento evento ESPN → fixture exige **proximidad de fecha (±3 días)** en `findFixture` (sin esto, una reprogramación atribuía el resultado al fixture de otra fecha: bug Levante-Athletic 0-0 del 16/09 atribuido al partido reprogramado al 21/10) y el score debe venir **explícito** en la respuesta ESPN (`parseInt(score ?? "")` — nunca `score || "0"`, que fabrica 0-0 de eventos sin marcador). Al cambiar el emparejamiento o la ventana, verificar contra `validate-fixtures.js` y auditar huérfanos/fechas contradictorias entre evaluados y fixtures.
 
 ### Footer global
 

@@ -57,7 +57,7 @@
 || **Total Blocking Time (TBT)** | 20 ms | 0 ms |
 || **Cumulative Layout Shift (CLS)** | 0 | 0 |
 
-> **Última verificación de calidad:** 57/57 checks de lógica. Build: 24 rutas estáticas OK. TypeScript estricto 0 errores. ESLint 0 errores.
+> **Última verificación de calidad:** 57/57 checks de lógica + 9/9 smoke tests de agrupación. Validador de calendario (10 secciones, incluye sincronización `src/data` ↔ `public/data`): 0 errores. Build: 24 rutas estáticas OK. TypeScript estricto 0 errores. ESLint 0 errores.
 
 ---
 
@@ -82,7 +82,8 @@
 - Visualización del estado VIVO/KO y equipo activo en landing, pronósticos e historial.
 
 ### Tablas de Posiciones por Liga
-- Clasificación, máximos goleadores y calendario de partidos vía ESPN API pública (`site.web.api.espn.com`).
+- Clasificación, máximos goleadores y calendario vía fixtures locales + fallback en vivo a ESPN API pública (`site.web.api.espn.com`, temporada completa con `?dates=<año>&limit=500`).
+- Partidos agrupados por **jornada** con encabezados sticky (por fecha en copas knockout) para navegar 100+ partidos cómodamente.
 - 11 competiciones disponibles en rutas estáticas generadas con `generateStaticParams`.
 
 ### Gestión de Cuenta
@@ -118,8 +119,8 @@
 |------------|-------|--------|
 | 🇮🇹 Copa Italia | `#024494` azul | ESPN |
 | 🇩🇪 DFB-Pokal | `#d20515` rojo | ESPN |
-| 🏴󠁧󠁢󠁥󠁮󠁧󠁿 FA Cup | `#f43f5e` rosa | Sorteo pendiente (UI, logos y lógica KO habilitados) |
-| 🇪🇸 Copa del Rey | `#eab308` amarillo | Sorteo pendiente (UI, logos y lógica KO habilitados) |
+| 🏴󠁧󠁢󠁥󠁮󠁧󠁿 FA Cup | `#f43f5e` rosa | ESPN (sync activo con filtro canónico; rondas 2026/27 aún no publicadas por la fuente) |
+| 🇪🇸 Copa del Rey | `#eab308` amarillo | ESPN (sync activo con filtro canónico; solo R1 publicada, clubes no-league filtrados) |
 
 ---
 

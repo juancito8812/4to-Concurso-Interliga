@@ -27,10 +27,11 @@ Contexto para agentes de código. Para documentación completa ver [README.md](.
 | `src/lib/leagueConfig.ts` | Normalización canónica de ligas/equipos, `matchIdToUuid`, colores |
 | `src/lib/survivor.ts` | Motor de superviviente en 7 copas KO |
 | `src/lib/scoring.ts` | Cálculo de puntos + matching fonético `arePlayersMatching` |
-| `src/data/officialFixtures.json` | 1.926 partidos reales pre-sincronizados |
+| `src/data/officialFixtures.json` | 1.926 partidos reales pre-sincronizados (9 competiciones incl. FA Cup/CDR con filtro canónico) |
 | `src/data/teamAliases.json` | 404 aliases, 241 equipos, 225 teamCups |
-| `src/data/officialPlayers.json` | 7.249 jugadores clasificados por posición |
-| `scripts/auto-sync-espn-results.js` | Cron: ESPN → evaluación → Supabase (service role key) |
+| `src/data/officialPlayers.json` | 7.252 jugadores clasificados por posición |
+| `scripts/auto-sync-espn-results.js` | Cron: ESPN → evaluación → Supabase (service role key). Empareja por nombre ±3 días de fecha y exige score explícito |
+| `scripts/validate-fixtures.js` | Validador de calendario: cruces FD/ESPN, canónicos, anti-duplicados y sync src↔public data (md5) |
 | `scripts/sync-player-squads.js` | Cron mensual: sync plantillas oficiales post-mercado |
 || `scripts/verify-logic.js` | 57 checks de lógica de negocio (incluye scoring, survivor, anti-farmeo) |
 || `scripts/recalcular-puntos.js` | Recalcula puntos de pronósticos evaluados descartando Regla #5 legacy |
@@ -51,6 +52,7 @@ npm run dev                # Desarrollo local
 npm run lint               # ESLint
 npx tsc --noEmit           # Type-checking
 node scripts/verify-logic.js         # 57 checks de lógica
-node scripts/validate-fixtures.js    # Validación de calendario (0 errores)
+node scripts/validate-fixtures.js    # Validación de calendario + sync src↔public (0 errores)
 node scripts/test-survivor.js        # Tests superviviente (12/12)
+node scripts/test-group-matches.js   # Smoke tests de agrupación por jornada (9/9)
 ```
