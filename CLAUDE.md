@@ -32,7 +32,8 @@ Contexto para agentes de código. Para documentación completa ver [README.md](.
 | `src/data/officialPlayers.json` | 7.249 jugadores clasificados por posición |
 | `scripts/auto-sync-espn-results.js` | Cron: ESPN → evaluación → Supabase (service role key) |
 | `scripts/sync-player-squads.js` | Cron mensual: sync plantillas oficiales post-mercado |
-| `scripts/verify-logic.js` | 48 checks de lógica de negocio |
+|| `scripts/verify-logic.js` | 57 checks de lógica de negocio (incluye scoring, survivor, anti-farmeo) |
+|| `scripts/recalcular-puntos.js` | Recalcula puntos de pronósticos evaluados descartando Regla #5 legacy |
 | `supabase/schema.sql` | DDL maestro: 8 tablas, RLS, triggers |
 
 ## Base de Datos
@@ -49,7 +50,7 @@ npm run build              # Build estático
 npm run dev                # Desarrollo local
 npm run lint               # ESLint
 npx tsc --noEmit           # Type-checking
-node scripts/verify-logic.js         # 48 checks de lógica
+node scripts/verify-logic.js         # 57 checks de lógica
 node scripts/validate-fixtures.js    # Validación de calendario (0 errores)
 node scripts/test-survivor.js        # Tests superviviente (12/12)
 ```

@@ -254,7 +254,7 @@ public/
 | **+2** | Marcador exacto acertado (ej. 2-1) |
 | **+1** | Diferencia de 1 gol total en el marcador (ej. predije 2-1 y fue 2-0) |
 | **+1** | Por cada autor de gol acertado (nombre) |
-| **---** | *Regla 5 eliminada el 16/09/2026* (cantidad exacta de goles del líder goleador) |
+|| **---** | *Regla 5 eliminada el 20/09/2026* (cantidad exacta de goles del líder goleador) |
 
 > **Máximo posible por partido:** +3 (signo) + 2 (exacto) + 2 (goleadores) = **7 puntos**.
 
@@ -435,7 +435,7 @@ npx tsc --noEmit
 ### Verificaciones de Lógica y Calendario
 
 ```bash
-node scripts/verify-logic.js            # 48 checks de lógica de negocio
+node scripts/verify-logic.js            # 57 checks de lógica de negocio
 node scripts/validate-fixtures.js       # Validación cruzada del calendario contra fuentes reales
 node scripts/test-survivor.js           # Tests del sistema de superviviente (12/12)
 ```
@@ -589,7 +589,7 @@ curl "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?date
 ### Verificación rápida de salud del proyecto
 
 ```bash
-node scripts/verify-logic.js              # 48 checks
+node scripts/verify-logic.js              # 57 checks
 node scripts/validate-fixtures.js         # 0 errores
 node scripts/test-survivor.js             # 12/12 PASS
 npx tsc --noEmit                          # Type-checking
@@ -603,6 +603,42 @@ Las cuentas sin confirmar (`confirmed_at IS NULL` en `auth.users`) generan rebot
 SELECT email, created_at FROM auth.users WHERE confirmed_at IS NULL;
 ```
 Eliminar cuentas de testing/obsoletas. **No registrar emails inventados.**
+
+---
+
+## 📋 Historial de Cambios
+
+### 2026-09-20 — Eliminación Regla #5 y corrección frontend
+
+**Descripción:** Eliminación total de la Regla #5 ("Cantidad exacta de goles del líder goleador") de todos los puntos donde estaba referenciada, recalcular la puntuación de todos los pronósticos evaluados para restar los puntos obtenidos bajo esa regla, y corregir el frontend para que siempre recalcule con el motor actualizado.
+
+**Archivos modificados:**
+
+| Archivo | Cambio |
+|---------|--------|
+| `src/lib/scoring.ts` | Regla #5 eliminada del motor. `pointsScorersQuantity` preservado como 0 para compat histórica |
+| `scripts/lib/score-utils.js` | Lógica de Regla #5 eliminada de `calculateScore()` y del objeto de retorno |
+| `src/app/Footer.tsx` | Quitada línea "Goles del líder goleador: 2 puntos" |
+| `src/app/page.tsx` | Quitada tarjeta de regla del landing |
+| `src/data/officialEvaluatedPredictions.json` | 13 pronósticos recalibrados, -26 pts totales de Regla #5 |
+| `public/data/officialEvaluatedPredictions.json` | Sincronización dual |
+| `scripts/verify-logic.js` | Tests actualizados: 57 checks, Regla #5 como eliminada |
+| `scripts/recalcular-puntos.js` | Script de recálculo retroactivo creado |
+| `src/app/mis-pronosticos/page.tsx` | `earnedPoints` siempre se recalcula con `calculateScore()` (no usa `pred.points` legacy) |
+| `src/app/ranking/UserPredictionsModal.tsx` | Same: siempre recalcula puntos con motor corregido |
+| `README.md` | Documentación actualizada (4 reglas, 57 checks, 24 rutas) |
+
+**Números clave:**
+- Pronósticos afectados: 13
+- Puntos restados (Regla #5): 26
+- Tests de lógica: 57/57 ✅
+- TypeScript: 0 errores ✅
+- ESLint: 0 errores ✅
+- Build: 24 rutas estáticas ✅
+
+**Commits:**
+- `b98b341` feat(scoring): eliminar regla #5 de toda la web
+- `c18e978` fix(mis-pronosticos,ranking): recalcular siempre puntos con motor corregido
 
 ---
 

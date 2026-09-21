@@ -24,7 +24,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Siempre usar `normalizeMatchLeague` y `normalizeTeamName` para asegurar correspondencia con plantillas y torneos.
 - **Transparencia y Regla Anti-Copia (`UserPredictionsModal.tsx`)**: Al hacer clic en cualquier participante del ranking/podio, se despliega el modal con sus pronósticos. Los partidos abiertos (`diffMin > 1`) muestran `🔒 ? - ?` y ocultan goleadores hasta 1 minuto antes del inicio (`diffMin <= 1`).
 - **Carga Concurrente de Red**: Todas las consultas cliente (`loadData`, Supabase, ESPN) deben dispararse en paralelo con `Promise.all` para evitar cascadas secuenciales que afecten el First Contentful Paint y Total Blocking Time.
-- El selector de goleadores muestra la plantilla oficial completa (7.097 jugadores) y despliega el contador `[-] 1 [+]` únicamente al elegir un jugador (máx. 5 goleadores por equipo).
+- El selector de goleadores muestra la plantilla oficial completa (7.252 jugadores) y despliega el contador `[-] 1 [+]` únicamente al elegir un jugador (máx. 5 goleadores por equipo).
 - `<Link>` genera rutas relativas automáticamente; `<img>` usa rutas absolutas desde la raíz (`/logos/...`).
 
 ### Datos dinámicos (fetch desde public/data/)
