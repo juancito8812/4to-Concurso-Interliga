@@ -273,7 +273,11 @@ export async function getEspnScoreboard(leagueSlug: string): Promise<CupMatch[]>
 
   if (localMatches.length > 0) {
     localMatches.sort((a, b) => new Date(a.match_date).getTime() - new Date(b.match_date).getTime());
-    return localMatches.slice(0, 30).map((m) => {
+    // Tope amplio (la liga con más partidos por jugar tiene ~330): sin este corte,
+    // el límite viejo de 30 truncaba la fase liga de Champions a ~1,5 jornadas
+    // (126 partidos por jugar en 2026/27). La pestaña "Partidos" de /tabla renderiza
+    // la lista completa sin paginación.
+    return localMatches.slice(0, 500).map((m) => {
       const homeNorm = normalizeTeamName(m.home_team);
       const awayNorm = normalizeTeamName(m.away_team);
       const key = `${homeNorm.toLowerCase()}__${awayNorm.toLowerCase()}`;
@@ -299,7 +303,13 @@ export async function getEspnScoreboard(leagueSlug: string): Promise<CupMatch[]>
   const espnCode = leagueEspnCodes[leagueSlug];
   if (!espnCode) return [];
 
-  const url = `https://site.web.api.espn.com/apis/site/v2/sports/soccer/${espnCode}/scoreboard`;
+  // Temporada completa 2026/27: sin ?dates ESPN solo devuelve su ventana por defecto
+  // (días alrededor de hoy) y las copas quedarían vacías entre rondas; y con el
+  // límite por defecto (100) la fase liga de Champions se trunca (189 en 2026/27).
+  // OJO: el host actual (site.web.api.espn.com) ya NO acepta rangos YYYYMMDD-YYYYMMDD
+  // (devuelve 0 eventos); espera el año de temporada. Los eventos 2025/26 que arrastra
+  // se descartan con el filtro season.year de abajo.
+  const url = `https://site.web.api.espn.com/apis/site/v2/sports/soccer/${espnCode}/scoreboard?dates=2026&limit=500`;
 
   try {
     const res = await fetch(url);
