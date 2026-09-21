@@ -16,8 +16,6 @@ import { calculateScore, PredictedScorer, RealScorer } from "@/lib/scoring";
 import { getUserCupSurvivors, TournamentSurvivor } from "@/lib/survivor";
 import { loadData } from "@/lib/dataLoader";
 import { fetchLiveFinishedMatches } from "@/lib/espnResultsFetcher";
-import officialEvaluatedMatches from "@/data/officialEvaluatedMatches.json";
-import officialEvaluatedPredictions from "@/data/officialEvaluatedPredictions.json";
 
 export interface UserPredictionsModalProps {
   userId: string | null;
@@ -137,19 +135,7 @@ export default function UserPredictionsModal({
         // 1. Build matches map combining bundled + dynamic JSON + live ESPN + Supabase
         const matchesMap: Record<string, MatchItem> = {};
 
-        const allEvalMatches = [
-          ...(officialEvaluatedMatches as Array<{
-            id: string;
-            home_team?: string;
-            away_team?: string;
-            match_date?: string;
-            league?: string;
-            result_home: number;
-            result_away: number;
-            scorers?: RealScorer[];
-          }>),
-          ...(Array.isArray(dynEvalMatches) ? dynEvalMatches : []),
-        ];
+        const allEvalMatches = Array.isArray(dynEvalMatches) ? dynEvalMatches : [];
 
         allEvalMatches.forEach((m) => {
           matchesMap[m.id] = {
@@ -209,19 +195,7 @@ export default function UserPredictionsModal({
           pointsDetails?: string[];
         }> = [];
 
-        const allEvalPreds = [
-          ...(officialEvaluatedPredictions as Array<{
-            id: string;
-            user_id: string;
-            match_id: string;
-            home_score: number;
-            away_score: number;
-            points?: number | null;
-            pointsDetails?: string[];
-            scorers?: PredictedScorer[];
-          }>),
-          ...(Array.isArray(dynEvalPreds) ? dynEvalPreds : []),
-        ];
+        const allEvalPreds = Array.isArray(dynEvalPreds) ? dynEvalPreds : [];
 
         allEvalPreds.forEach((op) => {
           if (op.user_id === userId) {

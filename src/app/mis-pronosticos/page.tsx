@@ -24,8 +24,6 @@ import {
   KnockoutCupSlug,
   getTeamCups,
 } from "@/lib/survivor";
-import officialEvaluatedMatches from "@/data/officialEvaluatedMatches.json";
-import officialEvaluatedPredictions from "@/data/officialEvaluatedPredictions.json";
 import { loadData } from "@/lib/dataLoader";
 import { fetchLiveFinishedMatches } from "@/lib/espnResultsFetcher";
 
@@ -183,10 +181,7 @@ export default function MisPronosticosPage() {
         }
 
         // Merge official evaluated predictions for user if any
-        const allEvalPreds = [
-          ...(officialEvaluatedPredictions as Array<{ id: string; user_id: string; match_id: string; home_score: number; away_score: number; scorers?: ScorerInfo[] }>),
-          ...(Array.isArray(dynEvalPreds) ? dynEvalPreds : []),
-        ];
+        const allEvalPreds = Array.isArray(dynEvalPreds) ? dynEvalPreds : [];
 
         allEvalPreds.forEach((op) => {
           if (op.user_id === user.id && !predsData.some((p) => p.match_id === op.match_id)) {
@@ -253,10 +248,7 @@ export default function MisPronosticosPage() {
         const matchesMap: Record<string, MatchData> = {};
         
         // 1. Populate from official evaluated matches first
-        const allEvalMatches = [
-          ...(officialEvaluatedMatches as Array<{ id: string; home_team: string; away_team: string; match_date: string; league: string; result_home: number; result_away: number; scorers?: Array<{ player_name: string; goals: number; team?: string }> }>),
-          ...(Array.isArray(dynEvalMatches) ? dynEvalMatches : []),
-        ];
+        const allEvalMatches = Array.isArray(dynEvalMatches) ? dynEvalMatches : [];
 
         allEvalMatches.forEach((m) => {
           matchesMap[m.id] = {

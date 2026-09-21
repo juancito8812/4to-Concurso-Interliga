@@ -1,16 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useEffect, useState, useMemo } from "react";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/contexts/AuthContext";
 import { calculateScore, PredictedScorer, RealScorer } from "@/lib/scoring";
 import { normalizeTeamName, matchIdToUuid } from "@/lib/leagueConfig";
-import officialEvaluatedMatches from "@/data/officialEvaluatedMatches.json";
-import officialEvaluatedPredictions from "@/data/officialEvaluatedPredictions.json";
 import { loadData } from "@/lib/dataLoader";
 import { fetchLiveFinishedMatches } from "@/lib/espnResultsFetcher";
-import UserPredictionsModal from "./UserPredictionsModal";
+const UserPredictionsModal = dynamic(() => import("./UserPredictionsModal"), {
+  ssr: false,
+  loading: () => null,
+});
 
 interface RankingEntry {
   user_id: string;
@@ -155,13 +157,10 @@ export default function RankingPage() {
           });
         }
 
-        // Load matches map combining bundled + dynamic evaluated + live ESPN + Supabase
+        // Load matches map combining dynamic evaluated + live ESPN + Supabase
         const matchesMap: Record<string, MatchRow> = {};
-        
-        const allEvalMatches = [
-          ...(officialEvaluatedMatches as Array<{ id: string; home_team?: string; away_team?: string; result_home: number; result_away: number; scorers?: RealScorer[] }>),
-          ...(Array.isArray(dynEvalMatches) ? dynEvalMatches : []),
-        ];
+
+        const allEvalMatches = Array.isArray(dynEvalMatches) ? dynEvalMatches : [];
 
         allEvalMatches.forEach((m) => {
           matchesMap[m.id] = {
@@ -200,12 +199,8 @@ export default function RankingPage() {
           });
         }
 
-        // 4. Fetch predictions (combine Supabase + official evaluated predictions)
         const allPredictions: PredictionRow[] = [];
-        const allEvalPreds = [
-          ...(officialEvaluatedPredictions as Array<{ id: string; user_id: string; match_id: string; home_score: number; away_score: number; points?: number | null; scorers?: PredictedScorer[] }>),
-          ...(Array.isArray(dynEvalPreds) ? dynEvalPreds : []),
-        ];
+        const allEvalPreds = Array.isArray(dynEvalPreds) ? dynEvalPreds : [];
 
         allEvalPreds.forEach((p) => {
           const exists = allPredictions.some(
