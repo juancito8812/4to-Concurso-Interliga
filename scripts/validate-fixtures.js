@@ -78,6 +78,12 @@ const expectedCounts = {
   "Conference League": 108,
   "Copa Italia": 36,
   "DFB-Pokal": 48,
+  // Copas con rondas aún no publicadas por ESPN para 2026/27: el conteo esperado
+  // se actualiza a medida que la fuente publica rondas (igual que el resto).
+  // OJO: ?dates=2026 en ESPN = temporada 2025/26 (etiquetada por año de fin);
+  // el sync escanea día a día la ventana 20260801-20270531 (2026/27 real).
+  "FA Cup": 0,
+  "Copa del Rey": 0,
 };
 const byLeague = {};
 fixtures.forEach((f) => { byLeague[f.league] = (byLeague[f.league] || 0) + 1; });
@@ -162,71 +168,52 @@ async function main() {
   await sleep(6000);
   await checkLeague("Bundesliga", "2002");
 
-  console.log("\n=== 6. Cruce con ESPN (UCL + Copa Italia + UEL + UECL) ===");
-  // UCL
-  const uclApi = await fetchEspnEvents("uefa.champions", "20260901", "20270131");
-  const uclFile = fixtures.filter((f) => f.league === "Champions League");
-  let uclMatched = 0;
-  const uclFilePairs = new Set(uclFile.map((f) => `${f.match_date.slice(0, 10)}|${f.home_team}|${f.away_team}`));
-  for (const e of uclApi) {
-    const comp = e.competitions[0];
-    const h = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "home").team.displayName);
-    const a = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "away").team.displayName);
-    const key = `${e.date.slice(0, 10)}|${h}|${a}`;
-    if (uclFilePairs.has(key)) uclMatched++;
-  }
-  if (uclMatched !== uclApi.length) fail(`UCL: ${uclMatched}/${uclApi.length} coinciden con ESPN`);
-  else ok(`UCL: ${uclMatched}/${uclApi.length} partidos idénticos a ESPN (fecha+equipos)`);
+  console.log("\n=== 6. Cruce con ESPN (UCL + Copa Italia + UEL + UECL + FA Cup + CDR) ===");
+  // Cruce de una competición contra ESPN: cada partido de la API debe existir en el
+  // archivo con la misma fecha (UTC) y equipos normalizados. `filter` descarta
+  // eventos (ej. rondas con clubes no canónicos en copas con clubes pequeños).
+  async function checkEspnCompetition(espnSlug, leagueName, from, to, { filter, note = "" } = {}) {
+    let api = await fetchEspnEvents(espnSlug, from, to);
+    if (filter) api = api.filter(filter);
 
-  // Copa Italia
-  const coppaEvents = await fetchEspnEvents("ita.coppa_italia", "20260801", "20270531");
-  const coppaApi = coppaEvents.filter((e) => {
-    const comp = e.competitions[0];
-    const teams = comp.competitors.map((c) => c.team.displayName);
-    return !teams.some((t) => t.includes("TBD"));
+    const filePairs = new Set(
+      fixtures
+        .filter((f) => f.league === leagueName)
+        .map((f) => `${f.match_date.slice(0, 10)}|${f.home_team}|${f.away_team}`)
+    );
+    let matched = 0;
+    for (const e of api) {
+      const comp = e.competitions[0];
+      const h = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "home").team.displayName);
+      const a = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "away").team.displayName);
+      if (filePairs.has(`${e.date.slice(0, 10)}|${h}|${a}`)) matched++;
+    }
+
+    if (matched !== api.length) fail(`${leagueName}: ${matched}/${api.length} coinciden con ESPN${note}`);
+    else ok(`${leagueName}: ${matched}/${api.length} partidos idénticos a ESPN (fecha+equipos)${note}`);
+  }
+
+  await checkEspnCompetition("uefa.champions", "Champions League", "20260901", "20270131");
+  await checkEspnCompetition("ita.coppa_italia", "Copa Italia", "20260801", "20270531", {
+    filter: (e) => {
+      const teams = e.competitions[0].competitors.map((c) => c.team.displayName);
+      return !teams.some((t) => t.includes("TBD"));
+    },
   });
-  const coppaFile = fixtures.filter((f) => f.league === "Copa Italia");
-  let coppaMatched = 0;
-  const coppaFilePairs = new Set(coppaFile.map((f) => `${f.match_date.slice(0, 10)}|${f.home_team}|${f.away_team}`));
-  for (const e of coppaApi) {
-    const comp = e.competitions[0];
-    const h = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "home").team.displayName);
-    const a = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "away").team.displayName);
-    const key = `${e.date.slice(0, 10)}|${h}|${a}`;
-    if (coppaFilePairs.has(key)) coppaMatched++;
-  }
-  if (coppaMatched !== coppaApi.length) fail(`Copa Italia: ${coppaMatched}/${coppaApi.length} coinciden con ESPN`);
-  else ok(`Copa Italia: ${coppaMatched}/${coppaApi.length} partidos idénticos a ESPN`);
+  await checkEspnCompetition("uefa.europa", "Europa League", "20260901", "20270131");
+  await checkEspnCompetition("uefa.europa.conf", "Conference League", "20260901", "20270131");
 
-  // UEL
-  const uelApi = await fetchEspnEvents("uefa.europa", "20260901", "20270131");
-  const uelFile = fixtures.filter((f) => f.league === "Europa League");
-  let uelMatched = 0;
-  const uelFilePairs = new Set(uelFile.map((f) => `${f.match_date.slice(0, 10)}|${f.home_team}|${f.away_team}`));
-  for (const e of uelApi) {
-    const comp = e.competitions[0];
-    const h = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "home").team.displayName);
-    const a = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "away").team.displayName);
-    const key = `${e.date.slice(0, 10)}|${h}|${a}`;
-    if (uelFilePairs.has(key)) uelMatched++;
-  }
-  if (uelMatched !== uelApi.length) fail(`UEL: ${uelMatched}/${uelApi.length} coinciden con ESPN`);
-  else ok(`UEL: ${uelMatched}/${uelApi.length} partidos idénticos a ESPN`);
+  // Copas con rondas de clubes pequeños: comparar SOLO los partidos de la API entre
+  // equipos canónicos (mismo criterio que sync-official-fixtures.js al generar).
+  const canonicalTeams = new Set(teamData.canonicalDbTeams);
+  const onlyCanonical = (e) => {
+    const teams = e.competitions[0].competitors.map((c) => normalizeTeamName(c.team.displayName));
+    return teams.length === 2 && teams.every((t) => t && !t.includes("TBD") && canonicalTeams.has(t));
+  };
+  await checkEspnCompetition("eng.fa", "FA Cup", "20260801", "20270531", { filter: onlyCanonical, note: " (filtro canónico)" });
+  await checkEspnCompetition("esp.copa_del_rey", "Copa del Rey", "20260801", "20270531", { filter: onlyCanonical, note: " (filtro canónico)" });
 
-  // UECL
-  const ueclApi = await fetchEspnEvents("uefa.europa.conf", "20260901", "20270131");
-  const ueclFile = fixtures.filter((f) => f.league === "Conference League");
-  let ueclMatched = 0;
-  const ueclFilePairs = new Set(ueclFile.map((f) => `${f.match_date.slice(0, 10)}|${f.home_team}|${f.away_team}`));
-  for (const e of ueclApi) {
-    const comp = e.competitions[0];
-    const h = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "home").team.displayName);
-    const a = normalizeTeamName(comp.competitors.find((c) => c.homeAway === "away").team.displayName);
-    const key = `${e.date.slice(0, 10)}|${h}|${a}`;
-    if (ueclFilePairs.has(key)) ueclMatched++;
-  }
-  if (ueclMatched !== ueclApi.length) fail(`UECL: ${ueclMatched}/${ueclApi.length} coinciden con ESPN`);
-  else ok(`UECL: ${ueclMatched}/${ueclApi.length} partidos idénticos a ESPN`);
+  const uclFile = fixtures.filter((f) => f.league === "Champions League"); // usado en la sección 7
 
   console.log("\n=== 7. UCL: cada equipo juega 8 partidos (4 como local) ===");
   const uclPerTeam = {};
@@ -262,6 +249,19 @@ async function main() {
   const missingChamp = [...uclTeams].filter((t) => !(teamData.teamCups[t] || []).includes("champions"));
   if (missingChamp.length) fail(`Equipos UCL sin copa champions: ${missingChamp.join(", ")}`);
   else ok(`Todos los ${uclTeams.size} equipos UCL tienen la copa champions en teamCups`);
+
+  console.log("\n=== 10. src/data y public/data sincronizados ===");
+  // El sitio (GitHub Pages) sirve public/data; el código embebido usa src/data.
+  // Si difieren, el bundle y lo servido discrepan (drift de ejecuciones locales).
+  const crypto = require("crypto");
+  for (const f of ["officialEvaluatedMatches", "officialEvaluatedPredictions", "officialFixtures", "officialPlayers"]) {
+    const srcPath = path.join(__dirname, "..", "src/data", `${f}.json`);
+    const pubPath = path.join(__dirname, "..", "public/data", `${f}.json`);
+    const hash = (p) => crypto.createHash("md5").update(fs.readFileSync(p)).digest("hex");
+    if (!fs.existsSync(pubPath)) fail(`public/data/${f}.json no existe`);
+    else if (hash(srcPath) !== hash(pubPath)) fail(`public/data/${f}.json desincronizado con src/data (el sitio sirve datos viejos)`);
+    else ok(`${f}.json: idéntico en src/ y public/`);
+  }
 
   console.log(`\n${errors === 0 ? "🎉 VALIDACIÓN COMPLETA: 0 errores" : `🔴 ${errors} errores encontrados`}`);
   process.exit(errors === 0 ? 0 : 1);

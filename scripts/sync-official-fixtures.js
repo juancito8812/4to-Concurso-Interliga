@@ -5,8 +5,9 @@
 //  - Champions League fase liga: ESPN scoreboard (144 partidos reales)
 //  - Copa Italia: ESPN scoreboard (partidos reales + QF del propio ESPN)
 //  - DFB-Pokal: ESPN scoreboard (primera ronda 2026/27)
-//  - FA Cup, Copa del Rey: SIN fixtures 2026/27 aún (la competición no ha empezado)
-//  - Europa/Conference League: SIN partidos aún (sorteo del 28/8 no publicado)
+//  - FA Cup / Copa del Rey: ESPN scoreboard (solo partidos entre equipos canónicos:
+//    las rondas tempranas traen clubes no-league sin plantilla pronosticable)
+//  - Europa/Conference League: ESPN scoreboard (144/108, fase liga)
 // También regenera teamAliases.json: teamCups derivado de los datos reales y knockoutPairs.
 // Ejecución: node scripts/sync-official-fixtures.js
 
@@ -512,7 +513,30 @@ async function main() {
   all.push(...uecl);
   uecl.forEach((f) => (sourceOf[f.id] = "ESPN:UECL"));
 
-  // 3.8 Regenerar teamCups con los equipos reales (derivados de las fuentes)
+  // Filtro de equipos canónicos para las copas con clubes pequeños: solo se
+  // aceptan partidos donde AMBOS equipos están en canonicalDbTeams (los mismos
+  // que sincroniza sync-db.js a la tabla teams y que tienen plantilla en
+  // officialPlayers.json). Sin esto, el validador falla y el juego permitiría
+  // pronosticar/elegir clubes sin datos.
+  const canonicalTeams = new Set(aliasesData.canonicalDbTeams);
+  const keepCanonical = (list) =>
+    list.filter((f) => canonicalTeams.has(f.home_team) && canonicalTeams.has(f.away_team));
+
+  // 3.8 FA Cup (ESPN, 2026/27)
+  const facupAll = await fetchEspnFixtures("eng.fa", "FA Cup", "FAC", "20260801", "20270531");
+  const facup = keepCanonical(facupAll);
+  console.log(`✅ FA Cup: ${facup.length} partidos canónicos (${facupAll.length - facup.length} descartados con clubes no-league) (ESPN)`);
+  all.push(...facup);
+  facup.forEach((f) => (sourceOf[f.id] = "ESPN:FACup"));
+
+  // 3.9 Copa del Rey (ESPN, 2026/27)
+  const cdrAll = await fetchEspnFixtures("esp.copa_del_rey", "Copa del Rey", "CDR", "20260801", "20270531");
+  const cdr = keepCanonical(cdrAll);
+  console.log(`✅ Copa del Rey: ${cdr.length} partidos canónicos (${cdrAll.length - cdr.length} descartados con clubes no-league) (ESPN)`);
+  all.push(...cdr);
+  cdr.forEach((f) => (sourceOf[f.id] = "ESPN:CopaDelRey"));
+
+  // 3.10 Regenerar teamCups con los equipos reales (derivados de las fuentes)
   {
     const teamCups = {};
     const addCup = (team, cup) => {
@@ -539,6 +563,10 @@ async function main() {
     coppa.forEach((f) => { addCup(f.home_team, "coppaitalia"); addCup(f.away_team, "coppaitalia"); });
     // DFB-Pokal: participantes reales
     dfb.forEach((f) => { addCup(f.home_team, "dfbpokal"); addCup(f.away_team, "dfbpokal"); });
+    // FA Cup: participantes reales (ya filtrados a canónicos)
+    facup.forEach((f) => { addCup(f.home_team, "facup"); addCup(f.away_team, "facup"); });
+    // Copa del Rey: participantes reales (ya filtrados a canónicos)
+    cdr.forEach((f) => { addCup(f.home_team, "copadelrey"); addCup(f.away_team, "copadelrey"); });
     // UCL: equipos reales de ESPN
     const uclTeams = [...new Set(ucl.flatMap((f) => [f.home_team, f.away_team]))];
     uclTeams.forEach((t) => addCup(t, "champions"));
@@ -555,7 +583,7 @@ async function main() {
     console.log(`✅ teamCups regenerado: ${Object.keys(aliasesData.teamCups).length} equipos (${uclTeams.length} UCL, ${uelTeams.length} UEL, ${ueclTeams.length} UECL)`);
   }
 
-  // 3.10 Ordenar y escribir
+  // 3.11 Ordenar y escribir
   all.sort((a, b) => new Date(a.match_date) - new Date(b.match_date) || a.league.localeCompare(b.league));
   fs.writeFileSync(FIXTURES_PATH, JSON.stringify(all, null, 2) + "\n");
   console.log(`\n✅ officialFixtures.json escrito: ${all.length} fixtures`);

@@ -2750,17 +2750,6 @@
     "matchday": 1
   },
   {
-    "id": "00000000-0000-4000-8000-000000089dcd",
-    "home_team": "Levante",
-    "away_team": "Athletic Bilbao",
-    "match_date": "2026-09-16T19:30:00Z",
-    "league": "LaLiga",
-    "competition_code": "PD",
-    "home_logo": "https://crests.football-data.org/88.png",
-    "away_logo": "https://crests.football-data.org/77.png",
-    "matchday": 6
-  },
-  {
     "id": "00000000-0000-4000-8000-000000089dcf",
     "home_team": "Barcelona",
     "away_team": "Racing Santander",
@@ -4893,6 +4882,17 @@
     "home_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/166.png",
     "away_logo": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png",
     "matchday": 3
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dcd",
+    "home_team": "Levante",
+    "away_team": "Athletic Bilbao",
+    "match_date": "2026-10-21T18:00:00Z",
+    "league": "LaLiga",
+    "competition_code": "PD",
+    "home_logo": "https://crests.football-data.org/88.png",
+    "away_logo": "https://crests.football-data.org/77.png",
+    "matchday": 6
   },
   {
     "id": "00000000-0000-4000-8000-000017f4be02",
