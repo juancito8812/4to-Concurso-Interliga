@@ -40,6 +40,39 @@ export interface CupMatch {
   awayTeam: string;
   awayLogo: string;
   awayScore?: number;
+  /** Jornada agrupable (fixtures locales); undefined en el fallback en vivo de ESPN. */
+  matchday?: number | null;
+}
+
+export interface MatchGroup {
+  key: string;
+  label: string;
+  matches: CupMatch[];
+}
+
+/**
+ * Agrupa partidos para la pestaña "Partidos" de /tabla, ordenados por fecha.
+ * Con matchday (fixtures locales): un grupo por jornada ("Jornada N");
+ * sin matchday (fallback en vivo de ESPN): un grupo por día con su fecha.
+ */
+export function groupMatchesByDay(matches: CupMatch[]): MatchGroup[] {
+  return [...matches]
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .reduce<Array<{ key: string; label: string; matches: CupMatch[] }>>((groups, m) => {
+      const d = new Date(m.date);
+      const key = m.matchday != null ? `md-${m.matchday}` : `date-${d.toISOString().slice(0, 10)}`;
+      const label =
+        m.matchday != null
+          ? `Jornada ${m.matchday}`
+          : d.toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" });
+      const last = groups[groups.length - 1];
+      if (last && last.key === key) {
+        last.matches.push(m);
+      } else {
+        groups.push({ key, label, matches: [m] });
+      }
+      return groups;
+    }, []);
 }
 
 export const leagueEspnCodes: Record<string, string> = {
@@ -295,6 +328,7 @@ export async function getEspnScoreboard(leagueSlug: string): Promise<CupMatch[]>
         awayTeam: awayNorm,
         awayLogo: m.away_logo || "",
         awayScore: isCompleted ? evaluated.result_away : undefined,
+        matchday: m.matchday ?? null,
       };
     });
   }

@@ -7,6 +7,7 @@ import {
   getEspnStandings,
   getEspnScorers,
   getEspnScoreboard,
+  groupMatchesByDay,
   Standing,
   PlayerStat,
   CupMatch,
@@ -323,8 +324,17 @@ export default function TablaLigaClient() {
 
               {activeTab === "matches" && (
                 cupMatches.length > 0 ? (
-                  <div className="divide-y divide-border/50">
-                    {cupMatches.map((m) => (
+                  <div>
+                    {/* Agrupados por jornada cuando hay matchday (fixtures locales);
+                        por fecha cuando no (fallback en vivo de ESPN, copas knockout). */}
+                    {groupMatchesByDay(cupMatches).map((group) => (
+                        <section key={group.key}>
+                          <h3 className="sticky top-0 z-10 bg-navy-dark/95 backdrop-blur-sm px-4 sm:px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-gold border-b border-border/40">
+                            {group.label}
+                            <span className="ml-2 text-silver/60 font-normal normal-case">({group.matches.length})</span>
+                          </h3>
+                          <div className="divide-y divide-border/50">
+                            {group.matches.map((m) => (
                       <div key={m.id} className="p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 hover:bg-navy-card/50 transition-colors">
                         <div className="flex-1 w-full flex items-center justify-between sm:justify-start gap-4 sm:gap-6">
                           {/* Home team */}
@@ -386,7 +396,10 @@ export default function TablaLigaClient() {
                           </span>
                         </div>
                       </div>
-                    ))}
+                            ))}
+                          </div>
+                        </section>
+                      ))}
                   </div>
                 ) : (
                   <div className="p-8 sm:p-12 text-center">
