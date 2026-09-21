@@ -4084,17 +4084,6 @@
     "completed": true
   },
   {
-    "id": "00000000-0000-4000-8000-000000089dcd",
-    "home_team": "Levante",
-    "away_team": "Athletic Bilbao",
-    "match_date": "2026-09-16T19:30Z",
-    "league": "LaLiga",
-    "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
-    "completed": true
-  },
-  {
     "id": "00000000-0000-4000-8000-000017f4bec2",
     "home_team": "AC Milan",
     "away_team": "Benfica",

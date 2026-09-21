@@ -487,14 +487,22 @@ function resolveMatchId(evId, fixture) {
   return null;
 }
 
-function findFixture(officialFixtures, homeName, awayName) {
+// El emparejamiento por nombre exige también proximidad de fecha (±3 días): sin
+// este control, un aplazamiento/reprogramación hizo que un evento ESPN de una
+// fecha distinta se acreditara al fixture de football-data con otro id (bug
+// Levante-Athletic: 0-0 del 16/09 atribuido a un partido reprogramado al 21/10).
+function findFixture(officialFixtures, homeName, awayName, eventDate) {
   const hN = homeName.toLowerCase();
   const aN = awayName.toLowerCase();
+  const isNear = (f) => {
+    if (!eventDate || !f.match_date) return false;
+    return Math.abs(new Date(f.match_date) - new Date(eventDate)) <= 3 * 86400000;
+  };
   // Prefer exact normalized match
   let found = officialFixtures.find((f) => {
     const hF = normalizeTeamName(f.home_team).toLowerCase();
     const aF = normalizeTeamName(f.away_team).toLowerCase();
-    return hF === hN && aF === aN;
+    return hF === hN && aF === aN && isNear(f);
   });
   if (found) return found;
   // Fallback to bidirectional substring
@@ -503,7 +511,8 @@ function findFixture(officialFixtures, homeName, awayName) {
     const aF = normalizeTeamName(f.away_team).toLowerCase();
     return (
       (hF.includes(hN) || hN.includes(hF)) &&
-      (aF.includes(aN) || aN.includes(aF))
+      (aF.includes(aN) || aN.includes(aF)) &&
+      isNear(f)
     );
   });
 }
@@ -645,8 +654,10 @@ async function autoSync() {
           const homeName = normalizeTeamName(homeComp.team?.displayName || homeComp.team?.name || "");
           const awayName = normalizeTeamName(awayComp.team?.displayName || awayComp.team?.name || "");
 
-          const scoreHome = parseInt(homeComp.score || "0", 10);
-          const scoreAway = parseInt(awayComp.score || "0", 10);
+          // Score estricto: sin marcador real no hay resultado (evita fabricar 0-0
+          // de eventos sin score). Ver bug Levante-Athletic 2026-09-16.
+          const scoreHome = parseInt(homeComp.score ?? "", 10);
+          const scoreAway = parseInt(awayComp.score ?? "", 10);
 
           if (isNaN(scoreHome) || isNaN(scoreAway)) continue;
 
@@ -677,7 +688,7 @@ async function autoSync() {
           }));
 
           // Find match in official fixtures
-          const fixture = findFixture(officialFixtures, homeName, awayName);
+          const fixture = findFixture(officialFixtures, homeName, awayName, ev.date || comp.date);
           const matchId = resolveMatchId(ev.id, fixture);
           if (!matchId) continue;
 
