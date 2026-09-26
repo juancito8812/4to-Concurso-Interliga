@@ -5546,5 +5546,27 @@
     "result_away": 0,
     "scorers": [],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb24",
+    "home_team": "Ribadesella",
+    "away_team": "SD Noja",
+    "match_date": "2026-09-26T17:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb2c",
+    "home_team": "Atlético Pinatarense",
+    "away_team": "Atlético Melilla",
+    "match_date": "2026-09-26T18:00Z",
+    "league": "Copa del Rey",
+    "result_home": 8,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
   }
 ]
