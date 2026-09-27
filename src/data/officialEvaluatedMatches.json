@@ -5568,5 +5568,27 @@
     "result_away": 0,
     "scorers": [],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb1d",
+    "home_team": "Auriense Cented Academy",
+    "away_team": "CD San José",
+    "match_date": "2026-09-27T10:00Z",
+    "league": "Copa del Rey",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb2b",
+    "home_team": "Sporting Hortaleza",
+    "away_team": "Atlético Unión Güímar",
+    "match_date": "2026-09-27T10:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
   }
 ]
