@@ -5590,5 +5590,38 @@
     "result_away": 0,
     "scorers": [],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb22",
+    "home_team": "CF San Rafael",
+    "away_team": "AE Prat",
+    "match_date": "2026-09-27T14:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 5,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb2a",
+    "home_team": "CP Talayuela",
+    "away_team": "Sporting de Alcázar",
+    "match_date": "2026-09-27T15:30Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb2e",
+    "home_team": "Maracena",
+    "away_team": "Tavernes de la Valldigna",
+    "match_date": "2026-09-27T16:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [],
+    "completed": true
   }
 ]
