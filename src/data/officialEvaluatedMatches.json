@@ -5623,5 +5623,16 @@
     "result_away": 1,
     "scorers": [],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb1f",
+    "home_team": "CD Baztán",
+    "away_team": "Atlético Calatayud",
+    "match_date": "2026-10-03T15:30Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [],
+    "completed": true
   }
 ]
