@@ -5634,5 +5634,38 @@
     "result_away": 2,
     "scorers": [],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb1c",
+    "home_team": "CD Tedeón",
+    "away_team": "Anaitasuna",
+    "match_date": "2026-10-03T16:00Z",
+    "league": "Copa del Rey",
+    "result_home": 2,
+    "result_away": 5,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb28",
+    "home_team": "Ceuta 6 de Junio",
+    "away_team": "UB Lebrijana",
+    "match_date": "2026-10-03T16:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb27",
+    "home_team": "Atlético Melilla",
+    "away_team": "Atlético Pinatarense",
+    "match_date": "2026-10-03T18:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
   }
 ]
