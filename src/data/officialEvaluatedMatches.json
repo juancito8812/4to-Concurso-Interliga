@@ -5661,10 +5661,10 @@
     "id": "00000000-0000-4000-8000-000017f4cb27",
     "home_team": "Atlético Melilla",
     "away_team": "Atlético Pinatarense",
-    "match_date": "2026-10-03T18:00Z",
+    "match_date": "2026-10-04T16:00Z",
     "league": "Copa del Rey",
     "result_home": 0,
-    "result_away": 0,
+    "result_away": 3,
     "scorers": [],
     "completed": true
   },
@@ -5719,6 +5719,17 @@
     "match_date": "2026-10-04T15:30Z",
     "league": "Copa del Rey",
     "result_home": 1,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb29",
+    "home_team": "Tavernes de la Valldigna",
+    "away_team": "Maracena",
+    "match_date": "2026-10-04T16:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
     "result_away": 0,
     "scorers": [],
     "completed": true
