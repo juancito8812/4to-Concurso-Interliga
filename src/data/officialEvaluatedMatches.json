@@ -5667,5 +5667,60 @@
     "result_away": 0,
     "scorers": [],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb26",
+    "home_team": "Atlético Unión Güímar",
+    "away_team": "Sporting Hortaleza",
+    "match_date": "2026-10-04T11:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb20",
+    "home_team": "AE Prat",
+    "away_team": "CF San Rafael",
+    "match_date": "2026-10-04T14:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4ca2e",
+    "home_team": "CD San José",
+    "away_team": "Auriense Cented Academy",
+    "match_date": "2026-10-04T14:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb21",
+    "home_team": "SD Noja",
+    "away_team": "Ribadesella",
+    "match_date": "2026-10-04T14:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4cb25",
+    "home_team": "Sporting de Alcázar",
+    "away_team": "CP Talayuela",
+    "match_date": "2026-10-04T15:30Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
   }
 ]
