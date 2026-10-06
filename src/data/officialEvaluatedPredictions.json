@@ -1409,5 +1409,98 @@
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Christian Pulisic (+1 pt)"
     ]
+  },
+  {
+    "id": "cf883ad3-e034-4435-a687-c83b0416dd99",
+    "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
+    "display_name": "Asere1995",
+    "match_id": "00000000-0000-4000-8000-000000089ddc",
+    "home_score": 5,
+    "away_score": 1,
+    "created_at": "2026-10-06T01:47:16.004734+00:00",
+    "scorers": [
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jesse Bisiwu",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Karim Adeyemi",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Juanmi",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "64517b36-c374-4f38-aa97-fe14749ce21e",
+    "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
+    "display_name": "Asere1995",
+    "match_id": "00000000-0000-4000-8000-000017f4be2b",
+    "home_score": 0,
+    "away_score": 3,
+    "created_at": "2026-10-06T01:47:17.641778+00:00",
+    "scorers": [
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Karim Adeyemi",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "706b8180-45fe-4bf7-bf83-83d7f6d884fe",
+    "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
+    "display_name": "Asere1995",
+    "match_id": "00000000-0000-4000-8000-000000089de9",
+    "home_score": 1,
+    "away_score": 2,
+    "created_at": "2026-10-06T01:47:18.773316+00:00",
+    "scorers": [
+      {
+        "player_name": "Abdessamad Ezzalzouli",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Dani Olmo",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
   }
 ]
