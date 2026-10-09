@@ -5733,5 +5733,59 @@
     "result_away": 0,
     "scorers": [],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de2",
+    "home_team": "Málaga",
+    "away_team": "Espanyol",
+    "match_date": "2026-10-09T19:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Bryan Zaragoza",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Adrián Niño",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a23c",
+    "home_team": "Borussia Dortmund",
+    "away_team": "Werder Bremen",
+    "match_date": "2026-10-09T18:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Daniel Svensson",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Nico Schlotterbeck",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ludovit Reis",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Niclas Füllkrug",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
