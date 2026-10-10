@@ -5787,5 +5787,350 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dda",
+    "home_team": "Rayo Vallecano",
+    "away_team": "Athletic Bilbao",
+    "match_date": "2026-10-10T12:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089ddb",
+    "home_team": "Alavés",
+    "away_team": "Atlético Madrid",
+    "match_date": "2026-10-10T14:15Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Alejandro Grimaldo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Lucas Boyé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Cristian Romero",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dd1",
+    "home_team": "Arsenal",
+    "away_team": "Leeds United",
+    "match_date": "2026-10-10T11:30Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "James Justin",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Riccardo Calafiori",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Bruno Guimarães",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dd9",
+    "home_team": "Aston Villa",
+    "away_team": "Brentford",
+    "match_date": "2026-10-10T14:00Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Yehor Yarmoliuk",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Nicolas Jackson",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "John McGinn",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kristoffer Ajer",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dd3",
+    "home_team": "Chelsea",
+    "away_team": "Bournemouth",
+    "match_date": "2026-10-10T14:00Z",
+    "league": "Premier League",
+    "result_home": 5,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Jordan Henderson",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Morgan Rogers",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "João Pedro",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Evanilson",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dd7",
+    "home_team": "Ipswich Town",
+    "away_team": "Fulham",
+    "match_date": "2026-10-10T14:00Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Ryan Sessegnon",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Abdoul Ouattara",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Dara O'Shea",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dd0",
+    "home_team": "Sunderland",
+    "away_team": "Brighton",
+    "match_date": "2026-10-10T14:00Z",
+    "league": "Premier League",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Maxim De Cuyper",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jaouen Hadjam",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885fc",
+    "home_team": "Genoa",
+    "away_team": "Fiorentina",
+    "match_date": "2026-10-10T13:00Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Milutin Osmajic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Junior Messias",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a239",
+    "home_team": "Union Berlin",
+    "away_team": "SV 07 Elversberg",
+    "match_date": "2026-10-10T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Livan Burcu",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a23b",
+    "home_team": "Augsburg",
+    "away_team": "Bayern Munich",
+    "match_date": "2026-10-10T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Robin Fellhauer",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ismael Saibari",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Rodrigo Ribeiro",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Nathaniel Brown",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a234",
+    "home_team": "Mainz",
+    "away_team": "Bayer Leverkusen",
+    "match_date": "2026-10-10T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 3,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Robert Andrich",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Patrik Schick",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Anthony Caci",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Jarell Quansah",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Moussa Diaby",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Benedict Hollerbach",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a235",
+    "home_team": "SC Paderborn 07",
+    "away_team": "Stuttgart",
+    "match_date": "2026-10-10T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Jeff Chabot",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Chris Führich",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a23a",
+    "home_team": "Hoffenheim",
+    "away_team": "Hamburger SV",
+    "match_date": "2026-10-10T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Yussuf Poulsen",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Bambasé Conté",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Terem Moffi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Miro Muheim",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]

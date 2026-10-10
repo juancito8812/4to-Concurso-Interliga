@@ -815,7 +815,12 @@
     "home_score": 2,
     "away_score": 0,
     "scorers": [],
-    "created_at": "2026-09-11T20:32:26.117416+00:00"
+    "created_at": "2026-09-11T20:32:26.117416+00:00",
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)"
+    ]
   },
   {
     "id": "095bc25d-a804-4720-97b3-1d442113ec65",
@@ -1055,7 +1060,11 @@
         "team": "away"
       }
     ],
-    "created_at": "2026-09-13T17:30:37.08187+00:00"
+    "created_at": "2026-09-13T17:30:37.08187+00:00",
+    "points": 1,
+    "pointsDetails": [
+      "Goleador acertado: Ismael Saibari (+1 pt)"
+    ]
   },
   {
     "id": "9e97acec-a165-4241-95e0-0d27146c33ed",
@@ -1519,6 +1528,63 @@
       },
       {
         "player_name": "Bruno Fernandes",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
+  },
+  {
+    "id": "d29a1890-7ac0-4c91-9c78-2b02fa8156d3",
+    "user_id": "266e7258-c7f9-4159-9fa2-3281989af465",
+    "display_name": "Raudel",
+    "match_id": "00000000-0000-4000-8000-000000089dde",
+    "home_score": 3,
+    "away_score": 2,
+    "created_at": "2026-10-10T12:05:39.764366+00:00",
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ayoze Pérez",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Nicolas Pépé",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "963ac746-21bf-4e5c-a85a-2583fbda8b81",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000000089dde",
+    "home_score": 4,
+    "away_score": 1,
+    "created_at": "2026-10-10T14:05:27.800383+00:00",
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Vinicius Junior",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jude Bellingham",
         "goals": 1,
         "team": "home"
       }
