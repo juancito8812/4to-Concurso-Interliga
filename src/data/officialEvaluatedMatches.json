@@ -6132,5 +6132,152 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089ddc",
+    "home_team": "Barcelona",
+    "away_team": "Getafe",
+    "match_date": "2026-10-10T16:30Z",
+    "league": "LaLiga",
+    "result_home": 3,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gabriel Jesus",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jules Koundé",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dde",
+    "home_team": "Real Madrid",
+    "away_team": "Villarreal",
+    "match_date": "2026-10-10T19:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Yan Diomande",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dd8",
+    "home_team": "Manchester United",
+    "away_team": "Tottenham",
+    "match_date": "2026-10-10T16:30Z",
+    "league": "Premier League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Bryan Mbeumo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Dominic Solanke",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f6",
+    "home_team": "Inter Milan",
+    "away_team": "Parma",
+    "match_date": "2026-10-10T16:00Z",
+    "league": "Serie A",
+    "result_home": 3,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Petar Sucic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Hakan Çalhanoglu",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Marcus Thuram",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885fa",
+    "home_team": "Napoli",
+    "away_team": "Frosinone",
+    "match_date": "2026-10-10T18:45Z",
+    "league": "Serie A",
+    "result_home": 3,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Kevin De Bruyne",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Noa Lang",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a237",
+    "home_team": "RB Leipzig",
+    "away_team": "Eintracht Frankfurt",
+    "match_date": "2026-10-10T16:30Z",
+    "league": "Bundesliga",
+    "result_home": 6,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Ezechiel Banzuzi",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Christopher Nkunku",
+        "goals": 3,
+        "team": "home"
+      },
+      {
+        "player_name": "Antonio Nusa",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Tidiam Gomis",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
