@@ -5672,10 +5672,10 @@
     "id": "00000000-0000-4000-8000-000017f4cb26",
     "home_team": "Atlético Unión Güímar",
     "away_team": "Sporting Hortaleza",
-    "match_date": "2026-10-04T11:00Z",
+    "match_date": "2026-10-11T11:00Z",
     "league": "Copa del Rey",
-    "result_home": 0,
-    "result_away": 0,
+    "result_home": 3,
+    "result_away": 3,
     "scorers": [],
     "completed": true
   },
@@ -6274,6 +6274,178 @@
       },
       {
         "player_name": "Tidiam Gomis",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089ddf",
+    "home_team": "Elche",
+    "away_team": "Celta Vigo",
+    "match_date": "2026-10-11T12:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dd4",
+    "home_team": "Crystal Palace",
+    "away_team": "Nott. Forest",
+    "match_date": "2026-10-11T13:00Z",
+    "league": "Premier League",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Dan Ndoye",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Daichi Kamada",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jefferson Lerma",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Yéremy Pino",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dd2",
+    "home_team": "Hull City",
+    "away_team": "Everton",
+    "match_date": "2026-10-11T13:00Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Joe Gelhardt",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kiernan Dewsbury-Hall",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Thierno Barry",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mohamed Belloumi",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f9",
+    "home_team": "Como",
+    "away_team": "Roma",
+    "match_date": "2026-10-11T10:30Z",
+    "league": "Serie A",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f7",
+    "home_team": "Lazio",
+    "away_team": "Monza",
+    "match_date": "2026-10-11T13:00Z",
+    "league": "Serie A",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Nuno Tavares",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gustav Isaksen",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Saba Goglichidze",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Andrea Pinamonti",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f5",
+    "home_team": "Lecce",
+    "away_team": "Bologna",
+    "match_date": "2026-10-11T13:00Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Riccardo Orsolini",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Amar Ahmed",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jay Enem",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a236",
+    "home_team": "Köln",
+    "away_team": "Borussia Mönchengladbach",
+    "match_date": "2026-10-11T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Ísak Jóhannesson",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Joe Scally",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Said El Mala",
         "goals": 1,
         "team": "home"
       }
