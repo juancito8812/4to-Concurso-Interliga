@@ -5683,9 +5683,9 @@
     "id": "00000000-0000-4000-8000-000017f4cb20",
     "home_team": "AE Prat",
     "away_team": "CF San Rafael",
-    "match_date": "2026-10-04T14:00Z",
+    "match_date": "2026-10-11T14:00Z",
     "league": "Copa del Rey",
-    "result_home": 0,
+    "result_home": 5,
     "result_away": 0,
     "scorers": [],
     "completed": true
@@ -6446,6 +6446,210 @@
       },
       {
         "player_name": "Said El Mala",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de3",
+    "home_team": "Real Sociedad",
+    "away_team": "Deportivo La Coruña",
+    "match_date": "2026-10-11T14:15Z",
+    "league": "LaLiga",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Jon Martín",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Arsen Zakharyan",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gonçalo Guedes",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Mario Soriano Carreno",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yeremay Hernández",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089ddd",
+    "home_team": "Real Betis",
+    "away_team": "Osasuna",
+    "match_date": "2026-10-11T16:30Z",
+    "league": "LaLiga",
+    "result_home": 5,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Isco",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Abde Ezzalzouli",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ante Budimir",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Raúl García",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "José Morante",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de1",
+    "home_team": "Racing Santander",
+    "away_team": "Valencia",
+    "match_date": "2026-10-11T19:00Z",
+    "league": "LaLiga",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Dani Raba",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yassir Zabiri",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Iván Martín",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "David Otorbi",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dd6",
+    "home_team": "Liverpool",
+    "away_team": "Manchester City",
+    "match_date": "2026-10-11T15:30Z",
+    "league": "Premier League",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Erling Haaland",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jérémy Doku",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Rayan Cherki",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f4",
+    "home_team": "Sassuolo",
+    "away_team": "AC Milan",
+    "match_date": "2026-10-11T16:00Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Adrien Rabiot",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Cas Odenthal",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f8",
+    "home_team": "Cagliari",
+    "away_team": "Juventus",
+    "match_date": "2026-10-11T18:45Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Daniel Maldini",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Randal Kolo Muani",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a238",
+    "home_team": "Freiburg",
+    "away_team": "Schalke 04",
+    "match_date": "2026-10-11T15:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Maximilian Eggestein",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kenan Karaman",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Keisuke Goto",
         "goals": 1,
         "team": "home"
       }
