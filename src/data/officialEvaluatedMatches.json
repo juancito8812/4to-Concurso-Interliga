@@ -6655,5 +6655,32 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f3",
+    "home_team": "Atalanta",
+    "away_team": "Venezia",
+    "match_date": "2026-10-12T16:30Z",
+    "league": "Serie A",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Franck Kessié",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Nikola Krstovic",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Antoine Hainaut",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
