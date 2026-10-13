@@ -5,6 +5,10 @@ on:
     # Runs every 2 hours automatically
     - cron: "0 */2 * * *"
   workflow_dispatch:
+  # [temporal] disparo manual por push (se revierte enseguida)
+  push:
+    paths:
+      - ".github/cron-trigger.txt"
 
 permissions:
   contents: write
