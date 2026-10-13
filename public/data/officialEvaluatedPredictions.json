@@ -1189,6 +1189,11 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Bukayo Saka (+1 pt)"
     ]
   },
   {
@@ -1225,6 +1230,11 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 2,
+    "pointsDetails": [
+      "Goleador acertado: Harry Kane (+1 pt)",
+      "Goleador acertado: Luis Díaz (+1 pt)"
     ]
   },
   {
@@ -1499,6 +1509,12 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Anthony Gordon (+1 pt)",
+      "Goleador acertado: Fermín López (+1 pt)"
     ]
   },
   {
@@ -1688,6 +1704,12 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Anthony Gordon (+1 pt)"
     ]
   }
 ]

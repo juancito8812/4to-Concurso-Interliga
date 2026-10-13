@@ -6873,5 +6873,216 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be19",
+    "espn_id": "401915417",
+    "home_team": "Arsenal",
+    "away_team": "Lille",
+    "match_date": "2026-10-13T19:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Jurriën Timber",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Eberechi Eze",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Bukayo Saka",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be14",
+    "espn_id": "401915412",
+    "home_team": "Atlético Madrid",
+    "away_team": "Manchester United",
+    "match_date": "2026-10-13T19:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Pablo Barrios",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ademola Lookman",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be2b",
+    "espn_id": "401915435",
+    "home_team": "Galatasaray SK",
+    "away_team": "Barcelona",
+    "match_date": "2026-10-13T19:00Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Alexey Batrakov",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "João Cancelo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Karim Adeyemi",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be15",
+    "espn_id": "401915413",
+    "home_team": "Inter Milan",
+    "away_team": "Club Brujas",
+    "match_date": "2026-10-13T19:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Nicolo Tresoldi",
+        "goals": 3,
+        "team": "away"
+      },
+      {
+        "player_name": "Lautaro Martínez",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Romeo Vermant",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ange-Yoan Bonny",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be2a",
+    "espn_id": "401915434",
+    "home_team": "RB Leipzig",
+    "away_team": "PSV",
+    "match_date": "2026-10-13T19:00Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Brajan Gruda",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be13",
+    "espn_id": "401915411",
+    "home_team": "Viking FK",
+    "away_team": "Bayern Munich",
+    "match_date": "2026-10-13T19:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Gianni Stensness",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Peter Christiansen",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Harry Kane",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Luis Díaz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Herman Haugen",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be12",
+    "espn_id": "401915410",
+    "home_team": "Villarreal",
+    "away_team": "Napoli",
+    "match_date": "2026-10-13T19:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Amir Rrahmani",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Georges Mikautadze",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Santiago Mouriño",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Tani Oluwaseyi",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
