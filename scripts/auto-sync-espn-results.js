@@ -374,7 +374,7 @@ async function evaluateSurvivors(finishedMatches) {
 
         if (p.home_score === p.away_score) continue;
         if (match.result_home === match.result_away) {
-          const penWinner = await resolvePenaltyWinner(match.id, getEspnSlug(match.league));
+          const penWinner = await resolvePenaltyWinner(match.espn_id || match.id, getEspnSlug(match.league));
           if (!penWinner) continue;
           match._penaltyWinner = penWinner;
         }
@@ -694,6 +694,9 @@ async function autoSync() {
 
           const matchObj = {
             id: matchId,
+            // id real del evento ESPN: necesario para resolver el ganador por penales
+            // en cruces KO empatados (el UUID determinístico no sirve para la API).
+            espn_id: ev.id || null,
             home_team: homeName,
             away_team: awayName,
             match_date: ev.date || comp.date || new Date().toISOString(),

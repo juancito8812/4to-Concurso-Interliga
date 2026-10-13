@@ -358,7 +358,10 @@ export default function RankingPage() {
               }
             }
 
-            let pts = p.points ?? null;
+            // El ranking NUNCA confía en `points` almacenado: se recalcula siempre con
+            // el motor oficial (defensa en profundidad; la columna points ahora solo la
+            // escribe el servidor, ver migración de endurecimiento 2026-10-13).
+            let pts = 0;
 
             if (match && match.result_home !== null && match.result_away !== null) {
               const breakdown = calculateScore(
@@ -382,12 +385,10 @@ export default function RankingPage() {
               }
               userStats[p.user_id].scorer_hits += breakdown.scorersNameHits;
 
-              if (pts === null) {
-                pts = breakdown.totalPoints;
-              }
+              pts = breakdown.totalPoints;
             }
 
-            userStats[p.user_id].total_points += pts || 0;
+            userStats[p.user_id].total_points += pts;
           });
         }
 

@@ -135,8 +135,10 @@ export async function fetchLiveFinishedMatches(): Promise<EvaluatedMatchResult[]
               const homeName = normalizeTeamName(homeComp.team?.displayName || homeComp.team?.name || "");
               const awayName = normalizeTeamName(awayComp.team?.displayName || awayComp.team?.name || "");
 
-              const scoreHome = parseInt(homeComp.score || "0", 10);
-              const scoreAway = parseInt(awayComp.score || "0", 10);
+              // Marcador estricto: sin score real no hay resultado (no fabricar 0-0).
+              // Misma regla que scripts/auto-sync-espn-results.js.
+              const scoreHome = parseInt(homeComp.score ?? "", 10);
+              const scoreAway = parseInt(awayComp.score ?? "", 10);
 
               if (isNaN(scoreHome) || isNaN(scoreAway)) continue;
 

@@ -104,6 +104,32 @@ BEGIN
 END $$;
 
 \echo ''
+\echo '--- VULN-001b: la columna points del propio usuario (partido ABIERTO) ---'
+
+DO $$
+DECLARE v_id uuid;
+BEGIN
+  SELECT id INTO v_id FROM public.predictions
+   WHERE user_id = '11111111-1111-4111-8111-111111111111'
+     AND match_id = '33333333-3333-4333-8333-333333333333' LIMIT 1;
+
+  BEGIN
+    UPDATE public.predictions SET points = 99 WHERE id = v_id;
+    RAISE NOTICE '❌ VULN-001b UPDATE points en partido ABIERTO: PERMITIDO (vulnerable)';
+  EXCEPTION WHEN raise_exception THEN
+    RAISE NOTICE '✅ VULN-001b UPDATE points en partido ABIERTO: bloqueado por trigger';
+  END;
+
+  BEGIN
+    INSERT INTO public.predictions (user_id, match_id, home_score, away_score, points)
+    VALUES ('11111111-1111-4111-8111-111111111111', '55555555-5555-4555-8555-555555555555', 1, 0, 50);
+    RAISE NOTICE '❌ VULN-001b INSERT con points pre-asignado: PERMITIDO (vulnerable)';
+  EXCEPTION WHEN raise_exception THEN
+    RAISE NOTICE '✅ VULN-001b INSERT con points pre-asignado: bloqueado por trigger';
+  END;
+END $$;
+
+\echo ''
 \echo '--- VULN-001 (control): partido sin horario (00:00Z) abierto durante su jornada ---'
 
 DO $$

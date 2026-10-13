@@ -182,7 +182,7 @@ async function main() {
   const ev = JSON.parse(fs.readFileSync(evPath, "utf8"));
   let evChanged = 0;
   ev.forEach((m) => {
-    const newId = pairs.get(`${m.home_team}|${m.away_team}`);
+    const newId = pairs.get(`${m.league}|${m.home_team}|${m.away_team}`);
     if (newId && newId !== m.id) {
       m.id = newId;
       evChanged++;

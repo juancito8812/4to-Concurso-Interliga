@@ -596,3 +596,37 @@ $$;
 
 REVOKE ALL ON FUNCTION public.reset_participation() FROM PUBLIC, anon;
 GRANT EXECUTE ON FUNCTION public.reset_participation() TO authenticated;
+
+-- I. [2026-10-13] points/created_at: solo el servidor (service role) los escribe.
+-- Antes, cualquier dueño podía PATCH su pronóstico con `points` arbitrario mientras
+-- el partido estaba abierto, y el ranking confiaba en ese valor.
+-- OJO: NO usar SECURITY DEFINER (cambiaría current_user y anularía el chequeo).
+CREATE OR REPLACE FUNCTION public.enforce_points_service_only()
+RETURNS trigger
+LANGUAGE plpgsql
+SET search_path = public, pg_temp
+AS $$
+DECLARE v_role text;
+BEGIN
+  v_role := COALESCE((current_setting('request.jwt.claims', true)::json)->>'role','');
+  IF v_role = 'service_role' THEN RETURN NEW; END IF;
+  IF v_role = '' AND session_user IN ('postgres','supabase_admin','service_role') THEN RETURN NEW; END IF;
+
+  IF TG_OP = 'INSERT' THEN
+    IF NEW.points IS NOT NULL THEN RAISE EXCEPTION 'points solo lo asigna el servidor'; END IF;
+    IF NEW.created_at IS NOT NULL AND abs(extract(epoch from (now() - NEW.created_at))) > 1 THEN
+      RAISE EXCEPTION 'created_at solo lo asigna el servidor'; END IF;
+  ELSE
+    IF NEW.points IS DISTINCT FROM OLD.points THEN RAISE EXCEPTION 'points solo lo asigna el servidor'; END IF;
+    IF NEW.created_at IS DISTINCT FROM OLD.created_at THEN RAISE EXCEPTION 'created_at inmutable'; END IF;
+  END IF;
+  RETURN NEW;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.enforce_points_service_only() FROM PUBLIC, anon, authenticated;
+
+DROP TRIGGER IF EXISTS trg_points_server_only ON public.predictions;
+CREATE TRIGGER trg_points_server_only
+  BEFORE INSERT OR UPDATE ON public.predictions
+  FOR EACH ROW EXECUTE FUNCTION public.enforce_points_service_only();
