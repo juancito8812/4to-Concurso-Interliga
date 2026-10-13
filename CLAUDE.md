@@ -33,7 +33,7 @@ Contexto para agentes de código. Para documentación completa ver [README.md](.
 | `scripts/auto-sync-espn-results.js` | Cron: ESPN → evaluación → Supabase (service role key). Empareja por nombre ±3 días de fecha y exige score explícito |
 | `scripts/validate-fixtures.js` | Validador de calendario: cruces FD/ESPN, canónicos, anti-duplicados y sync src↔public data (md5) |
 | `scripts/sync-player-squads.js` | Cron mensual: sync plantillas oficiales post-mercado |
-|| `scripts/verify-logic.js` | 57 checks de lógica de negocio (incluye scoring, survivor, anti-farmeo) |
+|| `scripts/verify-logic.js` | 59 checks de lógica de negocio (incluye scoring, survivor, anti-farmeo) |
 || `scripts/recalcular-puntos.js` | Recalcula puntos de pronósticos evaluados descartando Regla #5 legacy |
 | `supabase/schema.sql` | DDL maestro: 8 tablas, RLS, triggers |
 
@@ -51,7 +51,7 @@ npm run build              # Build estático
 npm run dev                # Desarrollo local
 npm run lint               # ESLint
 npx tsc --noEmit           # Type-checking
-node scripts/verify-logic.js         # 57 checks de lógica
+node scripts/verify-logic.js         # 59 checks de lógica
 node scripts/validate-fixtures.js    # Validación de calendario + sync src↔public (0 errores)
 node scripts/test-survivor.js        # Tests superviviente (12/12)
 node scripts/test-group-matches.js   # Smoke tests de agrupación por jornada (9/9)
