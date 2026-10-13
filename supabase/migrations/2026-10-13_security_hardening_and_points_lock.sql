@@ -208,4 +208,6 @@ FOR EACH ROW EXECUTE FUNCTION public.enforce_points_service_only();
 REVOKE ALL ON FUNCTION public.delete_user_account() FROM PUBLIC, anon;
 GRANT EXECUTE ON FUNCTION public.delete_user_account() TO authenticated;
 REVOKE ALL ON FUNCTION public.handle_new_user() FROM PUBLIC, anon, authenticated;
-REVOKE EXECUTE ON FUNCTION public.rls_auto_enable() FROM anon, authenticated;
+-- rls_auto_enable es una función de EVENT TRIGGER; revocar EXECUTE de PUBLIC
+-- (anon/authenticated heredan de PUBLIC) silencia el advisor y no afecta al trigger.
+REVOKE EXECUTE ON FUNCTION public.rls_auto_enable() FROM PUBLIC, anon, authenticated;
