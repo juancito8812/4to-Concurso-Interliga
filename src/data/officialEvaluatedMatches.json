@@ -5670,6 +5670,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000017f4cb26",
+    "espn_id": "401918758",
     "home_team": "Atlético Unión Güímar",
     "away_team": "Sporting Hortaleza",
     "match_date": "2026-10-11T11:00Z",
@@ -5681,6 +5682,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000017f4cb20",
+    "espn_id": "401918752",
     "home_team": "AE Prat",
     "away_team": "CF San Rafael",
     "match_date": "2026-10-11T14:00Z",
@@ -5790,6 +5792,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000089dda",
+    "espn_id": "401882849",
     "home_team": "Rayo Vallecano",
     "away_team": "Athletic Bilbao",
     "match_date": "2026-10-10T12:00Z",
@@ -5801,6 +5804,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000089ddb",
+    "espn_id": "401882856",
     "home_team": "Alavés",
     "away_team": "Atlético Madrid",
     "match_date": "2026-10-10T14:15Z",
@@ -5828,6 +5832,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd1",
+    "espn_id": "401879268",
     "home_team": "Arsenal",
     "away_team": "Leeds United",
     "match_date": "2026-10-10T11:30Z",
@@ -5855,6 +5860,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd9",
+    "espn_id": "401878776",
     "home_team": "Aston Villa",
     "away_team": "Brentford",
     "match_date": "2026-10-10T14:00Z",
@@ -5887,6 +5893,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd3",
+    "espn_id": "401878775",
     "home_team": "Chelsea",
     "away_team": "Bournemouth",
     "match_date": "2026-10-10T14:00Z",
@@ -5919,6 +5926,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd7",
+    "espn_id": "401879265",
     "home_team": "Ipswich Town",
     "away_team": "Fulham",
     "match_date": "2026-10-10T14:00Z",
@@ -5946,6 +5954,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd0",
+    "espn_id": "401878772",
     "home_team": "Sunderland",
     "away_team": "Brighton",
     "match_date": "2026-10-10T14:00Z",
@@ -5968,6 +5977,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-0000000885fc",
+    "espn_id": "401874947",
     "home_team": "Genoa",
     "away_team": "Fiorentina",
     "match_date": "2026-10-10T13:00Z",
@@ -5990,6 +6000,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-00000008a239",
+    "espn_id": "401884775",
     "home_team": "Union Berlin",
     "away_team": "SV 07 Elversberg",
     "match_date": "2026-10-10T13:30Z",
@@ -6007,6 +6018,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-00000008a23b",
+    "espn_id": "401884777",
     "home_team": "Augsburg",
     "away_team": "Bayern Munich",
     "match_date": "2026-10-10T13:30Z",
@@ -6039,6 +6051,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-00000008a234",
+    "espn_id": "401884776",
     "home_team": "Mainz",
     "away_team": "Bayer Leverkusen",
     "match_date": "2026-10-10T13:30Z",
@@ -6081,6 +6094,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-00000008a235",
+    "espn_id": "401884773",
     "home_team": "SC Paderborn 07",
     "away_team": "Stuttgart",
     "match_date": "2026-10-10T13:30Z",
@@ -6103,6 +6117,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-00000008a23a",
+    "espn_id": "401884779",
     "home_team": "Hoffenheim",
     "away_team": "Hamburger SV",
     "match_date": "2026-10-10T13:30Z",
@@ -6135,6 +6150,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000089ddc",
+    "espn_id": "401882853",
     "home_team": "Barcelona",
     "away_team": "Getafe",
     "match_date": "2026-10-10T16:30Z",
@@ -6162,6 +6178,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000089dde",
+    "espn_id": "401882848",
     "home_team": "Real Madrid",
     "away_team": "Villarreal",
     "match_date": "2026-10-10T19:00Z",
@@ -6179,6 +6196,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd8",
+    "espn_id": "401878773",
     "home_team": "Manchester United",
     "away_team": "Tottenham",
     "match_date": "2026-10-10T16:30Z",
@@ -6201,6 +6219,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-0000000885f6",
+    "espn_id": "401875021",
     "home_team": "Inter Milan",
     "away_team": "Parma",
     "match_date": "2026-10-10T16:00Z",
@@ -6228,6 +6247,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-0000000885fa",
+    "espn_id": "401874754",
     "home_team": "Napoli",
     "away_team": "Frosinone",
     "match_date": "2026-10-10T18:45Z",
@@ -6250,6 +6270,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-00000008a237",
+    "espn_id": "401884780",
     "home_team": "RB Leipzig",
     "away_team": "Eintracht Frankfurt",
     "match_date": "2026-10-10T16:30Z",
@@ -6282,6 +6303,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000089ddf",
+    "espn_id": "401882854",
     "home_team": "Elche",
     "away_team": "Celta Vigo",
     "match_date": "2026-10-11T12:00Z",
@@ -6293,6 +6315,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd4",
+    "espn_id": "401879266",
     "home_team": "Crystal Palace",
     "away_team": "Nott. Forest",
     "match_date": "2026-10-11T13:00Z",
@@ -6325,6 +6348,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd2",
+    "espn_id": "401878774",
     "home_team": "Hull City",
     "away_team": "Everton",
     "match_date": "2026-10-11T13:00Z",
@@ -6357,6 +6381,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-0000000885f9",
+    "espn_id": "401874940",
     "home_team": "Como",
     "away_team": "Roma",
     "match_date": "2026-10-11T10:30Z",
@@ -6368,6 +6393,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-0000000885f7",
+    "espn_id": "401874951",
     "home_team": "Lazio",
     "away_team": "Monza",
     "match_date": "2026-10-11T13:00Z",
@@ -6400,6 +6426,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-0000000885f5",
+    "espn_id": "401874776",
     "home_team": "Lecce",
     "away_team": "Bologna",
     "match_date": "2026-10-11T13:00Z",
@@ -6427,6 +6454,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-00000008a236",
+    "espn_id": "401884774",
     "home_team": "Köln",
     "away_team": "Borussia Mönchengladbach",
     "match_date": "2026-10-11T13:30Z",
@@ -6454,6 +6482,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000089de3",
+    "espn_id": "401882847",
     "home_team": "Real Sociedad",
     "away_team": "Deportivo La Coruña",
     "match_date": "2026-10-11T14:15Z",
@@ -6491,6 +6520,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000089ddd",
+    "espn_id": "401882855",
     "home_team": "Real Betis",
     "away_team": "Osasuna",
     "match_date": "2026-10-11T16:30Z",
@@ -6528,6 +6558,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000089de1",
+    "espn_id": "401882850",
     "home_team": "Racing Santander",
     "away_team": "Valencia",
     "match_date": "2026-10-11T19:00Z",
@@ -6560,6 +6591,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd6",
+    "espn_id": "401879264",
     "home_team": "Liverpool",
     "away_team": "Manchester City",
     "match_date": "2026-10-11T15:30Z",
@@ -6587,6 +6619,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-0000000885f4",
+    "espn_id": "401874789",
     "home_team": "Sassuolo",
     "away_team": "AC Milan",
     "match_date": "2026-10-11T16:00Z",
@@ -6609,6 +6642,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-0000000885f8",
+    "espn_id": "401874764",
     "home_team": "Cagliari",
     "away_team": "Juventus",
     "match_date": "2026-10-11T18:45Z",
@@ -6631,6 +6665,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-00000008a238",
+    "espn_id": "401884778",
     "home_team": "Freiburg",
     "away_team": "Schalke 04",
     "match_date": "2026-10-11T15:30Z",
@@ -6658,6 +6693,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-0000000885f3",
+    "espn_id": "401875005",
     "home_team": "Atalanta",
     "away_team": "Venezia",
     "match_date": "2026-10-12T16:30Z",
@@ -6685,6 +6721,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000089de0",
+    "espn_id": "401882852",
     "home_team": "Levante",
     "away_team": "Sevilla",
     "match_date": "2026-10-12T19:00Z",
@@ -6727,6 +6764,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-000000088dd5",
+    "espn_id": "401879267",
     "home_team": "Coventry City",
     "away_team": "Newcastle",
     "match_date": "2026-10-12T19:00Z",
@@ -6764,6 +6802,7 @@
   },
   {
     "id": "00000000-0000-4000-8000-0000000885fb",
+    "espn_id": "401874763",
     "home_team": "Torino",
     "away_team": "Udinese",
     "match_date": "2026-10-12T18:45Z",
@@ -6783,6 +6822,52 @@
       },
       {
         "player_name": "Sandro Kulenovic",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be1a",
+    "espn_id": "401915418",
+    "home_team": "Lens",
+    "away_team": "Sporting Clube de Portugal",
+    "match_date": "2026-10-13T16:45Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Luis Suárez",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Issa Doumbia",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be2c",
+    "espn_id": "401915436",
+    "home_team": "SABAH FK",
+    "away_team": "SK Slavia Praha",
+    "match_date": "2026-10-13T16:45Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Kaheem Parris",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Joy-Lance Mickels",
         "goals": 1,
         "team": "home"
       }

@@ -497,11 +497,6 @@
         "player_name": "Fermín López",
         "goals": 1,
         "team": "away"
-      },
-      {
-        "player_name": "Raphinha",
-        "goals": 1,
-        "team": "away"
       }
     ],
     "points": 7,
@@ -653,11 +648,6 @@
       },
       {
         "player_name": "Fermín López",
-        "goals": 1,
-        "team": "home"
-      },
-      {
-        "player_name": "Raphinha",
         "goals": 1,
         "team": "home"
       },
