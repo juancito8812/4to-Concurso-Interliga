@@ -352,10 +352,16 @@ function calculateScore(prediction, real) {
   if (prediction.scorers && prediction.scorers.length > 0) {
     const creditedRealScorers = new Set();
     const creditedPredNames = new Set();
+    // Cap por EQUIPO (5 por equipo, hasta 10): mismo criterio que la UI y el
+    // trigger trg_enforce_max_scorers.
+    const teamSlots = { home: 0, away: 0 };
 
-    for (const predScorer of prediction.scorers.slice(0, 5)) {
+    for (const predScorer of prediction.scorers) {
+      const teamKey = predScorer.team === "away" ? "away" : "home";
       const predName = normalizePlayerName(predScorer.player_name);
       if (!predName || creditedPredNames.has(predName)) continue;
+      if (teamSlots[teamKey] >= 5) continue;
+      teamSlots[teamKey] += 1;
       creditedPredNames.add(predName);
 
       const matchedIdx = realScorersList.findIndex(

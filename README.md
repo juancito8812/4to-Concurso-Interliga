@@ -57,7 +57,7 @@
 || **Total Blocking Time (TBT)** | 20 ms | 0 ms |
 || **Cumulative Layout Shift (CLS)** | 0 | 0 |
 
-> **Última verificación de calidad:** 57/57 checks de lógica + 9/9 smoke tests de agrupación. Validador de calendario (10 secciones, incluye sincronización `src/data` ↔ `public/data`): 0 errores. Build: 24 rutas estáticas OK. TypeScript estricto 0 errores. ESLint 0 errores.
+> **Última verificación de calidad:** 59/59 checks de lógica + 9/9 smoke tests de agrupación. Validador de calendario (10 secciones, incluye sincronización `src/data` ↔ `public/data`): 0 errores. Build: 24 rutas estáticas OK. TypeScript estricto 0 errores. ESLint 0 errores.
 
 ---
 
@@ -181,7 +181,7 @@ scripts/
 ├── sync-player-squads.js           # Completa plantillas con rosters ESPN reales
 ├── enrich_official_squads.py       # Enriquecimiento y auditoría de plantillas 2026/27 (7.252 jugadores)
 ├── rebuild-eval-preds.js           # Reconstruye predicciones evaluadas desde Supabase
-├── verify-logic.js                 # 57 checks de lógica de negocio, scoring y seguridad RLS
+├── verify-logic.js                 # 59 checks de lógica de negocio, scoring y seguridad RLS
 ├── evaluate-matches.js             # Evaluador CLI de partidos y puntos
 ├── assign-points.js                # Asignación directa de pronósticos y puntos
 ├── test-survivor.js                # Suite de pruebas del sistema de superviviente (12/12)
@@ -257,7 +257,7 @@ public/
 | **+1** | Por cada autor de gol acertado (nombre) |
 || **---** | *Regla 5 eliminada el 20/09/2026* (cantidad exacta de goles del líder goleador) |
 
-> **Máximo posible por partido:** +3 (signo) + 2 (exacto) + 2 (goleadores) = **7 puntos**.
+> **Máximo posible por partido:** +3 (signo) + 2 (exacto) + 10 (5 goleadores por equipo) = **15 puntos** (teórico; limitado por los goleadores reales).
 
 > **Matching inteligente de goleadores:** El motor de scoring usa matching fonético (`arePlayersMatching`) que acepta variantes de escritura — iniciales (`N. Williams` = `Nico Williams`), acentos (`Gonçalo Ramos` = `Gonzalo Ramos`), y variaciones ortográficas (ç/z/s → s, b/v → b). Los nombres se normalizan antes de comparar.
 
@@ -364,7 +364,7 @@ Todas las tablas usan **Row Level Security**: lectura pública para ranking/cron
 | `delete_user_account` | RPC `SECURITY DEFINER` (solo `authenticated`) que purga en cascada y libera el email |
 | **Contraseñas** | Mínimo 8 caracteres + mayúscula + número + símbolo |
 
-### Reglas del concurso aplicadas en la BASE (migración 2026-09-16)
+### Reglas del concurso aplicadas en la BASE (migraciones 2026-09-16 y 2026-10-13)
 
 Las reglas del juego ya no viven solo en el cliente (evadibles llamando directo a la API
 de Supabase con la anon key pública + una sesión propia). Migración:
@@ -374,6 +374,7 @@ de Supabase con la anon key pública + una sesión propia). Migración:
 |-------|----------------|
 | Cierre de pronósticos 1 min antes del inicio | `is_match_open_for_prediction()` en las políticas de `predictions` y `prediction_scorers` (UPDATE fuera de ventana = 0 filas / error) |
 | Sin puntaje retroactivo | El cron descarta pronósticos con `created_at` posterior al cierre efectivo (`isPredictionOnTime`); los ya archivados con puntos quedan grandfathereados |
+| Puntos solo del servidor | Trigger `trg_points_server_only` (`enforce_points_service_only`): anon/authenticated no pueden escribir `points`/`created_at` (solo `service_role`). El ranking además siempre recalcula con `calculateScore()` |
 | Un jugador una sola vez por pronóstico y lado | Índice único `(prediction_id, player_name)` + trigger `trg_enforce_max_scorers` (máx. 5 por equipo) + dedupe en el motor de scoring |
 | Goles pronosticados coherentes | `CHECK (goals BETWEEN 1 AND 10)` |
 | Superviviente KO de solo lectura para el cliente | Políticas de `tournament_survivors` limitadas a alta inicial (club propio, vivo, sin historial) y borrado; la progresión la escribe solo el cron |
@@ -436,7 +437,7 @@ npx tsc --noEmit
 ### Verificaciones de Lógica y Calendario
 
 ```bash
-node scripts/verify-logic.js            # 57 checks de lógica de negocio
+node scripts/verify-logic.js            # 59 checks de lógica de negocio
 node scripts/validate-fixtures.js       # Validación cruzada del calendario contra fuentes reales
 node scripts/test-survivor.js           # Tests del sistema de superviviente (12/12)
 ```
@@ -488,7 +489,7 @@ El despliegue es completamente automático vía **GitHub Actions** al hacer push
 
 | Eje | Estado | Notas |
 |-----|--------|-------|
-|| **Verify logic** | ✅ | 57/57 checks, 13 pronósticos recalibrados (-26 pts Regla #5) |
+|| **Verify logic** | ✅ | 59/59 checks, 13 pronósticos recalibrados (-26 pts Regla #5) |
 || **Type checking** | ✅ | TypeScript estricto, 0 errores |
 || **Build** | ✅ | 24 páginas estáticas generadas |
 || **Lint** | ✅ | ESLint 0 errores |
@@ -517,7 +518,7 @@ El despliegue es completamente automático vía **GitHub Actions** al hacer push
 
 ```bash
 npx tsc --noEmit              # Type checking
-node scripts/verify-logic.js  # 57 checks de lógica (incluye scoring, survivor, anti-farmeo)
+node scripts/verify-logic.js  # 59 checks de lógica (incluye scoring, survivor, anti-farmeo)
 node scripts/test-survivor.js # 12/12 tests survivor
 npm run build                 # Build completo (24 rutas estáticas)
 ```
@@ -590,7 +591,7 @@ curl "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?date
 ### Verificación rápida de salud del proyecto
 
 ```bash
-node scripts/verify-logic.js              # 57 checks
+node scripts/verify-logic.js              # 59 checks
 node scripts/validate-fixtures.js         # 0 errores
 node scripts/test-survivor.js             # 12/12 PASS
 npx tsc --noEmit                          # Type-checking

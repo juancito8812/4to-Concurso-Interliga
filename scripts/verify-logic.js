@@ -288,5 +288,24 @@ test("Un goleador real no se acredita dos veces con dos nombres distintos", () =
   assert.equal(r.pointsScorersName, 1);
 });
 
+test("Cap de goleadores: 6 en el mismo equipo acredita solo 5", () => {
+  const names = ["Home1", "Home2", "Home3", "Home4", "Home5", "Home6"];
+  const r = calculateScore(
+    { home_score: 6, away_score: 0, scorers: names.map((n) => ({ player_name: n, goals: 1, team: "home" })) },
+    { result_home: 6, result_away: 0, scorers: names.map((n) => ({ player_name: n, goals: 1, team: "home" })) }
+  );
+  assert.equal(r.pointsScorersName, 5);
+});
+
+test("Cap de goleadores: 5 por equipo (5 local + 5 visita = 10 acreditados)", () => {
+  const home = ["Home1", "Home2", "Home3", "Home4", "Home5"].map((n) => ({ player_name: n, goals: 1, team: "home" }));
+  const away = ["Away1", "Away2", "Away3", "Away4", "Away5"].map((n) => ({ player_name: n, goals: 1, team: "away" }));
+  const r = calculateScore(
+    { home_score: 5, away_score: 5, scorers: [...home, ...away] },
+    { result_home: 5, result_away: 5, scorers: [...home, ...away] }
+  );
+  assert.equal(r.pointsScorersName, 10);
+});
+
 console.log(`\n${failed === 0 ? "🎉 TODA LA LÓGICA VERIFICADA" : `🔴 ${failed} fallos`} (${passed} checks)`);
 process.exit(failed === 0 ? 0 : 1);

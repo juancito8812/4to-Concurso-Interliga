@@ -235,7 +235,7 @@ export default function Home() {
                 </p>
                 <ul className="text-[11px] text-slate-200 space-y-1 mb-4 font-medium">
                   <li>• Seleccioná el marcador exacto de cada encuentro</li>
-                  <li>• Elegí hasta <span className="text-gold font-bold">5 goleadores</span> por partido</li>
+                  <li>• Elegí hasta <span className="text-gold font-bold">5 goleadores</span> por equipo</li>
                   <li>• Sumá puntos y competí por los primeros puestos</li>
                 </ul>
               </div>
@@ -268,7 +268,7 @@ export default function Home() {
           </div>
 
           <p className="text-silver text-xs sm:text-sm mb-6 sm:mb-10">
-            Cada acierto suma puntos. ¡Máximo <span className="text-gold font-bold">5 goleadores</span> por partido!
+            Cada acierto suma puntos. ¡Máximo <span className="text-gold font-bold">5 goleadores</span> por equipo!
           </p>
 
           <div className="flex gap-3 overflow-x-auto pb-2 sm:pb-0 sm:grid sm:grid-cols-3 md:grid-cols-5 sm:overflow-visible">
@@ -290,7 +290,7 @@ export default function Home() {
           <div className="mt-4 sm:mt-5 px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl bg-gold/10 border border-gold/20">
             <p className="text-[11px] sm:text-xs text-silver leading-relaxed">
               <span className="text-gold font-bold">Nota:</span>{" "}
-              si pronosticas varios goleadores, los puntos se multiplican a tu favor — máximo <span className="text-gold font-bold">5 jugadores</span> por partido.
+              si pronosticas varios goleadores, los puntos se multiplican a tu favor — máximo <span className="text-gold font-bold">5 jugadores</span> por equipo.
             </p>
           </div>
         </div>

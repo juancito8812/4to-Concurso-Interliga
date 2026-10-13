@@ -7,7 +7,7 @@
  * 3. Diferencia de 1 gol en el marcador: 1 punto (cuando no es exacto)
  * 4. Goleador acertado (nombre): 1 punto por cada goleador que anote
  *
- * Maximum achievable per prediction: 3 + 2 + 5 = 10 puntos
+ * Maximum achievable per prediction: 3 (signo) + 2 (exacto) + 10 (5 goleadores por equipo) = 15 puntos
  *
  * NOTA: pointsScorersQuantity preservado como 0 para compatibilidad con
  * registros históricos — la Regla #5 fue eliminada y no otorga puntos.
@@ -178,10 +178,16 @@ export function calculateScore(
   if (prediction.scorers && prediction.scorers.length > 0) {
     const creditedRealScorers = new Set<number>();
     const creditedPredNames = new Set<string>();
+    // Cap por EQUIPO (5 goleadores por equipo, hasta 10 por pronóstico): no un
+    // tope global. Debe coincidir con la UI y el trigger trg_enforce_max_scorers.
+    const teamSlots: Record<string, number> = { home: 0, away: 0 };
 
-    for (const predScorer of prediction.scorers.slice(0, 5)) {
+    for (const predScorer of prediction.scorers) {
+      const teamKey = predScorer.team === "away" ? "away" : "home";
       const predName = normalizePlayerName(predScorer.player_name);
       if (!predName || creditedPredNames.has(predName)) continue;
+      if (teamSlots[teamKey] >= 5) continue;
+      teamSlots[teamKey] += 1;
       creditedPredNames.add(predName);
 
       const matchedIdx = realScorersList.findIndex(
