@@ -375,6 +375,9 @@ de Supabase con la anon key pública + una sesión propia). Migración:
 | Cierre de pronósticos 1 min antes del inicio | `is_match_open_for_prediction()` en las políticas de `predictions` y `prediction_scorers` (UPDATE fuera de ventana = 0 filas / error) |
 | Sin puntaje retroactivo | El cron descarta pronósticos con `created_at` posterior al cierre efectivo (`isPredictionOnTime`); los ya archivados con puntos quedan grandfathereados |
 | Puntos solo del servidor | Trigger `trg_points_server_only` (`enforce_points_service_only`): anon/authenticated no pueden escribir `points`/`created_at` (solo `service_role`). El ranking además siempre recalcula con `calculateScore()` |
+| Solo partidos del propio club | `is_users_club_match()` en las políticas de `predictions`: el partido debe incluir al `profiles.team_id` del usuario |
+| Eliminado de copa no pronostica | `is_prediction_cup_allowed()`: bloquea KO de una copa donde el survivor está `ELIMINATED` |
+| Superviviente no revive | DELETE de `tournament_survivors` solo para filas `ALIVE` con `history = '[]'` |
 | Un jugador una sola vez por pronóstico y lado | Índice único `(prediction_id, player_name)` + trigger `trg_enforce_max_scorers` (máx. 5 por equipo) + dedupe en el motor de scoring |
 | Goles pronosticados coherentes | `CHECK (goals BETWEEN 1 AND 10)` |
 | Superviviente KO de solo lectura para el cliente | Políticas de `tournament_survivors` limitadas a alta inicial (club propio, vivo, sin historial) y borrado; la progresión la escribe solo el cron |

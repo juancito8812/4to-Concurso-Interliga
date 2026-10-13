@@ -19,6 +19,21 @@ INSERT INTO public.matches (id, home_team, away_team, match_date, league, result
   ('66666666-6666-4666-8666-666666666666', 'Real Madrid', 'Getafe',    ((now() - interval '1 day')::date), 'LaLiga', NULL, NULL)
 ON CONFLICT (id) DO NOTHING;
 
+-- [2026-10-13] Datos para probar elegibilidad de pronóstico:
+--  * partido de OTRO club (no debe poder pronosticarse)
+--  * cruce KO de copa en la que el usuario está ELIMINADO
+--  * partido del propio club (sí pronosticable)
+INSERT INTO public.matches (id, home_team, away_team, match_date, league, result_home, result_away) VALUES
+  ('77777777-7777-4777-8777-777777777777', 'Arsenal',    'Chelsea',     now() + interval '5 days', 'Premier League', NULL, NULL),
+  ('88888888-8888-4888-8888-888888888888', 'Real Madrid','Bayern Munich','2027-03-10T20:00:00Z',   'DFB-Pokal',      NULL, NULL),
+  ('99999999-9999-4999-8999-999999999999', 'Real Madrid','Villarreal',  now() + interval '6 days', 'LaLiga',         NULL, NULL)
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO public.tournament_survivors (user_id, tournament_slug, active_team_id, status, eliminated_at_round, history)
+SELECT '11111111-1111-4111-8111-111111111111', 'dfbpokal', t.id, 'ELIMINATED', 'Octavos de Final', '[]'::jsonb
+FROM public.teams t WHERE t.name = 'Real Madrid' LIMIT 1
+ON CONFLICT (user_id, tournament_slug) DO NOTHING;
+
 -- Pronóstico YA existente de un partido terminado (para probar que no se puede editar)
 INSERT INTO public.predictions (id, user_id, match_id, home_score, away_score, created_at)
 VALUES ('44444444-4444-4444-8444-444444444444',
@@ -297,6 +312,47 @@ BEGIN
 
   PERFORM set_config('request.jwt.claims',
     json_build_object('sub', '11111111-1111-4111-8111-111111111111', 'role', 'authenticated')::text, true);
+END $$;
+
+\echo ''
+\echo '--- [2026-10-13] Elegibilidad: club propio y no-KO si eliminado ---'
+
+DO $$
+DECLARE n int;
+BEGIN
+  -- A1: partido de OTRO club (Arsenal vs Chelsea)
+  BEGIN
+    INSERT INTO public.predictions (user_id, match_id, home_score, away_score)
+    VALUES ('11111111-1111-4111-8111-111111111111', '77777777-7777-4777-8777-777777777777', 1, 0);
+    RAISE NOTICE '❌ A1 pronóstico de otro club: PERMITIDO (vulnerable)';
+  EXCEPTION WHEN others THEN
+    RAISE NOTICE '✅ A1 pronóstico de otro club: bloqueado';
+  END;
+
+  -- A2: KO de una copa en la que está ELIMINATED
+  BEGIN
+    INSERT INTO public.predictions (user_id, match_id, home_score, away_score)
+    VALUES ('11111111-1111-4111-8111-111111111111', '88888888-8888-4888-8888-888888888888', 1, 0);
+    RAISE NOTICE '❌ A2 KO estando eliminado: PERMITIDO (vulnerable)';
+  EXCEPTION WHEN others THEN
+    RAISE NOTICE '✅ A2 KO estando eliminado: bloqueado';
+  END;
+
+  -- A3: partido del propio club, abierto
+  BEGIN
+    INSERT INTO public.predictions (user_id, match_id, home_score, away_score)
+    VALUES ('11111111-1111-4111-8111-111111111111', '99999999-9999-4999-8999-999999999999', 2, 1);
+    RAISE NOTICE '✅ A3 pronóstico del propio club abierto: permitido';
+  EXCEPTION WHEN others THEN
+    RAISE NOTICE '❌ A3: %', SQLERRM;
+  END;
+
+  -- C: borrar el superviviente eliminado (no debe poder "revivir")
+  DELETE FROM public.tournament_survivors
+   WHERE user_id = '11111111-1111-4111-8111-111111111111' AND tournament_slug = 'dfbpokal';
+  GET DIAGNOSTICS n = ROW_COUNT;
+  IF n = 0 THEN RAISE NOTICE '✅ C borrar survivor eliminado: bloqueado (0 filas)';
+  ELSE RAISE NOTICE '❌ C borrar survivor eliminado: % filas (vulnerable)', n; END IF;
 END $$;
 
 \echo ''

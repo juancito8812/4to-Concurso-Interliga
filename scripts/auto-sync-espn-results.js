@@ -359,7 +359,16 @@ async function evaluateSurvivors(finishedMatches) {
       const doneMatches = new Set(history.map((h) => h.match_id));
       let current = { activeTeamId: sur.active_team_id, activeName, status: "ALIVE", history, roundName: "Ronda KO" };
 
-      for (const p of predsByUser.get(sur.user_id) || []) {
+      // Procesar los cruces KO en ORDEN CRONOLÓGICO: el orden de llegada de
+      // PostgREST es arbitrario y avanzar rondas fuera de orden corrompería el
+      // estado del superviviente (heredar/eliminar en la ronda equivocada).
+      const userPreds = (predsByUser.get(sur.user_id) || []).slice().sort((a, b) => {
+        const da = finishedMap.get(a.match_id)?.match_date || "";
+        const db = finishedMap.get(b.match_id)?.match_date || "";
+        return new Date(da).getTime() - new Date(db).getTime();
+      });
+
+      for (const p of userPreds) {
         if (current.status !== "ALIVE") break;
 
         const match = finishedMap.get(p.match_id);
