@@ -28,11 +28,12 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
 2. Abrir el archivo [`supabase/schema.sql`](./supabase/schema.sql) de este repositorio.
 3. Copiar todo el contenido, pegarlo en el editor y hacer clic en **Run**.
 4. ✅ Esto creará automáticamente:
-   - Las 7 tablas (`teams`, `profiles`, `players`, `matches`, `predictions`, `prediction_scorers`, `tournament_survivors`).
-   - Los 17 índices de alta velocidad (incluyendo composite, parciales y FK).
-   - Las políticas RLS de lectura y escritura.
-   - La función y trigger de registro automático (`handle_new_user`).
-   - La función RPC de eliminación de cuenta (`delete_user_account`).
+   - Las **8 tablas** (`teams`, `profiles`, `players`, `matches`, `predictions`, `prediction_scorers`, `tournament_survivors`, `app_meta`).
+   - Los **18 índices** explícitos de alta velocidad (compuestos, parciales y FK) más las PK y restricciones únicas.
+   - Las **políticas RLS endurecidas**: propiedad + cierre de pronóstico (1 min) + elegibilidad por club/copa + `points` solo del servidor.
+   - **Funciones y triggers**: `handle_new_user` (registro automático), `enforce_team_lock`, `enforce_max_scorers_per_team`, `enforce_points_service_only`.
+   - **Funciones de elegibilidad**: `effective_kickoff`, `is_match_open_for_prediction`, `is_users_club_match`, `is_prediction_cup_allowed`, `match_cup_slug`, `is_ko_cup_match`.
+   - **RPCs (SECURITY DEFINER)**: `delete_user_account`, `reset_participation`.
    - La semilla inicial de clubes.
 
 > **Después de correr `schema.sql`** (y con la service role key disponible), ejecutar los scripts de sincronización para poblar los datos reales:
@@ -170,10 +171,29 @@ CREATE POLICY "Lectura pública de tournament_survivors"
   ON tournament_survivors FOR SELECT
   USING (true);
 
-CREATE POLICY "Usuarios administran su estado de torneo"
-  ON tournament_survivors FOR ALL
-  USING (auth.uid() = user_id)
-  WITH CHECK (auth.uid() = user_id);
+-- El cliente SOLO puede crear su fila inicial (su propio club, vivo, sin historial)
+-- y borrarla si sigue prístina. La progresión/transferencias/eliminación las escribe
+-- únicamente el cron con la service role key (bypass RLS).
+CREATE POLICY "Alta inicial de superviviente"
+  ON tournament_survivors FOR INSERT
+  WITH CHECK (
+    auth.uid() = user_id AND status = 'ALIVE' AND eliminated_at_round IS NULL
+    AND history = '[]'::jsonb
+    AND active_team_id = (SELECT team_id FROM profiles WHERE user_id = auth.uid())
+  );
+
+CREATE POLICY "Mantenimiento limitado del propio superviviente"
+  ON tournament_survivors FOR UPDATE
+  USING (auth.uid() = user_id AND status = 'ALIVE' AND history = '[]'::jsonb
+    AND active_team_id = (SELECT team_id FROM profiles WHERE user_id = auth.uid()))
+  WITH CHECK (auth.uid() = user_id AND status = 'ALIVE' AND eliminated_at_round IS NULL
+    AND history = '[]'::jsonb
+    AND active_team_id = (SELECT team_id FROM profiles WHERE user_id = auth.uid()));
+
+-- No se puede borrar una fila eliminada o con progreso (evita borrar+reinsertar para "revivir")
+CREATE POLICY "Borrar el propio superviviente"
+  ON tournament_survivors FOR DELETE
+  USING (auth.uid() = user_id AND status = 'ALIVE' AND history = '[]'::jsonb);
 ```
 
 #### Estructura del campo `history` (JSONB) en `tournament_survivors`:
@@ -191,9 +211,9 @@ El historial de transferencias almacena las camisetas heredadas al predecir y ac
 ```
 Módulo de evaluación pura y helpers en `src/lib/survivor.ts`:
 - `evaluateSurvivorProgression`: Función pura que computa si el participante se mantiene `ALIVE`, es eliminado a `ELIMINATED` o transfiere su camiseta (`transferred: true`).
-- `getUserCupSurvivors(userId)`: Obtiene los estados del participante en las 4 copas con JOIN a `teams(name, logo_url)`.
-- `setInitialCupSurvivor(userId, tournamentSlug, teamId)`: Inicializa el club representante.
-- `upsertCupSurvivor(survivor)`: Guarda progresiones y transferencias.
+- `getUserCupSurvivors(userId)`: Obtiene los estados del participante en las **7 copas** con JOIN a `teams(name, logo_url)`.
+- `setInitialCupSurvivor(userId, tournamentSlug, teamId)`: inicializa el club representante (lo usa el cliente al elegir club).
+- `upsertCupSurvivor(survivor)`: helper interno; **el cliente solo lo usa para el alta inicial** — la progresión la persiste el cron con la service role key.
 
 ---
 
@@ -203,20 +223,21 @@ Todas las tablas cuentan con **Row Level Security (RLS)** para proteger los dato
 
 1. **`profiles`:**
    - `SELECT`: Público (`USING (true)`) para que el Ranking muestre a todos los participantes.
-   - `INSERT` / `UPDATE`: Restringido al propio usuario (`auth.uid() = user_id`).
+   - `INSERT` / `UPDATE`: Restringido al propio usuario (`auth.uid() = user_id`). Cambiar `team_id` exige pasar por `reset_participation()` (trigger `trg_enforce_team_lock`).
 2. **`predictions`:**
    - `SELECT`: Público (`USING (true)`) para el cálculo de clasificaciones y puntos.
-   - `INSERT` / `UPDATE`: Restringido al propio usuario (`auth.uid() = user_id`).
+   - `INSERT` / `UPDATE`: Solo del propio usuario **y** solo si (a) el partido está abierto (`is_match_open_for_prediction`), (b) **es del club del usuario** (`is_users_club_match`) y (c) **el usuario no está eliminado de esa copa KO** (`is_prediction_cup_allowed`).
+   - `points` / `created_at`: los escribe **solo el servidor** (trigger `trg_points_server_only`).
 3. **`prediction_scorers`:**
    - `SELECT`: Público (`USING (true)`) para el ranking y el cron.
-   - `INSERT` / `UPDATE` / `DELETE`: Solo el dueño del pronóstico (política con `EXISTS` sobre `predictions` — IDOR fix).
+   - `INSERT` / `UPDATE` / `DELETE`: Solo el dueño del pronóstico (política con `EXISTS` sobre `predictions` — IDOR fix); INSERT/UPDATE además exigen partido abierto.
 4. **`teams`, `players`, `matches`:**
-   - `SELECT`: Público (`USING (true)`).
+   - `SELECT`: Público (`USING (true)`). Sin políticas de escritura → el cliente no puede modificarlos.
 5. **`tournament_survivors`:**
    - `SELECT`: Público (`USING (true)`).
-   - `ALL`: Restringido al propio usuario (`auth.uid() = user_id`).
+   - `INSERT`: solo fila inicial (club propio, `ALIVE`, sin historial). `UPDATE`: limitado. `DELETE`: solo si sigue `ALIVE` con `history = '[]'` (no se puede revivir).
 6. **`app_meta`:**
-   - Sin grants para `anon`/`authenticated` — solo accesible por la service role key (el cron la usa para el hash del calendario).
+   - Sin grants para `anon`/`authenticated` — solo accesible por la service role key (el cron la usa para el hash del calendario y las marcas de revocación).
 
 > **Importante:** No existen RPCs públicos de escritura. El cron escribe en `matches`, `predictions`, `prediction_scorers` (no escribe), `tournament_survivors` y `app_meta` con la **service role key** vía REST directo (bypass RLS). Cualquier intento de escritura con la anon key desde el cliente es rechazado por RLS.
 
@@ -238,9 +259,9 @@ Para garantizar un rendimiento ultra-rápido y costo $0:
 2. **Caché en Cliente (60s TTL):**
    - El ranking utiliza caché en memoria para evitar saturar la base de datos con peticiones repetitivas.
 3. **Zero DB Reads en Plantillas:**
-   - 7.252 jugadores pre-cargados en bundle en memoria (`officialPlayers.json`).
+   - 7.196 jugadores pre-cargados en bundle en memoria (`officialPlayers.json`).
 4. **Cron liviano (~2MB/mes de egress):**
-   - El sync del calendario (1.650 fixtures) solo corre cuando cambia `officialFixtures.json` (hash md5 en `app_meta`).
+   - El sync del calendario (1.926 fixtures) solo corre cuando cambia `officialFixtures.json` (hash md5 en `app_meta`).
    - La persistencia de resultados usa los IDs canónicos directos (sin descargar la tabla `matches` completa en cada corrida).
 5. **Mantenimiento de actividad:**
    - El cron cada 2h mantiene el proyecto despierto (el plan Free pausa tras 7 días sin actividad).
@@ -260,6 +281,10 @@ En el panel de Supabase $\rightarrow$ **Authentication**:
 
 2. **Email Templates (Opcional):**
    - Confirm signup & Reset Password: Asegurarse de que el enlace dirija a `{{ .SiteURL }}/actualizar-contrasena/`.
+
+3. **Contraseñas:**
+   - La app exige ≥8 caracteres con mayúscula, número y símbolo (cliente + Supabase Auth).
+   - **Leaked password protection (HaveIBeenPwned):** recomendado (`Authentication → Providers → Email`). **Requiere plan Pro o superior** — el proyecto está en plan Free, por lo que no está disponible. Vive en GoTrue (no en Postgres): solo se cambia desde el dashboard o la Management API (`PATCH /v1/projects/<ref>/config/auth`); no por SQL ni por MCP.
 
 ---
 
@@ -295,8 +320,37 @@ END;
 $$;
 ```
 
+### Reinicio de participación (`reset_participation`):
+Borra pronósticos, goleadores y supervivientes, libera el club (NULL) y marca `revoked:<uid>` en `app_meta` para que el cron purgue los puntos del archivo oficial. Único camino permitido para cambiar de club; solo `authenticated`:
+
+```sql
+CREATE OR REPLACE FUNCTION public.reset_participation()
+RETURNS void LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, pg_temp AS $$
+DECLARE v_user_id uuid;
+BEGIN
+  v_user_id := auth.uid();
+  IF v_user_id IS NULL THEN RAISE EXCEPTION 'Not authenticated'; END IF;
+  INSERT INTO public.app_meta (key, value) VALUES ('revoked:' || v_user_id::text, now()::text)
+  ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;
+  DELETE FROM public.prediction_scorers WHERE prediction_id IN
+    (SELECT id FROM public.predictions WHERE user_id = v_user_id);
+  DELETE FROM public.predictions WHERE user_id = v_user_id;
+  DELETE FROM public.tournament_survivors WHERE user_id = v_user_id;
+  PERFORM set_config('app.reset_participation', 'on', true);
+  UPDATE public.profiles SET team_id = NULL WHERE user_id = v_user_id;
+END; $$;
+```
+
+### Funciones de elegibilidad y triggers (2026-10-13):
+- `effective_kickoff(ts)` / `is_match_open_for_prediction(match_id)`: cierre 1 min antes (medianoche UTC → 20:00).
+- `is_users_club_match(uid, match_id)`: el partido debe incluir al `profiles.team_id`.
+- `is_prediction_cup_allowed(match_id)` + `match_cup_slug(text)` + `is_ko_cup_match(text, ts)`: bloquea KO de una copa donde el survivor está `ELIMINATED`.
+- `enforce_team_lock` (`trg_enforce_team_lock`): bloquea cambiar `team_id` fuera de `reset_participation()`.
+- `enforce_max_scorers_per_team` (`trg_enforce_max_scorers`): máx 5 goleadores por equipo.
+- `enforce_points_service_only` (`trg_points_server_only`): `points`/`created_at` solo los escribe el `service_role`. **No usar SECURITY DEFINER** en esta función (cambiaría `current_user` y anularía el chequeo).
+
 ### Escrituras del Cron (service role key, NO RPCs públicos):
-El cron `scripts/auto-sync-espn-results.js` escribe vía REST directo con `SUPABASE_SERVICE_ROLE_KEY` (GitHub Secret). Su fetch a ESPN usa el rango `dates=YYYYMMDD-YYYYMMDD` (ESPN rechaza listas separadas por coma con HTTP 400) y tiene **fail-fast**: si todas las ligas devuelven error, el run de GitHub Actions queda marcado como fallido en vez de fallar en silencio (incidente ago-2026: resultados no sincronizados por cambio de formato en la API de ESPN).
+El cron `scripts/auto-sync-espn-results.js` escribe vía REST directo con `SUPABASE_SERVICE_ROLE_KEY` (GitHub Secret). Su fetch a ESPN usa el rango `dates=YYYYMMDD-YYYYMMDD` (ESPN rechaza listas separadas por coma con HTTP 400) y tiene **fail-fast**: si todas las ligas devuelven error, el run de GitHub Actions queda marcado como fallido en vez de fallar en silencio (incidente ago-2026). Además: empareja por nombre con **proximidad de fecha ±3 días**, exige **score explícito** (nunca fabrica 0-0), resuelve **penales con el id real de ESPN**, procesa la **progresión de supervivientes en orden cronológico** y hace **sincronización dual `src/data` ↔ `public/data`** de los JSON evaluados.
 
 | Operación | Endpoint REST |
 |---|---|

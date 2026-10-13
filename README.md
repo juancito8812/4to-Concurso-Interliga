@@ -40,7 +40,7 @@
 | **Base de Datos & Auth** | [Supabase](https://supabase.com/) — Autenticación + PostgreSQL con RLS y service role |
 | **Datos de Fútbol** | ESPN API pública (tablas, goleadores, en vivo) + football-data.org (fixtures) |
 | **Calendario Oficial** | `public/data/officialFixtures.json` — **1.926 partidos reales** pre-sincronizados (fetch dinámico) |
-| **Plantillas Oficiales** | `public/data/officialPlayers.json` — **7.249 jugadores** clasificados por posición (fetch dinámico) |
+| **Plantillas Oficiales** | `public/data/officialPlayers.json` — **7.196 jugadores** clasificados por posición (fetch dinámico, sync mensual) |
 | **Deploy** | GitHub Actions → GitHub Pages, dominio personalizado (Cloudflare DNS) |
 | **PWA** | Service Worker v2 offline-first con precaching de datos, manifest, icon SVG |
 
@@ -57,7 +57,7 @@
 || **Total Blocking Time (TBT)** | 20 ms | 0 ms |
 || **Cumulative Layout Shift (CLS)** | 0 | 0 |
 
-> **Última verificación de calidad:** 59/59 checks de lógica + 9/9 smoke tests de agrupación. Validador de calendario (10 secciones, incluye sincronización `src/data` ↔ `public/data`): 0 errores. Build: 24 rutas estáticas OK. TypeScript estricto 0 errores. ESLint 0 errores.
+> **Última verificación de calidad (2026-10-13):** 59/59 checks de lógica + smoke tests de agrupación OK. Validador de calendario (incluye sincronización `src/data` ↔ `public/data`): 0 errores. Build: 24 rutas estáticas OK. TypeScript estricto 0 errores. ESLint 0 errores. **Endurecimiento en la base de datos aplicado y verificado en producción** (ver [Seguridad y RLS](#-seguridad-y-rls)).
 
 ---
 
@@ -179,7 +179,7 @@ scripts/
 ├── validate-fixtures.js            # Validación cruzada del calendario (1.926 fixtures, 0 errores)
 ├── sync-db.js                      # Sincroniza Supabase: matches, remapeo de predicciones, teams
 ├── sync-player-squads.js           # Completa plantillas con rosters ESPN reales
-├── enrich_official_squads.py       # Enriquecimiento y auditoría de plantillas 2026/27 (7.252 jugadores)
+├── enrich_official_squads.py       # Enriquecimiento y auditoría de plantillas 2026/27 (7.196 jugadores)
 ├── rebuild-eval-preds.js           # Reconstruye predicciones evaluadas desde Supabase
 ├── verify-logic.js                 # 59 checks de lógica de negocio, scoring y seguridad RLS
 ├── evaluate-matches.js             # Evaluador CLI de partidos y puntos
@@ -205,7 +205,7 @@ public/
 ├── robots.txt                      # Directivas de indexación y sitemap para Google Search Console
 ├── sitemap.xml                     # Mapa de sitio con 17 URLs estáticas e indexables
 ├── data/                           # JSONs de datos servidos como assets estáticos (CDN)
-│   ├── officialPlayers.json        # 7.252 jugadores (fetch dinámico)
+│   ├── officialPlayers.json        # 7.196 jugadores (fetch dinámico, sync mensual)
 │   ├── officialFixtures.json       # 1.926 partidos (fetch dinámico)
 │   ├── officialEvaluatedMatches.json   # Resultados evaluados
 │   └── officialEvaluatedPredictions.json # Pronósticos evaluados
@@ -278,7 +278,7 @@ public/
 
 - Panel integrado debajo de cada club con dropdown clasificado por posición (Delanteros y Centrocampistas primero).
 - Selector de goles `[-] N [+]` con un máximo de **5 goleadores por equipo**.
-- Base de datos de **7.252 jugadores oficiales** clasificados por posición y equipo (240 clubes).
+- Base de datos de **7.196 jugadores oficiales** clasificados por posición y equipo (240 clubes).
 - Sincronización automática en segundo plano: los pronósticos guardados localmente se respaldan en Supabase tan pronto como el dispositivo se conecta.
 
 ### 5. Ranking General en Vivo Multiusuario
@@ -341,7 +341,7 @@ public/
 | `teams` | Clubes oficiales 2026/27 (225 equipos) | Lectura pública |
 | `profiles` | Perfiles de participantes y equipo favorito | Lectura pública / Escritura propio usuario |
 | `players` | Plantillas de jugadores oficiales | Lectura pública |
-| `matches` | Partidos oficiales (1.650 filas con IDs canónicos) | Lectura pública |
+| `matches` | Partidos oficiales (1.926 filas con IDs canónicos) | Lectura pública |
 | `predictions` | Pronósticos de marcadores por participante | Lectura pública / Escritura propio usuario |
 | `prediction_scorers` | Goleadores pronosticados por partido | Lectura pública / Escritura con IDOR fix |
 | `tournament_survivors` | Supervivencia y herencia en 7 copas KO | Lectura pública / Escritura propio usuario |
@@ -383,6 +383,11 @@ de Supabase con la anon key pública + una sesión propia). Migración:
 | Superviviente KO de solo lectura para el cliente | Políticas de `tournament_survivors` limitadas a alta inicial (club propio, vivo, sin historial) y borrado; la progresión la escribe solo el cron |
 | Club bloqueado | Trigger `trg_enforce_team_lock`: cambiar `team_id` fuera de `reset_participation()` lanza excepción |
 | Reinicio de participación real (0 pts) | RPC `reset_participation()` (solo `authenticated`): borra pronósticos/goleadores/survivors, libera el club y marca `revoked:<uid>` en `app_meta` para que el cron purgue los puntos del archivo oficial |
+
+### Contraseñas y configuración de Auth
+
+- La app exige contraseñas de **≥8 caracteres con mayúscula, número y símbolo** (cliente + Supabase Auth).
+- **Leaked password protection (HaveIBeenPwned):** recomendado activarlo en `Authentication → Providers → Email`. **Requiere plan Pro o superior**; el proyecto está en plan **Free**, por lo que aún no está disponible. La configuración de Auth vive en GoTrue (no en Postgres): no se puede aplicar por SQL ni por MCP, solo desde el dashboard o la Management API (`PATCH /v1/projects/<ref>/config/auth`).
 
 > **No commitear** `SUPABASE_SERVICE_ROLE_KEY` ni `.env.local` (están en `.gitignore`). Ver [DISASTER_RECOVERY_AND_SCHEMA.md](./DISASTER_RECOVERY_AND_SCHEMA.md) para la configuración completa de RLS.
 
@@ -502,7 +507,7 @@ El despliegue es completamente automático vía **GitHub Actions** al hacer push
 ### Arquitectura
 
 - **Separación de capas:** `lib/` para lógica de negocio, `app/` para UI, `data/` para JSONs estáticos
-- **Data loading:** `loadData()` con cache en memoria para JSONs grandes (1.375KB total)
+- **Data loading:** `loadData()` con cache en memoria para JSONs grandes (~2,1 MB total: fixtures 706 KB, players 1,27 MB, evaluados ~190 KB)
 - **Componentes:** Client components para interactividad, Server Components para layout
 - **Naming:** Convenciones consistentes (camelCase archivos, PascalCase componentes)
 
@@ -511,11 +516,10 @@ El despliegue es completamente automático vía **GitHub Actions** al hacer push
 | Paquete | Uso | Tamaño |
 |---------|-----|--------|
 | `next` | Framework | Core |
-| `react` | UI | Core |
+| `react` + `react-dom` | UI | Core |
 | `@supabase/supabase-js` | Auth + DB | ~45KB |
-| `@supabase/ssr` | Session management | ~5KB |
 
-**Total dependencias:** 3 (mínimo absoluto)
+**Total dependencias de producción:** 4 (`next`, `react`, `react-dom`, `@supabase/supabase-js`) — mínimo absoluto, sin dependencias de terceros extra.
 
 ### Scripts de Verificación
 
@@ -612,6 +616,33 @@ Eliminar cuentas de testing/obsoletas. **No registrar emails inventados.**
 ---
 
 ## 📋 Historial de Cambios
+
+### 2026-10-13 — Endurecimiento integral de seguridad (base + cliente + cron)
+
+**Descripción:** Se detectó que la base de **producción** (`ilkndkqcmxvlufxaugog`) **no tenía aplicada** la migración de seguridad del 2026-09-16 (faltaban sus funciones, triggers y políticas) y además había políticas legacy duplicadas que habrían anulado el candado. Se aplicó y verificó todo, y se cerraron reglas que vivían solo en el cliente.
+
+**Migraciones aplicadas en producción:** `security_hardening_and_points_lock`, `fix_points_lock_security_invoker`, `predictions_club_and_knockout_lock` (+ archivos espejo en `supabase/migrations/`).
+
+| Regla blindada en la base | Mecanismo |
+|---------------------------|-----------|
+| Cierre 1 min antes del kickoff | `is_match_open_for_prediction()` en políticas |
+| `points`/`created_at` solo el servidor | trigger `trg_points_server_only` |
+| Solo partidos del propio club | `is_users_club_match()` |
+| Eliminado de copa no pronostica | `is_prediction_cup_allowed()` + `match_cup_slug`/`is_ko_cup_match` |
+| Superviviente no revive | DELETE solo de filas `ALIVE` con `history='[]'` |
+| Goleadores: 1 vez, 1–10, máx 5/equipo | índice único + CHECK + trigger |
+| Club bloqueado | `trg_enforce_team_lock` + `reset_participation()` |
+
+**Otros cambios:**
+- `ranking/page.tsx`: siempre recalcula puntos con `calculateScore()` (no confía en la columna `points`).
+- `scoring.ts`/`score-utils.js`: cap de goleadores **5 por equipo** (máx 10 por partido) — antes el motor cortaba a 5 en total.
+- `espnResultsFetcher.ts`: marcador estricto (no fabrica 0-0), igual que el cron.
+- `auto-sync-espn-results.js`: penales con el **id real de ESPN**; progresión del superviviente en **orden cronológico**; **sincronización dual** `src/data` ↔ `public/data` de los JSON evaluados.
+- `sync-official-fixtures.js`: escribe `officialFixtures.json` también en `public/data`.
+- `sync-db.js`: clave de remapeo de ids corregida.
+- Retroactivo verificado: 57/57 pronósticos eran del club del usuario; 0 survivors eliminados; 0 manipulaciones de `points`; 2 filas de goleador duplicadas eliminadas.
+
+**Números clave:** 59/59 checks de lógica · 12/12 survivor · tsc 0 errores · ESLint 0 errores · build 24 rutas · sitio 200 en todas las rutas.
 
 ### 2026-09-20 — Eliminación Regla #5 y corrección frontend
 

@@ -532,6 +532,15 @@ async function autoSync() {
   const evalMatchesPath = path.join(__dirname, "../src/data/officialEvaluatedMatches.json");
   const evalPredsPath = path.join(__dirname, "../src/data/officialEvaluatedPredictions.json");
   const fixturesPath = path.join(__dirname, "../src/data/officialFixtures.json");
+  // Sincronización dual obligatoria: los JSON de datos deben existir tanto en
+  // src/data/ como en public/data/ (es lo que sirve el CDN y valida el md5).
+  const publicDataDir = path.join(__dirname, "../public/data");
+  const writeDual = (srcPath, publicName, data) => {
+    fs.writeFileSync(srcPath, JSON.stringify(data, null, 2), "utf8");
+    if (fs.existsSync(publicDataDir)) {
+      fs.copyFileSync(srcPath, path.join(publicDataDir, publicName));
+    }
+  };
 
   let officialMatches = [];
   try {
@@ -756,7 +765,7 @@ async function autoSync() {
   if (DRY_RUN) {
     console.log(`\n🧪 [dry-run] No se escribió ${path.basename(evalMatchesPath)} (${officialMatches.length} partidos finalizados)`);
   } else {
-    fs.writeFileSync(evalMatchesPath, JSON.stringify(officialMatches, null, 2), "utf8");
+    writeDual(evalMatchesPath, "officialEvaluatedMatches.json", officialMatches);
     console.log(`\n💾 Total de partidos finalizados guardados: ${officialMatches.length}`);
   }
 
@@ -818,7 +827,7 @@ async function autoSync() {
   if (DRY_RUN) {
     console.log(`\n🧪 [dry-run] No se escribió ${path.basename(evalPredsPath)} (${officialPreds.length} pronósticos)`);
   } else {
-    fs.writeFileSync(evalPredsPath, JSON.stringify(officialPreds, null, 2), "utf8");
+    writeDual(evalPredsPath, "officialEvaluatedPredictions.json", officialPreds);
   }
   console.log(
     `\n🎉 SINCRONIZACIÓN ${DRY_RUN ? "SIMULADA (dry-run)" : "AUTOMÁTICA COMPLETADA"} EXITOSAMENTE! (Puntos distribuidos: ${totalPointsDistributed} pts)`

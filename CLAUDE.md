@@ -28,21 +28,22 @@ Contexto para agentes de código. Para documentación completa ver [README.md](.
 | `src/lib/survivor.ts` | Motor de superviviente en 7 copas KO |
 | `src/lib/scoring.ts` | Cálculo de puntos + matching fonético `arePlayersMatching` |
 | `src/data/officialFixtures.json` | 1.926 partidos reales pre-sincronizados (9 competiciones incl. FA Cup/CDR con filtro canónico) |
-| `src/data/teamAliases.json` | 404 aliases, 241 equipos, 225 teamCups |
-| `src/data/officialPlayers.json` | 7.252 jugadores clasificados por posición |
-| `scripts/auto-sync-espn-results.js` | Cron: ESPN → evaluación → Supabase (service role key). Empareja por nombre ±3 días de fecha y exige score explícito |
+| `src/data/teamAliases.json` | 409 aliases, 242 equipos, 225 teamCups |
+| `src/data/officialPlayers.json` | 7.196 jugadores clasificados por posición |
+| `scripts/auto-sync-espn-results.js` | Cron: ESPN → evaluación → Supabase (service role key). Empareja por nombre ±3 días, score explícito, penales con id ESPN, survivors en orden cronológico y sync dual src↔public |
 | `scripts/validate-fixtures.js` | Validador de calendario: cruces FD/ESPN, canónicos, anti-duplicados y sync src↔public data (md5) |
 | `scripts/sync-player-squads.js` | Cron mensual: sync plantillas oficiales post-mercado |
 || `scripts/verify-logic.js` | 59 checks de lógica de negocio (incluye scoring, survivor, anti-farmeo) |
 || `scripts/recalcular-puntos.js` | Recalcula puntos de pronósticos evaluados descartando Regla #5 legacy |
-| `supabase/schema.sql` | DDL maestro: 8 tablas, RLS, triggers |
+| `supabase/schema.sql` | DDL maestro: 8 tablas, RLS endurecida, triggers (`points`, `team-lock`, `scorers`), funciones de elegibilidad y RPCs |
 
 ## Base de Datos
 
 - **RLS en todas las tablas**: lectura pública, escritura solo del dueño.
 - **No existen RPCs públicos de escritura**: el cron usa service role key vía REST directo.
-- Tablas: `teams` (225), `profiles`, `players`, `matches` (1.672), `predictions`, `prediction_scorers`, `tournament_survivors` (7 copas KO), `app_meta`.
-- `delete_user_account` (SECURITY DEFINER): purga en cascada y libera email.
+- Tablas: `teams` (225), `profiles`, `players`, `matches` (1.926), `predictions`, `prediction_scorers`, `tournament_survivors` (7 copas KO), `app_meta`.
+- **Reglas blindadas en la base** (además del cliente): cierre 1 min antes (`is_match_open_for_prediction`), `points`/`created_at` solo servidor (`trg_points_server_only`), **solo partidos del propio club** (`is_users_club_match`), **eliminado de copa no pronostica** (`is_prediction_cup_allowed`), superviviente que **no revive** (DELETE solo `ALIVE`+historial vacío), goleadores (único/1–10/máx 5 por equipo), club bloqueado (`trg_enforce_team_lock`).
+- RPCs (SECURITY DEFINER, validan `auth.uid()`): `delete_user_account`, `reset_participation`.
 
 ## Comandos
 

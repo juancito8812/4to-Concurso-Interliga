@@ -17,6 +17,8 @@ const path = require("path");
 const DATA_DIR = path.join(__dirname, "..", "src", "data");
 const ALIASES_PATH = path.join(DATA_DIR, "teamAliases.json");
 const FIXTURES_PATH = path.join(DATA_DIR, "officialFixtures.json");
+const PUBLIC_DATA_DIR = path.join(__dirname, "..", "public", "data");
+const FIXTURES_PUB_PATH = path.join(PUBLIC_DATA_DIR, "officialFixtures.json");
 
 const FOOTBALL_DATA_KEY = process.env.FOOTBALL_DATA_KEY || "";
 
@@ -585,8 +587,11 @@ async function main() {
 
   // 3.11 Ordenar y escribir
   all.sort((a, b) => new Date(a.match_date) - new Date(b.match_date) || a.league.localeCompare(b.league));
-  fs.writeFileSync(FIXTURES_PATH, JSON.stringify(all, null, 2) + "\n");
-  console.log(`\n✅ officialFixtures.json escrito: ${all.length} fixtures`);
+  const fixturesBody = JSON.stringify(all, null, 2) + "\n";
+  fs.writeFileSync(FIXTURES_PATH, fixturesBody);
+  // Sincronización dual obligatoria (src/data ↔ public/data, valida el md5)
+  if (fs.existsSync(PUBLIC_DATA_DIR)) fs.writeFileSync(FIXTURES_PUB_PATH, fixturesBody);
+  console.log(`\n✅ officialFixtures.json escrito (src + public): ${all.length} fixtures`);
   console.log(`   (${all.filter((f) => !f.home_team.includes("TBD")).length} con equipos reales)`);
 }
 
