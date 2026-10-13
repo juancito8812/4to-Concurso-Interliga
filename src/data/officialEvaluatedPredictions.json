@@ -1678,5 +1678,26 @@
         "team": "away"
       }
     ]
+  },
+  {
+    "id": "a7134408-0495-4402-b9d7-622f97773e4e",
+    "user_id": "a595517a-1160-493a-b24e-e14bba1956d4",
+    "display_name": "Noel Cordero Velázquez",
+    "match_id": "00000000-0000-4000-8000-000017f4be2b",
+    "home_score": 1,
+    "away_score": 3,
+    "created_at": "2026-10-12T21:28:13.714391+00:00",
+    "scorers": [
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
   }
 ]

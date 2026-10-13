@@ -6682,5 +6682,111 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de0",
+    "home_team": "Levante",
+    "away_team": "Sevilla",
+    "match_date": "2026-10-12T19:00Z",
+    "league": "LaLiga",
+    "result_home": 3,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Robbie Ure",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Felix Correia",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Iván Romero",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Adrián de la Fuente",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Isaac Romero",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ifeanyi Ndukwe",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dd5",
+    "home_team": "Coventry City",
+    "away_team": "Newcastle",
+    "match_date": "2026-10-12T19:00Z",
+    "league": "Premier League",
+    "result_home": 4,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Jack Rudoni",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Sidiki Cherif",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Sven Botman",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ellis Simms",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Stephen Mfuni",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885fb",
+    "home_team": "Torino",
+    "away_team": "Udinese",
+    "match_date": "2026-10-12T18:45Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Daniel Bragança",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jurgen Ekkelenkamp",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sandro Kulenovic",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
