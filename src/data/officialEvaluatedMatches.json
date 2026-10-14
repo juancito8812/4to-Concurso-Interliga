@@ -7160,5 +7160,231 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be16",
+    "espn_id": "401915414",
+    "home_team": "Roma",
+    "away_team": "Real Madrid",
+    "match_date": "2026-10-14T19:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Marten de Roon",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Donyell Malen",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Carlos Espí",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Endrick",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Antonio Rüdiger",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be11",
+    "espn_id": "401915409",
+    "home_team": "Aston Villa",
+    "away_team": "Fenerbahçe",
+    "match_date": "2026-10-14T19:00Z",
+    "league": "Champions League",
+    "result_home": 6,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Johan Manzambi",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Nicolas Jackson",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Ross Barkley",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Tammy Abraham",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be01",
+    "espn_id": "401915393",
+    "home_team": "FK Bodø/Glimt",
+    "away_team": "Borussia Dortmund",
+    "match_date": "2026-10-14T19:00Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Fredrik Sjøvold",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be0f",
+    "espn_id": "401915407",
+    "home_team": "Manchester City",
+    "away_team": "Paris Saint-Germain",
+    "match_date": "2026-10-14T19:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Désiré Doué",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ousmane Dembélé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Vitinha",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Erling Haaland",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Maghnes Akliouche",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be10",
+    "espn_id": "401915408",
+    "home_team": "Real Betis",
+    "away_team": "Porto",
+    "match_date": "2026-10-14T19:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Abde Ezzalzouli",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gabri Veiga",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Samu Aghehowa",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Cucho Hernández",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Isco",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be0e",
+    "espn_id": "401915406",
+    "home_team": "Shakhtar Donetsk",
+    "away_team": "AEK Athens",
+    "match_date": "2026-10-14T19:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Lovro Majer",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Pedrinho",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Vinícius Tobias",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gleiker Mendoza",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be0d",
+    "espn_id": "401915405",
+    "home_team": "Slovan Bratislava",
+    "away_team": "Stuttgart",
+    "match_date": "2026-10-14T19:00Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Deniz Undav",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ermedin Demirovic",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]

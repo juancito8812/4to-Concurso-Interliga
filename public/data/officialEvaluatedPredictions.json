@@ -1731,6 +1731,11 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)"
     ]
   },
   {
@@ -1772,6 +1777,12 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Donyell Malen (+1 pt)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)"
     ]
   }
 ]
