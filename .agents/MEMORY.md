@@ -2,20 +2,20 @@
 
 ## Información General
 
-- **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 8 ligas/copas europeas, ver clasificaciones y competir en el ranking general.
+- **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 11 competiciones europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages con dominio personalizado `futbolcamisetapasion.com` (Cloudflare DNS), sin basePath. Workflow `.github/workflows/deploy.yml`.
-- **Última sesión:** 2026-09-20 (bug de evaluación Levante-Athletic cerrado + performance: −117 KB JS en ranking + dedup de JSONs embebidos)
-- **Versión de memoria:** 2.4
+- **Última sesión:** 2026-10-14 (endurecimiento integral de seguridad aplicado y verificado en **producción** + reglas nuevas: solo propio club / no KO si eliminado / survivor no revive + `points` server-only + cap de goleadores 5/equipo + fixes del cron y sync dual)
+- **Versión de memoria:** 2.6
 
 ## Arquitectura
 
 - `src/app/` — Páginas de Next.js (`/`, `/registro`, `/login`, `/olvide-contrasena`, `/perfil`, `/pronosticar`, `/mis-pronosticos`, `/ranking`, `/tabla/[league]`).
 - `src/lib/survivor.ts` — Módulo de supervivencia multitorneo KO (`evaluateSurvivorProgression`, `getUserCupSurvivors`, `setInitialCupSurvivor`, `upsertCupSurvivor`).
-- `src/lib/espnApi.ts` — API client para estadísticas en vivo, clasificaciones y fixtures de las 8 competiciones sin restricciones de CORS ni límites de API key.
+- `src/lib/espnApi.ts` — API client para estadísticas en vivo, clasificaciones y fixtures de las 11 competiciones sin restricciones de CORS ni límites de API key.
 - `src/lib/scoring.ts` — Motor oficial de cálculo de puntuación (`calculateScore`) para aciertos de signo, marcador exacto, diferencia de 1 gol y goleadores.
 - `src/lib/supabase.ts` — Cliente Supabase para profiles, teams, players, matches, predictions, prediction_scorers y tournament_survivors.
-- `src/lib/leagueConfig.ts` — Colores de marca, normalizador unificado de nombres de equipos (`normalizeTeamName`) y logos de las 8 ligas.
+- `src/lib/leagueConfig.ts` — Colores de marca, normalizador unificado de nombres de equipos (`normalizeTeamName`) y logos de las 11 competiciones.
 - `src/contexts/AuthContext.tsx` — Context de autenticación, perfil en vivo, traducción inteligente de errores de auth (rate limits / spam protection) y eliminación de cuenta (`deleteAccount`).
 
 ## Decisiones Clave
@@ -68,19 +68,33 @@
 ## Estado Actual
 
 - **Branch:** `main` (desplegado a GitHub Pages).
-- **Build Status:** `npm run build` y `npx tsc --noEmit` pasando con 0 errores (23 rutas estáticas generadas).
+- **Build Status:** `npm run build` y `npx tsc --noEmit` pasando con 0 errores (24 rutas estáticas generadas).
 - **Deploy:** GitHub Actions activado con éxito en `main` (`deploy.yml`).
 - **Automatización & Superviviente:**
   - Cron de resultados y puntos cada 2h (`auto-evaluate-matches.yml`) con fail-closed en persistencia Supabase.
   - Cron mensual de plantillas el 1ro de cada mes (`auto-sync-squads.yml`) para actualizar traspasos.
   - 100% desatendida en 7 copas knockout (Champions, Europa, Conference, Copa Italia, FA Cup, Copa del Rey, DFB-Pokal).
-- **Calendario:** 1.672 partidos reales (0 fabricados) — 4 ligas football-data API + UCL fase liga y Copa Italia ESPN (34 partidos).
-- **Plantillas:** 7.097 jugadores oficiales clasificados por posición cubriendo 237 clubes tras el cierre del mercado de pases.
-- **Base de datos:** `matches` 1.672, `teams` 241, 12 usuarios.
-- **Verificación:** `verify-logic.js` (57/57 checks OK), `validate-fixtures.js` (0 errores), `test-survivor.js` (12/12 PASS), ESLint (0 errores), `tsc --noEmit` OK, y pruebas de RLS en Postgres desechable (20/20 casos).
-- **Seguridad pendiente de aplicar:** la migración `supabase/migrations/2026-09-16_security_hardening.sql` debe ejecutarse en producción (SQL Editor del dashboard o Management API). Hasta entonces, el cierre de pronósticos y el resto de reglas solo están blindados en el cron.
+- **Calendario:** 1.926 partidos reales (0 fabricados) — 4 ligas football-data API + copas europeas/domésticas ESPN.
+- **Plantillas:** 7.196 jugadores oficiales clasificados por posición cubriendo 240 clubes (sync mensual).
+- **Base de datos (Supabase `ilkndkqcmxvlufxaugog`):** `matches` 1.926, `teams` ~225, `profiles` 12 usuarios.
+- **Verificación:** `verify-logic.js` (59/59 checks OK), `validate-fixtures.js` (0 errores), `test-survivor.js` (12/12 PASS), ESLint (0 errores), `tsc --noEmit` OK, y pruebas de RLS + comportamiento en **producción** (rol authenticated/anon con rollback).
+- **Seguridad (2026-10-13):** endurecimiento **aplicado y verificado en producción** (migraciones `security_hardening_and_points_lock`, `fix_points_lock_security_invoker`, `predictions_club_and_knockout_lock`). Reglas blindadas en la base: cierre 1 min (`is_match_open_for_prediction`), `points`/`created_at` solo service role (`trg_points_server_only`), **solo partidos del propio club** (`is_users_club_match`), **eliminado de copa no pronostica** (`is_prediction_cup_allowed`), superviviente que no revive, club bloqueado (`trg_enforce_team_lock`) + `reset_participation()`. Sin RPCs públicos de escritura.
+- **Pendiente manual:** activar *leaked password protection* (HaveIBeenPwned) — **requiere plan Pro**; el proyecto está en **Free**. La config de Auth vive en GoTrue (no en Postgres): solo por dashboard o Management API (`PATCH /v1/projects/<ref>/config/auth`).
 
 ## Cambios Recientes
+
+- **2026-10-13/14** — **Endurecimiento integral aplicado y verificado en PRODUCCIÓN + reglas nuevas + fixes del cron**:
+  - **Hallazgo crítico:** la base de **producción** (`ilkndkqcmxvlufxaugog`) **no tenía aplicada** la migración `2026-09-16_security_hardening.sql` (faltaban funciones/triggers/políticas) y había **políticas legacy duplicadas** de `prediction_scorers`/`profiles` que, al sumarse por OR, habrían anulado el candado de tiempo. Se aplicó y verificó con el MCP de Supabase (migraciones + advisors + pruebas de rol authenticated/anon con `BEGIN/ROLLBACK`).
+  - **Regla nueva [CRÍTICO] — `points` manipulable:** con el partido abierto, el dueño podía `PATCH` su `points` por REST y el ranking confiaba en ese valor. **Fix:** trigger `trg_points_server_only` (`points`/`created_at` solo `service_role`) + el ranking **siempre recalcula** con `calculateScore()` (no lee `points`). ⚠️ La función del trigger **NO** debe ser `SECURITY DEFINER` (cambiaría `current_user` y el chequeo de rol quedaría inútil).
+  - **Regla nueva — solo partidos del propio club:** `is_users_club_match()` en las políticas de `predictions` (antes se podía pronosticar CUALQUIER partido abierto de `matches` y farmear puntos). Retroactivo: 57/57 ya eran del club.
+  - **Regla nueva — eliminado de copa no pronostica:** `is_prediction_cup_allowed()` (+ `match_cup_slug`/`is_ko_cup_match`) bloquea KO de una copa donde el survivor está `ELIMINATED`.
+  - **Regla nueva — superviviente que no revive:** DELETE de `tournament_survivors` solo si sigue `ALIVE` con `history = '[]'`.
+  - **Cap de goleadores:** el motor acreditaba solo 5 en total (`slice(0,5)`); regla oficial = **5 por equipo (máx 10)**. Alineado motor (`scoring.ts` + `score-utils.js`) + UI + textos. `verify-logic.js` 57 → 59.
+  - **Fixes del cron (`auto-sync-espn-results.js`):** penales con el **id real de ESPN** (antes el UUID determinístico → nunca resolvía); progresión de survivors en **orden cronológico**; **sincronización dual** `src/data` ↔ `public/data` de los JSON evaluados (antes el sitio servía JSON evaluados desactualizados: 47 vs 56). `sync-official-fixtures.js` también dual-write; `sync-db.js` clave de remapeo corregida; `espnResultsFetcher.ts` marcador estricto (no fabrica 0-0).
+  - **Migraciones en prod:** `security_hardening_and_points_lock`, `fix_points_lock_security_invoker`, `predictions_club_and_knockout_lock` (+ espejo en `supabase/migrations/2026-10-13_*.sql`). Retroactivo: 0 manipulaciones de `points`, 2 filas `Raphinha` duplicadas eliminadas.
+  - **Docs:** README / AGENTS / CLAUDE / DISASTER_RECOVERY / ADMIN_PANEL + esta memoria actualizados; nota de *leaked password protection* (requiere plan Pro; proyecto en **Free**).
+  - **Verificación (todas):** 59/59 lógica · 12/12 survivor · tsc 0 · ESLint 0 · build 24 rutas · sitio 200 en todas las rutas · pruebas de comportamiento en producción (propio club OK, otro club bloqueado, KO-eliminado bloqueado, borrar survivor eliminado bloqueado, prístino permitido, points bloqueado, cron service role OK, anon sin escritura).
+  - **Disparo manual del cron:** PAT de GitHub y token de Management API del entorno estaban vencidos → se disparó por `push` temporal (filtro de path en el workflow, luego revertido). Verificado: commit del bot `a81adc6`.
 
 - **2026-09-16** — **Auditoría de seguridad (`security-review` skill) y cierre de 5 vulnerabilidades**:
   - **Metodología:** revisión con datos reales (REST con anon key + verificación del bundle desplegado) y pruebas de RLS en un Postgres 15 desechable (Docker) emulando el rol `authenticated` con `BEGIN/ROLLBACK`.
