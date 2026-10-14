@@ -1711,5 +1711,67 @@
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Anthony Gordon (+1 pt)"
     ]
+  },
+  {
+    "id": "73a9987a-47af-45bc-b7bc-cc0f96589cb4",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000017f4be16",
+    "home_score": 1,
+    "away_score": 2,
+    "created_at": "2026-10-14T11:41:54.476428+00:00",
+    "scorers": [
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "3662f7ba-9fdf-485c-b030-ab04ae240d9b",
+    "user_id": "836a17f7-37f6-427f-a0fe-eedcf66a082d",
+    "display_name": "JOKENON93",
+    "match_id": "00000000-0000-4000-8000-00000008a24c",
+    "home_score": 2,
+    "away_score": 3,
+    "created_at": "2026-10-14T12:49:41.061686+00:00",
+    "scorers": []
+  },
+  {
+    "id": "eba23da9-6770-4d6a-b813-1b167fe20b36",
+    "user_id": "266e7258-c7f9-4159-9fa2-3281989af465",
+    "display_name": "Raudel",
+    "match_id": "00000000-0000-4000-8000-000017f4be16",
+    "home_score": 1,
+    "away_score": 3,
+    "created_at": "2026-10-14T13:05:06.507116+00:00",
+    "scorers": [
+      {
+        "player_name": "Donyell Malen",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yan Diomandé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
   }
 ]
