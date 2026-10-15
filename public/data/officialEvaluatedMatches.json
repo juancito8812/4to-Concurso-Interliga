@@ -7386,5 +7386,494 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb5",
+    "espn_id": "401915573",
+    "home_team": "AZ Alkmaar",
+    "away_team": "Hapoel Be'er Sheva",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Peer Koopmeiners",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Forson Amankwah",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mexx Meerdink",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb8",
+    "espn_id": "401915576",
+    "home_team": "Lech Poznań",
+    "away_team": "Bayer Leverkusen",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "result_home": 0,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Patrik Schick",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Malik Tillman",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ibrahim Maza",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beae",
+    "espn_id": "401915566",
+    "home_team": "Olympique Lyon",
+    "away_team": "Crystal Palace",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Corentin Tolisso",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ernest Nuamah",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Yéremy Pino",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Pavel Sulc",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Daichi Kamada",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb9",
+    "espn_id": "401915577",
+    "home_team": "Celje",
+    "away_team": "AC Omonia",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Jaden Montnor",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Muamer Tankovic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Senou Coulibaly",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb0",
+    "espn_id": "401915568",
+    "home_team": "Red Bull Salzburg",
+    "away_team": "AC Milan",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "result_home": 0,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Alphadjo Cissè",
+        "goals": 3,
+        "team": "away"
+      },
+      {
+        "player_name": "Gonçalo Ramos",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beaf",
+    "espn_id": "401915567",
+    "home_team": "Sparta Prague",
+    "away_team": "Lillestrøm",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Josimar Alcócer",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Thomas Lehne Olsen",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb7",
+    "espn_id": "401915575",
+    "home_team": "Torreense",
+    "away_team": "Sunderland",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Volnei Feltes",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jules Ahoka",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Noah Sadiki",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb6",
+    "espn_id": "401915574",
+    "home_team": "Royale Union Saint-Gilloise",
+    "away_team": "Real Sociedad",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Europa League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Beñat Turrientes",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sekou Keita",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfcf",
+    "espn_id": "401915855",
+    "home_team": "CSKA Sofia",
+    "away_team": "AS Monaco FC",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Paris Brunner",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ansu Fati",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Joël Zwarts",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfce",
+    "espn_id": "401915854",
+    "home_team": "Universitatea Craiova",
+    "away_team": "Getafe",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Assad Al-Hamlawi",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Nemanja Gudelj",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfd3",
+    "espn_id": "401915859",
+    "home_team": "Egnatia",
+    "away_team": "Midtjylland",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Ildi Gruda",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Cho Gue-Sung",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf64",
+    "espn_id": "401915748",
+    "home_team": "Lugano",
+    "away_team": "Red Star Belgrade",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Albian Ajeti",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Timi Elsnik",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Rade Krunic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Dereck Moncada",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Anto Grgic",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfd5",
+    "espn_id": "401915861",
+    "home_team": "Hajduk Split",
+    "away_team": "AFC Ajax",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Abdoulie Sanyang",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Davy Klaassen",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Marin Soticek",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfd4",
+    "espn_id": "401915860",
+    "home_team": "Gent",
+    "away_team": "AGF",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Bi Goore",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfd2",
+    "espn_id": "401915858",
+    "home_team": "KuPS",
+    "away_team": "Trabzonspor",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "result_home": 2,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Paul Onuachu",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mohamed Salah",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Franculino Djú",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Petteri Pennanen",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gustav Engvall",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfd1",
+    "espn_id": "401915857",
+    "home_team": "Mjällby",
+    "away_team": "Inter Club d'Escaldes",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Jacob Bergstrom",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Axel Norén",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfd0",
+    "espn_id": "401915856",
+    "home_team": "Panathinaikos",
+    "away_team": "Borac Banja Luka",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Cyriel Dessers",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kings Kangwa",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Milos Jojic",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf63",
+    "espn_id": "401915747",
+    "home_team": "Riga",
+    "away_team": "FK Kairat",
+    "match_date": "2026-10-15T16:45Z",
+    "league": "Conference League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Marc Gual",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Salah-Eddine Oulad",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
