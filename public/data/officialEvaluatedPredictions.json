@@ -1527,11 +1527,6 @@
     "created_at": "2026-10-06T01:47:18.773316+00:00",
     "scorers": [
       {
-        "player_name": "Abdessamad Ezzalzouli",
-        "goals": 1,
-        "team": "home"
-      },
-      {
         "player_name": "Lamine Yamal",
         "goals": 1,
         "team": "away"
@@ -1540,6 +1535,11 @@
         "player_name": "Dani Olmo",
         "goals": 1,
         "team": "away"
+      },
+      {
+        "player_name": "Abde Ezzalzouli",
+        "goals": 1,
+        "team": "home"
       }
     ]
   },
@@ -1783,6 +1783,47 @@
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Donyell Malen (+1 pt)",
       "Goleador acertado: Kylian Mbappé (+1 pt)"
+    ]
+  },
+  {
+    "id": "704c0c50-421b-4231-b717-3c50373b5f4a",
+    "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
+    "display_name": "Asere1995",
+    "match_id": "00000000-0000-4000-8000-000000089df3",
+    "home_score": 4,
+    "away_score": 2,
+    "created_at": "2026-10-15T22:32:19.586495+00:00",
+    "scorers": [
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Endrick",
+        "goals": 1,
+        "team": "away"
+      }
     ]
   }
 ]

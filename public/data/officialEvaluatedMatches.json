@@ -7875,5 +7875,474 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb3",
+    "espn_id": "401915571",
+    "home_team": "Bournemouth",
+    "away_team": "Sturm Graz",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "result_home": 3,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Evanilson",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Rayan",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Álvaro Rodríguez",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beaa",
+    "espn_id": "401915562",
+    "home_team": "Benfica",
+    "away_team": "Celtic",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "result_home": 4,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Jhon Durán",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Alexander Bah",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Camilo Durán",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Vangelis Pavlidis",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bea8",
+    "espn_id": "401915560",
+    "home_team": "Celta Vigo",
+    "away_team": "Juventus",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Hugo Álvarez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Nick Woltemade",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Randal Kolo Muani",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be9d",
+    "espn_id": "401915549",
+    "home_team": "Dinamo Zagreb",
+    "away_team": "Anderlecht",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Dion Drena Beljo",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beac",
+    "espn_id": "401915564",
+    "home_team": "Ferencváros",
+    "away_team": "Viktoria Plzeň",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Kristoffer Zachariassen",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Denis Visinský",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bea9",
+    "espn_id": "401915561",
+    "home_team": "Jagiellonia",
+    "away_team": "Ararat-Armenia",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Zidane Banjaqui",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Kamil Jozwiak",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Rodrigo Conceição",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ousmane Sow",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be9e",
+    "espn_id": "401915550",
+    "home_team": "Olympique de Marseille",
+    "away_team": "PAE Olympiakos SFP",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Santiago Hezze",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bead",
+    "espn_id": "401915565",
+    "home_team": "NEC",
+    "away_team": "Levski Sofia",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Reinaldo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Tjaronn Chery",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beb4",
+    "espn_id": "401915572",
+    "home_team": "Rennes",
+    "away_team": "OFI",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Taxiarchis Fountas",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mahamadou Nagida",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Abdelhamid Aït Boudlal",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4beab",
+    "espn_id": "401915563",
+    "home_team": "Hoffenheim",
+    "away_team": "Beşiktaş",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Europa League",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Amir Murillo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fisnik Asllani",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Oh Hyeon-Gyu",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Koki Machida",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf62",
+    "espn_id": "401915746",
+    "home_team": "Atalanta",
+    "away_team": "Pafos FC",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Eljif Elmas",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Giacomo Raspadori",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gianluca Scamacca",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gabriel Teixeira",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfcd",
+    "espn_id": "401915853",
+    "home_team": "Brighton",
+    "away_team": "Kauno Žalgiris",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Georginio Rutter",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Jack Hinshelwood",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Matt O'Riley",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfcc",
+    "espn_id": "401915852",
+    "home_team": "FC København",
+    "away_team": "Braga",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "result_home": 3,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Mohamed Elyounoussi",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Andreas Cornelius",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfcb",
+    "espn_id": "401915851",
+    "home_team": "Twente",
+    "away_team": "Thun",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Ramiz Zerrouki",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfca",
+    "espn_id": "401915850",
+    "home_team": "Hearts",
+    "away_team": "Nordsjælland",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Oisin McEntee",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Nicklas Rojkjaer",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfc8",
+    "espn_id": "401915848",
+    "home_team": "Freiburg",
+    "away_team": "Jablonec",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Vincenzo Grifo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Antonin Rusek",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Maximilian Eggestein",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Garang Kuol",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfc9",
+    "espn_id": "401915849",
+    "home_team": "Sint-Truiden",
+    "away_team": "Iberia 1999",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Robert-Jan Vanwesemael",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ilias Sebaoui",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfc7",
+    "espn_id": "401915847",
+    "home_team": "Brann",
+    "away_team": "Lincoln Red Imps",
+    "match_date": "2026-10-15T19:00Z",
+    "league": "Conference League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Enrique Gómez",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Niklas Castro",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
