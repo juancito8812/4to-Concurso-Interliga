@@ -179,6 +179,10 @@ Un fallo REAL es una predicción creada **antes** del pitazo que quedó con `poi
 
 **Nunca pases puntos por parámetro:** el motor los calcula. `scripts/assign-points.js` es LEGACY (ningún workflow lo invoca) y fue reescrito para ignorar cualquier `pointsAwarded` y llamar a `calculateScore()`.
 
+**Candado activo (desde 2026-10-17, ya en `main`):** `npm run verify` corre en `.github/workflows/verify.yml` (cada PR y cada push a `main`) y otra vez dentro de `deploy.yml` **antes** del build. Si los dos motores divergen o un check de lógica falla, **el deploy no publica**. La rama de trabajo `fix/logica-puntuacion-definitiva` fue mergeada (fast-forward) y eliminada.
+
+**Nunca escribas `points` a mano:** el trigger `trg_points_server_only` de la DB lo impide (solo `service_role`). Ver spec normativa en `docs/SCORING_LOGIC.md`.
+
 ### Estado del proyecto (vía MCP)
 
 `supabase_get_project` → `status: ACTIVE_HEALTHY`. La DB se puede consultar con `supabase_execute_sql` (service role implícito).

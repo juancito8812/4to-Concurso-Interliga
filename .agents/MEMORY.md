@@ -5,8 +5,8 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 11 competiciones europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages con dominio personalizado `futbolcamisetapasion.com` (Cloudflare DNS), sin basePath. Workflow `.github/workflows/deploy.yml`.
-- **Última sesión:** 2026-10-17 (lógica de puntuación fijada: `docs/SCORING_LOGIC.md` como fuente única de verdad + `verify-engine-parity.js` que prueba que el motor JS y el TS dan los mismos puntos — antes `verify-logic.js` solo probaba el JS; candado en CI y en el deploy)
-- **Versión de memoria:** 2.8
+- **Última sesión:** 2026-10-17 (lógica de puntuación **arreglada, mergeada a `main` y verificada en producción**: `docs/SCORING_LOGIC.md` como fuente única de verdad + `scripts/verify-engine-parity.js` que prueba que el motor JS y el TS dan los mismos puntos — antes `verify-logic.js` solo probaba el JS; candado en CI (`verify.yml`) y en el deploy; rama `fix/logica-puntuacion-definitiva` rebasada sobre el cron `80f5c3c`, merge fast-forward y eliminada)
+- **Versión de memoria:** 2.9
 
 ## Arquitectura
 
@@ -91,6 +91,12 @@
 
 ## Cambios Recientes
 
+- **2026-10-17** — **Merge a `main` de `fix/logica-puntuacion-definitiva` + verificación en producción (lógica de puntuación cerrada)**:
+  - **Rebase necesario:** la rama se rebasó sobre `80f5c3c` (`chore(cron): auto-sync finished match results from ESPN`) porque el cron había commiteado en `main` durante la sesión → había que re-verificar con los datos nuevos antes de mergear. Re-verificado: `npm run verify` **59/59 + paridad 76 casos / 206 pts** (los 65 registros del JSON: 57 con `points` no nulo = 206 pts; los 8 restantes están pendientes de resultado — el script de paridad filtra por partido evaluado, no los salta por error), `tsc` 0 errores, ESLint 0 errores, `npm run build` OK.
+  - **Merge:** fast-forward `80f5c3c..2bfb362` (2 commits: `b7a9b06` fix + `2bfb362` docs), push a `origin/main`, rama local eliminada.
+  - **CI en `main`:** `Verify scoring logic` ✅ (el candado ya corre en cada push a `main`, no solo en PRs) y `Deploy to GitHub Pages` ✅.
+  - **Producción verificada:** `futbolcamisetapasion.com` home **200** y los **4 JSON con md5 idéntico** a `src/data/` → cero drift; 0 referencias a la Regla 5 en el HTML servido.
+  - **Servidor de vista previa apagado** (puerto 3007 libre) tras la aprobación del usuario.
 - **2026-10-17** — **Lógica de puntuación fijada de una vez por todas (rama `fix/logica-puntuacion-definitiva`)**:
   - **Causa raíz del "cambiaron los puntos":** la regla vive en **dos motores** (`scripts/lib/score-utils.js` JS para el cron, `src/lib/scoring.ts` TS para el frontend) y `verify-logic.js` **solo probaba el JS** → una divergencia frontend↔cron pasaba desapercibida. Además `assign-points.js` aceptaba los puntos **por parámetro** (vector de puntos arbitrarios).
   - **Fix:** `docs/SCORING_LOGIC.md` (**fuente única de verdad**, 4 reglas, máx teórico **15 pts**, cap 5 goleadores/equipo, candados DB, anti-farmeo) + `scripts/verify-engine-parity.js` (compara ambos motores campo por campo sobre los 57 pronósticos reales = 206 pts y exige reproducir el `points` guardado; falla con exit 1 si divergen) + `.github/workflows/verify.yml` (verify-logic + paridad + `tsc` + ESLint en cada PR) + `npm run verify` **antes del build** en `deploy.yml` (una regla rota bloquea el deploy) + `assign-points.js` neutralizado (LEGACY, ignora `pointsAwarded`, calcula con `calculateScore`).

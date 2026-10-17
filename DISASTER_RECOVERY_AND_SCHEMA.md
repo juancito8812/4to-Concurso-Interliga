@@ -65,6 +65,7 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
    git push origin main
    ```
    > **Verificación obligatoria:** `deploy.yml` corre `npm run verify` (59 checks + paridad de motores JS↔TS) **antes** del build: si la lógica de puntuación se rompe o los dos motores divergen, el deploy FALLA a propósito y producción no se actualiza. Diagnóstico local: `npm run verify`.
+   > **CI de verificación (`.github/workflows/verify.yml`):** corre el mismo `npm run verify` + `tsc --noEmit` + ESLint en cada PR y en cada push a `main` (desde 2026-10-17). Sin secrets: solo lee los JSON del repo.
    > **Ojo:** esto solo dispara `deploy.yml` cuando el push lo hace un humano/PAT. Los push del cron con `GITHUB_TOKEN` **no disparan workflows**, por eso `auto-evaluate-matches.yml` y `auto-sync-squads.yml` terminan con `gh workflow run deploy.yml --ref main` (`permissions: actions: write`). Si tras un commit del cron producción no se actualiza, forzarlo a mano: `gh workflow run deploy.yml --ref main`.
 
 ---

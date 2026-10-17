@@ -57,7 +57,7 @@
 || **Total Blocking Time (TBT)** | 20 ms | 0 ms |
 || **Cumulative Layout Shift (CLS)** | 0 | 0 |
 
-> **Última verificación de calidad (2026-10-13):** 59/59 checks de lógica + smoke tests de agrupación OK. Validador de calendario (incluye sincronización `src/data` ↔ `public/data`): 0 errores. Build: 24 rutas estáticas OK. TypeScript estricto 0 errores. ESLint 0 errores. **Endurecimiento en la base de datos aplicado y verificado en producción** (ver [Seguridad y RLS](#-seguridad-y-rls)).
+> **Última verificación de calidad (2026-10-17):** `npm run verify` → **59/59** checks de lógica + **paridad de motores JS↔TS** (76 casos, 206 pts reales). Smoke tests de agrupación OK. Validador de calendario (incluye sincronización `src/data` ↔ `public/data` por md5): 0 errores. Build estático OK. TypeScript estricto 0 errores. ESLint 0 errores. **Endurecimiento en la base de datos aplicado y verificado en producción** (ver [Seguridad y RLS](#-seguridad-y-rls)). Este mismo comando corre en CI (`.github/workflows/verify.yml`) y **bloquea el deploy** si falla.
 
 ---
 
@@ -631,6 +631,18 @@ Eliminar cuentas de testing/obsoletas. **No registrar emails inventados.**
 ---
 
 ## 📋 Historial de Cambios
+
+### 2026-10-17 — Merge a `main` y verificación en producción (lógica de puntuación blindada)
+
+**Descripción:** la rama `fix/logica-puntuacion-definitiva` (spec normativa + prueba de paridad JS↔TS + CI bloqueante) se mergeó a `main` tras rebasarla sobre el último commit del cron (`80f5c3c`) para no perder los pronósticos sincronizados en el intervalo.
+
+**Cambios:** todas las piezas descritas en la entrada siguiente (spec, paridad, `verify.yml`, gate en `deploy.yml`, `assign-points.js` neutralizado, documentación) **ya están en `main` y activas en producción**. Rama eliminada tras el merge fast-forward (`80f5c3c..2bfb362`).
+
+**Verificación (todo real, en `main`):**
+- `npm run verify` con los datos post-rebase: **59/59 checks + paridad JS↔TS** (76 casos, 206 pts guardados reproducidos exactamente).
+- `npx tsc --noEmit` 0 errores · `npx eslint .` 0 errores · `npm run build` OK.
+- CI en `main`: **`Verify scoring logic` ✅** y **`Deploy to GitHub Pages` ✅** (el candado corre ya en cada push a `main`, no solo en PRs).
+- Producción `https://futbolcamisetapasion.com`: home **200**, y los **4 JSON con md5 idéntico** a `src/data/` (`officialFixtures`, `officialPlayers`, `officialEvaluatedPredictions`, `officialEvaluatedMatches`) → cero drift.
 
 ### 2026-10-17 — Lógica de puntuación: fuente única de verdad + prueba de paridad
 
