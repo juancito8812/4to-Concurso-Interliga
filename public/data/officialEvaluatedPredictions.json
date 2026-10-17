@@ -1851,5 +1851,36 @@
         "team": "away"
       }
     ]
+  },
+  {
+    "id": "6a30effe-65e4-4520-aeef-8c6877c74cb3",
+    "user_id": "266e7258-c7f9-4159-9fa2-3281989af465",
+    "display_name": "Raudel",
+    "match_id": "00000000-0000-4000-8000-000000089de5",
+    "home_score": 4,
+    "away_score": 1,
+    "created_at": "2026-10-17T03:12:34.76881+00:00",
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Yan Diomandé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ruben Vargas",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Endrick",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
   }
 ]
