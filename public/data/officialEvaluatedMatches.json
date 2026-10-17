@@ -8418,5 +8418,274 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de6",
+    "espn_id": "401882843",
+    "home_team": "Espanyol",
+    "away_team": "Atlético Madrid",
+    "match_date": "2026-10-17T12:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Álex Baena",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de4",
+    "espn_id": "401882837",
+    "home_team": "Villarreal",
+    "away_team": "Elche",
+    "match_date": "2026-10-17T14:15Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088ddb",
+    "espn_id": "401878771",
+    "home_team": "Everton",
+    "away_team": "Chelsea",
+    "match_date": "2026-10-17T11:30Z",
+    "league": "Premier League",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Pedro Neto",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088de3",
+    "espn_id": "401879262",
+    "home_team": "Brentford",
+    "away_team": "Liverpool",
+    "match_date": "2026-10-17T14:00Z",
+    "league": "Premier League",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Keane Lewis-Potter",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Víctor Muñoz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alexander Isak",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dda",
+    "espn_id": "401878770",
+    "home_team": "Fulham",
+    "away_team": "Hull City",
+    "match_date": "2026-10-17T14:00Z",
+    "league": "Premier League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Alex Iwobi",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088de2",
+    "espn_id": "401879259",
+    "home_team": "Manchester City",
+    "away_team": "Ipswich Town",
+    "match_date": "2026-10-17T14:00Z",
+    "league": "Premier League",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Phil Foden",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Daizen Maeda",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Erling Haaland",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Zian Flemming",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885ef",
+    "espn_id": "401874760",
+    "home_team": "Venezia",
+    "away_team": "Napoli",
+    "match_date": "2026-10-17T13:00Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Akor Adams",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a23d",
+    "espn_id": "401884769",
+    "home_team": "Union Berlin",
+    "away_team": "Borussia Dortmund",
+    "match_date": "2026-10-17T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a23e",
+    "espn_id": "401884767",
+    "home_team": "Hamburger SV",
+    "away_team": "Stuttgart",
+    "match_date": "2026-10-17T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Miro Muheim",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a245",
+    "espn_id": "401884765",
+    "home_team": "Schalke 04",
+    "away_team": "Mainz",
+    "match_date": "2026-10-17T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Phillip Tietz",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a240",
+    "espn_id": "401884764",
+    "home_team": "SV 07 Elversberg",
+    "away_team": "Augsburg",
+    "match_date": "2026-10-17T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 4,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Lukas Petkov",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lasse Günther",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Maximilian Rohr",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fabian Rieder",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Michael Gregoritsch",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Frederik Schmahl",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Mert Kömür",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a23f",
+    "espn_id": "401884766",
+    "home_team": "Werder Bremen",
+    "away_team": "SC Paderborn 07",
+    "match_date": "2026-10-17T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Stefano Marino",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Steffen Tigges",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Niclas Füllkrug",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]

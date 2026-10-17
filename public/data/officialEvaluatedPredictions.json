@@ -1882,5 +1882,26 @@
         "team": "home"
       }
     ]
+  },
+  {
+    "id": "127e8623-688c-4eb8-9d04-92aa823192cd",
+    "user_id": "266b309a-4eb0-474a-85db-aca42e055913",
+    "display_name": "JR_DT",
+    "match_id": "00000000-0000-4000-8000-000000088ddd",
+    "home_score": 0,
+    "away_score": 2,
+    "created_at": "2026-10-17T14:10:57.059692+00:00",
+    "scorers": [
+      {
+        "player_name": "Bryan Mbeumo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Bruno Fernandes",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
   }
 ]
