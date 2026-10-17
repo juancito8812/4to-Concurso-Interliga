@@ -106,7 +106,8 @@ CREATE TABLE IF NOT EXISTS public.tournament_survivors (
 
 -- 3. ÍNDICES DE RENDIMIENTO (SUB-MILISEGUNDO PARA PLAN FREE)
 CREATE INDEX IF NOT EXISTS idx_profiles_user_id ON public.profiles(user_id);
--- (idx_profiles_team_id eliminado el 2026-10-17: nunca usado, profiles se lee por user_id)
+-- (idx_profiles_team_id se mantiene el 2026-10-17: nunca usado, pero cubre la FK profiles_team_id_fkey)
+CREATE INDEX IF NOT EXISTS idx_profiles_team_id ON public.profiles(team_id);
 
 CREATE INDEX IF NOT EXISTS idx_predictions_user_id ON public.predictions(user_id);
 CREATE INDEX IF NOT EXISTS idx_predictions_match_id ON public.predictions(match_id);

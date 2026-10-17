@@ -4,13 +4,14 @@
 -- Contexto: avisos restantes del advisor de Supabase (performance) tras el
 --   fix de RLS anti-copia (2026-10-17_rls_anti_copia_predictions.sql).
 --
--- 1) Índices nunca usados (idx_scan = 0 desde el último reset de estadísticas):
---      - public.idx_players_name      (players.name)   -> ninguna query filtra
---        por nombre; pronosticar filtra por team (.in("team", ...)) y ya usa
---        idx_players_team (159 scans).
---      - public.idx_profiles_team_id  (profiles.team_id) -> solo se LEE team_id,
---        nunca se filtra por él; las lecturas van por user_id (profiles_user_id_key).
---    Ambos solo costaban escritura (INSERT/UPDATE) y espacio.
+-- 1) Índice nunca usado (idx_scan = 0 desde el último reset de estadísticas):
+--      - public.idx_players_name (players.name) -> ninguna query filtra por
+--        nombre; pronosticar filtra por team (.in("team", ...)) y ya usa
+--        idx_players_team (159 scans). Solo costaba escritura y espacio.
+--    OJO: public.idx_profiles_team_id NO se elimina. Aunque tampoco se ha usado,
+--    cubre la FK profiles_team_id_fkey; quitarlo solo traslada el aviso del
+--    advisor (unused_index INFO -> unindexed_foreign_keys INFO) y encarece los
+--    DELETE/UPDATE sobre teams. Se mantiene a propósito.
 --
 -- 2) Policy SELECT duplicada en public.profiles:
 --      - "Public profiles are viewable by everyone" USING (true)
@@ -26,7 +27,6 @@ BEGIN;
 
 -- 1) Índices sin uso ---------------------------------------------------------
 DROP INDEX IF EXISTS public.idx_players_name;
-DROP INDEX IF EXISTS public.idx_profiles_team_id;
 
 -- 2) Policy SELECT redundante en profiles -----------------------------------
 DROP POLICY IF EXISTS "Users can view own profile" ON public.profiles;
@@ -49,8 +49,11 @@ BEGIN
   RAISE NOTICE 'profiles: % filas, % policy(s) SELECT tras la limpieza', n_profiles, n_policies_select;
 
   IF EXISTS (SELECT 1 FROM pg_class c JOIN pg_namespace ns ON ns.oid = c.relnamespace
-              WHERE ns.nspname = 'public' AND c.relname IN ('idx_players_name','idx_profiles_team_id')) THEN
+              WHERE ns.nspname = 'public' AND c.relname = 'idx_players_name') THEN
     RAISE EXCEPTION 'quedaron índices sin eliminar';
+  END IF;
+  IF to_regclass('public.idx_profiles_team_id') IS NULL THEN
+    RAISE EXCEPTION 'idx_profiles_team_id debe seguir existiendo (cubre profiles_team_id_fkey)';
   END IF;
 END $$;
 
