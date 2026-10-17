@@ -8687,5 +8687,142 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de9",
+    "espn_id": "401882846",
+    "home_team": "Real Betis",
+    "away_team": "Barcelona",
+    "match_date": "2026-10-17T16:30Z",
+    "league": "LaLiga",
+    "result_home": 2,
+    "result_away": 5,
+    "scorers": [
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Valentín Gómez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Rodri",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Gabriel Jesus",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Abde Ezzalzouli",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Eric García",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Dani Olmo",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088ddf",
+    "espn_id": "401879258",
+    "home_team": "Newcastle",
+    "away_team": "Aston Villa",
+    "match_date": "2026-10-17T16:30Z",
+    "league": "Premier League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Johan Manzambi",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885eb",
+    "espn_id": "401874953",
+    "home_team": "Bologna",
+    "away_team": "Inter Milan",
+    "match_date": "2026-10-17T16:00Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Tommaso Pobega",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Marcus Thuram",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Carlos Augusto",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ange-Yoan Bonny",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a241",
+    "espn_id": "401884772",
+    "home_team": "Bayern Munich",
+    "away_team": "RB Leipzig",
+    "match_date": "2026-10-17T16:30Z",
+    "league": "Bundesliga",
+    "result_home": 6,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Luis Díaz",
+        "goals": 3,
+        "team": "home"
+      },
+      {
+        "player_name": "Aleksandar Pavlovic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Michael Olise",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Harry Kane",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Andrija Maksimovic",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]

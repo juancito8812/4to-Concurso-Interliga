@@ -1341,6 +1341,12 @@
         "goals": 2,
         "team": "away"
       }
+    ],
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Aleksandar Pavlović (+1 pt)",
+      "Goleador acertado: Harry Kane (+1 pt)"
     ]
   },
   {
@@ -1541,6 +1547,13 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Lamine Yamal (+1 pt)",
+      "Goleador acertado: Dani Olmo (+1 pt)",
+      "Goleador acertado: Abde Ezzalzouli (+1 pt)"
     ]
   },
   {
@@ -1850,6 +1863,11 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Lamine Yamal (+1 pt)"
     ]
   },
   {
