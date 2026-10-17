@@ -64,6 +64,7 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
    ```bash
    git push origin main
    ```
+   > **Ojo:** esto solo dispara `deploy.yml` cuando el push lo hace un humano/PAT. Los push del cron con `GITHUB_TOKEN` **no disparan workflows**, por eso `auto-evaluate-matches.yml` y `auto-sync-squads.yml` terminan con `gh workflow run deploy.yml --ref main` (`permissions: actions: write`). Si tras un commit del cron producción no se actualiza, forzarlo a mano: `gh workflow run deploy.yml --ref main`.
 
 ---
 

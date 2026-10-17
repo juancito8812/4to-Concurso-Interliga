@@ -324,6 +324,9 @@ public/
    - Calendario en `matches` solo cuando cambia `officialFixtures.json` (hash md5 en `app_meta`).
 5. **Fail-fast:** Si todas las ligas fallan, el run de Actions queda marcado como fallido (no falla en silencio).
 6. **Commit automático:** Si los JSON de evaluados cambiaron, el bot hace commit y push a `main`.
+7. **Dispatch del deploy:** Si hubo cambios reales, el workflow dispara `gh workflow run deploy.yml --ref main` (con `permissions: actions: write`) para publicar en GitHub Pages.
+
+> ⚠️ **Por qué el dispatch explícito (no basta el push):** los commits hechos por `github-actions[bot]` con el `GITHUB_TOKEN` **no generan eventos de workflow** (limitación de GitHub: evita recursión infinita). `deploy.yml` solo escucha `push`, así que sin el dispatch los datos del cron llegaban a `main` pero **producción quedaba desactualizada** (incidente oct-2026: 3 días de drift). `workflow_dispatch` es la única excepción que `GITHUB_TOKEN` sí puede disparar, por lo que **no se necesita un PAT**. El `auto-sync-squads.yml` (cron mensual) usa el mismo patrón.
 
 ### Cliente en vivo
 
@@ -413,6 +416,12 @@ SUPABASE_SERVICE_ROLE_KEY=tu-service-key   # SOLO local y GitHub Secrets (nunca 
 | `NEXT_PUBLIC_FOOTBALL_DATA_KEY` | **Ya NO se inyecta en el build.** `NEXT_PUBLIC_*` queda inlineado en el bundle público, y las llamadas en vivo a football-data.org solo se hacen en localhost |
 | `FOOTBALL_DATA_KEY` | Key de football-data.org para scripts de validación / sincronización |
 | `SUPABASE_SERVICE_ROLE_KEY` | Service role key para el cron (escritura bypass RLS) |
+
+> **No se requiere un PAT para el deploy.** El `GITHUB_TOKEN` que GitHub inyecta en los workflows basta para disparar `deploy.yml` vía `workflow_dispatch` (ver "Automatización" arriba). El workflow del cron declara `permissions: contents: write` (para pushear los JSON) y `actions: write` (para disparar el deploy).
+
+### Prerrequisito del deploy: workflows en `main`
+
+`workflow_dispatch` **solo funciona si el archivo del workflow existe en la rama por defecto**. Un workflow nuevo en una rama secundaria devuelve `HTTP 404: Not Found` al intentar dispararlo con `gh workflow run`; hay que mergearlo a `main` primero.
 
 ---
 
@@ -616,6 +625,31 @@ Eliminar cuentas de testing/obsoletas. **No registrar emails inventados.**
 ---
 
 ## 📋 Historial de Cambios
+
+### 2026-10-17 — Fix: el cron no desplegaba a producción (drift de datos)
+
+**Descripción:** Se detectó que `main` tenía los datos al día pero **producción servía datos de días atrás**: el último deploy real había sido el 14/10 mientras el cron commiteaba cada 2 h. Verificado comparando por md5 los 4 JSON de `src/data/` contra `https://futbolcamisetapasion.com/data/`.
+
+**Causa raíz:** `deploy.yml` solo se dispara con `push`, y los pushes hechos por `github-actions[bot]` con el `GITHUB_TOKEN` **no generan eventos de workflow** (limitación de GitHub para evitar recursión). El commit llegaba a `main`; el deploy nunca se disparaba.
+
+**Archivos modificados:**
+
+| Archivo | Cambio |
+|---------|--------|
+| `.github/workflows/auto-evaluate-matches.yml` | `permissions: actions: write` + step final condicional `gh workflow run deploy.yml --ref main`; el step de commit exporta `changed=true/false` a `GITHUB_OUTPUT` |
+| `.github/workflows/auto-sync-squads.yml` | Mismo patrón (cron mensual de plantillas) |
+| `README.md` | Sección "Automatización" (paso 7 + aviso del porqué), Secrets (no se requiere PAT), prerrequisito de `workflow_dispatch` en `main` |
+| `AGENTS.md` | Nueva subsección de diagnóstico del drift con comandos de md5/`gh run list` |
+| `CLAUDE.md` | Nota del dispatch en la línea de crons |
+| `DISASTER_RECOVERY_AND_SCHEMA.md` | Aviso en el paso de push a `main` |
+| `.agents/MEMORY.md` | Decisión 2026-10-17 (síntoma, causa raíz, fix, verificación, pitfalls) |
+
+**Verificación end-to-end (no solo teoría):**
+- Workflow temporal de prueba en `main` → el dispatch con `GITHUB_TOKEN` creó un run con `event=workflow_dispatch` ✅ (workflow eliminado después).
+- Cron real `39059197930`: sync ESPN (206 pts) → commit `72d8aef` → dispatch del deploy `39059225585` → **success** ✅
+- md5 de los 4 JSON contra producción: **OK** ✅
+
+**Números clave:** deploy verificado `39059225585` · `verify-logic.js` 59/59 · 4/4 JSON sincronizados · 3 workflows en `main` · PR #1 (`24df969`).
 
 ### 2026-10-13 — Endurecimiento integral de seguridad (base + cliente + cron)
 

@@ -130,6 +130,32 @@ gh run list --workflow=auto-evaluate-matches.yml
 curl "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=20260828-20260831"
 ```
 
+### Producción desactualizada tras el cron (incidente oct-2026)
+
+**Síntoma:** los JSON de `main` están al día pero `futbolcamisetapasion.com/data/*.json` sirve datos viejos (drift de días).
+
+**Causa raíz:** `deploy.yml` solo escucha `push`, y los pushes hechos por `github-actions[bot]` con el `GITHUB_TOKEN` **no generan eventos de workflow** (limitación de GitHub). El cron commiteaba pero nunca se desplegaba.
+
+**Fix:** los workflows del cron cierran con un step condicional `gh workflow run deploy.yml --ref main` bajo `permissions: actions: write` (`workflow_dispatch` es la única excepción que `GITHUB_TOKEN` puede disparar → no hace falta PAT).
+
+Diagnosticar drift:
+```bash
+# Comparar el JSON local contra el de producción
+for f in officialEvaluatedMatches.json officialEvaluatedPredictions.json officialFixtures.json officialPlayers.json; do
+  loc=$(md5sum src/data/$f | cut -d' ' -f1)
+  rem=$(curl -s "https://futbolcamisetapasion.com/data/$f?cb=$(date +%s)" | md5sum | cut -d' ' -f1)
+  [ "$loc" = "$rem" ] && echo "OK    $f" || echo "STALE $f"
+done
+
+# Ver los deploys y su evento disparador (push vs workflow_dispatch)
+gh run list --workflow="Deploy to GitHub Pages" --limit 5 --json databaseId,createdAt,event,conclusion
+
+# Forzar un deploy ya
+gh workflow run deploy.yml --ref main
+```
+
+**Pitfall:** `workflow_dispatch` solo funciona si el archivo del workflow existe en la **rama por defecto**. Disparar un workflow nuevo desde una rama secundaria da `HTTP 404: Not Found`.
+
 ### Estado del proyecto (vía MCP)
 
 `supabase_get_project` → `status: ACTIVE_HEALTHY`. La DB se puede consultar con `supabase_execute_sql` (service role implícito).

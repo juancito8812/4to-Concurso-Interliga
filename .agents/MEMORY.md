@@ -5,8 +5,8 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 11 competiciones europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages con dominio personalizado `futbolcamisetapasion.com` (Cloudflare DNS), sin basePath. Workflow `.github/workflows/deploy.yml`.
-- **Última sesión:** 2026-10-14 (endurecimiento integral de seguridad aplicado y verificado en **producción** + reglas nuevas: solo propio club / no KO si eliminado / survivor no revive + `points` server-only + cap de goleadores 5/equipo + fixes del cron y sync dual)
-- **Versión de memoria:** 2.6
+- **Última sesión:** 2026-10-17 (fix del hueco cron→deploy: los pushes del bot con `GITHUB_TOKEN` no disparaban `deploy.yml`, así que producción acumuló 3 días de drift; ahora ambos crons disparan el deploy al final y el ciclo `sync → commit → dispatch → deploy` quedó verificado end-to-end en producción)
+- **Versión de memoria:** 2.7
 
 ## Arquitectura
 
@@ -19,6 +19,14 @@
 - `src/contexts/AuthContext.tsx` — Context de autenticación, perfil en vivo, traducción inteligente de errores de auth (rate limits / spam protection) y eliminación de cuenta (`deleteAccount`).
 
 ## Decisiones Clave
+
+- **2026-10-17** — **Fix: producción no se sincronizaba tras los commits del cron (drift de 3 días)**:
+  - **Síntoma**: `officialEvaluatedMatches.json` / `officialEvaluatedPredictions.json` correctos en `main` pero STALE en `futbolcamisetapasion.com` (verificado por md5). Último deploy real: 14/10, con el cron commiteando cada 2 h hasta el 17/10 sin desplegar.
+  - **Causa raíz**: `deploy.yml` solo escucha `push` y los pushes de `github-actions[bot]` hechos con el `GITHUB_TOKEN` **no generan eventos de workflow** (limitación de GitHub para evitar recursión). El commit llegaba a `main`; el deploy nunca se disparaba.
+  - **Fix** (PR #1, commit `24df969`): `auto-evaluate-matches.yml` y `auto-sync-squads.yml` añaden `permissions: actions: write` y un step final condicional (`steps.commit.outputs.changed == 'true'`) que ejecuta `gh workflow run deploy.yml --ref main` con `GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}`. `workflow_dispatch` es la única excepción que `GITHUB_TOKEN` sí puede disparar → **no hace falta PAT**.
+  - **Verificación end-to-end**: workflow temporal de prueba en `main` → dispatch OK (run con `event=workflow_dispatch`); luego el cron real (`39059197930`) syncó 206 pts, commiteó `72d8aef` y disparó el deploy `39059225585` → success. md5 de los 4 JSON: OK contra producción.
+  - **Pitfalls**: (1) `workflow_dispatch` solo funciona si el workflow está en la **rama por defecto** — dispararlo desde una rama nueva da `HTTP 404`; (2) el step de dispatch necesita `actions/checkout` (si no, `gh workflow run` falla por no tener contexto de repo).
+  - **Lección**: un `push` de bot no equivale a un `push` humano en GitHub Actions. Cuando el CI depende de que un workflow dispare otro, usar `workflow_dispatch` explícito y verificar el **evento** del run, no solo que "hay un run nuevo".
 
 - **2026-09-20** — **Bug de evaluación cerrado: resultado fabricado Levante-Athletic (0-0 del 16/09)**:
   - **Causa raíz (2 bugs encadenados en `scripts/auto-sync-espn-results.js`)**: (1) `findFixture` emparejaba evento ESPN → fixture por nombre SIN comprobar fecha ni liga, así que cuando football-data reprogramó el partido (ID FD `564685` → UUID `...89dcd`, status `TIMED`, nueva fecha 21/10), un evento ESPN de otra fecha se le atribuyó; (2) `parseInt(homeComp.score || "0")` fabricaba un 0-0 válido cuando el evento no traía marcador. Resultado: entrada `completed: true, result 0-0` para un partido **no jugado**, commiteada por el cron (`26b1590`).
@@ -69,7 +77,7 @@
 
 - **Branch:** `main` (desplegado a GitHub Pages).
 - **Build Status:** `npm run build` y `npx tsc --noEmit` pasando con 0 errores (24 rutas estáticas generadas).
-- **Deploy:** GitHub Actions activado con éxito en `main` (`deploy.yml`).
+- **Deploy:** GitHub Actions activado con éxito en `main` (`deploy.yml`). Los crons **disparan el deploy al final** (`gh workflow run deploy.yml --ref main`, `permissions: actions: write`) porque los pushes del bot con `GITHUB_TOKEN` no generan eventos de workflow.
 - **Automatización & Superviviente:**
   - Cron de resultados y puntos cada 2h (`auto-evaluate-matches.yml`) con fail-closed en persistencia Supabase.
   - Cron mensual de plantillas el 1ro de cada mes (`auto-sync-squads.yml`) para actualizar traspasos.
@@ -82,6 +90,13 @@
 - **Pendiente manual:** activar *leaked password protection* (HaveIBeenPwned) — **requiere plan Pro**; el proyecto está en **Free**. La config de Auth vive en GoTrue (no en Postgres): solo por dashboard o Management API (`PATCH /v1/projects/<ref>/config/auth`).
 
 ## Cambios Recientes
+
+- **2026-10-17** — **Fix: producción no se sincronizaba con los datos del cron (drift de 3 días)**:
+  - **Síntoma:** `main` al día, pero `futbolcamisetapasion.com/data/*.json` servía datos del 14/10 (verificado por md5).
+  - **Causa raíz:** `deploy.yml` solo escucha `push`; los pushes de `github-actions[bot]` con `GITHUB_TOKEN` **no generan eventos de workflow**. El commit entraba a `main` y el deploy nunca se disparaba.
+  - **Fix (PR #1, `24df969`):** en `auto-evaluate-matches.yml` y `auto-sync-squads.yml` → `permissions: actions: write` + step final condicional (`changed == 'true'`) con `gh workflow run deploy.yml --ref main`. `workflow_dispatch` es la excepción que `GITHUB_TOKEN` sí puede disparar → **sin PAT**.
+  - **Verificado end-to-end en producción:** cron `39059197930` (206 pts) → commit `72d8aef` → dispatch deploy `39059225585` → **success**; md5 de los 4 JSON OK.
+  - **Docs:** README (Automatización + Secrets + Historial), AGENTS.md (sección de diagnóstico), CLAUDE.md, DISASTER_RECOVERY_AND_SCHEMA.md, esta memoria.
 
 - **2026-10-13/14** — **Endurecimiento integral aplicado y verificado en PRODUCCIÓN + reglas nuevas + fixes del cron**:
   - **Hallazgo crítico:** la base de **producción** (`ilkndkqcmxvlufxaugog`) **no tenía aplicada** la migración `2026-09-16_security_hardening.sql` (faltaban funciones/triggers/políticas) y había **políticas legacy duplicadas** de `prediction_scorers`/`profiles` que, al sumarse por OR, habrían anulado el candado de tiempo. Se aplicó y verificó con el MCP de Supabase (migraciones + advisors + pruebas de rol authenticated/anon con `BEGIN/ROLLBACK`).

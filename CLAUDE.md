@@ -13,7 +13,7 @@ Contexto para agentes de código. Para documentación completa ver [README.md](.
 - TypeScript 5 estricto
 - Supabase (Auth + PostgreSQL con RLS)
 - ESPN API (tablas, goleadores, partidos en vivo)
-- Cron GitHub Actions cada 2h (`auto-evaluate-matches.yml`) + Cron mensual de plantillas (`auto-sync-squads.yml`)
+- Cron GitHub Actions cada 2h (`auto-evaluate-matches.yml`) + Cron mensual de plantillas (`auto-sync-squads.yml`). **Ambos disparan el deploy de Pages al final** (`gh workflow run deploy.yml`, `permissions: actions: write`): los pushes del bot con `GITHUB_TOKEN` no disparan workflows, así que el deploy hay que dispararlo explícitamente.
 
 ## Archivos Más Importantes
 
