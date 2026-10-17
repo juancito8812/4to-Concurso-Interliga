@@ -32,6 +32,8 @@ Contexto para agentes de código. Para documentación completa ver [README.md](.
 | `src/data/officialPlayers.json` | 7.196 jugadores clasificados por posición |
 | `scripts/auto-sync-espn-results.js` | Cron: ESPN → evaluación → Supabase (service role key). Empareja por nombre ±3 días, score explícito, penales con id ESPN, survivors en orden cronológico y sync dual src↔public |
 | `scripts/validate-fixtures.js` | Validador de calendario: cruces FD/ESPN, canónicos, anti-duplicados y sync src↔public data (md5) |
+| `scripts/verify-engine-parity.js` | Paridad JS↔TS: compila `src/lib/scoring.ts` en memoria y lo compara campo por campo con `scripts/lib/score-utils.js` sobre los pronósticos reales + casos límite (exit 1 si divergen) |
+| `docs/SCORING_LOGIC.md` | **Fuente única de verdad** de la puntuación (4 reglas, matching de goleadores, candados de DB, anti-farmeo) |
 | `scripts/sync-player-squads.js` | Cron mensual: sync plantillas oficiales post-mercado |
 || `scripts/verify-logic.js` | 59 checks de lógica de negocio (incluye scoring, survivor, anti-farmeo) |
 || `scripts/recalcular-puntos.js` | Recalcula puntos de pronósticos evaluados descartando Regla #5 legacy |
@@ -52,6 +54,7 @@ npm run build              # Build estático
 npm run dev                # Desarrollo local
 npm run lint               # ESLint
 npx tsc --noEmit           # Type-checking
+npm run verify             # OBLIGATORIO antes de push: 59 checks + paridad de motores JS↔TS
 node scripts/verify-logic.js         # 59 checks de lógica
 node scripts/validate-fixtures.js    # Validación de calendario + sync src↔public (0 errores)
 node scripts/test-survivor.js        # Tests superviviente (12/12)

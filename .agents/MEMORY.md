@@ -5,8 +5,8 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 11 competiciones europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages con dominio personalizado `futbolcamisetapasion.com` (Cloudflare DNS), sin basePath. Workflow `.github/workflows/deploy.yml`.
-- **Última sesión:** 2026-10-17 (fix del hueco cron→deploy: los pushes del bot con `GITHUB_TOKEN` no disparaban `deploy.yml`, así que producción acumuló 3 días de drift; ahora ambos crons disparan el deploy al final y el ciclo `sync → commit → dispatch → deploy` quedó verificado end-to-end en producción)
-- **Versión de memoria:** 2.7
+- **Última sesión:** 2026-10-17 (lógica de puntuación fijada: `docs/SCORING_LOGIC.md` como fuente única de verdad + `verify-engine-parity.js` que prueba que el motor JS y el TS dan los mismos puntos — antes `verify-logic.js` solo probaba el JS; candado en CI y en el deploy)
+- **Versión de memoria:** 2.8
 
 ## Arquitectura
 
@@ -91,6 +91,11 @@
 
 ## Cambios Recientes
 
+- **2026-10-17** — **Lógica de puntuación fijada de una vez por todas (rama `fix/logica-puntuacion-definitiva`)**:
+  - **Causa raíz del "cambiaron los puntos":** la regla vive en **dos motores** (`scripts/lib/score-utils.js` JS para el cron, `src/lib/scoring.ts` TS para el frontend) y `verify-logic.js` **solo probaba el JS** → una divergencia frontend↔cron pasaba desapercibida. Además `assign-points.js` aceptaba los puntos **por parámetro** (vector de puntos arbitrarios).
+  - **Fix:** `docs/SCORING_LOGIC.md` (**fuente única de verdad**, 4 reglas, máx teórico **15 pts**, cap 5 goleadores/equipo, candados DB, anti-farmeo) + `scripts/verify-engine-parity.js` (compara ambos motores campo por campo sobre los 57 pronósticos reales = 206 pts y exige reproducir el `points` guardado; falla con exit 1 si divergen) + `.github/workflows/verify.yml` (verify-logic + paridad + `tsc` + ESLint en cada PR) + `npm run verify` **antes del build** en `deploy.yml` (una regla rota bloquea el deploy) + `assign-points.js` neutralizado (LEGACY, ignora `pointsAwarded`, calcula con `calculateScore`).
+  - **Verificado:** `verify-logic.js` **59/59** · paridad **20/20 (76 casos, 206 pts reales)** · `tsc --noEmit` 0 errores · ESLint 0 errores · `npm run build` OK.
+  - **Falso positivo descartado:** el "Barcelona-Getafe sin puntos" (kickoff 10/10, `points = NULL`) es la **regla anti-farmeo** funcionando: esa predicción se creó el 12/10, **2 días después del pitazo** → se descarta por diseño. La otra predicción del mismo partido (creada el 06/10) cobró sus 3 pts correctamente.
 - **2026-10-17** — **Fix: producción no se sincronizaba con los datos del cron (drift de 3 días)**:
   - **Síntoma:** `main` al día, pero `futbolcamisetapasion.com/data/*.json` servía datos del 14/10 (verificado por md5).
   - **Causa raíz:** `deploy.yml` solo escucha `push`; los pushes de `github-actions[bot]` con `GITHUB_TOKEN` **no generan eventos de workflow**. El commit entraba a `main` y el deploy nunca se disparaba.

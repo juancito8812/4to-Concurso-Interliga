@@ -156,6 +156,29 @@ gh workflow run deploy.yml --ref main
 
 **Pitfall:** `workflow_dispatch` solo funciona si el archivo del workflow existe en la **rama por defecto**. Disparar un workflow nuevo desde una rama secundaria da `HTTP 404: Not Found`.
 
+### Puntos mal otorgados / ranking que no cuadra (incidente oct-2026)
+
+**Síntoma:** "cambiaron los puntos" — el ranking muestra un total y la base guarda otro, sin que nadie tocara la regla.
+
+**Causa raíz típica:** la regla de puntuación vive en **DOS motores** — `scripts/lib/score-utils.js` (JS, lo usa el cron) y `src/lib/scoring.ts` (TS, lo usa el frontend). `verify-logic.js` **solo probaba el JS**, así que una divergencia entre ambos pasaba desapercibida.
+
+**Fix:** `docs/SCORING_LOGIC.md` es la **fuente única de verdad** ("si el código contradice este documento, el bug está en el código") y `scripts/verify-engine-parity.js` compara ambos motores campo por campo contra los pronósticos reales de `officialEvaluatedPredictions.json` — debe reproducir el `points` guardado exactamente — más casos límite. El CI lo corre en cada PR (`.github/workflows/verify.yml`) y `deploy.yml` antes del build: una regla rota **bloquea el deploy**.
+
+Diagnosticar:
+```bash
+npm run verify                       # 59 checks + paridad (es lo que corre el CI)
+node scripts/verify-engine-parity.js # solo paridad, salida detallada
+```
+
+**Antes de reportar "no se otorgaron los puntos":** un `points = NULL` en un partido terminado casi siempre es la **regla anti-farmeo** (`isPredictionOnTime()` descarta pronósticos hechos después del pitazo — correcto por diseño). Comparar `created_at` de la predicción contra `match_date` del partido:
+```bash
+curl -s "$URL/rest/v1/predictions?select=id,user_id,points,created_at&match_id=eq.<match_id>" \
+  -H "apikey: $ANON" -H "Authorization: Bearer $ANON"
+```
+Un fallo REAL es una predicción creada **antes** del pitazo que quedó con `points = NULL`.
+
+**Nunca pases puntos por parámetro:** el motor los calcula. `scripts/assign-points.js` es LEGACY (ningún workflow lo invoca) y fue reescrito para ignorar cualquier `pointsAwarded` y llamar a `calculateScore()`.
+
 ### Estado del proyecto (vía MCP)
 
 `supabase_get_project` → `status: ACTIVE_HEALTHY`. La DB se puede consultar con `supabase_execute_sql` (service role implícito).
