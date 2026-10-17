@@ -1,0 +1,57 @@
+-- ============================================================================
+-- Limpieza de rendimiento: índices sin uso + policy SELECT redundante
+-- Fecha: 2026-10-17
+-- Contexto: avisos restantes del advisor de Supabase (performance) tras el
+--   fix de RLS anti-copia (2026-10-17_rls_anti_copia_predictions.sql).
+--
+-- 1) Índices nunca usados (idx_scan = 0 desde el último reset de estadísticas):
+--      - public.idx_players_name      (players.name)   -> ninguna query filtra
+--        por nombre; pronosticar filtra por team (.in("team", ...)) y ya usa
+--        idx_players_team (159 scans).
+--      - public.idx_profiles_team_id  (profiles.team_id) -> solo se LEE team_id,
+--        nunca se filtra por él; las lecturas van por user_id (profiles_user_id_key).
+--    Ambos solo costaban escritura (INSERT/UPDATE) y espacio.
+--
+-- 2) Policy SELECT duplicada en public.profiles:
+--      - "Public profiles are viewable by everyone" USING (true)
+--      - "Users can view own profile"               USING (auth.uid() = user_id)
+--    La segunda está subsumida por la primera (y profiles no tiene PII), así que
+--    se elimina para dejar una sola policy permisiva de SELECT.
+--    NO se toca ninguna policy de INSERT/UPDATE.
+--
+-- Idempotente: se puede re-ejecutar sin error.
+-- ============================================================================
+
+BEGIN;
+
+-- 1) Índices sin uso ---------------------------------------------------------
+DROP INDEX IF EXISTS public.idx_players_name;
+DROP INDEX IF EXISTS public.idx_profiles_team_id;
+
+-- 2) Policy SELECT redundante en profiles -----------------------------------
+DROP POLICY IF EXISTS "Users can view own profile" ON public.profiles;
+
+-- 3) Comprobación de que profiles sigue siendo legible (RLS intacto) --------
+DO $$
+DECLARE
+  n_profiles integer;
+  n_policies_select integer;
+BEGIN
+  SELECT count(*) INTO n_policies_select
+    FROM pg_policies
+   WHERE schemaname = 'public' AND tablename = 'profiles' AND cmd = 'SELECT';
+
+  IF n_policies_select < 1 THEN
+    RAISE EXCEPTION 'profiles quedaría sin policy de SELECT (n=%): abortando', n_policies_select;
+  END IF;
+
+  SELECT count(*) INTO n_profiles FROM public.profiles;
+  RAISE NOTICE 'profiles: % filas, % policy(s) SELECT tras la limpieza', n_profiles, n_policies_select;
+
+  IF EXISTS (SELECT 1 FROM pg_class c JOIN pg_namespace ns ON ns.oid = c.relnamespace
+              WHERE ns.nspname = 'public' AND c.relname IN ('idx_players_name','idx_profiles_team_id')) THEN
+    RAISE EXCEPTION 'quedaron índices sin eliminar';
+  END IF;
+END $$;
+
+COMMIT;

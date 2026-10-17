@@ -106,13 +106,13 @@ CREATE TABLE IF NOT EXISTS public.tournament_survivors (
 
 -- 3. ÍNDICES DE RENDIMIENTO (SUB-MILISEGUNDO PARA PLAN FREE)
 CREATE INDEX IF NOT EXISTS idx_profiles_user_id ON public.profiles(user_id);
-CREATE INDEX IF NOT EXISTS idx_profiles_team_id ON public.profiles(team_id);
+-- (idx_profiles_team_id eliminado el 2026-10-17: nunca usado, profiles se lee por user_id)
 
 CREATE INDEX IF NOT EXISTS idx_predictions_user_id ON public.predictions(user_id);
 CREATE INDEX IF NOT EXISTS idx_predictions_match_id ON public.predictions(match_id);
 CREATE INDEX IF NOT EXISTS idx_predictions_user_match ON public.predictions(user_id, match_id);
 
-CREATE INDEX IF NOT EXISTS idx_prediction_scorers_pred_id ON public.prediction_scorers(prediction_id);
+-- (idx_prediction_scorers_pred_id eliminado el 2026-10-17: duplicaba prediction_scorers_unique_player)
 
 CREATE INDEX IF NOT EXISTS idx_matches_league_date ON public.matches(league, match_date);
 CREATE INDEX IF NOT EXISTS idx_matches_home ON public.matches(home_team);
@@ -122,7 +122,7 @@ CREATE INDEX IF NOT EXISTS idx_matches_unfinished ON public.matches(match_date) 
 CREATE INDEX IF NOT EXISTS idx_teams_league ON public.teams(league);
 CREATE INDEX IF NOT EXISTS idx_teams_name ON public.teams(name);
 CREATE INDEX IF NOT EXISTS idx_players_team ON public.players(team);
-CREATE INDEX IF NOT EXISTS idx_players_name ON public.players(name);
+-- (idx_players_name eliminado el 2026-10-17: nunca usado, players se filtra por team)
 
 CREATE INDEX IF NOT EXISTS idx_tournament_survivors_user_slug ON public.tournament_survivors(user_id, tournament_slug);
 CREATE INDEX IF NOT EXISTS idx_tournament_survivors_active_team ON public.tournament_survivors(active_team_id);
