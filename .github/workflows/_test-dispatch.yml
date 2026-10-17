@@ -15,6 +15,9 @@ jobs:
   test-dispatch:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Dispatch Pages deploy with GITHUB_TOKEN
         run: |
           gh workflow run deploy.yml --ref main
