@@ -102,10 +102,10 @@ export default function UserPredictionsModal({
             .from("matches")
             .select("id, home_team, away_team, match_date, league, result_home, result_away"),
           getUserCupSurvivors(userId).catch(() => ({})),
-          supabase
-            .from("predictions")
-            .select("id, user_id, match_id, home_score, away_score, points")
-            .eq("user_id", userId),
+          // RPC con proyección segura: devuelve la fila aunque el partido siga
+          // abierto (para pintar la tarjeta 🔒) pero con marcador y puntos en
+          // NULL mientras no haya empezado. Ver migración 2026-10-17.
+          supabase.rpc("get_public_predictions", { p_user_id: userId }),
           loadData<Array<{
             id: string;
             home_team?: string;
@@ -193,6 +193,7 @@ export default function UserPredictionsModal({
           away_score: number;
           points?: number | null;
           pointsDetails?: string[];
+          hidden?: boolean;
         }> = [];
 
         const allEvalPreds = Array.isArray(dynEvalPreds) ? dynEvalPreds : [];
@@ -218,7 +219,15 @@ export default function UserPredictionsModal({
 
         // Supabase predictions for this user
         if (dbPredsRes?.data) {
-          dbPredsRes.data.forEach((p) => {
+          dbPredsRes.data.forEach((p: {
+            id: string;
+            user_id: string;
+            match_id: string;
+            home_score: number | null;
+            away_score: number | null;
+            points: number | null;
+            is_hidden?: boolean;
+          }) => {
             const existingIdx = userPreds.findIndex(
               (up) => up.match_id === p.match_id || up.id === p.id
             );
@@ -231,10 +240,13 @@ export default function UserPredictionsModal({
                 id: p.id,
                 user_id: p.user_id,
                 match_id: p.match_id,
-                home_score: p.home_score,
-                away_score: p.away_score,
+                // En partidos abiertos el RPC devuelve null (anti-copia); la
+                // tarjeta 🔒 no usa estos valores, así que 0 es seguro.
+                home_score: p.home_score ?? 0,
+                away_score: p.away_score ?? 0,
                 points: p.points ?? null,
                 pointsDetails: [],
+                hidden: p.is_hidden === true,
               });
             }
           });
@@ -375,7 +387,10 @@ export default function UserPredictionsModal({
 
           // Regla Anti-Copia: Un partido se revela si ya finalizó, o si su hora de inicio ya pasó (diffMin <= 1)
           const isPastOrLocked = matchDateMs > 0 ? diffMin <= 1 : false;
-          const isLocked = isFinished || isPastOrLocked;
+          // hidden = el RPC no devolvió marcador (partido abierto, anti-copia):
+          // se pinta la tarjeta 🔒 siempre, aunque el mapa de partidos no
+          // resuelva la fecha.
+          const isLocked = pred.hidden === true || isFinished || isPastOrLocked;
 
           const predScorers = scorersMap[pred.id] || [];
 
