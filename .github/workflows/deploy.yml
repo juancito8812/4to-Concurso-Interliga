@@ -30,6 +30,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify scoring logic (bloquea el deploy si la regla se rompe)
+        run: npm run verify
+
+      - name: TypeScript
+        run: npx tsc --noEmit
+
       - name: Build with Next.js
         run: npm run build
         # NEXT_PUBLIC_* se inlinea en el bundle público. La key de football-data.org

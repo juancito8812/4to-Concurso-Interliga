@@ -1,0 +1,40 @@
+name: Verify scoring logic
+
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Bloquea el merge/deploy si la regla de puntuación se rompe o si los dos
+      # motores (scripts/lib/score-utils.js y src/lib/scoring.ts) divergen.
+      - name: Verificar lógica de negocio (59 checks)
+        run: node scripts/verify-logic.js
+
+      - name: Verificar paridad de motores JS <-> TS
+        run: node scripts/verify-engine-parity.js
+
+      - name: TypeScript
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npm run lint

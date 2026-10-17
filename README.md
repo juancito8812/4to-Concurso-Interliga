@@ -181,9 +181,10 @@ scripts/
 ├── sync-player-squads.js           # Completa plantillas con rosters ESPN reales
 ├── enrich_official_squads.py       # Enriquecimiento y auditoría de plantillas 2026/27 (7.196 jugadores)
 ├── rebuild-eval-preds.js           # Reconstruye predicciones evaluadas desde Supabase
-├── verify-logic.js                 # 59 checks de lógica de negocio, scoring y seguridad RLS
-├── evaluate-matches.js             # Evaluador CLI de partidos y puntos
-├── assign-points.js                # Asignación directa de pronósticos y puntos
+├── verify-logic.js                 # 59 checks del motor JS (scoring, survivor, anti-farmeo, RLS)
+├── verify-engine-parity.js         # Paridad JS ↔ TS sobre datos reales + 18 casos límite (NUEVO)
+├── evaluate-matches.js             # Evaluador CLI de partidos y puntos (usa el motor oficial)
+├── assign-points.js                # LEGACY: calcula con el motor oficial; nunca lo invoca un workflow
 ├── test-survivor.js                # Suite de pruebas del sistema de superviviente (12/12)
 └── lib/
     └── score-utils.js              # Módulo compartido CJS (normalización, scoring, survivor)
@@ -193,6 +194,7 @@ supabase/
 
 .github/workflows/
 ├── deploy.yml                      # Build y deploy a GitHub Pages (push a main)
+├── verify.yml                      # Verifica la lógica de puntuación en cada PR (bloquea el merge)
 ├── auto-evaluate-matches.yml       # Cron cada 2h: sync ESPN + evaluar + persistir
 └── auto-sync-squads.yml            # Cron mensual (1ro de cada mes): sync plantillas oficiales
 
@@ -255,9 +257,11 @@ public/
 | **+2** | Marcador exacto acertado (ej. 2-1) |
 | **+1** | Diferencia de 1 gol total en el marcador (ej. predije 2-1 y fue 2-0) |
 | **+1** | Por cada autor de gol acertado (nombre) |
-|| **---** | *Regla 5 eliminada el 20/09/2026* (cantidad exacta de goles del líder goleador) |
+| **—** | ~~Regla 5: cantidad exacta de goles del líder goleador~~ **ELIMINADA** (16/09/2026) |
 
 > **Máximo posible por partido:** +3 (signo) + 2 (exacto) + 10 (5 goleadores por equipo) = **15 puntos** (teórico; limitado por los goleadores reales).
+
+> 📌 **Fuente única de verdad:** la especificación normativa completa (reglas, matching, candados de DB, anti-farmeo y **prueba de paridad entre los dos motores**) está en **[`docs/SCORING_LOGIC.md`](docs/SCORING_LOGIC.md)**. Si el código contradice ese documento, el bug es en el código.
 
 > **Matching inteligente de goleadores:** El motor de scoring usa matching fonético (`arePlayersMatching`) que acepta variantes de escritura — iniciales (`N. Williams` = `Nico Williams`), acentos (`Gonçalo Ramos` = `Gonzalo Ramos`), y variaciones ortográficas (ç/z/s → s, b/v → b). Los nombres se normalizan antes de comparar.
 
@@ -454,7 +458,9 @@ npx tsc --noEmit
 ### Verificaciones de Lógica y Calendario
 
 ```bash
-node scripts/verify-logic.js            # 59 checks de lógica de negocio
+npm run verify                          # 59 checks (motor JS) + paridad JS ↔ TS  [OBLIGATORIO]
+node scripts/verify-logic.js            # 59 checks de lógica de negocio (motor JS)
+node scripts/verify-engine-parity.js    # Paridad entre el motor JS y el motor TS del frontend
 node scripts/validate-fixtures.js       # Validación cruzada del calendario contra fuentes reales
 node scripts/test-survivor.js           # Tests del sistema de superviviente (12/12)
 ```
@@ -534,7 +540,7 @@ El despliegue es completamente automático vía **GitHub Actions** al hacer push
 
 ```bash
 npx tsc --noEmit              # Type checking
-node scripts/verify-logic.js  # 59 checks de lógica (incluye scoring, survivor, anti-farmeo)
+npm run verify                # 59 checks + paridad JS ↔ TS (incluye scoring, survivor, anti-farmeo)
 node scripts/test-survivor.js # 12/12 tests survivor
 npm run build                 # Build completo (24 rutas estáticas)
 ```
@@ -607,7 +613,7 @@ curl "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?date
 ### Verificación rápida de salud del proyecto
 
 ```bash
-node scripts/verify-logic.js              # 59 checks
+npm run verify                            # 59 checks + paridad JS ↔ TS
 node scripts/validate-fixtures.js         # 0 errores
 node scripts/test-survivor.js             # 12/12 PASS
 npx tsc --noEmit                          # Type-checking
@@ -625,6 +631,24 @@ Eliminar cuentas de testing/obsoletas. **No registrar emails inventados.**
 ---
 
 ## 📋 Historial de Cambios
+
+### 2026-10-17 — Lógica de puntuación: fuente única de verdad + prueba de paridad
+
+**Descripción:** se consolidó la regla de puntuación para que no vuelva a haber divergencias en el otorgamiento de puntos. Se detectó que la regla vivía en **dos motores** (`scripts/lib/score-utils.js` JS y `src/lib/scoring.ts` TS) y que `verify-logic.js` **sólo probaba el JS** — una divergencia entre frontend y cron pasaba desapercibida (síntoma: el ranking mostraba un número y la base guardaba otro). Además, `assign-points.js` aceptaba los puntos **por parámetro** (vector de puntos arbitrarios).
+
+**Cambios:**
+
+| Archivo | Cambio |
+|---------|--------|
+| `docs/SCORING_LOGIC.md` | **NUEVO** — especificación normativa: 4 reglas, matching de goleadores, cap 5/equipo, candados de DB, anti-farmeo e historial |
+| `scripts/verify-engine-parity.js` | **NUEVO** — compara los dos motores campo por campo sobre los pronósticos reales (exige reproducir el `points` guardado) + 18 casos límite. Falla con exit 1 si divergen |
+| `.github/workflows/verify.yml` | **NUEVO** — en cada PR y push a `main`: `verify-logic` + `verify-engine-parity` + `tsc` + ESLint |
+| `.github/workflows/deploy.yml` | Añadido `npm run verify` + `tsc --noEmit` **antes** del build → una regla rota bloquea el deploy |
+| `package.json` | `verify` / `verify:logic` / `verify:parity`; `lint` corregido (`next lint` → `eslint .`, que estaba roto) |
+| `scripts/assign-points.js` | Legacy neutralizado: calcula con el motor oficial e **ignora** los puntos por parámetro |
+| `README.md` | Enlace a la spec normativa y comandos actualizados |
+
+**Verificación:** `verify-logic.js` **59/59** · paridad **20/20 (76 casos, 206 pts reales)** · `tsc` 0 errores · ESLint 0 errores (67 warnings preexistentes).
 
 ### 2026-10-17 — Fix: el cron no desplegaba a producción (drift de datos)
 
@@ -649,7 +673,7 @@ Eliminar cuentas de testing/obsoletas. **No registrar emails inventados.**
 - Cron real `39059197930`: sync ESPN (206 pts) → commit `72d8aef` → dispatch del deploy `39059225585` → **success** ✅
 - md5 de los 4 JSON contra producción: **OK** ✅
 
-**Números clave:** deploy verificado `39059225585` · `verify-logic.js` 59/59 · 4/4 JSON sincronizados · 3 workflows en `main` · PR #1 (`24df969`).
+**Números clave:** deploy verificado `39059225585` · `verify-logic.js` 59/59 · **paridad JS↔TS 20/20 (76 casos)** · 4/4 JSON sincronizados · PR #1 (`24df969`).
 
 ### 2026-10-13 — Endurecimiento integral de seguridad (base + cliente + cron)
 

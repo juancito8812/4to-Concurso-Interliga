@@ -1,4 +1,9 @@
+// ⚠️ HERRAMIENTA LEGACY (2026-10-17) — NO forma parte del pipeline automático.
+// Nunca fue invocada por ningún workflow. Los puntos NO se aceptan por parámetro:
+// se calculan SIEMPRE con el motor oficial (`score-utils.js`), para que sea
+// imposible otorgar puntos arbitrarios. Ver docs/SCORING_LOGIC.md.
 const { createClient } = require("@supabase/supabase-js");
+const { calculateScore } = require("./lib/score-utils.js");
 
 // Keys obligatorias — no usar fallbacks hardcodeados
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
@@ -11,7 +16,17 @@ if (!supabaseUrl || !supabaseAnonKey) {
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 async function assignPointsToUser(username, matchData, predictionData, pointsAwarded) {
-  console.log(`\nAsignando puntos a usuario: ${username}...`);
+  if (pointsAwarded !== undefined) {
+    console.warn(
+      "⚠️ Se ignoró 'pointsAwarded': los puntos se calculan con el motor oficial (no se aceptan por parámetro)."
+    );
+  }
+  const breakdown = calculateScore(
+    { home_score: predictionData.home_score, away_score: predictionData.away_score, scorers: predictionData.scorers || [] },
+    { result_home: matchData.result_home, result_away: matchData.result_away, scorers: matchData.scorers || [] }
+  );
+  const puntos = breakdown.totalPoints;
+  console.log(`\nAsignando puntos a usuario: ${username}... (motor oficial: ${puntos} pts)`);
 
   // 1. Find profile
   const { data: profiles, error: pErr } = await supabase
@@ -65,7 +80,7 @@ async function assignPointsToUser(username, matchData, predictionData, pointsAwa
   }
 
   // 3. Insert or update prediction
-  console.log(`Guardando pronóstico: ${predictionData.home_score} - ${predictionData.away_score} con ${pointsAwarded} puntos...`);
+  console.log(`Guardando pronóstico: ${predictionData.home_score} - ${predictionData.away_score} con ${puntos} puntos...`);
   const { data: pred, error: predErr } = await supabase
     .from("predictions")
     .upsert({
@@ -73,7 +88,7 @@ async function assignPointsToUser(username, matchData, predictionData, pointsAwa
       match_id: matchId,
       home_score: predictionData.home_score,
       away_score: predictionData.away_score,
-      points: pointsAwarded,
+      points: puntos,
     }, { onConflict: "user_id,match_id" })
     .select()
     .single();
@@ -98,7 +113,7 @@ async function assignPointsToUser(username, matchData, predictionData, pointsAwa
     console.log(`✓ Goleadores asociados: ${scorersToInsert.length}`);
   }
 
-  console.log(`\n🎉 ¡PUNTOS ASIGNADOS CON ÉXITO A ${profile.display_name}! Total: +${pointsAwarded} pts`);
+  console.log(`\n🎉 ¡PUNTOS ASIGNADOS CON ÉXITO A ${profile.display_name}! Total: +${puntos} pts`);
   return true;
 }
 

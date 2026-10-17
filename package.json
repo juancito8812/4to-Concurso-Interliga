@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "verify:logic": "node scripts/verify-logic.js",
+    "verify:parity": "node scripts/verify-engine-parity.js",
+    "verify": "npm run verify:logic && npm run verify:parity"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.4",
