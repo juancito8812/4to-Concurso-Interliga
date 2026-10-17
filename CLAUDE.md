@@ -35,8 +35,8 @@ Contexto para agentes de código. Para documentación completa ver [README.md](.
 | `scripts/verify-engine-parity.js` | Paridad JS↔TS: compila `src/lib/scoring.ts` en memoria y lo compara campo por campo con `scripts/lib/score-utils.js` sobre los pronósticos reales + casos límite (exit 1 si divergen) |
 | `docs/SCORING_LOGIC.md` | **Fuente única de verdad** de la puntuación (4 reglas, matching de goleadores, candados de DB, anti-farmeo) |
 | `scripts/sync-player-squads.js` | Cron mensual: sync plantillas oficiales post-mercado |
-|| `scripts/verify-logic.js` | 59 checks de lógica de negocio (incluye scoring, survivor, anti-farmeo) |
-|| `scripts/recalcular-puntos.js` | Recalcula puntos de pronósticos evaluados descartando Regla #5 legacy |
+| `scripts/verify-logic.js` | 59 checks de lógica de negocio (incluye scoring, survivor, anti-farmeo) |
+| `scripts/recalcular-puntos.js` | Recalcula puntos de pronósticos evaluados descartando Regla #5 legacy |
 | `supabase/schema.sql` | DDL maestro: 8 tablas, RLS endurecida, triggers (`points`, `team-lock`, `scorers`), funciones de elegibilidad y RPCs |
 
 ## Base de Datos
@@ -60,3 +60,5 @@ node scripts/validate-fixtures.js    # Validación de calendario + sync src↔pu
 node scripts/test-survivor.js        # Tests superviviente (12/12)
 node scripts/test-group-matches.js   # Smoke tests de agrupación por jornada (9/9)
 ```
+
+**Candado de puntuación (desde 2026-10-17):** `npm run verify` corre en `.github/workflows/verify.yml` (cada PR y cada push a `main`) y otra vez dentro de `deploy.yml` **antes** del build — si la lógica se rompe o los dos motores divergen, el deploy no publica. La regla vive en DOS motores (`scripts/lib/score-utils.js` para el cron, `src/lib/scoring.ts` para el frontend) y solo `verify-engine-parity.js` prueba que coincidan.
