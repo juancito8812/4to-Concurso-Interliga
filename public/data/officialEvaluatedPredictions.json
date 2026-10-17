@@ -1921,5 +1921,25 @@
         "team": "away"
       }
     ]
+  },
+  {
+    "id": "a43164cc-07e3-4c3f-af4e-b295e05e2cdc",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "ARS",
+    "match_id": "00000000-0000-4000-8000-000000088de0",
+    "home_score": 0,
+    "away_score": 2,
+    "created_at": "2026-10-17T19:07:57.753412+00:00",
+    "scorers": []
+  },
+  {
+    "id": "ca78b108-ed3f-4be6-a213-b52faeb8baed",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "ARS",
+    "match_id": "00000000-0000-4000-8000-000017f4bdb0",
+    "home_score": 1,
+    "away_score": 2,
+    "created_at": "2026-10-17T19:31:29.66288+00:00",
+    "scorers": []
   }
 ]
