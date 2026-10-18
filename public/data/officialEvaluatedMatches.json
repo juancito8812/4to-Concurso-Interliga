@@ -8887,5 +8887,196 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089deb",
+    "espn_id": "401882840",
+    "home_team": "Osasuna",
+    "away_team": "Racing Santander",
+    "match_date": "2026-10-18T12:00Z",
+    "league": "LaLiga",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Ante Budimir",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Asier Osambela",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de8",
+    "espn_id": "401882845",
+    "home_team": "Celta Vigo",
+    "away_team": "Alavés",
+    "match_date": "2026-10-18T14:15Z",
+    "league": "LaLiga",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Ferran Jutglà",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Javi Rodríguez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Hugo Novoa",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088ddc",
+    "espn_id": "401879263",
+    "home_team": "Bournemouth",
+    "away_team": "Sunderland",
+    "match_date": "2026-10-18T13:00Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Marcus Tavernier",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Evanilson",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088de1",
+    "espn_id": "401879261",
+    "home_team": "Brighton",
+    "away_team": "Crystal Palace",
+    "match_date": "2026-10-18T13:00Z",
+    "league": "Premier League",
+    "result_home": 5,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Diego Gómez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Yasin Ayari",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Charalambos Kostoulas",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jack Hinshelwood",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088ddd",
+    "espn_id": "401879260",
+    "home_team": "Leeds United",
+    "away_team": "Manchester United",
+    "match_date": "2026-10-18T13:00Z",
+    "league": "Premier League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Bryan Mbeumo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Dominic Calvert-Lewin",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f1",
+    "espn_id": "401874774",
+    "home_team": "Fiorentina",
+    "away_team": "Como",
+    "match_date": "2026-10-18T13:00Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Mattia Liberali",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Nico Paz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Marin Pongracic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Anastasios Douvikas",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a243",
+    "espn_id": "401884771",
+    "home_team": "Bayer Leverkusen",
+    "away_team": "Freiburg",
+    "match_date": "2026-10-18T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Derry Scherhant",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ibrahim Maza",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Patrik Schick",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
