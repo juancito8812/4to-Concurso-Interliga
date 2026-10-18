@@ -39,7 +39,7 @@
 | **Lenguaje** | TypeScript 5 en modo estricto |
 | **Base de Datos & Auth** | [Supabase](https://supabase.com/) — Autenticación + PostgreSQL con RLS y service role |
 | **Datos de Fútbol** | ESPN API pública (tablas, goleadores, en vivo) + football-data.org (fixtures) |
-| **Calendario Oficial** | `public/data/officialFixtures.json` — **1.926 partidos reales** pre-sincronizados (fetch dinámico) |
+| **Calendario Oficial** | `src/data/officialFixtures.json` (espejo `public/data/`) — **1.926 partidos reales** pre-sincronizados de **9 competiciones** (Premier 380, LaLiga 380, Serie A 380, Bundesliga 306, Champions 144, Europa 144, Conference 108, Copa Italia 36, DFB-Pokal 48). **FA Cup y Copa del Rey NO están en el archivo**: se consultan en vivo contra ESPN |
 | **Plantillas Oficiales** | `public/data/officialPlayers.json` — **7.196 jugadores** clasificados por posición (fetch dinámico, sync mensual) |
 | **Deploy** | GitHub Actions → GitHub Pages, dominio personalizado (Cloudflare DNS) |
 | **PWA** | Service Worker v2 offline-first con precaching de datos, manifest, icon SVG |
@@ -71,8 +71,8 @@
 ### Ranking Multiusuario en Vivo
 - Tabla de clasificación global con datos en tiempo real desde Supabase.
 - **Podio de Honor** con medallas 🥇🥈🥉, puntos y escudos oficiales.
-- **Transparencia y Desglose de Puntos:** Al tocar cualquier participante o líder del podio, se despliega una ventana emergente (`UserPredictionsModal.tsx`) con sus pronósticos, marcadores predichos vs reales, goleadores y el desglose de puntos regla por regla.
-- **Regla Anti-Copia:** Los partidos que aún no han comenzado ocultan automáticamente el pronóstico (`🔒 ? - ?`) y se revelan 1 minuto antes del pitazo para proteger el juego limpio.
+- **Transparencia y Desglose de Puntos:** Al tocar cualquier participante o líder del podio, se despliega una ventana emergente (`UserPredictionsModal.tsx`) que carga los pronósticos por la RPC `get_public_predictions(p_user_id)` (`SECURITY DEFINER`). Para partidos **ya iniciados** muestra marcadores predichos vs reales, goleadores y el desglose de puntos regla por regla; para partidos **abiertos** devuelve los datos **enmascarados** (`points`/marcador en `NULL`, `is_hidden = TRUE`).
+- **Regla Anti-Copia (impuesta en la base de datos, 2026-10-17):** la policy pública de lectura de `predictions`/`prediction_scorers` solo permite leer partidos **ya iniciados** — con la anon key por REST ya no se filtran los pronósticos de partidos abiertos. En la UI esos partidos siguen ocultos (`🔒 ? - ?`) y se revelan **1 minuto antes** del pitazo (`is_match_open_for_prediction`). Efecto aceptado: el ranking solo cuenta pronósticos de partidos iniciados; **la puntuación no cambia**.
 - Búsqueda instantánea por nombre de usuario.
 
 ### Superviviente en Copas Knockout
@@ -170,7 +170,7 @@ src/
 │   ├── leagueConfig.ts             # Normalizador canónico de ligas, torneos y equipos
 │   ├── footballData.ts             # Cliente football-data.org + plantillas oficiales (loadData)
 │   ├── espnApi.ts                  # Cliente ESPN API para tablas, goleadores y partidos
-│   ├── espnResultsFetcher.ts       # Partidos finalizados ESPN en vivo (caché 30s, rango 3 días)
+│   ├── espnResultsFetcher.ts       # Partidos finalizados ESPN en vivo (caché 30s; últimos 3 días = una petición por día: ESPN solo acepta `?dates=YYYYMMDD`)
 │   └── scoring.ts                  # Motor de cálculo y auditoría de puntuación
 
 scripts/
@@ -182,15 +182,18 @@ scripts/
 ├── enrich_official_squads.py       # Enriquecimiento y auditoría de plantillas 2026/27 (7.196 jugadores)
 ├── rebuild-eval-preds.js           # Reconstruye predicciones evaluadas desde Supabase
 ├── verify-logic.js                 # 59 checks del motor JS (scoring, survivor, anti-farmeo, RLS)
-├── verify-engine-parity.js         # Paridad JS ↔ TS sobre datos reales + 18 casos límite (NUEVO)
+├── verify-engine-parity.js         # Paridad JS ↔ TS sobre datos reales + 19 casos límite (20 checks, 76 casos) (NUEVO)
 ├── evaluate-matches.js             # Evaluador CLI de partidos y puntos (usa el motor oficial)
 ├── assign-points.js                # LEGACY: calcula con el motor oficial; nunca lo invoca un workflow
 ├── test-survivor.js                # Suite de pruebas del sistema de superviviente (12/12)
+├── test-group-matches.js           # Smoke tests de agrupación de partidos
+├── recalcular-puntos.js            # Recalcula los puntos de los pronósticos evaluados
 └── lib/
     └── score-utils.js              # Módulo compartido CJS (normalización, scoring, survivor)
 
 supabase/
-└── schema.sql                      # Script DDL maestro: 8 tablas, índices, RLS, triggers
+├── schema.sql                      # Script DDL maestro: 8 tablas, índices, RLS, triggers
+└── migrations/                     # 5 migraciones incrementales (2026-09-16 → 2026-10-17): seguridad, lock de puntos/club, anti-copia y limpieza de rendimiento
 
 .github/workflows/
 ├── deploy.yml                      # Build y deploy a GitHub Pages (push a main)
@@ -205,7 +208,7 @@ public/
 ├── .nojekyll                       # Evita que GitHub Pages ignore _next/
 ├── CNAME                           # Dominio personalizado
 ├── robots.txt                      # Directivas de indexación y sitemap para Google Search Console
-├── sitemap.xml                     # Mapa de sitio con 17 URLs estáticas e indexables
+├── sitemap.xml                     # Mapa de sitio con 16 URLs estáticas (revisar: incluye `/reglas/` inexistente y slugs de liga desalineados con la app)
 ├── data/                           # JSONs de datos servidos como assets estáticos (CDN)
 │   ├── officialPlayers.json        # 7.196 jugadores (fetch dinámico, sync mensual)
 │   ├── officialFixtures.json       # 1.926 partidos (fetch dinámico)
@@ -318,7 +321,7 @@ public/
 
 ### Cron cada 2 horas (`.github/workflows/auto-evaluate-matches.yml`)
 
-1. **Sincroniza ESPN** con backfill de 3 días usando rango `dates=YYYYMMDD-YYYYMMDD` (ESPN rechaza listas separadas por coma con HTTP 400).
+1. **Sincroniza ESPN** con backfill de 3 días haciendo **una petición por día** (`?dates=YYYYMMDD` × 3). ESPN solo acepta **un día por petición**: rechaza con HTTP 400 tanto las listas separadas por coma como los rangos con guión.
 2. **Actualiza `officialEvaluatedMatches.json`** con resultados y goleadores reales (IDs canónicos determinísticos).
 3. **Evalúa todos los pronósticos** (JSON local + Supabase) aplicando las reglas oficiales de puntuación.
 4. **Persiste en Supabase** con la service role key (REST directo, bypass RLS):
@@ -598,16 +601,16 @@ El repositorio incluye el script maestro DDL y semilla SQL en [`supabase/schema.
 
 **Síntoma:** Endpoints `/auth/v1/*` sin responder pero `/rest/v1/*` funciona y el proyecto figura `ACTIVE_HEALTHY`.
 
-**Solución:** Reiniciar el proyecto con la Management API:
+**Solución:** Reiniciar el proyecto desde el dashboard (**Project Settings → General → Restart project**). La vía por Management API también sirve, pero exige un **Personal Access Token** válido (hoy el token disponible en esta máquina devuelve 401):
 ```bash
 curl -X POST "https://api.supabase.com/v1/projects/ilkndkqcmxvlufxaugog/restart" \
   -H "Authorization: Bearer <MANAGEMENT_API_TOKEN>"
 ```
-Verificar con `GET /auth/v1/health` (debe devolver 200 con `"version":"v2.x"`).
+Verificar con `GET /auth/v1/health` (debe devolver 200 con `"version":"v2.x"`). El token `sbp_...` **no** está versionado ni vive en `~/.config/opencode/opencode.jsonc` (ese archivo no existe): hay que generarlo en el dashboard → *Account → Access Tokens*.
 
 ### Resultados no sincronizados
 
-**Causa conocida (ago-2026):** ESPN cambió su API y rechaza listas de fechas separadas por coma (`?dates=20260831,20260830,...` → HTTP 400). Solo acepta fecha única o rango con guión (`?dates=YYYYMMDD-YYYYMMDD`).
+**Causa conocida (ago-2026, verificada 2026-10-17):** la API de ESPN solo acepta **un día por petición** (`?dates=YYYYMMDD` → HTTP 200). Rechaza con HTTP 400 tanto las listas separadas por coma (`?dates=20260831,20260830`) como los rangos con guión (`?dates=YYYYMMDD-YYYYMMDD`). El backfill de 3 días son 3 peticiones independientes.
 
 **Diagnóstico:**
 ```bash
@@ -617,7 +620,7 @@ gh run list --workflow=auto-evaluate-matches.yml
 
 **Verificación manual:**
 ```bash
-curl "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=20260828-20260831"
+curl "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=20260828"   # un solo día; coma y rango devuelven HTTP 400
 ```
 
 ### Verificación rápida de salud del proyecto
@@ -663,7 +666,7 @@ Eliminar cuentas de testing/obsoletas. **No registrar emails inventados.**
 | Archivo | Cambio |
 |---------|--------|
 | `docs/SCORING_LOGIC.md` | **NUEVO** — especificación normativa: 4 reglas, matching de goleadores, cap 5/equipo, candados de DB, anti-farmeo e historial |
-| `scripts/verify-engine-parity.js` | **NUEVO** — compara los dos motores campo por campo sobre los pronósticos reales (exige reproducir el `points` guardado) + 18 casos límite. Falla con exit 1 si divergen |
+| `scripts/verify-engine-parity.js` | **NUEVO** — compara los dos motores campo por campo sobre los pronósticos reales (exige reproducir el `points` guardado) + 19 casos límite (20 checks, 76 casos). Falla con exit 1 si divergen |
 | `.github/workflows/verify.yml` | **NUEVO** — en cada PR y push a `main`: `verify-logic` + `verify-engine-parity` + `tsc` + ESLint |
 | `.github/workflows/deploy.yml` | Añadido `npm run verify` + `tsc --noEmit` **antes** del build → una regla rota bloquea el deploy |
 | `package.json` | `verify` / `verify:logic` / `verify:parity`; `lint` corregido (`next lint` → `eslint .`, que estaba roto) |

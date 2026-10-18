@@ -212,11 +212,10 @@ CREATE POLICY "Admin read all" ON profiles
     SELECT user_id FROM profiles WHERE role = 'admin'
   ));
 
--- Admin puede actualizar cualquier perfil
-CREATE POLICY "Admin update all" ON profiles
-  FOR UPDATE USING (auth.uid() IN (
-    SELECT user_id FROM profiles WHERE role = 'admin'
-  ));
+-- ⚠️ NO crear policies de UPDATE amplias como la de abajo: contradice la nota de más abajo.
+-- Las escrituras de admin van por RPCs SECURITY DEFINER con chequeo de rol `admin`
+-- (o Edge Functions con la service role key).
+-- CREATE POLICY "Admin update all" ON profiles FOR UPDATE USING (...)  -- ❌ anti-patrón
 ```
 
 ### Protección de Rutas

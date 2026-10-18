@@ -40,7 +40,7 @@ estos dos. Una copia propia de la regla es un bug, aunque hoy coincida.
 
 - **los pronósticos reales evaluados** (`officialEvaluatedPredictions.json`): exige que ambos motores
   coincidan **y** que reproduzcan exactamente el `points` guardado en la base de datos;
-- **18 casos límite** (exacto, diferencia de 1, diferencia de 2, signo erróneo, goleadores con
+- **19 casos límite** (exacto, diferencia de 1, diferencia de 2, signo erróneo, goleadores con
   acentos/apellido suelto, anti-inflación, cap 5/equipo, Regla #5 eliminada, `team` ausente…).
 
 Si los dos motores divergen → **exit 1**. Es la prueba que faltaba: `verify-logic.js` sólo probaba el

@@ -29,11 +29,11 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
 3. Copiar todo el contenido, pegarlo en el editor y hacer clic en **Run**.
 4. ✅ Esto creará automáticamente:
    - Las **8 tablas** (`teams`, `profiles`, `players`, `matches`, `predictions`, `prediction_scorers`, `tournament_survivors`, `app_meta`).
-   - Los **18 índices** explícitos de alta velocidad (compuestos, parciales y FK) más las PK y restricciones únicas.
+   - Los **índices B-Tree explícitos** de alta velocidad (compuestos, parciales y FK) más las PK y restricciones únicas. *(La limpieza de rendimiento 2026-10-17 eliminó `idx_players_name`; ver Sección 4.)*
    - Las **políticas RLS endurecidas**: propiedad + cierre de pronóstico (1 min) + elegibilidad por club/copa + `points` solo del servidor.
    - **Funciones y triggers**: `handle_new_user` (registro automático), `enforce_team_lock`, `enforce_max_scorers_per_team`, `enforce_points_service_only`.
    - **Funciones de elegibilidad**: `effective_kickoff`, `is_match_open_for_prediction`, `is_users_club_match`, `is_prediction_cup_allowed`, `match_cup_slug`, `is_ko_cup_match`.
-   - **RPCs (SECURITY DEFINER)**: `delete_user_account`, `reset_participation`.
+   - **RPCs (SECURITY DEFINER)**: `delete_user_account`, `reset_participation` y `get_public_predictions` (lectura del ranking con los pronósticos abiertos enmascarados, 2026-10-17).
    - La semilla inicial de clubes.
 
 > **Después de correr `schema.sql`** (y con la service role key disponible), ejecutar los scripts de sincronización para poblar los datos reales:
@@ -254,9 +254,8 @@ Todas las tablas cuentan con **Row Level Security (RLS)** para proteger los dato
 
 Para garantizar un rendimiento ultra-rápido y costo $0:
 
-1. **Índices B-Tree Estratégicos (17 total):**
+1. **Índices B-Tree Estratégicos** *(la limpieza 2026-10-17 — migración `2026-10-17_perf_cleanup_indexes_policies.sql` — eliminó `idx_players_name` y `idx_predictions_user_match`, que duplicaba el unique `predictions_user_id_match_id_key`; se conserva `idx_profiles_team_id` porque cubre la FK):*
    - `idx_profiles_user_id`, `idx_profiles_team_id`
-   - `idx_predictions_user_match` (compuesto: `user_id, match_id`)
    - `idx_matches_league_date` (compuesto: `league, match_date`) — optimizado para el cron
    - `idx_matches_unfinished` (parcial: `WHERE result_home IS NULL`) — partidos pendientes
    - `idx_matches_home`, `idx_matches_away`
@@ -357,7 +356,7 @@ END; $$;
 - `enforce_points_service_only` (`trg_points_server_only`): `points`/`created_at` solo los escribe el `service_role`. **No usar SECURITY DEFINER** en esta función (cambiaría `current_user` y anularía el chequeo).
 
 ### Escrituras del Cron (service role key, NO RPCs públicos):
-El cron `scripts/auto-sync-espn-results.js` escribe vía REST directo con `SUPABASE_SERVICE_ROLE_KEY` (GitHub Secret). Su fetch a ESPN usa el rango `dates=YYYYMMDD-YYYYMMDD` (ESPN rechaza listas separadas por coma con HTTP 400) y tiene **fail-fast**: si todas las ligas devuelven error, el run de GitHub Actions queda marcado como fallido en vez de fallar en silencio (incidente ago-2026). Además: empareja por nombre con **proximidad de fecha ±3 días**, exige **score explícito** (nunca fabrica 0-0), resuelve **penales con el id real de ESPN**, procesa la **progresión de supervivientes en orden cronológico** y hace **sincronización dual `src/data` ↔ `public/data`** de los JSON evaluados.
+El cron `scripts/auto-sync-espn-results.js` escribe vía REST directo con `SUPABASE_SERVICE_ROLE_KEY` (GitHub Secret). Su fetch a ESPN consulta **un día por petición** (`?dates=YYYYMMDD`) e itera los 3 días del backfill (ESPN devuelve HTTP 400 tanto a las listas separadas por coma como a los rangos con guión) y tiene **fail-fast**: si todas las ligas devuelven error, el run de GitHub Actions queda marcado como fallido en vez de fallar en silencio (incidente ago-2026). Además: empareja por nombre con **proximidad de fecha ±3 días**, exige **score explícito** (nunca fabrica 0-0), resuelve **penales con el id real de ESPN**, procesa la **progresión de supervivientes en orden cronológico** y hace **sincronización dual `src/data` ↔ `public/data`** de los JSON evaluados.
 
 | Operación | Endpoint REST |
 |---|---|

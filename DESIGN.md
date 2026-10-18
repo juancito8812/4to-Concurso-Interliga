@@ -130,3 +130,4 @@ DM Sans (Google Fonts) para todo el sitio. Jerarquía con pesos extremos (900 pa
 - **Europa League:** #f37920 (naranja)
 - **Conference League:** #00843d (verde)
 - **Copa Italia:** #024494 (azul)
+- **DFB-Pokal:** #22c55e (verde)
