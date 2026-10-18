@@ -394,7 +394,8 @@ de Supabase con la anon key pública + una sesión propia). Migración:
 ### Contraseñas y configuración de Auth
 
 - La app exige contraseñas de **≥8 caracteres con mayúscula, número y símbolo** (cliente + Supabase Auth).
-- **Leaked password protection (HaveIBeenPwned):** recomendado activarlo en `Authentication → Providers → Email`. **Requiere plan Pro o superior**; el proyecto está en plan **Free**, por lo que aún no está disponible. La configuración de Auth vive en GoTrue (no en Postgres): no se puede aplicar por SQL ni por MCP, solo desde el dashboard o la Management API (`PATCH /v1/projects/<ref>/config/auth`).
+- **Leaked password protection (HaveIBeenPwned):** recomendado activarlo en `Authentication → Providers → Email`. **Requiere plan Pro o superior**; el proyecto está en plan **Free**, por lo que no está disponible (el dashboard no muestra la sección *Passwords*). La configuración de Auth vive en GoTrue (no en Postgres): no se puede aplicar por SQL ni por MCP, solo desde el dashboard o la Management API (`PATCH /v1/projects/<ref>/config/auth`).
+  - **Decisión (2026-10-17): riesgo aceptado.** No se sube a Pro por ahora; el Security Advisor seguirá marcando `auth_leaked_password_protection` (**WARN**). Es el único WARN de seguridad real que queda (los demás son intencionales: `get_public_predictions` `SECURITY DEFINER`, y `delete_user_account`/`reset_participation`, que exigen `auth.uid()`). Si el sitio crece o se sube a Pro, activar el toggle y re-verificar con el advisor. No hay control compensatorio en la app (el mínimo de 8 caracteres con mayúscula, número y símbolo sí está activo).
 
 > **No commitear** `SUPABASE_SERVICE_ROLE_KEY` ni `.env.local` (están en `.gitignore`). Ver [DISASTER_RECOVERY_AND_SCHEMA.md](./DISASTER_RECOVERY_AND_SCHEMA.md) para la configuración completa de RLS.
 

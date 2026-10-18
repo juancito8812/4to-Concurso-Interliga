@@ -287,7 +287,7 @@ En el panel de Supabase $\rightarrow$ **Authentication**:
 
 3. **Contraseñas:**
    - La app exige ≥8 caracteres con mayúscula, número y símbolo (cliente + Supabase Auth).
-   - **Leaked password protection (HaveIBeenPwned):** recomendado (`Authentication → Providers → Email`). **Requiere plan Pro o superior** — el proyecto está en plan Free, por lo que no está disponible. Vive en GoTrue (no en Postgres): solo se cambia desde el dashboard o la Management API (`PATCH /v1/projects/<ref>/config/auth`); no por SQL ni por MCP.
+   - **Leaked password protection (HaveIBeenPwned):** recomendado (`Authentication → Providers → Email`). **Requiere plan Pro o superior** — el proyecto está en plan Free, por lo que no está disponible. Vive en GoTrue (no en Postgres): solo se cambia desde el dashboard o la Management API (`PATCH /v1/projects/<ref>/config/auth`); no por SQL ni por MCP. **Decisión 2026-10-17: riesgo aceptado** (no se sube a Pro; el advisor queda con ese WARN como único hallazgo real).
 
 ---
 
