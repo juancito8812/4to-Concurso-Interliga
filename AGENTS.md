@@ -22,7 +22,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - El cierre de pronósticos es a **1 minuto antes del inicio** (`diffMin <= 1`).
 - Se permite **re-editar** pronósticos guardados mientras el partido esté abierto (`diffMin > 1`).
 - Siempre usar `normalizeMatchLeague` y `normalizeTeamName` para asegurar correspondencia con plantillas y torneos.
-- **Transparencia y Regla Anti-Copia (`UserPredictionsModal.tsx`)**: Al hacer clic en cualquier participante del ranking/podio, se despliega el modal con sus pronósticos. Los partidos abiertos (`diffMin > 1`) muestran `🔒 ? - ?` y ocultan goleadores hasta 1 minuto antes del inicio (`diffMin <= 1`).
+- **Transparencia y Regla Anti-Copia (`UserPredictionsModal.tsx`)**: Al hacer clic en cualquier participante del ranking/podio, se despliega el modal con sus pronósticos. Los partidos abiertos (`diffMin > 1`) muestran `🔒 ? - ?` y ocultan goleadores hasta 1 minuto antes del inicio (`diffMin <= 1`). Desde 2026-10-17 esta regla **también vive en la base**: el modal lee la RPC `get_public_predictions(p_user_id)` (SECURITY DEFINER) — que devuelve los partidos abiertos enmascarados (`is_hidden = TRUE`, marcador y puntos en NULL) — y la policy pública de `predictions`/`prediction_scorers` solo deja leer por REST los pronósticos de partidos **ya iniciados** (antes, la anon key permitía leer los abiertos del competidor).
 - **Carga Concurrente de Red**: Todas las consultas cliente (`loadData`, Supabase, ESPN) deben dispararse en paralelo con `Promise.all` para evitar cascadas secuenciales que afecten el First Contentful Paint y Total Blocking Time.
 - El selector de goleadores muestra la plantilla oficial completa (7.196 jugadores) y despliega el contador `[-] 1 [+]` únicamente al elegir un jugador (máx. 5 goleadores por equipo).
 - `<Link>` genera rutas relativas automáticamente; `<img>` usa rutas absolutas desde la raíz (`/logos/...`).
@@ -107,9 +107,9 @@ de negocio debe existir también en la base**: el cliente se evade con la anon k
 **Solución:** Reiniciar el proyecto (NO tocar código):
 ```bash
 curl -X POST "https://api.supabase.com/v1/projects/ilkndkqcmxvlufxaugog/restart" \
-  -H "Authorization: Bearer <MANAGEMENT_API_TOKEN>"
+  -H "Authorization: Bearer $SUPABASE_MANAGEMENT_TOKEN"
 ```
-El token `sbp_...` está en `~/.config/opencode/opencode.jsonc`. Verificar con `GET /auth/v1/health` (debe devolver 200 con `"version":"v2.x"`).
+El token de la Management API (`sbp_...`) **no** está versionado ni en `~/.config/opencode/opencode.jsonc` (verificado 2026-10-17: ese archivo no existe). El único token presente en la máquina devuelve **401 `JWT could not be decoded`**, así que para usar este comando hay que **generar uno nuevo** en el dashboard (Account → Access Tokens) y exportarlo en el entorno como `[REDACTED]`. Verificar con `GET /auth/v1/health` (debe devolver 200 con `"version":"v2.x"`).
 
 ### Rebotes de email de Supabase
 
@@ -121,14 +121,15 @@ Eliminar cuentas de testing/obsoletas con DELETE de `profiles` + `auth.users` (v
 
 ### Resultados no sincronizados (incidente ago-2026)
 
-ESPN cambió su API y **rechaza listas de fechas separadas por coma** (`?dates=20260831,20260830,...` → HTTP 400). Solo acepta fecha única o **rango con guión** (`?dates=YYYYMMDD-YYYYMMDD`). El cron tiene **fail-fast**: si todas las ligas fallan, el run queda marcado como fallido.
+ESPN cambió su API y **solo acepta una fecha por petición**: `?dates=YYYYMMDD` → HTTP 200. Verificado 2026-10-17: la lista separada por coma (`?dates=20260830,20260831`) **y** el rango con guión (`?dates=20260828-20260831`) devuelven ambos HTTP 400. El cron itera día por día y tiene **fail-fast**: si todas las ligas fallan, el run queda marcado como fallido.
 
 Diagnosticar:
 ```bash
 gh run list --workflow=auto-evaluate-matches.yml
 # Revisar log de "Sync finished match results from ESPN"
-curl "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=20260828-20260831"
+curl "https://site.web.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=20260830"
 ```
+`site.api.espn.com` también responde desde curl, pero el navegador lo bloquea (sin headers CORS): **todo fetch del cliente usa `site.web.api.espn.com`**.
 
 ### Producción desactualizada tras el cron (incidente oct-2026)
 
@@ -183,6 +184,13 @@ Un fallo REAL es una predicción creada **antes** del pitazo que quedó con `poi
 
 **Nunca escribas `points` a mano:** el trigger `trg_points_server_only` de la DB lo impide (solo `service_role`). Ver spec normativa en `docs/SCORING_LOGIC.md`.
 
+### Seguridad Supabase (estado 2026-10-17)
+
+- **Regla anti-copia (cerrada)**: la lectura pública de `predictions`/`prediction_scorers` solo cubre partidos **ya iniciados** y el ranking usa la RPC `get_public_predictions(p_user_id)` con los abiertos enmascarados. Migración `2026-10-17_rls_anti_copia_predictions.sql` (registrada `20261017214000`), commit `dee3fd7`. Efecto aceptado: el ranking solo cuenta pronósticos de partidos iniciados; **la puntuación no cambia**.
+- **Limpieza de rendimiento**: `DROP INDEX idx_players_name` + policy redundante `"Users can view own profile"`; `idx_profiles_team_id` **se conserva** (cubre la FK `profiles_team_id_fkey`; borrarlo solo cambiaba un aviso INFO por otro). Migración `2026-10-17_perf_cleanup_indexes_policies.sql` (`20261017220000`), commits `929d8fa`/`715ed10`.
+- **Leaked password protection = riesgo aceptado (2026-10-17)**: el toggle requiere plan **Pro+** y el proyecto "J soluciones" está en **FREE** (el dashboard no muestra *Passwords*). Vive en GoTrue, no en Postgres: solo se cambia por dashboard o Management API (`PATCH /v1/projects/<ref>/config/auth`), nunca por SQL ni MCP. Es el **único WARN real** que queda en el Security Advisor (el resto son intencionales: la RPC `get_public_predictions` SECURITY DEFINER, `delete_user_account`/`reset_participation` y `app_meta` deny-all).
+- **Nunca** escribir valores de API keys, tokens, passwords o connection strings en documentación, commits o resúmenes: usar `[REDACTED]`. Las claves salen solo de `.env.local`/entorno.
+
 ### Estado del proyecto (vía MCP)
 
-`supabase_get_project` → `status: ACTIVE_HEALTHY`. La DB se puede consultar con `supabase_execute_sql` (service role implícito).
+`mcp__supabase__get_project` (requiere el argumento `id` = `ilkndkqcmxvlufxaugog`) → `status: ACTIVE_HEALTHY`. La DB se consulta con `mcp__supabase__execute_sql` (requiere `project_id`; service role implícito).

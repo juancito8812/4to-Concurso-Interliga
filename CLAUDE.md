@@ -27,8 +27,8 @@ Contexto para agentes de código. Para documentación completa ver [README.md](.
 | `src/lib/leagueConfig.ts` | Normalización canónica de ligas/equipos, `matchIdToUuid`, colores |
 | `src/lib/survivor.ts` | Motor de superviviente en 7 copas KO |
 | `src/lib/scoring.ts` | Cálculo de puntos + matching fonético `arePlayersMatching` |
-| `src/data/officialFixtures.json` | 1.926 partidos reales pre-sincronizados (9 competiciones incl. FA Cup/CDR con filtro canónico) |
-| `src/data/teamAliases.json` | 409 aliases, 242 equipos, 225 teamCups |
+| `src/data/officialFixtures.json` | 1.926 partidos reales pre-sincronizados (9 competiciones; FA Cup y Copa del Rey se traen en vivo desde ESPN y por eso no están en este JSON) |
+| `src/data/teamAliases.json` | 409 aliases, 242 equipos canónicos, 225 teamCups, 3 knockoutPairs |
 | `src/data/officialPlayers.json` | 7.196 jugadores clasificados por posición |
 | `scripts/auto-sync-espn-results.js` | Cron: ESPN → evaluación → Supabase (service role key). Empareja por nombre ±3 días, score explícito, penales con id ESPN, survivors en orden cronológico y sync dual src↔public |
 | `scripts/validate-fixtures.js` | Validador de calendario: cruces FD/ESPN, canónicos, anti-duplicados y sync src↔public data (md5) |
@@ -41,11 +41,11 @@ Contexto para agentes de código. Para documentación completa ver [README.md](.
 
 ## Base de Datos
 
-- **RLS en todas las tablas**: lectura pública, escritura solo del dueño.
+- **RLS en todas las tablas**: lectura pública como norma general — **salvo** `predictions`/`prediction_scorers`, donde desde el 2026-10-17 (anti-copia) la lectura por REST se limita a los pronósticos propios y a los de partidos ya iniciados; `app_meta` es deny-all. Escritura solo del dueño.
 - **No existen RPCs públicos de escritura**: el cron usa service role key vía REST directo.
-- Tablas: `teams` (225), `profiles`, `players`, `matches` (1.926), `predictions`, `prediction_scorers`, `tournament_survivors` (7 copas KO), `app_meta`.
-- **Reglas blindadas en la base** (además del cliente): cierre 1 min antes (`is_match_open_for_prediction`), `points`/`created_at` solo servidor (`trg_points_server_only`), **solo partidos del propio club** (`is_users_club_match`), **eliminado de copa no pronostica** (`is_prediction_cup_allowed`), superviviente que **no revive** (DELETE solo `ALIVE`+historial vacío), goleadores (único/1–10/máx 5 por equipo), club bloqueado (`trg_enforce_team_lock`).
-- RPCs (SECURITY DEFINER, validan `auth.uid()`): `delete_user_account`, `reset_participation`.
+- Tablas: `teams` (225), `profiles`, `players` (517 — solo los que tienen plantilla publicada por ESPN; el catálogo del cliente es `officialPlayers.json` con 7.196), `matches` (1.926), `predictions`, `prediction_scorers`, `tournament_survivors` (7 copas KO), `app_meta`.
+- **Reglas blindadas en la base** (además del cliente): cierre 1 min antes (`is_match_open_for_prediction`), `points`/`created_at` solo servidor (`trg_points_server_only`), **solo partidos del propio club** (`is_users_club_match`), **eliminado de copa no pronostica** (`is_prediction_cup_allowed`), superviviente que **no revive** (DELETE solo `ALIVE`+historial vacío), goleadores (único/1–10/máx 5 por equipo), club bloqueado (`trg_enforce_team_lock`), y **anti-copia** (2026-10-17): la policy pública de lectura de `predictions`/`prediction_scorers` solo deja ver partidos ya iniciados — los abiertos se leen por la RPC enmascarada.
+- RPCs (SECURITY DEFINER, validan `auth.uid()`): `delete_user_account`, `reset_participation`, y `get_public_predictions(p_user_id)` (lectura pública del ranking con los partidos abiertos enmascarados: `is_hidden = TRUE`, marcador y puntos en NULL).
 
 ## Comandos
 

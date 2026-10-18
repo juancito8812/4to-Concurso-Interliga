@@ -25,7 +25,7 @@ El panel de administración permitirá al propietario del sitio gestionar todos 
 ├── /page.tsx                    # Dashboard principal con métricas
 ├── /equipos/page.tsx            # Gestión de equipos (225)
 ├── /equipos/[id]/page.tsx       # Edición de equipo
-├── /jugadores/page.tsx          # Gestión de jugadores (7.196)
+├── /jugadores/page.tsx          # Gestión de jugadores (517 en base)
 ├── /jugadores/[id]/page.tsx     # Edición de jugador
 ├── /partidos/page.tsx           # Gestión de fixtures (1.926)
 ├── /partidos/[id]/page.tsx      # Edición de partido + resultado
@@ -240,6 +240,8 @@ export default async function AdminLayout({ children }) {
 ```
 
 > **⚠️ Importante (2026-10-13):** las escrituras de admin **deben** respetar las reglas ya blindadas en la base: `points`/`created_at` solo los escribe el `service_role` (trigger `trg_points_server_only`), el club está bloqueado (`trg_enforce_team_lock`), y la elegibilidad de pronósticos (`is_users_club_match`, `is_prediction_cup_allowed`) aplica. Por eso las operaciones sensibles del admin deben ir por **RPCs `SECURITY DEFINER` con chequeo de rol `admin`** o por Edge Functions con la service role key — **no** agregando políticas RLS de `UPDATE` amplias que abran la puerta a saltarse esas reglas.
+
+> **⚠️ Nota anti-copia (2026-10-17):** la política de "Admin read all" debe aplicarse **con cuidado sobre `predictions`/`prediction_scorers`**: la lectura pública ya está restringida a partidos ya iniciados y el panel lee lo abierto enmascarado por la RPC `get_public_predictions(p_user_id)`. Un admin que necesite ver pronósticos abiertos en claro debe hacerlo con la **service role key** (server-side), nunca ampliando una política RLS de `SELECT` para `authenticated`.
 
 ---
 

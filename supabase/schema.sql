@@ -2,12 +2,19 @@
 -- 4° CONCURSO INTERLIGA - ESQUEMA MAESTRO DE BASE DE DATOS Y RESTAURACIÓN
 -- ==============================================================================
 -- Este script recrea completamente la base de datos desde cero en Supabase:
--- 1. Extensiones requeridas (pgcrypto, uuid-ossp).
--- 2. Tablas del sistema (teams, profiles, players, matches, predictions, prediction_scorers, tournament_survivors).
+-- 1. Extensiones requeridas (pgcrypto, uuid-ossp, pg_stat_statements).
+-- 2. Tablas del sistema (teams, profiles, players, matches, predictions, prediction_scorers, tournament_survivors, app_meta).
 -- 3. Índices de alto rendimiento (optimizados para Free Tier).
--- 4. Políticas de Row Level Security (RLS).
--- 5. Funciones y Triggers (handle_new_user, delete_user_account).
--- 6. Semilla oficial de equipos (89 clubes de Europa).
+-- 4. Políticas de Row Level Security (RLS) — incluye la regla ANTI-COPIA 2026-10-17.
+-- 5. Funciones y Triggers (handle_new_user, delete_user_account, reset_participation, get_public_predictions, enforce_points_service_only).
+-- 6. Semilla oficial de equipos (89 clubes de Europa; el cron de sincronización
+--    completa la tabla hasta las ~225 selecciones de las competiciones en vivo).
+-- 7. Higiene de privilegios (REVOKE TRUNCATE/REFERENCES/TRIGGER a anon/authenticated).
+-- Estado: ALINEADO CON PRODUCCIÓN el 2026-10-17 (proyecto "J soluciones", plan FREE).
+--   Migraciones ya aplicadas en prod y reflejadas aquí:
+--     · 20261017214000 rls_anti_copia_predictions
+--     · 20261017220000 perf_cleanup_indexes_policies
+--   Cualquier cambio de RLS debe prepararse en rama + preview ANTES de tocar main.
 -- ==============================================================================
 
 -- 1. EXTENSIONES
@@ -111,7 +118,9 @@ CREATE INDEX IF NOT EXISTS idx_profiles_team_id ON public.profiles(team_id);
 
 CREATE INDEX IF NOT EXISTS idx_predictions_user_id ON public.predictions(user_id);
 CREATE INDEX IF NOT EXISTS idx_predictions_match_id ON public.predictions(match_id);
-CREATE INDEX IF NOT EXISTS idx_predictions_user_match ON public.predictions(user_id, match_id);
+-- idx_predictions_user_match (user_id, match_id) eliminado 2026-10-17: duplicaba
+-- exactamente la restricción única predictions_user_id_match_id_key (advisor:
+-- duplicate_index). Ver supabase/migrations/2026-10-17_perf_cleanup_indexes_policies.sql.
 
 -- (idx_prediction_scorers_pred_id eliminado el 2026-10-17: duplicaba prediction_scorers_unique_player)
 
@@ -237,9 +246,19 @@ ON public.profiles FOR UPDATE USING ((SELECT auth.uid()) = user_id) WITH CHECK (
 
 -- B. Predictions RLS
 ALTER TABLE public.predictions ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS "Predictions are viewable by everyone" ON public.predictions;
-CREATE POLICY "Predictions are viewable by everyone" 
-ON public.predictions FOR SELECT USING (true);
+-- ANTI-COPIA (2026-10-17): la lectura pública solo alcanza partidos YA INICIADOS.
+-- Antes era `USING (true)` (rol public), y cualquiera con la anon key —que es
+-- pública— podía leer user_id + marcador de los pronósticos de partidos futuros.
+-- Los pronósticos PROPIOS siguen visibles siempre (editar antes del cierre).
+DROP POLICY IF EXISTS "Predictions are viewable by everyone"            ON public.predictions;
+DROP POLICY IF EXISTS "Users can view own predictions"                  ON public.predictions;
+DROP POLICY IF EXISTS "Predictions propias o de partidos ya iniciados"  ON public.predictions;
+CREATE POLICY "Predictions propias o de partidos ya iniciados" ON public.predictions
+FOR SELECT TO public
+USING (
+  (SELECT auth.uid()) = user_id
+  OR public.is_match_open_for_prediction(match_id) IS NOT TRUE
+);
 
 -- Cierre de pronósticos en la base (no solo en el cliente): el partido debe seguir
 -- abierto (más de 1 minuto para el inicio efectivo). Sin esto, cualquier usuario
@@ -266,9 +285,25 @@ WITH CHECK ((SELECT auth.uid()) = user_id AND public.is_match_open_for_predictio
 
 -- C. Prediction Scorers RLS
 ALTER TABLE public.prediction_scorers ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS "Scorers are viewable by everyone" ON public.prediction_scorers;
-CREATE POLICY "Scorers are viewable by everyone" 
-ON public.prediction_scorers FOR SELECT USING (true);
+-- ANTI-COPIA (2026-10-17): idéntico filtro que predictions — solo goleadores de
+-- partidos YA INICIADOS (el EXISTS queda además sujeto a la RLS de predictions, así
+-- que el filtro público y el propio coinciden sin código extra).
+DROP POLICY IF EXISTS "Scorers are viewable by everyone"                ON public.prediction_scorers;
+DROP POLICY IF EXISTS "Users can view own scorers"                      ON public.prediction_scorers;
+DROP POLICY IF EXISTS "Scorers de partidos ya iniciados"                ON public.prediction_scorers;
+CREATE POLICY "Scorers de partidos ya iniciados" ON public.prediction_scorers
+FOR SELECT TO public
+USING (
+  EXISTS (
+    SELECT 1
+    FROM public.predictions p
+    WHERE p.id = prediction_scorers.prediction_id
+      AND (
+        p.user_id = (SELECT auth.uid())
+        OR public.is_match_open_for_prediction(p.match_id) IS NOT TRUE
+      )
+  )
+);
 
 -- Escritura solo para el dueño del pronóstico (IDOR fix); lectura pública para ranking/cron
 DROP POLICY IF EXISTS "Users can manage prediction scorers" ON public.prediction_scorers;
@@ -689,3 +724,48 @@ DROP TRIGGER IF EXISTS trg_points_server_only ON public.predictions;
 CREATE TRIGGER trg_points_server_only
   BEFORE INSERT OR UPDATE ON public.predictions
   FOR EACH ROW EXECUTE FUNCTION public.enforce_points_service_only();
+
+-- 9. RPC PÚBLICA DEL RANKING (anti-copia, 2026-10-17) --------------------------
+-- El modal "Pronósticos de <usuario>" muestra la tarjeta 🔒 de los partidos
+-- abiertos, pero el marcador/puntos de esos partidos NO pueden salir de la tabla:
+-- la proyección los devuelve en NULL mientras `is_match_open_for_prediction` sea
+-- TRUE. No expone nada que el frontend no mostrara ya.
+CREATE OR REPLACE FUNCTION public.get_public_predictions(p_user_id uuid)
+RETURNS TABLE (
+  id         uuid,
+  user_id    uuid,
+  match_id   uuid,
+  home_score integer,
+  away_score integer,
+  points     integer,
+  is_hidden  boolean
+)
+LANGUAGE sql
+STABLE
+SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+  SELECT
+    p.id,
+    p.user_id,
+    p.match_id,
+    CASE WHEN public.is_match_open_for_prediction(p.match_id) IS NOT TRUE
+         THEN p.home_score END,
+    CASE WHEN public.is_match_open_for_prediction(p.match_id) IS NOT TRUE
+         THEN p.away_score END,
+    CASE WHEN public.is_match_open_for_prediction(p.match_id) IS NOT TRUE
+         THEN p.points END,
+    public.is_match_open_for_prediction(p.match_id) IS TRUE AS is_hidden
+  FROM public.predictions p
+  WHERE p_user_id IS NOT NULL
+    AND p.user_id = p_user_id;
+$$;
+REVOKE ALL ON FUNCTION public.get_public_predictions(uuid) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.get_public_predictions(uuid) TO anon, authenticated;
+
+-- 10. HIGIENE DE PRIVILEGIOS DE TABLA -----------------------------------------
+-- TRUNCATE / REFERENCES / TRIGGER nunca los necesita el cliente (PostgREST solo
+-- usa SELECT/INSERT/UPDATE/DELETE) y además no pasan por RLS: defensa en profundidad.
+REVOKE TRUNCATE, REFERENCES, TRIGGER ON ALL TABLES IN SCHEMA public FROM anon, authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+  REVOKE TRUNCATE, REFERENCES, TRIGGER ON TABLES FROM anon, authenticated;

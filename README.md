@@ -349,8 +349,8 @@ public/
 | `profiles` | Perfiles de participantes y equipo favorito | Lectura pública / Escritura propio usuario |
 | `players` | Plantillas de jugadores oficiales | Lectura pública |
 | `matches` | Partidos oficiales (1.926 filas con IDs canónicos) | Lectura pública |
-| `predictions` | Pronósticos de marcadores por participante | Lectura pública / Escritura propio usuario |
-| `prediction_scorers` | Goleadores pronosticados por partido | Lectura pública / Escritura con IDOR fix |
+| `predictions` | Pronósticos de marcadores por participante | Lectura propia + partidos ya iniciados / Escritura propio usuario |
+| `prediction_scorers` | Goleadores pronosticados por partido | Lectura propia + partidos ya iniciados / Escritura con IDOR fix |
 | `tournament_survivors` | Supervivencia y herencia en 7 copas KO | Lectura pública / Escritura propio usuario |
 | `app_meta` | Clave-valor (hash del calendario para el cron) | Solo service role |
 
@@ -362,20 +362,28 @@ El esquema DDL completo, diagrama ER, triggers y políticas RLS se encuentran en
 
 ## 🔒 Seguridad y RLS
 
-Todas las tablas usan **Row Level Security**: lectura pública para ranking/cron, escritura solo del dueño. El cron escribe con la **service role key** vía REST directo (bypass RLS) — no existen RPCs públicos de escritura.
+Todas las tablas usan **Row Level Security**. El cron escribe con la **service role key** vía REST directo (bypass RLS) — no existen RPCs públicos de escritura.
+
+Desde el endurecimiento del **2026-10-17** la lectura pública **no es total**: la anon key es pública (viaja en el JS del sitio), así que la lectura de `predictions`/`prediction_scorers` por REST queda limitada a los pronósticos **propios** y a los de partidos **ya iniciados**. Los partidos abiertos se leen únicamente a través de la RPC `get_public_predictions(p_user_id)`, que los devuelve **enmascarados** (`is_hidden = TRUE`, marcador y puntos en `NULL`) para poder pintar la tarjeta `🔒 ? - ?` del modal del ranking.
 
 | Política | Detalle |
 |----------|---------|
-| `prediction_scorers` | Escritura validada por ownership del pronóstico con `EXISTS` sobre `predictions` (IDOR fix) |
+| `predictions` (SELECT) | `Predictions propias o de partidos ya iniciados`: `auth.uid() = user_id OR is_match_open_for_prediction(match_id) IS NOT TRUE` |
+| `prediction_scorers` (SELECT) | Solo goleadores de partidos ya iniciados (o del propio pronóstico), vía `EXISTS` sobre `predictions` |
+| `get_public_predictions(p_user_id)` | RPC `SECURITY DEFINER` que sirve el modal del ranking con los partidos abiertos enmascarados |
+| `prediction_scorers` (escritura) | Escritura validada por ownership del pronóstico con `EXISTS` sobre `predictions` (IDOR fix) |
 | `app_meta` | Sin grants para anon/authenticated — solo service role |
 | `delete_user_account` | RPC `SECURITY DEFINER` (solo `authenticated`) que purga en cascada y libera el email |
+| Privilegios de tabla | `TRUNCATE`/`REFERENCES`/`TRIGGER` revocados a anon/authenticated (no pasan por RLS: defensa en profundidad) |
 | **Contraseñas** | Mínimo 8 caracteres + mayúscula + número + símbolo |
 
-### Reglas del concurso aplicadas en la BASE (migraciones 2026-09-16 y 2026-10-13)
+### Reglas del concurso aplicadas en la BASE (migraciones 2026-09-16, 2026-10-13 y 2026-10-17)
 
 Las reglas del juego ya no viven solo en el cliente (evadibles llamando directo a la API
-de Supabase con la anon key pública + una sesión propia). Migración:
-[`supabase/migrations/2026-09-16_security_hardening.sql`](./supabase/migrations/2026-09-16_security_hardening.sql).
+de Supabase con la anon key pública + una sesión propia). Migraciones:
+[`2026-09-16_security_hardening.sql`](./supabase/migrations/2026-09-16_security_hardening.sql),
+[`2026-10-13_predictions_club_and_knockout_lock.sql`](./supabase/migrations/2026-10-13_predictions_club_and_knockout_lock.sql) y
+[`2026-10-17_rls_anti_copia_predictions.sql`](./supabase/migrations/2026-10-17_rls_anti_copia_predictions.sql).
 
 | Regla | Implementación |
 |-------|----------------|
@@ -390,6 +398,7 @@ de Supabase con la anon key pública + una sesión propia). Migración:
 | Superviviente KO de solo lectura para el cliente | Políticas de `tournament_survivors` limitadas a alta inicial (club propio, vivo, sin historial) y borrado; la progresión la escribe solo el cron |
 | Club bloqueado | Trigger `trg_enforce_team_lock`: cambiar `team_id` fuera de `reset_participation()` lanza excepción |
 | Reinicio de participación real (0 pts) | RPC `reset_participation()` (solo `authenticated`): borra pronósticos/goleadores/survivors, libera el club y marca `revoked:<uid>` en `app_meta` para que el cron purgue los puntos del archivo oficial |
+| Anti-copia de pronósticos (2026-10-17) | La lectura pública por REST de `predictions`/`prediction_scorers` solo cubre partidos **ya iniciados** (o los propios); los abiertos se leen por la RPC `get_public_predictions(p_user_id)`, que los devuelve enmascarados (`is_hidden = TRUE`, marcador y `points` en `NULL`). Antes, la anon key permitía leer los pronósticos abiertos de cualquier rival |
 
 ### Contraseñas y configuración de Auth
 

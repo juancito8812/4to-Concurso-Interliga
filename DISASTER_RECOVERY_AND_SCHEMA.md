@@ -228,11 +228,11 @@ Todas las tablas cuentan con **Row Level Security (RLS)** para proteger los dato
    - `SELECT`: Público (`USING (true)`) para que el Ranking muestre a todos los participantes.
    - `INSERT` / `UPDATE`: Restringido al propio usuario (`auth.uid() = user_id`). Cambiar `team_id` exige pasar por `reset_participation()` (trigger `trg_enforce_team_lock`).
 2. **`predictions`:**
-   - `SELECT`: Público (`USING (true)`) para el cálculo de clasificaciones y puntos.
+   - `SELECT`: **propia o de partidos ya iniciados** — policy `"Predictions propias o de partidos ya iniciados"`: `auth.uid() = user_id OR is_match_open_for_prediction(match_id) IS NOT TRUE` (**anti-copia**, 2026-10-17; antes era `USING (true)` y la anon key permitía leer los pronósticos abiertos de cualquier rival).
    - `INSERT` / `UPDATE`: Solo del propio usuario **y** solo si (a) el partido está abierto (`is_match_open_for_prediction`), (b) **es del club del usuario** (`is_users_club_match`) y (c) **el usuario no está eliminado de esa copa KO** (`is_prediction_cup_allowed`).
    - `points` / `created_at`: los escribe **solo el servidor** (trigger `trg_points_server_only`).
 3. **`prediction_scorers`:**
-   - `SELECT`: Público (`USING (true)`) para el ranking y el cron.
+   - `SELECT`: Propios o de partidos ya iniciados — policy `"Scorers de partidos ya iniciados"` (`EXISTS` sobre `predictions` aplicando la misma condición). El ranking/cron siguen viendo todo lo necesario por service role.
    - `INSERT` / `UPDATE` / `DELETE`: Solo el dueño del pronóstico (política con `EXISTS` sobre `predictions` — IDOR fix); INSERT/UPDATE además exigen partido abierto.
 4. **`teams`, `players`, `matches`:**
    - `SELECT`: Público (`USING (true)`). Sin políticas de escritura → el cliente no puede modificarlos.
@@ -241,8 +241,12 @@ Todas las tablas cuentan con **Row Level Security (RLS)** para proteger los dato
    - `INSERT`: solo fila inicial (club propio, `ALIVE`, sin historial). `UPDATE`: limitado. `DELETE`: solo si sigue `ALIVE` con `history = '[]'` (no se puede revivir).
 6. **`app_meta`:**
    - Sin grants para `anon`/`authenticated` — solo accesible por la service role key (el cron la usa para el hash del calendario y las marcas de revocación).
+7. **RPC de lectura del ranking (anti-copia, 2026-10-17):** `get_public_predictions(p_user_id)` (`SECURITY DEFINER`, `GRANT EXECUTE` a `anon`/`authenticated`) devuelve los pronósticos de un usuario con los partidos **abiertos enmascarados** (`home_score`/`away_score`/`points` en `NULL`, `is_hidden = TRUE`) y los ya iniciados completos. Es el único camino para pintar los pronósticos abiertos de un rival en el modal del ranking.
+8. **Higiene de privilegios de tabla:** `TRUNCATE`, `REFERENCES` y `TRIGGER` revocados a `anon`/`authenticated` (no pasan por RLS; PostgREST solo necesita SELECT/INSERT/UPDATE/DELETE) — defensa en profundidad.
 
 > **Importante:** No existen RPCs públicos de escritura. El cron escribe en `matches`, `predictions`, `prediction_scorers` (no escribe), `tournament_survivors` y `app_meta` con la **service role key** vía REST directo (bypass RLS). Cualquier intento de escritura con la anon key desde el cliente es rechazado por RLS.
+
+> **Migraciones de seguridad aplicadas** (registradas en `supabase_migrations.schema_migrations`): `2026-09-16_security_hardening.sql`, `2026-10-13_predictions_club_and_knockout_lock.sql`, `2026-10-17_rls_anti_copia_predictions.sql` (`20261017214000`) y `2026-10-17_perf_cleanup_indexes_policies.sql` (`20261017220000`). Cualquier cambio de RLS se prepara en rama + preview **antes** de tocar `main`.
 
 ---
 

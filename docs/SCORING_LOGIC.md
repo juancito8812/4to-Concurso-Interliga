@@ -89,3 +89,4 @@ una divergencia **bloquea el despliegue**.
 | 16/09/2026 | **Regla #5 eliminada** (cantidad exacta de goles del líder goleador). `pointsScorersQuantity` queda fijo en 0. |
 | — | Cap de goleadores fijado en **5 por equipo** (antes global) y alineado en motor JS, motor TS y trigger de DB. |
 | 2026-10-17 | Añadida la **prueba de paridad JS↔TS** y este documento normativo. Máximo oficial = **15 pts**. |
+| 2026-10-17 | **Anti-copia (RLS)**: la lectura pública de `predictions`/`prediction_scorers` se limita a partidos **ya iniciados** y los abiertos se leen por la RPC enmascarada `get_public_predictions(p_user_id)`. Efecto secundario aceptado: el ranking solo cuenta pronósticos de partidos iniciados. **La puntuación no cambia** (`verify-logic.js` 59 checks + paridad 20/76 verdes). |
