@@ -8859,5 +8859,33 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885ee",
+    "espn_id": "401874771",
+    "home_team": "Udinese",
+    "away_team": "Lecce",
+    "match_date": "2026-10-18T10:30Z",
+    "league": "Serie A",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Kialonda Gaspar",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Konan N’Dri",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jamil Siebert",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
