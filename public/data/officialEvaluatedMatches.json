@@ -9078,5 +9078,132 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dea",
+    "espn_id": "401882841",
+    "home_team": "Málaga",
+    "away_team": "Real Sociedad",
+    "match_date": "2026-10-18T16:30Z",
+    "league": "LaLiga",
+    "result_home": 2,
+    "result_away": 5,
+    "scorers": [
+      {
+        "player_name": "Takefusa Kubo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Orri Óskarsson",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Adrián Niño",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Mikel Oyarzabal",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Pablo Martínez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gonçalo Guedes",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088de0",
+    "espn_id": "401878769",
+    "home_team": "Nott. Forest",
+    "away_team": "Arsenal",
+    "match_date": "2026-10-18T15:30Z",
+    "league": "Premier League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Noni Madueke",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885e9",
+    "espn_id": "401874978",
+    "home_team": "AC Milan",
+    "away_team": "Atalanta",
+    "match_date": "2026-10-18T16:00Z",
+    "league": "Serie A",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Gonçalo Ramos",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Adrien Rabiot",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Mario Gila",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gianluca Gaetano",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Nikola Krstovic",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a242",
+    "espn_id": "401884768",
+    "home_team": "Borussia Mönchengladbach",
+    "away_team": "Hoffenheim",
+    "match_date": "2026-10-18T15:30Z",
+    "league": "Bundesliga",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Bambasé Conté",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Wael Mohya",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alexander Prass",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]

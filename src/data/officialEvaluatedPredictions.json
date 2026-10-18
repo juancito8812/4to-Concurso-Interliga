@@ -1934,7 +1934,12 @@
     "home_score": 0,
     "away_score": 2,
     "created_at": "2026-10-17T19:07:57.753412+00:00",
-    "scorers": []
+    "scorers": [],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)"
+    ]
   },
   {
     "id": "ca78b108-ed3f-4be6-a213-b52faeb8baed",
@@ -1945,5 +1950,31 @@
     "away_score": 2,
     "created_at": "2026-10-17T19:31:29.66288+00:00",
     "scorers": []
+  },
+  {
+    "id": "861b615c-c43c-4f39-a202-fd2233a85dbc",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000000089de5",
+    "home_score": 3,
+    "away_score": 1,
+    "created_at": "2026-10-18T00:59:59.358434+00:00",
+    "scorers": [
+      {
+        "player_name": "Carlos Espí",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "home"
+      }
+    ]
   }
 ]
