@@ -1899,6 +1899,13 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "points": 7,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Marcador exacto (+2 pts)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Goleador acertado: Yan Diomandé (+1 pt)"
     ]
   },
   {
@@ -1975,6 +1982,12 @@
         "goals": 1,
         "team": "home"
       }
+    ],
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)"
     ]
   }
 ]

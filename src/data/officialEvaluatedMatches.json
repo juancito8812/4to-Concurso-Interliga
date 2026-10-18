@@ -9205,5 +9205,66 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089de5",
+    "espn_id": "401882839",
+    "home_team": "Real Madrid",
+    "away_team": "Sevilla",
+    "match_date": "2026-10-18T19:00Z",
+    "league": "LaLiga",
+    "result_home": 4,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Arda Güler",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Manu Bueno",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yan Diomande",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885ea",
+    "espn_id": "401874765",
+    "home_team": "Juventus",
+    "away_team": "Lazio",
+    "match_date": "2026-10-18T18:45Z",
+    "league": "Serie A",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Oliver Provstgaard",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Gustav Isaksen",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fisayo Dele-Bashiru",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
