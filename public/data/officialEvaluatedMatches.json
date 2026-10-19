@@ -9266,5 +9266,112 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089ded",
+    "espn_id": "401882842",
+    "home_team": "Getafe",
+    "away_team": "Rayo Vallecano",
+    "match_date": "2026-10-19T19:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Álvaro García",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Martín Satriano",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dde",
+    "espn_id": "401879257",
+    "home_team": "Tottenham",
+    "away_team": "Coventry City",
+    "match_date": "2026-10-19T19:00Z",
+    "league": "Premier League",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "James Maddison",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jack Rudoni",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Omar Marmoush",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ben Davies",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f0",
+    "espn_id": "401874762",
+    "home_team": "Monza",
+    "away_team": "Cagliari",
+    "match_date": "2026-10-19T16:30Z",
+    "league": "Serie A",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Eddy Kouadio",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gustavo Varela",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Jay Robinson",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885f2",
+    "espn_id": "401874784",
+    "home_team": "Parma",
+    "away_team": "Torino",
+    "match_date": "2026-10-19T18:45Z",
+    "league": "Serie A",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Giovanni Simeone",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Ché Adams",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
