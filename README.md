@@ -193,7 +193,7 @@ scripts/
 
 supabase/
 ├── schema.sql                      # Script DDL maestro: 8 tablas, índices, RLS, triggers
-└── migrations/                     # 5 migraciones incrementales (2026-09-16 → 2026-10-17): seguridad, lock de puntos/club, anti-copia y limpieza de rendimiento
+└── migrations/                     # 6 migraciones incrementales (2026-09-16 → 2026-10-30): seguridad, lock de puntos/club, anti-copia, limpieza de rendimiento y grants por defecto para tablas nuevas
 
 .github/workflows/
 ├── deploy.yml                      # Build y deploy a GitHub Pages (push a main)
@@ -379,6 +379,22 @@ Desde el endurecimiento del **2026-10-17** la lectura pública **no es total**: 
 | `delete_user_account` | RPC `SECURITY DEFINER` (solo `authenticated`) que purga en cascada y libera el email |
 | Privilegios de tabla | `TRUNCATE`/`REFERENCES`/`TRIGGER` revocados a anon/authenticated (no pasan por RLS: defensa en profundidad) |
 | **Contraseñas** | Mínimo 8 caracteres + mayúscula + número + símbolo |
+
+### Grants por defecto para tablas nuevas (Supabase, 30-oct-2026)
+
+Supabase dejó de otorgar permisos automáticos por Data API a las tablas creadas en
+`public` desde el **30 de octubre de 2026**. Una tabla nueva sin `grant` explícito
+responde `42501 permission denied` (HTTP 403) **antes** de evaluar la RLS.
+
+- Todas las tablas actuales (verificado contra producción el 20-oct-2026) tienen
+  grants para `anon` / `authenticated` / `service_role`: **nada existente se rompe**.
+- [`2026-10-30_default_privileges_grants.sql`](./supabase/migrations/2026-10-30_default_privileges_grants.sql)
+  restablece el comportamiento vía `alter default privileges` (rol `postgres`),
+  con criterio de mínimo privilegio: `anon` solo `SELECT`, `authenticated` y
+  `service_role` DML completo, y `TRUNCATE/REFERENCES/TRIGGER` revocados.
+- **Regla del repo:** toda migración que cree una tabla lleva su bloque `grant`
+  explícito justo después del `create table` (plantilla al final de esa migración),
+  porque la ACL por defecto es la misma entrada que Supabase puede tocar.
 
 ### Reglas del concurso aplicadas en la BASE (migraciones 2026-09-16, 2026-10-13 y 2026-10-17)
 
