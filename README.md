@@ -198,7 +198,7 @@ supabase/
 .github/workflows/
 ├── deploy.yml                      # Build y deploy a GitHub Pages (push a main)
 ├── verify.yml                      # Verifica la lógica de puntuación en cada PR (bloquea el merge)
-├── auto-evaluate-matches.yml       # Cron cada 2h: sync ESPN + evaluar + persistir
+├── auto-evaluate-matches.yml       # Cron cada 30 min: sync ESPN + evaluar + persistir
 └── auto-sync-squads.yml            # Cron mensual (1ro de cada mes): sync plantillas oficiales
 
 public/
@@ -319,7 +319,9 @@ public/
 
 ## 🤖 Automatización 100% (Resultados → Puntos → Survivors → Ranking)
 
-### Cron cada 2 horas (`.github/workflows/auto-evaluate-matches.yml`)
+### Cron cada 30 minutos (`.github/workflows/auto-evaluate-matches.yml`)
+
+> **Por qué 30 min y no 2 h:** GitHub retrasa los workflows `schedule` bajo carga. Con `0 */2 * * *` la corrida de las 16:00 (Caracas) no se ejecutó y los 9 partidos de Champions del 2026-10-20 quedaron sin resultado ni puntos hasta que se disparó a mano. Con `*/30 * * * *` el retraso se acota y los resultados aparecen en ≤30-60 min. El repo es público: los minutos de Actions son ilimitados y el paso de commit/deploy es condicional (no hace nada si no hay cambios).
 
 1. **Sincroniza ESPN** con backfill de 3 días haciendo **una petición por día** (`?dates=YYYYMMDD` × 3). ESPN solo acepta **un día por petición**: rechaza con HTTP 400 tanto las listas separadas por coma como los rangos con guión.
 2. **Actualiza `officialEvaluatedMatches.json`** con resultados y goleadores reales (IDs canónicos determinísticos).

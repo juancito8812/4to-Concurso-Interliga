@@ -2,8 +2,9 @@ name: Auto-Sync ESPN Match Results & Score Predictions
 
 on:
   schedule:
-    # Runs every 2 hours automatically
-    - cron: "0 */2 * * *"
+    # Cada 30 min: GitHub retrasa los schedules bajo carga y con 2 h los
+    # resultados del día podían tardar 4-6 h en reflejarse (incidente 2026-10-20).
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 permissions:

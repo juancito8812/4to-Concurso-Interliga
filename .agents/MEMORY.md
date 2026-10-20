@@ -5,8 +5,8 @@
 - **Propósito:** Aplicación web para el 4° Concurso de pronósticos de fútbol (temporada 2026-27). Permite elegir equipo, pronosticar resultados y goleadores de 11 competiciones europeas, ver clasificaciones y competir en el ranking general.
 - **Stack:** Next.js 16.3.2 (App Router, static export), React 19, Tailwind CSS v4, TypeScript 5, Supabase (Auth + PostgreSQL), ESPN Public API.
 - **Deploy:** GitHub Pages con dominio personalizado `futbolcamisetapasion.com` (Cloudflare DNS), sin basePath. Workflow `.github/workflows/deploy.yml`.
-- **Última sesión:** 2026-10-17 — anti-copia de pronósticos en la base (policies + RPC `get_public_predictions`, migración `20261017214000`) y limpieza de rendimiento (`929d8fa`/`715ed10`, migración `20261017220000`), con `main` en `08ee423` y CI verde; además la lógica de puntuación **arreglada, mergeada a `main` y verificada en producción**: `docs/SCORING_LOGIC.md` como fuente única de verdad + `scripts/verify-engine-parity.js` que prueba que el motor JS y el TS dan los mismos puntos — antes `verify-logic.js` solo probaba el JS; candado en CI (`verify.yml`) y en el deploy; rama `fix/logica-puntuacion-definitiva` rebasada sobre el cron `80f5c3c`, merge fast-forward y eliminada)
-- **Versión de memoria:** 3.0
+- **Última sesión:** 2026-10-20 — cron de resultados a cada 30 min (antes 2 h) tras comprobar que GitHub retrasaba los runs y los partidos del día tardaban 4-6 h en puntuar; además, 2026-10-17 — anti-copia de pronósticos en la base (policies + RPC `get_public_predictions`, migración `20261017214000`) y limpieza de rendimiento (`929d8fa`/`715ed10`, migración `20261017220000`), con `main` en `08ee423` y CI verde; además la lógica de puntuación **arreglada, mergeada a `main` y verificada en producción**: `docs/SCORING_LOGIC.md` como fuente única de verdad + `scripts/verify-engine-parity.js` que prueba que el motor JS y el TS dan los mismos puntos — antes `verify-logic.js` solo probaba el JS; candado en CI (`verify.yml`) y en el deploy; rama `fix/logica-puntuacion-definitiva` rebasada sobre el cron `80f5c3c`, merge fast-forward y eliminada)
+- **Versión de memoria:** 3.1
 
 ## Arquitectura
 
@@ -71,7 +71,7 @@
 
 - **2026-08-28** — **Arquitectura 100% Automática de Resultados y Puntuación**:
   - **Capa Cliente en Vivo (`src/lib/espnResultsFetcher.ts`)**: Consulta la API de ESPN Scoreboard en tiempo real con caché de 30s para obtener partidos finalizados (`completed: true`), marcadores y goleadores oficiales directamente en el navegador del usuario al abrir `/ranking` o `/mis-pronosticos`.
-  - **Capa Servidor/Cron (`.github/workflows/auto-evaluate-matches.yml` + `scripts/auto-sync-espn-results.js`)**: Ejecución programada cada 2 horas en GitHub Actions para extraer resultados de las 8 competiciones, actualizar `officialEvaluatedMatches.json`, calcular puntos de todos los usuarios y commitear automáticamente.
+  - **Capa Servidor/Cron (`.github/workflows/auto-evaluate-matches.yml` + `scripts/auto-sync-espn-results.js`)**: Ejecución programada cada 30 minutos en GitHub Actions para extraer resultados de las 8 competiciones, actualizar `officialEvaluatedMatches.json`, calcular puntos de todos los usuarios y commitear automáticamente.
 
 ## Estado Actual
 
@@ -79,7 +79,7 @@
 - **Build Status:** `npm run build` y `npx tsc --noEmit` pasando con 0 errores (24 rutas estáticas generadas).
 - **Deploy:** GitHub Actions activado con éxito en `main` (`deploy.yml`). Los crons **disparan el deploy al final** (`gh workflow run deploy.yml --ref main`, `permissions: actions: write`) porque los pushes del bot con `GITHUB_TOKEN` no generan eventos de workflow.
 - **Automatización & Superviviente:**
-  - Cron de resultados y puntos cada 2h (`auto-evaluate-matches.yml`) con fail-closed en persistencia Supabase.
+  - Cron de resultados y puntos cada 30 min (`auto-evaluate-matches.yml`) con fail-closed en persistencia Supabase.
   - Cron mensual de plantillas el 1ro de cada mes (`auto-sync-squads.yml`) para actualizar traspasos.
   - 100% desatendida en 7 copas knockout (Champions, Europa, Conference, Copa Italia, FA Cup, Copa del Rey, DFB-Pokal).
 - **Calendario:** 1.926 partidos reales (0 fabricados) — 4 ligas football-data API + copas europeas/domésticas ESPN.
@@ -90,6 +90,12 @@
 - **Riesgo aceptado (2026-10-17):** *leaked password protection* (HaveIBeenPwned) queda desactivada — **requiere plan Pro** y el proyecto está en **Free** (verificado: el proyecto es "J soluciones", badge FREE, y el menú de Authentication no tiene sección *Passwords*). La config de Auth vive en GoTrue (no en Postgres): solo por dashboard o Management API (`PATCH /v1/projects/<ref>/config/auth`). El único WARN real que queda en el Security Advisor es `auth_leaked_password_protection`; los demás son intencionales. Revisar si se sube a Pro.
 
 ## Cambios Recientes
+
+- **2026-10-20** — **Cron de resultados a cada 30 min + limpieza de resultado huérfano**:
+  - **Síntoma:** los 9 partidos de Champions del día estaban `completed` en ESPN pero en la app seguían sin resultado ni puntos. La última corrida `schedule` había sido a las 14:19 (Caracas) y la de las 16:00 nunca se ejecutó (GitHub retrasa `schedule` bajo carga; el cron declaraba `0 */2 * * *`).
+  - **Fix:** disparo manual del workflow (run `39509047211` → 9/9 resultados, 375 evaluados, deploy `39509089119` ✅) y cambio de schedule a `*/30 * * * *`. Repo público → minutos ilimitados; commit y dispatch del deploy siguen condicionados a que haya cambios.
+  - **Dato huérfano:** el fixture Levante-Athletic del 21/10 conservaba un 0-0 del partido reprogramado de septiembre (se mostraba finalizado y bloqueaba pronósticos). Limpiado a `NULL`; verificado `0` partidos futuros con resultado.
+  - **Auditoría del motor:** 63/63 pronósticos evaluados recalculados coinciden con los puntos guardados; DB vs JSON sin diferencias de puntos ni resultados; únicos NULL son pronósticos creados después del pitazo (anti-farmeo).
 
 - **2026-10-17** — **Endurecimiento de Supabase: anti-copia de pronósticos + limpieza de rendimiento (todo en `main` y en prod)**:
   - **🔴 Fuga cerrada (anti-copia):** la policy pública de lectura de `predictions`/`prediction_scorers` permitía ver pronósticos de partidos **abiertos** por REST con la anon key → se podía copiar. Ahora la policy solo deja leer partidos ya iniciados y el modal del ranking usa la RPC `get_public_predictions(p_user_id)` (`SECURITY DEFINER`, parametrizada) que devuelve los abiertos **enmascarados** (`points`/marcador `NULL`, `is_hidden = TRUE`). Migración `2026-10-17_rls_anti_copia_predictions.sql`, registrada en `supabase_migrations.schema_migrations` como `20261017214000`; commit `dee3fd7`. Semántica en cliente: `is_hidden = ... IS TRUE`. Efecto aceptado: el ranking solo cuenta pronósticos de partidos iniciados; la puntuación no cambia.

@@ -270,7 +270,7 @@ Para garantizar un rendimiento ultra-rápido y costo $0:
    - El sync del calendario (1.926 fixtures) solo corre cuando cambia `officialFixtures.json` (hash md5 en `app_meta`).
    - La persistencia de resultados usa los IDs canónicos directos (sin descargar la tabla `matches` completa en cada corrida).
 5. **Mantenimiento de actividad:**
-   - El cron cada 2h mantiene el proyecto despierto (el plan Free pausa tras 7 días sin actividad).
+   - El cron cada 30 min mantiene el proyecto despierto (el plan Free pausa tras 7 días sin actividad).
 
 ---
 
