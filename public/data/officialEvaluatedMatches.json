@@ -9373,5 +9373,292 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be0b",
+    "espn_id": "401915403",
+    "home_team": "Fenerbahçe",
+    "away_team": "SK Slavia Praha",
+    "match_date": "2026-10-20T16:45Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Oguz Aydin",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Mason Greenwood",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lukás Provod",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Pavel Kacor",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be0c",
+    "espn_id": "401915404",
+    "home_team": "SABAH FK",
+    "away_team": "Borussia Dortmund",
+    "match_date": "2026-10-20T16:45Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Serhou Guirassy",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Aden Mccarthy",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be0a",
+    "espn_id": "401915402",
+    "home_team": "Roma",
+    "away_team": "Slovan Bratislava",
+    "match_date": "2026-10-20T19:00Z",
+    "league": "Champions League",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Mario Hermoso",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Nahuel Molina",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Niccolò Pisilli",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Donyell Malen",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be06",
+    "espn_id": "401915398",
+    "home_team": "Porto",
+    "away_team": "PSV",
+    "match_date": "2026-10-20T19:00Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Guus Til",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be05",
+    "espn_id": "401915397",
+    "home_team": "Liverpool",
+    "away_team": "Villarreal",
+    "match_date": "2026-10-20T19:00Z",
+    "league": "Champions League",
+    "result_home": 4,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Georges Mikautadze",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sergi Cardona",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alexis Mac Allister",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Ronald Araújo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Florian Wirtz",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Tani Oluwaseyi",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be09",
+    "espn_id": "401915401",
+    "home_team": "Manchester City",
+    "away_team": "AEK Athens",
+    "match_date": "2026-10-20T19:00Z",
+    "league": "Champions League",
+    "result_home": 5,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Elliot Anderson",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Phil Foden",
+        "goals": 3,
+        "team": "home"
+      },
+      {
+        "player_name": "Stavros Pilios",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Rayan Cherki",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be08",
+    "espn_id": "401915400",
+    "home_team": "Napoli",
+    "away_team": "FK Bodø/Glimt",
+    "match_date": "2026-10-20T19:00Z",
+    "league": "Champions League",
+    "result_home": 4,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Matteo Politano",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jens Petter Hauge",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Scott McTominay",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Andreas Helmersen",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sondre Brunstad Fet",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be07",
+    "espn_id": "401915399",
+    "home_team": "Paris Saint-Germain",
+    "away_team": "Barcelona",
+    "match_date": "2026-10-20T19:00Z",
+    "league": "Champions League",
+    "result_home": 4,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Désiré Doué",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Xavi Espart",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Lucas Hernández",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Vitinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fabián Ruiz",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be00",
+    "espn_id": "401915392",
+    "home_team": "Stuttgart",
+    "away_team": "Atlético Madrid",
+    "match_date": "2026-10-20T19:00Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Jamie Leweling",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Julián Álvarez",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
