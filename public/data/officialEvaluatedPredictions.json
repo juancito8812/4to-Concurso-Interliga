@@ -1670,6 +1670,12 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 3,
+    "pointsDetails": [
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Harry Kane (+1 pt)",
+      "Goleador acertado: Eberechi Eze (+1 pt)"
     ]
   },
   {
@@ -1958,7 +1964,11 @@
     "home_score": 1,
     "away_score": 2,
     "created_at": "2026-10-17T19:31:29.66288+00:00",
-    "scorers": []
+    "scorers": [],
+    "points": 1,
+    "pointsDetails": [
+      "Diferencia de 1 gol (+1 pt)"
+    ]
   },
   {
     "id": "861b615c-c43c-4f39-a202-fd2233a85dbc",
@@ -2020,6 +2030,77 @@
     "points": 1,
     "pointsDetails": [
       "Goleador acertado: Lamine Yamal (+1 pt)"
+    ]
+  },
+  {
+    "id": "adaeaf86-1b00-4420-9a56-6c019d09c9b4",
+    "user_id": "266e7258-c7f9-4159-9fa2-3281989af465",
+    "display_name": "Raudel",
+    "match_id": "00000000-0000-4000-8000-000017f4bdb1",
+    "home_score": 3,
+    "away_score": 1,
+    "created_at": "2026-10-21T15:21:32.571837+00:00",
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Yan Diomandé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Antonio Nusa",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Goleador acertado: Yan Diomandé (+1 pt)"
+    ]
+  },
+  {
+    "id": "7b22441d-8701-4454-a803-fcbb8bead3f3",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000017f4bdb1",
+    "home_score": 4,
+    "away_score": 0,
+    "created_at": "2026-10-21T17:22:38.418572+00:00",
+    "scorers": [
+      {
+        "player_name": "Carlos Espí",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Yan Diomandé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Goleador acertado: Yan Diomandé (+1 pt)"
     ]
   }
 ]

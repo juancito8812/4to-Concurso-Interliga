@@ -9660,5 +9660,295 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dcd",
+    "espn_id": "401882870",
+    "home_team": "Levante",
+    "away_team": "Athletic Bilbao",
+    "match_date": "2026-10-21T18:00Z",
+    "league": "LaLiga",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Roger Brugué",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Álex Berenguer",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Etta Eyong",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be03",
+    "espn_id": "401915395",
+    "home_team": "Como",
+    "away_team": "Manchester United",
+    "match_date": "2026-10-21T16:45Z",
+    "league": "Champions League",
+    "result_home": 4,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Nico Paz",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Anastasios Douvikas",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jacobo Ramón",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Joshua Zirkzee",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be04",
+    "espn_id": "401915396",
+    "home_team": "Lille",
+    "away_team": "Galatasaray SK",
+    "match_date": "2026-10-21T16:45Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Yunus Akgün",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Soriba Diaoune",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Alexey Batrakov",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Victor Osimhen",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be02",
+    "espn_id": "401915394",
+    "home_team": "Aston Villa",
+    "away_team": "Viking FK",
+    "match_date": "2026-10-21T19:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Ross Barkley",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Emiliano Buendía",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Peter Christiansen",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdb0",
+    "espn_id": "401915312",
+    "home_team": "Bayern Munich",
+    "away_team": "Arsenal",
+    "match_date": "2026-10-21T19:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Eberechi Eze",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alphonso Davies",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Harry Kane",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Declan Rice",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdfc",
+    "espn_id": "401915388",
+    "home_team": "Club Brujas",
+    "away_team": "Lens",
+    "match_date": "2026-10-21T19:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Hans Vanaken",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Joaquin Seys",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Carlos Forbs",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdfe",
+    "espn_id": "401915390",
+    "home_team": "Inter Milan",
+    "away_team": "Shakhtar Donetsk",
+    "match_date": "2026-10-21T19:00Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Carlos Augusto",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdfd",
+    "espn_id": "401915389",
+    "home_team": "Real Betis",
+    "away_team": "Feyenoord",
+    "match_date": "2026-10-21T19:00Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Isco",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdb1",
+    "espn_id": "401915313",
+    "home_team": "Real Madrid",
+    "away_team": "RB Leipzig",
+    "match_date": "2026-10-21T19:00Z",
+    "league": "Champions League",
+    "result_home": 4,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Bernardo Silva",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Arda Güler",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Tidiam Gomis",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yan Diomande",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdff",
+    "espn_id": "401915391",
+    "home_team": "Sporting Clube de Portugal",
+    "away_team": "LASK Linz",
+    "match_date": "2026-10-21T19:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Luis Suárez",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Christoph Lang",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sasa Kalajdzic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Krystof Danek",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
