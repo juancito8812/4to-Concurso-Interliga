@@ -55,6 +55,27 @@ alter default privileges for role postgres in schema public
 alter default privileges for role postgres in schema public
   grant execute on functions to authenticated, service_role;
 
+-- Mínimo privilegio real: la ACL por defecto de Supabase ya traía
+-- `anon=arwdDxtm` en tablas y `anon=rwU` en secuencias. Un `grant select` no
+-- quita nada, así que hay que revocar explícitamente lo que anon no debe tener
+-- en tablas FUTURAS. Aplicado en producción el 2026-10-20.
+alter default privileges for role postgres in schema public
+  revoke insert, update, delete, truncate, references, trigger on tables from anon;
+
+alter default privileges for role postgres in schema public
+  revoke update on sequences from anon;
+
+-- ⚠️ LÍMITE CONOCIDO: el proyecto tiene una SEGUNDA ACL por defecto en `public`
+-- propiedad de `supabase_admin` (tablas anon=arwdDxtm). `postgres` no puede
+-- modificarla (`42501 permission denied to change default privileges`) y es la
+-- que Supabase podría reescribir el 30-oct. Las tablas creadas desde el SQL
+-- Editor / migraciones corren como `postgres` y sí heredan lo de arriba; si algo
+-- se crea como `supabase_admin`, hay que aplicar el `grant`/`revoke` explícito
+-- de la plantilla. Verificación:
+--   select defaclrole::regrole, defaclobjtype, defaclacl
+--     from pg_default_acl where defaclnamespace = 'public'::regnamespace;
+
+
 -- ---------------------------------------------------------------------------
 -- Verificación (solo lectura). Debe devolver 0 filas.
 -- Cualquier tabla listada aquí es inaccesible por Data API para ese rol.
