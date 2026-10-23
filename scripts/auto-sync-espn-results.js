@@ -243,7 +243,10 @@ async function persistToSupabase(officialMatches, officialPreds) {
     const ids = withResults.map((m) => m.id);
     let persisted = 0;
     if (ids.length > 0) {
-      const existing = await supabaseGetAll(`matches?select=id&result_home=is.null&id=in.(${ids.join(",")})`);
+      // Sin filtro in.(...): con 400+ ids la URL pasa de 16 KB y undici (Node)
+      // aborta con "Headers Overflow Error" -> "fetch failed" (incidente 2026-10-22).
+      // Pedimos solo las filas pendientes y comparamos en memoria.
+      const existing = await supabaseGetAll("matches?select=id&result_home=is.null");
       const pendingIds = new Set((existing || []).map((r) => r.id));
       for (const m of withResults) {
         if (!pendingIds.has(m.id)) continue;
