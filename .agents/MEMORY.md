@@ -91,6 +91,12 @@
 
 ## Cambios Recientes
 
+- **2026-10-23** — **Cron `Auto-Sync` en rojo 24 h (`persistToSupabase falló: fetch failed`)**: 7 corridas fallidas seguidas desde el 22/10 19:46.
+  - **Causa raíz:** `persistToSupabase` filtraba los partidos pendientes con `matches?...&id=in.(<todos los ids con resultado>)`. Al pasar de ~400 partidos finalizados la URL llegó a **15,7 KB** y undici (el `fetch` de Node) abortó con `Headers Overflow Error` (límite interno de 16 KB) → `TypeError: fetch failed`. No era ESPN ni Supabase: el `--dry-run` local fallaba en el mismo punto.
+  - **Fix:** pedir solo las filas pendientes (`matches?select=id&result_home=is.null`, pocas) y comparar en memoria. Commit `eee2a3f`.
+  - **Verificación:** local `--dry-run` ✅ y corrida real (37 resultados + 67 puntos persistidos) → `npm run verify` 59/59 + paridad 20 checks/86 casos; en el runner, run manual `40020036771` ✅ (422 finalizados, 240 pts, 67 puntos persistidos) + `Verify` y `Deploy` ✅.
+  - **Regla:** nunca meter listas largas de ids en la query string de PostgREST; filtrar por columna (`is.null`) o en memoria.
+
 - **2026-10-20** — **Cron de resultados a cada 30 min + limpieza de resultado huérfano**:
   - **Síntoma:** los 9 partidos de Champions del día estaban `completed` en ESPN pero en la app seguían sin resultado ni puntos. La última corrida `schedule` había sido a las 14:19 (Caracas) y la de las 16:00 nunca se ejecutó (GitHub retrasa `schedule` bajo carga; el cron declaraba `0 */2 * * *`).
   - **Fix:** disparo manual del workflow (run `39509047211` → 9/9 resultados, 375 evaluados, deploy `39509089119` ✅) y cambio de schedule a `*/30 * * * *`. Repo público → minutos ilimitados; commit y dispatch del deploy siguen condicionados a que haya cambios.
