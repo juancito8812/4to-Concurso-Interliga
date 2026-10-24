@@ -11007,5 +11007,211 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dee",
+    "espn_id": "401882830",
+    "home_team": "Rayo Vallecano",
+    "away_team": "Elche",
+    "match_date": "2026-10-24T12:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Federico Redondo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fer Niño",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Germán Valera",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088de6",
+    "espn_id": "401879256",
+    "home_team": "Aston Villa",
+    "away_team": "Manchester City",
+    "match_date": "2026-10-24T11:30Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Nicolas Jackson",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Erling Haaland",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885e0",
+    "espn_id": "401874958",
+    "home_team": "Cagliari",
+    "away_team": "Bologna",
+    "match_date": "2026-10-24T13:00Z",
+    "league": "Serie A",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Nicolo Casale",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Federico Bernardeschi",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885e1",
+    "espn_id": "401874961",
+    "home_team": "Como",
+    "away_team": "Sassuolo",
+    "match_date": "2026-10-24T13:00Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Anastasios Douvikas",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a24e",
+    "espn_id": "401884758",
+    "home_team": "Augsburg",
+    "away_team": "Union Berlin",
+    "match_date": "2026-10-24T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Han-Noah Massengo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Janik Haberer",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a247",
+    "espn_id": "401884756",
+    "home_team": "Köln",
+    "away_team": "Schalke 04",
+    "match_date": "2026-10-24T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a246",
+    "espn_id": "401884757",
+    "home_team": "Mainz",
+    "away_team": "Werder Bremen",
+    "match_date": "2026-10-24T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Niclas Füllkrug",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Anthony Caci",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ludovit Reis",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Lee Jae-Sung",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a248",
+    "espn_id": "401884762",
+    "home_team": "RB Leipzig",
+    "away_team": "SV 07 Elversberg",
+    "match_date": "2026-10-24T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Tidiam Gomis",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Rômulo",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Christoph Baumgartner",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a24a",
+    "espn_id": "401884755",
+    "home_team": "SC Paderborn 07",
+    "away_team": "Hamburger SV",
+    "match_date": "2026-10-24T13:30Z",
+    "league": "Bundesliga",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Rayan Philippe",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
