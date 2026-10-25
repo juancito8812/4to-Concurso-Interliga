@@ -1837,13 +1837,13 @@
     "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
     "display_name": "Asere1995",
     "match_id": "00000000-0000-4000-8000-000000089df3",
-    "home_score": 4,
+    "home_score": 6,
     "away_score": 2,
     "created_at": "2026-10-15T22:32:19.586495+00:00",
     "scorers": [
       {
         "player_name": "Lamine Yamal",
-        "goals": 1,
+        "goals": 2,
         "team": "home"
       },
       {
@@ -1870,7 +1870,17 @@
         "player_name": "Endrick",
         "goals": 1,
         "team": "away"
+      },
+      {
+        "player_name": "Pedri",
+        "goals": 1,
+        "team": "home"
       }
+    ],
+    "points": 2,
+    "pointsDetails": [
+      "Goleador acertado: Raphinha (+1 pt)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)"
     ]
   },
   {
@@ -2127,6 +2137,113 @@
       "Diferencia de 1 gol (+1 pt)",
       "Goleador acertado: Kylian Mbappé (+1 pt)",
       "Goleador acertado: Yan Diomandé (+1 pt)"
+    ]
+  },
+  {
+    "id": "004e5450-2ace-46a7-9933-ddc0acffcc3f",
+    "user_id": "266e7258-c7f9-4159-9fa2-3281989af465",
+    "display_name": "Raudel",
+    "match_id": "00000000-0000-4000-8000-000000089df3",
+    "home_score": 4,
+    "away_score": 2,
+    "created_at": "2026-10-25T00:23:59.349569+00:00",
+    "scorers": [
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Dani Olmo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Karim Adeyemi",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yan Diomandé",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 2,
+    "pointsDetails": [
+      "Goleador acertado: Raphinha (+1 pt)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)"
+    ]
+  },
+  {
+    "id": "8fa1620f-cb3c-4f56-b424-ed0e675e7430",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000000089df3",
+    "home_score": 2,
+    "away_score": 3,
+    "created_at": "2026-10-25T13:27:17.297784+00:00",
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yan Diomandé",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)"
+    ]
+  },
+  {
+    "id": "227c0fd7-0182-46fa-a17b-3ac7c9045757",
+    "user_id": "a595517a-1160-493a-b24e-e14bba1956d4",
+    "display_name": "Noel Cordero Velázquez",
+    "match_id": "00000000-0000-4000-8000-000000089df3",
+    "home_score": 3,
+    "away_score": 1,
+    "created_at": "2026-10-25T15:06:43.671171+00:00",
+    "scorers": [
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "points": 1,
+    "pointsDetails": [
+      "Goleador acertado: Raphinha (+1 pt)"
     ]
   }
 ]
