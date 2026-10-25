@@ -1764,10 +1764,31 @@
     "user_id": "836a17f7-37f6-427f-a0fe-eedcf66a082d",
     "display_name": "JOKENON93",
     "match_id": "00000000-0000-4000-8000-00000008a24c",
-    "home_score": 2,
-    "away_score": 3,
+    "home_score": 0,
+    "away_score": 5,
     "created_at": "2026-10-14T12:49:41.061686+00:00",
-    "scorers": []
+    "scorers": [
+      {
+        "player_name": "Harry Kane",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Luis Díaz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ismael Saibari",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Dayot Upamecano",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
   },
   {
     "id": "eba23da9-6770-4d6a-b813-1b167fe20b36",
