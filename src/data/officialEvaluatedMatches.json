@@ -11811,5 +11811,28 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089df1",
+    "espn_id": "401882828",
+    "home_team": "Sevilla",
+    "away_team": "Osasuna",
+    "match_date": "2026-10-26T20:00Z",
+    "league": "LaLiga",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Isaac Romero",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Felix Correia",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
