@@ -11834,5 +11834,193 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885dc",
+    "espn_id": "401874980",
+    "home_team": "Sassuolo",
+    "away_team": "Lazio",
+    "match_date": "2026-10-27T17:30Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 6,
+    "scorers": [
+      {
+        "player_name": "Kenneth Taylor",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Kristian Thorstvedt",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gustav Isaksen",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Romano Floriani",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sebastiano Esposito",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Mattia Zaccagni",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Tijjani Noslin",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f12d",
+    "espn_id": "401928493",
+    "home_team": "CD Cuarte",
+    "away_team": "Girona",
+    "match_date": "2026-10-27T17:30Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Abel Ruiz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Oleksandr Pishchur",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c3f8",
+    "espn_id": "401916920",
+    "home_team": "Hamburger SV",
+    "away_team": "Eintracht Frankfurt",
+    "match_date": "2026-10-27T17:00Z",
+    "league": "DFB-Pokal",
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Robin Koch",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jonathan Burkardt",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Younes Ebnoutalib",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Terem Moffi",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c463",
+    "espn_id": "401917027",
+    "home_team": "Rot-Weiss Essen",
+    "away_team": "RB Leipzig",
+    "match_date": "2026-10-27T17:00Z",
+    "league": "DFB-Pokal",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Lucas Brumme",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Christoph Baumgartner",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c464",
+    "espn_id": "401917028",
+    "home_team": "SG Sonnenhof Großaspach",
+    "away_team": "Augsburg",
+    "match_date": "2026-10-27T17:00Z",
+    "league": "DFB-Pokal",
+    "result_home": 2,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Rodrigo Ribeiro",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Luca Molinari",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Volkan Celiktas",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Arijon Ibrahimovic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Anton Kade",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c465",
+    "espn_id": "401917029",
+    "home_team": "Bochum",
+    "away_team": "Mainz",
+    "match_date": "2026-10-27T17:00Z",
+    "league": "DFB-Pokal",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Christian Rasmussen",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Philipp Hofmann",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
