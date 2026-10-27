@@ -5775,33 +5775,34 @@
     "completed": true
   },
   {
-    "id": "00000000-0000-4000-8000-00000008a23c",
+    "id": "00000000-0000-4000-8000-000017f4c466",
+    "espn_id": "401917030",
     "home_team": "Borussia Dortmund",
     "away_team": "Werder Bremen",
-    "match_date": "2026-10-09T18:30Z",
-    "league": "Bundesliga",
-    "result_home": 2,
+    "match_date": "2026-10-27T19:45Z",
+    "league": "DFB-Pokal",
+    "result_home": 3,
     "result_away": 2,
     "scorers": [
       {
-        "player_name": "Daniel Svensson",
+        "player_name": "Serhou Guirassy",
         "goals": 1,
         "team": "home"
       },
       {
-        "player_name": "Nico Schlotterbeck",
+        "player_name": "Carney Chukwuemeka",
         "goals": 1,
         "team": "home"
-      },
-      {
-        "player_name": "Ludovit Reis",
-        "goals": 1,
-        "team": "away"
       },
       {
         "player_name": "Niclas Füllkrug",
-        "goals": 1,
+        "goals": 2,
         "team": "away"
+      },
+      {
+        "player_name": "Marcel Sabitzer",
+        "goals": 1,
+        "team": "home"
       }
     ],
     "completed": true
@@ -11851,11 +11852,6 @@
         "team": "away"
       },
       {
-        "player_name": "Kristian Thorstvedt",
-        "goals": 1,
-        "team": "home"
-      },
-      {
         "player_name": "Gustav Isaksen",
         "goals": 1,
         "team": "away"
@@ -11965,7 +11961,7 @@
   {
     "id": "00000000-0000-4000-8000-000017f4c464",
     "espn_id": "401917028",
-    "home_team": "SG Sonnenhof Großaspach",
+    "home_team": "SG Sonnenhof Großaspch",
     "away_team": "Augsburg",
     "match_date": "2026-10-27T17:00Z",
     "league": "DFB-Pokal",
@@ -12019,6 +12015,710 @@
         "player_name": "Philipp Hofmann",
         "goals": 1,
         "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885db",
+    "espn_id": "401874780",
+    "home_team": "Roma",
+    "away_team": "Cagliari",
+    "match_date": "2026-10-27T19:45Z",
+    "league": "Serie A",
+    "result_home": 4,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "M'Bala Nzola",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Emanuele Lulli",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Niccolò Pisilli",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Daniel Maldini",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Rodrigo Mora",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Donyell Malen",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885dd",
+    "espn_id": "401874786",
+    "home_team": "Torino",
+    "away_team": "Como",
+    "match_date": "2026-10-27T19:45Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Ché Adams",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jacobo Ramón",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Nico Paz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Martin Baturina",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f135",
+    "espn_id": "401928501",
+    "home_team": "Atlético Pinatarense",
+    "away_team": "Elche",
+    "match_date": "2026-10-27T18:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Mohammed Benhallou El Farh",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ezequiel Ponce",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Ali Houary",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f148",
+    "espn_id": "401928520",
+    "home_team": "CF Calamocha",
+    "away_team": "CE Europa",
+    "match_date": "2026-10-27T18:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f12f",
+    "espn_id": "401928495",
+    "home_team": "Sestao",
+    "away_team": "Espanyol",
+    "match_date": "2026-10-27T18:00Z",
+    "league": "Copa del Rey",
+    "result_home": 4,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Marcos Fernández",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Adrián Carrión",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Andoni Ugarte",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Roberto Fernández",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Gabriel Moscardo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ander Laka",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jon Rojo",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f149",
+    "espn_id": "401928521",
+    "home_team": "UD Castellonense",
+    "away_team": "Almería",
+    "match_date": "2026-10-27T18:45Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Agustín Murillo Sala",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Thalys",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sergio Arribas",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f165",
+    "espn_id": "401928549",
+    "home_team": "Alcalá",
+    "away_team": "Las Palmas",
+    "match_date": "2026-10-27T19:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Kirian Rodríguez",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Luis Simón Pecharromán",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Manu Fuster",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f13d",
+    "espn_id": "401928509",
+    "home_team": "Atlético Tordesillas",
+    "away_team": "Mirandés",
+    "match_date": "2026-10-27T19:00Z",
+    "league": "Copa del Rey",
+    "result_home": 3,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Verde",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Javi Bueno",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jorge González",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Carlos Navarro",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Abel Conejo",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "David De La Iglesia Rey",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Chatún",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Ricardo de Moraes",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Aritz Arambarri",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f156",
+    "espn_id": "401928534",
+    "home_team": "Ciudad De Lucena",
+    "away_team": "Rayo Majadahonda",
+    "match_date": "2026-10-27T19:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "David Del Pozo",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f13c",
+    "espn_id": "401928508",
+    "home_team": "Gimnastica Segoviana",
+    "away_team": "Cultural Leonesa",
+    "match_date": "2026-10-27T19:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f13e",
+    "espn_id": "401928510",
+    "home_team": "Llanera",
+    "away_team": "Ponferradina",
+    "match_date": "2026-10-27T19:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Pablo Muñoz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Longo",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "José Luis Aranda",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "David Andújar",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mikel Busto",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Slavy",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Adrian Turmo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Borja Valle",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Serigne Faye",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f169",
+    "espn_id": "401928553",
+    "home_team": "Don Benito",
+    "away_team": "CD Extremadura",
+    "match_date": "2026-10-27T19:30Z",
+    "league": "Copa del Rey",
+    "result_home": 2,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Gorka Santamaria",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Diego Díaz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Luis Morcillo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Iker Burgos López",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Nordin Al Lal",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f136",
+    "espn_id": "401928502",
+    "home_team": "Manresa",
+    "away_team": "Sant Andreu",
+    "match_date": "2026-10-27T19:30Z",
+    "league": "Copa del Rey",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Emilio Lucas Viña",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sergi Armero",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Pablo Agudín",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "David Momoh Domínguez",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Daniel Torices",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alexis García",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Roger Munells Carrera",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f128",
+    "espn_id": "401928488",
+    "home_team": "Arosa",
+    "away_team": "Pontevedra",
+    "match_date": "2026-10-27T20:00Z",
+    "league": "Copa del Rey",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Marcos Remeseiro",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gabriel Palmás",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f163",
+    "espn_id": "401928547",
+    "home_team": "Atlético Paso",
+    "away_team": "Córdoba",
+    "match_date": "2026-10-27T20:00Z",
+    "league": "Copa del Rey",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Ibai Sanz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Iván Villoslada",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Aythami Perera",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f137",
+    "espn_id": "401928503",
+    "home_team": "CD Tudelano",
+    "away_team": "Real Zaragoza",
+    "match_date": "2026-10-27T20:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Joaquin Delgado",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Pau Sans",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Hugo Pinilla",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f14a",
+    "espn_id": "401928522",
+    "home_team": "Manacor",
+    "away_team": "Villarreal",
+    "match_date": "2026-10-27T20:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 5,
+    "scorers": [
+      {
+        "player_name": "Alassane Diatta",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Tani Oluwaseyi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sergi Cardona",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Nizar El Jmili Ben Hamou",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Nicolas Pépé",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f155",
+    "espn_id": "401928533",
+    "home_team": "Recreativo Huelva",
+    "away_team": "Rayo Vallecano",
+    "match_date": "2026-10-27T20:00Z",
+    "league": "Copa del Rey",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Alejandro Marín Díaz",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alexandre Alemão",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Jorge de Frutos",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Paolo Romero",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f133",
+    "espn_id": "401928499",
+    "home_team": "Sporting de Alcázar",
+    "away_team": "Málaga",
+    "match_date": "2026-10-27T20:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Chupete",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Daniel Lorenzo",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c467",
+    "espn_id": "401917031",
+    "home_team": "Borussia Mönchengladbach",
+    "away_team": "Karlsruher SC",
+    "match_date": "2026-10-27T19:45Z",
+    "league": "DFB-Pokal",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Robin Hack",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lukas Ullrich",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c462",
+    "espn_id": "401917026",
+    "home_team": "Köln",
+    "away_team": "Union Berlin",
+    "match_date": "2026-10-27T19:45Z",
+    "league": "DFB-Pokal",
+    "result_home": 5,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Said El Mala",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Linton Maina",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ísak Jóhannesson",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Sebastian Sebulonsen",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c3fb",
+    "espn_id": "401916923",
+    "home_team": "SV 07 Elversberg",
+    "away_team": "Darmstadt",
+    "match_date": "2026-10-27T19:45Z",
+    "league": "DFB-Pokal",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Lars Kehl",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Milan Smit",
+        "goals": 1,
+        "team": "away"
       }
     ],
     "completed": true
