@@ -6110,22 +6110,17 @@
     "completed": true
   },
   {
-    "id": "00000000-0000-4000-8000-00000008a235",
-    "espn_id": "401884773",
+    "id": "00000000-0000-4000-8000-000017f4c468",
+    "espn_id": "401917032",
     "home_team": "SC Paderborn 07",
     "away_team": "Stuttgart",
-    "match_date": "2026-10-10T13:30Z",
-    "league": "Bundesliga",
+    "match_date": "2026-10-28T17:00Z",
+    "league": "DFB-Pokal",
     "result_home": 0,
-    "result_away": 2,
+    "result_away": 1,
     "scorers": [
       {
-        "player_name": "Jeff Chabot",
-        "goals": 1,
-        "team": "away"
-      },
-      {
-        "player_name": "Chris Führich",
+        "player_name": "Deniz Undav",
         "goals": 1,
         "team": "away"
       }
@@ -13009,6 +13004,297 @@
     "result_home": 0,
     "result_away": 0,
     "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885d5",
+    "espn_id": "401874993",
+    "home_team": "AC Milan",
+    "away_team": "Bologna",
+    "match_date": "2026-10-28T17:30Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Samuel Mbangula",
+        "goals": 3,
+        "team": "away"
+      },
+      {
+        "player_name": "Alphadjo Cissè",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885d9",
+    "espn_id": "401874965",
+    "home_team": "Parma",
+    "away_team": "Udinese",
+    "match_date": "2026-10-28T17:30Z",
+    "league": "Serie A",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885d6",
+    "espn_id": "401874773",
+    "home_team": "Venezia",
+    "away_team": "Inter Milan",
+    "match_date": "2026-10-28T17:30Z",
+    "league": "Serie A",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885d8",
+    "espn_id": "401874988",
+    "home_team": "Genoa",
+    "away_team": "Juventus",
+    "match_date": "2026-10-28T19:45Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Kingsley Ehizibue",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Tommaso Baldanzi",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885da",
+    "espn_id": "401874799",
+    "home_team": "Monza",
+    "away_team": "Napoli",
+    "match_date": "2026-10-28T19:45Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Rasmus Højlund",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Gustavo Varela",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Matteo Politano",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Rafa Marín",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Kevin De Bruyne",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c3f9",
+    "espn_id": "401916921",
+    "home_team": "Dynamo Dresden",
+    "away_team": "Schalke 04",
+    "match_date": "2026-10-28T17:00Z",
+    "league": "DFB-Pokal",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Patrice Covic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Christoph Daferner",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c46c",
+    "espn_id": "401917036",
+    "home_team": "Freiburg",
+    "away_team": "Wolfsburg",
+    "match_date": "2026-10-28T17:00Z",
+    "league": "DFB-Pokal",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Igor Matanovic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kento Shiogai",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Keisuke Goto",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c3f7",
+    "espn_id": "401916919",
+    "home_team": "SSV Jeddeloh II",
+    "away_team": "Hertha Berlin",
+    "match_date": "2026-10-28T17:00Z",
+    "league": "DFB-Pokal",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Josip Brekalo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Julian Eitscberger",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c469",
+    "espn_id": "401917033",
+    "home_team": "Bayer Leverkusen",
+    "away_team": "FC Nürnberg",
+    "match_date": "2026-10-28T19:45Z",
+    "league": "DFB-Pokal",
+    "result_home": 5,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Rafael Lubach",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sigurd Haugen",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Edmond Tapsoba",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Patrik Schick",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jonas Hofmann",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lucas Vázquez",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c46b",
+    "espn_id": "401917035",
+    "home_team": "Bayern Munich",
+    "away_team": "1. FC Magdeburg",
+    "match_date": "2026-10-28T19:45Z",
+    "league": "DFB-Pokal",
+    "result_home": 6,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Michael Olise",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Mateusz Zukowski",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ismael Saibari",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alphonso Davies",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Nathaniel Brown",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "David Daiber",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c3fa",
+    "espn_id": "401916922",
+    "home_team": "Hannover 96",
+    "away_team": "Kaiserslautern",
+    "match_date": "2026-10-28T19:45Z",
+    "league": "DFB-Pokal",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Milos Lukovic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ivan Prtajin",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
     "completed": true
   }
 ]
