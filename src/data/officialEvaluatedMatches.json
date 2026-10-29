@@ -12759,10 +12759,10 @@
     "espn_id": "401928494",
     "home_team": "Coruxo",
     "away_team": "Zamora CF",
-    "match_date": "2026-10-28T18:00Z",
+    "match_date": "2026-10-29T18:00Z",
     "league": "Copa del Rey",
     "result_home": 0,
-    "result_away": 0,
+    "result_away": 2,
     "scorers": [],
     "completed": true
   },
@@ -12771,10 +12771,10 @@
     "espn_id": "401928515",
     "home_team": "Peña Sport",
     "away_team": "Huesca",
-    "match_date": "2026-10-28T18:00Z",
+    "match_date": "2026-10-29T17:00Z",
     "league": "Copa del Rey",
-    "result_home": 0,
-    "result_away": 0,
+    "result_home": 1,
+    "result_away": 5,
     "scorers": [],
     "completed": true
   },
@@ -12783,10 +12783,10 @@
     "espn_id": "401928525",
     "home_team": "Lens",
     "away_team": "Ceuta",
-    "match_date": "2026-10-28T18:00Z",
+    "match_date": "2026-10-29T18:00Z",
     "league": "Copa del Rey",
-    "result_home": 0,
-    "result_away": 0,
+    "result_home": 1,
+    "result_away": 2,
     "scorers": [],
     "completed": true
   },
@@ -12879,7 +12879,7 @@
     "espn_id": "401928528",
     "home_team": "Mijas Las Lagunas",
     "away_team": "Real Jaen CF",
-    "match_date": "2026-10-28T19:00Z",
+    "match_date": "2026-10-29T19:00Z",
     "league": "Copa del Rey",
     "result_home": 0,
     "result_away": 0,
@@ -12891,11 +12891,62 @@
     "espn_id": "401928490",
     "home_team": "Numancia",
     "away_team": "Real Oviedo",
-    "match_date": "2026-10-28T19:00Z",
+    "match_date": "2026-10-29T17:00Z",
     "league": "Copa del Rey",
-    "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_home": 3,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Rafa Roldán",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jonatan González Crespo",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "José Luis Morales",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Víctor Charlez Romeo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Daniel Villahermosa",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jean Lauture",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Aitor Aranzabe",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Iker León Gutiérrez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alexandru Mihai Isfan",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mikel Goti",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
     "completed": true
   },
   {
@@ -12927,11 +12978,27 @@
     "espn_id": "401928530",
     "home_team": "Cieza",
     "away_team": "Granada",
-    "match_date": "2026-10-28T19:30Z",
+    "match_date": "2026-10-29T18:30Z",
     "league": "Copa del Rey",
     "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Diego Hormigo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Benedikt Gimber",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jorge Pascual Medina",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
     "completed": true
   },
   {
@@ -13351,6 +13418,133 @@
         "player_name": "Adrian Kapralik",
         "goals": 1,
         "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885de",
+    "espn_id": "401874976",
+    "home_team": "Frosinone",
+    "away_team": "Lecce",
+    "match_date": "2026-10-29T17:30Z",
+    "league": "Serie A",
+    "result_home": 5,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Matteo Cichella",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Giacomo Calo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Antonio Raimondo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Daniel Birligea",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Joel Monteiro",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f151",
+    "espn_id": "401928529",
+    "home_team": "Atlético Baleares",
+    "away_team": "Eldense",
+    "match_date": "2026-10-29T18:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Iker Ortega",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f130",
+    "espn_id": "401928496",
+    "home_team": "Atlético Calatayud",
+    "away_team": "Osasuna",
+    "match_date": "2026-10-29T18:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 6,
+    "scorers": [
+      {
+        "player_name": "Raúl García",
+        "goals": 3,
+        "team": "away"
+      },
+      {
+        "player_name": "Enrique Barja",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jonathan Dubasin",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Asier Bonel Aicua",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f14e",
+    "espn_id": "401928526",
+    "home_team": "UB Lebrijana",
+    "away_team": "Getafe",
+    "match_date": "2026-10-29T18:00Z",
+    "league": "Copa del Rey",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Pepe Tejero Gómez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Sergio David Romero Campo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Abdel Abqar",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Borja Mayoral",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Orel Mangala",
+        "goals": 1,
+        "team": "away"
       }
     ],
     "completed": true
