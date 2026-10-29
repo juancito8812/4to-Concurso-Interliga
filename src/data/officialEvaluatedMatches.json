@@ -13296,5 +13296,63 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4c46a",
+    "espn_id": "401917034",
+    "home_team": "Holstein Kiel",
+    "away_team": "Hoffenheim",
+    "match_date": "2026-10-28T19:45Z",
+    "league": "DFB-Pokal",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Andrej Kramaric",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ivan Nekic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fisnik Asllani",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Guillermo Balzi",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gyan De Regt",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alexander Prass",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Phil Harres",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Adam Hlozek",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Adrian Kapralik",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
