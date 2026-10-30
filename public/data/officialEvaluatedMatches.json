@@ -12867,11 +12867,17 @@
     "espn_id": "401928511",
     "home_team": "Covadonga",
     "away_team": "Real Valladolid",
-    "match_date": "2026-10-28T19:00Z",
+    "match_date": "2026-10-29T19:00Z",
     "league": "Copa del Rey",
     "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Robin Van Duiven",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
     "completed": true
   },
   {
@@ -13006,11 +13012,32 @@
     "espn_id": "401928517",
     "home_team": "Gimnástica Torrelavega",
     "away_team": "UD Ourense",
-    "match_date": "2026-10-28T19:30Z",
+    "match_date": "2026-10-29T19:30Z",
     "league": "Copa del Rey",
-    "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "José Luis Friaza",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Javi Labrada",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Saza",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alberto Gómez",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
     "completed": true
   },
   {
@@ -13066,11 +13093,32 @@
     "espn_id": "401928548",
     "home_team": "Xerez",
     "away_team": "Cádiz",
-    "match_date": "2026-10-28T20:00Z",
+    "match_date": "2026-10-29T20:00Z",
     "league": "Copa del Rey",
-    "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Jaime Lopéz",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Cristian Gutiérrez",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "García Pascual",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Borja Vázquez",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
     "completed": true
   },
   {
@@ -13543,6 +13591,342 @@
       },
       {
         "player_name": "Orel Mangala",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885d7",
+    "espn_id": "401874969",
+    "home_team": "Fiorentina",
+    "away_team": "Atalanta",
+    "match_date": "2026-10-29T19:45Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Charles De Ketelaere",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alieu Njie",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "João Mário",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Nicola Zalewski",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f157",
+    "espn_id": "401928535",
+    "home_team": "San Sebastián de los Reyes",
+    "away_team": "Coria",
+    "match_date": "2026-10-29T18:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Toper",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "De La Llave De La Llave",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Rafael Núñez",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f14b",
+    "espn_id": "401928523",
+    "home_team": "Antequera CF",
+    "away_team": "Aguilas",
+    "match_date": "2026-10-29T19:00Z",
+    "league": "Copa del Rey",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Israel Domínguez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alberto Quintana",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f12b",
+    "espn_id": "401928491",
+    "home_team": "CD Laredo",
+    "away_team": "Burgos",
+    "match_date": "2026-10-29T19:00Z",
+    "league": "Copa del Rey",
+    "result_home": 2,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "José Gragera",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Andrés Carral",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alberto Dadie",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Óscar Conde",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Iván Martínez",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f132",
+    "espn_id": "401928498",
+    "home_team": "CD Varea",
+    "away_team": "FC Andorra",
+    "match_date": "2026-10-29T19:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Diego Diaz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Julian Rijkhoff",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Nacho Quintana",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f153",
+    "espn_id": "401928531",
+    "home_team": "Conquense",
+    "away_team": "Castellón",
+    "match_date": "2026-10-29T19:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Varo",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Antonio Gala",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f12c",
+    "espn_id": "401928492",
+    "home_team": "Guijuelo",
+    "away_team": "Sporting Gijón",
+    "match_date": "2026-10-29T19:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Juan Otero",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Enol Prendes",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Miguel Conde",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f140",
+    "espn_id": "401928512",
+    "home_team": "Real Ávila",
+    "away_team": "Unionistas de Salamanca",
+    "match_date": "2026-10-29T19:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Alejandro Millán Coutiño",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f141",
+    "espn_id": "401928513",
+    "home_team": "AE Prat",
+    "away_team": "Athletic Bilbao",
+    "match_date": "2026-10-29T20:00Z",
+    "league": "Copa del Rey",
+    "result_home": 1,
+    "result_away": 6,
+    "scorers": [
+      {
+        "player_name": "Maroan Sannadi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Robert Navarro",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Gustavo Reinke Gonçalves",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Nico Serrano",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jesús Vizcay Hurtado",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Christian Imga",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Selton Sánchez",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f13b",
+    "espn_id": "401928507",
+    "home_team": "Auriense Cented Academy",
+    "away_team": "Deportivo La Coruña",
+    "match_date": "2026-10-29T20:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Jonathan Asp Jensen",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Luismi Cruz",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f129",
+    "espn_id": "401928489",
+    "home_team": "Ribadesella",
+    "away_team": "Racing Santander",
+    "match_date": "2026-10-29T20:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Asier Villalibre",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4f168",
+    "espn_id": "401928552",
+    "home_team": "Sporting Hortaleza",
+    "away_team": "Sevilla",
+    "match_date": "2026-10-29T20:00Z",
+    "league": "Copa del Rey",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Robbie Ure",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Peque",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Rubén Vargas",
         "goals": 1,
         "team": "away"
       }
