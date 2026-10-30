@@ -13932,5 +13932,61 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e01",
+    "espn_id": "401882817",
+    "home_team": "Villarreal",
+    "away_team": "Espanyol",
+    "match_date": "2026-10-30T20:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Leandro Cabrera",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a256",
+    "espn_id": "401884746",
+    "home_team": "SV 07 Elversberg",
+    "away_team": "Mainz",
+    "match_date": "2026-10-30T19:30Z",
+    "league": "Bundesliga",
+    "result_home": 4,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Felix Keidel",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Francis-Ikechukwu Onyeka",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Maurice Krattenmacher",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Cole Campbell",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Benedict Hollerbach",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
