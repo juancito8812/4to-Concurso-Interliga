@@ -2245,5 +2245,17 @@
     "pointsDetails": [
       "Goleador acertado: Raphinha (+1 pt)"
     ]
+  },
+  {
+    "id": "56ea3a1e-813f-4586-ba59-03121f89b624",
+    "user_id": "266b309a-4eb0-474a-85db-aca42e055913",
+    "display_name": "JR_DT",
+    "match_id": "00000000-0000-4000-8000-000000088df2",
+    "home_score": 2,
+    "away_score": 2,
+    "created_at": "2026-10-31T11:28:59.200354+00:00",
+    "scorers": [],
+    "points": 0,
+    "pointsDetails": []
   }
 ]

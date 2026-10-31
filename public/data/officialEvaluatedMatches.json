@@ -13988,5 +13988,51 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dfa",
+    "espn_id": "401882820",
+    "home_team": "Levante",
+    "away_team": "Atlético Madrid",
+    "match_date": "2026-10-31T13:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Alejandro Grimaldo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Giuliano Simeone",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088df2",
+    "espn_id": "401879248",
+    "home_team": "Chelsea",
+    "away_team": "Manchester United",
+    "match_date": "2026-10-31T12:30Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Morgan Rogers",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Cole Palmer",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
