@@ -2257,5 +2257,36 @@
     "scorers": [],
     "points": 0,
     "pointsDetails": []
+  },
+  {
+    "id": "5dfeccb7-4b77-4f18-b05d-d1b06e8e8615",
+    "user_id": "836a17f7-37f6-427f-a0fe-eedcf66a082d",
+    "display_name": "JOKENON93",
+    "match_id": "00000000-0000-4000-8000-00000008a255",
+    "home_score": 3,
+    "away_score": 2,
+    "created_at": "2026-10-23T15:12:50.875513+00:00",
+    "scorers": [
+      {
+        "player_name": "Michael Olise",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Luis Díaz",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Sehrou Guirassy",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jobe Bellingham",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
   }
 ]
