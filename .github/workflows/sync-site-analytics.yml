@@ -1,0 +1,44 @@
+name: Sync Site Analytics (Cloudflare)
+
+on:
+  schedule:
+    # Cada 3 h: el panel de admin muestra tráfico; no necesita tiempo real.
+    - cron: "15 */3 * * *"
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Días de ventana a sincronizar"
+        required: false
+        default: "30"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-site-analytics
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Sync Cloudflare analytics into Supabase
+        # El input va por env (no interpolado en el comando) para evitar inyección.
+        run: node scripts/sync-site-analytics.mjs "$DAYS"
+        env:
+          DAYS: ${{ inputs.days || '30' }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ZONE_TAG: ${{ vars.CF_ZONE_TAG }}
+          CF_ACCOUNT_TAG: ${{ vars.CF_ACCOUNT_TAG }}
+          CF_RUM_SITE_TAG: ${{ vars.CF_RUM_SITE_TAG }}

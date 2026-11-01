@@ -15,6 +15,28 @@ interface DashboardStats {
   cups: { slug: string; alive: number; eliminated: number; total: number }[];
 }
 
+interface SiteStats {
+  generated_at: string;
+  window_days: number;
+  last_sync: string | null;
+  totals: {
+    requests: number;
+    page_views: number;
+    uniques_avg: number;
+    uniques_max: number;
+    bytes: number;
+    threats: number;
+    rum_pageviews: number;
+    rum_visits: number;
+  };
+  yesterday: { day?: string; rum_pageviews?: number; rum_visits?: number; page_views?: number; uniques?: number; requests?: number };
+  daily: { date: string; rum_pageviews: number; rum_visits: number; page_views: number; uniques: number }[];
+  top_paths: { key: string; hits: number }[];
+  top_countries: { key: string; hits: number }[];
+  top_referers: { key: string; hits: number }[];
+  top_browsers: { key: string; hits: number }[];
+}
+
 interface Fixture {
   id: string;
   home_team: string;
@@ -77,6 +99,8 @@ function closingLabel(matchDate: string, now: number): string {
 
 export default function AdminHomePage() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [site, setSite] = useState<SiteStats | null>(null);
+  const [siteError, setSiteError] = useState("");
   const [fixtures, setFixtures] = useState<Fixture[]>([]);
   const [evaluated, setEvaluated] = useState<EvaluatedMatch[]>([]);
   const [error, setError] = useState("");
@@ -87,8 +111,9 @@ export default function AdminHomePage() {
     setLoading(true);
     setError("");
 
-    const [rpc, fixturesRes, evaluatedRes] = await Promise.all([
+    const [rpc, siteRpc, fixturesRes, evaluatedRes] = await Promise.all([
       supabase.rpc("admin_dashboard_stats"),
+      supabase.rpc("admin_site_stats", { p_days: 30 }),
       fetch("/data/officialFixtures.json").catch(() => null),
       fetch("/data/officialEvaluatedMatches.json").catch(() => null),
     ]);
@@ -97,6 +122,13 @@ export default function AdminHomePage() {
       setError(rpc.error.message);
     } else {
       setStats(rpc.data as DashboardStats);
+    }
+
+    if (siteRpc.error) {
+      setSiteError(siteRpc.error.message);
+    } else {
+      setSite(siteRpc.data as SiteStats);
+      setSiteError("");
     }
 
     if (fixturesRes?.ok) {
@@ -162,6 +194,39 @@ export default function AdminHomePage() {
   const maxActivity = Math.max(1, ...activity.map((d) => d.count));
   const totalActivity = activity.reduce((s, d) => s + d.count, 0);
   const pendingResults = stats?.matches.overdue ?? 0;
+
+  const trafficDaily = useMemo(() => {
+    const byDay = new Map((site?.daily ?? []).map((d) => [d.date.slice(0, 10), d]));
+    const out: { key: string; label: string; views: number; visits: number }[] = [];
+    for (let i = 13; i >= 0; i--) {
+      const d = new Date();
+      d.setUTCHours(12, 0, 0, 0);
+      d.setUTCDate(d.getUTCDate() - i);
+      const key = d.toISOString().slice(0, 10);
+      const row = byDay.get(key);
+      out.push({
+        key,
+        label: d.toLocaleDateString("es-VE", { day: "2-digit", month: "short", timeZone: "UTC" }),
+        views: row?.rum_pageviews ?? 0,
+        visits: row?.rum_visits ?? 0,
+      });
+    }
+    return out;
+  }, [site]);
+
+  const maxTraffic = Math.max(1, ...trafficDaily.map((d) => d.views));
+  const humanVisits = site?.totals.rum_visits ?? 0;
+  const botsRatio =
+    site && site.totals.page_views > 0
+      ? Math.round((site.totals.page_views / Math.max(1, site.totals.rum_pageviews)) * 10) / 10
+      : 0;
+
+  const fmtBytes = (n: number): string => {
+    if (!n) return "0 B";
+    const units = ["B", "KB", "MB", "GB", "TB"];
+    const i = Math.min(units.length - 1, Math.floor(Math.log(n) / Math.log(1024)));
+    return `${(n / 1024 ** i).toFixed(i > 1 ? 1 : 0)} ${units[i]}`;
+  };
 
   const kpi = (label: string, value: string, hint: string, tone: "normal" | "warn" | "good" = "normal") => (
     <div className="bg-navy-mid border border-border rounded-2xl p-4 sm:p-5">
@@ -252,6 +317,127 @@ export default function AdminHomePage() {
           stats ? `${stats.participants.admins} admin${stats.participants.admins === 1 ? "" : "s"} en total` : "altas recientes",
           stats && stats.participants.new_7d > 0 ? "good" : "normal"
         )}
+      </div>
+
+      <div className="space-y-3">
+        <div className="bg-navy-mid border border-border rounded-2xl p-5">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <div>
+              <h2 className="text-sm font-semibold text-white">Tráfico del sitio · últimos 30 días</h2>
+              <p className="text-[11px] text-silver/60 mt-0.5">
+                Cloudflare (zona + Web Analytics). Se sincroniza cada 3 h.
+              </p>
+            </div>
+            <span className="text-[11px] text-silver/60">
+              {site?.last_sync ? `Actualizado ${fmtDate(site.last_sync, true)}` : siteError ? "Sin datos" : "Leyendo…"}
+            </span>
+          </div>
+
+          {siteError && (
+            <p className="text-[11px] text-amber-300/80 mt-2">No se pudieron leer las estadísticas del sitio: {siteError}</p>
+          )}
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
+            {kpi(
+              "Visitas reales",
+              site ? nf.format(humanVisits) : "…",
+              site ? `${site.totals.rum_pageviews} páginas vistas · ayer ${site.yesterday.rum_visits ?? 0}` : "navegadores reales"
+            )}
+            {kpi(
+              "Páginas por visita",
+              site && humanVisits > 0 ? (site.totals.rum_pageviews / humanVisits).toFixed(1) : "…",
+              site ? "profundidad media de navegación" : ""
+            )}
+            {kpi(
+              "Peticiones totales",
+              site ? nf.format(site.totals.requests) : "…",
+              site ? `incluye bots · ×${nf.format(botsRatio)} frente a vistas reales` : "zona Cloudflare"
+            )}
+            {kpi(
+              "Datos servidos",
+              site ? fmtBytes(site.totals.bytes) : "…",
+              site ? `${nf.format(site.totals.threats)} amenazas bloqueadas` : "salida del CDN"
+            )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+          <div className="bg-navy-mid border border-border rounded-2xl p-5">
+            <div className="flex items-baseline justify-between">
+              <h2 className="text-sm font-semibold text-white">Visitas reales · 14 días</h2>
+              <span className="text-[11px] text-silver/60">
+                {nf.format(trafficDaily.reduce((s, d) => s + d.views, 0))} páginas
+              </span>
+            </div>
+            <div className="mt-4 flex items-end gap-1.5 h-28">
+              {trafficDaily.map((d) => (
+                <div key={d.key} className="flex-1 flex flex-col items-center gap-1.5">
+                  <span className="text-[9px] text-silver/70 tabular-nums">{d.views || ""}</span>
+                  <div
+                    className={`w-full rounded-t ${d.views ? "bg-green/70" : "bg-border"}`}
+                    style={{ height: `${Math.max(4, (d.views / maxTraffic) * 80)}px` }}
+                    title={`${d.label}: ${d.views} páginas · ${d.visits} visitas`}
+                  />
+                  <span className="text-[9px] text-silver/50">{d.label.split(" ")[0]}</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-[11px] text-silver/50 mt-3">
+              Solo navegadores reales (sin bots ni crawlers). Ayer: {site?.yesterday.rum_pageviews ?? 0} páginas ·{" "}
+              {site?.yesterday.rum_visits ?? 0} visitas.
+            </p>
+          </div>
+
+          <div className="bg-navy-mid border border-border rounded-2xl p-5">
+            <h2 className="text-sm font-semibold text-white">Páginas más visitadas (30 días)</h2>
+            {site?.top_paths.length ? (
+              <ul className="mt-3 space-y-2">
+                {site.top_paths.map((p) => {
+                  const max = Math.max(1, site.top_paths[0]?.hits ?? 1);
+                  return (
+                    <li key={p.key} className="flex items-center gap-2">
+                      <span className="text-xs text-white flex-1 truncate" title={p.key}>
+                        {p.key === "/" ? "/ (inicio)" : p.key}
+                      </span>
+                      <span className="w-20 h-1.5 rounded bg-border overflow-hidden shrink-0">
+                        <span className="block h-full bg-gold/70" style={{ width: `${Math.max(6, (p.hits / max) * 100)}%` }} />
+                      </span>
+                      <span className="text-[11px] text-silver/70 tabular-nums w-8 text-right">{p.hits}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <p className="text-[11px] text-silver/50 mt-3">Sin visitas registradas en la ventana.</p>
+            )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {[
+            { title: "Países", rows: site?.top_countries ?? [] },
+            { title: "Referentes", rows: site?.top_referers ?? [] },
+            { title: "Navegadores", rows: site?.top_browsers ?? [] },
+          ].map((block) => (
+            <div key={block.title} className="bg-navy-mid border border-border rounded-2xl p-5">
+              <h2 className="text-sm font-semibold text-white">{block.title}</h2>
+              {block.rows.length ? (
+                <ul className="mt-3 space-y-1.5 text-xs">
+                  {block.rows.map((r) => (
+                    <li key={r.key} className="flex justify-between gap-2">
+                      <span className="text-silver/80 truncate" title={r.key}>
+                        {r.key}
+                      </span>
+                      <span className="text-white tabular-nums">{r.hits}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-[11px] text-silver/50 mt-3">Sin datos.</p>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
