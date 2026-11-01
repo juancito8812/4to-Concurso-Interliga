@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
+import TeamCrest from "@/components/TeamCrest";
 import {
   leagueColors,
   leagueLogos,
@@ -794,13 +795,13 @@ export default function PronosticarPage() {
         {/* Title & Team Info */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8 bg-navy-mid border border-border rounded-2xl p-4 sm:p-6">
           <div className="flex items-center gap-3 sm:gap-4">
-            {userTeam.logo_url && (
-              <img
-                src={userTeam.logo_url}
-                alt={userTeam.name}
-                className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-contain bg-white p-1 shrink-0 shadow-lg"
-              />
-            )}
+            <TeamCrest
+              src={userTeam.logo_url}
+              name={userTeam.name}
+              size="w-12 h-12 sm:w-14 sm:h-14"
+              textSize="text-sm"
+              className="shadow-lg"
+            />
             <div>
               <h1 className="text-xl sm:text-2xl font-black text-white">{userTeam.name}</h1>
               <p className="text-silver text-xs sm:text-sm font-medium">
