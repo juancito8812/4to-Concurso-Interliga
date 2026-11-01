@@ -198,6 +198,25 @@ Un fallo REAL es una predicción creada **antes** del pitazo que quedó con `poi
 - Cambio de contraseña (`ChangePasswordForm`): pide la **contraseña actual** y reautentica con `signInWithPassword` antes de `updateUser({password})`; mínimo 8 caracteres. Vive en `/perfil` (cualquier usuario) y `/admin/cuenta` (admin). No agregar un flujo que cambie la clave sin reautenticar.
 - El login del panel es `/admin/login`; `/admin` y `/admin/cuenta` son `noindex` y están en `robots.txt` como `Disallow`. El dashboard lee todo de **una sola RPC**, `admin_dashboard_stats()` (`supabase/migrations/2026-11-01_admin_dashboard_stats.sql`): `SECURITY DEFINER` + `is_admin()`, solo agregados, `EXECUTE` únicamente para `authenticated`. Si agregás métricas, hacelo dentro de esa función (no abras tablas a `authenticated`); los fixtures y resultados que muestra salen de los JSON estáticos del build, no de `matches`. Fases pendientes (CRUD de equipos, resultados, usuarios) siguen en `ADMIN_PANEL.md`: las escrituras sensibles deben ir por RPCs `SECURITY DEFINER` con chequeo de `is_admin()`, no por policies de UPDATE amplias.
 
+### Estadísticas de tráfico del sitio (2026-11-02)
+
+- Fuente: **Cloudflare** (no GA4/Search Console). Dos capas: RUM Web Analytics (GraphQL
+  `rumPageloadEventsAdaptiveGroups`, solo navegadores reales) y zona (`zoneAnalyticsGroups1d`:
+  peticiones, bytes, amenazas, incluye bots).
+- Ingesta: `scripts/sync-site-analytics.mjs` (Node, sin dependencias) escribe con service role en
+  `site_stats_daily` y `site_stats_breakdown`; corre en `.github/workflows/sync-site-analytics.yml`
+  cada 3 h. Variables: secrets `CLOUDFLARE_API_TOKEN`, `SUPABASE_SERVICE_ROLE_KEY`,
+  `NEXT_PUBLIC_SUPABASE_URL`; vars `CF_ZONE_TAG`, `CF_RUM_SITE_TAG`, `CF_ACCOUNT_TAG`. Para
+  backfill local: `set -a; . ./.env.local; set +a; node scripts/sync-site-analytics.mjs 30`.
+- Lectura: RPC `admin_site_stats(p_days)` (`supabase/migrations/2026-11-02_site_analytics.sql`),
+  `SECURITY DEFINER` + `is_admin()`, `EXECUTE` solo `authenticated`. Las tablas tienen RLS sin
+  policies: `anon`/`authenticated` no leen nada directo.
+- `site_stats_breakdown` se reemplaza entero en cada corrida y se ancla al día de hoy (es un
+  snapshot de 30 días, no histórico por día). Si el token no tiene permiso de Analytics el job
+  falla y los KPIs quedan con el último snapshot bueno.
+- Ojo: el `CLOUDFLARE_API_TOKEN` del repo necesita `Account Analytics: Read` + `Zone Analytics: Read`
+  además de lo que ya usa el deploy.
+
 ### Estado del proyecto (vía MCP)
 
 `mcp__supabase__get_project` (requiere el argumento `id` = `ilkndkqcmxvlufxaugog`) → `status: ACTIVE_HEALTHY`. La DB se consulta con `mcp__supabase__execute_sql` (requiere `project_id`; service role implícito).
