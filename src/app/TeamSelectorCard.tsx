@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
+import TeamCrest from "@/components/TeamCrest";
 
 import { getTeamCups, setInitialCupSurvivor, KnockoutCupSlug } from "@/lib/survivor";
 
@@ -134,11 +135,11 @@ export default function TeamSelectorCard() {
           <>
             {selectedTeam ? (
               <div className="flex items-center gap-3 mb-3">
-                <img
+                <TeamCrest
                   src={selectedTeam.logo_url}
-                  alt={selectedTeam.name}
-                  className="w-10 h-10 rounded-full object-contain bg-white p-0.5 shadow-sm"
-                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                  name={selectedTeam.name}
+                  size="w-10 h-10"
+                  textSize="text-xs"
                 />
                 <div>
                   <p className="text-sm font-bold text-white">{selectedTeam.name}</p>
