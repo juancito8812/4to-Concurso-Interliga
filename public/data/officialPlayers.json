@@ -296,6 +296,14 @@
     "nationality": "Belgium"
   },
   {
+    "id": "fd-5326343",
+    "name": "El Hadji Malick Cissé",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
     "id": "fd-236210",
     "name": "Fikayo Tomori",
     "team": "AC Milan",
@@ -344,12 +352,28 @@
     "nationality": "France"
   },
   {
+    "id": "fd-3110063",
+    "name": "Lorenzo Ossola",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-384305",
     "name": "Lorenzo Torriani",
     "team": "AC Milan",
     "league": "Serie A",
     "position": "Arquero",
     "nationality": "Italy"
+  },
+  {
+    "id": "fd-5326345",
+    "name": "Luca Menon",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": ""
   },
   {
     "id": "fd-76762",
@@ -382,6 +406,14 @@
     "league": "Serie A",
     "position": "Arquero",
     "nationality": "France"
+  },
+  {
+    "id": "fd-5326344",
+    "name": "Nirash Raffaello Perera",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": ""
   },
   {
     "id": "fd-322771",
@@ -432,6 +464,14 @@
     "nationality": "France"
   },
   {
+    "id": "fd-335207",
+    "name": "Silvano Vos",
+    "team": "AC Milan",
+    "league": "Serie A",
+    "position": "Mediocampista",
+    "nationality": "Netherlands"
+  },
+  {
     "id": "fd-290375",
     "name": "Strahinja Pavlovic",
     "team": "AC Milan",
@@ -480,6 +520,14 @@
     "nationality": "Cyprus"
   },
   {
+    "id": "fd-5323356",
+    "name": "Athos Kounounis",
+    "team": "AC Omonia",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
     "id": "fd-222608",
     "name": "Babajide David",
     "team": "AC Omonia",
@@ -502,22 +550,6 @@
     "league": "Europa League",
     "position": "Defensor",
     "nationality": "Cyprus"
-  },
-  {
-    "id": "fd-408525",
-    "name": "Chrysis Evangelou",
-    "team": "AC Omonia",
-    "league": "Europa League",
-    "position": "Delantero",
-    "nationality": "Cyprus"
-  },
-  {
-    "id": "fd-3095868",
-    "name": "Evripidis Pepis",
-    "team": "AC Omonia",
-    "league": "Europa League",
-    "position": "Defensor",
-    "nationality": ""
   },
   {
     "id": "fd-199675",
@@ -588,7 +620,7 @@
     "name": "Konstantinos Panagi",
     "team": "AC Omonia",
     "league": "Europa League",
-    "position": "Delantero",
+    "position": "Arquero",
     "nationality": "Cyprus"
   },
   {
@@ -1016,6 +1048,14 @@
     "nationality": "Denmark"
   },
   {
+    "id": "fd-389638",
+    "name": "Aymean El Hani",
+    "team": "AFC Ajax",
+    "league": "Conference League",
+    "position": "Arquero",
+    "nationality": "Netherlands"
+  },
+  {
     "id": "fd-240353",
     "name": "Caio Henrique",
     "team": "AFC Ajax",
@@ -1046,6 +1086,14 @@
     "league": "Conference League",
     "position": "Mediocampista",
     "nationality": "Netherlands"
+  },
+  {
+    "id": "fd-397257",
+    "name": "Diego Pugno",
+    "team": "AFC Ajax",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Italy"
   },
   {
     "id": "fd-368818",
@@ -1680,6 +1728,14 @@
     "nationality": "Spain"
   },
   {
+    "id": "fd-373796",
+    "name": "Rúben Montero",
+    "team": "Alavés",
+    "league": "LaLiga",
+    "position": "Arquero",
+    "nationality": "Spain"
+  },
+  {
     "id": "fd-367996",
     "name": "Selu Diallo",
     "team": "Alavés",
@@ -1720,210 +1776,242 @@
     "nationality": "Morocco"
   },
   {
-    "id": "espn_193130",
+    "id": "fd-193130",
     "name": "Adri Embarba",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_178896",
+    "id": "fd-178896",
     "name": "Álex Muñoz",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_286167",
+    "id": "fd-286167",
     "name": "Álex Sola",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_87897",
+    "id": "fd-414761",
+    "name": "Andrej Popovic",
+    "team": "Almería",
+    "league": "Copa del Rey",
+    "position": "Defensor",
+    "nationality": "Serbia"
+  },
+  {
+    "id": "fd-87897",
     "name": "Andrés Fernández",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_377529",
+    "id": "fd-377529",
     "name": "Áron Yaakobishvili",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Hungary"
   },
   {
-    "id": "espn_352285",
+    "id": "fd-5326668",
+    "name": "Ayouba Koné",
+    "team": "Almería",
+    "league": "Copa del Rey",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-352285",
     "name": "Brian Cipenga",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Congo DR"
   },
   {
-    "id": "espn_268439",
+    "id": "fd-268439",
     "name": "Chumi",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_297291",
+    "id": "fd-297291",
     "name": "Daijiro Chirino",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Netherlands"
   },
   {
-    "id": "espn_283833",
+    "id": "fd-283833",
     "name": "Federico Bonini",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Italy"
   },
   {
-    "id": "espn_161896",
+    "id": "fd-161896",
     "name": "Fernando Martínez",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_324005",
+    "id": "fd-324005",
     "name": "Guilherme Borges Guedes",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Portugal"
   },
   {
-    "id": "espn_41549",
-    "name": "Ibrahima Koné",
+    "id": "fd-41549",
+    "name": "Ibrahim Koné",
     "team": "Almería",
-    "league": "",
-    "position": "Delantero",
-    "nationality": "Mali"
+    "league": "Copa del Rey",
+    "position": "Arquero",
+    "nationality": "Guinea"
   },
   {
-    "id": "espn_28065",
+    "id": "fd-214275",
+    "name": "Javi Muñoz",
+    "team": "Almería",
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-28065",
     "name": "Jesus Lopez",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_306578",
+    "id": "fd-306578",
     "name": "Jon Morcillo",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_152557",
+    "id": "fd-152557",
     "name": "Jorge Pulido",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_175010",
+    "id": "fd-396775",
+    "name": "Kassoum Koné",
+    "team": "Almería",
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
+    "id": "fd-175010",
     "name": "Léo Baptistão",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Brazil"
   },
   {
-    "id": "espn_347438",
-    "name": "Marcos Luna Marcos Ruiz",
+    "id": "fd-344843",
+    "name": "Leonardo Lelo",
     "team": "Almería",
-    "league": "",
-    "position": "Defensor",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_277717",
-    "name": "Miguel de la Fuente",
-    "team": "Almería",
-    "league": "",
-    "position": "Delantero",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_222373",
-    "name": "Mikel Vesga",
-    "team": "Almería",
-    "league": "",
-    "position": "Mediocampista",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_141666",
-    "name": "Nélson Monte",
-    "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Portugal"
   },
   {
-    "id": "espn_290565",
+    "id": "fd-347438",
+    "name": "Marcos Luna Marcos Ruiz",
+    "team": "Almería",
+    "league": "Copa del Rey",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-277717",
+    "name": "Miguel de la Fuente",
+    "team": "Almería",
+    "league": "Copa del Rey",
+    "position": "Delantero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-222373",
+    "name": "Mikel Vesga",
+    "team": "Almería",
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-290565",
     "name": "Nicolás Melamed",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_376425",
+    "id": "fd-376425",
     "name": "Quim Junyent",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_155584",
+    "id": "fd-155584",
     "name": "Rodrigo Ely",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Brazil"
   },
   {
-    "id": "espn_307917",
+    "id": "fd-307917",
     "name": "Sergio Arribas",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_389437",
+    "id": "fd-389437",
     "name": "Stefan Dzodic",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Serbia"
   },
   {
-    "id": "espn_361458",
+    "id": "fd-361458",
     "name": "Thalys",
     "team": "Almería",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Brazil"
   },
@@ -1933,14 +2021,6 @@
     "team": "Anderlecht",
     "league": "Europa League",
     "position": "Delantero",
-    "nationality": "Belgium"
-  },
-  {
-    "id": "fd-420945",
-    "name": "Alexander De Ridder",
-    "team": "Anderlecht",
-    "league": "Europa League",
-    "position": "Mediocampista",
     "nationality": "Belgium"
   },
   {
@@ -2168,14 +2248,6 @@
     "nationality": "Finland"
   },
   {
-    "id": "fd-3102773",
-    "name": "Omar Sarr",
-    "team": "Anderlecht",
-    "league": "Europa League",
-    "position": "Defensor",
-    "nationality": ""
-  },
-  {
     "id": "fd-382432",
     "name": "Tawfik Bentayeb",
     "team": "Anderlecht",
@@ -2273,11 +2345,11 @@
   },
   {
     "id": "fd-241696",
-    "name": "Bernardo Oliveira",
+    "name": "Bernardo Dias",
     "team": "Ararat-Armenia",
     "league": "Europa League",
-    "position": "Delantero",
-    "nationality": "Australia"
+    "position": "Mediocampista",
+    "nationality": "Portugal"
   },
   {
     "id": "fd-351442",
@@ -2316,7 +2388,7 @@
     "name": "Edgar Grigoryan",
     "team": "Ararat-Armenia",
     "league": "Europa League",
-    "position": "Defensor",
+    "position": "Delantero",
     "nationality": "Armenia"
   },
   {
@@ -2432,6 +2504,14 @@
     "nationality": "Armenia"
   },
   {
+    "id": "fd-408530",
+    "name": "Vahe Petrosyan",
+    "team": "Ararat-Armenia",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Armenia"
+  },
+  {
     "id": "fd-289159",
     "name": "Zhirayr Shaghoyan",
     "team": "Ararat-Armenia",
@@ -2544,14 +2624,6 @@
     "nationality": ""
   },
   {
-    "id": "fd-324643",
-    "name": "Fabio Tito",
-    "team": "Arezzo",
-    "league": "Copa Italia",
-    "position": "Defensor",
-    "nationality": "Italy"
-  },
-  {
     "id": "fd-3126929",
     "name": "Federico Malvestuto",
     "team": "Arezzo",
@@ -2581,6 +2653,14 @@
     "team": "Arezzo",
     "league": "Copa Italia",
     "position": "Mediocampista",
+    "nationality": "Italy"
+  },
+  {
+    "id": "fd-207823",
+    "name": "Gian Marco Ferrari",
+    "team": "Arezzo",
+    "league": "Copa Italia",
+    "position": "Defensor",
     "nationality": "Italy"
   },
   {
@@ -2748,7 +2828,7 @@
     "name": "Daniel Richter",
     "team": "Arminia Bielefeld",
     "league": "DFB-Pokal",
-    "position": "Delantero",
+    "position": "Mediocampista",
     "nationality": "Germany"
   },
   {
@@ -2801,11 +2881,11 @@
   },
   {
     "id": "fd-235127",
-    "name": "Joel Felix",
+    "name": "Joe Felix",
     "team": "Arminia Bielefeld",
     "league": "DFB-Pokal",
     "position": "Defensor",
-    "nationality": "Denmark"
+    "nationality": "England"
   },
   {
     "id": "fd-260779",
@@ -2936,6 +3016,22 @@
     "nationality": "Germany"
   },
   {
+    "id": "fd-367189",
+    "name": "Vincent Ocansey",
+    "team": "Arminia Bielefeld",
+    "league": "DFB-Pokal",
+    "position": "Delantero",
+    "nationality": "Germany"
+  },
+  {
+    "id": "fd-390975",
+    "name": "Andre Annous",
+    "team": "Arsenal",
+    "league": "Premier League",
+    "position": "Delantero",
+    "nationality": "England"
+  },
+  {
     "id": "fd-241077",
     "name": "Ben White",
     "team": "Arsenal",
@@ -2958,6 +3054,14 @@
     "league": "Premier League",
     "position": "Delantero",
     "nationality": "England"
+  },
+  {
+    "id": "fd-381341",
+    "name": "Ceadach O’Neill",
+    "team": "Arsenal",
+    "league": "Premier League",
+    "position": "Delantero",
+    "nationality": "Northern Ireland"
   },
   {
     "id": "fd-303793",
@@ -3054,6 +3158,22 @@
     "league": "Premier League",
     "position": "Arquero",
     "nationality": "Spain"
+  },
+  {
+    "id": "fd-399007",
+    "name": "Maalik Hashi",
+    "team": "Arsenal",
+    "league": "Premier League",
+    "position": "Mediocampista",
+    "nationality": "England"
+  },
+  {
+    "id": "fd-399893",
+    "name": "Marcell Washington",
+    "team": "Arsenal",
+    "league": "Premier League",
+    "position": "Defensor",
+    "nationality": "England"
   },
   {
     "id": "fd-400284",
@@ -3312,14 +3432,6 @@
     "nationality": "Portugal"
   },
   {
-    "id": "fd-299566",
-    "name": "Oumar Konaté",
-    "team": "AS Monaco FC",
-    "league": "Conference League",
-    "position": "Delantero",
-    "nationality": "Mali"
-  },
-  {
     "id": "fd-411449",
     "name": "Pape Cabral",
     "team": "AS Monaco FC",
@@ -3432,14 +3544,6 @@
     "nationality": ""
   },
   {
-    "id": "fd-272228",
-    "name": "Davide Barosi",
-    "team": "Ascoli",
-    "league": "Copa Italia",
-    "position": "Arquero",
-    "nationality": "Italy"
-  },
-  {
     "id": "fd-245920",
     "name": "Don Bolsius",
     "team": "Ascoli",
@@ -3504,12 +3608,12 @@
     "nationality": "Italy"
   },
   {
-    "id": "fd-3122241",
-    "name": "Kevin Gorica",
+    "id": "fd-199726",
+    "name": "Lorenzo Venuti",
     "team": "Ascoli",
     "league": "Copa Italia",
-    "position": "Delantero",
-    "nationality": ""
+    "position": "Defensor",
+    "nationality": "Italy"
   },
   {
     "id": "fd-3122239",
@@ -3888,6 +3992,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-378197",
+    "name": "Andrea Bonanomi",
+    "team": "Atalanta",
+    "league": "Serie A",
+    "position": "Mediocampista",
+    "nationality": "Italy"
+  },
+  {
     "id": "fd-296319",
     "name": "Charles De Ketelaere",
     "team": "Atalanta",
@@ -3902,6 +4014,14 @@
     "league": "Serie A",
     "position": "Defensor",
     "nationality": "Italy"
+  },
+  {
+    "id": "fd-410098",
+    "name": "Digne Pounga",
+    "team": "Atalanta",
+    "league": "Serie A",
+    "position": "Mediocampista",
+    "nationality": "Congo"
   },
   {
     "id": "fd-278210",
@@ -3968,6 +4088,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-3128883",
+    "name": "Isaac Collins Isoa",
+    "team": "Atalanta",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
     "id": "fd-312862",
     "name": "Isak Hien",
     "team": "Atalanta",
@@ -3981,6 +4109,14 @@
     "team": "Atalanta",
     "league": "Serie A",
     "position": "Defensor",
+    "nationality": "Italy"
+  },
+  {
+    "id": "fd-403445",
+    "name": "Javison Idele",
+    "team": "Atalanta",
+    "league": "Serie A",
+    "position": "Mediocampista",
     "nationality": "Italy"
   },
   {
@@ -4046,6 +4182,14 @@
     "league": "Serie A",
     "position": "Defensor",
     "nationality": "Italy"
+  },
+  {
+    "id": "fd-3130628",
+    "name": "Mattia Sonzogni",
+    "team": "Atalanta",
+    "league": "Serie A",
+    "position": "Arquero",
+    "nationality": ""
   },
   {
     "id": "fd-288488",
@@ -4168,12 +4312,12 @@
     "nationality": "Guinea-Bissau"
   },
   {
-    "id": "fd-414464",
-    "name": "Asier Hierro",
+    "id": "fd-3122617",
+    "name": "Aritz Conde Albiol",
     "team": "Athletic Bilbao",
     "league": "LaLiga",
     "position": "Delantero",
-    "nationality": "Spain"
+    "nationality": ""
   },
   {
     "id": "fd-159317",
@@ -4197,6 +4341,14 @@
     "team": "Athletic Bilbao",
     "league": "LaLiga",
     "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-422929",
+    "name": "Christian Imga",
+    "team": "Athletic Bilbao",
+    "league": "LaLiga",
+    "position": "Delantero",
     "nationality": "Spain"
   },
   {
@@ -4256,6 +4408,14 @@
     "nationality": "Spain"
   },
   {
+    "id": "fd-3106512",
+    "name": "Jesús Vizcay Hurtado",
+    "team": "Athletic Bilbao",
+    "league": "LaLiga",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-333214",
     "name": "Johaneko Louis Jean",
     "team": "Athletic Bilbao",
@@ -4277,14 +4437,6 @@
     "team": "Athletic Bilbao",
     "league": "LaLiga",
     "position": "Mediocampista",
-    "nationality": "Spain"
-  },
-  {
-    "id": "fd-287410",
-    "name": "Mikel Santos",
-    "team": "Athletic Bilbao",
-    "league": "LaLiga",
-    "position": "Arquero",
     "nationality": "Spain"
   },
   {
@@ -4704,6 +4856,14 @@
     "nationality": "Germany"
   },
   {
+    "id": "fd-413727",
+    "name": "Loris Husic",
+    "team": "Augsburg",
+    "league": "Bundesliga",
+    "position": "Mediocampista",
+    "nationality": "Austria"
+  },
+  {
     "id": "fd-207623",
     "name": "Marius Wolf",
     "team": "Augsburg",
@@ -4956,7 +5116,7 @@
     "name": "Lewis Schouten",
     "team": "AZ Alkmaar",
     "league": "Europa League",
-    "position": "Mediocampista",
+    "position": "Defensor",
     "nationality": "Netherlands"
   },
   {
@@ -5280,6 +5440,14 @@
     "nationality": "Spain"
   },
   {
+    "id": "fd-94947",
+    "name": "Álex Campos",
+    "team": "Barcelona",
+    "league": "LaLiga",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
     "id": "fd-186430",
     "name": "Andreas Christensen",
     "team": "Barcelona",
@@ -5318,6 +5486,14 @@
     "league": "LaLiga",
     "position": "Arquero",
     "nationality": "Croatia"
+  },
+  {
+    "id": "fd-416502",
+    "name": "Ebrima Tunkara",
+    "team": "Barcelona",
+    "league": "LaLiga",
+    "position": "Mediocampista",
+    "nationality": "Spain"
   },
   {
     "id": "fd-403587",
@@ -5370,6 +5546,14 @@
   {
     "id": "fd-312015",
     "name": "Gerard Martín",
+    "team": "Barcelona",
+    "league": "LaLiga",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-403583",
+    "name": "Guillem Víctor",
     "team": "Barcelona",
     "league": "LaLiga",
     "position": "Defensor",
@@ -5456,6 +5640,14 @@
     "nationality": "Spain"
   },
   {
+    "id": "fd-416496",
+    "name": "Orian Goren",
+    "team": "Barcelona",
+    "league": "LaLiga",
+    "position": "Mediocampista",
+    "nationality": "Israel"
+  },
+  {
     "id": "fd-368992",
     "name": "Pau Cubarsí",
     "team": "Barcelona",
@@ -5528,12 +5720,28 @@
     "nationality": "Spain"
   },
   {
+    "id": "fd-397120",
+    "name": "Ben Hawighorst",
+    "team": "Bayer Leverkusen",
+    "league": "Bundesliga",
+    "position": "Defensor",
+    "nationality": "Germany"
+  },
+  {
     "id": "fd-398709",
     "name": "Christian Kofane",
     "team": "Bayer Leverkusen",
     "league": "Bundesliga",
     "position": "Delantero",
     "nationality": "Cameroon"
+  },
+  {
+    "id": "fd-5327243",
+    "name": "Dustin Buck",
+    "team": "Bayer Leverkusen",
+    "league": "Bundesliga",
+    "position": "Delantero",
+    "nationality": ""
   },
   {
     "id": "fd-257287",
@@ -5566,6 +5774,14 @@
     "league": "Bundesliga",
     "position": "Defensor",
     "nationality": "Argentina"
+  },
+  {
+    "id": "fd-5325769",
+    "name": "Gabriel Minutillo",
+    "team": "Bayer Leverkusen",
+    "league": "Bundesliga",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-346636",
@@ -5606,6 +5822,14 @@
     "league": "Bundesliga",
     "position": "Mediocampista",
     "nationality": "Germany"
+  },
+  {
+    "id": "fd-422968",
+    "name": "Kenan Doganay",
+    "team": "Bayer Leverkusen",
+    "league": "Bundesliga",
+    "position": "Mediocampista",
+    "nationality": "France"
   },
   {
     "id": "fd-408246",
@@ -5752,12 +5976,28 @@
     "nationality": "Senegal"
   },
   {
+    "id": "fd-405586",
+    "name": "Cassiano Kiala",
+    "team": "Bayern Munich",
+    "league": "Bundesliga",
+    "position": "Defensor",
+    "nationality": "Germany"
+  },
+  {
     "id": "fd-405585",
     "name": "David Daiber",
     "team": "Bayern Munich",
     "league": "Bundesliga",
     "position": "Mediocampista",
     "nationality": "Portugal"
+  },
+  {
+    "id": "fd-3110056",
+    "name": "David Podar-Stiube",
+    "team": "Bayern Munich",
+    "league": "Bundesliga",
+    "position": "Arquero",
+    "nationality": ""
   },
   {
     "id": "fd-222793",
@@ -5797,6 +6037,14 @@
     "team": "Bayern Munich",
     "league": "Bundesliga",
     "position": "Mediocampista",
+    "nationality": "Germany"
+  },
+  {
+    "id": "fd-409827",
+    "name": "Jannis Bärtl",
+    "team": "Bayern Munich",
+    "league": "Bundesliga",
+    "position": "Arquero",
     "nationality": "Germany"
   },
   {
@@ -5920,6 +6168,14 @@
     "nationality": "Germany"
   },
   {
+    "id": "fd-3104151",
+    "name": "Tim Binder",
+    "team": "Bayern Munich",
+    "league": "Bundesliga",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-324660",
     "name": "Tom Bischof",
     "team": "Bayern Munich",
@@ -5932,7 +6188,7 @@
     "name": "Alioune Sylla",
     "team": "Benevento",
     "league": "Copa Italia",
-    "position": "Arquero",
+    "position": "Delantero",
     "nationality": "Senegal"
   },
   {
@@ -6305,7 +6561,7 @@
   },
   {
     "id": "fd-338713",
-    "name": "Gabriel Índio",
+    "name": "Gabriel Indio",
     "team": "Benfica",
     "league": "Europa League",
     "position": "Defensor",
@@ -6350,6 +6606,14 @@
     "league": "Europa League",
     "position": "Delantero",
     "nationality": "Colombia"
+  },
+  {
+    "id": "fd-399408",
+    "name": "João Fonseca",
+    "team": "Benfica",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Portugal"
   },
   {
     "id": "fd-224144",
@@ -6430,6 +6694,14 @@
     "league": "Europa League",
     "position": "Defensor",
     "nationality": "Morocco"
+  },
+  {
+    "id": "fd-400474",
+    "name": "Tiago Dias Freitas",
+    "team": "Benfica",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Portugal"
   },
   {
     "id": "fd-329691",
@@ -6700,7 +6972,7 @@
     "name": "Aurel Wagbe",
     "team": "Bochum",
     "league": "DFB-Pokal",
-    "position": "Mediocampista",
+    "position": "Delantero",
     "nationality": "Germany"
   },
   {
@@ -6780,7 +7052,7 @@
     "name": "Jean-Manuel Mbom",
     "team": "Bochum",
     "league": "DFB-Pokal",
-    "position": "Mediocampista",
+    "position": "Defensor",
     "nationality": "Germany"
   },
   {
@@ -7000,6 +7272,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-5326829",
+    "name": "Luca Lo Monaco",
+    "team": "Bologna",
+    "league": "Serie A",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-179358",
     "name": "Lukasz Skorupski",
     "team": "Bologna",
@@ -7029,6 +7309,14 @@
     "team": "Bologna",
     "league": "Serie A",
     "position": "Arquero",
+    "nationality": "Italy"
+  },
+  {
+    "id": "fd-91873",
+    "name": "Matteo Darmian",
+    "team": "Bologna",
+    "league": "Serie A",
+    "position": "Defensor",
     "nationality": "Italy"
   },
   {
@@ -7065,7 +7353,7 @@
   },
   {
     "id": "fd-250707",
-    "name": "Nicolo Casale",
+    "name": "Nicoló Casale",
     "team": "Bologna",
     "league": "Serie A",
     "position": "Defensor",
@@ -7752,6 +8040,14 @@
     "nationality": "USA"
   },
   {
+    "id": "fd-3116064",
+    "name": "Josiah Kaled Uwakhonye",
+    "team": "Borussia Mönchengladbach",
+    "league": "Bundesliga",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-206863",
     "name": "Kevin Diks",
     "team": "Borussia Mönchengladbach",
@@ -7774,6 +8070,14 @@
     "league": "Bundesliga",
     "position": "Defensor",
     "nationality": "Japan"
+  },
+  {
+    "id": "fd-291817",
+    "name": "Lion Schweers",
+    "team": "Borussia Mönchengladbach",
+    "league": "Bundesliga",
+    "position": "Defensor",
+    "nationality": "Germany"
   },
   {
     "id": "fd-346617",
@@ -7964,7 +8268,7 @@
     "name": "Djordje Petrovic",
     "team": "Bournemouth",
     "league": "Premier League",
-    "position": "Arquero",
+    "position": "Defensor",
     "nationality": "Serbia"
   },
   {
@@ -8120,14 +8424,6 @@
     "nationality": "Bosnia and Herzegovina"
   },
   {
-    "id": "fd-418321",
-    "name": "António Gil",
-    "team": "Braga",
-    "league": "Conference League",
-    "position": "Mediocampista",
-    "nationality": "Portugal"
-  },
-  {
     "id": "fd-340560",
     "name": "Bernardo",
     "team": "Braga",
@@ -8174,6 +8470,14 @@
     "league": "Conference League",
     "position": "Defensor",
     "nationality": "Portugal"
+  },
+  {
+    "id": "fd-3113464",
+    "name": "Flinto Augusto Patrão Da Costa",
+    "team": "Braga",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": ""
   },
   {
     "id": "fd-285434",
@@ -8390,14 +8694,6 @@
     "league": "Conference League",
     "position": "Arquero",
     "nationality": "Norway"
-  },
-  {
-    "id": "fd-3134030",
-    "name": "Jacob Ebsen Sørensen",
-    "team": "Brann",
-    "league": "Conference League",
-    "position": "Mediocampista",
-    "nationality": ""
   },
   {
     "id": "fd-243863",
@@ -8860,8 +9156,8 @@
     "name": "Evan Ferguson",
     "team": "Brighton",
     "league": "Premier League",
-    "position": "Delantero",
-    "nationality": "Republic of Ireland"
+    "position": "Mediocampista",
+    "nationality": "Scotland"
   },
   {
     "id": "fd-308402",
@@ -9038,6 +9334,14 @@
     "league": "Premier League",
     "position": "Delantero",
     "nationality": "Greece"
+  },
+  {
+    "id": "fd-182573",
+    "name": "Steven Hall",
+    "team": "Brighton",
+    "league": "Premier League",
+    "position": "Arquero",
+    "nationality": "Australia"
   },
   {
     "id": "fd-248761",
@@ -9744,14 +10048,6 @@
     "nationality": "Italy"
   },
   {
-    "id": "fd-3099472",
-    "name": "Gianfranco Allesandro Quiroz Kong",
-    "team": "Catania",
-    "league": "Copa Italia",
-    "position": "Delantero",
-    "nationality": ""
-  },
-  {
     "id": "fd-323146",
     "name": "Giovanni Bruzzaniti",
     "team": "Catania",
@@ -10196,7 +10492,7 @@
     "name": "Luka Kolar",
     "team": "Celje",
     "league": "Europa League",
-    "position": "Delantero",
+    "position": "Arquero",
     "nationality": "Slovenia"
   },
   {
@@ -10384,6 +10680,14 @@
     "nationality": "Spain"
   },
   {
+    "id": "fd-415036",
+    "name": "Ángel Arcos",
+    "team": "Celta Vigo",
+    "league": "LaLiga",
+    "position": "Delantero",
+    "nationality": "Spain"
+  },
+  {
     "id": "fd-214995",
     "name": "Borja Iglesias",
     "team": "Celta Vigo",
@@ -10422,6 +10726,14 @@
     "league": "LaLiga",
     "position": "Delantero",
     "nationality": "Spain"
+  },
+  {
+    "id": "fd-3100792",
+    "name": "Frank Germain Jonathan Miller",
+    "team": "Celta Vigo",
+    "league": "LaLiga",
+    "position": "Defensor",
+    "nationality": ""
   },
   {
     "id": "fd-188391",
@@ -10680,6 +10992,14 @@
     "nationality": "Switzerland"
   },
   {
+    "id": "fd-408331",
+    "name": "Joseph Haney",
+    "team": "Celtic",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Scotland"
+  },
+  {
     "id": "fd-258915",
     "name": "Jota",
     "team": "Celtic",
@@ -10712,12 +11032,28 @@
     "nationality": "England"
   },
   {
+    "id": "fd-418762",
+    "name": "Liam Kennedy",
+    "team": "Celtic",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Scotland"
+  },
+  {
     "id": "fd-288959",
     "name": "Liam Scales",
     "team": "Celtic",
     "league": "Europa League",
     "position": "Defensor",
     "nationality": "Republic of Ireland"
+  },
+  {
+    "id": "fd-410415",
+    "name": "Lucas Clearie",
+    "team": "Celtic",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Scotland"
   },
   {
     "id": "fd-259208",
@@ -10758,6 +11094,14 @@
     "league": "Europa League",
     "position": "Arquero",
     "nationality": "England"
+  },
+  {
+    "id": "fd-387202",
+    "name": "Sean Mcardle",
+    "team": "Celtic",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": "Scotland"
   },
   {
     "id": "fd-303702",
@@ -10872,6 +11216,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-409547",
+    "name": "Filippo Galvagno",
+    "team": "Cesena",
+    "league": "Copa Italia",
+    "position": "Delantero",
+    "nationality": "Italy"
+  },
+  {
     "id": "fd-251775",
     "name": "Gianluca Frabotta",
     "team": "Cesena",
@@ -10970,6 +11322,14 @@
   {
     "id": "fd-363636",
     "name": "Matteo Guidi",
+    "team": "Cesena",
+    "league": "Copa Italia",
+    "position": "Mediocampista",
+    "nationality": "Italy"
+  },
+  {
+    "id": "fd-409308",
+    "name": "Matteo Lontani",
     "team": "Cesena",
     "league": "Copa Italia",
     "position": "Mediocampista",
@@ -11680,6 +12040,14 @@
     "nationality": "Croatia"
   },
   {
+    "id": "fd-411276",
+    "name": "Matteo Papaccioli",
+    "team": "Como",
+    "league": "Serie A",
+    "position": "Mediocampista",
+    "nationality": "Italy"
+  },
+  {
     "id": "fd-387723",
     "name": "Mattia Liberali",
     "team": "Como",
@@ -11780,7 +12148,7 @@
     "name": "Ben Wilson",
     "team": "Coventry City",
     "league": "Premier League",
-    "position": "Arquero",
+    "position": "Mediocampista",
     "nationality": "England"
   },
   {
@@ -12096,6 +12464,22 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-3144055",
+    "name": "Filippo Rino Bignamini",
+    "team": "Cremonese",
+    "league": "Copa Italia",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-3144056",
+    "name": "Gabriel Herzuah",
+    "team": "Cremonese",
+    "league": "Copa Italia",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-224249",
     "name": "Giuseppe Pezzella",
     "team": "Cremonese",
@@ -12176,6 +12560,22 @@
     "nationality": ""
   },
   {
+    "id": "fd-3144058",
+    "name": "Riccardo Villa",
+    "team": "Cremonese",
+    "league": "Copa Italia",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-3144054",
+    "name": "Ronie Barros Cabezas",
+    "team": "Cremonese",
+    "league": "Copa Italia",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-272618",
     "name": "Salvatore Elia",
     "team": "Cremonese",
@@ -12198,6 +12598,14 @@
     "league": "Copa Italia",
     "position": "Mediocampista",
     "nationality": "Italy"
+  },
+  {
+    "id": "fd-3144057",
+    "name": "Simone Marsi",
+    "team": "Cremonese",
+    "league": "Copa Italia",
+    "position": "Defensor",
+    "nationality": ""
   },
   {
     "id": "fd-215682",
@@ -12264,6 +12672,14 @@
     "nationality": "England"
   },
   {
+    "id": "fd-358084",
+    "name": "Caleb Kporha",
+    "team": "Crystal Palace",
+    "league": "Premier League",
+    "position": "Defensor",
+    "nationality": "England"
+  },
+  {
     "id": "fd-307870",
     "name": "Chadi Riad",
     "team": "Crystal Palace",
@@ -12304,6 +12720,14 @@
     "nationality": "Chile"
   },
   {
+    "id": "fd-403867",
+    "name": "Dean Benamar",
+    "team": "Crystal Palace",
+    "league": "Premier League",
+    "position": "Defensor",
+    "nationality": "England"
+  },
+  {
     "id": "fd-234172",
     "name": "Dean Henderson",
     "team": "Crystal Palace",
@@ -12334,6 +12758,14 @@
     "league": "Premier League",
     "position": "Delantero",
     "nationality": "Ivory Coast"
+  },
+  {
+    "id": "fd-400110",
+    "name": "George King",
+    "team": "Crystal Palace",
+    "league": "Premier League",
+    "position": "Defensor",
+    "nationality": "England"
   },
   {
     "id": "fd-388605",
@@ -12740,7 +13172,7 @@
     "name": "Fabian Nürnberger",
     "team": "Darmstadt",
     "league": "DFB-Pokal",
-    "position": "Mediocampista",
+    "position": "Defensor",
     "nationality": "Bulgaria"
   },
   {
@@ -12758,6 +13190,14 @@
     "league": "DFB-Pokal",
     "position": "Delantero",
     "nationality": "Germany"
+  },
+  {
+    "id": "fd-5324093",
+    "name": "Giulio Weitz",
+    "team": "Darmstadt",
+    "league": "DFB-Pokal",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-388811",
@@ -12884,7 +13324,7 @@
     "name": "Milan Smit",
     "team": "Darmstadt",
     "league": "DFB-Pokal",
-    "position": "Defensor",
+    "position": "Delantero",
     "nationality": "Netherlands"
   },
   {
@@ -12926,6 +13366,14 @@
     "league": "DFB-Pokal",
     "position": "Defensor",
     "nationality": "Italy"
+  },
+  {
+    "id": "fd-5324002",
+    "name": "Tom Steineck",
+    "team": "Darmstadt",
+    "league": "DFB-Pokal",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-313897",
@@ -13120,6 +13568,14 @@
     "nationality": "Spain"
   },
   {
+    "id": "fd-375392",
+    "name": "Martín Ochoa",
+    "team": "Deportivo La Coruña",
+    "league": "LaLiga",
+    "position": "Delantero",
+    "nationality": "Spain"
+  },
+  {
     "id": "fd-259915",
     "name": "Miguel Loureiro",
     "team": "Deportivo La Coruña",
@@ -13152,12 +13608,12 @@
     "nationality": "Spain"
   },
   {
-    "id": "fd-362123",
-    "name": "Teun Gijselhart",
+    "id": "fd-375566",
+    "name": "Rubén",
     "team": "Deportivo La Coruña",
     "league": "LaLiga",
     "position": "Mediocampista",
-    "nationality": "Netherlands"
+    "nationality": "Spain"
   },
   {
     "id": "fd-157568",
@@ -13165,6 +13621,14 @@
     "team": "Deportivo La Coruña",
     "league": "LaLiga",
     "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-324945",
+    "name": "Yayo",
+    "team": "Deportivo La Coruña",
+    "league": "LaLiga",
+    "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
@@ -13198,6 +13662,14 @@
     "league": "Europa League",
     "position": "Delantero",
     "nationality": "Albania"
+  },
+  {
+    "id": "fd-398064",
+    "name": "Borna Orlic",
+    "team": "Dinamo Zagreb",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Croatia"
   },
   {
     "id": "fd-364169",
@@ -13408,6 +13880,14 @@
     "nationality": "Croatia"
   },
   {
+    "id": "fd-379705",
+    "name": "Noa Mikic",
+    "team": "Dinamo Zagreb",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Croatia"
+  },
+  {
     "id": "fd-416441",
     "name": "Noah Nsoki",
     "team": "Dinamo Zagreb",
@@ -13422,6 +13902,14 @@
     "league": "Europa League",
     "position": "Defensor",
     "nationality": "Philippines"
+  },
+  {
+    "id": "fd-421322",
+    "name": "Petar Zaja",
+    "team": "Dinamo Zagreb",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Croatia"
   },
   {
     "id": "fd-259512",
@@ -15124,7 +15612,7 @@
     "name": "Christian Kinsombi",
     "team": "Energie Cottbus",
     "league": "DFB-Pokal",
-    "position": "Mediocampista",
+    "position": "Delantero",
     "nationality": "Germany"
   },
   {
@@ -15150,6 +15638,14 @@
     "league": "DFB-Pokal",
     "position": "Delantero",
     "nationality": "Germany"
+  },
+  {
+    "id": "fd-5325994",
+    "name": "Fabian Balg",
+    "team": "Energie Cottbus",
+    "league": "DFB-Pokal",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-404775",
@@ -15192,14 +15688,6 @@
     "nationality": ""
   },
   {
-    "id": "fd-174617",
-    "name": "Jonas Hofmann",
-    "team": "Energie Cottbus",
-    "league": "DFB-Pokal",
-    "position": "Mediocampista",
-    "nationality": "Germany"
-  },
-  {
     "id": "fd-291965",
     "name": "Julian Guttau",
     "team": "Energie Cottbus",
@@ -15230,6 +15718,14 @@
     "league": "DFB-Pokal",
     "position": "Defensor",
     "nationality": "Germany"
+  },
+  {
+    "id": "fd-232327",
+    "name": "Leon Guwara",
+    "team": "Energie Cottbus",
+    "league": "DFB-Pokal",
+    "position": "Defensor",
+    "nationality": "Gambia"
   },
   {
     "id": "fd-157560",
@@ -15328,6 +15824,14 @@
     "nationality": "France"
   },
   {
+    "id": "fd-3111255",
+    "name": "Alejandro Santiago Vargas",
+    "team": "Espanyol",
+    "league": "LaLiga",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-245839",
     "name": "Andoni Gorosabel",
     "team": "Espanyol",
@@ -15390,6 +15894,14 @@
     "league": "LaLiga",
     "position": "Mediocampista",
     "nationality": "Brazil"
+  },
+  {
+    "id": "fd-3111247",
+    "name": "Jan Peries Duran",
+    "team": "Espanyol",
+    "league": "LaLiga",
+    "position": "Delantero",
+    "nationality": ""
   },
   {
     "id": "fd-367946",
@@ -15744,6 +16256,14 @@
     "nationality": "Ukraine"
   },
   {
+    "id": "fd-323944",
+    "name": "Alexios Dedidis",
+    "team": "FC Carl Zeiss Jena",
+    "league": "DFB-Pokal",
+    "position": "Arquero",
+    "nationality": "Germany"
+  },
+  {
     "id": "fd-3108008",
     "name": "Benno Walter",
     "team": "FC Carl Zeiss Jena",
@@ -15974,6 +16494,14 @@
     "league": "DFB-Pokal",
     "position": "Defensor",
     "nationality": ""
+  },
+  {
+    "id": "fd-365273",
+    "name": "Ali Loune",
+    "team": "FC Erzgebirge Aue",
+    "league": "DFB-Pokal",
+    "position": "Mediocampista",
+    "nationality": "Morocco"
   },
   {
     "id": "fd-291267",
@@ -16712,6 +17240,14 @@
     "nationality": "Germany"
   },
   {
+    "id": "fd-3144170",
+    "name": "David Michael Jendrzej",
+    "team": "FC Phönix Lübeck",
+    "league": "DFB-Pokal",
+    "position": "Arquero",
+    "nationality": ""
+  },
+  {
     "id": "fd-341832",
     "name": "Fabio Maiolo",
     "team": "FC Phönix Lübeck",
@@ -16878,14 +17414,6 @@
     "league": "DFB-Pokal",
     "position": "Arquero",
     "nationality": "Luxembourg"
-  },
-  {
-    "id": "fd-371538",
-    "name": "Abdou Fall",
-    "team": "Fenerbahçe",
-    "league": "Champions League",
-    "position": "Mediocampista",
-    "nationality": "Senegal"
   },
   {
     "id": "fd-416476",
@@ -17105,7 +17633,7 @@
   },
   {
     "id": "fd-340186",
-    "name": "Yiğit Demir",
+    "name": "Yigit Demir",
     "team": "Fenerbahçe",
     "league": "Champions League",
     "position": "Defensor",
@@ -17257,11 +17785,11 @@
   },
   {
     "id": "fd-206847",
-    "name": "Jonathan Levi",
+    "name": "Jonathan Levin",
     "team": "Ferencváros",
     "league": "Europa League",
-    "position": "Delantero",
-    "nationality": "Sweden"
+    "position": "Defensor",
+    "nationality": "Mexico"
   },
   {
     "id": "fd-253991",
@@ -17321,10 +17849,10 @@
   },
   {
     "id": "fd-196567",
-    "name": "Naby Keïta",
+    "name": "Naby Keita",
     "team": "Ferencváros",
     "league": "Europa League",
-    "position": "Mediocampista",
+    "position": "Delantero",
     "nationality": "Guinea"
   },
   {
@@ -17408,6 +17936,14 @@
     "nationality": "Belgium"
   },
   {
+    "id": "fd-3145423",
+    "name": "Dani Slory",
+    "team": "Feyenoord",
+    "league": "Champions League",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
     "id": "fd-289334",
     "name": "Florian Kastenmeier",
     "team": "Feyenoord",
@@ -17476,7 +18012,7 @@
     "name": "Jerayno Schaken",
     "team": "Feyenoord",
     "league": "Champions League",
-    "position": "Mediocampista",
+    "position": "Delantero",
     "nationality": "Netherlands"
   },
   {
@@ -17584,6 +18120,14 @@
     "nationality": "Netherlands"
   },
   {
+    "id": "fd-3145424",
+    "name": "Theodoris Deligiannidis",
+    "team": "Feyenoord",
+    "league": "Champions League",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-343202",
     "name": "Thijs Kraaijeveld",
     "team": "Feyenoord",
@@ -17656,6 +18200,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-5324063",
+    "name": "Arnis Ademi",
+    "team": "Fiorentina",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
     "id": "fd-356213",
     "name": "Arthur Atta",
     "team": "Fiorentina",
@@ -17702,6 +18254,14 @@
     "league": "Serie A",
     "position": "Arquero",
     "nationality": "Spain"
+  },
+  {
+    "id": "fd-3099527",
+    "name": "Dennis Beldenti",
+    "team": "Fiorentina",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": ""
   },
   {
     "id": "fd-168453",
@@ -17814,6 +18374,14 @@
     "league": "Serie A",
     "position": "Defensor",
     "nationality": "Romania"
+  },
+  {
+    "id": "fd-421785",
+    "name": "Salvatore Cianciulli",
+    "team": "Fiorentina",
+    "league": "Serie A",
+    "position": "Mediocampista",
+    "nationality": "Italy"
   },
   {
     "id": "fd-233515",
@@ -19048,6 +19616,14 @@
     "nationality": "Türkiye"
   },
   {
+    "id": "fd-407331",
+    "name": "Ada Yüzgec",
+    "team": "Galatasaray SK",
+    "league": "Champions League",
+    "position": "Delantero",
+    "nationality": "Türkiye"
+  },
+  {
     "id": "fd-355113",
     "name": "Alexey Batrakov",
     "team": "Galatasaray SK",
@@ -19144,11 +19720,27 @@
     "nationality": "Türkiye"
   },
   {
-    "id": "fd-268478",
-    "name": "Gabriel Sara",
+    "id": "fd-415122",
+    "name": "Eyüp Karasu",
     "team": "Galatasaray SK",
     "league": "Champions League",
     "position": "Mediocampista",
+    "nationality": "Türkiye"
+  },
+  {
+    "id": "fd-400113",
+    "name": "Furkan Koçak",
+    "team": "Galatasaray SK",
+    "league": "Champions League",
+    "position": "Mediocampista",
+    "nationality": "Türkiye"
+  },
+  {
+    "id": "fd-268478",
+    "name": "Gabriel Gomes",
+    "team": "Galatasaray SK",
+    "league": "Champions League",
+    "position": "Defensor",
     "nationality": "Brazil"
   },
   {
@@ -19432,14 +20024,6 @@
     "nationality": "Japan"
   },
   {
-    "id": "fd-306544",
-    "name": "Kayden Pierre",
-    "team": "Genk",
-    "league": "Belgian Pro League",
-    "position": "Defensor",
-    "nationality": "USA"
-  },
-  {
     "id": "fd-387365",
     "name": "Kenan Haroun",
     "team": "Genk",
@@ -19478,14 +20062,6 @@
     "league": "Belgian Pro League",
     "position": "Defensor",
     "nationality": "Montenegro"
-  },
-  {
-    "id": "fd-414929",
-    "name": "Moussa Kone",
-    "team": "Genk",
-    "league": "Belgian Pro League",
-    "position": "Mediocampista",
-    "nationality": ""
   },
   {
     "id": "fd-345959",
@@ -19534,14 +20110,6 @@
     "league": "Belgian Pro League",
     "position": "Defensor",
     "nationality": "Ecuador"
-  },
-  {
-    "id": "fd-3118700",
-    "name": "Adam Žulevič",
-    "team": "Genoa",
-    "league": "Serie A",
-    "position": "Delantero",
-    "nationality": ""
   },
   {
     "id": "fd-364761",
@@ -19614,6 +20182,14 @@
     "league": "Serie A",
     "position": "Arquero",
     "nationality": "Austria"
+  },
+  {
+    "id": "fd-383999",
+    "name": "Gaël Lafont",
+    "team": "Genoa",
+    "league": "Serie A",
+    "position": "Mediocampista",
+    "nationality": "France"
   },
   {
     "id": "fd-257058",
@@ -19840,14 +20416,6 @@
     "nationality": "Netherlands"
   },
   {
-    "id": "fd-228519",
-    "name": "Alseny Soumah",
-    "team": "Gent",
-    "league": "Conference League",
-    "position": "Mediocampista",
-    "nationality": "Guinea"
-  },
-  {
     "id": "fd-379025",
     "name": "Bas Evers",
     "team": "Gent",
@@ -19856,28 +20424,12 @@
     "nationality": "Belgium"
   },
   {
-    "id": "fd-399631",
-    "name": "Bi Goore",
-    "team": "Gent",
-    "league": "Conference League",
-    "position": "Delantero",
-    "nationality": ""
-  },
-  {
     "id": "fd-181403",
     "name": "Christian Burgess",
     "team": "Gent",
     "league": "Conference League",
     "position": "Defensor",
     "nationality": "England"
-  },
-  {
-    "id": "fd-3102737",
-    "name": "Daniel James Wisdom",
-    "team": "Gent",
-    "league": "Conference League",
-    "position": "Delantero",
-    "nationality": ""
   },
   {
     "id": "fd-178363",
@@ -19902,6 +20454,22 @@
     "league": "Conference League",
     "position": "Defensor",
     "nationality": "Belgium"
+  },
+  {
+    "id": "fd-384600",
+    "name": "Hannes Vernemmen",
+    "team": "Gent",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Belgium"
+  },
+  {
+    "id": "fd-399631",
+    "name": "Hyllarion",
+    "team": "Gent",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": ""
   },
   {
     "id": "fd-418988",
@@ -20016,14 +20584,6 @@
     "nationality": "Belgium"
   },
   {
-    "id": "fd-361591",
-    "name": "Moctar Diop",
-    "team": "Gent",
-    "league": "Conference League",
-    "position": "Delantero",
-    "nationality": "Senegal"
-  },
-  {
     "id": "fd-403618",
     "name": "Mohammed El Adfaoui",
     "team": "Gent",
@@ -20056,14 +20616,6 @@
     "nationality": ""
   },
   {
-    "id": "fd-183074",
-    "name": "Pieter Gerkens",
-    "team": "Gent",
-    "league": "Conference League",
-    "position": "Mediocampista",
-    "nationality": "Belgium"
-  },
-  {
     "id": "fd-240517",
     "name": "Siebe van der Heyden",
     "team": "Gent",
@@ -20085,14 +20637,6 @@
     "team": "Gent",
     "league": "Conference League",
     "position": "Mediocampista",
-    "nationality": "Belgium"
-  },
-  {
-    "id": "fd-345146",
-    "name": "Tom Vandenberghe",
-    "team": "Gent",
-    "league": "Conference League",
-    "position": "Arquero",
     "nationality": "Belgium"
   },
   {
@@ -20146,6 +20690,14 @@
   {
     "id": "fd-394958",
     "name": "Curro Burgos",
+    "team": "Getafe",
+    "league": "LaLiga",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-168531",
+    "name": "Dani Carvajal",
     "team": "Getafe",
     "league": "LaLiga",
     "position": "Defensor",
@@ -20208,6 +20760,22 @@
     "nationality": ""
   },
   {
+    "id": "fd-3121766",
+    "name": "Ibrahima Danfakha Keita",
+    "team": "Getafe",
+    "league": "LaLiga",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-5327018",
+    "name": "Irahima Danfakha Keita",
+    "team": "Getafe",
+    "league": "LaLiga",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-310259",
     "name": "Ivan Azón",
     "team": "Getafe",
@@ -20222,6 +20790,14 @@
     "league": "LaLiga",
     "position": "Defensor",
     "nationality": "Ivory Coast"
+  },
+  {
+    "id": "fd-384168",
+    "name": "Jesús Martínez",
+    "team": "Getafe",
+    "league": "LaLiga",
+    "position": "Mediocampista",
+    "nationality": "Spain"
   },
   {
     "id": "fd-344245",
@@ -20344,6 +20920,22 @@
     "nationality": "Uruguay"
   },
   {
+    "id": "fd-3101327",
+    "name": "Sebastián Salazar Trujillo",
+    "team": "Getafe",
+    "league": "LaLiga",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-411023",
+    "name": "Vladyslav Kysil",
+    "team": "Getafe",
+    "league": "LaLiga",
+    "position": "Defensor",
+    "nationality": "Ukraine"
+  },
+  {
     "id": "fd-300111",
     "name": "Zaid Romero",
     "team": "Getafe",
@@ -20352,250 +20944,250 @@
     "nationality": "Argentina"
   },
   {
-    "id": "espn_241139",
+    "id": "fd-241139",
     "name": "Abdul Mumin",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Ghana"
   },
   {
-    "id": "espn_261613",
+    "id": "fd-261613",
     "name": "Abel Ruiz",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_297825",
+    "id": "fd-297825",
     "name": "Alejandro Francés",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_30377",
+    "id": "fd-30377",
     "name": "Álex Moreno",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_291552",
-    "name": "Azzedine Ounahi",
-    "team": "Girona",
-    "league": "",
-    "position": "Mediocampista",
-    "nationality": "Morocco"
-  },
-  {
-    "id": "espn_284429",
+    "id": "fd-284429",
     "name": "Bryan Gil",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_113737",
+    "id": "fd-261468",
+    "name": "Carles Pérez",
+    "team": "Girona",
+    "league": "Copa del Rey",
+    "position": "Delantero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-113737",
     "name": "Cristhian Stuani",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Uruguay"
   },
   {
-    "id": "espn_160740",
+    "id": "fd-160740",
     "name": "David López",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_329667",
-    "name": "Dawda Camara",
-    "team": "Girona",
-    "league": "",
-    "position": "Delantero",
-    "nationality": "Mauritania"
-  },
-  {
-    "id": "espn_215717",
+    "id": "fd-215717",
     "name": "Donny van de Beek",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Netherlands"
   },
   {
-    "id": "espn_242383",
+    "id": "fd-242383",
     "name": "Fran Beltrán",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_335208",
-    "name": "Gabriel Misehouy",
-    "team": "Girona",
-    "league": "",
-    "position": "Mediocampista",
-    "nationality": "Netherlands"
-  },
-  {
-    "id": "espn_409290",
+    "id": "fd-409290",
     "name": "Gibert Jordana",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_3118648",
+    "id": "fd-3118648",
     "name": "Guillem Badía Gutiérrez",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": ""
   },
   {
-    "id": "espn_422939",
+    "id": "fd-422939",
     "name": "Holmes Zamorano",
     "team": "Girona",
-    "league": "",
-    "position": "Mediocampista",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_297369",
-    "name": "Ivan Ruiz Morante",
-    "team": "Girona",
-    "league": "",
-    "position": "Mediocampista",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_375753",
-    "name": "Izan González",
-    "team": "Girona",
-    "league": "",
-    "position": "Mediocampista",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_372324",
-    "name": "Jastin García",
-    "team": "Girona",
-    "league": "",
-    "position": "Delantero",
-    "nationality": "Portugal"
-  },
-  {
-    "id": "espn_373877",
-    "name": "Javier Boñar",
-    "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_372151",
+    "id": "fd-297369",
+    "name": "Ivan Ruiz Morante",
+    "team": "Girona",
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-372324",
+    "name": "Jastin García",
+    "team": "Girona",
+    "league": "Copa del Rey",
+    "position": "Delantero",
+    "nationality": "Portugal"
+  },
+  {
+    "id": "fd-373877",
+    "name": "Javier Boñar",
+    "team": "Girona",
+    "league": "Copa del Rey",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-411877",
+    "name": "Javier Sarasa",
+    "team": "Girona",
+    "league": "Copa del Rey",
+    "position": "Delantero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-399407",
+    "name": "Jordi Danso",
+    "team": "Girona",
+    "league": "Copa del Rey",
+    "position": "Arquero",
+    "nationality": "Gambia"
+  },
+  {
+    "id": "fd-372151",
     "name": "Juan Arango",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Venezuela"
   },
   {
-    "id": "espn_384393",
+    "id": "fd-384393",
     "name": "Lancinet Kourouma",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Guinea"
   },
   {
-    "id": "espn_403881",
+    "id": "fd-265992",
+    "name": "Mateu Morey",
+    "team": "Girona",
+    "league": "Copa del Rey",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-403881",
     "name": "Mauro Furtado",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Portugal"
   },
   {
-    "id": "espn_406305",
+    "id": "fd-376336",
+    "name": "Mohammed Hamony",
+    "team": "Girona",
+    "league": "Copa del Rey",
+    "position": "Delantero",
+    "nationality": "Morocco"
+  },
+  {
+    "id": "fd-406305",
     "name": "Oleksandr Pishchur",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Ukraine"
   },
   {
-    "id": "espn_164469",
+    "id": "fd-164469",
     "name": "Paulo Gazzaniga",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Argentina"
   },
   {
-    "id": "espn_152166",
+    "id": "fd-152166",
     "name": "Portu",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_325019",
-    "name": "Ricard Artero",
-    "team": "Girona",
-    "league": "",
-    "position": "Mediocampista",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_259908",
+    "id": "fd-259908",
     "name": "Sergi Puig",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_279748",
+    "id": "fd-279748",
     "name": "Unai Hernandez",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_367976",
+    "id": "fd-367976",
     "name": "Vladyslav Krapyvtsov",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Ukraine"
   },
   {
-    "id": "espn_314176",
+    "id": "fd-314176",
     "name": "Vladyslav Vanat",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Ukraine"
   },
   {
-    "id": "espn_311056",
+    "id": "fd-311056",
     "name": "Yáser Asprilla",
     "team": "Girona",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Colombia"
   },
@@ -21456,6 +22048,14 @@
     "nationality": "Germany"
   },
   {
+    "id": "fd-3107017",
+    "name": "Merlin Sinanović",
+    "team": "Hannover 96",
+    "league": "DFB-Pokal",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-245512",
     "name": "Mustapha Bundu",
     "team": "Hannover 96",
@@ -21540,7 +22140,7 @@
     "name": "Yunus Ünal",
     "team": "Hannover 96",
     "league": "DFB-Pokal",
-    "position": "Defensor",
+    "position": "Delantero",
     "nationality": ""
   },
   {
@@ -22160,6 +22760,14 @@
     "nationality": "Scotland"
   },
   {
+    "id": "fd-365869",
+    "name": "Gus Stevenson",
+    "team": "Hearts",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Scotland"
+  },
+  {
     "id": "fd-228805",
     "name": "Harry Milne",
     "team": "Hearts",
@@ -22318,14 +22926,6 @@
     "league": "Conference League",
     "position": "Mediocampista",
     "nationality": "Iceland"
-  },
-  {
-    "id": "fd-252390",
-    "name": "Trialist 1",
-    "team": "Hearts",
-    "league": "Conference League",
-    "position": "Arquero",
-    "nationality": "England"
   },
   {
     "id": "fd-204352",
@@ -23264,14 +23864,6 @@
     "nationality": "Croatia"
   },
   {
-    "id": "fd-319530",
-    "name": "Arthur Chaves",
-    "team": "Hoffenheim",
-    "league": "Bundesliga",
-    "position": "Defensor",
-    "nationality": "Brazil"
-  },
-  {
     "id": "fd-336355",
     "name": "Bambasé Conté",
     "team": "Hoffenheim",
@@ -23302,6 +23894,22 @@
     "league": "Bundesliga",
     "position": "Delantero",
     "nationality": "Kosovo"
+  },
+  {
+    "id": "fd-3099575",
+    "name": "Jykese Fields",
+    "team": "Hoffenheim",
+    "league": "Bundesliga",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-208608",
+    "name": "Klaus Gjasula",
+    "team": "Hoffenheim",
+    "league": "Bundesliga",
+    "position": "Mediocampista",
+    "nationality": "Albania"
   },
   {
     "id": "fd-238025",
@@ -23360,6 +23968,14 @@
     "nationality": "Germany"
   },
   {
+    "id": "fd-3105981",
+    "name": "Muhammed Yasin Batuhan Zor",
+    "team": "Hoffenheim",
+    "league": "Bundesliga",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-386884",
     "name": "Nathan De Cat",
     "team": "Hoffenheim",
@@ -23382,6 +23998,14 @@
     "league": "Bundesliga",
     "position": "Arquero",
     "nationality": "Germany"
+  },
+  {
+    "id": "fd-3111134",
+    "name": "Oskar Hencke",
+    "team": "Hoffenheim",
+    "league": "Bundesliga",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-266565",
@@ -23438,6 +24062,14 @@
     "league": "Bundesliga",
     "position": "Defensor",
     "nationality": "France"
+  },
+  {
+    "id": "fd-418789",
+    "name": "Valentin Lässig",
+    "team": "Hoffenheim",
+    "league": "Bundesliga",
+    "position": "Defensor",
+    "nationality": "Germany"
   },
   {
     "id": "fd-191209",
@@ -23588,7 +24220,7 @@
     "name": "Jonas Therkelsen",
     "team": "Holstein Kiel",
     "league": "DFB-Pokal",
-    "position": "Defensor",
+    "position": "Mediocampista",
     "nationality": "Norway"
   },
   {
@@ -23636,7 +24268,7 @@
     "name": "Mark Richter Montserrat",
     "team": "Holstein Kiel",
     "league": "DFB-Pokal",
-    "position": "Mediocampista",
+    "position": "Delantero",
     "nationality": ""
   },
   {
@@ -24080,6 +24712,14 @@
     "nationality": "Georgia"
   },
   {
+    "id": "fd-405659",
+    "name": "Giorgi Kukalia",
+    "team": "Iberia 1999",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Georgia"
+  },
+  {
     "id": "fd-258932",
     "name": "Giorgi Kutsia",
     "team": "Iberia 1999",
@@ -24224,6 +24864,14 @@
     "nationality": "Georgia"
   },
   {
+    "id": "fd-3144331",
+    "name": "Tsotne Khechikashvili",
+    "team": "Iberia 1999",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-239915",
     "name": "Vahid Selimovic",
     "team": "Iberia 1999",
@@ -24286,6 +24934,14 @@
     "league": "Conference League",
     "position": "Defensor",
     "nationality": "Mexico"
+  },
+  {
+    "id": "fd-3099327",
+    "name": "Arnau Luque Martos",
+    "team": "Inter Club d'Escaldes",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-3099342",
@@ -24480,6 +25136,14 @@
     "nationality": "Spain"
   },
   {
+    "id": "fd-400734",
+    "name": "Alain Taho",
+    "team": "Inter Milan",
+    "league": "Serie A",
+    "position": "Arquero",
+    "nationality": "Albania"
+  },
+  {
     "id": "fd-240109",
     "name": "Aleksandar Stankovic",
     "team": "Inter Milan",
@@ -24552,6 +25216,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-387837",
+    "name": "Francesco Stante",
+    "team": "Inter Milan",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": "Italy"
+  },
+  {
     "id": "fd-170785",
     "name": "Hakan Çalhanoglu",
     "team": "Inter Milan",
@@ -24608,6 +25280,14 @@
     "nationality": "Argentina"
   },
   {
+    "id": "fd-384534",
+    "name": "Leon Jakirovic",
+    "team": "Inter Milan",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": "Croatia"
+  },
+  {
     "id": "fd-403808",
     "name": "Leonardo Bovio",
     "team": "Inter Milan",
@@ -24638,6 +25318,14 @@
     "league": "Serie A",
     "position": "Delantero",
     "nationality": "France"
+  },
+  {
+    "id": "fd-402778",
+    "name": "Matteo Lavelli",
+    "team": "Inter Milan",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": "Italy"
   },
   {
     "id": "fd-412245",
@@ -24836,7 +25524,7 @@
     "name": "Jack Clarke",
     "team": "Ipswich Town",
     "league": "Premier League",
-    "position": "Delantero",
+    "position": "Mediocampista",
     "nationality": "England"
   },
   {
@@ -24936,6 +25624,14 @@
     "nationality": "Netherlands"
   },
   {
+    "id": "fd-3145987",
+    "name": "Adam Kubát",
+    "team": "Jablonec",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-257078",
     "name": "Antonin Rusek",
     "team": "Jablonec",
@@ -24982,6 +25678,14 @@
     "league": "Conference League",
     "position": "Defensor",
     "nationality": "Ukraine"
+  },
+  {
+    "id": "fd-3102913",
+    "name": "Evžen Malý",
+    "team": "Jablonec",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": ""
   },
   {
     "id": "fd-167559",
@@ -25174,6 +25878,14 @@
     "league": "Conference League",
     "position": "Mediocampista",
     "nationality": "Georgia"
+  },
+  {
+    "id": "fd-3145986",
+    "name": "Vojtěch Reiner",
+    "team": "Jablonec",
+    "league": "Conference League",
+    "position": "Arquero",
+    "nationality": ""
   },
   {
     "id": "fd-407468",
@@ -25720,12 +26432,28 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-3129035",
+    "name": "Antonio Stefano Merola",
+    "team": "Juventus",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-179359",
     "name": "Arkadiusz Milik",
     "team": "Juventus",
     "league": "Serie A",
     "position": "Delantero",
     "nationality": "Poland"
+  },
+  {
+    "id": "fd-3102531",
+    "name": "Arman Durmiši",
+    "team": "Juventus",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": ""
   },
   {
     "id": "fd-397258",
@@ -25920,6 +26648,14 @@
     "nationality": "Brazil"
   },
   {
+    "id": "fd-397463",
+    "name": "Niccolò Rizzo",
+    "team": "Juventus",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": "Italy"
+  },
+  {
     "id": "fd-298349",
     "name": "Nick Woltemade",
     "team": "Juventus",
@@ -25966,6 +26702,14 @@
     "league": "Serie A",
     "position": "Arquero",
     "nationality": "Romania"
+  },
+  {
+    "id": "fd-414157",
+    "name": "Stefano Mangiapoco",
+    "team": "Juventus",
+    "league": "Serie A",
+    "position": "Arquero",
+    "nationality": "Italy"
   },
   {
     "id": "fd-258968",
@@ -26200,6 +26944,14 @@
     "nationality": "France"
   },
   {
+    "id": "fd-5323062",
+    "name": "Samet Acar",
+    "team": "Kaiserslautern",
+    "league": "DFB-Pokal",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
     "id": "fd-344743",
     "name": "Semih Sahin",
     "team": "Kaiserslautern",
@@ -26222,6 +26974,14 @@
     "league": "DFB-Pokal",
     "position": "Mediocampista",
     "nationality": "Austria"
+  },
+  {
+    "id": "fd-5323768",
+    "name": "Titus Ole Henseler",
+    "team": "Kaiserslautern",
+    "league": "DFB-Pokal",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-3100695",
@@ -26364,7 +27124,7 @@
     "name": "Noel Eichinger",
     "team": "Karlsruher SC",
     "league": "DFB-Pokal",
-    "position": "Delantero",
+    "position": "Mediocampista",
     "nationality": "Germany"
   },
   {
@@ -26438,6 +27198,14 @@
     "league": "DFB-Pokal",
     "position": "Defensor",
     "nationality": "Sweden"
+  },
+  {
+    "id": "fd-5325771",
+    "name": "Adomas Užkurnys",
+    "team": "Kauno Žalgiris",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-183003",
@@ -26624,12 +27392,36 @@
     "nationality": "Lithuania"
   },
   {
+    "id": "fd-5323144",
+    "name": "Titas Milius",
+    "team": "Kauno Žalgiris",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-175221",
     "name": "Tomas Svedkauskas",
     "team": "Kauno Žalgiris",
     "league": "Conference League",
     "position": "Arquero",
     "nationality": "Lithuania"
+  },
+  {
+    "id": "fd-3098632",
+    "name": "Vėjas Pocius",
+    "team": "Kauno Žalgiris",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
+    "id": "fd-5323143",
+    "name": "Vilius Dovydas",
+    "team": "Kauno Žalgiris",
+    "league": "Conference League",
+    "position": "Arquero",
+    "nationality": ""
   },
   {
     "id": "fd-181777",
@@ -26654,6 +27446,14 @@
     "league": "Bundesliga",
     "position": "Mediocampista",
     "nationality": "Belgium"
+  },
+  {
+    "id": "fd-3114554",
+    "name": "Assad Kotya-Fofana",
+    "team": "Köln",
+    "league": "Bundesliga",
+    "position": "Defensor",
+    "nationality": ""
   },
   {
     "id": "fd-228319",
@@ -27008,6 +27808,14 @@
     "nationality": "Austria"
   },
   {
+    "id": "fd-419197",
+    "name": "Joni Kivijarvi",
+    "team": "KuPS",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Finland"
+  },
+  {
     "id": "fd-385662",
     "name": "Joslyn Luyeye-Lutumba",
     "team": "KuPS",
@@ -27136,242 +27944,314 @@
     "nationality": "Finland"
   },
   {
-    "id": "espn_379136",
+    "id": "fd-419199",
+    "name": "Veikko Lahtela",
+    "team": "KuPS",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Finland"
+  },
+  {
+    "id": "fd-379136",
     "name": "Aboubacar Bassinga",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": ""
   },
   {
-    "id": "espn_409288",
+    "id": "fd-409288",
     "name": "Adam Arvelo",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_406376",
+    "id": "fd-406376",
     "name": "Adri Suárez",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_325873",
+    "id": "fd-3144268",
+    "name": "Adrián Rodríguez Del Rosario",
+    "team": "Las Palmas",
+    "league": "Copa del Rey",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-3140807",
+    "name": "Aidán Pieter Pérez Kraaijeveld",
+    "team": "Las Palmas",
+    "league": "Copa del Rey",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-3145646",
+    "name": "Aimar Domínguez Rodríguez",
+    "team": "Las Palmas",
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
+    "id": "fd-325873",
     "name": "Ale García",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_121611",
+    "id": "fd-121611",
     "name": "Álex Suárez",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_375799",
+    "id": "fd-375799",
     "name": "Andrés Rodríguez",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_239387",
+    "id": "fd-239387",
     "name": "Caro",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_363153",
+    "id": "fd-3142101",
+    "name": "Eduard Mohedano Serrano",
+    "team": "Las Palmas",
+    "league": "Copa del Rey",
+    "position": "Arquero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-363153",
     "name": "Edward Cedeño",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Panama"
   },
   {
-    "id": "espn_241461",
-    "name": "Elías Romero",
+    "id": "fd-241461",
+    "name": "Elias Romero",
     "team": "Las Palmas",
-    "league": "",
-    "position": "Delantero",
-    "nationality": "Spain"
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": "Argentina"
   },
   {
-    "id": "espn_292217",
+    "id": "fd-292217",
     "name": "Enrique Clemente",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_272870",
+    "id": "fd-272870",
     "name": "Enzo Loiodice",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "France"
   },
   {
-    "id": "espn_335952",
+    "id": "fd-335952",
     "name": "Giovanni Bonfanti",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Italy"
   },
   {
-    "id": "espn_367731",
+    "id": "fd-367731",
     "name": "Iñaki González",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_414085",
+    "id": "fd-280489",
+    "name": "Iván Jaime",
+    "team": "Las Palmas",
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-414085",
     "name": "Iván Medina",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_165671",
+    "id": "fd-165671",
     "name": "Jefté",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_380670",
+    "id": "fd-380670",
     "name": "Jeremía Recoba",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Uruguay"
   },
   {
-    "id": "espn_162453",
+    "id": "fd-162453",
     "name": "Jesé",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_367729",
+    "id": "fd-259984",
+    "name": "Jorge Cruz",
+    "team": "Las Palmas",
+    "league": "Copa del Rey",
+    "position": "Defensor",
+    "nationality": "El Salvador"
+  },
+  {
+    "id": "fd-136272",
+    "name": "Jorge Valverde",
+    "team": "Las Palmas",
+    "league": "Copa del Rey",
+    "position": "Arquero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-367729",
     "name": "Juanma Herzog",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_288936",
+    "id": "fd-288936",
     "name": "Kirian Rodríguez",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_292774",
+    "id": "fd-292774",
     "name": "Manu Fuster",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_307916",
+    "id": "fd-307916",
     "name": "Marvin",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_387901",
+    "id": "fd-387901",
     "name": "Mateo Acimovic",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Slovenia"
   },
   {
-    "id": "espn_256836",
+    "id": "fd-256836",
     "name": "Nicholas Opoku",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Ghana"
   },
   {
-    "id": "espn_422046",
+    "id": "fd-3140808",
+    "name": "Rachid Saiah Bouchaiba",
+    "team": "Las Palmas",
+    "league": "Copa del Rey",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-422046",
     "name": "Rafa Cruz",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_188165",
+    "id": "fd-188165",
     "name": "Sandro",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_184759",
+    "id": "fd-184759",
     "name": "Sergio Ruiz",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_265959",
+    "id": "fd-5326095",
+    "name": "Sergio Viera García",
+    "team": "Las Palmas",
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
+    "id": "fd-265959",
     "name": "Taisei Miyashiro",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Japan"
   },
   {
-    "id": "espn_388727",
+    "id": "fd-388727",
     "name": "Valentín Pezzolesi",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_46930",
-    "name": "Víctor",
-    "team": "Las Palmas",
-    "league": "",
-    "position": "Defensor",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_236458",
+    "id": "fd-236458",
     "name": "Viti",
     "team": "Las Palmas",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
@@ -27414,6 +28294,14 @@
     "league": "Champions League",
     "position": "Defensor",
     "nationality": "Mali"
+  },
+  {
+    "id": "fd-413713",
+    "name": "Christof Katzmayr",
+    "team": "LASK Linz",
+    "league": "Champions League",
+    "position": "Arquero",
+    "nationality": "Austria"
   },
   {
     "id": "fd-37442",
@@ -28128,6 +29016,14 @@
     "nationality": "Morocco"
   },
   {
+    "id": "fd-3144978",
+    "name": "Aleks Olsztyn",
+    "team": "Lech Poznań",
+    "league": "Europa League",
+    "position": "Arquero",
+    "nationality": ""
+  },
+  {
     "id": "fd-267613",
     "name": "Alex Douglas",
     "team": "Lech Poznań",
@@ -28168,6 +29064,14 @@
     "nationality": "Finland"
   },
   {
+    "id": "fd-3144977",
+    "name": "Eryk Śledziński",
+    "team": "Lech Poznań",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-239756",
     "name": "Filip Jagiello",
     "team": "Lech Poznań",
@@ -28206,6 +29110,14 @@
     "league": "Europa League",
     "position": "Defensor",
     "nationality": "Portugal"
+  },
+  {
+    "id": "fd-409784",
+    "name": "Kamil Jakóbczyk",
+    "team": "Lech Poznań",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": "Poland"
   },
   {
     "id": "fd-3107588",
@@ -28286,6 +29198,14 @@
     "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "Sweden"
+  },
+  {
+    "id": "fd-3144976",
+    "name": "Piotr Bartczak",
+    "team": "Lech Poznań",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": ""
   },
   {
     "id": "fd-239148",
@@ -28576,243 +29496,259 @@
     "nationality": "Bosnia and Herzegovina"
   },
   {
-    "id": "espn_312013",
-    "name": "Álex Millán",
+    "id": "fd-355379",
+    "name": "Alejandro González Gorrin",
     "team": "Leganés",
-    "league": "",
-    "position": "Delantero",
+    "league": "Copa del Rey",
+    "position": "Arquero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_354342",
-    "name": "Álex Sancris",
+    "id": "fd-389451",
+    "name": "Álex Fita",
     "team": "Leganés",
-    "league": "",
-    "position": "Delantero",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_3099572",
-    "name": "Alfred Gøthler",
-    "team": "Leganés",
-    "league": "",
-    "position": "Delantero",
-    "nationality": ""
-  },
-  {
-    "id": "espn_231405",
-    "name": "Álvaro Tejero",
-    "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_224418",
+    "id": "fd-312013",
+    "name": "Álex Millán",
+    "team": "Leganés",
+    "league": "Copa del Rey",
+    "position": "Delantero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-354342",
+    "name": "Álex Sancris",
+    "team": "Leganés",
+    "league": "Copa del Rey",
+    "position": "Delantero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-154446",
+    "name": "Álvaro Morata",
+    "team": "Leganés",
+    "league": "Copa del Rey",
+    "position": "Delantero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-231405",
+    "name": "Álvaro Tejero",
+    "team": "Leganés",
+    "league": "Copa del Rey",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-224418",
     "name": "Amadou Diawara",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Guinea"
   },
   {
-    "id": "espn_406399",
+    "id": "fd-406399",
     "name": "Andrés Campos",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_422074",
-    "name": "Beltrán Auguste",
-    "team": "Leganés",
-    "league": "",
-    "position": "Defensor",
-    "nationality": "Argentina"
-  },
-  {
-    "id": "espn_144587",
+    "id": "fd-144587",
     "name": "Dani Rodríguez",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_398349",
-    "name": "David Hamansenya",
-    "team": "Leganés",
-    "league": "",
-    "position": "Defensor",
-    "nationality": "Zambia"
-  },
-  {
-    "id": "espn_290824",
+    "id": "fd-290824",
     "name": "Enric Franquesa",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_123864",
+    "id": "fd-276650",
+    "name": "Francisco Montero",
+    "team": "Leganés",
+    "league": "Copa del Rey",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-123864",
     "name": "Gonzalo Aguilar",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_119045",
-    "name": "Gonzalo Melero",
-    "team": "Leganés",
-    "league": "",
-    "position": "Mediocampista",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_153442",
+    "id": "fd-153442",
     "name": "Ignasi Miquel",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_317473",
+    "id": "fd-317473",
     "name": "Ismaël Gharbi",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Tunisia"
   },
   {
-    "id": "espn_225561",
+    "id": "fd-418974",
+    "name": "Jorge Herrero",
+    "team": "Leganés",
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-5326033",
+    "name": "Jorge Martínez Jiménez",
+    "team": "Leganés",
+    "league": "Copa del Rey",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-225561",
     "name": "Luca Zidane",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Algeria"
   },
   {
-    "id": "espn_356366",
+    "id": "fd-356366",
     "name": "Marvel",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_264124",
+    "id": "fd-264124",
     "name": "Miguel Atienza",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_325005",
+    "id": "fd-325005",
     "name": "Naim García",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_415245",
+    "id": "fd-415245",
     "name": "Nico Lozano",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_113097",
+    "id": "fd-113097",
     "name": "Raúl Fernández",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_308145",
-    "name": "Roberto López",
-    "team": "Leganés",
-    "league": "",
-    "position": "Mediocampista",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_177803",
+    "id": "fd-177803",
     "name": "Rubén Peña",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_300350",
+    "id": "fd-300350",
     "name": "Ruben Pulido Peñas",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_260078",
+    "id": "fd-260078",
     "name": "Serge Patrick Njoh",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Cameroon"
   },
   {
-    "id": "espn_395585",
+    "id": "fd-3135236",
+    "name": "Sulaiman Mulumba",
+    "team": "Leganés",
+    "league": "Copa del Rey",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-395585",
     "name": "Suleiman El Haddadi Mohamed",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Morocco"
   },
   {
-    "id": "espn_418538",
+    "id": "fd-418538",
     "name": "Unax Del Cura",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_319290",
+    "id": "fd-319290",
     "name": "Yassine Kechta",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Morocco"
   },
   {
-    "id": "espn_306400",
+    "id": "fd-306400",
     "name": "Zico Buurmeester",
     "team": "Leganés",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Netherlands"
   },
   {
-    "id": "fd-332046",
-    "name": "Aaron Ramsey",
-    "team": "Leicester City",
-    "league": "FA Cup",
-    "position": "Mediocampista",
-    "nationality": "England"
-  },
-  {
-    "id": "fd-92885",
-    "name": "Asmir Begovic",
+    "id": "fd-107542",
+    "name": "Alex McCarthy",
     "team": "Leicester City",
     "league": "FA Cup",
     "position": "Arquero",
+    "nationality": "England"
+  },
+  {
+    "id": "fd-341490",
+    "name": "Amir Bristric",
+    "team": "Leicester City",
+    "league": "FA Cup",
+    "position": "Delantero",
     "nationality": "Bosnia and Herzegovina"
   },
   {
@@ -28840,51 +29776,51 @@
     "nationality": "Italy"
   },
   {
-    "id": "fd-358577",
-    "name": "Divine Mukasa",
+    "id": "fd-328239",
+    "name": "Christian McFarlane",
     "team": "Leicester City",
     "league": "FA Cup",
-    "position": "Mediocampista",
+    "position": "Defensor",
     "nationality": "England"
   },
   {
-    "id": "fd-360326",
-    "name": "Dujuan Richards",
+    "id": "fd-211756",
+    "name": "Conor Chaplin",
     "team": "Leicester City",
     "league": "FA Cup",
     "position": "Delantero",
-    "nationality": "Jamaica"
+    "nationality": "England"
   },
   {
-    "id": "fd-318680",
-    "name": "Fatawu Issahaku",
+    "id": "fd-131897",
+    "name": "David Cornell",
+    "team": "Leicester City",
+    "league": "FA Cup",
+    "position": "Arquero",
+    "nationality": "Wales"
+  },
+  {
+    "id": "fd-243406",
+    "name": "Emil Riis Jakobsen",
     "team": "Leicester City",
     "league": "FA Cup",
     "position": "Delantero",
-    "nationality": "Ghana"
+    "nationality": "Denmark"
   },
   {
-    "id": "fd-271914",
-    "name": "Fran Vieites",
+    "id": "fd-292101",
+    "name": "Franco Ravizzoli",
     "team": "Leicester City",
     "league": "FA Cup",
     "position": "Arquero",
-    "nationality": "Spain"
+    "nationality": "Argentina"
   },
   {
-    "id": "fd-234320",
-    "name": "Hamza Choudhury",
+    "id": "fd-378530",
+    "name": "Harry Howell",
     "team": "Leicester City",
     "league": "FA Cup",
-    "position": "Mediocampista",
-    "nationality": "Bangladesh"
-  },
-  {
-    "id": "fd-369194",
-    "name": "Harry French",
-    "team": "Leicester City",
-    "league": "FA Cup",
-    "position": "Arquero",
+    "position": "Delantero",
     "nationality": "England"
   },
   {
@@ -28896,12 +29832,20 @@
     "nationality": "Australia"
   },
   {
-    "id": "fd-202332",
-    "name": "Harry Winks",
+    "id": "fd-3144543",
+    "name": "Hugo Charles March Phillipps De Lisle",
     "team": "Leicester City",
     "league": "FA Cup",
     "position": "Mediocampista",
-    "nationality": "England"
+    "nationality": ""
+  },
+  {
+    "id": "fd-3099164",
+    "name": "Ilari Akseli Kangasniemi",
+    "team": "Leicester City",
+    "league": "FA Cup",
+    "position": "Defensor",
+    "nationality": ""
   },
   {
     "id": "fd-296398",
@@ -28912,60 +29856,44 @@
     "nationality": "Poland"
   },
   {
-    "id": "fd-156867",
-    "name": "Jamaal Lascelles",
-    "team": "Leicester City",
-    "league": "FA Cup",
-    "position": "Defensor",
-    "nationality": "England"
-  },
-  {
-    "id": "fd-155211",
-    "name": "Jannik Vestergaard",
-    "team": "Leicester City",
-    "league": "FA Cup",
-    "position": "Defensor",
-    "nationality": "Denmark"
-  },
-  {
-    "id": "fd-389329",
-    "name": "Jeremy Monga",
-    "team": "Leicester City",
-    "league": "FA Cup",
-    "position": "Delantero",
-    "nationality": "England"
-  },
-  {
-    "id": "fd-226125",
-    "name": "Joe Aribo",
+    "id": "fd-356073",
+    "name": "Jayden Joseph",
     "team": "Leicester City",
     "league": "FA Cup",
     "position": "Mediocampista",
-    "nationality": "Nigeria"
+    "nationality": "England"
   },
   {
-    "id": "fd-123518",
-    "name": "Jordan Ayew",
-    "team": "Leicester City",
-    "league": "FA Cup",
-    "position": "Delantero",
-    "nationality": "Ghana"
-  },
-  {
-    "id": "fd-97867",
-    "name": "Jordan James",
+    "id": "fd-159450",
+    "name": "John Lundstram",
     "team": "Leicester City",
     "league": "FA Cup",
     "position": "Mediocampista",
+    "nationality": "England"
+  },
+  {
+    "id": "fd-328039",
+    "name": "Kamari Doyle",
+    "team": "Leicester City",
+    "league": "FA Cup",
+    "position": "Mediocampista",
+    "nationality": "England"
+  },
+  {
+    "id": "fd-250786",
+    "name": "Liam Cullen",
+    "team": "Leicester City",
+    "league": "FA Cup",
+    "position": "Delantero",
     "nationality": "Wales"
   },
   {
-    "id": "fd-391455",
-    "name": "Kevon Gray",
+    "id": "fd-3102198",
+    "name": "Lorenz William Lucas Hutchinson",
     "team": "Leicester City",
     "league": "FA Cup",
-    "position": "Defensor",
-    "nationality": "England"
+    "position": "Delantero",
+    "nationality": ""
   },
   {
     "id": "fd-391457",
@@ -28984,14 +29912,6 @@
     "nationality": "England"
   },
   {
-    "id": "fd-351338",
-    "name": "Michael Golding",
-    "team": "Leicester City",
-    "league": "FA Cup",
-    "position": "Mediocampista",
-    "nationality": "England"
-  },
-  {
     "id": "fd-371701",
     "name": "Olabade Aluko",
     "team": "Leicester City",
@@ -29000,60 +29920,84 @@
     "nationality": "England"
   },
   {
-    "id": "fd-261448",
-    "name": "Oliver Skipp",
+    "id": "fd-3102199",
+    "name": "Riley Carr",
+    "team": "Leicester City",
+    "league": "FA Cup",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-333417",
+    "name": "Sammy Braybrooke",
     "team": "Leicester City",
     "league": "FA Cup",
     "position": "Mediocampista",
     "nationality": "England"
   },
   {
-    "id": "fd-232662",
-    "name": "Patson Daka",
-    "team": "Leicester City",
-    "league": "FA Cup",
-    "position": "Delantero",
-    "nationality": "Zambia"
-  },
-  {
-    "id": "fd-171144",
-    "name": "Ricardo Pereira",
-    "team": "Leicester City",
-    "league": "FA Cup",
-    "position": "Defensor",
-    "nationality": "Portugal"
-  },
-  {
-    "id": "fd-325539",
-    "name": "Silko Thomas",
+    "id": "fd-403702",
+    "name": "Tom Watson",
     "team": "Leicester City",
     "league": "FA Cup",
     "position": "Delantero",
     "nationality": "England"
   },
   {
-    "id": "fd-225549",
-    "name": "Stephy Mavididi",
+    "id": "fd-374138",
+    "name": "Tommy Neale",
     "team": "Leicester City",
     "league": "FA Cup",
-    "position": "Delantero",
+    "position": "Mediocampista",
     "nationality": "England"
   },
   {
-    "id": "fd-310991",
-    "name": "Victor Kristiansen",
+    "id": "fd-277173",
+    "name": "Warren O'Hora",
     "team": "Leicester City",
     "league": "FA Cup",
     "position": "Defensor",
-    "nationality": "Denmark"
+    "nationality": "Republic of Ireland"
   },
   {
-    "id": "fd-326255",
-    "name": "Wanya Marcal-Madivadua",
+    "id": "fd-181516",
+    "name": "Wes Burns",
     "team": "Leicester City",
     "league": "FA Cup",
     "position": "Delantero",
-    "nationality": "Portugal"
+    "nationality": "Wales"
+  },
+  {
+    "id": "fd-273839",
+    "name": "Will Alves",
+    "team": "Leicester City",
+    "league": "FA Cup",
+    "position": "Mediocampista",
+    "nationality": "England"
+  },
+  {
+    "id": "fd-3142463",
+    "name": "William James Lawrence",
+    "team": "Leicester City",
+    "league": "FA Cup",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
+    "id": "fd-246943",
+    "name": "William Smallbone",
+    "team": "Leicester City",
+    "league": "FA Cup",
+    "position": "Mediocampista",
+    "nationality": "Republic of Ireland"
+  },
+  {
+    "id": "fd-290581",
+    "name": "Woyo Coulibaly",
+    "team": "Leicester City",
+    "league": "FA Cup",
+    "position": "Defensor",
+    "nationality": "Mali"
   },
   {
     "id": "fd-308246",
@@ -29204,7 +30148,7 @@
     "name": "Moussa Diarra",
     "team": "Lens",
     "league": "Champions League",
-    "position": "Defensor",
+    "position": "Delantero",
     "nationality": "Mali"
   },
   {
@@ -29413,7 +30357,7 @@
     "team": "Levante",
     "league": "LaLiga",
     "position": "Defensor",
-    "nationality": "Spain"
+    "nationality": "Argentina"
   },
   {
     "id": "fd-3129042",
@@ -29501,7 +30445,7 @@
     "team": "Levante",
     "league": "LaLiga",
     "position": "Delantero",
-    "nationality": "Argentina"
+    "nationality": "Uruguay"
   },
   {
     "id": "fd-203680",
@@ -29509,7 +30453,7 @@
     "team": "Levante",
     "league": "LaLiga",
     "position": "Defensor",
-    "nationality": "Spain"
+    "nationality": "Venezuela"
   },
   {
     "id": "fd-3102194",
@@ -29561,7 +30505,7 @@
   },
   {
     "id": "fd-286180",
-    "name": "Armstrong Okoflex",
+    "name": "Armstrong Oko-Flex",
     "team": "Levski Sofia",
     "league": "Europa League",
     "position": "Delantero",
@@ -29864,6 +30808,14 @@
     "nationality": "Switzerland"
   },
   {
+    "id": "fd-417256",
+    "name": "Matah Yondjio",
+    "team": "Lille",
+    "league": "Champions League",
+    "position": "Delantero",
+    "nationality": "Cameroon"
+  },
+  {
     "id": "fd-304011",
     "name": "Maurits Kjaergaard",
     "team": "Lille",
@@ -29952,12 +30904,28 @@
     "nationality": "France"
   },
   {
+    "id": "fd-408358",
+    "name": "Thomas Sajous",
+    "team": "Lille",
+    "league": "Champions League",
+    "position": "Arquero",
+    "nationality": "France"
+  },
+  {
     "id": "fd-346844",
     "name": "Tiago Santos",
     "team": "Lille",
     "league": "Champions League",
     "position": "Defensor",
     "nationality": "Portugal"
+  },
+  {
+    "id": "fd-415421",
+    "name": "Zadig Lanssade",
+    "team": "Lille",
+    "league": "Champions League",
+    "position": "Arquero",
+    "nationality": "France"
   },
   {
     "id": "fd-3138999",
@@ -30062,6 +31030,14 @@
     "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "Norway"
+  },
+  {
+    "id": "fd-3144071",
+    "name": "Julius Rogne-Bakke",
+    "team": "Lillestrøm",
+    "league": "Europa League",
+    "position": "Arquero",
+    "nationality": ""
   },
   {
     "id": "fd-236589",
@@ -30285,14 +31261,6 @@
     "team": "Lincoln Red Imps",
     "league": "Conference League",
     "position": "Mediocampista",
-    "nationality": "Gibraltar"
-  },
-  {
-    "id": "fd-382114",
-    "name": "Jay Coombes",
-    "team": "Lincoln Red Imps",
-    "league": "Conference League",
-    "position": "Defensor",
     "nationality": "Gibraltar"
   },
   {
@@ -30552,6 +31520,14 @@
     "nationality": "England"
   },
   {
+    "id": "fd-395890",
+    "name": "Joshua Lambie",
+    "team": "Liverpool",
+    "league": "Premier League",
+    "position": "Delantero",
+    "nationality": "England"
+  },
+  {
     "id": "fd-226177",
     "name": "Kostas Tsimikas",
     "team": "Liverpool",
@@ -30576,6 +31552,14 @@
     "nationality": "England"
   },
   {
+    "id": "fd-380624",
+    "name": "Michael Laffey",
+    "team": "Liverpool",
+    "league": "Premier League",
+    "position": "Mediocampista",
+    "nationality": "England"
+  },
+  {
     "id": "fd-323110",
     "name": "Milos Kerkez",
     "team": "Liverpool",
@@ -30593,7 +31577,7 @@
   },
   {
     "id": "fd-270821",
-    "name": "Ronald Araújo",
+    "name": "Ronald Araujo",
     "team": "Liverpool",
     "league": "Premier League",
     "position": "Defensor",
@@ -30646,6 +31630,14 @@
     "league": "Premier League",
     "position": "Mediocampista",
     "nationality": "Japan"
+  },
+  {
+    "id": "fd-379855",
+    "name": "Wellity Lucky",
+    "team": "Liverpool",
+    "league": "Premier League",
+    "position": "Defensor",
+    "nationality": "Spain"
   },
   {
     "id": "fd-315387",
@@ -31044,7 +32036,7 @@
     "name": "Philippe Schultz",
     "team": "Lüneburger SK Hansa",
     "league": "DFB-Pokal",
-    "position": "Delantero",
+    "position": "Mediocampista",
     "nationality": ""
   },
   {
@@ -31158,14 +32150,6 @@
     "league": "Bundesliga",
     "position": "Defensor",
     "nationality": "Peru"
-  },
-  {
-    "id": "fd-271701",
-    "name": "Hong Hyun-Seok",
-    "team": "Mainz",
-    "league": "Bundesliga",
-    "position": "Mediocampista",
-    "nationality": "South Korea"
   },
   {
     "id": "fd-375371",
@@ -31532,7 +32516,7 @@
     "name": "Moussa Diarra",
     "team": "Málaga",
     "league": "LaLiga",
-    "position": "Defensor",
+    "position": "Delantero",
     "nationality": "Mali"
   },
   {
@@ -31576,210 +32560,250 @@
     "nationality": "Spain"
   },
   {
-    "id": "espn_155935",
+    "id": "fd-155935",
     "name": "Abdón Prats",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_381633",
+    "id": "fd-381633",
     "name": "Aboubaka Soumahoro",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "France"
   },
   {
-    "id": "espn_257211",
+    "id": "fd-257211",
     "name": "Adam Buksa",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Poland"
   },
   {
-    "id": "espn_381682",
+    "id": "fd-381682",
     "name": "Adrián Liso",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_172998",
-    "name": "Alberto Moreno",
+    "id": "fd-383176",
+    "name": "Aimar Peña",
     "team": "Mallorca",
-    "league": "",
-    "position": "Mediocampista",
+    "league": "Copa del Rey",
+    "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_119310",
+    "id": "fd-119310",
     "name": "Álex Sala",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_222333",
+    "id": "fd-222333",
     "name": "Antonio Raíllo",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_279511",
+    "id": "fd-279511",
     "name": "Antonio Sánchez",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_368332",
+    "id": "fd-368332",
     "name": "Antoniu Roca",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_291437",
+    "id": "fd-291437",
     "name": "Arnau Puigmal",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_371688",
-    "name": "David López",
+    "id": "fd-290043",
+    "name": "Arnau Tenas",
     "team": "Mallorca",
-    "league": "",
-    "position": "Defensor",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_331787",
-    "name": "Fuentes",
-    "team": "Mallorca",
-    "league": "",
-    "position": "Delantero",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_32501",
-    "name": "Iván Cuéllar",
-    "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_390026",
-    "name": "Jan Salas",
+    "id": "fd-302590",
+    "name": "Daniel Luna",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
+    "nationality": "Colombia"
+  },
+  {
+    "id": "fd-371688",
+    "name": "David López",
+    "team": "Mallorca",
+    "league": "Copa del Rey",
+    "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_415866",
-    "name": "Jandro García",
+    "id": "fd-331787",
+    "name": "Fuentes",
     "team": "Mallorca",
-    "league": "",
-    "position": "Mediocampista",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_354218",
-    "name": "Josep Cerdà",
-    "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_361266",
+    "id": "fd-388286",
+    "name": "Guille Fernández",
+    "team": "Mallorca",
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-32501",
+    "name": "Iván Cuéllar",
+    "team": "Mallorca",
+    "league": "Copa del Rey",
+    "position": "Arquero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-390026",
+    "name": "Jan Salas",
+    "team": "Mallorca",
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-415866",
+    "name": "Jandro García",
+    "team": "Mallorca",
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-311996",
+    "name": "John Donald",
+    "team": "Mallorca",
+    "league": "Copa del Rey",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-354218",
+    "name": "Josep Cerdà",
+    "team": "Mallorca",
+    "league": "Copa del Rey",
+    "position": "Delantero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-361266",
     "name": "Justin-Noel Kalumba",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "France"
   },
   {
-    "id": "espn_296406",
+    "id": "fd-296406",
     "name": "Lucas Bergstrom",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Finland"
   },
   {
-    "id": "espn_190569",
+    "id": "fd-190569",
     "name": "Luis Orejuela",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_268753",
+    "id": "fd-268753",
     "name": "Manu Morlanes",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_193397",
+    "id": "fd-193397",
     "name": "Martin Valjent",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Slovakia"
   },
   {
-    "id": "espn_265992",
-    "name": "Mateu Morey",
-    "team": "Mallorca",
-    "league": "",
-    "position": "Defensor",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_422183",
+    "id": "fd-422183",
     "name": "Miguel Calatayud",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_165519",
-    "name": "Sergi Darder",
+    "id": "fd-206110",
+    "name": "Pablo Torre",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_232275",
+    "id": "fd-165519",
+    "name": "Sergi Darder",
+    "team": "Mallorca",
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-333922",
+    "name": "Toni Dols",
+    "team": "Mallorca",
+    "league": "Copa del Rey",
+    "position": "Arquero",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-232275",
     "name": "Toni Lato",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_297035",
+    "id": "fd-297035",
     "name": "Zito Luvumbo",
     "team": "Mallorca",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Angola"
   },
@@ -31814,6 +32838,14 @@
     "league": "Premier League",
     "position": "Mediocampista",
     "nationality": "Morocco"
+  },
+  {
+    "id": "fd-3129530",
+    "name": "Dexter Oliver",
+    "team": "Manchester City",
+    "league": "Premier League",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-238472",
@@ -32056,6 +33088,14 @@
     "nationality": "Cameroon"
   },
   {
+    "id": "fd-381055",
+    "name": "Daniel Armer",
+    "team": "Manchester United",
+    "league": "Premier League",
+    "position": "Defensor",
+    "nationality": "Scotland"
+  },
+  {
     "id": "fd-325550",
     "name": "Dermot Mee",
     "team": "Manchester United",
@@ -32093,6 +33133,14 @@
     "team": "Manchester United",
     "league": "Premier League",
     "position": "Mediocampista",
+    "nationality": "England"
+  },
+  {
+    "id": "fd-386199",
+    "name": "Jaydan Kamason",
+    "team": "Manchester United",
+    "league": "Premier League",
+    "position": "Defensor",
     "nationality": "England"
   },
   {
@@ -32230,6 +33278,14 @@
     "league": "Premier League",
     "position": "Mediocampista",
     "nationality": "Scotland"
+  },
+  {
+    "id": "fd-397881",
+    "name": "Tynan Thompson",
+    "team": "Manchester United",
+    "league": "Premier League",
+    "position": "Delantero",
+    "nationality": "England"
   },
   {
     "id": "fd-193297",
@@ -32584,6 +33640,14 @@
     "nationality": "South Korea"
   },
   {
+    "id": "fd-3145645",
+    "name": "Joseph Avwerosuoghene Okuaghare",
+    "team": "Midtjylland",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-418783",
     "name": "Julius Emefile",
     "team": "Midtjylland",
@@ -32692,8 +33756,8 @@
     "name": "Pedro Bravo",
     "team": "Midtjylland",
     "league": "Conference League",
-    "position": "Mediocampista",
-    "nationality": "Colombia"
+    "position": "Arquero",
+    "nationality": "Argentina"
   },
   {
     "id": "fd-192660",
@@ -32774,6 +33838,14 @@
     "league": "Conference League",
     "position": "Defensor",
     "nationality": "Sweden"
+  },
+  {
+    "id": "fd-5326303",
+    "name": "Edon Oremalm Murseli",
+    "team": "Mjällby",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": ""
   },
   {
     "id": "fd-306519",
@@ -32984,6 +34056,14 @@
     "nationality": "Switzerland"
   },
   {
+    "id": "fd-251776",
+    "name": "Alessandro Bianco",
+    "team": "Modena",
+    "league": "Copa Italia",
+    "position": "Mediocampista",
+    "nationality": "Italy"
+  },
+  {
     "id": "fd-356268",
     "name": "Alessandro Sersanti",
     "team": "Modena",
@@ -33006,6 +34086,14 @@
     "league": "Copa Italia",
     "position": "Arquero",
     "nationality": "Italy"
+  },
+  {
+    "id": "fd-422509",
+    "name": "Antonio Cannoni",
+    "team": "Modena",
+    "league": "Copa Italia",
+    "position": "Defensor",
+    "nationality": "Chile"
   },
   {
     "id": "fd-357340",
@@ -33276,8 +34364,8 @@
     "name": "Demba Thiam",
     "team": "Monza",
     "league": "Serie A",
-    "position": "Arquero",
-    "nationality": "Senegal"
+    "position": "Defensor",
+    "nationality": "France"
   },
   {
     "id": "fd-362776",
@@ -33832,6 +34920,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-3145436",
+    "name": "Milton Agustín Pereyra",
+    "team": "Napoli",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-198082",
     "name": "Nikita Contini",
     "team": "Napoli",
@@ -34064,6 +35160,14 @@
     "nationality": "Netherlands"
   },
   {
+    "id": "fd-267573",
+    "name": "Mitchel Bakker",
+    "team": "NEC",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Netherlands"
+  },
+  {
     "id": "fd-309090",
     "name": "Nikolas Polster",
     "team": "NEC",
@@ -34134,14 +35238,6 @@
     "league": "Europa League",
     "position": "Defensor",
     "nationality": "Netherlands"
-  },
-  {
-    "id": "fd-353304",
-    "name": "Aidan Harris",
-    "team": "Newcastle",
-    "league": "Premier League",
-    "position": "Arquero",
-    "nationality": "England"
   },
   {
     "id": "fd-396630",
@@ -34408,14 +35504,6 @@
     "nationality": "Denmark"
   },
   {
-    "id": "fd-381561",
-    "name": "Araphat Mohammed",
-    "team": "Nordsjælland",
-    "league": "Conference League",
-    "position": "Mediocampista",
-    "nationality": "Ghana"
-  },
-  {
     "id": "fd-3107524",
     "name": "Carl Ernest Hope Kristoffersen",
     "team": "Nordsjælland",
@@ -34524,7 +35612,7 @@
     "name": "Mouekinga Kone",
     "team": "Nordsjælland",
     "league": "Conference League",
-    "position": "Mediocampista",
+    "position": "Delantero",
     "nationality": ""
   },
   {
@@ -34582,14 +35670,6 @@
     "league": "Conference League",
     "position": "Defensor",
     "nationality": "Norway"
-  },
-  {
-    "id": "fd-335709",
-    "name": "Souleymane Alio",
-    "team": "Nordsjælland",
-    "league": "Conference League",
-    "position": "Delantero",
-    "nationality": "Burkina Faso"
   },
   {
     "id": "fd-378549",
@@ -35168,6 +36248,14 @@
     "nationality": "Tunisia"
   },
   {
+    "id": "fd-5325768",
+    "name": "Antoine Dominique Henri Valero",
+    "team": "Olympique de Marseille",
+    "league": "Europa League",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-324960",
     "name": "Bamo Meïté",
     "team": "Olympique de Marseille",
@@ -35230,6 +36318,14 @@
     "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "Algeria"
+  },
+  {
+    "id": "fd-404675",
+    "name": "Ibrahim Gomis",
+    "team": "Olympique de Marseille",
+    "league": "Europa League",
+    "position": "Arquero",
+    "nationality": "Morocco"
   },
   {
     "id": "fd-289114",
@@ -35382,6 +36478,14 @@
     "league": "Europa League",
     "position": "Delantero",
     "nationality": "France"
+  },
+  {
+    "id": "fd-5325687",
+    "name": "Angel Daniel Garcia",
+    "team": "Olympique Lyon",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": ""
   },
   {
     "id": "fd-214649",
@@ -35752,6 +36856,14 @@
     "nationality": "Spain"
   },
   {
+    "id": "fd-3128992",
+    "name": "Mikel Bermejo Sola",
+    "team": "Osasuna",
+    "league": "LaLiga",
+    "position": "Arquero",
+    "nationality": ""
+  },
+  {
     "id": "fd-169089",
     "name": "Moi Gómez",
     "team": "Osasuna",
@@ -35960,14 +37072,6 @@
     "nationality": "Italy"
   },
   {
-    "id": "fd-241995",
-    "name": "Giulio Favale",
-    "team": "Padova",
-    "league": "Copa Italia",
-    "position": "Defensor",
-    "nationality": "Italy"
-  },
-  {
     "id": "fd-207819",
     "name": "Kevin Lasagna",
     "team": "Padova",
@@ -36144,14 +37248,6 @@
     "nationality": "Brazil"
   },
   {
-    "id": "fd-192734",
-    "name": "Dani García",
-    "team": "PAE Olympiakos SFP",
-    "league": "Europa League",
-    "position": "Mediocampista",
-    "nationality": "Spain"
-  },
-  {
     "id": "fd-236301",
     "name": "David Carmo",
     "team": "PAE Olympiakos SFP",
@@ -36198,6 +37294,14 @@
     "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "Portugal"
+  },
+  {
+    "id": "fd-3126810",
+    "name": "Iason Georgakopoulos",
+    "team": "PAE Olympiakos SFP",
+    "league": "Europa League",
+    "position": "Arquero",
+    "nationality": ""
   },
   {
     "id": "fd-333232",
@@ -36280,11 +37384,27 @@
     "nationality": "Armenia"
   },
   {
+    "id": "fd-422718",
+    "name": "Nikloaos Avramulis",
+    "team": "PAE Olympiakos SFP",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Greece"
+  },
+  {
     "id": "fd-233973",
     "name": "Panagiotis Retsos",
     "team": "PAE Olympiakos SFP",
     "league": "Europa League",
     "position": "Defensor",
+    "nationality": "Greece"
+  },
+  {
+    "id": "fd-387684",
+    "name": "Paschalis Toufakis",
+    "team": "PAE Olympiakos SFP",
+    "league": "Europa League",
+    "position": "Mediocampista",
     "nationality": "Greece"
   },
   {
@@ -36294,14 +37414,6 @@
     "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "Switzerland"
-  },
-  {
-    "id": "fd-136688",
-    "name": "Rémy Cabella",
-    "team": "PAE Olympiakos SFP",
-    "league": "Europa League",
-    "position": "Mediocampista",
-    "nationality": "France"
   },
   {
     "id": "fd-219543",
@@ -36489,7 +37601,7 @@
   },
   {
     "id": "fd-389772",
-    "name": "Jónatas Noro",
+    "name": "Jonatás Noro",
     "team": "Pafos FC",
     "league": "Conference League",
     "position": "Defensor",
@@ -36652,7 +37764,7 @@
     "name": "Antonio Palumbo",
     "team": "Palermo",
     "league": "Copa Italia",
-    "position": "Delantero",
+    "position": "Mediocampista",
     "nationality": "Italy"
   },
   {
@@ -37408,6 +38520,14 @@
     "nationality": "France"
   },
   {
+    "id": "fd-417391",
+    "name": "Vasilis Nikolakoulis",
+    "team": "PAOK",
+    "league": "Super League Greece",
+    "position": "Arquero",
+    "nationality": "Greece"
+  },
+  {
     "id": "fd-37791",
     "name": "Anderson",
     "team": "Paphos FC",
@@ -37494,6 +38614,14 @@
     "league": "UEFA Champions League",
     "position": "Mediocampista",
     "nationality": "Brazil"
+  },
+  {
+    "id": "fd-389772",
+    "name": "Jónatas Noro",
+    "team": "Paphos FC",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": "Portugal"
   },
   {
     "id": "fd-269209",
@@ -37600,12 +38728,28 @@
     "nationality": "Morocco"
   },
   {
+    "id": "fd-3143886",
+    "name": "Adam Mouak",
+    "team": "Paris Saint-Germain",
+    "league": "Champions League",
+    "position": "Arquero",
+    "nationality": ""
+  },
+  {
     "id": "fd-387725",
     "name": "Alessandro Longoni",
     "team": "Paris Saint-Germain",
     "league": "Champions League",
     "position": "Arquero",
     "nationality": "Italy"
+  },
+  {
+    "id": "fd-403981",
+    "name": "David Boly",
+    "team": "Paris Saint-Germain",
+    "league": "Champions League",
+    "position": "Defensor",
+    "nationality": "France"
   },
   {
     "id": "fd-336388",
@@ -37840,6 +38984,14 @@
     "nationality": "Brazil"
   },
   {
+    "id": "fd-422950",
+    "name": "Djibril Diallo",
+    "team": "Parma",
+    "league": "Serie A",
+    "position": "Defensor",
+    "nationality": "Italy"
+  },
+  {
     "id": "fd-417783",
     "name": "Dominik Drobnic",
     "team": "Parma",
@@ -37980,8 +39132,8 @@
     "name": "Ousmane Diallo",
     "team": "Parma",
     "league": "Serie A",
-    "position": "Delantero",
-    "nationality": "Spain"
+    "position": "Defensor",
+    "nationality": "Mali"
   },
   {
     "id": "fd-253569",
@@ -38440,6 +39592,14 @@
     "nationality": "Portugal"
   },
   {
+    "id": "fd-403762",
+    "name": "Mateus Mide",
+    "team": "Porto",
+    "league": "Champions League",
+    "position": "Delantero",
+    "nationality": "Portugal"
+  },
+  {
     "id": "fd-274289",
     "name": "Moura",
     "team": "Porto",
@@ -38614,6 +39774,14 @@
     "league": "Copa Italia",
     "position": "Arquero",
     "nationality": "Italy"
+  },
+  {
+    "id": "fd-5323803",
+    "name": "Francesco Sicolo",
+    "team": "Potenza",
+    "league": "Copa Italia",
+    "position": "Arquero",
+    "nationality": ""
   },
   {
     "id": "fd-3099496",
@@ -39512,6 +40680,22 @@
     "nationality": "Spain"
   },
   {
+    "id": "fd-3125573",
+    "name": "Alejandro Laso Molino",
+    "team": "Racing Santander",
+    "league": "LaLiga",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-3130644",
+    "name": "Álvaro Fernández Fernández",
+    "team": "Racing Santander",
+    "league": "LaLiga",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
     "id": "fd-300471",
     "name": "Alvaro Mantilla",
     "team": "Racing Santander",
@@ -39552,14 +40736,6 @@
     "nationality": "Spain"
   },
   {
-    "id": "fd-421199",
-    "name": "Carlos Sánchez",
-    "team": "Racing Santander",
-    "league": "LaLiga",
-    "position": "Defensor",
-    "nationality": "Spain"
-  },
-  {
     "id": "fd-367499",
     "name": "Facundo González",
     "team": "Racing Santander",
@@ -39568,12 +40744,28 @@
     "nationality": "Uruguay"
   },
   {
+    "id": "fd-3125566",
+    "name": "Gabriel Jiménez Carpintero",
+    "team": "Racing Santander",
+    "league": "LaLiga",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-289439",
     "name": "Giorgi Guliashvili",
     "team": "Racing Santander",
     "league": "LaLiga",
     "position": "Delantero",
     "nationality": "Georgia"
+  },
+  {
+    "id": "fd-112492",
+    "name": "Héctor Mejía",
+    "team": "Racing Santander",
+    "league": "LaLiga",
+    "position": "Defensor",
+    "nationality": "Spain"
   },
   {
     "id": "fd-3100788",
@@ -39656,6 +40848,14 @@
     "nationality": "Spain"
   },
   {
+    "id": "fd-362829",
+    "name": "Junior Bita",
+    "team": "Racing Santander",
+    "league": "LaLiga",
+    "position": "Mediocampista",
+    "nationality": "Spain"
+  },
+  {
     "id": "fd-394309",
     "name": "Laro Gómez",
     "team": "Racing Santander",
@@ -39677,6 +40877,14 @@
     "team": "Racing Santander",
     "league": "LaLiga",
     "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
+    "id": "fd-397596",
+    "name": "Mario Solórzano",
+    "team": "Racing Santander",
+    "league": "LaLiga",
+    "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
@@ -39750,14 +40958,6 @@
     "league": "Copa Italia",
     "position": "Defensor",
     "nationality": ""
-  },
-  {
-    "id": "fd-251776",
-    "name": "Alessandro Bianconi",
-    "team": "Ravenna",
-    "league": "Copa Italia",
-    "position": "Defensor",
-    "nationality": "Italy"
   },
   {
     "id": "fd-139186",
@@ -39934,14 +41134,6 @@
     "league": "Copa Italia",
     "position": "Mediocampista",
     "nationality": ""
-  },
-  {
-    "id": "fd-20128",
-    "name": "Ronaldinho",
-    "team": "Ravenna",
-    "league": "Copa Italia",
-    "position": "Mediocampista",
-    "nationality": "Brazil"
   },
   {
     "id": "fd-309204",
@@ -40848,6 +42040,14 @@
     "nationality": "France"
   },
   {
+    "id": "fd-405490",
+    "name": "Illia Voloshyn",
+    "team": "Real Madrid",
+    "league": "LaLiga",
+    "position": "Arquero",
+    "nationality": "Ukraine"
+  },
+  {
     "id": "fd-84349",
     "name": "Javier Navarro",
     "team": "Real Madrid",
@@ -41172,7 +42372,7 @@
     "name": "Mamadou Sarr",
     "team": "Real Sociedad",
     "league": "LaLiga",
-    "position": "Defensor",
+    "position": "Delantero",
     "nationality": "Senegal"
   },
   {
@@ -41232,290 +42432,282 @@
     "nationality": "Venezuela"
   },
   {
-    "id": "espn_371617",
+    "id": "fd-371617",
     "name": "Adrián Arnun",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_409248",
+    "id": "fd-409248",
     "name": "Alejandro Galdeano",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_332009",
+    "id": "fd-332009",
     "name": "Álex Balboa",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Equatorial Guinea"
   },
   {
-    "id": "espn_347431",
+    "id": "fd-347431",
     "name": "Álvaro Aceves",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_422017",
+    "id": "fd-422017",
     "name": "Brain Obosso",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Nigeria"
   },
   {
-    "id": "espn_168363",
+    "id": "fd-168363",
     "name": "Carlos Clerc",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_238918",
-    "name": "Clement Michelin",
+    "id": "fd-388809",
+    "name": "Daniel Martín",
     "team": "Real Valladolid",
-    "league": "",
-    "position": "Defensor",
-    "nationality": "France"
+    "league": "Copa del Rey",
+    "position": "Arquero",
+    "nationality": "Spain"
   },
   {
-    "id": "espn_353854",
+    "id": "fd-353854",
     "name": "Daniel Pérez",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_347433",
+    "id": "fd-347433",
     "name": "David Torres",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_340464",
+    "id": "fd-340464",
     "name": "Guillermo Bueno",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_272874",
+    "id": "fd-272874",
     "name": "Homam Ahmed",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Qatar"
   },
   {
-    "id": "espn_3125552",
+    "id": "fd-3125552",
     "name": "Hugo Calvo Vadillo",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": ""
   },
   {
-    "id": "espn_409246",
+    "id": "fd-409246",
     "name": "Hugo Wauthier",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_206473",
+    "id": "fd-206473",
     "name": "Iván Alejo",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_367677",
+    "id": "fd-367677",
     "name": "Iván Garriel",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_335235",
+    "id": "fd-335235",
     "name": "Juan Latasa",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_276450",
+    "id": "fd-276450",
     "name": "Julien Ponceau",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "France"
   },
   {
-    "id": "espn_271345",
+    "id": "fd-271345",
     "name": "Kaj de Rooij",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Netherlands"
   },
   {
-    "id": "espn_384167",
-    "name": "Koke",
-    "team": "Real Valladolid",
-    "league": "",
-    "position": "Defensor",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_361401",
+    "id": "fd-361401",
     "name": "Lucas Lavagnino",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Arquero",
     "nationality": "Argentina"
   },
   {
-    "id": "espn_331411",
+    "id": "fd-331411",
     "name": "Luis Rodriguez",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_264168",
-    "name": "Marcos André",
-    "team": "Real Valladolid",
-    "league": "",
-    "position": "Delantero",
-    "nationality": "Brazil"
-  },
-  {
-    "id": "espn_403591",
+    "id": "fd-403591",
     "name": "Marcos Parriego",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_313340",
+    "id": "fd-313340",
     "name": "Mathis Lachuer",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "France"
   },
   {
-    "id": "espn_273291",
+    "id": "fd-273291",
     "name": "Miguel Rubio",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_324949",
+    "id": "fd-324949",
     "name": "Pablo Tomeo",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_332089",
+    "id": "fd-332089",
     "name": "Ramón Martínez",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_364090",
+    "id": "fd-364090",
     "name": "Robin Van Duiven",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Netherlands"
   },
   {
-    "id": "espn_276578",
+    "id": "fd-236070",
+    "name": "Ryotaro Ito",
+    "team": "Real Valladolid",
+    "league": "Copa del Rey",
+    "position": "Mediocampista",
+    "nationality": "Japan"
+  },
+  {
+    "id": "fd-276578",
     "name": "Stanko Juric",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Croatia"
   },
   {
-    "id": "espn_318125",
+    "id": "fd-324954",
+    "name": "Tai Abed",
+    "team": "Real Valladolid",
+    "league": "Copa del Rey",
+    "position": "Delantero",
+    "nationality": "Israel"
+  },
+  {
+    "id": "fd-318125",
     "name": "Thiago Ojeda",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Argentina"
   },
   {
-    "id": "espn_331988",
+    "id": "fd-3111397",
+    "name": "Tomás Fernández Sabatini",
+    "team": "Real Valladolid",
+    "league": "Copa del Rey",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
+    "id": "fd-331988",
     "name": "Trilli",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Defensor",
     "nationality": "Spain"
   },
   {
-    "id": "espn_293362",
-    "name": "Vegard Østraat Erlien",
-    "team": "Real Valladolid",
-    "league": "",
-    "position": "Delantero",
-    "nationality": "Norway"
-  },
-  {
-    "id": "espn_363540",
+    "id": "fd-363540",
     "name": "Victor Barberà",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
   {
-    "id": "espn_367679",
+    "id": "fd-367679",
     "name": "Víctor Fernández",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Mediocampista",
     "nationality": "Spain"
   },
   {
-    "id": "espn_300361",
-    "name": "Victor Meseguer",
-    "team": "Real Valladolid",
-    "league": "",
-    "position": "Mediocampista",
-    "nationality": "Spain"
-  },
-  {
-    "id": "espn_353477",
+    "id": "fd-353477",
     "name": "Yeray Cabanzón",
     "team": "Real Valladolid",
-    "league": "",
+    "league": "Copa del Rey",
     "position": "Delantero",
     "nationality": "Spain"
   },
@@ -41524,8 +42716,8 @@
     "name": "Aboubacar Camara",
     "team": "Red Bull Salzburg",
     "league": "Europa League",
-    "position": "Defensor",
-    "nationality": "Niger"
+    "position": "Mediocampista",
+    "nationality": "Burkina Faso"
   },
   {
     "id": "fd-386242",
@@ -41680,6 +42872,14 @@
     "nationality": "Togo"
   },
   {
+    "id": "fd-268019",
+    "name": "Lassina Traoré",
+    "team": "Red Bull Salzburg",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Burkina Faso"
+  },
+  {
     "id": "fd-325526",
     "name": "Leandro Morgalla",
     "team": "Red Bull Salzburg",
@@ -41792,6 +42992,14 @@
     "nationality": "Serbia"
   },
   {
+    "id": "fd-3145434",
+    "name": "Andrej Sibinovic",
+    "team": "Red Star Belgrade",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
     "id": "fd-313889",
     "name": "Bamba Dieng",
     "team": "Red Star Belgrade",
@@ -41854,14 +43062,6 @@
     "league": "Conference League",
     "position": "Delantero",
     "nationality": "Cyprus"
-  },
-  {
-    "id": "fd-409461",
-    "name": "Luka Zaric",
-    "team": "Red Star Belgrade",
-    "league": "Conference League",
-    "position": "Mediocampista",
-    "nationality": "Serbia"
   },
   {
     "id": "fd-362298",
@@ -41958,14 +43158,6 @@
     "league": "Conference League",
     "position": "Mediocampista",
     "nationality": "Bosnia and Herzegovina"
-  },
-  {
-    "id": "fd-203707",
-    "name": "Rodrigão",
-    "team": "Red Star Belgrade",
-    "league": "Conference League",
-    "position": "Defensor",
-    "nationality": "Brazil"
   },
   {
     "id": "fd-401106",
@@ -42276,7 +43468,7 @@
     "name": "Andrés Salazar",
     "team": "Riga",
     "league": "Conference League",
-    "position": "Defensor",
+    "position": "Arquero",
     "nationality": "Colombia"
   },
   {
@@ -42528,14 +43720,6 @@
     "nationality": "Latvia"
   },
   {
-    "id": "fd-394250",
-    "name": "Rodrigo Mendes",
-    "team": "Riga",
-    "league": "Conference League",
-    "position": "Mediocampista",
-    "nationality": "Portugal"
-  },
-  {
     "id": "fd-307172",
     "name": "Salah-Eddine Oulad",
     "team": "Riga",
@@ -42564,6 +43748,14 @@
     "name": "Valters Lūsis",
     "team": "Riga",
     "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
+    "id": "fd-3098218",
+    "name": "Alessandro Di Nunzio",
+    "team": "Roma",
+    "league": "Serie A",
     "position": "Mediocampista",
     "nationality": ""
   },
@@ -42664,12 +43856,28 @@
     "nationality": "Argentina"
   },
   {
+    "id": "fd-409634",
+    "name": "Lorenzo Paratici",
+    "team": "Roma",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": "Italy"
+  },
+  {
     "id": "fd-204320",
     "name": "Lorenzo Pellegrini",
     "team": "Roma",
     "league": "Serie A",
     "position": "Mediocampista",
     "nationality": "Italy"
+  },
+  {
+    "id": "fd-377387",
+    "name": "Mandjou Camara",
+    "team": "Roma",
+    "league": "Serie A",
+    "position": "Delantero",
+    "nationality": "Guinea"
   },
   {
     "id": "fd-285226",
@@ -42808,6 +44016,14 @@
     "nationality": "Netherlands"
   },
   {
+    "id": "fd-422146",
+    "name": "Fadih Vasic",
+    "team": "Rot-Weiss Essen",
+    "league": "DFB-Pokal",
+    "position": "Delantero",
+    "nationality": "Germany"
+  },
+  {
     "id": "fd-332324",
     "name": "Felix Bernd Wienand",
     "team": "Rot-Weiss Essen",
@@ -42936,6 +44152,14 @@
     "nationality": "Croatia"
   },
   {
+    "id": "fd-5323773",
+    "name": "Rami Malaeb",
+    "team": "Rot-Weiss Essen",
+    "league": "DFB-Pokal",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-417629",
     "name": "Romero Gerres",
     "team": "Rot-Weiss Essen",
@@ -43006,6 +44230,14 @@
     "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "Romania"
+  },
+  {
+    "id": "fd-366827",
+    "name": "Dennis Egel",
+    "team": "Royale Union Saint-Gilloise",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": "Germany"
   },
   {
     "id": "fd-363067",
@@ -43521,7 +44753,7 @@
   },
   {
     "id": "fd-291791",
-    "name": "Joy Lance Mickels",
+    "name": "Joy-Lance Mickels",
     "team": "SABAH FK",
     "league": "Champions League",
     "position": "Delantero",
@@ -43896,6 +45128,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-5326669",
+    "name": "Gerald Donegà",
+    "team": "Sampdoria",
+    "league": "Copa Italia",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-167727",
     "name": "Jordan Ferri",
     "team": "Sampdoria",
@@ -43928,11 +45168,19 @@
     "nationality": ""
   },
   {
+    "id": "fd-3114185",
+    "name": "Leonardo Cosi",
+    "team": "Sampdoria",
+    "league": "Copa Italia",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-107568",
     "name": "Liam Henderson",
     "team": "Sampdoria",
     "league": "Copa Italia",
-    "position": "Mediocampista",
+    "position": "Delantero",
     "nationality": "Scotland"
   },
   {
@@ -44888,6 +46136,14 @@
     "nationality": "Germany"
   },
   {
+    "id": "fd-261062",
+    "name": "Dominik Martinovic",
+    "team": "SC Verl 1924",
+    "league": "DFB-Pokal",
+    "position": "Delantero",
+    "nationality": "Croatia"
+  },
+  {
     "id": "fd-3098292",
     "name": "Emmanuel Bamba",
     "team": "SC Verl 1924",
@@ -45088,6 +46344,14 @@
     "nationality": "Bosnia and Herzegovina"
   },
   {
+    "id": "fd-409974",
+    "name": "Edion Gashi",
+    "team": "Schalke 04",
+    "league": "Bundesliga",
+    "position": "Mediocampista",
+    "nationality": "Kosovo"
+  },
+  {
     "id": "fd-332429",
     "name": "Emil Höjlund",
     "team": "Schalke 04",
@@ -45126,6 +46390,14 @@
     "league": "Bundesliga",
     "position": "Mediocampista",
     "nationality": "Germany"
+  },
+  {
+    "id": "fd-3107094",
+    "name": "Jean-Paul N'Diaye",
+    "team": "Schalke 04",
+    "league": "Bundesliga",
+    "position": "Delantero",
+    "nationality": ""
   },
   {
     "id": "fd-408247",
@@ -45582,6 +46854,14 @@
     "league": "LaLiga",
     "position": "Delantero",
     "nationality": "Spain"
+  },
+  {
+    "id": "fd-5324162",
+    "name": "Jesús Cruz Morales",
+    "team": "Sevilla",
+    "league": "LaLiga",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-254320",
@@ -46060,7 +47340,7 @@
     "name": "Lassina Traoré",
     "team": "Shakhtar Donetsk",
     "league": "Champions League",
-    "position": "Delantero",
+    "position": "Defensor",
     "nationality": "Burkina Faso"
   },
   {
@@ -46177,7 +47457,7 @@
   },
   {
     "id": "fd-307928",
-    "name": "Vinicius Augusto",
+    "name": "Vinícius Tobias",
     "team": "Shakhtar Donetsk",
     "league": "Champions League",
     "position": "Defensor",
@@ -46408,6 +47688,14 @@
     "nationality": "Belgium"
   },
   {
+    "id": "fd-3101987",
+    "name": "Abel Cedergren",
+    "team": "SK Slavia Praha",
+    "league": "Champions League",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-414121",
     "name": "Adam Rajnoha",
     "team": "SK Slavia Praha",
@@ -46552,6 +47840,14 @@
     "nationality": "Czechia"
   },
   {
+    "id": "fd-3111595",
+    "name": "Matěj Kotrba",
+    "team": "SK Slavia Praha",
+    "league": "Champions League",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-249525",
     "name": "Michal Sadílek",
     "team": "SK Slavia Praha",
@@ -46629,6 +47925,14 @@
     "team": "SK Slavia Praha",
     "league": "Champions League",
     "position": "Mediocampista",
+    "nationality": "Czechia"
+  },
+  {
+    "id": "fd-403778",
+    "name": "Petr Potmesil",
+    "team": "SK Slavia Praha",
+    "league": "Champions League",
+    "position": "Delantero",
     "nationality": "Czechia"
   },
   {
@@ -46822,14 +48126,6 @@
     "league": "Champions League",
     "position": "Defensor",
     "nationality": "Czechia"
-  },
-  {
-    "id": "fd-291442",
-    "name": "Kelvin Ofori",
-    "team": "Slovan Bratislava",
-    "league": "Champions League",
-    "position": "Mediocampista",
-    "nationality": "Ghana"
   },
   {
     "id": "fd-238958",
@@ -47412,7 +48708,7 @@
     "name": "Magnus Andersen",
     "team": "Sparta Prague",
     "league": "Europa League",
-    "position": "Mediocampista",
+    "position": "Defensor",
     "nationality": "Denmark"
   },
   {
@@ -47648,6 +48944,14 @@
     "nationality": "Brazil"
   },
   {
+    "id": "fd-394429",
+    "name": "Lucas Taibo",
+    "team": "Sporting Clube de Portugal",
+    "league": "Champions League",
+    "position": "Defensor",
+    "nationality": "Spain"
+  },
+  {
     "id": "fd-361429",
     "name": "Luis Guilherme",
     "team": "Sporting Clube de Portugal",
@@ -47662,6 +48966,22 @@
     "league": "Champions League",
     "position": "Delantero",
     "nationality": "Colombia"
+  },
+  {
+    "id": "fd-309478",
+    "name": "Mateo Tanlongo",
+    "team": "Sporting Clube de Portugal",
+    "league": "Champions League",
+    "position": "Mediocampista",
+    "nationality": "Argentina"
+  },
+  {
+    "id": "fd-349812",
+    "name": "Mauro Couto",
+    "team": "Sporting Clube de Portugal",
+    "league": "Champions League",
+    "position": "Delantero",
+    "nationality": "Portugal"
   },
   {
     "id": "fd-287025",
@@ -47694,6 +49014,14 @@
     "league": "Champions League",
     "position": "Defensor",
     "nationality": "Portugal"
+  },
+  {
+    "id": "fd-3124013",
+    "name": "Paulo Yanick Moreno Vieira Sanches Cardoso",
+    "team": "Sporting Clube de Portugal",
+    "league": "Champions League",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-307930",
@@ -47741,6 +49069,14 @@
     "team": "Sporting Clube de Portugal",
     "league": "Champions League",
     "position": "Arquero",
+    "nationality": "Portugal"
+  },
+  {
+    "id": "fd-414124",
+    "name": "Salvador Blopa",
+    "team": "Sporting Clube de Portugal",
+    "league": "Champions League",
+    "position": "Defensor",
     "nationality": "Portugal"
   },
   {
@@ -48080,6 +49416,14 @@
     "nationality": "Morocco"
   },
   {
+    "id": "fd-3098373",
+    "name": "Jakob Bertram",
+    "team": "SSV Jeddeloh II",
+    "league": "DFB-Pokal",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-3116248",
     "name": "Jannek Brinkmann",
     "team": "SSV Jeddeloh II",
@@ -48265,10 +49609,10 @@
   },
   {
     "id": "fd-283952",
-    "name": "David Nemeth",
+    "name": "Dávid Németh",
     "team": "St. Pauli",
     "league": "DFB-Pokal",
-    "position": "Defensor",
+    "position": "Delantero",
     "nationality": "Austria"
   },
   {
@@ -48381,7 +49725,7 @@
     "team": "St. Pauli",
     "league": "DFB-Pokal",
     "position": "Mediocampista",
-    "nationality": "Norway"
+    "nationality": "Denmark"
   },
   {
     "id": "fd-409375",
@@ -48454,6 +49798,14 @@
     "league": "DFB-Pokal",
     "position": "Delantero",
     "nationality": "Germany"
+  },
+  {
+    "id": "fd-329479",
+    "name": "Adam Stejskal",
+    "team": "Sturm Graz",
+    "league": "Europa League",
+    "position": "Arquero",
+    "nationality": "Czechia"
   },
   {
     "id": "fd-274923",
@@ -48576,6 +49928,14 @@
     "nationality": ""
   },
   {
+    "id": "fd-3106899",
+    "name": "Jonas Petritsch",
+    "team": "Sturm Graz",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
     "id": "fd-354014",
     "name": "Joshua Quarshie",
     "team": "Sturm Graz",
@@ -48598,6 +49958,14 @@
     "league": "Europa League",
     "position": "Mediocampista",
     "nationality": "Austria"
+  },
+  {
+    "id": "fd-400271",
+    "name": "Kelechi Nnamdi",
+    "team": "Sturm Graz",
+    "league": "Europa League",
+    "position": "Defensor",
+    "nationality": ""
   },
   {
     "id": "fd-359714",
@@ -49056,6 +50424,14 @@
     "nationality": "Morocco"
   },
   {
+    "id": "fd-3145288",
+    "name": "Jannik Leitner",
+    "team": "Sudtirol",
+    "league": "Copa Italia",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-365226",
     "name": "Kenny Mixtur",
     "team": "Sudtirol",
@@ -49248,6 +50624,14 @@
     "nationality": "France"
   },
   {
+    "id": "fd-3111009",
+    "name": "Felix Scott",
+    "team": "Sunderland",
+    "league": "Premier League",
+    "position": "Delantero",
+    "nationality": ""
+  },
+  {
     "id": "fd-149981",
     "name": "Granit Xhaka",
     "team": "Sunderland",
@@ -49424,6 +50808,14 @@
     "nationality": "Northern Ireland"
   },
   {
+    "id": "fd-392107",
+    "name": "Trey Ogunsuyi",
+    "team": "Sunderland",
+    "league": "Premier League",
+    "position": "Delantero",
+    "nationality": "Belgium"
+  },
+  {
     "id": "fd-387460",
     "name": "Tymur Tutierov",
     "team": "Sunderland",
@@ -49518,14 +50910,6 @@
     "league": "Bundesliga",
     "position": "Defensor",
     "nationality": "Ghana"
-  },
-  {
-    "id": "fd-290512",
-    "name": "Jason Ceka",
-    "team": "SV 07 Elversberg",
-    "league": "Bundesliga",
-    "position": "Delantero",
-    "nationality": "Germany"
   },
   {
     "id": "fd-321061",
@@ -49688,6 +51072,14 @@
     "nationality": "Sri Lanka"
   },
   {
+    "id": "fd-409175",
+    "name": "David Zimmer",
+    "team": "SV Waldhof Mannheim",
+    "league": "DFB-Pokal",
+    "position": "Arquero",
+    "nationality": "Germany"
+  },
+  {
     "id": "fd-3098345",
     "name": "Denis Kryeziu",
     "team": "SV Waldhof Mannheim",
@@ -49830,6 +51222,14 @@
     "league": "DFB-Pokal",
     "position": "Mediocampista",
     "nationality": "Germany"
+  },
+  {
+    "id": "fd-3098331",
+    "name": "Milo Bauer",
+    "team": "SV Waldhof Mannheim",
+    "league": "DFB-Pokal",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-408984",
@@ -50736,6 +52136,14 @@
     "nationality": "Portugal"
   },
   {
+    "id": "fd-5325772",
+    "name": "David Liz Castro Morgado",
+    "team": "Torreense",
+    "league": "Europa League",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-3141707",
     "name": "Gustavo Sousa Alhinho Alves Rijo",
     "team": "Torreense",
@@ -51000,6 +52408,14 @@
     "nationality": "England"
   },
   {
+    "id": "fd-372016",
+    "name": "Callum Olusesi",
+    "team": "Tottenham",
+    "league": "Premier League",
+    "position": "Mediocampista",
+    "nationality": "England"
+  },
+  {
     "id": "fd-266696",
     "name": "Conor Gallagher",
     "team": "Tottenham",
@@ -51232,6 +52648,14 @@
     "nationality": "Ukraine"
   },
   {
+    "id": "fd-265917",
+    "name": "Batista Mendy",
+    "team": "Trabzonspor",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "France"
+  },
+  {
     "id": "fd-304683",
     "name": "Benjamin Bouchouari",
     "team": "Trabzonspor",
@@ -51254,6 +52678,14 @@
     "league": "Conference League",
     "position": "Defensor",
     "nationality": "Nigeria"
+  },
+  {
+    "id": "fd-321113",
+    "name": "Cihan Canak",
+    "team": "Trabzonspor",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": "Türkiye"
   },
   {
     "id": "fd-305542",
@@ -51286,6 +52718,14 @@
     "league": "Conference League",
     "position": "Delantero",
     "nationality": "Guinea-Bissau"
+  },
+  {
+    "id": "fd-5325770",
+    "name": "Hakan Yılmaz",
+    "team": "Trabzonspor",
+    "league": "Conference League",
+    "position": "Delantero",
+    "nationality": ""
   },
   {
     "id": "fd-224357",
@@ -51328,12 +52768,28 @@
     "nationality": "Türkiye"
   },
   {
+    "id": "fd-3112088",
+    "name": "Mustafa Kuzey Akçay",
+    "team": "Trabzonspor",
+    "league": "Conference League",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
     "id": "fd-410817",
     "name": "Noah Saviolo",
     "team": "Trabzonspor",
     "league": "Conference League",
     "position": "Delantero",
     "nationality": "Portugal"
+  },
+  {
+    "id": "fd-417813",
+    "name": "Oguzhan Ertem",
+    "team": "Trabzonspor",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Türkiye"
   },
   {
     "id": "fd-169512",
@@ -51414,6 +52870,14 @@
     "league": "Conference League",
     "position": "Defensor",
     "nationality": "Cape Verde Islands"
+  },
+  {
+    "id": "fd-403175",
+    "name": "Yigithan Çubukcu",
+    "team": "Trabzonspor",
+    "league": "Conference League",
+    "position": "Mediocampista",
+    "nationality": "Türkiye"
   },
   {
     "id": "fd-3118243",
@@ -51621,6 +53085,14 @@
     "team": "TSV 1860 Munich",
     "league": "DFB-Pokal",
     "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
+    "id": "fd-3146056",
+    "name": "Rron Gosalci",
+    "team": "TSV 1860 Munich",
+    "league": "DFB-Pokal",
+    "position": "Delantero",
     "nationality": ""
   },
   {
@@ -52656,6 +54128,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-5326844",
+    "name": "Emanuele Molinari",
+    "team": "Union Brescia",
+    "league": "Copa Italia",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-3125076",
     "name": "Filippo Armanini",
     "team": "Union Brescia",
@@ -52678,6 +54158,14 @@
     "league": "Copa Italia",
     "position": "Defensor",
     "nationality": "Denmark"
+  },
+  {
+    "id": "fd-5326845",
+    "name": "Gabriele Zanini",
+    "team": "Union Brescia",
+    "league": "Copa Italia",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-310770",
@@ -52728,6 +54216,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-5326846",
+    "name": "Marco Foresti",
+    "team": "Union Brescia",
+    "league": "Copa Italia",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-307856",
     "name": "Marco Frigerio",
     "team": "Union Brescia",
@@ -52744,20 +54240,20 @@
     "nationality": "Italy"
   },
   {
-    "id": "fd-3099533",
-    "name": "Nicola Grazioli",
-    "team": "Union Brescia",
-    "league": "Copa Italia",
-    "position": "Arquero",
-    "nationality": ""
-  },
-  {
     "id": "fd-126496",
     "name": "Nicola Pasini",
     "team": "Union Brescia",
     "league": "Copa Italia",
     "position": "Defensor",
     "nationality": "Italy"
+  },
+  {
+    "id": "fd-5324431",
+    "name": "Salouma Coulibaly",
+    "team": "Union Brescia",
+    "league": "Copa Italia",
+    "position": "Delantero",
+    "nationality": ""
   },
   {
     "id": "fd-3130470",
@@ -52837,22 +54333,6 @@
     "team": "Universitatea Craiova",
     "league": "Conference League",
     "position": "Mediocampista",
-    "nationality": "Romania"
-  },
-  {
-    "id": "fd-407229",
-    "name": "Alexandru Glodean",
-    "team": "Universitatea Craiova",
-    "league": "Conference League",
-    "position": "Arquero",
-    "nationality": "Romania"
-  },
-  {
-    "id": "fd-418889",
-    "name": "Alexandru Iamandache",
-    "team": "Universitatea Craiova",
-    "league": "Conference League",
-    "position": "Delantero",
     "nationality": "Romania"
   },
   {
@@ -52976,14 +54456,6 @@
     "nationality": "Ukraine"
   },
   {
-    "id": "fd-322537",
-    "name": "Pavlo Isenko",
-    "team": "Universitatea Craiova",
-    "league": "Conference League",
-    "position": "Arquero",
-    "nationality": "Ukraine"
-  },
-  {
     "id": "fd-302721",
     "name": "Razvan Sava",
     "team": "Universitatea Craiova",
@@ -53054,14 +54526,6 @@
     "league": "Copa Italia",
     "position": "Defensor",
     "nationality": ""
-  },
-  {
-    "id": "fd-340704",
-    "name": "Alessandro Fontanarosa",
-    "team": "US Avellino",
-    "league": "Copa Italia",
-    "position": "Defensor",
-    "nationality": "Italy"
   },
   {
     "id": "fd-214765",
@@ -53425,11 +54889,11 @@
   },
   {
     "id": "fd-16340",
-    "name": "Javier Guerra",
+    "name": "Javi Guerra",
     "team": "Valencia",
     "league": "LaLiga",
-    "position": "Defensor",
-    "nationality": "Bolivia"
+    "position": "Mediocampista",
+    "nationality": "Spain"
   },
   {
     "id": "fd-189804",
@@ -53508,7 +54972,7 @@
     "name": "Rodrigo Gamón Martín",
     "team": "Valencia",
     "league": "LaLiga",
-    "position": "Mediocampista",
+    "position": "Defensor",
     "nationality": ""
   },
   {
@@ -54396,7 +55860,7 @@
     "name": "Ismail Badjie",
     "team": "VfL Osnabruck",
     "league": "DFB-Pokal",
-    "position": "Delantero",
+    "position": "Mediocampista",
     "nationality": "Germany"
   },
   {
@@ -54524,7 +55988,7 @@
     "name": "Patrick Kammerbauer",
     "team": "VfL Osnabruck",
     "league": "DFB-Pokal",
-    "position": "Defensor",
+    "position": "Mediocampista",
     "nationality": "Germany"
   },
   {
@@ -54602,6 +56066,14 @@
   {
     "id": "fd-346384",
     "name": "Elia Tantalocchi",
+    "team": "Vicenza",
+    "league": "Copa Italia",
+    "position": "Arquero",
+    "nationality": "Italy"
+  },
+  {
+    "id": "fd-277395",
+    "name": "Fabrizio Bagheria",
     "team": "Vicenza",
     "league": "Copa Italia",
     "position": "Arquero",
@@ -54813,14 +56285,6 @@
     "team": "Viking FK",
     "league": "Champions League",
     "position": "Delantero",
-    "nationality": ""
-  },
-  {
-    "id": "fd-3139071",
-    "name": "Elias Dahman",
-    "team": "Viking FK",
-    "league": "Champions League",
-    "position": "Mediocampista",
     "nationality": ""
   },
   {
@@ -55568,6 +57032,14 @@
     "nationality": "Spain"
   },
   {
+    "id": "fd-3101339",
+    "name": "César Bonafé Ceita",
+    "team": "Villarreal",
+    "league": "LaLiga",
+    "position": "Defensor",
+    "nationality": ""
+  },
+  {
     "id": "fd-3101325",
     "name": "Cheikh Ahmad Tidiane Thiam",
     "team": "Villarreal",
@@ -55600,6 +57072,14 @@
     "nationality": "Morocco"
   },
   {
+    "id": "fd-371619",
+    "name": "Joselillo",
+    "team": "Villarreal",
+    "league": "LaLiga",
+    "position": "Delantero",
+    "nationality": "Spain"
+  },
+  {
     "id": "fd-242710",
     "name": "Juan Foyth",
     "team": "Villarreal",
@@ -55622,6 +57102,14 @@
     "league": "LaLiga",
     "position": "Arquero",
     "nationality": "Brazil"
+  },
+  {
+    "id": "fd-5326689",
+    "name": "Mauro Roca Martínez",
+    "team": "Villarreal",
+    "league": "LaLiga",
+    "position": "Mediocampista",
+    "nationality": ""
   },
   {
     "id": "fd-311163",
@@ -55712,6 +57200,14 @@
     "nationality": "Spain"
   },
   {
+    "id": "fd-5326690",
+    "name": "Sergio Barrera Martín",
+    "team": "Villarreal",
+    "league": "LaLiga",
+    "position": "Mediocampista",
+    "nationality": ""
+  },
+  {
     "id": "fd-284769",
     "name": "Tajon Buchanan",
     "team": "Villarreal",
@@ -55784,6 +57280,14 @@
     "nationality": "Italy"
   },
   {
+    "id": "fd-5327301",
+    "name": "Francesco D'Alterio",
+    "team": "Virtus Entella",
+    "league": "Copa Italia",
+    "position": "Arquero",
+    "nationality": ""
+  },
+  {
     "id": "fd-185734",
     "name": "Francesco Forte",
     "team": "Virtus Entella",
@@ -55794,6 +57298,14 @@
   {
     "id": "fd-250879",
     "name": "Francesco Mezzoni",
+    "team": "Virtus Entella",
+    "league": "Copa Italia",
+    "position": "Mediocampista",
+    "nationality": "Italy"
+  },
+  {
+    "id": "fd-366985",
+    "name": "Gabriele Costa",
     "team": "Virtus Entella",
     "league": "Copa Italia",
     "position": "Mediocampista",
@@ -55861,6 +57373,14 @@
     "team": "Virtus Entella",
     "league": "Copa Italia",
     "position": "Defensor",
+    "nationality": ""
+  },
+  {
+    "id": "fd-3127969",
+    "name": "Matteo Tassara",
+    "team": "Virtus Entella",
+    "league": "Copa Italia",
+    "position": "Arquero",
     "nationality": ""
   },
   {
@@ -56016,6 +57536,14 @@
     "nationality": "Germany"
   },
   {
+    "id": "fd-371398",
+    "name": "Filip Ilie",
+    "team": "VSG Altglienicke",
+    "league": "DFB-Pokal",
+    "position": "Delantero",
+    "nationality": "Romania"
+  },
+  {
     "id": "fd-39386",
     "name": "John Brooks",
     "team": "VSG Altglienicke",
@@ -56078,6 +57606,14 @@
     "league": "DFB-Pokal",
     "position": "Arquero",
     "nationality": "Germany"
+  },
+  {
+    "id": "fd-3098384",
+    "name": "Malik Liao",
+    "team": "VSG Altglienicke",
+    "league": "DFB-Pokal",
+    "position": "Arquero",
+    "nationality": ""
   },
   {
     "id": "fd-332289",
@@ -56216,14 +57752,6 @@
     "nationality": ""
   },
   {
-    "id": "fd-220060",
-    "name": "Dawid Kownacki",
-    "team": "Werder Bremen",
-    "league": "Bundesliga",
-    "position": "Delantero",
-    "nationality": "Poland"
-  },
-  {
     "id": "fd-312112",
     "name": "Eren Dinkci",
     "team": "Werder Bremen",
@@ -56309,6 +57837,14 @@
     "team": "Werder Bremen",
     "league": "Bundesliga",
     "position": "Arquero",
+    "nationality": "Germany"
+  },
+  {
+    "id": "fd-419946",
+    "name": "Mats Heitmann",
+    "team": "Werder Bremen",
+    "league": "Bundesliga",
+    "position": "Defensor",
     "nationality": "Germany"
   },
   {
@@ -56918,6 +58454,14 @@
     "league": "DFB-Pokal",
     "position": "Defensor",
     "nationality": "Brazil"
+  },
+  {
+    "id": "fd-66722",
+    "name": "Dusan Pernis",
+    "team": "Wolfsburg",
+    "league": "DFB-Pokal",
+    "position": "Arquero",
+    "nationality": "Slovakia"
   },
   {
     "id": "fd-259055",
