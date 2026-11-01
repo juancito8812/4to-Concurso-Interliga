@@ -25,6 +25,7 @@ export default function TeamSelectorCard() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [teamLocked, setTeamLocked] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (cachedTeamsList && cachedTeamsList.length > 0) return;
@@ -46,10 +47,11 @@ export default function TeamSelectorCard() {
     if (user) {
       supabase
         .from("profiles")
-        .select("team_id")
+        .select("team_id, role")
         .eq("user_id", user.id)
         .single()
         .then(({ data }) => {
+          setIsAdmin(data?.role === "admin");
           if (data?.team_id) {
             supabase
               .from("teams")
@@ -123,6 +125,9 @@ export default function TeamSelectorCard() {
     acc[team.league].push(team);
     return acc;
   }, {});
+
+  // La cuenta admin no participa: no se le ofrece elegir equipo.
+  if (isAdmin) return null;
 
   return (
     <div className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border h-full flex flex-col justify-between">

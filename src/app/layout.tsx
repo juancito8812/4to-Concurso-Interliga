@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import { Providers } from "./providers";
 import RegisterSW from "./RegisterSW";
 import Footer from "./Footer";
+import AdminBackToPanel from "@/components/AdminBackToPanel";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="main-content" className="flex-1 flex flex-col">
             {children}
           </main>
+          <AdminBackToPanel />
         </Providers>
         <Footer />
       </body>
