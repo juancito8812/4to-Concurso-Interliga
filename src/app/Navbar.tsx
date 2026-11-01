@@ -9,16 +9,18 @@ export default function Navbar() {
   const { user, displayName, signOut } = useAuth();
   const [teamName, setTeamName] = useState("");
   const [teamLogo, setTeamLogo] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (user) {
       supabase
         .from("profiles")
-        .select("team_id")
+        .select("team_id, role")
         .eq("user_id", user.id)
         .single()
         .then(({ data }) => {
+          setIsAdmin(data?.role === "admin");
           if (data?.team_id) {
             supabase
               .from("teams")
@@ -77,6 +79,14 @@ export default function Navbar() {
               >
                 Ranking
               </Link>
+              {isAdmin && (
+                <Link
+                  href="/admin/"
+                  className="text-navy-black bg-gold/90 hover:bg-gold font-bold px-2.5 py-1 rounded-full text-[11px] transition-colors hidden sm:block"
+                >
+                  Admin
+                </Link>
+              )}
               <div id="user-menu-container" className="relative">
                 <button
                   onClick={() => setMenuOpen((prev) => !prev)}
@@ -112,6 +122,15 @@ export default function Navbar() {
                   >
                     Mi Perfil
                   </Link>
+                  {isAdmin && (
+                    <Link
+                      href="/admin/"
+                      onClick={() => setMenuOpen(false)}
+                      className="block px-4 py-2.5 text-xs font-bold text-gold hover:text-gold-light hover:bg-navy-card transition-colors sm:hidden"
+                    >
+                      Panel Admin
+                    </Link>
+                  )}
                   <Link
                     href="/pronosticar/"
                     onClick={() => setMenuOpen(false)}
