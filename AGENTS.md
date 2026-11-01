@@ -191,6 +191,13 @@ Un fallo REAL es una predicción creada **antes** del pitazo que quedó con `poi
 - **Leaked password protection = riesgo aceptado (2026-10-17)**: el toggle requiere plan **Pro+** y el proyecto "J soluciones" está en **FREE** (el dashboard no muestra *Passwords*). Vive en GoTrue, no en Postgres: solo se cambia por dashboard o Management API (`PATCH /v1/projects/<ref>/config/auth`), nunca por SQL ni MCP. Es el **único WARN real** que queda en el Security Advisor (el resto son intencionales: la RPC `get_public_predictions` SECURITY DEFINER, `delete_user_account`/`reset_participation` y `app_meta` deny-all).
 - **Nunca** escribir valores de API keys, tokens, passwords o connection strings en documentación, commits o resúmenes: usar `[REDACTED]`. Las claves salen solo de `.env.local`/entorno.
 
+### Panel de administración (rol admin, 2026-11-01)
+
+- El guard es **doble**: el layout `src/app/admin/layout.tsx` exige sesión + `profiles.role === 'admin'` y desloguea si no lo es; el dato está protegido en la DB por `is_admin()` (SECURITY DEFINER, evita recursión de policies) y por la policy `"Admins read all profiles"`. **No hay credenciales separadas**: es la misma cuenta de Supabase Auth con rol elevado.
+- `profiles.role` **solo lo escribe el servidor**: el trigger `trg_role_service_only` rechaza INSERT/UPDATE de esa columna con `role != user` para `anon`/`authenticated` (probado: PATCH da 400 `Solo el servidor puede cambiar roles`). Para promover a alguien: `update public.profiles set role='admin' where user_id='<uuid>'` por SQL/dashboard.
+- Cambio de contraseña (`ChangePasswordForm`): pide la **contraseña actual** y reautentica con `signInWithPassword` antes de `updateUser({password})`; mínimo 8 caracteres. Vive en `/perfil` (cualquier usuario) y `/admin/cuenta` (admin). No agregar un flujo que cambie la clave sin reautenticar.
+- El login del panel es `/admin/login`; `/admin` y `/admin/cuenta` son `noindex` y están en `robots.txt` como `Disallow`. Fases pendientes (CRUD de equipos, resultados, usuarios) siguen en `ADMIN_PANEL.md`: las escrituras sensibles deben ir por RPCs `SECURITY DEFINER` con chequeo de `is_admin()`, no por policies de UPDATE amplias.
+
 ### Estado del proyecto (vía MCP)
 
 `mcp__supabase__get_project` (requiere el argumento `id` = `ilkndkqcmxvlufxaugog`) → `status: ACTIVE_HEALTHY`. La DB se consulta con `mcp__supabase__execute_sql` (requiere `project_id`; service role implícito).

@@ -232,7 +232,10 @@ public/
 | `/login` | Inicio de sesión | No |
 | `/olvide-contrasena` | Solicitud de restablecimiento de contraseña | No |
 | `/actualizar-contrasena` | Destino del email de recuperación (nueva contraseña) | No |
-| `/perfil` | Edición de nombre de usuario, reinicio de club y eliminación de cuenta | **Sí** |
+| `/perfil` | Edición de nombre de usuario, reinicio de club, cambio de contraseña y eliminación de cuenta | **Sí** |
+| `/admin` | Panel de administración: métricas del concurso y accesos rápidos | **Sí (rol `admin`)** |
+| `/admin/cuenta` | Correo del administrador y cambio de contraseña | **Sí (rol `admin`)** |
+| `/admin/login` | Inicio de sesión exclusivo del panel; rechaza cuentas sin rol `admin` | No |
 | `/pronosticar` | Envío y re-edición de pronósticos en tarjetas estilo TV | **Sí** |
 | `/mis-pronosticos` | Historial de pronósticos enviados y desglose de puntos | **Sí** |
 | `/ranking` | Tabla de clasificación general en vivo, Podio de Honor y búsqueda | No |
@@ -580,14 +583,29 @@ npm run build                 # Build completo (24 rutas estáticas)
 
 ## 🛠️ Panel de Administración
 
-El proyecto incluye documentación para implementar un panel de admin (`ADMIN_PANEL.md`) que permitirá al propietario gestionar:
+**Estado:** Fase 1 implementada (2026-11-01). El resto del alcance sigue especificado en [`ADMIN_PANEL.md`](./ADMIN_PANEL.md).
 
-- Equipos y jugadores
-- Partidos y resultados
-- Usuarios y predicciones
-- Configuración del concurso
+### Lo que ya funciona
 
-**Estado:** Documentado para futuro (8-12 días de desarrollo estimados)
+- **Login separado** en `/admin/login` (misma sesión de Supabase Auth; no hay credenciales aparte).
+- **Rol en base**: `profiles.role` (`'user'` | `'admin'`), aplicado por la migración `supabase/migrations/2026-11-01_admin_role.sql`. El layout `/admin` valida sesión + rol antes de pintar nada; quien no es admin se desloguea.
+- **`/admin`**: métricas en vivo (participantes, cuentas con club elegido, administradores) y accesos rápidos.
+- **`/admin/cuenta`**: correo del admin (solo lectura) y **cambio de contraseña con reautenticación** por contraseña actual.
+- **Cambio de contraseña para cualquier usuario** en `/perfil` (mismo componente `ChangePasswordForm`); el email de recuperación (`/olvide-contrasena` → `/actualizar-contrasena`) sigue siendo la vía cuando el usuario no recuerda la clave.
+
+### Lo que falta (fases siguientes)
+
+- CRUD de equipos y jugadores, edición de fixtures y resultados, evaluación manual de partidos.
+- Gestión de usuarios (reset de contraseña por el admin, suspensión, borrado).
+- Todas las escrituras sensibles deben ir por RPCs `SECURITY DEFINER` con chequeo de rol, no por policies de UPDATE amplias.
+
+### Crear otro administrador
+
+```sql
+update public.profiles set role = 'admin' where user_id = '<uuid-de-auth.users>';
+```
+
+La cuenta se crea como cualquier participante (`/registro`); el rol se asigna después por SQL o por dashboard. `role` no es escribible por el cliente: el trigger `trg_role_service_only` rechaza cualquier INSERT/UPDATE de esa columna hecho por `anon`/`authenticated`.
 
 👉 **[Ver documentación completa del Admin Panel](./ADMIN_PANEL.md)**
 

@@ -769,3 +769,80 @@ GRANT EXECUTE ON FUNCTION public.get_public_predictions(uuid) TO anon, authentic
 REVOKE TRUNCATE, REFERENCES, TRIGGER ON ALL TABLES IN SCHEMA public FROM anon, authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
   REVOKE TRUNCATE, REFERENCES, TRIGGER ON TABLES FROM anon, authenticated;
+
+-- ==============================================================================
+-- J. [2026-11-01] ROL DE ADMINISTRADOR (`profiles.role`)
+--
+-- Espejo de `migrations/2026-11-01_admin_role.sql` para que un bootstrap limpio
+-- quede con el panel /admin funcionando. Si cambiás una, cambiá la otra.
+--
+-- Reglas: `role` ∈ {user, admin}; solo el servidor lo escribe (mismo criterio
+-- que `points`); `is_admin()` es SECURITY DEFINER para poder usarse dentro de
+-- policies sin recursión; los admins leen todos los profiles, pero NO los
+-- pronósticos abiertos (eso sigue pasando por `get_public_predictions`).
+-- ==============================================================================
+
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS role text NOT NULL DEFAULT 'user';
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conname = 'profiles_role_check' AND conrelid = 'public.profiles'::regclass
+  ) THEN
+    ALTER TABLE public.profiles
+      ADD CONSTRAINT profiles_role_check CHECK (role IN ('user', 'admin'));
+  END IF;
+END $$;
+
+CREATE INDEX IF NOT EXISTS idx_profiles_role ON public.profiles (role) WHERE role = 'admin';
+
+CREATE OR REPLACE FUNCTION public.is_admin()
+RETURNS boolean
+LANGUAGE sql STABLE SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM public.profiles p
+    WHERE p.user_id = auth.uid() AND p.role = 'admin'
+  );
+$$;
+
+REVOKE ALL ON FUNCTION public.is_admin() FROM public;
+GRANT EXECUTE ON FUNCTION public.is_admin() TO authenticated;
+
+DROP POLICY IF EXISTS "Admins read all profiles" ON public.profiles;
+CREATE POLICY "Admins read all profiles" ON public.profiles
+  FOR SELECT TO authenticated
+  USING (public.is_admin());
+
+CREATE OR REPLACE FUNCTION public.enforce_role_service_only()
+RETURNS trigger
+LANGUAGE plpgsql SECURITY DEFINER
+SET search_path = public, pg_temp
+AS $$
+DECLARE
+  v_jwt_role text;
+  v_is_service boolean;
+BEGIN
+  v_jwt_role := COALESCE((current_setting('request.jwt.claims', true)::json) ->> 'role', '');
+  v_is_service := v_jwt_role = 'service_role'
+    OR session_user IN ('postgres', 'supabase_admin', 'service_role');
+
+  IF TG_OP = 'INSERT' THEN
+    IF NEW.role IS DISTINCT FROM 'user' AND NOT v_is_service THEN
+      RAISE EXCEPTION 'Solo el servidor puede asignar roles';
+    END IF;
+    RETURN NEW;
+  END IF;
+
+  IF NEW.role IS DISTINCT FROM OLD.role AND NOT v_is_service THEN
+    RAISE EXCEPTION 'Solo el servidor puede cambiar roles';
+  END IF;
+  RETURN NEW;
+END $$;
+
+DROP TRIGGER IF EXISTS trg_role_service_only ON public.profiles;
+CREATE TRIGGER trg_role_service_only
+  BEFORE INSERT OR UPDATE ON public.profiles
+  FOR EACH ROW EXECUTE FUNCTION public.enforce_role_service_only();
