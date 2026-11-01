@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import ChangePasswordForm from "@/components/ChangePasswordForm";
 import { supabase } from "@/lib/supabase";
 
 export default function PerfilPage() {
@@ -226,6 +227,12 @@ export default function PerfilPage() {
             {loading ? "Guardando..." : "Guardar Cambios"}
           </button>
         </form>
+
+        {/* Cambio de contraseña */}
+        <ChangePasswordForm
+          email={user.email || ""}
+          subtitle="Cambiá la clave con la que entrás al concurso. Necesitás la actual para confirmar."
+        />
 
         {/* Zona de Gestión / Peligro */}
         <div className="bg-navy-mid border border-red-500/30 rounded-2xl p-6 space-y-6 shadow-xl">

@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /perfil/
+Disallow: /mis-pronosticos/
 
 Sitemap: https://futbolcamisetapasion.com/sitemap.xml
