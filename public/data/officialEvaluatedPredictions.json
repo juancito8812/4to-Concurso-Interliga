@@ -2292,5 +2292,157 @@
     "pointsDetails": [
       "Diferencia de 1 gol (+1 pt)"
     ]
+  },
+  {
+    "id": "86452f69-d6d1-456b-917f-87687ae788b3",
+    "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
+    "display_name": "Asere1995",
+    "match_id": "00000000-0000-4000-8000-000000089dfc",
+    "home_score": 4,
+    "away_score": 1,
+    "created_at": "2026-10-22T13:27:43.022943+00:00",
+    "scorers": [
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "points": 7,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Lamine Yamal (+1 pt)",
+      "Goleador acertado: Fermín López (+1 pt)",
+      "Goleador acertado: Raphinha (+1 pt)",
+      "Goleador acertado: Anthony Gordon (+1 pt)"
+    ]
+  },
+  {
+    "id": "ab81df33-c8ea-4bb6-8d83-4a4666abff47",
+    "user_id": "a595517a-1160-493a-b24e-e14bba1956d4",
+    "display_name": "Noel Cordero Velázquez",
+    "match_id": "00000000-0000-4000-8000-000000089dfc",
+    "home_score": 4,
+    "away_score": 0,
+    "created_at": "2026-10-31T16:00:13.485685+00:00",
+    "scorers": [
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Lamine Yamal (+1 pt)",
+      "Goleador acertado: Raphinha (+1 pt)",
+      "Goleador acertado: Fermín López (+1 pt)"
+    ]
+  },
+  {
+    "id": "7c715539-803e-46a5-aad9-8f456143fcce",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "ARS",
+    "match_id": "00000000-0000-4000-8000-000000088df7",
+    "home_score": 0,
+    "away_score": 2,
+    "created_at": "2026-10-25T01:30:20.205456+00:00",
+    "scorers": [],
+    "points": 4,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)"
+    ]
+  },
+  {
+    "id": "f22e3e3a-1dd1-4e6e-9434-43f1ad39c638",
+    "user_id": "b4feea6d-d092-40b8-884f-c9f52618264a",
+    "display_name": "Zahilet",
+    "match_id": "00000000-0000-4000-8000-000000089dfe",
+    "home_score": 1,
+    "away_score": 4,
+    "created_at": "2026-11-01T01:47:42.293152+00:00",
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yan Diomandé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Arda Guler",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Goleador acertado: Yan Diomandé (+1 pt)",
+      "Goleador acertado: Jude Bellingham (+1 pt)"
+    ]
+  },
+  {
+    "id": "33f0ee24-659a-4df9-9ded-eea3061b9207",
+    "user_id": "266e7258-c7f9-4159-9fa2-3281989af465",
+    "display_name": "Raudel",
+    "match_id": "00000000-0000-4000-8000-000000089dfe",
+    "home_score": 1,
+    "away_score": 5,
+    "created_at": "2026-11-01T01:56:28.670185+00:00",
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 3,
+        "team": "away"
+      },
+      {
+        "player_name": "Yan Diomandé",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Kylian Mbappé (+1 pt)",
+      "Goleador acertado: Yan Diomandé (+1 pt)"
+    ]
   }
 ]

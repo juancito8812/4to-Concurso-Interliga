@@ -14606,5 +14606,199 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dfe",
+    "espn_id": "401882819",
+    "home_team": "Racing Santander",
+    "away_team": "Real Madrid",
+    "match_date": "2026-11-01T15:15Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yan Diomande",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089df8",
+    "espn_id": "401882823",
+    "home_team": "Elche",
+    "away_team": "Valencia",
+    "match_date": "2026-11-01T17:30Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Umar Sadiq",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088df7",
+    "espn_id": "401879246",
+    "home_team": "Liverpool",
+    "away_team": "Arsenal",
+    "match_date": "2026-11-01T16:30Z",
+    "league": "Premier League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Kai Havertz",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885d0",
+    "espn_id": "401874782",
+    "home_team": "Frosinone",
+    "away_team": "Torino",
+    "match_date": "2026-11-01T14:00Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Farès Ghedjemis",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Giacomo Calo",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885d2",
+    "espn_id": "401874983",
+    "home_team": "Lazio",
+    "away_team": "Cagliari",
+    "match_date": "2026-11-01T14:00Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "M'Bala Nzola",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Gustav Isaksen",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Andrea Pinamonti",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885cc",
+    "espn_id": "401874968",
+    "home_team": "Lecce",
+    "away_team": "Genoa",
+    "match_date": "2026-11-01T17:00Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Milutin Osmajic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Junior Messias",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Youssef Maleh",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a251",
+    "espn_id": "401884750",
+    "home_team": "Union Berlin",
+    "away_team": "Köln",
+    "match_date": "2026-11-01T14:30Z",
+    "league": "Bundesliga",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Janik Haberer",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Malek El Mala",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a254",
+    "espn_id": "401884752",
+    "home_team": "Eintracht Frankfurt",
+    "away_team": "Hamburger SV",
+    "match_date": "2026-11-01T16:30Z",
+    "league": "Bundesliga",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Terem Moffi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Raphael Onyedika",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Younes Ebnoutalib",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
