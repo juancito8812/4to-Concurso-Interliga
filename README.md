@@ -589,7 +589,7 @@ npm run build                 # Build completo (24 rutas estáticas)
 
 - **Login separado** en `/admin/login` (misma sesión de Supabase Auth; no hay credenciales aparte).
 - **Rol en base**: `profiles.role` (`'user'` | `'admin'`), aplicado por la migración `supabase/migrations/2026-11-01_admin_role.sql`. El layout `/admin` valida sesión + rol antes de pintar nada; quien no es admin se desloguea.
-- **`/admin`**: métricas en vivo (participantes, cuentas con club elegido, administradores) y accesos rápidos.
+- **`/admin`**: dashboard con métricas en vivo vía la RPC `admin_dashboard_stats()` (SECURITY DEFINER + `is_admin()`): 6 KPIs (participantes, pronósticos, partidos con resultado, pendientes de resultado, supervivientes vivos, altas de 7 días), gráfico de actividad de los últimos 7 días, clubes más elegidos con logo y porcentaje, supervivientes por copa KO, cobertura del calendario publicado y próximos partidos con hora de cierre. Las fechas se muestran en `America/Caracas`; hay aviso ámbar automático si hay partidos de los últimos 7 días sin resultado oficial.
 - **`/admin/cuenta`**: correo del admin (solo lectura) y **cambio de contraseña con reautenticación** por contraseña actual.
 - **Cambio de contraseña para cualquier usuario** en `/perfil` (mismo componente `ChangePasswordForm`); el email de recuperación (`/olvide-contrasena` → `/actualizar-contrasena`) sigue siendo la vía cuando el usuario no recuerda la clave.
 

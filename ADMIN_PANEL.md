@@ -22,39 +22,60 @@ El panel de administración permitirá al propietario del sitio gestionar todos 
 
 ```
 /admin
-├── /page.tsx                    # Dashboard principal con métricas
-├── /equipos/page.tsx            # Gestión de equipos (225)
-├── /equipos/[id]/page.tsx       # Edición de equipo
-├── /jugadores/page.tsx          # Gestión de jugadores (517 en base)
-├── /jugadores/[id]/page.tsx     # Edición de jugador
-├── /partidos/page.tsx           # Gestión de fixtures (1.926)
-├── /partidos/[id]/page.tsx      # Edición de partido + resultado
-├── /usuarios/page.tsx           # Lista de participantes
-├── /usuarios/[id]/page.tsx      # Perfil de usuario + predicciones
-├── /pronosticos/page.tsx        # Predicciones evaluadas
-├── /resultados/page.tsx         # Evaluación manual de partidos
-├── /survivors/page.tsx          # Estado de supervivencia por copa
-├── /config/page.tsx             # Configuración del concurso
-└── /logs/page.tsx               # Logs de actividad
+├── /page.tsx                    # ✅ Dashboard con métricas (RPC admin_dashboard_stats)
+├── /login/page.tsx              # ✅ Login exclusivo del panel
+├── /cuenta/page.tsx             # ✅ Correo + cambio de contraseña
+├── /equipos/page.tsx            # ⬜ Gestión de equipos (225)
+├── /equipos/[id]/page.tsx       # ⬜ Edición de equipo
+├── /jugadores/page.tsx          # ⬜ Gestión de jugadores (517 en base)
+├── /jugadores/[id]/page.tsx     # ⬜ Edición de jugador
+├── /partidos/page.tsx           # ⬜ Gestión de fixtures (1.926)
+├── /partidos/[id]/page.tsx      # ⬜ Edición de partido + resultado
+├── /usuarios/page.tsx           # ⬜ Lista de participantes
+├── /usuarios/[id]/page.tsx      # ⬜ Perfil de usuario + predicciones
+├── /pronosticos/page.tsx        # ⬜ Predicciones evaluadas
+├── /resultados/page.tsx         # ⬜ Evaluación manual de partidos
+├── /survivors/page.tsx          # ⬜ Estado de supervivencia por copa
+├── /config/page.tsx             # ⬜ Configuración del concurso
+└── /logs/page.tsx               # ⬜ Logs de actividad
 ```
+
+> El estado de supervivientes ya se ve **resumido por copa** dentro del dashboard; la ruta `/survivors` solo agregaría el detalle por participante.
 
 ---
 
 ## Módulos del Admin
 
-### 1. Dashboard (`/admin`)
+### 1. Dashboard (`/admin`) — ✅ implementado (2026-11-01)
 
-**Métricas en tiempo real:**
-- Total de usuarios registrados
-- Usuarios activos (con predicciones esta semana)
-- Partidos pendientes / finalizados
-- Predicciones enviadas / evaluadas
-- Estado del cron (última ejecución, éxito/fallo)
+Lee todo de una sola RPC, `public.admin_dashboard_stats()` (`supabase/migrations/2026-11-01_admin_dashboard_stats.sql`), `SECURITY DEFINER` con chequeo `is_admin()`: si no sos admin lanza excepción, y solo `authenticated` tiene `EXECUTE`. Devuelve un único `jsonb`:
 
-**Acciones rápidas:**
-- Evaluar partidos manualmente
-- Sincronizar con ESPN
-- Exportar datos a CSV
+| Clave | Contenido |
+|---|---|
+| `participants` | `total`, `with_club`, `admins`, `new_7d` |
+| `predictions` | `total`, `scored`, `last_24h`, `last_7d`, `last_at` |
+| `matches` | `total`, `with_result`, `overdue` (sin resultado, con más de 3 h de inicio, dentro de los últimos 7 días) |
+| `survivors` | `alive`, `eliminated`, `total` |
+| `activity_7d` | `[{date, count}]` de los últimos 7 días |
+| `top_clubs` | `[{name, league, logo_url, count}]` |
+| `cups` | `[{slug, alive, eliminated, total}]` |
+
+**Widgets en pantalla:**
+- 6 KPIs (participantes, pronósticos, partidos con resultado, pendientes de resultado, supervivientes vivos, altas de 7 días).
+- Aviso ámbar si `matches.overdue > 0`, con la instrucción de revisar el cron o cargar el resultado a mano.
+- Barras de actividad de 7 días + hora del último pronóstico.
+- Clubes más elegidos (logo, barra proporcional sobre las cuentas con club).
+- Supervivientes por copa KO (vivos / fuera).
+- Cobertura del build actual: fixtures, partidos con resultado, último resultado cargado, ligas del calendario.
+- Próximos 6 partidos con cuenta atrás al cierre (`Cerrado` / `Cierra en X min` / `h` / `d`).
+- Botón **Actualizar** que reejecuta la RPC sin recargar la página.
+
+**Detalles de implementación:**
+- Los fixtures y resultados salen de los JSON estáticos ya publicados (`/data/officialFixtures.json`, `/data/officialEvaluatedMatches.json`), así que el bloque "build actual" refleja el último deploy, no la DB.
+- Fechas siempre en `America/Caracas`; el reloj se refresca cada 60 s.
+- `admin_dashboard_stats()` no filtra datos sensibles de otros usuarios: solo agregados. Para ver pronósticos abiertos en claro sigue valiendo la regla anti-copia de más abajo.
+
+**Acciones rápidas:** enlaces a `/ranking`, `/pronosticar` y `/admin/cuenta`. Evaluar partidos manualmente y sincronizar con ESPN siguen pendientes (fases 2-3).
 
 ---
 
@@ -324,9 +345,9 @@ Vinicius Jr,Real Madrid,Delantero
 ## Roadmap de Implementación
 
 ### Fase 1: Admin Básico (2-3 días)
-- [ ] Auth con rol `admin`
-- [ ] Layout del admin (sidebar + header)
-- [ ] Dashboard con métricas básicas
+- [x] Auth con rol `admin`
+- [x] Layout del admin (guard de sesión + rol en cliente)
+- [x] Dashboard con métricas (KPIs, actividad 7d, clubes, copas, próximos partidos)
 - [ ] CRUD de equipos
 
 ### Fase 2: Gestión de Datos (2-3 días)
@@ -340,13 +361,14 @@ Vinicius Jr,Real Madrid,Delantero
 - [ ] Evaluación manual de partidos
 
 ### Fase 4: Supervivientes y Config (1-2 días)
-- [ ] Estado de supervivencia por copa
+- [x] Estado de supervivencia por copa (resumen en el dashboard)
+- [ ] Estado de supervivencia por copa (detalle por participante)
 - [ ] Panel de configuración
 - [ ] Logs de actividad
 
 ### Fase 5: Extras (1-2 días)
 - [ ] Importar/exportar CSV
-- [ ] Gráficos de actividad
+- [x] Gráficos de actividad (barras de 7 días)
 - [ ] Notificaciones
 
 ---
@@ -402,6 +424,6 @@ Crear `MANUAL_ADMIN.md` con:
 
 ---
 
-**Estado:** Pendiente de implementación
+**Estado:** fases 2-5 pendientes; el dashboard (fase 1) está implementado.
 **Prioridad:** Baja (documentado para futuro)
-**Estimación:** 8-12 días de desarrollo
+**Estimación restante:** 6-9 días de desarrollo
