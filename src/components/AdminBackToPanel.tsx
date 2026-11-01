@@ -11,16 +11,17 @@ import { supabase } from "@/lib/supabase";
  * El sitio no tiene barra de navegación global (solo la portada), así que al
  * entrar en /ranking, /tabla/... o /pronosticar desde /admin no había forma de
  * volver al panel. Este botón flotante se muestra únicamente a los admins.
+ *
+ * Se guarda el id del usuario admin (no un booleano) para que el botón
+ * desaparezca solo al cambiar de sesión sin necesidad de setState síncrono
+ * dentro del efecto (react-hooks/set-state-in-effect).
  */
 export default function AdminBackToPanel() {
   const { user } = useAuth();
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminUserId, setAdminUserId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!user) {
-      setIsAdmin(false);
-      return;
-    }
+    if (!user) return;
     let active = true;
     supabase
       .from("profiles")
@@ -28,14 +29,14 @@ export default function AdminBackToPanel() {
       .eq("user_id", user.id)
       .single()
       .then(({ data }) => {
-        if (active) setIsAdmin(data?.role === "admin");
+        if (active) setAdminUserId(data?.role === "admin" ? user.id : null);
       });
     return () => {
       active = false;
     };
   }, [user]);
 
-  if (!isAdmin) return null;
+  if (!user || adminUserId !== user.id) return null;
 
   return (
     <Link
