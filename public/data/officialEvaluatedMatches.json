@@ -14851,5 +14851,112 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089dfb",
+    "espn_id": "401882824",
+    "home_team": "Deportivo La Coruña",
+    "away_team": "Osasuna",
+    "match_date": "2026-11-02T20:00Z",
+    "league": "LaLiga",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Ante Budimir",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mario Soriano Carreno",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Bil Nsongo",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dee",
+    "espn_id": "401878762",
+    "home_team": "Newcastle",
+    "away_team": "Everton",
+    "match_date": "2026-11-02T20:00Z",
+    "league": "Premier League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Thierno Barry",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885cd",
+    "espn_id": "401874963",
+    "home_team": "Sassuolo",
+    "away_team": "Fiorentina",
+    "match_date": "2026-11-02T17:30Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Armand Laurienté",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Mateo Pellegrino",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alieu Njie",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Franco Mastantuono",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Víctor Valdepeñas",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885d1",
+    "espn_id": "401874971",
+    "home_team": "Atalanta",
+    "away_team": "Parma",
+    "match_date": "2026-11-02T19:45Z",
+    "league": "Serie A",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Giovanni Fabbian",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Simone Lontani",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
