@@ -75,6 +75,24 @@ Lee todo de una sola RPC, `public.admin_dashboard_stats()` (`supabase/migrations
 - Fechas siempre en `America/Caracas`; el reloj se refresca cada 60 s.
 - `admin_dashboard_stats()` no filtra datos sensibles de otros usuarios: solo agregados. Para ver pronósticos abiertos en claro sigue valiendo la regla anti-copia de más abajo.
 
+#### 1.1 Tráfico del sitio — ✅ implementado (2026-11-02)
+
+Segundo bloque del dashboard, alimentado por el cron `.github/workflows/sync-site-analytics.yml` (cada 3 h, `scripts/sync-site-analytics.mjs`). Cloudflare exige token privado, y el panel es un export estático: el navegador **nunca** habla con Cloudflare. El cron consulta la API con el token en un secret, agrega por día y hace upsert en Supabase; el panel lee por la RPC `public.admin_site_stats(p_days integer default 30)` (`SECURITY DEFINER` + `is_admin()`, ventana acotada a 1-90 días).
+
+| Clave | Contenido |
+|---|---|
+| `totals` | `requests`, `page_views`, `uniques_avg`, `uniques_max`, `bytes`, `threats`, `rum_pageviews`, `rum_visits` |
+| `yesterday` | Último día cerrado: `day`, `rum_pageviews`, `rum_visits`, `page_views`, `uniques`, `requests` |
+| `daily` | `[{date, rum_pageviews, rum_visits, page_views, uniques}]` de la ventana |
+| `top_paths` / `top_countries` / `top_referers` / `top_browsers` | `[{key, hits}]` (8 / 6 / 6 / 5) |
+| `last_sync`, `window_days`, `generated_at` | Frescura y tamaño de la ventana |
+
+**Fuentes:** Zone Analytics (peticiones, vistas de zona, únicos, bytes, cache ratio, amenazas) y Web Analytics RUM (páginas vistas y visitas de navegadores reales, top rutas/países/referentes/navegadores). Los RUM son la métrica de audiencia; `requests` incluye bots y assets.
+
+**Privacidad:** solo agregados diarios, sin IP ni user agent. `site_stats_daily` y `site_stats_breakdown` tienen RLS **sin policies**: anon/authenticated no las leen en claro, únicamente por la RPC.
+
+**Operación:** si el run falla por permisos, el panel conserva el último sync y muestra la fecha de `last_sync`; se puede forzar con `gh workflow run sync-site-analytics.yml --ref main -f days=30`.
+
 **Acciones rápidas:** enlaces a `/ranking`, `/pronosticar` y `/admin/cuenta`. Evaluar partidos manualmente y sincronizar con ESPN siguen pendientes (fases 2-3).
 
 ---

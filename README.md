@@ -42,6 +42,7 @@
 | **Calendario Oficial** | `src/data/officialFixtures.json` (espejo `public/data/`) — **1.926 partidos reales** pre-sincronizados de **9 competiciones** (Premier 380, LaLiga 380, Serie A 380, Bundesliga 306, Champions 144, Europa 144, Conference 108, Copa Italia 36, DFB-Pokal 48). **FA Cup y Copa del Rey NO están en el archivo**: se consultan en vivo contra ESPN |
 | **Plantillas Oficiales** | `public/data/officialPlayers.json` — **7.196 jugadores** clasificados por posición (fetch dinámico, sync mensual) |
 | **Deploy** | GitHub Actions → GitHub Pages, dominio personalizado (Cloudflare DNS) |
+| **Analítica** | Cloudflare (Web Analytics RUM + Zone Analytics) → Supabase → panel `/admin` (cron cada 3 h). Google Search Console para indexación/sitemap |
 | **PWA** | Service Worker v2 offline-first con precaching de datos, manifest, icon SVG |
 
 ### Métricas de Performance y Auditoría
@@ -154,10 +155,20 @@ src/
 │   │   └── page.tsx                # Historial de predicciones, estado y desglose de puntos
 │   ├── ranking/
 │   │   └── page.tsx                # Ranking general en vivo, Podio de Honor y búsqueda
-│   └── tabla/
-│       └── [league]/
-│           ├── page.tsx            # Generador de rutas estáticas (SSG)
-│           └── TablaLigaClient.tsx # Clasificación, goleadores y calendario (ESPN API)
+│   ├── tabla/
+│   │   └── [league]/
+│   │       ├── page.tsx            # Generador de rutas estáticas (SSG)
+│   │       └── TablaLigaClient.tsx # Clasificación, goleadores y calendario (ESPN API)
+│   └── admin/
+│       ├── layout.tsx              # Guard de rol: sesión + profiles.role === 'admin'
+│       ├── page.tsx                # Dashboard: KPIs del concurso + Tráfico del sitio (Cloudflare)
+│       ├── login/page.tsx          # Login exclusivo del panel (noindex)
+│       └── cuenta/page.tsx         # Correo del admin y cambio de contraseña
+├── components/
+│   ├── AdminGuard.tsx              # Redirección/deslogueo si el rol no es admin
+│   ├── AdminBackToPanel.tsx        # Navegación de vuelta al panel
+│   ├── ChangePasswordForm.tsx      # Cambio de clave con reautenticación
+│   └── TeamCrest.tsx               # Escudo con fallback
 ├── contexts/
 │   └── AuthContext.tsx             # Context de autenticación, perfil y gestión de cuenta
 ├── data/
@@ -188,18 +199,20 @@ scripts/
 ├── test-survivor.js                # Suite de pruebas del sistema de superviviente (12/12)
 ├── test-group-matches.js           # Smoke tests de agrupación de partidos
 ├── recalcular-puntos.js            # Recalcula los puntos de los pronósticos evaluados
+├── sync-site-analytics.mjs         # Cron: Cloudflare (zona + RUM) → Supabase (agregados diarios)
 └── lib/
     └── score-utils.js              # Módulo compartido CJS (normalización, scoring, survivor)
 
 supabase/
-├── schema.sql                      # Script DDL maestro: 8 tablas, índices, RLS, triggers
-└── migrations/                     # 6 migraciones incrementales (2026-09-16 → 2026-10-30): seguridad, lock de puntos/club, anti-copia, limpieza de rendimiento y grants por defecto para tablas nuevas
+├── schema.sql                      # Script DDL maestro: 8 tablas base, índices, RLS, triggers + rol admin y tablas de analítica (secciones J y K)
+└── migrations/                     # 9 migraciones incrementales (2026-09-16 → 2026-11-02): seguridad, lock de puntos/club, anti-copia, limpieza de rendimiento, grants por defecto, rol admin, dashboard y estadísticas de tráfico
 
 .github/workflows/
 ├── deploy.yml                      # Build y deploy a GitHub Pages (push a main)
 ├── verify.yml                      # Verifica la lógica de puntuación en cada PR (bloquea el merge)
 ├── auto-evaluate-matches.yml       # Cron cada 30 min: sync ESPN + evaluar + persistir
-└── auto-sync-squads.yml            # Cron mensual (1ro de cada mes): sync plantillas oficiales
+├── auto-sync-squads.yml            # Cron mensual (1ro de cada mes): sync plantillas oficiales
+└── sync-site-analytics.yml         # Cron cada 3 h: tráfico de Cloudflare → Supabase (panel admin)
 
 public/
 ├── manifest.json                   # PWA manifest
@@ -233,7 +246,7 @@ public/
 | `/olvide-contrasena` | Solicitud de restablecimiento de contraseña | No |
 | `/actualizar-contrasena` | Destino del email de recuperación (nueva contraseña) | No |
 | `/perfil` | Edición de nombre de usuario, reinicio de club, cambio de contraseña y eliminación de cuenta | **Sí** |
-| `/admin` | Panel de administración: métricas del concurso y accesos rápidos | **Sí (rol `admin`)** |
+| `/admin` | Panel de administración: métricas del concurso, tráfico del sitio (30 días) y accesos rápidos | **Sí (rol `admin`)** |
 | `/admin/cuenta` | Correo del administrador y cambio de contraseña | **Sí (rol `admin`)** |
 | `/admin/login` | Inicio de sesión exclusivo del panel; rechaza cuentas sin rol `admin` | No |
 | `/pronosticar` | Envío y re-edición de pronósticos en tarjetas estilo TV | **Sí** |
@@ -345,6 +358,16 @@ public/
 - `/ranking` y `/mis-pronosticos` recalculan puntos en el navegador con resultados ESPN en vivo (caché 30s) + fallback a los JSON oficiales.
 - El survivor también progresa client-side al abrir `/mis-pronosticos` (refuerzo idempotente).
 
+### Cron cada 3 horas — estadísticas de tráfico (`.github/workflows/sync-site-analytics.yml`)
+
+> El panel es un export estático: no puede llamar a la API de Cloudflare desde el navegador (el token quedaría público). Por eso un cron con el token en un **secret** consulta Cloudflare y deja solo agregados en Supabase; el panel lee por la RPC `admin_site_stats()`.
+
+1. **Zona (Zone Analytics):** peticiones, páginas vistas, visitantes únicos, bytes, cache ratio y amenazas de los **30 días** recientes.
+2. **Web Analytics (RUM):** páginas vistas y visitas de navegadores reales (excluye bots), más top rutas, países, referentes y navegadores.
+3. **Persiste** en `site_stats_daily` y `site_stats_breakdown` con la service role key (REST directo, idempotente por `day`).
+4. **Fail-fast:** si Cloudflare responde error de permisos, el run falla; el panel sigue mostrando el último sync correcto (`last_sync`).
+5. **Manual:** `gh workflow run sync-site-analytics.yml --ref main` para refrescar al instante tras un deploy.
+
 ---
 
 ## 🗄️ Base de Datos
@@ -361,6 +384,8 @@ public/
 | `prediction_scorers` | Goleadores pronosticados por partido | Lectura propia + partidos ya iniciados / Escritura con IDOR fix |
 | `tournament_survivors` | Supervivencia y herencia en 7 copas KO | Lectura pública / Escritura propio usuario |
 | `app_meta` | Clave-valor (hash del calendario para el cron) | Solo service role |
+| `site_stats_daily` | Agregados diarios de tráfico de Cloudflare (zona + RUM) | RLS sin policies: solo escribe el cron (service role) |
+| `site_stats_breakdown` | Top rutas, países, referentes y navegadores por día | RLS sin policies: solo escribe el cron (service role) |
 
 Los IDs de los partidos son **UUIDs determinísticos** generados por `matchIdToUuid()` — no se almacenan en la API original. Cualquier identificador (numérico de football-data.org, string de ESPN, o UUID existente) se convierte a un UUID v4 determinístico using hash, garantizando consistencia entre el JSON local, Supabase y el cron.
 
@@ -382,6 +407,8 @@ Desde el endurecimiento del **2026-10-17** la lectura pública **no es total**: 
 | `prediction_scorers` (escritura) | Escritura validada por ownership del pronóstico con `EXISTS` sobre `predictions` (IDOR fix) |
 | `app_meta` | Sin grants para anon/authenticated — solo service role |
 | `delete_user_account` | RPC `SECURITY DEFINER` (solo `authenticated`) que purga en cascada y libera el email |
+| `admin_site_stats(p_days)` | RPC `SECURITY DEFINER` que exige `is_admin()` y devuelve solo agregados de tráfico (sin IP ni user agent). Ventana acotada a 1-90 días |
+| `site_stats_*` | Sin policies ni grants para anon/authenticated: se leen **únicamente** por la RPC de admin |
 | Privilegios de tabla | `TRUNCATE`/`REFERENCES`/`TRIGGER` revocados a anon/authenticated (no pasan por RLS: defensa en profundidad) |
 | **Contraseñas** | Mínimo 8 caracteres + mayúscula + número + símbolo |
 
@@ -454,6 +481,15 @@ SUPABASE_SERVICE_ROLE_KEY=tu-service-key   # SOLO local y GitHub Secrets (nunca 
 | `NEXT_PUBLIC_FOOTBALL_DATA_KEY` | **Ya NO se inyecta en el build.** `NEXT_PUBLIC_*` queda inlineado en el bundle público, y las llamadas en vivo a football-data.org solo se hacen en localhost |
 | `FOOTBALL_DATA_KEY` | Key de football-data.org para scripts de validación / sincronización |
 | `SUPABASE_SERVICE_ROLE_KEY` | Service role key para el cron (escritura bypass RLS) |
+| `CLOUDFLARE_API_TOKEN` | Token con `Account Analytics: Read` + `Zone Analytics: Read`, para el cron de tráfico |
+
+### GitHub Variables necesarias (solo el cron de tráfico)
+
+| Variable | Uso |
+|----------|-----|
+| `CF_ZONE_TAG` | Zone ID de `futbolcamisetapasion.com` (Zone Analytics) |
+| `CF_ACCOUNT_TAG` | Account ID de Cloudflare (Web Analytics / GraphQL) |
+| `CF_RUM_SITE_TAG` | Site tag del beacon de Web Analytics (páginas vistas y visitas reales) |
 
 > **No se requiere un PAT para el deploy.** El `GITHUB_TOKEN` que GitHub inyecta en los workflows basta para disparar `deploy.yml` vía `workflow_dispatch` (ver "Automatización" arriba). El workflow del cron declara `permissions: contents: write` (para pushear los JSON) y `actions: write` (para disparar el deploy).
 
@@ -591,6 +627,7 @@ npm run build                 # Build completo (24 rutas estáticas)
 - **Rol en base**: `profiles.role` (`'user'` | `'admin'`), aplicado por la migración `supabase/migrations/2026-11-01_admin_role.sql`. El layout `/admin` valida sesión + rol antes de pintar nada; quien no es admin se desloguea.
 - **`/admin`**: dashboard con métricas en vivo vía la RPC `admin_dashboard_stats()` (SECURITY DEFINER + `is_admin()`): 6 KPIs (participantes, pronósticos, partidos con resultado, pendientes de resultado, supervivientes vivos, altas de 7 días), gráfico de actividad de los últimos 7 días, clubes más elegidos con logo y porcentaje, supervivientes por copa KO, cobertura del calendario publicado y próximos partidos con hora de cierre. Las fechas se muestran en `America/Caracas`; hay aviso ámbar automático si hay partidos de los últimos 7 días sin resultado oficial.
 - **`/admin/cuenta`**: correo del admin (solo lectura) y **cambio de contraseña con reautenticación** por contraseña actual.
+- **Tráfico del sitio (2026-11-02)**: bloque dentro de `/admin` con datos de los últimos 30 días servidos por la RPC `admin_site_stats()`: KPIs (vistas reales, visitas, visitantes únicos, peticiones, cache ratio, amenazas), gráfico diario de vistas reales vs. peticiones, top 8 rutas, top países, referentes y navegadores. Los datos los alimenta el cron `sync-site-analytics.yml` cada 3 h; el bloque muestra `last_sync` y avisa si los datos están viejos.
 - **Cambio de contraseña para cualquier usuario** en `/perfil` (mismo componente `ChangePasswordForm`); el email de recuperación (`/olvide-contrasena` → `/actualizar-contrasena`) sigue siendo la vía cuando el usuario no recuerda la clave.
 
 ### Lo que falta (fases siguientes)
@@ -680,6 +717,23 @@ Eliminar cuentas de testing/obsoletas. **No registrar emails inventados.**
 ---
 
 ## 📋 Historial de Cambios
+
+### 2026-11-02 — Tráfico del sitio en el panel de admin (Cloudflare → Supabase → `/admin`)
+
+**Descripción:** el panel mostraba el pulso del concurso pero nada del sitio. Se añadió un bloque de **tráfico de los últimos 30 días** con datos reales de Cloudflare, sin exponer ningún token en el bundle estático.
+
+**Cambios:**
+
+| Archivo | Cambio |
+|---------|--------|
+| `supabase/migrations/2026-11-02_site_analytics.sql` | **NUEVO** — tablas `site_stats_daily` y `site_stats_breakdown` (RLS sin policies) + RPC `admin_site_stats(p_days)` con `is_admin()` y ventana 1-90 días |
+| `supabase/schema.sql` | Sección K con el mismo DDL, para que un bootstrap limpio no quede sin el bloque |
+| `scripts/sync-site-analytics.mjs` | **NUEVO** — consulta Zone Analytics (HTTP) y Web Analytics (GraphQL), agrega por día y hace upsert con service role |
+| `.github/workflows/sync-site-analytics.yml` | **NUEVO** — cron `15 */3 * * *` + `workflow_dispatch` con input `days` |
+| `src/app/admin/page.tsx` | Bloque "Tráfico del sitio": 6 KPIs, gráfico diario vistas reales vs. peticiones, top rutas/países/referentes/navegadores, `last_sync` y aviso de datos viejos |
+| `README.md`, `ADMIN_PANEL.md`, `AGENTS.md`, `DISASTER_RECOVERY_AND_SCHEMA.md` | Documentación del flujo, secrets/variables y tabla nueva |
+
+**Verificación:** `npm run verify` + `tsc` + ESLint + build OK en la rama; CI `Verify scoring logic` y `Deploy to GitHub Pages` ✅ en `main`; `/admin/`, `/ranking/` y `/pronosticar/` responden **200** en producción y el chunk servido contiene el bloque nuevo; primer sync manual del workflow ✅ con 30 días de histórico. Rama `feat/site-analytics` eliminada tras el merge.
 
 ### 2026-10-17 — Merge a `main` y verificación en producción (lógica de puntuación blindada)
 

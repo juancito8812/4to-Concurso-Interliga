@@ -28,12 +28,12 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
 2. Abrir el archivo [`supabase/schema.sql`](./supabase/schema.sql) de este repositorio.
 3. Copiar todo el contenido, pegarlo en el editor y hacer clic en **Run**.
 4. ✅ Esto creará automáticamente:
-   - Las **8 tablas** (`teams`, `profiles`, `players`, `matches`, `predictions`, `prediction_scorers`, `tournament_survivors`, `app_meta`).
+   - Las **8 tablas base** (`teams`, `profiles`, `players`, `matches`, `predictions`, `prediction_scorers`, `tournament_survivors`, `app_meta`) y, al final del script, el **rol de admin** (sección J) y las **2 tablas de analítica** con su RPC (sección K): `site_stats_daily` y `site_stats_breakdown` + `admin_site_stats()`.
    - Los **índices B-Tree explícitos** de alta velocidad (compuestos, parciales y FK) más las PK y restricciones únicas. *(La limpieza de rendimiento 2026-10-17 eliminó `idx_players_name`; ver Sección 4.)*
-   - Las **políticas RLS endurecidas**: propiedad + cierre de pronóstico (1 min) + elegibilidad por club/copa + `points` solo del servidor.
-   - **Funciones y triggers**: `handle_new_user` (registro automático), `enforce_team_lock`, `enforce_max_scorers_per_team`, `enforce_points_service_only`.
+   - Las **políticas RLS endurecidas**: propiedad + cierre de pronóstico (1 min) + elegibilidad por club/copa + `points` solo del servidor. Las tablas `site_stats_*` quedan con RLS **sin policies** (solo service role y la RPC de admin).
+   - **Funciones y triggers**: `handle_new_user` (registro automático), `enforce_team_lock`, `enforce_max_scorers_per_team`, `enforce_points_service_only`, `enforce_role_service_only`.
    - **Funciones de elegibilidad**: `effective_kickoff`, `is_match_open_for_prediction`, `is_users_club_match`, `is_prediction_cup_allowed`, `match_cup_slug`, `is_ko_cup_match`.
-   - **RPCs (SECURITY DEFINER)**: `delete_user_account`, `reset_participation` y `get_public_predictions` (lectura del ranking con los pronósticos abiertos enmascarados, 2026-10-17).
+   - **RPCs (SECURITY DEFINER)**: `delete_user_account`, `reset_participation`, `get_public_predictions` (lectura del ranking con los pronósticos abiertos enmascarados, 2026-10-17), `is_admin`, `admin_dashboard_stats` y `admin_site_stats`.
    - La semilla inicial de clubes.
 
 > **Después de correr `schema.sql`** (y con la service role key disponible), ejecutar los scripts de sincronización para poblar los datos reales:
@@ -60,7 +60,13 @@ Si se pierde la base de datos de Supabase o se necesita crear un nuevo entorno:
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Llave pública anónima.
    - `SUPABASE_SERVICE_ROLE_KEY`: Llave secreta con permisos de escritura para el cron automático de puntuación (`auto-evaluate-matches.yml`).
    - `FOOTBALL_DATA_KEY` / `NEXT_PUBLIC_FOOTBALL_DATA_KEY`: Token de football-data.org.
-3. Hacer push a `main` para que GitHub Actions construya y despliegue el sitio en GitHub Pages:
+   - `CLOUDFLARE_API_TOKEN`: token con `Account Analytics: Read` + `Zone Analytics: Read` (cron de tráfico del sitio).
+3. En **Settings → Secrets and variables → Actions → Variables** (pestaña *Variables*, no secrets), crear:
+   - `CF_ZONE_TAG`: Zone ID de `futbolcamisetapasion.com`.
+   - `CF_ACCOUNT_TAG`: Account ID de Cloudflare.
+   - `CF_RUM_SITE_TAG`: site tag del beacon de Web Analytics.
+   Sin estas tres variables el workflow `sync-site-analytics.yml` falla y el bloque de tráfico del panel queda vacío (con aviso de `last_sync`).
+4. Hacer push a `main` para que GitHub Actions construya y despliegue el sitio en GitHub Pages:
    ```bash
    git push origin main
    ```
@@ -86,6 +92,8 @@ El esquema relacional completo se encuentra en [`supabase/schema.sql`](./supabas
 | `prediction_scorers` | Goleadores pronosticados por partido | `id` | `prediction_id` $\rightarrow$ `predictions` |
 | `tournament_survivors` | Supervivencia y herencia de equipo en torneos KO | `id` | `user_id` $\rightarrow$ `auth.users`, `active_team_id` $\rightarrow$ `teams` |
 | `app_meta` | Clave-valor interna (hash del calendario para el cron) | `key` | - |
+| `site_stats_daily` | Agregados diarios de tráfico (Cloudflare Zone + RUM), escritos por el cron | `day` | - |
+| `site_stats_breakdown` | Top rutas / países / referentes / navegadores por día | `(day, kind, key)` | - |
 
 ### Diagrama Entidad-Relación:
 

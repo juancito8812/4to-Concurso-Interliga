@@ -846,3 +846,142 @@ DROP TRIGGER IF EXISTS trg_role_service_only ON public.profiles;
 CREATE TRIGGER trg_role_service_only
   BEFORE INSERT OR UPDATE ON public.profiles
   FOR EACH ROW EXECUTE FUNCTION public.enforce_role_service_only();
+
+-- ==============================================================================
+-- K. [2026-11-02] ESTADÍSTICAS DE TRÁFICO DEL SITIO (Cloudflare → Supabase)
+-- ==============================================================================
+-- Espejo de `supabase/migrations/2026-11-02_site_analytics.sql` para que un
+-- bootstrap limpio tenga el bloque de tráfico del panel. Son solo agregados por
+-- día (sin IP ni user agent). Las escribe el cron `sync-site-analytics.yml` con
+-- service_role; anon/authenticated no tienen policies ni grants sobre ellas y
+-- las leen únicamente por la RPC `admin_site_stats()`.
+-- ==============================================================================
+
+CREATE TABLE IF NOT EXISTS public.site_stats_daily (
+  day            date primary key,
+  requests       bigint  not null default 0,
+  page_views     bigint  not null default 0,
+  uniques        integer not null default 0,
+  bytes          bigint  not null default 0,
+  cached_bytes   bigint  not null default 0,
+  threats        integer not null default 0,
+  rum_pageviews  integer not null default 0,
+  rum_visits     integer not null default 0,
+  updated_at     timestamptz not null default now()
+);
+
+CREATE TABLE IF NOT EXISTS public.site_stats_breakdown (
+  day  date not null,
+  kind text not null check (kind in ('path', 'country', 'referer', 'browser')),
+  key  text not null check (char_length(key) between 1 and 300),
+  hits integer not null default 0,
+  primary key (day, kind, key)
+);
+
+CREATE INDEX IF NOT EXISTS site_stats_breakdown_kind_day_idx
+  ON public.site_stats_breakdown (kind, day desc);
+
+ALTER TABLE public.site_stats_daily ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.site_stats_breakdown ENABLE ROW LEVEL SECURITY;
+
+-- Sin policies a propósito: el service_role (cron) escribe porque bypassa RLS.
+
+CREATE OR REPLACE FUNCTION public.admin_site_stats(p_days integer DEFAULT 30)
+RETURNS jsonb
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+DECLARE
+  v_days integer := greatest(1, least(coalesce(p_days, 30), 90));
+  v_from date := (current_date - (v_days - 1));
+  v jsonb;
+BEGIN
+  IF NOT public.is_admin() THEN
+    RAISE EXCEPTION 'Solo administradores pueden ver las estadísticas del sitio';
+  END IF;
+
+  SELECT jsonb_build_object(
+    'generated_at', now(),
+    'window_days', v_days,
+    'last_sync', (SELECT max(updated_at) FROM site_stats_daily),
+    'totals', coalesce((
+      SELECT jsonb_build_object(
+        'requests', coalesce(sum(requests), 0),
+        'page_views', coalesce(sum(page_views), 0),
+        'uniques_avg', coalesce(round(avg(nullif(uniques, 0))), 0),
+        'uniques_max', coalesce(max(uniques), 0),
+        'bytes', coalesce(sum(bytes), 0),
+        'threats', coalesce(sum(threats), 0),
+        'rum_pageviews', coalesce(sum(rum_pageviews), 0),
+        'rum_visits', coalesce(sum(rum_visits), 0)
+      ) FROM site_stats_daily WHERE day >= v_from
+    ), '{}'::jsonb),
+    'yesterday', coalesce((
+      SELECT jsonb_build_object(
+        'day', day,
+        'rum_pageviews', rum_pageviews,
+        'rum_visits', rum_visits,
+        'page_views', page_views,
+        'uniques', uniques,
+        'requests', requests
+      ) FROM site_stats_daily
+      WHERE day < current_date
+      ORDER BY day DESC
+      LIMIT 1
+    ), '{}'::jsonb),
+    'daily', coalesce((
+      SELECT jsonb_agg(
+        jsonb_build_object(
+          'date', day,
+          'rum_pageviews', rum_pageviews,
+          'rum_visits', rum_visits,
+          'page_views', page_views,
+          'uniques', uniques
+        ) ORDER BY day
+      ) FROM site_stats_daily WHERE day >= v_from
+    ), '[]'::jsonb),
+    'top_paths', coalesce((
+      SELECT jsonb_agg(jsonb_build_object('key', key, 'hits', n) ORDER BY n DESC, key)
+      FROM (
+        SELECT key, sum(hits)::int AS n
+        FROM site_stats_breakdown
+        WHERE kind = 'path' AND day >= v_from
+        GROUP BY key ORDER BY n DESC, key LIMIT 8
+      ) p
+    ), '[]'::jsonb),
+    'top_countries', coalesce((
+      SELECT jsonb_agg(jsonb_build_object('key', key, 'hits', n) ORDER BY n DESC, key)
+      FROM (
+        SELECT key, sum(hits)::int AS n
+        FROM site_stats_breakdown
+        WHERE kind = 'country' AND day >= v_from
+        GROUP BY key ORDER BY n DESC, key LIMIT 6
+      ) c
+    ), '[]'::jsonb),
+    'top_referers', coalesce((
+      SELECT jsonb_agg(jsonb_build_object('key', key, 'hits', n) ORDER BY n DESC, key)
+      FROM (
+        SELECT key, sum(hits)::int AS n
+        FROM site_stats_breakdown
+        WHERE kind = 'referer' AND day >= v_from
+        GROUP BY key ORDER BY n DESC, key LIMIT 6
+      ) r
+    ), '[]'::jsonb),
+    'top_browsers', coalesce((
+      SELECT jsonb_agg(jsonb_build_object('key', key, 'hits', n) ORDER BY n DESC, key)
+      FROM (
+        SELECT key, sum(hits)::int AS n
+        FROM site_stats_breakdown
+        WHERE kind = 'browser' AND day >= v_from
+        GROUP BY key ORDER BY n DESC, key LIMIT 5
+      ) b
+    ), '[]'::jsonb)
+  ) INTO v;
+
+  RETURN v;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.admin_site_stats(integer) FROM public;
+GRANT EXECUTE ON FUNCTION public.admin_site_stats(integer) TO authenticated;
