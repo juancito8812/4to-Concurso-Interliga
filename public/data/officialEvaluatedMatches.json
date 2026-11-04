@@ -14958,5 +14958,226 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdaf",
+    "espn_id": "401915311",
+    "home_team": "Galatasaray SK",
+    "away_team": "Stuttgart",
+    "match_date": "2026-11-03T17:45Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Alexey Batrakov",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdae",
+    "espn_id": "401915310",
+    "home_team": "Shakhtar Donetsk",
+    "away_team": "Sporting Clube de Portugal",
+    "match_date": "2026-11-03T17:45Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Issa Doumbia",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdfa",
+    "espn_id": "401915386",
+    "home_team": "Atlético Madrid",
+    "away_team": "Bayern Munich",
+    "match_date": "2026-11-03T20:00Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Lennart Karl",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Konrad Laimer",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdfb",
+    "espn_id": "401915387",
+    "home_team": "Barcelona",
+    "away_team": "Aston Villa",
+    "match_date": "2026-11-03T20:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdf8",
+    "espn_id": "401915384",
+    "home_team": "FK Bodø/Glimt",
+    "away_team": "Lille",
+    "match_date": "2026-11-03T20:00Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdab",
+    "espn_id": "401915307",
+    "home_team": "Feyenoord",
+    "away_team": "Inter Milan",
+    "match_date": "2026-11-03T20:00Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Yann Bisseck",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Pio Esposito",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Piotr Zielinski",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdf9",
+    "espn_id": "401915385",
+    "home_team": "LASK Linz",
+    "away_team": "Slovan Bratislava",
+    "match_date": "2026-11-03T20:00Z",
+    "league": "Champions League",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Kasper Jørgensen",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Robert Ljubicic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Samuel Adeniran",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdac",
+    "espn_id": "401915308",
+    "home_team": "Manchester United",
+    "away_team": "Roma",
+    "match_date": "2026-11-03T20:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Matìas Soulè",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Donyell Malen",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Bruno Fernandes",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Matheus Cunha",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdad",
+    "espn_id": "401915309",
+    "home_team": "Villarreal",
+    "away_team": "Paris Saint-Germain",
+    "match_date": "2026-11-03T20:00Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 6,
+    "scorers": [
+      {
+        "player_name": "João Neves",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Désiré Doué",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Senny Mayulu",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fabián Ruiz",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "David Boly",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
