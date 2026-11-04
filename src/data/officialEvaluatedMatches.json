@@ -15179,5 +15179,93 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdf7",
+    "espn_id": "401915383",
+    "home_team": "AEK Athens",
+    "away_team": "Real Madrid",
+    "match_date": "2026-11-04T17:45Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Aboubakary Koita",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Stavros Pilios",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Federico Valverde",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdf6",
+    "espn_id": "401915382",
+    "home_team": "Fenerbahçe",
+    "away_team": "Liverpool",
+    "match_date": "2026-11-04T17:45Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Trey Nyoni",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mason Greenwood",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alexander Isak",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Archie Brown",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Vedat Muriqi",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be9f",
+    "espn_id": "401915551",
+    "home_team": "Rennes",
+    "away_team": "PAE Olympiakos SFP",
+    "match_date": "2026-11-04T15:30Z",
+    "league": "Europa League",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
   }
 ]

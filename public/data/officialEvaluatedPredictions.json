@@ -2481,5 +2481,15 @@
     "scorers": [],
     "points": 0,
     "pointsDetails": []
+  },
+  {
+    "id": "a5412afc-8c76-494e-aa81-9251d3f77b69",
+    "user_id": "b2ff86ea-a2f0-4fb6-9095-e87fe5ec093b",
+    "display_name": "ARS",
+    "match_id": "00000000-0000-4000-8000-000017f4bdf5",
+    "home_score": 0,
+    "away_score": 3,
+    "created_at": "2026-10-25T01:30:29.134731+00:00",
+    "scorers": []
   }
 ]
