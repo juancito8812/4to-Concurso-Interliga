@@ -12747,7 +12747,7 @@
     "espn_id": "401928527",
     "home_team": "CD Tarancon",
     "away_team": "Levante",
-    "match_date": "2026-10-28T18:00Z",
+    "match_date": "2026-11-05T18:00Z",
     "league": "Copa del Rey",
     "result_home": 0,
     "result_away": 0,
@@ -12819,7 +12819,7 @@
     "espn_id": "401928505",
     "home_team": "Alcoyano",
     "away_team": "Mallorca",
-    "match_date": "2026-10-28T19:00Z",
+    "match_date": "2026-11-05T20:00Z",
     "league": "Copa del Rey",
     "result_home": 0,
     "result_away": 0,
@@ -15266,6 +15266,247 @@
     "result_home": 0,
     "result_away": 0,
     "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bda8",
+    "espn_id": "401915304",
+    "home_team": "Borussia Dortmund",
+    "away_team": "Real Betis",
+    "match_date": "2026-11-04T20:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Fábio Silva",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Aitor Ruibal",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Konstantinos Karetsas",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bda5",
+    "espn_id": "401915301",
+    "home_team": "Porto",
+    "away_team": "Napoli",
+    "match_date": "2026-11-04T20:00Z",
+    "league": "Champions League",
+    "result_home": 4,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Jan Bednarek",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Scott McTominay",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Gabri Veiga",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jakub Kiwior",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Samu Aghehowa",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bda9",
+    "espn_id": "401915305",
+    "home_team": "Lens",
+    "away_team": "Como",
+    "match_date": "2026-11-04T20:00Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 9,
+    "scorers": [
+      {
+        "player_name": "Tasos Douvikas",
+        "goals": 3,
+        "team": "away"
+      },
+      {
+        "player_name": "Nico Paz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Lucas Da Cunha",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Marc-Oliver Kempf",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mattia Liberali",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ruben Aguilar",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Martin Baturina",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Matteo Papaccioli",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bda7",
+    "espn_id": "401915303",
+    "home_team": "PSV",
+    "away_team": "Club Brujas",
+    "match_date": "2026-11-04T20:00Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Nicolo Tresoldi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Kodai Sano",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Carlos Forbs",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdaa",
+    "espn_id": "401915306",
+    "home_team": "RB Leipzig",
+    "away_team": "Manchester City",
+    "match_date": "2026-11-04T20:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Ridle Baku",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Enzo Fernández",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Antonio Nusa",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Erling Haaland",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdf5",
+    "espn_id": "401915381",
+    "home_team": "SK Slavia Praha",
+    "away_team": "Arsenal",
+    "match_date": "2026-11-04T20:00Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Noni Madueke",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Viktor Gyökeres",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Wiktor Nowak",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bda6",
+    "espn_id": "401915302",
+    "home_team": "Viking FK",
+    "away_team": "SABAH FK",
+    "match_date": "2026-11-04T20:00Z",
+    "league": "Champions League",
+    "result_home": 4,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Orphé Mbina",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Erik Botheim",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Zlatko Tripic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Henrik Falchener",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
     "completed": true
   }
 ]
