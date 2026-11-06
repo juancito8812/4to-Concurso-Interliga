@@ -16355,5 +16355,167 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e04",
+    "espn_id": "401882809",
+    "home_team": "Sevilla",
+    "away_team": "Alavés",
+    "match_date": "2026-11-06T20:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dfa",
+    "espn_id": "401879242",
+    "home_team": "Everton",
+    "away_team": "Coventry City",
+    "match_date": "2026-11-06T20:00Z",
+    "league": "Premier League",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Yann Gboho",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Thierno Barry",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Kiernan Dewsbury-Hall",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c9",
+    "espn_id": "401874815",
+    "home_team": "Venezia",
+    "away_team": "Udinese",
+    "match_date": "2026-11-06T19:45Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Toma Basic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Enrique Perez",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a25c",
+    "espn_id": "401884739",
+    "home_team": "Hamburger SV",
+    "away_team": "Borussia Mönchengladbach",
+    "match_date": "2026-11-06T19:30Z",
+    "league": "Bundesliga",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Miro Muheim",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Robin Hack",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Shafiq Nandja",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Albert Grønbaek",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4fb4d",
+    "espn_id": "401931085",
+    "home_team": "Bristol Rovers",
+    "away_team": "Cambridge United",
+    "match_date": "2026-11-06T19:30Z",
+    "league": "FA Cup",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Reiss-Alexander Russell-Denny",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fabrizio Cavegn",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4fb65",
+    "espn_id": "401931109",
+    "home_team": "Oxford City",
+    "away_team": "Leicester City",
+    "match_date": "2026-11-06T19:45Z",
+    "league": "FA Cup",
+    "result_home": 2,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Louis Page",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Scott Pollock",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Emil Riis Jakobsen",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Kamari Doyle",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Josh Ashby",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Tom Watson",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
