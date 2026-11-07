@@ -16644,13 +16644,7 @@
     "league": "Serie A",
     "result_home": 1,
     "result_away": 1,
-    "scorers": [
-      {
-        "player_name": "Giovanni Simeone",
-        "goals": 1,
-        "team": "home"
-      }
-    ],
+    "scorers": [],
     "completed": true
   },
   {
@@ -17588,6 +17582,212 @@
         "player_name": "Josh Stones",
         "goals": 1,
         "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e03",
+    "espn_id": "401882811",
+    "home_team": "Osasuna",
+    "away_team": "Athletic Bilbao",
+    "match_date": "2026-11-07T17:30Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Nico Williams",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alejandro Catena",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e01",
+    "espn_id": "401878757",
+    "home_team": "Nott. Forest",
+    "away_team": "Manchester City",
+    "match_date": "2026-11-07T17:30Z",
+    "league": "Premier League",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Jair Cunha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Liam Delap",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Rayan Cherki",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c7",
+    "espn_id": "401874974",
+    "home_team": "Parma",
+    "away_team": "Bologna",
+    "match_date": "2026-11-07T17:00Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Arthur Theate",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Riccardo Orsolini",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Vincent Sierro",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a259",
+    "espn_id": "401884743",
+    "home_team": "Stuttgart",
+    "away_team": "Werder Bremen",
+    "match_date": "2026-11-07T17:30Z",
+    "league": "Bundesliga",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Maximilian Mittelstädt",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4fb6c",
+    "espn_id": "401931116",
+    "home_team": "AFC Hornchurch",
+    "away_team": "Blackpool",
+    "match_date": "2026-11-07T15:00Z",
+    "league": "FA Cup",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Henry Roy Hearn",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jordan Brown",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Josh Bowler",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4fb61",
+    "espn_id": "401931105",
+    "home_team": "Fleetwood Town",
+    "away_team": "Rochdale",
+    "match_date": "2026-11-07T15:00Z",
+    "league": "FA Cup",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Luke Hannant",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ronan Coughlan",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Babajide Adeeko",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4fb59",
+    "espn_id": "401931097",
+    "home_team": "Altrincham",
+    "away_team": "Notts County",
+    "match_date": "2026-11-07T17:30Z",
+    "league": "FA Cup",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Jacob Bedeau",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Lucas Weaver",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lewis Banks",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Callum Roberts",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Max Sanders",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Kristian Dennis",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jack Hinchy",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Rosaire Longelo",
+        "goals": 1,
+        "team": "away"
       }
     ],
     "completed": true
