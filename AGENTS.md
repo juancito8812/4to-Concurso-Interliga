@@ -158,6 +158,23 @@ gh workflow run deploy.yml --ref main
 
 **Pitfall:** `workflow_dispatch` solo funciona si el archivo del workflow existe en la **rama por defecto**. Disparar un workflow nuevo desde una rama secundaria da `HTTP 404: Not Found`.
 
+### `npm run build` local falla con "Failed to fetch DM Sans" (incidente nov-2026)
+
+**Síntoma:** `next/font/google` no puede descargar DM Sans y el build muere, aunque `npm ci` y `npm run verify` pasen.
+
+**Causa:** en la LAN de producción `fonts.googleapis.com` está bloqueado (conexión rechazada al instante); el proxy SOCKS local puede estar caído, así que no hay ruta para `next/font`.
+
+**Fix:** no tocar `next/font`. Compilar en CI y bajar el artefacto:
+
+```bash
+git push origin <rama>                      # dispara preview-build.yml
+gh run watch $(gh run list --branch <rama> --limit 1 --json databaseId -q '.[0].databaseId')
+env -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY -u http_proxy -u https_proxy -u all_proxy \
+  gh run download <run-id> -n preview-site -D /tmp/preview-out
+```
+
+El `env -u` es obligatorio: los hosts de artefactos (`*.blob.core.windows.net`) no están en `NO_PROXY` y el `gh` intenta salir por el proxy muerto.
+
 ### Puntos mal otorgados / ranking que no cuadra (incidente oct-2026)
 
 **Síntoma:** "cambiaron los puntos" — el ranking muestra un total y la base guarda otro, sin que nadie tocara la regla.
