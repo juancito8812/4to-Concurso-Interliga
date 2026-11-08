@@ -17875,5 +17875,23 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c5",
+    "espn_id": "401874810",
+    "home_team": "Napoli",
+    "away_team": "Lazio",
+    "match_date": "2026-11-08T11:30Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Davide Frattesi",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
