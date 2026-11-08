@@ -18300,5 +18300,175 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e06",
+    "espn_id": "401882815",
+    "home_team": "Celta Vigo",
+    "away_team": "Levante",
+    "match_date": "2026-11-08T17:30Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e0b",
+    "espn_id": "401882807",
+    "home_team": "Villarreal",
+    "away_team": "Getafe",
+    "match_date": "2026-11-08T17:30Z",
+    "league": "LaLiga",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Tajon Buchanan",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Carlos Romero",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e0a",
+    "espn_id": "401882816",
+    "home_team": "Atlético Madrid",
+    "away_team": "Barcelona",
+    "match_date": "2026-11-08T20:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Giuliano Simeone",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c2",
+    "espn_id": "401874808",
+    "home_team": "Inter Milan",
+    "away_team": "Como",
+    "match_date": "2026-11-08T17:00Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Pio Esposito",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Marcus Thuram",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c1",
+    "espn_id": "401875003",
+    "home_team": "Fiorentina",
+    "away_team": "Juventus",
+    "match_date": "2026-11-08T19:45Z",
+    "league": "Serie A",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Mateo Pellegrino",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Nick Woltemade",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alieu Njie",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Bremer",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a260",
+    "espn_id": "401884742",
+    "home_team": "Hoffenheim",
+    "away_team": "Schalke 04",
+    "match_date": "2026-11-08T18:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Fisnik Asllani",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Tim Lemperle",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Junior Adamu",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4fb64",
+    "espn_id": "401931108",
+    "home_team": "Oldham Athletic",
+    "away_team": "Sheffield Wednesday",
+    "match_date": "2026-11-08T17:15Z",
+    "league": "FA Cup",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Calum Kavanagh",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Davis Kellior-Dunn",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Will Sutton",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
