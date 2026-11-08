@@ -17791,5 +17791,89 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e05",
+    "espn_id": "401882808",
+    "home_team": "Valencia",
+    "away_team": "Real Madrid",
+    "match_date": "2026-11-07T20:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Federico Valverde",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Arda Güler",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c3",
+    "espn_id": "401874803",
+    "home_team": "Roma",
+    "away_team": "Sassuolo",
+    "match_date": "2026-11-07T19:45Z",
+    "league": "Serie A",
+    "result_home": 3,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Mario Hermoso",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Rodrigo Mora",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4fb60",
+    "espn_id": "401931104",
+    "home_team": "Peterborough United",
+    "away_team": "Reading",
+    "match_date": "2026-11-07T20:00Z",
+    "league": "FA Cup",
+    "result_home": 0,
+    "result_away": 5,
+    "scorers": [
+      {
+        "player_name": "Daniel Kyerewaa",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jack Marriott",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Charlie Savage",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jamie Reid",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
