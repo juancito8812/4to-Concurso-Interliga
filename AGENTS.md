@@ -51,6 +51,7 @@ de negocio debe existir también en la base**: el cliente se evade con la anon k
 - **Eliminado de copa no pronostica**: `is_prediction_cup_allowed()` bloquea pronósticos en partidos de fase KO de una copa donde `tournament_survivors.status = 'ELIMINATED'` (`match_cup_slug` + `is_ko_cup_match` replican la detección de KO del cliente).
 - **Superviviente KO no revive**: la política de DELETE de `tournament_survivors` solo permite borrar la fila si sigue `ALIVE` y con `history = '[]'`. Antes se podía borrar la fila eliminada y reinsertarla "viva" para revivir en la copa.
 - **Horarios a medianoche (`00:00:00Z`)**: se evalúan como jornada vespertina (20:00 UTC) en el cliente, en la base (`effective_kickoff`) y en el cron. Si cambiás uno, cambiá los tres.
+- **Hora real del kickoff (2026-11-08)**: football-data.org devuelve `00:00Z` cuando la TV todavía no confirma horario, así que el JSON/DB se quedaban "a medianoche" meses antes del partido. `scripts/sync-kickoff-times.js --write` (paso previo del cron `auto-evaluate-matches.yml`, ventana −14/+10 días) copia la hora real de ESPN a `matches.match_date` y a los dos `officialFixtures.json`; solo reescribe fixtures con `00:00Z` o desvío > 30 min. Consecuencia de diseño: el banner de atrasados del admin cuenta por **kickoff efectivo** (`effective_kickoff`), no por `match_date` crudo — si no, todo partido de liga europea aparecía "atrasado 10 h" desde las 00:00Z hasta el pitazo (`admin_dashboard_stats()`, migración `2026-11-08_admin_alarm_effective_kickoff.sql`).
 - **Cron `--dry-run`**: `node scripts/auto-sync-espn-results.js --dry-run` hace todas las lecturas y reporta lo que haría sin escribir nada (ni en Supabase ni en los JSON).
 - **Ingesta de resultados del cron (bugs cerrados 2026-09-20)**: el emparejamiento evento ESPN → fixture exige **proximidad de fecha (±3 días)** en `findFixture` (sin esto, una reprogramación atribuía el resultado al fixture de otra fecha: bug Levante-Athletic 0-0 del 16/09 atribuido al partido reprogramado al 21/10) y el score debe venir **explícito** en la respuesta ESPN (`parseInt(score ?? "")` — nunca `score || "0"`, que fabrica 0-0 de eventos sin marcador). Al cambiar el emparejamiento o la ventana, verificar contra `validate-fixtures.js` y auditar huérfanos/fechas contradictorias entre evaluados y fixtures.
 
@@ -156,6 +157,23 @@ gh workflow run deploy.yml --ref main
 ```
 
 **Pitfall:** `workflow_dispatch` solo funciona si el archivo del workflow existe en la **rama por defecto**. Disparar un workflow nuevo desde una rama secundaria da `HTTP 404: Not Found`.
+
+### `npm run build` local falla con "Failed to fetch DM Sans" (incidente nov-2026)
+
+**Síntoma:** `next/font/google` no puede descargar DM Sans y el build muere, aunque `npm ci` y `npm run verify` pasen.
+
+**Causa:** en la LAN de producción `fonts.googleapis.com` está bloqueado (conexión rechazada al instante); el proxy SOCKS local puede estar caído, así que no hay ruta para `next/font`.
+
+**Fix:** no tocar `next/font`. Compilar en CI y bajar el artefacto:
+
+```bash
+git push origin <rama>                      # dispara preview-build.yml
+gh run watch $(gh run list --branch <rama> --limit 1 --json databaseId -q '.[0].databaseId')
+env -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY -u http_proxy -u https_proxy -u all_proxy \
+  gh run download <run-id> -n preview-site -D /tmp/preview-out
+```
+
+El `env -u` es obligatorio: los hosts de artefactos (`*.blob.core.windows.net`) no están en `NO_PROXY` y el `gh` intenta salir por el proxy muerto.
 
 ### Puntos mal otorgados / ranking que no cuadra (incidente oct-2026)
 

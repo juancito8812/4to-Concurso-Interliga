@@ -20,6 +20,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Sync kickoff times from ESPN
+        # football-data.org guarda 00:00Z cuando la TV no confirma horario; el
+        # script lo corrige con la hora real de ESPN (ventana ±10 días) en DB y
+        # en los JSON de fixtures, para que la ventana de pronóstico cierre a
+        # la hora real del pitazo.
+        run: node scripts/sync-kickoff-times.js --write
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+      - name: Sync kickoff times from ESPN
+        # football-data.org guarda 00:00Z cuando la TV aún no confirma horario;
+        # el script lo corrige con la hora real de ESPN (ventana -14/+10 días)
+        # en la DB y en los JSON de fixtures, para que la ventana de pronóstico
+        # cierre a la hora real del pitazo.
+        run: node scripts/sync-kickoff-times.js --write
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
       - name: Sync finished match results from ESPN
         run: node scripts/auto-sync-espn-results.js
         env:
@@ -32,7 +54,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/data/officialEvaluatedMatches.json src/data/officialEvaluatedPredictions.json public/data/officialEvaluatedMatches.json public/data/officialEvaluatedPredictions.json
+          git add src/data/officialEvaluatedMatches.json src/data/officialEvaluatedPredictions.json public/data/officialEvaluatedMatches.json public/data/officialEvaluatedPredictions.json src/data/officialFixtures.json public/data/officialFixtures.json
           if git diff --cached --quiet; then
             echo "Sin cambios en los JSON de resultados."
             echo "changed=false" >> "$GITHUB_OUTPUT"
