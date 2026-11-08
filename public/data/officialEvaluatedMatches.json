@@ -17893,5 +17893,412 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e02",
+    "espn_id": "401882814",
+    "home_team": "Elche",
+    "away_team": "Real Betis",
+    "match_date": "2026-11-08T13:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Rodrigo Riquelme",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Marc Bartra",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e07",
+    "espn_id": "401882810",
+    "home_team": "Real Sociedad",
+    "away_team": "Rayo Vallecano",
+    "match_date": "2026-11-08T15:15Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Orri Óskarsson",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dfe",
+    "espn_id": "401879244",
+    "home_team": "Brighton",
+    "away_team": "Brentford",
+    "match_date": "2026-11-08T14:00Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Diego Gómez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Pascal Gross",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dfb",
+    "espn_id": "401879243",
+    "home_team": "Crystal Palace",
+    "away_team": "Liverpool",
+    "match_date": "2026-11-08T14:00Z",
+    "league": "Premier League",
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Alexis Mac Allister",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Florian Wirtz",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alexander Isak",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Eddie Nketiah",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dfd",
+    "espn_id": "401878759",
+    "home_team": "Ipswich Town",
+    "away_team": "Bournemouth",
+    "match_date": "2026-11-08T14:00Z",
+    "league": "Premier League",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Evanilson",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jack Clarke",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dfc",
+    "espn_id": "401879239",
+    "home_team": "Sunderland",
+    "away_team": "Chelsea",
+    "match_date": "2026-11-08T14:00Z",
+    "league": "Premier League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Enzo Le Fée",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088dff",
+    "espn_id": "401879240",
+    "home_team": "Manchester United",
+    "away_team": "Aston Villa",
+    "match_date": "2026-11-08T16:30Z",
+    "league": "Premier League",
+    "result_home": 4,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Alysson",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Nicolas Jackson",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Bruno Fernandes",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Youri Tielemans",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "John McGinn",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Leon Goretzka",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Joshua Zirkzee",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Patrick Dorgu",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885c8",
+    "espn_id": "401875018",
+    "home_team": "Genoa",
+    "away_team": "AC Milan",
+    "match_date": "2026-11-08T14:00Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Alphadjo Cissè",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Christian Pulisic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mikael Ellertsson",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885ca",
+    "espn_id": "401874800",
+    "home_team": "Monza",
+    "away_team": "Atalanta",
+    "match_date": "2026-11-08T14:00Z",
+    "league": "Serie A",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Nikola Krstovic",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a25f",
+    "espn_id": "401884738",
+    "home_team": "Köln",
+    "away_team": "Bayer Leverkusen",
+    "match_date": "2026-11-08T14:30Z",
+    "league": "Bundesliga",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Aleix García",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Patrik Schick",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Said El Mala",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a25e",
+    "espn_id": "401884741",
+    "home_team": "Freiburg",
+    "away_team": "Union Berlin",
+    "match_date": "2026-11-08T16:30Z",
+    "league": "Bundesliga",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Yuito Suzuki",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4fb47",
+    "espn_id": "401931079",
+    "home_team": "Stafford Rangers",
+    "away_team": "Grimsby Town",
+    "match_date": "2026-11-08T12:00Z",
+    "league": "FA Cup",
+    "result_home": 3,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Darrhyl Mason",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Jack Birch",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Harvey Rodgers",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Maldini Kacurri",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Géza Dávid Turi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Luke Marcus Banks",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Andy Cook",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Cian Doyle",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Kyle Sambor",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Justin Amaluzor",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4fb48",
+    "espn_id": "401931080",
+    "home_team": "Cray Wanderers",
+    "away_team": "Stockport County",
+    "match_date": "2026-11-08T14:15Z",
+    "league": "FA Cup",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Sammie Thomas Mcleod",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alex Joseph Hernández Cascante",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kyle Wootton",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mikael Mandron",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Lewis Fiorini",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4fb55",
+    "espn_id": "401931093",
+    "home_team": "Wimborne Town",
+    "away_team": "Crawley Town",
+    "match_date": "2026-11-08T15:00Z",
+    "league": "FA Cup",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Seung-Woo Yang",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Cameron Munn",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
