@@ -1,0 +1,48 @@
+name: Build preview (rama)
+
+# Compila la rama y deja el sitio estático como artefacto descargable.
+# Sirve para revisar cambios sin mergear a main (y sin depender de la red local,
+# que tiene bloqueado fonts.googleapis.com para next/font).
+
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify scoring logic
+        run: npm run verify
+
+      - name: TypeScript
+        run: npx tsc --noEmit
+
+      - name: Build with Next.js
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+
+      - name: Upload static site
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-site
+          path: ./out
+          retention-days: 7
