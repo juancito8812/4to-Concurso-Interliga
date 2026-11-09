@@ -220,8 +220,7 @@ public/
 ├── icon.svg                        # Icono de la aplicación
 ├── .nojekyll                       # Evita que GitHub Pages ignore _next/
 ├── CNAME                           # Dominio personalizado
-├── robots.txt                      # Directivas de indexación y sitemap para Google Search Console
-├── sitemap.xml                     # Mapa de sitio con 16 URLs estáticas (revisar: incluye `/reglas/` inexistente y slugs de liga desalineados con la app)
+├── robots.txt                      # Directivas de indexación (declara /sitemap.xml)
 ├── data/                           # JSONs de datos servidos como assets estáticos (CDN)
 │   ├── officialPlayers.json        # 7.196 jugadores (fetch dinámico, sync mensual)
 │   ├── officialFixtures.json       # 1.926 partidos (fetch dinámico)

@@ -235,6 +235,34 @@ Un fallo REAL es una predicción creada **antes** del pitazo que quedó con `poi
 - Ojo: el `CLOUDFLARE_API_TOKEN` del repo necesita `Account Analytics: Read` + `Zone Analytics: Read`
   además de lo que ya usa el deploy.
 
+### SEO, sitemap y metadatos (estado 2026-11-09)
+
+- **Fuente única del sitemap:** `src/app/sitemap.ts` (App Router, `dynamic = "force-static"`). Genera **15 URLs**:
+  4 estáticas (`/`, `/pronosticar/`, `/ranking/`, `/mis-pronosticos/`) + 11 tablas (`/tabla/<slug>/`).
+  El `public/sitemap.xml` estático **se eliminó** el 2026-11-09: estaba congelado desde sep-2026, listaba
+  `/reglas/` (inexistente) y slugs de liga viejos, y podía pisar la ruta generada.
+- **Slugs de liga:** deben coincidir con `generateStaticParams()` de `src/app/tabla/[league]/page.tsx` **y**
+  con la lista de `src/lib/leagueConfig.ts`: `laliga`, `premier`, `seriea`, `bundesliga`, `champions`,
+  `europa`, `conference`, `coppaitalia`, `facup`, `copadelrey`, `dfbpokal`. Un slug fuera de esa lista da
+  404 y Google penaliza el sitemap entero (hallazgo #1 del informe 2026-11-02). Al agregar o renombrar una
+  copa/liga se tocan los tres sitios en el mismo commit (sitemap, `generateStaticParams`, `leagueConfig`).
+- **No existe `/reglas/`:** el reglamento vive en la landing. No volver a enlazarlo ni a meterlo en el sitemap.
+- **Canonical por página:** `metadataBase` en `src/app/layout.tsx` apunta a `https://futbolcamisetapasion.com`;
+  cada ruta declara `alternates.canonical` en su propio `layout.tsx` (`/pronosticar/`, `/ranking/`,
+  `/mis-pronosticos/`) y `src/app/tabla/[league]/page.tsx` emite el canonical absoluto por liga. Las páginas
+  con `"use client"` no pueden exportar `metadata`: el canonical va en el `layout.tsx` de la ruta.
+- **Verificación en producción (CI verde no alcanza):**
+  ```bash
+  curl -s https://futbolcamisetapasion.com/sitemap.xml | grep -o '<loc>[^<]*'
+  curl -s https://futbolcamisetapasion.com/tabla/seriea/ | grep -o 'rel="canonical" href="[^"]*"'
+  ```
+- **Search Console:** propiedad `sc-domain:futbolcamisetapasion.com`. Tras cambiar rutas, reenviar
+  `https://futbolcamisetapasion.com/sitemap.xml` (`python3 ~/.hermes/scripts/gsc.py submit …`). "Solicitar
+  indexación" no tiene API: es manual en la UI.
+- **Inconsistencia abierta (decisión del dueño):** `robots.txt` bloquea `/mis-pronosticos/` y el sitemap la
+  incluye. Google puede reportarla como "bloqueada por robots.txt". Opciones: sacarla del sitemap (recomendado,
+  es una vista por usuario) o dejar de bloquearla.
+
 ### Estado del proyecto (vía MCP)
 
 `mcp__supabase__get_project` (requiere el argumento `id` = `ilkndkqcmxvlufxaugog`) → `status: ACTIVE_HEALTHY`. La DB se consulta con `mcp__supabase__execute_sql` (requiere `project_id`; service role implícito).
