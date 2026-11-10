@@ -18470,5 +18470,28 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4fb5a",
+    "espn_id": "401931098",
+    "home_team": "Plymouth Parkway",
+    "away_team": "Berkhamsted",
+    "match_date": "2026-11-09T19:30Z",
+    "league": "FA Cup",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Luke Andrews",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Andrew Neal",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
