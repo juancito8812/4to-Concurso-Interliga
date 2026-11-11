@@ -12723,11 +12723,42 @@
     "espn_id": "401928514",
     "home_team": "Anaitasuna",
     "away_team": "Alavés",
-    "match_date": "2026-11-03T18:00Z",
+    "match_date": "2026-11-10T18:00Z",
     "league": "Copa del Rey",
-    "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_home": 1,
+    "result_away": 6,
+    "scorers": [
+      {
+        "player_name": "Jonny",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mariano Díaz",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Carlos Juaristi Badiola",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Miguel Rodríguez",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Aitor Mañas",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Carles Aleñá",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
     "completed": true
   },
   {
@@ -12735,11 +12766,22 @@
     "espn_id": "401928516",
     "home_team": "CD Pamplona",
     "away_team": "Eibar",
-    "match_date": "2026-11-03T18:00Z",
+    "match_date": "2026-11-10T18:00Z",
     "league": "Copa del Rey",
     "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Javier Martón",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jon Magunacelaya",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
     "completed": true
   },
   {
@@ -12831,11 +12873,17 @@
     "espn_id": "401928519",
     "home_team": "Amorebieta",
     "away_team": "UD Logroñés",
-    "match_date": "2026-11-04T19:00Z",
+    "match_date": "2026-11-10T19:00Z",
     "league": "Copa del Rey",
-    "result_home": 0,
+    "result_home": 1,
     "result_away": 0,
-    "scorers": [],
+    "scorers": [
+      {
+        "player_name": "Xalbat Larralde Null",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
     "completed": true
   },
   {
@@ -12885,11 +12933,27 @@
     "espn_id": "401928528",
     "home_team": "Mijas Las Lagunas",
     "away_team": "Real Jaen CF",
-    "match_date": "2026-10-29T19:00Z",
+    "match_date": "2026-11-10T19:00Z",
     "league": "Copa del Rey",
-    "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Francisco Gallego",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mouhamadou Keita",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Raúl Pérez",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
     "completed": true
   },
   {
@@ -12960,11 +13024,17 @@
     "espn_id": "401928550",
     "home_team": "Trival Valderas",
     "away_team": "Leganés",
-    "match_date": "2026-10-28T19:00Z",
+    "match_date": "2026-11-10T19:00Z",
     "league": "Copa del Rey",
     "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Álex Millán",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
     "completed": true
   },
   {
@@ -13081,11 +13151,37 @@
     "espn_id": "401928504",
     "home_team": "Tavernes de la Valldigna",
     "away_team": "Valencia",
-    "match_date": "2026-10-28T20:00Z",
+    "match_date": "2026-11-10T20:00Z",
     "league": "Copa del Rey",
     "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_away": 6,
+    "scorers": [
+      {
+        "player_name": "Dani Raba",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Hugo Duro",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Luis Rioja",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Harvey Elliott",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Aimar Blázquez",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
     "completed": true
   },
   {
