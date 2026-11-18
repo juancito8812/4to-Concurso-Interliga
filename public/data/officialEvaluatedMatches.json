@@ -12853,11 +12853,37 @@
     "espn_id": "401928518",
     "home_team": "Portugalete",
     "away_team": "Real Unión Irun",
-    "match_date": "2026-11-04T18:00Z",
+    "match_date": "2026-11-18T18:00Z",
     "league": "Copa del Rey",
     "result_home": 0,
     "result_away": 0,
-    "scorers": [],
+    "scorers": [
+      {
+        "player_name": "Jorge García",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Anartz Amilibia Santa Cruz",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ander Martín",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Diego Lamadrid",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Aimar Barrera",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
     "completed": true
   },
   {
@@ -12865,11 +12891,27 @@
     "espn_id": "401928497",
     "home_team": "Utebo",
     "away_team": "CD Sabadell",
-    "match_date": "2026-11-04T19:30Z",
+    "match_date": "2026-11-18T18:00Z",
     "league": "Copa del Rey",
     "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Nikolai Óbolo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alain Ribeiro",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Yanis Rahmani",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
     "completed": true
   },
   {
@@ -12877,11 +12919,32 @@
     "espn_id": "401928505",
     "home_team": "Alcoyano",
     "away_team": "Mallorca",
-    "match_date": "2026-11-05T20:00Z",
+    "match_date": "2026-11-18T19:00Z",
     "league": "Copa del Rey",
-    "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Abdón Prats",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Guille Andrés",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Adam Buksa",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fuentes",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
     "completed": true
   },
   {
@@ -12907,11 +12970,42 @@
     "espn_id": "401928532",
     "home_team": "Badajoz",
     "away_team": "Tenerife",
-    "match_date": "2026-10-28T19:00Z",
+    "match_date": "2026-11-18T19:00Z",
     "league": "Copa del Rey",
-    "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_home": 2,
+    "result_away": 5,
+    "scorers": [
+      {
+        "player_name": "Grant-Leon Ranos",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Juanjo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Carlos Beitia",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Iván Chapela",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jorge Barba",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Víctor Moreno",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
     "completed": true
   },
   {
@@ -13074,11 +13168,27 @@
     "espn_id": "401928524",
     "home_team": "CD Minera",
     "away_team": "FC Cartagena",
-    "match_date": "2026-11-04T19:30Z",
+    "match_date": "2026-11-18T19:30Z",
     "league": "Copa del Rey",
-    "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Marcelo dos Santos",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Zahui Kouassi",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Raúl Dacosta",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
     "completed": true
   },
   {
@@ -13147,11 +13257,52 @@
     "espn_id": "401928500",
     "home_team": "Reus FC Reddis",
     "away_team": "Barakaldo",
-    "match_date": "2026-11-04T19:30Z",
+    "match_date": "2026-11-18T19:30Z",
     "league": "Copa del Rey",
-    "result_home": 0,
-    "result_away": 0,
-    "scorers": [],
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Alya Camara",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Urko Collado",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Carlos Mattheus",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Óscar Jiménez Rodríguez",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Julen Huidobro",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Aitor Serrano",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alberto Benito",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Agustín Gutiérrez",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
     "completed": true
   },
   {
