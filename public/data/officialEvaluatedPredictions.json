@@ -2586,5 +2586,38 @@
       "Resultado correcto (+3 pts)",
       "Goleador acertado: Fermín López (+1 pt)"
     ]
+  },
+  {
+    "id": "1bc24088-d811-4f50-9a51-9a05633a7c2e",
+    "user_id": "836a17f7-37f6-427f-a0fe-eedcf66a082d",
+    "display_name": "JOKENON93",
+    "match_id": "00000000-0000-4000-8000-00000008a263",
+    "home_score": 5,
+    "away_score": 0,
+    "created_at": "2026-11-03T23:02:11.484899+00:00",
+    "scorers": [
+      {
+        "player_name": "Harry Kane",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Lennart Karl",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Tom Bischof",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Joshua Kimmich",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "points": 0,
+    "pointsDetails": []
   }
 ]

@@ -18809,5 +18809,28 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a263",
+    "espn_id": "401884736",
+    "home_team": "Bayern Munich",
+    "away_team": "Köln",
+    "match_date": "2026-11-20T19:30Z",
+    "league": "Bundesliga",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Mikey Moore",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Nathaniel Brown",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
