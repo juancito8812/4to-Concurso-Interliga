@@ -19214,5 +19214,147 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e14",
+    "espn_id": "401882797",
+    "home_team": "Sevilla",
+    "away_team": "Real Betis",
+    "match_date": "2026-11-21T17:30Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Antony",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Enrique Salas",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e12",
+    "espn_id": "401882798",
+    "home_team": "Real Madrid",
+    "away_team": "Celta Vigo",
+    "match_date": "2026-11-21T20:00Z",
+    "league": "LaLiga",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Pablo Durán",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Carlos Espí",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e0b",
+    "espn_id": "401879232",
+    "home_team": "Newcastle",
+    "away_team": "Arsenal",
+    "match_date": "2026-11-21T17:30Z",
+    "league": "Premier League",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Eberechi Eze",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Harvey Barnes",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Malick Thiaw",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Noni Madueke",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885be",
+    "espn_id": "401874967",
+    "home_team": "Parma",
+    "away_team": "Roma",
+    "match_date": "2026-11-21T17:00Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 5,
+    "scorers": [
+      {
+        "player_name": "Donyell Malen",
+        "goals": 4,
+        "team": "away"
+      },
+      {
+        "player_name": "Nesta Elphege",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Rodrigo Mora",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885bf",
+    "espn_id": "401875067",
+    "home_team": "Napoli",
+    "away_team": "Torino",
+    "match_date": "2026-11-21T19:45Z",
+    "league": "Serie A",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Scott McTominay",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a265",
+    "espn_id": "401884729",
+    "home_team": "Schalke 04",
+    "away_team": "Stuttgart",
+    "match_date": "2026-11-21T17:30Z",
+    "league": "Bundesliga",
+    "result_home": 0,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
   }
 ]
