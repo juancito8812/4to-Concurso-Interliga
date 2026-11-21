@@ -18832,5 +18832,23 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e0c",
+    "espn_id": "401882805",
+    "home_team": "Athletic Bilbao",
+    "away_team": "Espanyol",
+    "match_date": "2026-11-20T20:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Roberto Fernández",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
