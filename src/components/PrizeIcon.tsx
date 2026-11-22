@@ -6,7 +6,7 @@ import {
   Flag,
   Footprints,
   Glasses,
-  Image as ImageIcon,
+  Frame,
   Shirt,
   type LucideIcon,
 } from "lucide-react";
@@ -23,7 +23,7 @@ const PRIZE_ICONS: Record<string, LucideIcon> = {
   flag: Flag,
   mug: Beer,
   glasses: Glasses,
-  poster: ImageIcon,
+  poster: Frame,
 };
 
 export default function PrizeIcon({

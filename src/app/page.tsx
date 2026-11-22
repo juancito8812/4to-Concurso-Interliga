@@ -164,7 +164,7 @@ export default function Home() {
         </p>
 
         {/* League Logos - 3 filas */}
-        <div className="fade-up fade-up-4 flex flex-col items-center gap-3 sm:gap-4 max-w-md sm:max-w-3xl w-full">
+        <div className="fade-up fade-up-4 flex flex-col items-center gap-3 sm:gap-4 max-w-md sm:max-w-2xl w-full">
           <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-silver/70 mb-1">
             Elegí tu competición
           </span>
@@ -376,7 +376,7 @@ export default function Home() {
                     key={idx}
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-navy-card/40 border border-border/30 hover:bg-navy-card/70 transition-colors"
                   >
-                    <PrizeIcon name={item.icon} size={18} className="text-slate-300" />
+                    <PrizeIcon name={item.icon} size={20} className="text-slate-300" />
                     <span className="text-sm font-semibold text-white/90">{item.name}</span>
                   </div>
                 ))}
@@ -451,7 +451,7 @@ export default function Home() {
                     key={idx}
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-navy-card/40 border border-border/30 hover:bg-navy-card/70 transition-colors"
                   >
-                    <PrizeIcon name={item.icon} size={18} className="text-slate-300" />
+                    <PrizeIcon name={item.icon} size={20} className="text-slate-300" />
                     <span className="text-sm font-semibold text-white/90">{item.name}</span>
                   </div>
                 ))}
