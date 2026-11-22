@@ -261,7 +261,7 @@ export default function Home() {
             {/* Tarjeta 2: Cómo pronosticar */}
             <div className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border h-full flex flex-col justify-between">
               <div>
-                <span className="block text-4xl sm:text-5xl font-black text-gold/40 mb-2 sm:mb-3 leading-none">
+                <span className="block text-4xl sm:text-5xl font-black text-gold/55 mb-2 sm:mb-3 leading-none">
                   2
                 </span>
                 <p className="text-sm leading-relaxed text-silver mb-3">
@@ -305,7 +305,7 @@ export default function Home() {
             Cada acierto suma puntos. ¡Máximo <span className="text-gold font-bold">5 goleadores</span> por equipo!
           </p>
 
-          <div className="flex gap-3 overflow-x-auto pb-2 sm:pb-0 sm:grid sm:grid-cols-3 md:grid-cols-5 sm:overflow-visible">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
             {scoring.map((item, i) => (
               <div
                 key={i}
