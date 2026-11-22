@@ -469,6 +469,7 @@ NEXT_PUBLIC_SUPABASE_URL=https://ilkndkqcmxvlufxaugog.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu-anon-key
 NEXT_PUBLIC_FOOTBALL_DATA_KEY=tu-key-de-football-data   # solo dev local (ver aviso abajo)
 SUPABASE_SERVICE_ROLE_KEY=tu-service-key   # SOLO local y GitHub Secrets (nunca en el bundle)
+NEXT_PUBLIC_WHATSAPP_GROUP_URL=            # opcional: https://wa.me/58XXXXXXXXXX o https://chat.whatsapp.com/... (vacío = icono oculto)
 ```
 
 ### GitHub Secrets necesarios (para CI/CD y cron)
@@ -481,6 +482,7 @@ SUPABASE_SERVICE_ROLE_KEY=tu-service-key   # SOLO local y GitHub Secrets (nunca 
 | `FOOTBALL_DATA_KEY` | Key de football-data.org para scripts de validación / sincronización |
 | `SUPABASE_SERVICE_ROLE_KEY` | Service role key para el cron (escritura bypass RLS) |
 | `CLOUDFLARE_API_TOKEN` | Token con `Account Analytics: Read` + `Zone Analytics: Read`, para el cron de tráfico |
+| `NEXT_PUBLIC_WHATSAPP_GROUP_URL` | Opcional. Enlace del grupo de WhatsApp del footer; si falta, el icono no se renderiza (nunca un `wa.me` vacío) |
 
 ### GitHub Variables necesarias (solo el cron de tráfico)
 
