@@ -19542,5 +19542,188 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e10",
+    "espn_id": "401882801",
+    "home_team": "Osasuna",
+    "away_team": "Málaga",
+    "match_date": "2026-11-22T17:30Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Ante Budimir",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e11",
+    "espn_id": "401882803",
+    "home_team": "Getafe",
+    "away_team": "Atlético Madrid",
+    "match_date": "2026-11-22T20:00Z",
+    "league": "LaLiga",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Álex Baena",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Johnny Cardoso",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alejandro Grimaldo",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e05",
+    "espn_id": "401878755",
+    "home_team": "Liverpool",
+    "away_team": "Manchester United",
+    "match_date": "2026-11-22T16:30Z",
+    "league": "Premier League",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Dominik Szoboszlai",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Florian Wirtz",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Rio Ngumoha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Víctor Muñoz",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885bb",
+    "espn_id": "401874989",
+    "home_team": "AC Milan",
+    "away_team": "Frosinone",
+    "match_date": "2026-11-22T17:00Z",
+    "league": "Serie A",
+    "result_home": 5,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Gonçalo Ramos",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Patrizio Masini",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ardon Jashari",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Alphadjo Cissè",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Christian Pulisic",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885b8",
+    "espn_id": "401875001",
+    "home_team": "Atalanta",
+    "away_team": "Inter Milan",
+    "match_date": "2026-11-22T19:45Z",
+    "league": "Serie A",
+    "result_home": 4,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Pio Esposito",
+        "goals": 3,
+        "team": "away"
+      },
+      {
+        "player_name": "Eljif Elmas",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Charles De Ketelaere",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Petar Sucic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Franck Kessié",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000008a267",
+    "espn_id": "401884730",
+    "home_team": "Werder Bremen",
+    "away_team": "Hamburger SV",
+    "match_date": "2026-11-22T16:30Z",
+    "league": "Bundesliga",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Marco Friedl",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Justin Njinmah",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Niclas Füllkrug",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]

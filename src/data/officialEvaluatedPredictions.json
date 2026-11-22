@@ -2646,7 +2646,9 @@
     "home_score": 3,
     "away_score": 3,
     "created_at": "2026-11-08T03:35:04.576082+00:00",
-    "scorers": []
+    "scorers": [],
+    "points": 0,
+    "pointsDetails": []
   },
   {
     "id": "b4c7b824-62a1-466f-a18e-48bfb3b914c1",
