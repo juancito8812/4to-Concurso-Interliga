@@ -183,7 +183,7 @@ export default function Home() {
                     alt={league.name}
                     width={64}
                     height={64}
-                    loading={idx === 0 ? "eager" : "lazy"}
+                    loading="eager"
                     fetchPriority={idx === 0 ? "high" : undefined}
                     decoding="async"
                     className="w-full h-full object-contain transition-transform group-hover:scale-105"
@@ -208,7 +208,7 @@ export default function Home() {
                     alt={league.name}
                     width={64}
                     height={64}
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                     className="w-full h-full object-contain transition-transform group-hover:scale-105"
                   />
@@ -232,7 +232,7 @@ export default function Home() {
                     alt={league.name}
                     width={64}
                     height={64}
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                     className="w-full h-full object-contain transition-transform group-hover:scale-105"
                   />
