@@ -175,9 +175,9 @@ export default function Home() {
                 key={league.name}
                 href={`/tabla/${league.slug}`}
                 title={league.name}
-                className="group aspect-square rounded-xl sm:rounded-2xl bg-navy-mid/90 border border-border/80 hover:border-gold/70 p-2 sm:p-2.5 flex items-center justify-center hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-all"
+                className="group aspect-square rounded-xl sm:rounded-2xl bg-navy-mid/90 border border-border/80 hover:border-gold/70 p-1.5 sm:p-2.5 flex items-center justify-center hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-all"
               >
-                <div className="w-full h-full bg-white rounded-lg sm:rounded-xl p-1.5 sm:p-2 flex items-center justify-center shadow-inner">
+                <div className="w-full h-full bg-white rounded-lg sm:rounded-xl p-1 sm:p-2 flex items-center justify-center shadow-inner">
                   <img
                     src={league.logo}
                     alt={league.name}
@@ -200,9 +200,9 @@ export default function Home() {
                 key={league.name}
                 href={`/tabla/${league.slug}`}
                 title={league.name}
-                className="group aspect-square rounded-xl sm:rounded-2xl bg-navy-mid/90 border border-border/80 hover:border-gold/70 p-2 sm:p-2.5 flex items-center justify-center hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-all"
+                className="group aspect-square rounded-xl sm:rounded-2xl bg-navy-mid/90 border border-border/80 hover:border-gold/70 p-1.5 sm:p-2.5 flex items-center justify-center hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-all"
               >
-                <div className="w-full h-full bg-white rounded-lg sm:rounded-xl p-1.5 sm:p-2 flex items-center justify-center shadow-inner">
+                <div className="w-full h-full bg-white rounded-lg sm:rounded-xl p-1 sm:p-2 flex items-center justify-center shadow-inner">
                   <img
                     src={league.logo}
                     alt={league.name}
@@ -224,9 +224,9 @@ export default function Home() {
                 key={league.name}
                 href={`/tabla/${league.slug}`}
                 title={league.name}
-                className="group aspect-square rounded-xl sm:rounded-2xl bg-navy-mid/90 border border-border/80 hover:border-gold/70 p-2 sm:p-2.5 flex items-center justify-center hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-all"
+                className="group aspect-square rounded-xl sm:rounded-2xl bg-navy-mid/90 border border-border/80 hover:border-gold/70 p-1.5 sm:p-2.5 flex items-center justify-center hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.15)] transition-all"
               >
-                <div className="w-full h-full bg-white rounded-lg sm:rounded-xl p-1.5 sm:p-2 flex items-center justify-center shadow-inner">
+                <div className="w-full h-full bg-white rounded-lg sm:rounded-xl p-1 sm:p-2 flex items-center justify-center shadow-inner">
                   <img
                     src={league.logo}
                     alt={league.name}
