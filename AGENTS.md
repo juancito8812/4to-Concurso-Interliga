@@ -235,6 +235,45 @@ Un fallo REAL es una predicción creada **antes** del pitazo que quedó con `poi
 - Ojo: el `CLOUDFLARE_API_TOKEN` del repo necesita `Account Analytics: Read` + `Zone Analytics: Read`
   además de lo que ya usa el deploy.
 
+### SEO, sitemap y metadatos (estado 2026-11-21)
+
+- **Fuente única del sitemap:** `src/app/sitemap.ts` (App Router, `dynamic = "force-static"`). Genera **14 URLs**:
+  3 estáticas (`/`, `/pronosticar/`, `/ranking/`) + 11 tablas (`/tabla/<slug>/`).
+  El `public/sitemap.xml` estático **se eliminó** el 2026-11-09: estaba congelado desde sep-2026, listaba
+  `/reglas/` (inexistente) y slugs de liga viejos, y podía pisar la ruta generada.
+- **`/mis-pronosticos/` NO va al sitemap** (resuelto 2026-11-21): `robots.txt` la bloquea y es una vista por
+  usuario, así que listarla solo producía "bloqueada por robots.txt" en Search Console. La ruta sigue viva y
+  enlazada desde el footer; lo que se quitó es la entrada del sitemap. No volver a agregarla sin cambiar
+  `robots.txt` primero.
+- **Slugs de liga:** deben coincidir con `generateStaticParams()` de `src/app/tabla/[league]/page.tsx` **y**
+  con la lista de `src/lib/leagueConfig.ts`: `laliga`, `premier`, `seriea`, `bundesliga`, `champions`,
+  `europa`, `conference`, `coppaitalia`, `facup`, `copadelrey`, `dfbpokal`. Un slug fuera de esa lista da
+  404 y Google penaliza el sitemap entero (hallazgo #1 del informe 2026-11-02). Al agregar o renombrar una
+  copa/liga se tocan los tres sitios en el mismo commit (sitemap, `generateStaticParams`, `leagueConfig`).
+- **404 duro en `/tabla/<slug>` inválido** (cerrado 2026-11-21, antes soft-404 con 200 y tabla vacía): la página
+  exporta `dynamicParams = false` y el componente llama `notFound()` si el slug no está en `leagueSlugToName`;
+  `generateMetadata` devuelve `{}` en ese caso en vez de un título genérico. En el export estático el 404 lo
+  sirve `out/404.html`; el guard cubre `next dev`/`next start` y cualquier cambio futuro de `output`.
+- **No existe `/reglas/`:** el reglamento vive en la landing. No volver a enlazarlo ni a meterlo en el sitemap.
+- **Canonical por página:** `metadataBase` en `src/app/layout.tsx` apunta a `https://futbolcamisetapasion.com`;
+  cada ruta declara `alternates.canonical` en su propio `layout.tsx` (`/pronosticar/`, `/ranking/`,
+  `/mis-pronosticos/`) y `src/app/tabla/[league]/page.tsx` emite el canonical absoluto por liga. Las páginas
+  con `"use client"` no pueden exportar `metadata`: el canonical va en el `layout.tsx` de la ruta.
+- **Verificación en producción (CI verde no alcanza):**
+  ```bash
+  curl -s https://futbolcamisetapasion.com/sitemap.xml | grep -o '<loc>[^<]*' | wc -l   # 14
+  curl -s -o /dev/null -w '%{http_code}\n' https://futbolcamisetapasion.com/tabla/noexiste/  # 404
+  curl -s https://futbolcamisetapasion.com/tabla/seriea/ | grep -o 'rel="canonical" href="[^"]*"'
+  curl -s https://futbolcamisetapasion.com/ | grep -c 'wa.me'                            # 0 si no hay grupo
+  ```
+- **WhatsApp del footer:** el icono lee `NEXT_PUBLIC_WHATSAPP_GROUP_URL` (build-time) y **no se renderiza si está
+  vacía**. Antes el `href` era `https://wa.me/` sin número (link muerto, informe 2026-11-02). Para activarlo:
+  definir la variable en `.env.local` y en los secrets del repo, y redeployar. Formato: `https://wa.me/58XXXXXXXXXX`
+  o `https://chat.whatsapp.com/<invite>`.
+- **Search Console:** propiedad `sc-domain:futbolcamisetapasion.com`. Tras cambiar rutas, reenviar
+  `https://futbolcamisetapasion.com/sitemap.xml` (`python3 ~/.hermes/scripts/gsc.py submit …`). "Solicitar
+  indexación" no tiene API: es manual en la UI.
+
 ### Estado del proyecto (vía MCP)
 
 `mcp__supabase__get_project` (requiere el argumento `id` = `ilkndkqcmxvlufxaugog`) → `status: ACTIVE_HEALTHY`. La DB se consulta con `mcp__supabase__execute_sql` (requiere `project_id`; service role implícito).
