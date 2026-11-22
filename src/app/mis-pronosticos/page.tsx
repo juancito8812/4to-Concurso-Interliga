@@ -731,7 +731,7 @@ export default function MisPronosticosPage() {
               return (
                 <div
                   key={p.id}
-                  className="rounded-2xl bg-navy-mid border border-border/80 shadow-lg overflow-hidden relative transition-all content-visibility-auto"
+                  className="rounded-2xl bg-navy-mid border border-border/80 shadow-lg overflow-hidden relative transition-all"
                 >
                   {/* League Color Top Accent Bar */}
                   <div className="h-1 w-full" style={{ backgroundColor: leagueColor }} />

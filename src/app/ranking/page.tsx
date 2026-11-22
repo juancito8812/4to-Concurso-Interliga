@@ -896,7 +896,7 @@ export default function RankingPage() {
             </div>
 
             {/* Complete Leaderboard Table */}
-            <div className="bg-navy-mid border border-border rounded-2xl overflow-hidden shadow-xl content-visibility-auto">
+            <div className="bg-navy-mid border border-border rounded-2xl overflow-hidden shadow-xl">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>

@@ -290,7 +290,7 @@ export default function Home() {
       </section>
 
       {/* SISTEMA DE PUNTUACIÓN */}
-      <section className="py-16 sm:py-24 lg:py-[120px] px-4 sm:px-6 content-visibility-auto">
+      <section className="py-16 sm:py-24 lg:py-[120px] px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gold flex items-center justify-center shrink-0">
@@ -331,7 +331,7 @@ export default function Home() {
       </section>
 
       {/* PREMIOS - PODIO ESTILO CHAMPIONS LEAGUE */}
-      <section className="py-16 sm:py-24 lg:py-[120px] px-4 sm:px-6 relative overflow-hidden content-visibility-auto">
+      <section className="py-16 sm:py-24 lg:py-[120px] px-4 sm:px-6 relative overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 sm:mb-14">
             <div className="flex items-center gap-3 sm:gap-4">

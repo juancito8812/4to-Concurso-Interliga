@@ -881,7 +881,7 @@ export default function PronosticarPage() {
                 return (
                   <div
                     key={match.id}
-                    className={`rounded-2xl bg-navy-mid border border-border/80 shadow-xl overflow-hidden relative transition-all content-visibility-auto ${
+                    className={`rounded-2xl bg-navy-mid border border-border/80 shadow-xl overflow-hidden relative transition-all ${
                       locked || isEliminated ? "opacity-80" : ""
                     }`}
                   >

@@ -28,12 +28,6 @@ body {
   navigation: auto;
 }
 
-/* Performance optimizations: content visibility for heavy components */
-.content-visibility-auto {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 350px;
-}
-
 /* Movimiento discreto: aparición al cargar el hero. Se desactiva si el usuario
    pidió menos movimiento al sistema operativo. */
 @keyframes fade-up {

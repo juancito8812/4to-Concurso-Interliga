@@ -109,7 +109,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-center sm:text-left">
               <p className="text-white text-xs font-bold tracking-[0.1em] uppercase">
-                ELIGE TU EQUIPO • PRONOSTICA • GANA
+                ELEGÍ TU EQUIPO • PRONOSTICÁ • GANÁ
               </p>
               <p className="text-silver text-[10px] tracking-wider uppercase mt-1">
                 4° CONCURSO INTERLIGA • TEMPORADA 2026-27
