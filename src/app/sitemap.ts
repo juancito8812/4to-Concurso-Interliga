@@ -30,13 +30,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily" as const,
       priority: 0.9,
     },
-    {
-      url: `${BASE_URL}/mis-pronosticos/`,
-      lastModified: now,
-      changeFrequency: "daily" as const,
-      priority: 0.8,
-    },
   ];
+  // /mis-pronosticos/ queda FUERA: robots.txt la bloquea y es una vista por
+  // usuario (informe 2026-11-02). Listarla solo produce "bloqueada por robots.txt"
+  // en Search Console. 14 URLs: 3 estáticas + 11 tablas.
 
   // League tables — mismos slugs de generateStaticParams.
   // Sincronizar con la lista lógica (-leagueSlugs) de src/lib/leagueConfig.ts.
