@@ -139,7 +139,7 @@ export default function Home() {
           <span className="text-green">Ganá el kit oficial.</span>
         </p>
 
-        <p className="fade-up fade-up-2 text-[10px] sm:text-xs font-semibold tracking-[0.3em] text-silver/70 uppercase mb-7 sm:mb-8">
+        <p className="fade-up fade-up-2 text-[10px] sm:text-xs font-semibold tracking-[0.3em] text-silver/85 uppercase mb-7 sm:mb-8">
           Fútbol <span className="text-gold/70">•</span> Camiseta <span className="text-gold/70">•</span> Pasión
         </p>
 
@@ -165,9 +165,9 @@ export default function Home() {
 
         {/* League Logos - 3 filas */}
         <div className="fade-up fade-up-4 flex flex-col items-center gap-3 sm:gap-4 max-w-md sm:max-w-2xl w-full">
-          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-silver/70 mb-1">
+          <h2 className="text-[10px] font-bold uppercase tracking-[0.25em] text-silver/85 mb-1">
             Elegí tu competición
-          </span>
+          </h2>
           {/* Fila 1: Ligas nacionales */}
           <div className="grid grid-cols-4 gap-2.5 sm:gap-4 w-full">
             {domesticLeagues.map((league, idx) => (
