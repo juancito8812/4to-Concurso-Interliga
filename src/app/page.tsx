@@ -9,22 +9,22 @@ import PrizeIcon from "@/components/PrizeIcon";
 import { useAuth } from "@/contexts/AuthContext";
 
 const domesticLeagues = [
-  { name: "LaLiga", logo: "/logos/laliga.png", slug: "laliga" },
-  { name: "Premier League", logo: "/logos/premier.png", slug: "premier" },
-  { name: "Serie A", logo: "/logos/seriea.png", slug: "seriea" },
-  { name: "Bundesliga", logo: "/logos/bundesliga.png", slug: "bundesliga" },
+  { name: "LaLiga", logo: "/logos/laliga.png?v=2", slug: "laliga" },
+  { name: "Premier League", logo: "/logos/premier.png?v=2", slug: "premier" },
+  { name: "Serie A", logo: "/logos/seriea.png?v=2", slug: "seriea" },
+  { name: "Bundesliga", logo: "/logos/bundesliga.png?v=2", slug: "bundesliga" },
 ];
 
 const domesticCups = [
-  { name: "Copa del Rey", logo: "/logos/copadelrey.png", slug: "copadelrey" },
+  { name: "Copa del Rey", logo: "/logos/copadelrey.png?v=2", slug: "copadelrey" },
   { name: "FA Cup", logo: "/logos/facup.svg", slug: "facup" },
   { name: "Copa Italia", logo: "/logos/coppaitalia.svg", slug: "coppaitalia" },
   { name: "DFB-Pokal", logo: "/logos/dfbpokal.svg", slug: "dfbpokal" },
 ];
 
 const europeanCups = [
-  { name: "Champions League", logo: "/logos/champions.png", slug: "champions" },
-  { name: "Europa League", logo: "/logos/europa.png", slug: "europa" },
+  { name: "Champions League", logo: "/logos/champions.png?v=2", slug: "champions" },
+  { name: "Europa League", logo: "/logos/europa.png?v=2", slug: "europa" },
   { name: "Conference League", logo: "/logos/conference.svg", slug: "conference" },
 ];
 
@@ -244,7 +244,7 @@ export default function Home() {
       </section>
 
       {/* REGLAS */}
-      <section className="py-16 sm:py-24 lg:py-[120px] px-4 sm:px-6">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gold flex items-center justify-center shrink-0">
@@ -261,7 +261,7 @@ export default function Home() {
             {/* Tarjeta 2: Cómo pronosticar */}
             <div className="relative p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-navy-mid border border-border h-full flex flex-col justify-between">
               <div>
-                <span className="block text-4xl sm:text-5xl font-black text-gold/20 mb-2 sm:mb-3 leading-none">
+                <span className="block text-4xl sm:text-5xl font-black text-gold/40 mb-2 sm:mb-3 leading-none">
                   2
                 </span>
                 <p className="text-sm leading-relaxed text-silver mb-3">
@@ -276,7 +276,7 @@ export default function Home() {
               <div className="mt-auto pt-2">
                 <Link
                   href="/pronosticar/"
-                  className="block text-center bg-gold/10 border border-gold/30 text-gold font-bold py-2.5 rounded-full text-xs hover:bg-gold/20 transition-colors"
+                  className="block text-center bg-gold text-navy-black font-bold py-2.5 rounded-full text-xs hover:bg-gold-light transition-colors"
                 >
                   Ir a Pronosticar →
                 </Link>
@@ -290,7 +290,7 @@ export default function Home() {
       </section>
 
       {/* SISTEMA DE PUNTUACIÓN */}
-      <section className="py-16 sm:py-24 lg:py-[120px] px-4 sm:px-6">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gold flex items-center justify-center shrink-0">
@@ -331,7 +331,7 @@ export default function Home() {
       </section>
 
       {/* PREMIOS - PODIO ESTILO CHAMPIONS LEAGUE */}
-      <section className="py-16 sm:py-24 lg:py-[120px] px-4 sm:px-6 relative overflow-hidden">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 relative overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 sm:mb-14">
             <div className="flex items-center gap-3 sm:gap-4">
