@@ -2637,5 +2637,52 @@
     ],
     "points": 0,
     "pointsDetails": []
+  },
+  {
+    "id": "075565b2-7c5b-41cf-a610-f09f66dc7aa8",
+    "user_id": "266b309a-4eb0-474a-85db-aca42e055913",
+    "display_name": "JR_DT",
+    "match_id": "00000000-0000-4000-8000-000000088e05",
+    "home_score": 3,
+    "away_score": 3,
+    "created_at": "2026-11-08T03:35:04.576082+00:00",
+    "scorers": []
+  },
+  {
+    "id": "b4c7b824-62a1-466f-a18e-48bfb3b914c1",
+    "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
+    "display_name": "Asere1995",
+    "match_id": "00000000-0000-4000-8000-000000089e0d",
+    "home_score": 3,
+    "away_score": 1,
+    "created_at": "2026-11-09T01:20:43.722008+00:00",
+    "scorers": [
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ayoze Pérez",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Fermín López (+1 pt)"
+    ]
   }
 ]
