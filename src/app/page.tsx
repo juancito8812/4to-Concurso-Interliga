@@ -1,9 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import Navbar from "./Navbar";
 import TeamSelectorCard from "./TeamSelectorCard";
 import CompetitionStatusCard from "./CompetitionStatusCard";
+import PrizeIcon from "@/components/PrizeIcon";
+import { useAuth } from "@/contexts/AuthContext";
 
 const domesticLeagues = [
   { name: "LaLiga", logo: "/logos/laliga.png", slug: "laliga" },
@@ -62,13 +65,13 @@ const podiumPrizes: PodiumPrize[] = [
     textColor: "text-gold",
     orderClass: "order-1 md:order-2 md:-translate-y-4 md:mb-4 z-10",
     items: [
-      { icon: "🎽", name: "Camiseta Oficial del Club" },
-      { icon: "🩳", name: "Short Oficial de Juego" },
-      { icon: "🧢", name: "Gorra Oficial del Club" },
-      { icon: "🚩", name: "Bandera Oficial del Club" },
-      { icon: "🍺", name: "Jarra Oficial de Colección" },
-      { icon: "🕶️", name: "Gafas de Sol Deportivas" },
-      { icon: "🖼️", name: "Póster de Campeones" },
+      { icon: "shirt", name: "Camiseta Oficial del Club" },
+      { icon: "shorts", name: "Short Oficial de Juego" },
+      { icon: "cap", name: "Gorra Oficial del Club" },
+      { icon: "flag", name: "Bandera Oficial del Club" },
+      { icon: "mug", name: "Jarra Oficial de Colección" },
+      { icon: "glasses", name: "Gafas de Sol Deportivas" },
+      { icon: "poster", name: "Póster de Campeones" },
     ],
   },
   {
@@ -82,11 +85,11 @@ const podiumPrizes: PodiumPrize[] = [
     textColor: "text-slate-200",
     orderClass: "order-2 md:order-1 md:mt-6",
     items: [
-      { icon: "🎽", name: "Camiseta Oficial del Club" },
-      { icon: "🩳", name: "Short Oficial de Juego" },
-      { icon: "🧢", name: "Gorra Oficial del Club" },
-      { icon: "🚩", name: "Bandera Oficial del Club" },
-      { icon: "🍺", name: "Jarra Oficial de Colección" },
+      { icon: "shirt", name: "Camiseta Oficial del Club" },
+      { icon: "shorts", name: "Short Oficial de Juego" },
+      { icon: "cap", name: "Gorra Oficial del Club" },
+      { icon: "flag", name: "Bandera Oficial del Club" },
+      { icon: "mug", name: "Jarra Oficial de Colección" },
     ],
   },
   {
@@ -100,40 +103,71 @@ const podiumPrizes: PodiumPrize[] = [
     textColor: "text-amber-400",
     orderClass: "order-3 md:order-3 md:mt-8",
     items: [
-      { icon: "🎽", name: "Camiseta Oficial del Club" },
-      { icon: "🩳", name: "Short Oficial de Juego" },
-      { icon: "🧢", name: "Gorra Oficial del Club" },
-      { icon: "🚩", name: "Bandera Oficial del Club" },
-      { icon: "🍺", name: "Jarra Oficial de Colección" },
+      { icon: "shirt", name: "Camiseta Oficial del Club" },
+      { icon: "shorts", name: "Short Oficial de Juego" },
+      { icon: "cap", name: "Gorra Oficial del Club" },
+      { icon: "flag", name: "Bandera Oficial del Club" },
+      { icon: "mug", name: "Jarra Oficial de Colección" },
     ],
   },
 ];
 
 export default function Home() {
+  const { user } = useAuth();
+
   return (
     <div className="min-h-screen">
       <Navbar />
-      {/* HERO */}
-      <section className="flex flex-col items-center justify-center min-h-[70vh] sm:min-h-[85vh] px-4 sm:px-6 pt-20 sm:pt-24 text-center">
-        <div className="inline-block px-5 py-1.5 sm:px-6 sm:py-2 mb-6 sm:mb-8 text-[10px] sm:text-xs font-bold tracking-[0.25em] text-navy-black uppercase bg-gold rounded-full">
+      {/* HERO — propuesta de valor y CTA dentro de la primera pantalla */}
+      <section className="relative flex flex-col items-center px-4 sm:px-6 pt-24 sm:pt-28 pb-10 sm:pb-16 text-center overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[420px] bg-[radial-gradient(60%_100%_at_50%_0%,rgba(201,168,76,0.16),transparent_70%)]"
+        />
+
+        <div className="fade-up inline-block px-5 py-1.5 sm:px-6 sm:py-2 mb-6 sm:mb-8 text-[10px] sm:text-xs font-bold tracking-[0.25em] text-navy-black uppercase bg-gold rounded-full">
           Temporada 2026-27
         </div>
 
-        <h1 className="mb-3 sm:mb-4">
+        <h1 className="fade-up fade-up-2 mb-4 sm:mb-5">
           <span className="block text-3xl sm:text-5xl lg:text-6xl font-black text-white">4°</span>
           <span className="block text-5xl sm:text-8xl lg:text-9xl font-black tracking-tight text-gold">INTERLIGA</span>
         </h1>
 
-        <p className="text-xs sm:text-base font-semibold tracking-[0.15em] text-silver uppercase mb-8 sm:mb-12">
-          FÚTBOL{" "}
-          <span className="text-gold mx-1 sm:mx-2">•</span>{" "}
-          CAMISETA{" "}
-          <span className="text-gold mx-1 sm:mx-2">•</span>{" "}
-          <span className="text-green">PASIÓN</span>
+        <p className="fade-up fade-up-2 max-w-[680px] text-base sm:text-2xl font-semibold text-white/90 leading-snug mb-2 sm:mb-3">
+          Pronosticá los partidos. Sumá puntos.{" "}
+          <span className="text-green">Ganá el kit oficial.</span>
+        </p>
+
+        <p className="fade-up fade-up-2 text-[10px] sm:text-xs font-semibold tracking-[0.3em] text-silver/70 uppercase mb-7 sm:mb-8">
+          Fútbol <span className="text-gold/70">•</span> Camiseta <span className="text-gold/70">•</span> Pasión
+        </p>
+
+        <div className="fade-up fade-up-3 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+          <Link
+            href={user ? "/pronosticar/" : "/registro/"}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full bg-gold text-navy-black text-sm font-black uppercase tracking-wide hover:bg-gold-light active:scale-[0.98] transition-all shadow-[0_8px_24px_rgba(201,168,76,0.25)]"
+          >
+            {user ? "Pronosticar ahora" : "Jugar gratis"}
+            <ArrowRight size={18} strokeWidth={2.25} aria-hidden="true" />
+          </Link>
+          <Link
+            href="/ranking/"
+            className="w-full sm:w-auto inline-flex items-center justify-center h-12 px-7 rounded-full border border-border bg-navy-mid/60 text-white text-sm font-bold hover:border-gold/60 hover:bg-navy-card transition-all"
+          >
+            Ver ranking
+          </Link>
+        </div>
+
+        <p className="fade-up fade-up-3 text-[11px] sm:text-xs text-silver mt-3 mb-9 sm:mb-12">
+          Gratis · 11 competiciones · Kits oficiales en juego
         </p>
 
         {/* League Logos - 3 filas */}
-        <div className="flex flex-col items-center gap-3 sm:gap-4 max-w-md sm:max-w-3xl w-full">
+        <div className="fade-up fade-up-4 flex flex-col items-center gap-3 sm:gap-4 max-w-md sm:max-w-3xl w-full">
+          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-silver/70 mb-1">
+            Elegí tu competición
+          </span>
           {/* Fila 1: Ligas nacionales */}
           <div className="grid grid-cols-4 gap-2.5 sm:gap-4 w-full">
             {domesticLeagues.map((league, idx) => (
@@ -210,7 +244,7 @@ export default function Home() {
       </section>
 
       {/* REGLAS */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6">
+      <section className="py-16 sm:py-24 lg:py-[120px] px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gold flex items-center justify-center shrink-0">
@@ -256,7 +290,7 @@ export default function Home() {
       </section>
 
       {/* SISTEMA DE PUNTUACIÓN */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6 content-visibility-auto">
+      <section className="py-16 sm:py-24 lg:py-[120px] px-4 sm:px-6 content-visibility-auto">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gold flex items-center justify-center shrink-0">
@@ -297,7 +331,7 @@ export default function Home() {
       </section>
 
       {/* PREMIOS - PODIO ESTILO CHAMPIONS LEAGUE */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6 relative overflow-hidden content-visibility-auto">
+      <section className="py-16 sm:py-24 lg:py-[120px] px-4 sm:px-6 relative overflow-hidden content-visibility-auto">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 sm:mb-14">
             <div className="flex items-center gap-3 sm:gap-4">
@@ -342,7 +376,7 @@ export default function Home() {
                     key={idx}
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-navy-card/40 border border-border/30 hover:bg-navy-card/70 transition-colors"
                   >
-                    <span className="text-base select-none shrink-0">{item.icon}</span>
+                    <PrizeIcon name={item.icon} size={18} className="text-slate-300" />
                     <span className="text-sm font-semibold text-white/90">{item.name}</span>
                   </div>
                 ))}
@@ -382,7 +416,7 @@ export default function Home() {
                     key={idx}
                     className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gold/5 border border-gold/20 hover:bg-gold/10 transition-colors"
                   >
-                    <span className="text-lg select-none shrink-0">{item.icon}</span>
+                    <PrizeIcon name={item.icon} size={20} className="text-gold-light" />
                     <span className="text-sm font-bold text-white">{item.name}</span>
                   </div>
                 ))}
@@ -417,7 +451,7 @@ export default function Home() {
                     key={idx}
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-navy-card/40 border border-border/30 hover:bg-navy-card/70 transition-colors"
                   >
-                    <span className="text-base select-none shrink-0">{item.icon}</span>
+                    <PrizeIcon name={item.icon} size={18} className="text-slate-300" />
                     <span className="text-sm font-semibold text-white/90">{item.name}</span>
                   </div>
                 ))}

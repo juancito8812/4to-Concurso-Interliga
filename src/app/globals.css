@@ -34,6 +34,34 @@ body {
   contain-intrinsic-size: 0 350px;
 }
 
+/* Movimiento discreto: aparición al cargar el hero. Se desactiva si el usuario
+   pidió menos movimiento al sistema operativo. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-up {
+    animation: fade-up 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  .fade-up-2 {
+    animation-delay: 0.08s;
+  }
+  .fade-up-3 {
+    animation-delay: 0.16s;
+  }
+  .fade-up-4 {
+    animation-delay: 0.24s;
+  }
+}
+
 /* Hide number input spinner arrows */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {

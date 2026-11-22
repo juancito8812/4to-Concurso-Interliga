@@ -92,7 +92,7 @@ export default function Navbar() {
                   onClick={() => setMenuOpen((prev) => !prev)}
                   aria-expanded={menuOpen}
                   aria-haspopup="true"
-                  className="bg-gold text-navy-black font-bold px-3 py-1.5 rounded-full text-xs hover:bg-gold-light transition-all flex items-center gap-1.5 sm:gap-2 shadow-sm cursor-pointer"
+                  className="min-h-11 bg-gold text-navy-black font-bold px-3 py-1.5 rounded-full text-xs hover:bg-gold-light transition-all flex items-center gap-1.5 sm:gap-2 shadow-sm cursor-pointer"
                 >
                   {teamLogo ? (
                     <img src={teamLogo} alt={teamName} className="w-4 h-4 sm:w-5 sm:h-5 rounded-full object-contain bg-white p-0.5" />
@@ -118,7 +118,7 @@ export default function Navbar() {
                   <Link
                     href="/perfil/"
                     onClick={() => setMenuOpen(false)}
-                    className="block px-4 py-2.5 text-xs text-silver hover:text-white hover:bg-navy-card transition-colors"
+                    className="block px-4 py-3 text-xs text-silver hover:text-white hover:bg-navy-card transition-colors"
                   >
                     Mi Perfil
                   </Link>
@@ -126,7 +126,7 @@ export default function Navbar() {
                     <Link
                       href="/admin/"
                       onClick={() => setMenuOpen(false)}
-                      className="block px-4 py-2.5 text-xs font-bold text-gold hover:text-gold-light hover:bg-navy-card transition-colors sm:hidden"
+                      className="block px-4 py-3 text-xs font-bold text-gold hover:text-gold-light hover:bg-navy-card transition-colors sm:hidden"
                     >
                       Panel Admin
                     </Link>
@@ -134,21 +134,21 @@ export default function Navbar() {
                   <Link
                     href="/pronosticar/"
                     onClick={() => setMenuOpen(false)}
-                    className="block px-4 py-2.5 text-xs text-silver hover:text-white hover:bg-navy-card sm:hidden transition-colors"
+                    className="block px-4 py-3 text-xs text-silver hover:text-white hover:bg-navy-card sm:hidden transition-colors"
                   >
                     Pronosticar
                   </Link>
                   <Link
                     href="/mis-pronosticos/"
                     onClick={() => setMenuOpen(false)}
-                    className="block px-4 py-2.5 text-xs text-silver hover:text-white hover:bg-navy-card sm:hidden transition-colors"
+                    className="block px-4 py-3 text-xs text-silver hover:text-white hover:bg-navy-card sm:hidden transition-colors"
                   >
                     Mis Pronósticos
                   </Link>
                   <Link
                     href="/ranking/"
                     onClick={() => setMenuOpen(false)}
-                    className="block px-4 py-2.5 text-xs text-silver hover:text-white hover:bg-navy-card sm:hidden transition-colors"
+                    className="block px-4 py-3 text-xs text-silver hover:text-white hover:bg-navy-card sm:hidden transition-colors"
                   >
                     Ranking
                   </Link>
@@ -157,7 +157,7 @@ export default function Navbar() {
                       setMenuOpen(false);
                       signOut();
                     }}
-                    className="w-full text-left px-4 py-2.5 text-xs text-red-400 hover:text-red-300 hover:bg-navy-card rounded-b-xl border-t border-border/70 transition-colors cursor-pointer"
+                    className="w-full text-left px-4 py-3 text-xs text-red-400 hover:text-red-300 hover:bg-navy-card rounded-b-xl border-t border-border/70 transition-colors cursor-pointer"
                   >
                     Cerrar Sesión
                   </button>
@@ -168,19 +168,19 @@ export default function Navbar() {
             <>
               <Link
                 href="/ranking/"
-                className="text-silver text-xs font-semibold hover:text-white transition-colors flex items-center gap-1 px-1.5 py-1"
+                className="inline-flex items-center gap-1 min-h-11 px-2 text-silver text-xs font-semibold hover:text-white transition-colors"
               >
                 <span className="hidden sm:inline">Ranking</span>
               </Link>
               <Link
                 href="/login/"
-                className="text-silver text-xs font-semibold hover:text-white transition-colors px-2 py-1"
+                className="inline-flex items-center min-h-11 px-3 text-silver text-xs font-semibold hover:text-white transition-colors"
               >
                 Ingresar
               </Link>
               <Link
                 href="/registro/"
-                className="bg-gold text-navy-black font-bold px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-xs hover:bg-gold-light transition-all shadow-sm shrink-0"
+                className="inline-flex items-center min-h-11 px-4 bg-gold text-navy-black font-bold rounded-full text-xs hover:bg-gold-light transition-all shadow-sm shrink-0"
               >
                 Registrarse
               </Link>
