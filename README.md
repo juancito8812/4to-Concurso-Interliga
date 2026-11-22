@@ -719,6 +719,21 @@ Eliminar cuentas de testing/obsoletas. **No registrar emails inventados.**
 
 ## 📋 Historial de Cambios
 
+### 2026-11-21 — Cierre de los 3 hallazgos SEO del informe 2026-11-02
+
+**Descripción:** quedaban tres hallazgos del informe de auditoría del 2026-11-02 sin cerrar: soft-404 en `/tabla/<slug>` inválido (200 con tabla vacía), el icono de WhatsApp del footer apuntando a `https://wa.me/` sin número y el sitemap listando `/mis-pronosticos/` mientras `robots.txt` la bloquea.
+
+**Cambios:**
+
+| Archivo | Cambio |
+|---------|--------|
+| `src/app/tabla/[league]/page.tsx` | `dynamicParams = false` + `notFound()` cuando el slug no está en `leagueSlugToName`; `generateMetadata` devuelve `{}` en ese caso en vez de un título genérico |
+| `src/app/Footer.tsx` | El icono de WhatsApp lee `NEXT_PUBLIC_WHATSAPP_GROUP_URL` y **no se renderiza si está vacía** (antes `href="https://wa.me/"`, link muerto) |
+| `src/app/sitemap.ts` | Fuera `/mis-pronosticos/`: **14 URLs** (3 estáticas + 11 tablas) |
+| `AGENTS.md`, `README.md` | Estado nuevo del SEO, la variable de WhatsApp en `.env.local` y secrets, y comandos de verificación con los valores esperados |
+
+**Verificación:** `npm run verify` (59 checks + paridad 20 checks / 106 casos), `tsc --noEmit` limpio y ESLint 0 errores; CI `Build preview (rama)` ✅; tras el merge, `Verify scoring logic` y `Deploy to GitHub Pages` ✅ en `main`; en producción `sitemap.xml` = **14** locs sin `mis-pronosticos`, `/tabla/noexiste/` y `/tabla/foo/` = **404**, `/tabla/seriea/` = 200 con canonical propio, `wa.me` = **0** apariciones y `/mis-pronosticos/` sigue en 200. Ramas `fix/seo-hardening-nov21` y `docs/seo-sitemap-estado` eliminadas tras el merge.
+
 ### 2026-11-02 — Tráfico del sitio en el panel de admin (Cloudflare → Supabase → `/admin`)
 
 **Descripción:** el panel mostraba el pulso del concurso pero nada del sitio. Se añadió un bloque de **tráfico de los últimos 30 días** con datos reales de Cloudflare, sin exponer ningún token en el bundle estático.

@@ -175,6 +175,14 @@ env -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY -u http_proxy -u https_proxy -u al
 
 El `env -u` es obligatorio: los hosts de artefactos (`*.blob.core.windows.net`) no están en `NO_PROXY` y el `gh` intenta salir por el proxy muerto.
 
+### El preview no refleja el build nuevo (mount viejo de Docker)
+
+Si `~/previews/interliga/site` se reemplaza con `rm -rf` + `cp -r`, el bind mount del contenedor
+`agency-interliga-preview` queda apuntando al inodo borrado: el contenedor ve `/srv/site` **vacío** y
+nginx responde **403** en `/` (y 404 en todo lo demás). No es un problema del build ni de permisos.
+Arreglo: `docker restart agency-interliga-preview` (o copiar con `rsync --delete` en vez de borrar el
+directorio). Verificación: `docker exec agency-interliga-preview ls /srv/site | head -3`.
+
 ### Puntos mal otorgados / ranking que no cuadra (incidente oct-2026)
 
 **Síntoma:** "cambiaron los puntos" — el ranking muestra un total y la base guarda otro, sin que nadie tocara la regla.
