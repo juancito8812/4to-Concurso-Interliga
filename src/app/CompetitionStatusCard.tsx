@@ -293,13 +293,13 @@ export default function CompetitionStatusCard() {
               <div className="flex gap-2">
                 <Link
                   href="/registro/"
-                  className="flex-1 bg-gold text-navy-black font-bold py-2 rounded-full text-xs text-center hover:bg-gold-light transition-colors"
+                  className="flex-1 bg-gold text-navy-black font-bold min-h-[44px] inline-flex items-center justify-center rounded-full text-xs text-center hover:bg-gold-light transition-colors"
                 >
                   Registrarse
                 </Link>
                 <Link
                   href="/login/"
-                  className="flex-1 border border-gold text-gold font-bold py-2 rounded-full text-xs text-center hover:bg-gold/10 transition-colors"
+                  className="flex-1 border border-gold text-gold font-bold min-h-[44px] inline-flex items-center justify-center rounded-full text-xs text-center hover:bg-gold/10 transition-colors"
                 >
                   Iniciar Sesión
                 </Link>

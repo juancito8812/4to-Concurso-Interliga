@@ -708,7 +708,7 @@ export default function MisPronosticosPage() {
           <div className="bg-navy-mid border border-border rounded-2xl p-8 text-center">
             <span className="text-4xl mb-3 block"></span>
             <p className="text-silver text-sm">Todavía no hiciste pronósticos</p>
-            <Link href="/pronosticar/" className="inline-block mt-4 bg-gold text-navy-black font-bold px-6 py-2 rounded-full text-xs hover:bg-gold-light transition-colors">
+            <Link href="/pronosticar/" className="inline-block mt-4 bg-gold text-navy-black font-bold px-6 min-h-[44px] inline-flex items-center rounded-full text-xs hover:bg-gold-light transition-colors">
               Ir a Pronosticar
             </Link>
           </div>

@@ -65,10 +65,10 @@ export default function Footer() {
           {/* Ligas */}
           <div>
             <h4 className="text-white text-xs font-bold uppercase tracking-wider mb-3">Ligas</h4>
-            <ul className="space-y-1.5">
+            <ul className="space-y-0.5">
               {ligas.map((liga) => (
                 <li key={liga.slug}>
-                  <Link href={`/tabla/${liga.slug}/`} className="text-silver text-xs hover:text-gold transition-colors">
+                  <Link href={`/tabla/${liga.slug}/`} className="inline-flex min-h-[44px] items-center text-silver text-xs hover:text-gold transition-colors">
                     {liga.name}
                   </Link>
                 </li>
@@ -79,10 +79,10 @@ export default function Footer() {
           {/* Navegación */}
           <div>
             <h4 className="text-white text-xs font-bold uppercase tracking-wider mb-3">Navegación</h4>
-            <ul className="space-y-1.5">
+            <ul className="space-y-0.5">
               {paginas.map((page) => (
                 <li key={page.name}>
-                  <Link href={page.href} className="text-silver text-xs hover:text-gold transition-colors">
+                  <Link href={page.href} className="inline-flex min-h-[44px] items-center text-silver text-xs hover:text-gold transition-colors">
                     {page.name}
                   </Link>
                 </li>
@@ -93,7 +93,7 @@ export default function Footer() {
           {/* Sistema de Puntos */}
           <div>
             <h4 className="text-white text-xs font-bold uppercase tracking-wider mb-3">Puntuación</h4>
-            <ul className="space-y-1.5">
+            <ul className="space-y-0.5">
               {reglas.map((regla, i) => (
                 <li key={i} className="text-silver text-xs flex items-start gap-2">
                   <span className="text-gold font-bold text-[10px] mt-0.5">•</span>
