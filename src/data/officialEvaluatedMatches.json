@@ -19725,5 +19725,79 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e15",
+    "espn_id": "401882802",
+    "home_team": "Levante",
+    "away_team": "Elche",
+    "match_date": "2026-11-23T20:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Roy Revivo",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Dani Requena",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e09",
+    "espn_id": "401879237",
+    "home_team": "Brentford",
+    "away_team": "Everton",
+    "match_date": "2026-11-23T20:00Z",
+    "league": "Premier League",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Keane Lewis-Potter",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Vitaly Janelt",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Fábio Carvalho",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-0000000885b7",
+    "espn_id": "401875009",
+    "home_team": "Monza",
+    "away_team": "Fiorentina",
+    "match_date": "2026-11-23T19:45Z",
+    "league": "Serie A",
+    "result_home": 3,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Gustavo Varela",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Jay Robinson",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
   }
 ]
