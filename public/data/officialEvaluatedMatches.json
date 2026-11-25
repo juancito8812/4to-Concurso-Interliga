@@ -19799,5 +19799,205 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdf4",
+    "espn_id": "401915380",
+    "home_team": "FK Bodø/Glimt",
+    "away_team": "LASK Linz",
+    "match_date": "2026-11-24T17:45Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bda4",
+    "espn_id": "401915300",
+    "home_team": "Galatasaray SK",
+    "away_team": "Aston Villa",
+    "match_date": "2026-11-24T17:45Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Deniz Gül",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bd9f",
+    "espn_id": "401915295",
+    "home_team": "Arsenal",
+    "away_team": "Borussia Dortmund",
+    "match_date": "2026-11-24T20:00Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Viktor Gyökeres",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Maximilian Beier",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bda0",
+    "espn_id": "401915296",
+    "home_team": "Como",
+    "away_team": "AEK Athens",
+    "match_date": "2026-11-24T20:00Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Luis Milla",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bd9e",
+    "espn_id": "401915294",
+    "home_team": "Feyenoord",
+    "away_team": "Porto",
+    "match_date": "2026-11-24T20:00Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdf3",
+    "espn_id": "401915379",
+    "home_team": "Manchester City",
+    "away_team": "Napoli",
+    "match_date": "2026-11-24T20:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Rasmus Højlund",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ayyoub Bouaddi",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Noa Lang",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Rayan Cherki",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bda3",
+    "espn_id": "401915299",
+    "home_team": "RB Leipzig",
+    "away_team": "Lens",
+    "match_date": "2026-11-24T20:00Z",
+    "league": "Champions League",
+    "result_home": 3,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "David Raum",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Antonio Nusa",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Matthieu Udol",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bda2",
+    "espn_id": "401915298",
+    "home_team": "Real Madrid",
+    "away_team": "PSV",
+    "match_date": "2026-11-24T20:00Z",
+    "league": "Champions League",
+    "result_home": 5,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Ivan Perisic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Federico Valverde",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Jude Bellingham",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kylian Mbappé",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Vinícius Júnior",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bda1",
+    "espn_id": "401915297",
+    "home_team": "Slovan Bratislava",
+    "away_team": "Real Betis",
+    "match_date": "2026-11-24T20:00Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Cucho Hernández",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
