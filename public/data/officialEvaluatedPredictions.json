@@ -2700,5 +2700,72 @@
     "pointsDetails": [
       "Diferencia de 1 gol (+1 pt)"
     ]
+  },
+  {
+    "id": "3dc3e7f9-25a0-4260-890a-256d4694c021",
+    "user_id": "a595517a-1160-493a-b24e-e14bba1956d4",
+    "display_name": "Noel Cordero Velázquez",
+    "match_id": "00000000-0000-4000-8000-000017f4bdf2",
+    "home_score": 0,
+    "away_score": 4,
+    "created_at": "2026-11-24T22:58:16.93699+00:00",
+    "scorers": [
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Karim Adeyemi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
+  },
+  {
+    "id": "3601bd79-9a6d-47c0-9073-83d7f4a55525",
+    "user_id": "03c4147f-45ed-41ca-a921-9c40b00edc8e",
+    "display_name": "Asere1995",
+    "match_id": "00000000-0000-4000-8000-000017f4bdf2",
+    "home_score": 0,
+    "away_score": 5,
+    "created_at": "2026-11-19T02:57:44.261711+00:00",
+    "scorers": [
+      {
+        "player_name": "Lamine Yamal",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fermín López",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Raphinha",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Karim Adeyemi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 1,
+        "team": "away"
+      }
+    ]
   }
 ]
