@@ -20216,5 +20216,479 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be72",
+    "espn_id": "401915506",
+    "home_team": "Beşiktaş",
+    "away_team": "Hapoel Be'er Sheva",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Junior Olaitan",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Orkun Kökçü",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Javon East",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be7f",
+    "espn_id": "401915519",
+    "home_team": "Celta Vigo",
+    "away_team": "Bournemouth",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "result_home": 1,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Iago Aspas",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Álvaro Rodríguez",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Rayan",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be7d",
+    "espn_id": "401915517",
+    "home_team": "Dinamo Zagreb",
+    "away_team": "Bayer Leverkusen",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Malik Tillman",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Jarell Quansah",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be73",
+    "espn_id": "401915507",
+    "home_team": "Olympique de Marseille",
+    "away_team": "Levski Sofia",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Amine Gouiri",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be81",
+    "espn_id": "401915521",
+    "home_team": "PAE Olympiakos SFP",
+    "away_team": "AC Milan",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "result_home": 2,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Jota Silva",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Omari Hutchinson",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Alphadjo Cissè",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Christian Pulisic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Diego Moreira",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be80",
+    "espn_id": "401915520",
+    "home_team": "Red Bull Salzburg",
+    "away_team": "Ararat-Armenia",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Bartosz Mazurek",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be74",
+    "espn_id": "401915508",
+    "home_team": "Royale Union Saint-Gilloise",
+    "away_team": "Lech Poznań",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Yannick Agnero",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Luis Palma",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Raul Florucz",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Kevin Rodríguez",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4be7e",
+    "espn_id": "401915518",
+    "home_team": "Viktoria Plzeň",
+    "away_team": "Benfica",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Europa League",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Patrik Hrosovský",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Prince Adu",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Christophe Kabongo",
+        "goals": 2,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa8",
+    "espn_id": "401915816",
+    "home_team": "FK Kairat",
+    "away_team": "Mjällby",
+    "match_date": "2026-11-26T15:30Z",
+    "league": "Conference League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Erkin Tapalov",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa7",
+    "espn_id": "401915815",
+    "home_team": "AFC Ajax",
+    "away_team": "Thun",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Rayane Bounida",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Marcos Leonardo",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Steven Berghuis",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa6",
+    "espn_id": "401915814",
+    "home_team": "Brighton",
+    "away_team": "Universitatea Craiova",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "result_home": 4,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Ibrahim Osman",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Maxim De Cuyper",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Charalambos Kostoulas",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa2",
+    "espn_id": "401915810",
+    "home_team": "Egnatia",
+    "away_team": "Lincoln Red Imps",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Alessandro Albanese",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Yussef Flalhi Idrissi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Fernando Medeiros",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa3",
+    "espn_id": "401915811",
+    "home_team": "Hearts",
+    "away_team": "AS Monaco FC",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "result_home": 2,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Jordi Altena",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Folarin Balogun",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Edan Diop",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Sabah Kerjota",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa5",
+    "espn_id": "401915813",
+    "home_team": "Iberia 1999",
+    "away_team": "Getafe",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "result_home": 1,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Giorgi Kobuladze",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa4",
+    "espn_id": "401915812",
+    "home_team": "Jablonec",
+    "away_team": "Lugano",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Martin Cedidla",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lamin Jawo",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bf5b",
+    "espn_id": "401915739",
+    "home_team": "Kauno Žalgiris",
+    "away_team": "Riga",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Anthony Kalik",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Gabriel Debeljuh",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa1",
+    "espn_id": "401915809",
+    "home_team": "Pafos FC",
+    "away_team": "Midtjylland",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "result_home": 0,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Mileta Rajovic",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Mikel Gogorza",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bfa0",
+    "espn_id": "401915808",
+    "home_team": "Brann",
+    "away_team": "AGF",
+    "match_date": "2026-11-26T17:45Z",
+    "league": "Conference League",
+    "result_home": 1,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Tobias Bech",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Daniel Grétarsson",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Niklas Castro",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Stefen Tchamche",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Magnus Knudsen",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
