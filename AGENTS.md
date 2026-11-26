@@ -285,3 +285,7 @@ Un fallo REAL es una predicción creada **antes** del pitazo que quedó con `poi
 ### Estado del proyecto (vía MCP)
 
 `mcp__supabase__get_project` (requiere el argumento `id` = `ilkndkqcmxvlufxaugog`) → `status: ACTIVE_HEALTHY`. La DB se consulta con `mcp__supabase__execute_sql` (requiere `project_id`; service role implícito).
+
+## Grafo de conocimiento (understand-anything)
+
+Este repo tiene un grafo de conocimiento listo en `.ua/knowledge-graph.json`: nodos (files, endpoints, tables, flows de negocio), aristas y dominios. **Para entender el código, lee primero el grafo** — no el árbol completo. Uso y regeneración: `../GRAFOS-CODIGO.md` (raíz del workspace). En Hermes hay skills `understand-*` listas. El `.ua/` no se commitea (regenerable).

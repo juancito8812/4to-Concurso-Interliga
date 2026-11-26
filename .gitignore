@@ -56,3 +56,6 @@ next-env.d.ts
 # agent skills locales (no son código del proyecto)
 .agents/skills/
 skills-lock.json
+
+# grafo understand-anything (regenerable, local)
+.ua/
