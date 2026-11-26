@@ -2730,6 +2730,13 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 6,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Diferencia de 1 gol (+1 pt)",
+      "Goleador acertado: Karim Adeyemi (+1 pt)",
+      "Goleador acertado: Anthony Gordon (+1 pt)"
     ]
   },
   {
@@ -2766,6 +2773,47 @@
         "goals": 1,
         "team": "away"
       }
+    ],
+    "points": 5,
+    "pointsDetails": [
+      "Resultado correcto (+3 pts)",
+      "Goleador acertado: Karim Adeyemi (+1 pt)",
+      "Goleador acertado: Anthony Gordon (+1 pt)"
     ]
+  },
+  {
+    "id": "3022ac16-6944-4f66-b8e8-41e51528d497",
+    "user_id": "266b309a-4eb0-474a-85db-aca42e055913",
+    "display_name": "JR_DT",
+    "match_id": "00000000-0000-4000-8000-000017f4bded",
+    "home_score": 0,
+    "away_score": 2,
+    "created_at": "2026-11-08T03:35:04.12994+00:00",
+    "scorers": [],
+    "points": 0,
+    "pointsDetails": []
+  },
+  {
+    "id": "e11384a5-ccad-46dd-832c-6558fb516ca2",
+    "user_id": "836a17f7-37f6-427f-a0fe-eedcf66a082d",
+    "display_name": "JOKENON93",
+    "match_id": "00000000-0000-4000-8000-000017f4bdf1",
+    "home_score": 0,
+    "away_score": 3,
+    "created_at": "2026-11-03T23:02:14.671329+00:00",
+    "scorers": [
+      {
+        "player_name": "Ismael Saibari",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Tom Bischof",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "points": 0,
+    "pointsDetails": []
   }
 ]

@@ -19999,5 +19999,222 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdf2",
+    "espn_id": "401915378",
+    "home_team": "SABAH FK",
+    "away_team": "Barcelona",
+    "match_date": "2026-11-25T17:45Z",
+    "league": "Champions League",
+    "result_home": 1,
+    "result_away": 4,
+    "scorers": [
+      {
+        "player_name": "Anthony Gordon",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Karim Adeyemi",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Gabriel Jesus",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Joy-Lance Mickels",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bd9d",
+    "espn_id": "401915293",
+    "home_team": "SK Slavia Praha",
+    "away_team": "Villarreal",
+    "match_date": "2026-11-25T17:45Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Tajon Buchanan",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bd9b",
+    "espn_id": "401915291",
+    "home_team": "Atlético Madrid",
+    "away_team": "Viking FK",
+    "match_date": "2026-11-25T20:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Alexander Sørloth",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Julián Álvarez",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bd9c",
+    "espn_id": "401915292",
+    "home_team": "Club Brujas",
+    "away_team": "Liverpool",
+    "match_date": "2026-11-25T20:00Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Alexander Isak",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Florian Wirtz",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdf0",
+    "espn_id": "401915376",
+    "home_team": "Inter Milan",
+    "away_team": "Stuttgart",
+    "match_date": "2026-11-25T20:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 0,
+    "scorers": [
+      {
+        "player_name": "Petar Sucic",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Lautaro Martínez",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdf1",
+    "espn_id": "401915377",
+    "home_team": "Lille",
+    "away_team": "Bayern Munich",
+    "match_date": "2026-11-25T20:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Dayot Upamecano",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Ayase Ueda",
+        "goals": 1,
+        "team": "home"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdee",
+    "espn_id": "401915374",
+    "home_team": "Paris Saint-Germain",
+    "away_team": "Roma",
+    "match_date": "2026-11-25T20:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Mario Hermoso",
+        "goals": 1,
+        "team": "away"
+      },
+      {
+        "player_name": "Illia Zabarnyi",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Ousmane Dembélé",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Donyell Malen",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bdef",
+    "espn_id": "401915375",
+    "home_team": "Shakhtar Donetsk",
+    "away_team": "Fenerbahçe",
+    "match_date": "2026-11-25T20:00Z",
+    "league": "Champions League",
+    "result_home": 0,
+    "result_away": 1,
+    "scorers": [
+      {
+        "player_name": "Vedat Muriqi",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000017f4bded",
+    "espn_id": "401915373",
+    "home_team": "Sporting Clube de Portugal",
+    "away_team": "Manchester United",
+    "match_date": "2026-11-25T20:00Z",
+    "league": "Champions League",
+    "result_home": 2,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Luis Suárez",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Bruno Fernandes",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
