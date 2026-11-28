@@ -21227,5 +21227,61 @@
       }
     ],
     "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000089e1d",
+    "espn_id": "401882791",
+    "home_team": "Levante",
+    "away_team": "Racing Santander",
+    "match_date": "2026-11-27T20:00Z",
+    "league": "LaLiga",
+    "result_home": 1,
+    "result_away": 3,
+    "scorers": [
+      {
+        "player_name": "Iván Romero",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Pablo García",
+        "goals": 2,
+        "team": "away"
+      },
+      {
+        "player_name": "Yassir Zabiri",
+        "goals": 1,
+        "team": "away"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000088e12",
+    "espn_id": "401879225",
+    "home_team": "Nott. Forest",
+    "away_team": "Chelsea",
+    "match_date": "2026-11-27T20:00Z",
+    "league": "Premier League",
+    "result_home": 3,
+    "result_away": 2,
+    "scorers": [
+      {
+        "player_name": "Igor Jesus",
+        "goals": 1,
+        "team": "home"
+      },
+      {
+        "player_name": "Morgan Gibbs-White",
+        "goals": 2,
+        "team": "home"
+      },
+      {
+        "player_name": "Emmanuel Emegha",
+        "goals": 2,
+        "team": "away"
+      }
+    ],
+    "completed": true
   }
 ]
